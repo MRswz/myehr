@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormRadiobuttonlistMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlist" >
+    <id column="RADIOLIST_ID" property="radiolistId" jdbcType="DECIMAL" />
+    <result column="RADIOLIST_FORM_COLUMN_ID" property="radiolistFormColumnId" jdbcType="DECIMAL" />
+    <result column="RADIOLIST_CHECK_TYPE" property="radiolistCheckType" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_CHECK_SELF" property="radiolistCheckSelf" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_CHECK_FUN" property="radiolistCheckFun" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_INIT_FUN" property="radiolistInitFun" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_INIT_SQL" property="radiolistInitSql" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_VALUECHANGE_FUN" property="radiolistValuechangeFun" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_CLICK_FUN" property="radiolistClickFun" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_DATA_FROM_TYPE" property="radiolistDataFromType" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_DATA_FROM_VALUE" property="radiolistDataFromValue" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_GUI_INIT_TYPE" property="radiolistGuiInitType" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_GUI_INIT_VALUE" property="radiolistGuiInitValue" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_REPEATDIRECTION" property="radiolistRepeatdirection" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_TEXTFIELD" property="radiolistTextfield" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_VALUEFIELD" property="radiolistValuefield" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_DATAFIELD" property="radiolistDatafield" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_REPEATLAYOUT" property="radiolistRepeatlayout" jdbcType="VARCHAR" />
+    <result column="RADIOLIST_REPEATITEMS" property="radiolistRepeatitems" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="CHECKBOX_OR_RADIOBOX" property="checkboxOrRadiobox" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RADIOLIST_ID, RADIOLIST_FORM_COLUMN_ID, RADIOLIST_CHECK_TYPE, RADIOLIST_CHECK_SELF, 
+    RADIOLIST_CHECK_FUN, RADIOLIST_INIT_FUN, RADIOLIST_INIT_SQL, RADIOLIST_VALUECHANGE_FUN, 
+    RADIOLIST_CLICK_FUN, RADIOLIST_DATA_FROM_TYPE, RADIOLIST_DATA_FROM_VALUE, RADIOLIST_GUI_INIT_TYPE, 
+    RADIOLIST_GUI_INIT_VALUE, RADIOLIST_REPEATDIRECTION, RADIOLIST_TEXTFIELD, RADIOLIST_VALUEFIELD, 
+    RADIOLIST_DATAFIELD, RADIOLIST_REPEATLAYOUT, RADIOLIST_REPEATITEMS, OPERATOR_TIME, 
+    OPERATOR_NAME, CHECKBOX_OR_RADIOBOX
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_RADIOBUTTONLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_RADIOBUTTONLIST
+    where RADIOLIST_ID = #{radiolistId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_RADIOBUTTONLIST
+    where RADIOLIST_ID = #{radiolistId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlistExample" >
+    delete from SYS_FORM_RADIOBUTTONLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlist" useGeneratedKeys="true" keyProperty="radiolistId" keyColumn="RADIOLIST_ID">
+    insert into SYS_FORM_RADIOBUTTONLIST (RADIOLIST_FORM_COLUMN_ID, 
+      RADIOLIST_CHECK_TYPE, RADIOLIST_CHECK_SELF, 
+      RADIOLIST_CHECK_FUN, RADIOLIST_INIT_FUN, RADIOLIST_INIT_SQL, 
+      RADIOLIST_VALUECHANGE_FUN, RADIOLIST_CLICK_FUN, 
+      RADIOLIST_DATA_FROM_TYPE, RADIOLIST_DATA_FROM_VALUE, 
+      RADIOLIST_GUI_INIT_TYPE, RADIOLIST_GUI_INIT_VALUE, 
+      RADIOLIST_REPEATDIRECTION, RADIOLIST_TEXTFIELD, 
+      RADIOLIST_VALUEFIELD, RADIOLIST_DATAFIELD, 
+      RADIOLIST_REPEATLAYOUT, RADIOLIST_REPEATITEMS, 
+      OPERATOR_TIME, OPERATOR_NAME, CHECKBOX_OR_RADIOBOX
+      )
+    values (#{radiolistFormColumnId,jdbcType=DECIMAL}, 
+      #{radiolistCheckType,jdbcType=VARCHAR}, #{radiolistCheckSelf,jdbcType=VARCHAR}, 
+      #{radiolistCheckFun,jdbcType=VARCHAR}, #{radiolistInitFun,jdbcType=VARCHAR}, #{radiolistInitSql,jdbcType=VARCHAR}, 
+      #{radiolistValuechangeFun,jdbcType=VARCHAR}, #{radiolistClickFun,jdbcType=VARCHAR}, 
+      #{radiolistDataFromType,jdbcType=VARCHAR}, #{radiolistDataFromValue,jdbcType=VARCHAR}, 
+      #{radiolistGuiInitType,jdbcType=VARCHAR}, #{radiolistGuiInitValue,jdbcType=VARCHAR}, 
+      #{radiolistRepeatdirection,jdbcType=VARCHAR}, #{radiolistTextfield,jdbcType=VARCHAR}, 
+      #{radiolistValuefield,jdbcType=VARCHAR}, #{radiolistDatafield,jdbcType=VARCHAR}, 
+      #{radiolistRepeatlayout,jdbcType=VARCHAR}, #{radiolistRepeatitems,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR}, #{checkboxOrRadiobox,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlist" >
+    insert into SYS_FORM_RADIOBUTTONLIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="radiolistId != null" >
+        RADIOLIST_ID,
+      </if>
+      <if test="radiolistFormColumnId != null" >
+        RADIOLIST_FORM_COLUMN_ID,
+      </if>
+      <if test="radiolistCheckType != null" >
+        RADIOLIST_CHECK_TYPE,
+      </if>
+      <if test="radiolistCheckSelf != null" >
+        RADIOLIST_CHECK_SELF,
+      </if>
+      <if test="radiolistCheckFun != null" >
+        RADIOLIST_CHECK_FUN,
+      </if>
+      <if test="radiolistInitFun != null" >
+        RADIOLIST_INIT_FUN,
+      </if>
+      <if test="radiolistInitSql != null" >
+        RADIOLIST_INIT_SQL,
+      </if>
+      <if test="radiolistValuechangeFun != null" >
+        RADIOLIST_VALUECHANGE_FUN,
+      </if>
+      <if test="radiolistClickFun != null" >
+        RADIOLIST_CLICK_FUN,
+      </if>
+      <if test="radiolistDataFromType != null" >
+        RADIOLIST_DATA_FROM_TYPE,
+      </if>
+      <if test="radiolistDataFromValue != null" >
+        RADIOLIST_DATA_FROM_VALUE,
+      </if>
+      <if test="radiolistGuiInitType != null" >
+        RADIOLIST_GUI_INIT_TYPE,
+      </if>
+      <if test="radiolistGuiInitValue != null" >
+        RADIOLIST_GUI_INIT_VALUE,
+      </if>
+      <if test="radiolistRepeatdirection != null" >
+        RADIOLIST_REPEATDIRECTION,
+      </if>
+      <if test="radiolistTextfield != null" >
+        RADIOLIST_TEXTFIELD,
+      </if>
+      <if test="radiolistValuefield != null" >
+        RADIOLIST_VALUEFIELD,
+      </if>
+      <if test="radiolistDatafield != null" >
+        RADIOLIST_DATAFIELD,
+      </if>
+      <if test="radiolistRepeatlayout != null" >
+        RADIOLIST_REPEATLAYOUT,
+      </if>
+      <if test="radiolistRepeatitems != null" >
+        RADIOLIST_REPEATITEMS,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="checkboxOrRadiobox != null" >
+        CHECKBOX_OR_RADIOBOX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="radiolistId != null" >
+        #{radiolistId,jdbcType=DECIMAL},
+      </if>
+      <if test="radiolistFormColumnId != null" >
+        #{radiolistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="radiolistCheckType != null" >
+        #{radiolistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistCheckSelf != null" >
+        #{radiolistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistCheckFun != null" >
+        #{radiolistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistInitFun != null" >
+        #{radiolistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistInitSql != null" >
+        #{radiolistInitSql,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistValuechangeFun != null" >
+        #{radiolistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistClickFun != null" >
+        #{radiolistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDataFromType != null" >
+        #{radiolistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDataFromValue != null" >
+        #{radiolistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistGuiInitType != null" >
+        #{radiolistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistGuiInitValue != null" >
+        #{radiolistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatdirection != null" >
+        #{radiolistRepeatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistTextfield != null" >
+        #{radiolistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistValuefield != null" >
+        #{radiolistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDatafield != null" >
+        #{radiolistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatlayout != null" >
+        #{radiolistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatitems != null" >
+        #{radiolistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxOrRadiobox != null" >
+        #{checkboxOrRadiobox,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlistExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_RADIOBUTTONLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_RADIOBUTTONLIST
+    <set >
+      <if test="record.radiolistId != null" >
+        RADIOLIST_ID = #{record.radiolistId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.radiolistFormColumnId != null" >
+        RADIOLIST_FORM_COLUMN_ID = #{record.radiolistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.radiolistCheckType != null" >
+        RADIOLIST_CHECK_TYPE = #{record.radiolistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistCheckSelf != null" >
+        RADIOLIST_CHECK_SELF = #{record.radiolistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistCheckFun != null" >
+        RADIOLIST_CHECK_FUN = #{record.radiolistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistInitFun != null" >
+        RADIOLIST_INIT_FUN = #{record.radiolistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistInitSql != null" >
+        RADIOLIST_INIT_SQL = #{record.radiolistInitSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistValuechangeFun != null" >
+        RADIOLIST_VALUECHANGE_FUN = #{record.radiolistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistClickFun != null" >
+        RADIOLIST_CLICK_FUN = #{record.radiolistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistDataFromType != null" >
+        RADIOLIST_DATA_FROM_TYPE = #{record.radiolistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistDataFromValue != null" >
+        RADIOLIST_DATA_FROM_VALUE = #{record.radiolistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistGuiInitType != null" >
+        RADIOLIST_GUI_INIT_TYPE = #{record.radiolistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistGuiInitValue != null" >
+        RADIOLIST_GUI_INIT_VALUE = #{record.radiolistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistRepeatdirection != null" >
+        RADIOLIST_REPEATDIRECTION = #{record.radiolistRepeatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistTextfield != null" >
+        RADIOLIST_TEXTFIELD = #{record.radiolistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistValuefield != null" >
+        RADIOLIST_VALUEFIELD = #{record.radiolistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistDatafield != null" >
+        RADIOLIST_DATAFIELD = #{record.radiolistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistRepeatlayout != null" >
+        RADIOLIST_REPEATLAYOUT = #{record.radiolistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.radiolistRepeatitems != null" >
+        RADIOLIST_REPEATITEMS = #{record.radiolistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxOrRadiobox != null" >
+        CHECKBOX_OR_RADIOBOX = #{record.checkboxOrRadiobox,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_RADIOBUTTONLIST
+    set RADIOLIST_ID = #{record.radiolistId,jdbcType=DECIMAL},
+      RADIOLIST_FORM_COLUMN_ID = #{record.radiolistFormColumnId,jdbcType=DECIMAL},
+      RADIOLIST_CHECK_TYPE = #{record.radiolistCheckType,jdbcType=VARCHAR},
+      RADIOLIST_CHECK_SELF = #{record.radiolistCheckSelf,jdbcType=VARCHAR},
+      RADIOLIST_CHECK_FUN = #{record.radiolistCheckFun,jdbcType=VARCHAR},
+      RADIOLIST_INIT_FUN = #{record.radiolistInitFun,jdbcType=VARCHAR},
+      RADIOLIST_INIT_SQL = #{record.radiolistInitSql,jdbcType=VARCHAR},
+      RADIOLIST_VALUECHANGE_FUN = #{record.radiolistValuechangeFun,jdbcType=VARCHAR},
+      RADIOLIST_CLICK_FUN = #{record.radiolistClickFun,jdbcType=VARCHAR},
+      RADIOLIST_DATA_FROM_TYPE = #{record.radiolistDataFromType,jdbcType=VARCHAR},
+      RADIOLIST_DATA_FROM_VALUE = #{record.radiolistDataFromValue,jdbcType=VARCHAR},
+      RADIOLIST_GUI_INIT_TYPE = #{record.radiolistGuiInitType,jdbcType=VARCHAR},
+      RADIOLIST_GUI_INIT_VALUE = #{record.radiolistGuiInitValue,jdbcType=VARCHAR},
+      RADIOLIST_REPEATDIRECTION = #{record.radiolistRepeatdirection,jdbcType=VARCHAR},
+      RADIOLIST_TEXTFIELD = #{record.radiolistTextfield,jdbcType=VARCHAR},
+      RADIOLIST_VALUEFIELD = #{record.radiolistValuefield,jdbcType=VARCHAR},
+      RADIOLIST_DATAFIELD = #{record.radiolistDatafield,jdbcType=VARCHAR},
+      RADIOLIST_REPEATLAYOUT = #{record.radiolistRepeatlayout,jdbcType=VARCHAR},
+      RADIOLIST_REPEATITEMS = #{record.radiolistRepeatitems,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      CHECKBOX_OR_RADIOBOX = #{record.checkboxOrRadiobox,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlist" >
+    update SYS_FORM_RADIOBUTTONLIST
+    <set >
+      <if test="radiolistFormColumnId != null" >
+        RADIOLIST_FORM_COLUMN_ID = #{radiolistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="radiolistCheckType != null" >
+        RADIOLIST_CHECK_TYPE = #{radiolistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistCheckSelf != null" >
+        RADIOLIST_CHECK_SELF = #{radiolistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistCheckFun != null" >
+        RADIOLIST_CHECK_FUN = #{radiolistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistInitFun != null" >
+        RADIOLIST_INIT_FUN = #{radiolistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistInitSql != null" >
+        RADIOLIST_INIT_SQL = #{radiolistInitSql,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistValuechangeFun != null" >
+        RADIOLIST_VALUECHANGE_FUN = #{radiolistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistClickFun != null" >
+        RADIOLIST_CLICK_FUN = #{radiolistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDataFromType != null" >
+        RADIOLIST_DATA_FROM_TYPE = #{radiolistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDataFromValue != null" >
+        RADIOLIST_DATA_FROM_VALUE = #{radiolistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistGuiInitType != null" >
+        RADIOLIST_GUI_INIT_TYPE = #{radiolistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistGuiInitValue != null" >
+        RADIOLIST_GUI_INIT_VALUE = #{radiolistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatdirection != null" >
+        RADIOLIST_REPEATDIRECTION = #{radiolistRepeatdirection,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistTextfield != null" >
+        RADIOLIST_TEXTFIELD = #{radiolistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistValuefield != null" >
+        RADIOLIST_VALUEFIELD = #{radiolistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistDatafield != null" >
+        RADIOLIST_DATAFIELD = #{radiolistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatlayout != null" >
+        RADIOLIST_REPEATLAYOUT = #{radiolistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="radiolistRepeatitems != null" >
+        RADIOLIST_REPEATITEMS = #{radiolistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxOrRadiobox != null" >
+        CHECKBOX_OR_RADIOBOX = #{checkboxOrRadiobox,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RADIOLIST_ID = #{radiolistId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormRadiobuttonlist" >
+    update SYS_FORM_RADIOBUTTONLIST
+    set RADIOLIST_FORM_COLUMN_ID = #{radiolistFormColumnId,jdbcType=DECIMAL},
+      RADIOLIST_CHECK_TYPE = #{radiolistCheckType,jdbcType=VARCHAR},
+      RADIOLIST_CHECK_SELF = #{radiolistCheckSelf,jdbcType=VARCHAR},
+      RADIOLIST_CHECK_FUN = #{radiolistCheckFun,jdbcType=VARCHAR},
+      RADIOLIST_INIT_FUN = #{radiolistInitFun,jdbcType=VARCHAR},
+      RADIOLIST_INIT_SQL = #{radiolistInitSql,jdbcType=VARCHAR},
+      RADIOLIST_VALUECHANGE_FUN = #{radiolistValuechangeFun,jdbcType=VARCHAR},
+      RADIOLIST_CLICK_FUN = #{radiolistClickFun,jdbcType=VARCHAR},
+      RADIOLIST_DATA_FROM_TYPE = #{radiolistDataFromType,jdbcType=VARCHAR},
+      RADIOLIST_DATA_FROM_VALUE = #{radiolistDataFromValue,jdbcType=VARCHAR},
+      RADIOLIST_GUI_INIT_TYPE = #{radiolistGuiInitType,jdbcType=VARCHAR},
+      RADIOLIST_GUI_INIT_VALUE = #{radiolistGuiInitValue,jdbcType=VARCHAR},
+      RADIOLIST_REPEATDIRECTION = #{radiolistRepeatdirection,jdbcType=VARCHAR},
+      RADIOLIST_TEXTFIELD = #{radiolistTextfield,jdbcType=VARCHAR},
+      RADIOLIST_VALUEFIELD = #{radiolistValuefield,jdbcType=VARCHAR},
+      RADIOLIST_DATAFIELD = #{radiolistDatafield,jdbcType=VARCHAR},
+      RADIOLIST_REPEATLAYOUT = #{radiolistRepeatlayout,jdbcType=VARCHAR},
+      RADIOLIST_REPEATITEMS = #{radiolistRepeatitems,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      CHECKBOX_OR_RADIOBOX = #{checkboxOrRadiobox,jdbcType=VARCHAR}
+    where RADIOLIST_ID = #{radiolistId,jdbcType=DECIMAL}
+  </update>
+</mapper>

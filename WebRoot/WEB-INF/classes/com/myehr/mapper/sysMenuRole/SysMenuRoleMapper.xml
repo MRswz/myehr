@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysMenuRole.SysMenuRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysMenuRole.SysMenuRole" >
+    <id column="MENU_ROLE_ID" property="menuRoleId" jdbcType="DECIMAL" />
+    <result column="MENU_ID" property="menuId" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="MENU_ROLE_REMARK" property="menuRoleRemark" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MENU_ROLE_ID, MENU_ID, ROLE_ID, MENU_ROLE_REMARK, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MENU_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU_ROLE
+    where MENU_ROLE_ID = #{menuRoleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_MENU_ROLE
+    where MENU_ROLE_ID = #{menuRoleId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRoleExample" >
+    delete from SYS_MENU_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRole" >
+    insert into SYS_MENU_ROLE (MENU_ID, ROLE_ID, 
+      MENU_ROLE_REMARK, OPERATOR_NAME, OPERATOR_TIME
+      )
+    values (#{menuId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, 
+      #{menuRoleRemark,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRole" >
+    insert into SYS_MENU_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuRoleId != null" >
+        MENU_ROLE_ID,
+      </if>
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="menuRoleRemark != null" >
+        MENU_ROLE_REMARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuRoleId != null" >
+        #{menuRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuRoleRemark != null" >
+        #{menuRoleRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRoleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MENU_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MENU_ROLE
+    <set >
+      <if test="record.menuRoleId != null" >
+        MENU_ROLE_ID = #{record.menuRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuId != null" >
+        MENU_ID = #{record.menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuRoleRemark != null" >
+        MENU_ROLE_REMARK = #{record.menuRoleRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MENU_ROLE
+    set MENU_ROLE_ID = #{record.menuRoleId,jdbcType=DECIMAL},
+      MENU_ID = #{record.menuId,jdbcType=DECIMAL},
+      ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      MENU_ROLE_REMARK = #{record.menuRoleRemark,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRole" >
+    update SYS_MENU_ROLE
+    <set >
+      <if test="menuId != null" >
+        MENU_ID = #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuRoleRemark != null" >
+        MENU_ROLE_REMARK = #{menuRoleRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+    </set>
+    where MENU_ROLE_ID = #{menuRoleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysMenuRole.SysMenuRole" >
+    update SYS_MENU_ROLE
+    set MENU_ID = #{menuId,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      MENU_ROLE_REMARK = #{menuRoleRemark,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE}
+    where MENU_ROLE_ID = #{menuRoleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,10 @@
+.nav>li>a{padding: 3px 12px;font-size: 12px;font-family: Microsoft YaHei;}
+.input-group{padding-top: 5px;}
+.input-group table tr label{font-size: 12px;}
+.input-group table tr td{padding-top: 0!important;}
+
+.panel-primary > .panel-heading {color: #333;background-color: transparent;}
+
+.sidebar .searchInput i{top:6px!important;}
+.sidebar .searchInput .searchInfo{top:1px;}
+#form_2082 .fixed-table-toolbar{bottom: -41px;}

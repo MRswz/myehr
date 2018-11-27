@@ -1,0 +1,756 @@
+package com.myehr.service.impl.calendar;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.cxf.binding.corba.wsdl.Array;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myehr.mapper.calendar.AttendCalendarMapper;
+import com.myehr.mapper.calendar.AttendEmpshiftgroupSchedueMapper;
+import com.myehr.mapper.calendar.AttendShifttypeMapper;
+import com.myehr.mapper.calendar.AttendZoneMapper;
+import com.myehr.mapper.calendar.K15Mapper;
+import com.myehr.mapper.calendar.KbasecodeMapper;
+import com.myehr.mapper.calendar.KcalclassMapper;
+import com.myehr.mapper.calendar.KcalendarMapper;
+import com.myehr.pojo.calendar.AttendCalendar;
+import com.myehr.pojo.calendar.AttendCalendarExample;
+import com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue;
+import com.myehr.pojo.calendar.AttendEmpshiftgroupSchedueExample;
+import com.myehr.pojo.calendar.AttendShifttype;
+import com.myehr.pojo.calendar.AttendShifttypeExample;
+import com.myehr.pojo.calendar.AttendZone;
+import com.myehr.pojo.calendar.AttendZoneExample;
+import com.myehr.pojo.calendar.K15;
+import com.myehr.pojo.calendar.K15Example;
+import com.myehr.pojo.calendar.Kbasecode;
+import com.myehr.pojo.calendar.KbasecodeExample;
+import com.myehr.pojo.calendar.Kcalclass;
+import com.myehr.pojo.calendar.KcalclassExample;
+import com.myehr.pojo.calendar.Kcalendar;
+import com.myehr.pojo.calendar.KcalendarExample;
+import com.myehr.pojo.calendar.Testcalendar;
+import com.myehr.service.calendar.CalendarService;
+@Service("CalendarServiceImpl")
+public class CalendarServiceImpl implements CalendarService {
+	private static Logger logger = LoggerFactory.getLogger(CalendarServiceImpl.class);
+	@Autowired
+	private KcalendarMapper kcalendarMapper;
+	
+	@Autowired
+	private AttendCalendarMapper attendCalendarMapper;
+	
+	@Autowired
+	private AttendShifttypeMapper attendShifttypeMapper;
+	
+	@Autowired
+	private AttendEmpshiftgroupSchedueMapper attendEmpshiftgroupSchedueMapper;
+	
+	@Autowired
+	private AttendZoneMapper attendZoneMapper;
+	
+	@Autowired
+	private KbasecodeMapper kbasecodeMapper;
+	
+	@Autowired
+	private KcalclassMapper kcalclassMapper;
+	
+	
+	@Autowired
+	private K15Mapper k15Mapper;
+	
+	
+	
+	@Override
+	public List<Testcalendar> getAllCalendar(Testcalendar test) throws Exception {
+		
+		
+		
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	/**
+	 * 排班管理
+	 */
+	public String addWorkDay(String kguid,String itemCaption,Date itemDate) throws Exception {
+		KcalendarExample example = new KcalendarExample();
+		com.myehr.pojo.calendar.KcalendarExample.Criteria criteria = example.createCriteria();
+		criteria.andKguidEqualTo(kguid);
+		criteria.andItemDateEqualTo(itemDate);
+		List<Kcalendar> Kcalendars = kcalendarMapper.selectByExample(example);
+		
+		Kcalendar calendar = new Kcalendar();
+		calendar.setKguid(kguid);
+		calendar.setItemCaption(itemCaption);
+		calendar.setItemDate(itemDate);
+		if(Kcalendars.size()==0){
+			
+			kcalendarMapper.insert(calendar);
+		}else{
+			if(itemCaption.equals("sc") ==false){
+				kcalendarMapper.updateByPrimaryKey(calendar);
+			}else{
+		        kcalendarMapper.deleteByExample(example);
+			}
+		}
+		return "2";
+	}
+	
+	
+	/**
+	 * 排班管理
+	 */
+	public String addAttendCalendar(Integer zoneid,Integer xtype,Date itemDate) throws Exception {
+		AttendCalendarExample example = new AttendCalendarExample();
+		com.myehr.pojo.calendar.AttendCalendarExample.Criteria criteria = example.createCriteria();
+		criteria.andZoneidEqualTo(zoneid);
+		criteria.andTermEqualTo(itemDate);
+		List<AttendCalendar> Kcalendars = attendCalendarMapper.selectByExample(example);
+		
+		AttendCalendar calendar = new AttendCalendar();
+		calendar.setZoneid(zoneid);
+		calendar.setXtype(xtype);
+		calendar.setTerm(itemDate);
+		if(Kcalendars.size()==0){
+			attendCalendarMapper.insert(calendar);
+		}else{
+			if(xtype == 0){
+				attendCalendarMapper.deleteByExample(example);
+			}else{
+				calendar.setId(Kcalendars.get(0).getId());
+				attendCalendarMapper.updateByPrimaryKey(calendar);
+			}
+		}
+		return "2";
+	}
+	
+	/**
+	 * 人员排班
+	 */
+	public String saveEmpWorkday(HttpServletRequest request,String empIds,String empCodes,List<Kcalendar> workdays,String kguid) throws Exception {
+		String userName = (String)request.getSession().getAttribute("userName");
+		String userCode = (String)request.getSession().getAttribute("userCode");
+		String[] empIds1=empIds.split("-");
+		String[] empCodes1=empCodes.split("-");
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd");
+		SimpleDateFormat sdf2 =   new SimpleDateFormat( "yyyy-MM");
+		SimpleDateFormat sdf1 =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+		List<Kcalendar> sysEntitys=null;
+		if(kguid!=null && kguid!=""){
+			KcalendarExample example = new KcalendarExample();
+			com.myehr.pojo.calendar.KcalendarExample.Criteria criteria = example.createCriteria();
+			criteria.andKguidEqualTo(kguid);
+			Date startDate = workdays.get(0).getItemDate();
+			String startDate1=sdf2.format(startDate);
+			Date startDate11=sdf1.parse(startDate1+"-01 00:00:00");
+			Date endDate = workdays.get(workdays.size()-1).getItemDate();
+			String endDate1=sdf2.format(endDate);
+			Date endDate11=sdf1.parse(endDate1+"-31 00:00:00");
+			
+			criteria.andItemDateBetween(startDate11, endDate11);
+			sysEntitys = kcalendarMapper.selectByExample(example);
+		}
+		List<Long> values = new ArrayList<Long>();
+		for (int i = 0; i < empIds1.length; i++) {
+			values.add(Long.parseLong(empIds1[i]));
+		}
+		for (Kcalendar kcalendar : workdays) {
+			K15Example example = new K15Example();
+			String itemDateString = sdf.format(kcalendar.getItemDate());
+			Date itemDate = sdf1.parse( itemDateString+" 00:00:00");
+			String itemDateString1 = sdf.format(kcalendar.getItemDate());
+			Date itemDate1= sdf1.parse( itemDateString1+" 23:59:59");
+			example.or().andA0188In(values).andD9999Between(itemDate, itemDate1);
+			k15Mapper.deleteByExample(example);
+		}
+		
+
+		workdays = hebingWorkDay(workdays);
+		if(sysEntitys==null || sysEntitys.size()==0){
+			for(int i=0;i<empIds1.length;i++){
+				for(int j=0;j<workdays.size();j++){
+					K15 k15 = new K15();
+					k15.setOpname("{"+userName+"|"+userCode+"}");
+					k15.setI9999(new BigDecimal(1));
+					k15.setK1500( workdays.get(j).getItemCaption());
+					k15.setA0188(Long.parseLong(empIds1[i]));
+					String d9999 = sdf.format(workdays.get(j).getItemDate());
+					Date d9999Date = sdf1.parse( d9999+" 00:00:00");
+					k15.setK15a0190(empCodes1[i]);
+					k15.setD9999(d9999Date);
+					k15Mapper.insert(k15);
+				}
+			}
+		}else{
+			for(int j=0;j<workdays.size();j++){
+				int flag=0;
+				Date datetime = workdays.get(j).getItemDate();
+				String datetimeStr = sdf.format(datetime);
+				for(int k=0;k<sysEntitys.size();k++){
+					Date datetime1 = sysEntitys.get(k).getItemDate();
+					String datetime1Str = sdf.format(datetime1);
+					if(datetimeStr.equals(datetime1Str)){
+						flag=1;
+					}
+				}
+				if(flag==1){
+					continue;
+				}else{
+					for(int i=0;i<empIds1.length;i++){
+						K15 k15 = new K15();
+						k15.setOpname("{"+userName+"|"+userCode+"}");
+						k15.setI9999(new BigDecimal(1));
+						k15.setK1500(workdays.get(j).getItemCaption());
+						k15.setA0188(Long.parseLong(empIds1[i]));
+						k15.setK15a0190(empCodes1[i]);
+						String d9999 = sdf.format(datetime);
+						Date d9999Date = sdf1.parse( d9999+" 00:00:00");
+						k15.setD9999(d9999Date);
+						
+						k15Mapper.insert(k15);
+					}
+				}
+				
+			}
+			
+		}
+		return "2";
+	}
+	
+	private List<Kcalendar> hebingWorkDay(List<Kcalendar> workdays) {
+		List<Kcalendar> days = new ArrayList<Kcalendar>();
+		Map map = new HashMap();
+		for (int i = workdays.size()-1; i>-1; i--) {
+			if (map.get(workdays.get(i).getItemDate())==null) {
+				map.put(workdays.get(i).getItemDate(), workdays.get(i));
+				days.add(workdays.get(i));
+			}
+		}
+		
+		return days;
+	}
+
+
+	/**
+	 * 人员排班
+	 */
+	public String saveEmpWorkdayNew(HttpServletRequest request,String empIds,String empCodes,List<Kcalendar> workdays,Integer zoneid) throws Exception {
+		/*HttpSession session = (HttpSession) DcfUtil.getSession();
+		UserObject user = (UserObject) session
+				.getAttribute("userObject");*/
+		//String userName = (String)request.getSession().getAttribute("userName");
+		//String userCode = (String)request.getSession().getAttribute("userCode");
+		String[] empIds1=empIds.split("-");
+		//String[] empCodes1=empCodes.split(",");
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd");
+		//SimpleDateFormat sdf2 =   new SimpleDateFormat( "yyyy-MM");
+		SimpleDateFormat sdf1 =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+		
+		for(int i=0;i<empIds1.length;i++){
+			for(int j=0;j<workdays.size();j++){
+				
+				AttendShifttype attendShifttype = attendShifttypeMapper.selectByPrimaryKey(Integer.parseInt(workdays.get(j).getItemCaption()));
+				
+				AttendEmpshiftgroupSchedue attendEmpshiftgroupSchedue = new AttendEmpshiftgroupSchedue();
+				attendEmpshiftgroupSchedue.setEmpid(Integer.parseInt(empIds1[i]));
+				attendEmpshiftgroupSchedue.setZoneid(zoneid);
+				attendEmpshiftgroupSchedue.setShifttype(Integer.parseInt(workdays.get(j).getItemCaption()));
+				String d9999 = sdf.format(workdays.get(j).getItemDate());
+				Date d9999Date = sdf1.parse( d9999+" 00:00:00");
+				attendEmpshiftgroupSchedue.setTerm(d9999Date);
+				attendEmpshiftgroupSchedue.setWorktimes(attendShifttype.getAsWorktimes());
+				String asBegintime1 = attendShifttype.getAsBegintime1();
+				String asBegintime1Mark = asBegintime1.substring(0,1);
+				String realAsBegintime1 = asBegintime1.substring(1,asBegintime1.length());
+				if ( asBegintime1Mark.equals("=")) {
+					attendEmpshiftgroupSchedue.setBegintime1(sdf1.parse(d9999+" "+realAsBegintime1+":00"));
+				}else if (asBegintime1Mark.equals("+")) {
+					attendEmpshiftgroupSchedue.setBegintime1(new Date((sdf1.parse(d9999+" "+realAsBegintime1+":00").getTime()+86400000)));
+				}else{
+					attendEmpshiftgroupSchedue.setBegintime1(new Date((sdf1.parse(d9999+" "+realAsBegintime1+":00").getTime()-86400000)));
+				}
+				
+				String asEndtime1 = attendShifttype.getAsEndtime1();
+				String asEndtime1Mark = asEndtime1.substring(0,1);
+				String realEndtime1= asEndtime1.substring(1,asEndtime1.length());
+				if (asEndtime1Mark.equals("=")) {
+					attendEmpshiftgroupSchedue.setEndtime1(sdf1.parse(d9999+" "+realEndtime1+":00"));
+				}else if (asEndtime1Mark.equals("+")) {
+					attendEmpshiftgroupSchedue.setEndtime1(new Date((sdf1.parse(d9999+" "+realEndtime1+":00").getTime()+86400000)));
+				}else{
+					attendEmpshiftgroupSchedue.setEndtime1(new Date((sdf1.parse(d9999+" "+realEndtime1+":00").getTime()-86400000)));
+				}
+				
+				if (attendShifttype.getAsBegintime2()!=null) {
+					String asBegintime2 = attendShifttype.getAsBegintime2();
+					String asBegintime2Mark = asBegintime2.substring(0,1);
+					String realAsBegintime2 = asBegintime2.substring(1,asBegintime2.length());
+					if ( asBegintime2Mark.equals("=")) {
+						attendEmpshiftgroupSchedue.setBegintime2(sdf1.parse(d9999+" "+realAsBegintime2+":00"));
+					}else if (asBegintime1Mark.equals("+")) {
+						attendEmpshiftgroupSchedue.setBegintime2(new Date((sdf1.parse(d9999+" "+realAsBegintime2+":00").getTime()+86400000)));
+					}else{
+						attendEmpshiftgroupSchedue.setBegintime2(new Date((sdf1.parse(d9999+" "+realAsBegintime2+":00").getTime()-86400000)));
+					}
+				}
+				if (attendShifttype.getAsEndtime2()!=null) {
+					String asEndtime2 = attendShifttype.getAsEndtime2();
+					String asEndtime2Mark = asEndtime2.substring(0,1);
+					String realEndtime2= asEndtime2.substring(1,asEndtime2.length());
+					if (asEndtime2Mark.equals("=")) {
+						attendEmpshiftgroupSchedue.setEndtime2(sdf1.parse(d9999+" "+realEndtime2+":00"));
+					}else if (asEndtime2Mark.equals("+")) {
+						attendEmpshiftgroupSchedue.setEndtime2(new Date((sdf1.parse(d9999+" "+realEndtime2+":00").getTime()+86400000)));
+					}else{
+						attendEmpshiftgroupSchedue.setEndtime2(new Date((sdf1.parse(d9999+" "+realEndtime2+":00").getTime()-86400000)));
+					}
+				}
+				attendEmpshiftgroupSchedue.setCardtimes(attendShifttype.getAsCardtimes());
+				if (attendShifttype.getAsScanbegintime()!=null) {
+					String asScanbegintime = attendShifttype.getAsScanbegintime();
+					String asScanbegintimeMark = asScanbegintime.substring(0,1);
+					String realAsScanbegintime= asScanbegintime.substring(1,asScanbegintime.length());
+					if (asScanbegintimeMark.equals("=")) {
+						attendEmpshiftgroupSchedue.setScanbegintime(sdf1.parse(d9999+" "+realAsScanbegintime+":00"));
+					}else if (asScanbegintimeMark.equals("+")) {
+						attendEmpshiftgroupSchedue.setScanbegintime(new Date((sdf1.parse(d9999+" "+realAsScanbegintime+":00").getTime()+86400000)));
+					}else{
+						attendEmpshiftgroupSchedue.setScanbegintime(new Date((sdf1.parse(d9999+" "+realAsScanbegintime+":00").getTime()-86400000)));
+					}
+				}
+				if (attendShifttype.getAsScanendtime()!=null) {
+					String asScanendtime = attendShifttype.getAsScanendtime();
+					String asScanendtimeMark = asScanendtime.substring(0,1);
+					String realAsScanendtime= asScanendtime.substring(1,asScanendtime.length());
+					if (asScanendtimeMark.equals("=")) {
+						attendEmpshiftgroupSchedue.setScanendtime(sdf1.parse(d9999+" "+realAsScanendtime+":00"));
+					}else if (asScanendtimeMark.equals("+")) {
+						attendEmpshiftgroupSchedue.setScanendtime(new Date((sdf1.parse(d9999+" "+realAsScanendtime+":00").getTime()+86400000)));
+					}else{
+						attendEmpshiftgroupSchedue.setScanendtime(new Date((sdf1.parse(d9999+" "+realAsScanendtime+":00").getTime()-86400000)));
+					}
+				}
+				
+				attendEmpshiftgroupSchedue.setLatemiu(attendShifttype.getAsLatemiu());
+				attendEmpshiftgroupSchedue.setLateabs(attendShifttype.getAsLateabs());
+				attendEmpshiftgroupSchedue.setEarlymiu(attendShifttype.getAsEarlymiu());
+				attendEmpshiftgroupSchedue.setEarlabs(attendShifttype.getAsEarlabs());
+				
+				if (attendShifttype.getRestdate()!=null) {
+					String restdate = attendShifttype.getRestdate();
+					String restdateMark = restdate.substring(0,1);
+					String realrestdate= restdate.substring(1,restdate.length());
+					if (restdateMark.equals("=")) {
+						attendEmpshiftgroupSchedue.setRestdate(sdf1.parse(d9999+" "+realrestdate+":00"));
+					}else if (restdateMark.equals("+")) {
+						attendEmpshiftgroupSchedue.setRestdate(new Date((sdf1.parse(d9999+" "+realrestdate+":00").getTime()+86400000)));
+					}else{
+						attendEmpshiftgroupSchedue.setRestdate(new Date((sdf1.parse(d9999+" "+realrestdate+":00").getTime()-86400000)));
+					}
+				}
+				AttendEmpshiftgroupSchedueExample example = new AttendEmpshiftgroupSchedueExample();
+				com.myehr.pojo.calendar.AttendEmpshiftgroupSchedueExample.Criteria criteria = example.createCriteria();
+				criteria.andEmpidEqualTo(Integer.parseInt(empIds1[i]));
+				String itemDateString = sdf.format(workdays.get(j).getItemDate());
+				Date itemDate = sdf1.parse( itemDateString+" 00:00:00");
+				criteria.andTermEqualTo(itemDate);
+				attendEmpshiftgroupSchedueMapper.deleteByExample(example);
+				
+				attendEmpshiftgroupSchedueMapper.insert(attendEmpshiftgroupSchedue);
+			}
+		}
+		
+		return "2";
+	}
+	
+	/**
+	 * 查询日历
+	 * @return
+	 */
+	public List<Kcalendar> queryWorkDay(String kguid,String datemonth){
+		KcalendarExample example = new KcalendarExample();
+		com.myehr.pojo.calendar.KcalendarExample.Criteria criteria = example.createCriteria();
+		criteria.andKguidEqualTo(kguid);
+		if (datemonth!=null && !datemonth.equals("")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date value1 = null;
+			Date value2 = null;
+			try {
+				value1 = sdf.parse(datemonth+"-00");
+				value2 = sdf.parse(datemonth+"-32");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();logger.error(e.getMessage(),e);
+			}
+			criteria.andItemDateBetween(value1, value2);
+		}
+		example.setOrderByClause("Item_date");
+		List<Kcalendar> Kcalendars = kcalendarMapper.selectByExample(example);
+		return Kcalendars;
+	}
+	
+	/**
+	 * 查询日历
+	 * @return
+	 */
+	public List<K15> queryEmpWorkDay(String k15A1090){
+		K15Example example = new K15Example();
+		com.myehr.pojo.calendar.K15Example.Criteria criteria = example.createCriteria();
+		criteria.andK15a0190EqualTo(k15A1090);
+		example.setOrderByClause("D9999");
+		List<K15> K15s = k15Mapper.selectByExample(example);
+		return K15s;
+	}
+	
+	/**
+	 * 查询班次
+	 * @return
+	 */
+	public List<Kbasecode> queryItem(){
+		KbasecodeExample example = new KbasecodeExample();
+		example.setOrderByClause("Parent_Code");
+		List<Kbasecode> Kbasecodes = kbasecodeMapper.selectByExample(example);
+		return Kbasecodes;
+	}
+	
+	/**
+	 * 查询班次
+	 * @return
+	 */
+	public List<AttendShifttype> queryAttendShifttypes(){
+		AttendShifttypeExample example = new AttendShifttypeExample();
+		//example.setOrderByClause("Parent_Code");
+		List<AttendShifttype> attendShifttypes = attendShifttypeMapper.selectByExample(example);
+		return attendShifttypes;
+	}
+	
+	/**
+	 * 查询休息班次
+	 * @return
+	 */
+	public List<Kcalclass> queryCalClass(){
+		KcalclassExample example = new KcalclassExample();
+		com.myehr.pojo.calendar.KcalclassExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("Item_Code");
+		List<Kcalclass> Kcalclasses = kcalclassMapper.selectByExample(example);
+		return Kcalclasses;
+	}
+	
+	/**
+	 * 查询休息班次
+	 * @return
+	 */
+	public List<AttendZone> queryCalClassNew(){
+		AttendZoneExample example = new AttendZoneExample();
+		com.myehr.pojo.calendar.AttendZoneExample.Criteria criteria = example.createCriteria();
+		example.setOrderByClause("az_id");
+		List<AttendZone> attendZones = attendZoneMapper.selectByExample(example);
+		return attendZones;
+	}
+	
+	/**
+	 * 查询休息日历树
+	 * @return
+	 */
+	/*public DataObject[] buildTreeNodes(String nodeType, String nodeId, String nodeCode, String nodeExt) {
+		List<DataObject> results = new ArrayList<DataObject>();
+		if ("Default".equals(nodeType)||"FO".equals(nodeType)) {
+			
+			DataObject[] folders = querySolutionFolderByParent(nodeId);
+			
+			//DataObject[] solution = querySolutionByParent(nodeId);
+			if (folders != null && folders.length > 0) {
+				for (int i = 0; i < folders.length; i++) {
+					DataObject dataObject = DataObjectUtil.createDataObject("commonj.sdo.DataObject");
+					dataObject.setString("nodeId", folders[i].getString("kguid"));
+					dataObject.setString("nodeCode", folders[i].getString("typeCode"));
+					dataObject.setString("nodeName", folders[i].getString("itemName"));
+					dataObject.setString("nodeType", folders[i].getString("typeCode"));
+					dataObject.setString("iconCls", "icon-solution");
+					dataObject.setString("nodeExt", folders[i].getString("kguid"));
+					dataObject.setBoolean("isLeaf", true);
+					dataObject.setBoolean("expanded", true);
+					results.add(dataObject);
+				}
+			}
+		}
+		if ("FO".equals(nodeType)) {
+			DataObject[] solution = querySolutionByParent(nodeId);
+			if (solution != null && solution.length > 0) {
+				for (int i = 0; i < solution.length; i++) {
+					DataObject dataObject = DataObjectUtil.createDataObject("commonj.sdo.DataObject");
+					dataObject.setString("nodeId", solution[i].getString("solutionId"));
+					dataObject.setString("nodeCode", solution[i].getString("solutionCode"));
+					dataObject.setString("nodeName", solution[i].getString("solutionName"));
+					dataObject.setString("nodeType", "T");
+					dataObject.setString("iconCls", "icon-solution");
+					dataObject.setString("nodeExt", solution[i].getString("solutionId"));
+					dataObject.setBoolean("isLeaf", false);
+					dataObject.setBoolean("expanded", false);
+					results.add(dataObject);
+				}
+			}
+		}
+		 if ("T".equals(nodeType)) {	
+			DataObject[] rule = queryRuleBySolutionId(nodeExt,"N",null,null,null);
+			if (rule != null && rule.length > 0) {
+				for (int i = 0; i < rule.length; i++) {
+					DataObject dataObject = DataObjectUtil.createDataObject("commonj.sdo.DataObject");
+					dataObject.setString("nodeId", rule[i].getString("ruleId"));
+					dataObject.setString("nodeCode", rule[i].getString("ruleCode"));
+					dataObject.setString("nodeName", rule[i].getString("ruleName"));
+					dataObject.setString("nodeType", "F");
+					dataObject.setString("iconCls", "icon-calculate");
+					dataObject.setString("nodeExt", rule[i].getString("ruleId"));
+					dataObject.setBoolean("isLeaf", false);
+					dataObject.setBoolean("expanded", false);
+					results.add(dataObject);
+				}
+			}
+		}
+		return results.toArray(new DataObject[results.size()]);
+	}*/
+	
+	/**
+	 * 获取所有的子目录信息
+	 */
+	/*public DataObject[] querySolutionFolderByParent(String parentFolderId) {
+		IDASCriteria dasCriteria = getDASTemplate().createCriteria("com.dcf.system.clendar.workday.calender.Kcalclass");
+		
+		if(parentFolderId!=null&&!"root".equals(parentFolderId)){
+			//dasCriteria.add(ExpressionHelper.eq("folderTreeParentId", Long.parseLong(parentFolderId)));
+		}else {
+			dasCriteria.add(ExpressionHelper.isNull("folderTreeParentId"));
+		}
+		
+		return getDASTemplate().queryEntitiesByCriteriaEntity(DataObject.class, dasCriteria);
+	}*/
+	
+	
+	/**
+	 * 保存目录信息
+	 */
+	/*public String saveSysFormFolder(DataObject kclass) throws Exception {
+		if(kclass.getString("kguid")!=null){
+			getDASTemplate().updateEntity(kclass);
+			return "4";
+		}else{
+			IDASCriteria dasCriteria = getDASTemplate().createCriteria("com.dcf.system.clendar.workday.calender.Kcalclass");
+			dasCriteria.add(ExpressionHelper.eq("itemCode", kclass.getString("itemCode")));
+			DataObject[] sysEntitys = getDASTemplate().queryEntitiesByCriteriaEntity(DataObject.class, dasCriteria);
+			IDASCriteria dasCriteria1 = getDASTemplate().createCriteria("com.dcf.system.clendar.workday.calender.Kcalclass");
+			dasCriteria1.add(ExpressionHelper.eq("itemName", kclass.getString("itemName")));
+			DataObject[] sysEntitys1 = getDASTemplate().queryEntitiesByCriteriaEntity(DataObject.class, dasCriteria1);
+			if(sysEntitys.length>0){
+				return "1";	
+			}else if(sysEntitys1.length>0){
+				return "2";
+			}else {
+				getDASTemplate().saveEntity(kclass);
+				return "0";
+			}
+		}
+	}*/
+	
+	/**
+	 * 获取目录信息
+	 * @return
+	 */
+	/*public DataObject querySolutionFolderById(String kguid) {
+
+		IDASCriteria dasCriteria = getDASTemplate().createCriteria("com.dcf.system.clendar.workday.calender.Kcalclass");
+		
+		dasCriteria.add(ExpressionHelper.eq("kguid", kguid));
+		DataObject[] sysFormFolder = getDASTemplate()
+		.queryEntitiesByCriteriaEntity(DataObject.class, dasCriteria);
+		if(sysFormFolder!=null&&sysFormFolder.length>0){
+			return sysFormFolder[0];
+		}
+		return null;
+	}*/
+	
+	/**
+	 * 删除目录
+	 * @param folderTreeId
+	 */
+	/*public String deleteSolutionFolderById(String kguid) {		
+		DataObject sysFormFolder= querySolutionFolderById(kguid);		
+		getDASTemplate().deleteEntity(sysFormFolder);
+		return "0";
+	}*/
+	
+	
+	/**
+	 * 初始化本月休息日历
+	 */
+	public String InitRestCalendar(String kguid,String datetime) throws Exception {
+		Kcalendar calendar = new Kcalendar();
+		String month1 = datetime.substring(6,7);
+		for (int i = 1; i < 32; i++) {
+			String dateString="";
+			if (i<10) {
+				dateString =datetime+"-0"+i;
+			}else {
+				dateString=datetime+"-"+i;
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = sdf.parse(dateString);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			String month = cal.get(Calendar.MONTH)+"";
+			if (month.equals(month1)) {
+				break;
+			}
+			String weekDay=getWeekOfDate(date);
+			String title="";
+			if (weekDay.equals("星期六") || weekDay.equals("星期日")) {
+				title="休息日";
+				calendar.setKguid(kguid);
+				calendar.setItemCaption(title);
+				calendar.setItemDate(date);
+				kcalendarMapper.insert(calendar);
+			}
+		}
+		return "1";
+	}
+	
+	/**
+	 * 初始化本月休息日历
+	 */
+	public String InitRestCalendarNew(Integer zoneid,String datetime) throws Exception {
+		AttendCalendar calendar = new AttendCalendar();
+		String month1 = datetime.substring(6,7);
+		for (int i = 1; i < 32; i++) {
+			String dateString="";
+			if (i<10) {
+				dateString =datetime+"-0"+i;
+			}else {
+				dateString=datetime+"-"+i;
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = sdf.parse(dateString);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			String month = cal.get(Calendar.MONTH)+"";
+			if (month.equals(month1)) {
+				break;
+			}
+			String weekDay=getWeekOfDate(date);
+			Integer xtype=1;
+			if (weekDay.equals("星期六") || weekDay.equals("星期日")) {
+				calendar.setZoneid(zoneid);
+				calendar.setXtype(xtype);
+				calendar.setTerm(date);
+				attendCalendarMapper.insert(calendar);
+			}
+		}
+		return "1";
+	}
+	
+	/**
+	 * 清空本月休息日历
+	 */
+	public String ClearRestCalendar(String kguid,String datetime) throws Exception {
+		for (int i = 1; i < 32; i++) {
+			String dateString="";
+			if (i<10) {
+				dateString =datetime+"-0"+i;
+			}else {
+				dateString=datetime+"-"+i;
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = sdf.parse(dateString);
+			
+			KcalendarExample example = new KcalendarExample();
+			com.myehr.pojo.calendar.KcalendarExample.Criteria criteria = example.createCriteria();
+			criteria.andKguidEqualTo(kguid);
+			criteria.andItemDateEqualTo(date);
+			kcalendarMapper.deleteByExample(example);
+		}
+		return "1";
+	}
+	
+	/**
+	 * 清空本月休息日历
+	 */
+	public String ClearRestCalendarNew(Integer zoneid,String datetime) throws Exception {
+		for (int i = 1; i < 32; i++) {
+			String dateString="";
+			if (i<10) {
+				dateString =datetime+"-0"+i;
+			}else {
+				dateString=datetime+"-"+i;
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = sdf.parse(dateString);
+			
+			AttendCalendarExample example = new AttendCalendarExample();
+			com.myehr.pojo.calendar.AttendCalendarExample.Criteria criteria = example.createCriteria();
+			criteria.andZoneidEqualTo(zoneid);
+			criteria.andTermEqualTo(date);
+			attendCalendarMapper.deleteByExample(example);
+		}
+		return "1";
+	}
+	
+	
+	/**
+     * 获取当前日期是星期几<br>
+     * 
+     * @param dt
+     * @return 当前日期是星期几
+     */
+    public static String getWeekOfDate(Date dt) {
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+    
+    
+    /**
+	 * 查询日历
+	 * @return
+	 */
+	public List<AttendCalendar> queryWorkDayNew(Integer zoneid,String datemonth){
+		AttendCalendarExample example = new AttendCalendarExample();
+		com.myehr.pojo.calendar.AttendCalendarExample.Criteria criteria = example.createCriteria();
+		criteria.andZoneidEqualTo(zoneid);
+		if (datemonth!=null && !datemonth.equals("")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date value1 = null;
+			Date value2 = null;
+			try {
+				value1 = sdf.parse(datemonth+"-00");
+				value2 = sdf.parse(datemonth+"-32");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();logger.error(e.getMessage(),e);
+			}
+			criteria.andTermBetween(value1, value2);
+		}
+		example.setOrderByClause("term");
+		List<AttendCalendar> Kcalendars = attendCalendarMapper.selectByExample(example);
+		return Kcalendars;
+	}
+
+}

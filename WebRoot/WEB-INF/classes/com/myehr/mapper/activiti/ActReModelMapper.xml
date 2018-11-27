@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActReModelMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActReModel" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="REV_" property="rev" jdbcType="DECIMAL" />
+    <result column="NAME_" property="name" jdbcType="OTHER" />
+    <result column="KEY_" property="key" jdbcType="OTHER" />
+    <result column="CATEGORY_" property="category" jdbcType="OTHER" />
+    <result column="CREATE_TIME_" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_TIME_" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="VERSION_" property="version" jdbcType="DECIMAL" />
+    <result column="META_INFO_" property="metaInfo" jdbcType="OTHER" />
+    <result column="DEPLOYMENT_ID_" property="deploymentId" jdbcType="OTHER" />
+    <result column="EDITOR_SOURCE_VALUE_ID_" property="editorSourceValueId" jdbcType="OTHER" />
+    <result column="EDITOR_SOURCE_EXTRA_VALUE_ID_" property="editorSourceExtraValueId" jdbcType="OTHER" />
+    <result column="TENANT_ID_" property="tenantId" jdbcType="OTHER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, REV_, NAME_, KEY_, CATEGORY_, CREATE_TIME_, LAST_UPDATE_TIME_, VERSION_, META_INFO_, 
+    DEPLOYMENT_ID_, EDITOR_SOURCE_VALUE_ID_, EDITOR_SOURCE_EXTRA_VALUE_ID_, TENANT_ID_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActReModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_RE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_RE_MODEL
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_RE_MODEL
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActReModelExample" >
+    delete from ACT_RE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActReModel" >
+    insert into ACT_RE_MODEL (ID_, REV_, NAME_, KEY_, 
+      CATEGORY_, CREATE_TIME_, LAST_UPDATE_TIME_, 
+      VERSION_, META_INFO_, DEPLOYMENT_ID_, 
+      EDITOR_SOURCE_VALUE_ID_, EDITOR_SOURCE_EXTRA_VALUE_ID_, 
+      TENANT_ID_)
+    values (#{id,jdbcType=OTHER}, #{rev,jdbcType=DECIMAL}, #{name,jdbcType=OTHER}, #{key,jdbcType=OTHER}, 
+      #{category,jdbcType=OTHER}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=DECIMAL}, #{metaInfo,jdbcType=OTHER}, #{deploymentId,jdbcType=OTHER}, 
+      #{editorSourceValueId,jdbcType=OTHER}, #{editorSourceExtraValueId,jdbcType=OTHER}, 
+      #{tenantId,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActReModel" >
+    insert into ACT_RE_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="rev != null" >
+        REV_,
+      </if>
+      <if test="name != null" >
+        NAME_,
+      </if>
+      <if test="key != null" >
+        KEY_,
+      </if>
+      <if test="category != null" >
+        CATEGORY_,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME_,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME_,
+      </if>
+      <if test="version != null" >
+        VERSION_,
+      </if>
+      <if test="metaInfo != null" >
+        META_INFO_,
+      </if>
+      <if test="deploymentId != null" >
+        DEPLOYMENT_ID_,
+      </if>
+      <if test="editorSourceValueId != null" >
+        EDITOR_SOURCE_VALUE_ID_,
+      </if>
+      <if test="editorSourceExtraValueId != null" >
+        EDITOR_SOURCE_EXTRA_VALUE_ID_,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="rev != null" >
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=OTHER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="metaInfo != null" >
+        #{metaInfo,jdbcType=OTHER},
+      </if>
+      <if test="deploymentId != null" >
+        #{deploymentId,jdbcType=OTHER},
+      </if>
+      <if test="editorSourceValueId != null" >
+        #{editorSourceValueId,jdbcType=OTHER},
+      </if>
+      <if test="editorSourceExtraValueId != null" >
+        #{editorSourceExtraValueId,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActReModelExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_RE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_RE_MODEL
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.rev != null" >
+        REV_ = #{record.rev,jdbcType=DECIMAL},
+      </if>
+      <if test="record.name != null" >
+        NAME_ = #{record.name,jdbcType=OTHER},
+      </if>
+      <if test="record.key != null" >
+        KEY_ = #{record.key,jdbcType=OTHER},
+      </if>
+      <if test="record.category != null" >
+        CATEGORY_ = #{record.category,jdbcType=OTHER},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME_ = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        LAST_UPDATE_TIME_ = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null" >
+        VERSION_ = #{record.version,jdbcType=DECIMAL},
+      </if>
+      <if test="record.metaInfo != null" >
+        META_INFO_ = #{record.metaInfo,jdbcType=OTHER},
+      </if>
+      <if test="record.deploymentId != null" >
+        DEPLOYMENT_ID_ = #{record.deploymentId,jdbcType=OTHER},
+      </if>
+      <if test="record.editorSourceValueId != null" >
+        EDITOR_SOURCE_VALUE_ID_ = #{record.editorSourceValueId,jdbcType=OTHER},
+      </if>
+      <if test="record.editorSourceExtraValueId != null" >
+        EDITOR_SOURCE_EXTRA_VALUE_ID_ = #{record.editorSourceExtraValueId,jdbcType=OTHER},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID_ = #{record.tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_RE_MODEL
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      NAME_ = #{record.name,jdbcType=OTHER},
+      KEY_ = #{record.key,jdbcType=OTHER},
+      CATEGORY_ = #{record.category,jdbcType=OTHER},
+      CREATE_TIME_ = #{record.createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME_ = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION_ = #{record.version,jdbcType=DECIMAL},
+      META_INFO_ = #{record.metaInfo,jdbcType=OTHER},
+      DEPLOYMENT_ID_ = #{record.deploymentId,jdbcType=OTHER},
+      EDITOR_SOURCE_VALUE_ID_ = #{record.editorSourceValueId,jdbcType=OTHER},
+      EDITOR_SOURCE_EXTRA_VALUE_ID_ = #{record.editorSourceExtraValueId,jdbcType=OTHER},
+      TENANT_ID_ = #{record.tenantId,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActReModel" >
+    update ACT_RE_MODEL
+    <set >
+      <if test="rev != null" >
+        REV_ = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        NAME_ = #{name,jdbcType=OTHER},
+      </if>
+      <if test="key != null" >
+        KEY_ = #{key,jdbcType=OTHER},
+      </if>
+      <if test="category != null" >
+        CATEGORY_ = #{category,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME_ = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        VERSION_ = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="metaInfo != null" >
+        META_INFO_ = #{metaInfo,jdbcType=OTHER},
+      </if>
+      <if test="deploymentId != null" >
+        DEPLOYMENT_ID_ = #{deploymentId,jdbcType=OTHER},
+      </if>
+      <if test="editorSourceValueId != null" >
+        EDITOR_SOURCE_VALUE_ID_ = #{editorSourceValueId,jdbcType=OTHER},
+      </if>
+      <if test="editorSourceExtraValueId != null" >
+        EDITOR_SOURCE_EXTRA_VALUE_ID_ = #{editorSourceExtraValueId,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_ = #{tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActReModel" >
+    update ACT_RE_MODEL
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      NAME_ = #{name,jdbcType=OTHER},
+      KEY_ = #{key,jdbcType=OTHER},
+      CATEGORY_ = #{category,jdbcType=OTHER},
+      CREATE_TIME_ = #{createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME_ = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION_ = #{version,jdbcType=DECIMAL},
+      META_INFO_ = #{metaInfo,jdbcType=OTHER},
+      DEPLOYMENT_ID_ = #{deploymentId,jdbcType=OTHER},
+      EDITOR_SOURCE_VALUE_ID_ = #{editorSourceValueId,jdbcType=OTHER},
+      EDITOR_SOURCE_EXTRA_VALUE_ID_ = #{editorSourceExtraValueId,jdbcType=OTHER},
+      TENANT_ID_ = #{tenantId,jdbcType=OTHER}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

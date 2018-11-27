@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.message.SysMessageTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.message.SysMessageTemplate" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="NEWS_TEMPLATE" property="newsTemplate" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.message.SysMessageTemplateWithBLOBs" extends="BaseResultMap" >
+    <result column="EMAIL_TEMPLATE" property="emailTemplate" jdbcType="LONGVARCHAR" />
+    <result column="WEIXIN_TEMPLATE" property="weixinTemplate" jdbcType="LONGVARCHAR" />
+    <result column="NOTIFY_TEMPLATE" property="notifyTemplate" jdbcType="LONGVARCHAR" />
+    <result column="EXT1_TEMPLATE" property="ext1Template" jdbcType="LONGVARCHAR" />
+    <result column="EXT2_TEMPLATE" property="ext2Template" jdbcType="LONGVARCHAR" />
+    <result column="EXT3_TEMPLATE" property="ext3Template" jdbcType="LONGVARCHAR" />
+    <result column="EXT4_TEMPLATE" property="ext4Template" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CODE, TITLE, NEWS_TEMPLATE, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    EMAIL_TEMPLATE, WEIXIN_TEMPLATE, NOTIFY_TEMPLATE, EXT1_TEMPLATE, EXT2_TEMPLATE, EXT3_TEMPLATE, 
+    EXT4_TEMPLATE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.message.SysMessageTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MESSAGE_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.message.SysMessageTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MESSAGE_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MESSAGE_TEMPLATE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_MESSAGE_TEMPLATE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.message.SysMessageTemplateExample" >
+    delete from SYS_MESSAGE_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.message.SysMessageTemplateWithBLOBs" >
+    insert into SYS_MESSAGE_TEMPLATE (ID, CODE, TITLE, 
+      NEWS_TEMPLATE, OPERATOR_NAME, OPERATOR_TIME, 
+      EMAIL_TEMPLATE, WEIXIN_TEMPLATE, 
+      NOTIFY_TEMPLATE, EXT1_TEMPLATE, EXT2_TEMPLATE, 
+      EXT3_TEMPLATE, EXT4_TEMPLATE)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{newsTemplate,jdbcType=VARCHAR}, #{operatorName,jdbcType=NCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{emailTemplate,jdbcType=LONGVARCHAR}, #{weixinTemplate,jdbcType=LONGVARCHAR}, 
+      #{notifyTemplate,jdbcType=LONGVARCHAR}, #{ext1Template,jdbcType=LONGVARCHAR}, #{ext2Template,jdbcType=LONGVARCHAR}, 
+      #{ext3Template,jdbcType=LONGVARCHAR}, #{ext4Template,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.message.SysMessageTemplateWithBLOBs" >
+    insert into SYS_MESSAGE_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="newsTemplate != null" >
+        NEWS_TEMPLATE,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="emailTemplate != null" >
+        EMAIL_TEMPLATE,
+      </if>
+      <if test="weixinTemplate != null" >
+        WEIXIN_TEMPLATE,
+      </if>
+      <if test="notifyTemplate != null" >
+        NOTIFY_TEMPLATE,
+      </if>
+      <if test="ext1Template != null" >
+        EXT1_TEMPLATE,
+      </if>
+      <if test="ext2Template != null" >
+        EXT2_TEMPLATE,
+      </if>
+      <if test="ext3Template != null" >
+        EXT3_TEMPLATE,
+      </if>
+      <if test="ext4Template != null" >
+        EXT4_TEMPLATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="newsTemplate != null" >
+        #{newsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailTemplate != null" >
+        #{emailTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="weixinTemplate != null" >
+        #{weixinTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyTemplate != null" >
+        #{notifyTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext1Template != null" >
+        #{ext1Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext2Template != null" >
+        #{ext2Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext3Template != null" >
+        #{ext3Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext4Template != null" >
+        #{ext4Template,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.message.SysMessageTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MESSAGE_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MESSAGE_TEMPLATE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsTemplate != null" >
+        NEWS_TEMPLATE = #{record.newsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.emailTemplate != null" >
+        EMAIL_TEMPLATE = #{record.emailTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.weixinTemplate != null" >
+        WEIXIN_TEMPLATE = #{record.weixinTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notifyTemplate != null" >
+        NOTIFY_TEMPLATE = #{record.notifyTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ext1Template != null" >
+        EXT1_TEMPLATE = #{record.ext1Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ext2Template != null" >
+        EXT2_TEMPLATE = #{record.ext2Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ext3Template != null" >
+        EXT3_TEMPLATE = #{record.ext3Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ext4Template != null" >
+        EXT4_TEMPLATE = #{record.ext4Template,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_MESSAGE_TEMPLATE
+    set ID = #{record.id,jdbcType=INTEGER},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      NEWS_TEMPLATE = #{record.newsTemplate,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      EMAIL_TEMPLATE = #{record.emailTemplate,jdbcType=LONGVARCHAR},
+      WEIXIN_TEMPLATE = #{record.weixinTemplate,jdbcType=LONGVARCHAR},
+      NOTIFY_TEMPLATE = #{record.notifyTemplate,jdbcType=LONGVARCHAR},
+      EXT1_TEMPLATE = #{record.ext1Template,jdbcType=LONGVARCHAR},
+      EXT2_TEMPLATE = #{record.ext2Template,jdbcType=LONGVARCHAR},
+      EXT3_TEMPLATE = #{record.ext3Template,jdbcType=LONGVARCHAR},
+      EXT4_TEMPLATE = #{record.ext4Template,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MESSAGE_TEMPLATE
+    set ID = #{record.id,jdbcType=INTEGER},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      NEWS_TEMPLATE = #{record.newsTemplate,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.message.SysMessageTemplateWithBLOBs" >
+    update SYS_MESSAGE_TEMPLATE
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="newsTemplate != null" >
+        NEWS_TEMPLATE = #{newsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailTemplate != null" >
+        EMAIL_TEMPLATE = #{emailTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="weixinTemplate != null" >
+        WEIXIN_TEMPLATE = #{weixinTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyTemplate != null" >
+        NOTIFY_TEMPLATE = #{notifyTemplate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext1Template != null" >
+        EXT1_TEMPLATE = #{ext1Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext2Template != null" >
+        EXT2_TEMPLATE = #{ext2Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext3Template != null" >
+        EXT3_TEMPLATE = #{ext3Template,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext4Template != null" >
+        EXT4_TEMPLATE = #{ext4Template,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.message.SysMessageTemplateWithBLOBs" >
+    update SYS_MESSAGE_TEMPLATE
+    set CODE = #{code,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      NEWS_TEMPLATE = #{newsTemplate,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      EMAIL_TEMPLATE = #{emailTemplate,jdbcType=LONGVARCHAR},
+      WEIXIN_TEMPLATE = #{weixinTemplate,jdbcType=LONGVARCHAR},
+      NOTIFY_TEMPLATE = #{notifyTemplate,jdbcType=LONGVARCHAR},
+      EXT1_TEMPLATE = #{ext1Template,jdbcType=LONGVARCHAR},
+      EXT2_TEMPLATE = #{ext2Template,jdbcType=LONGVARCHAR},
+      EXT3_TEMPLATE = #{ext3Template,jdbcType=LONGVARCHAR},
+      EXT4_TEMPLATE = #{ext4Template,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.message.SysMessageTemplate" >
+    update SYS_MESSAGE_TEMPLATE
+    set CODE = #{code,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      NEWS_TEMPLATE = #{newsTemplate,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

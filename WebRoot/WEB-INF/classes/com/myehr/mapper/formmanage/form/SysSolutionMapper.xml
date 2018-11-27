@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysSolutionMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysSolution" >
+    <id column="SOLUTION_ID" property="solutionId" jdbcType="DECIMAL" />
+    <result column="SOLUTION_CODE" property="solutionCode" jdbcType="NVARCHAR" />
+    <result column="SOLUTION_NAME" property="solutionName" jdbcType="NVARCHAR" />
+    <result column="SOLUTION_PARENT_ID" property="solutionParentId" jdbcType="NVARCHAR" />
+    <result column="SOLUTION_SORT" property="solutionSort" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="NVARCHAR" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="SOLUTION_MENU_ID" property="solutionMenuId" jdbcType="NVARCHAR" />
+    <result column="FOLDER_ID" property="folderId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SOLUTION_ID, SOLUTION_CODE, SOLUTION_NAME, SOLUTION_PARENT_ID, SOLUTION_SORT, OPERATOR_TIME, 
+    OPERATOR_NAME, APPROVE_TIME, APPROVE_NAME, DELETE_MARK, SOLUTION_MENU_ID, FOLDER_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysSolutionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_SOLUTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_SOLUTION
+    where SOLUTION_ID = #{solutionId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_SOLUTION
+    where SOLUTION_ID = #{solutionId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysSolutionExample" >
+    delete from SYS_SOLUTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysSolution" >
+    insert into SYS_SOLUTION (SOLUTION_CODE, SOLUTION_NAME, 
+      SOLUTION_PARENT_ID, SOLUTION_SORT, OPERATOR_TIME, 
+      OPERATOR_NAME, APPROVE_TIME, APPROVE_NAME, 
+      DELETE_MARK, SOLUTION_MENU_ID, FOLDER_ID
+      )
+    values (#{solutionCode,jdbcType=NVARCHAR}, #{solutionName,jdbcType=NVARCHAR}, 
+      #{solutionParentId,jdbcType=NVARCHAR}, #{solutionSort,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{approveTime,jdbcType=TIMESTAMP}, #{approveName,jdbcType=NVARCHAR}, 
+      #{deleteMark,jdbcType=NVARCHAR}, #{solutionMenuId,jdbcType=NVARCHAR}, #{folderId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysSolution" >
+    insert into SYS_SOLUTION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="solutionId != null" >
+        SOLUTION_ID,
+      </if>
+      <if test="solutionCode != null" >
+        SOLUTION_CODE,
+      </if>
+      <if test="solutionName != null" >
+        SOLUTION_NAME,
+      </if>
+      <if test="solutionParentId != null" >
+        SOLUTION_PARENT_ID,
+      </if>
+      <if test="solutionSort != null" >
+        SOLUTION_SORT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="solutionMenuId != null" >
+        SOLUTION_MENU_ID,
+      </if>
+      <if test="folderId != null" >
+        FOLDER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="solutionId != null" >
+        #{solutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="solutionCode != null" >
+        #{solutionCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionName != null" >
+        #{solutionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionParentId != null" >
+        #{solutionParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionSort != null" >
+        #{solutionSort,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionMenuId != null" >
+        #{solutionMenuId,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderId != null" >
+        #{folderId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysSolutionExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_SOLUTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_SOLUTION
+    <set >
+      <if test="record.solutionId != null" >
+        SOLUTION_ID = #{record.solutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.solutionCode != null" >
+        SOLUTION_CODE = #{record.solutionCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.solutionName != null" >
+        SOLUTION_NAME = #{record.solutionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.solutionParentId != null" >
+        SOLUTION_PARENT_ID = #{record.solutionParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.solutionSort != null" >
+        SOLUTION_SORT = #{record.solutionSort,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.solutionMenuId != null" >
+        SOLUTION_MENU_ID = #{record.solutionMenuId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.folderId != null" >
+        FOLDER_ID = #{record.folderId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_SOLUTION
+    set SOLUTION_ID = #{record.solutionId,jdbcType=DECIMAL},
+      SOLUTION_CODE = #{record.solutionCode,jdbcType=NVARCHAR},
+      SOLUTION_NAME = #{record.solutionName,jdbcType=NVARCHAR},
+      SOLUTION_PARENT_ID = #{record.solutionParentId,jdbcType=NVARCHAR},
+      SOLUTION_SORT = #{record.solutionSort,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      SOLUTION_MENU_ID = #{record.solutionMenuId,jdbcType=NVARCHAR},
+      FOLDER_ID = #{record.folderId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysSolution" >
+    update SYS_SOLUTION
+    <set >
+      <if test="solutionCode != null" >
+        SOLUTION_CODE = #{solutionCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionName != null" >
+        SOLUTION_NAME = #{solutionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionParentId != null" >
+        SOLUTION_PARENT_ID = #{solutionParentId,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionSort != null" >
+        SOLUTION_SORT = #{solutionSort,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="solutionMenuId != null" >
+        SOLUTION_MENU_ID = #{solutionMenuId,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderId != null" >
+        FOLDER_ID = #{folderId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SOLUTION_ID = #{solutionId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysSolution" >
+    update SYS_SOLUTION
+    set SOLUTION_CODE = #{solutionCode,jdbcType=NVARCHAR},
+      SOLUTION_NAME = #{solutionName,jdbcType=NVARCHAR},
+      SOLUTION_PARENT_ID = #{solutionParentId,jdbcType=NVARCHAR},
+      SOLUTION_SORT = #{solutionSort,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      SOLUTION_MENU_ID = #{solutionMenuId,jdbcType=NVARCHAR},
+      FOLDER_ID = #{folderId,jdbcType=DECIMAL}
+    where SOLUTION_ID = #{solutionId,jdbcType=DECIMAL}
+  </update>
+</mapper>

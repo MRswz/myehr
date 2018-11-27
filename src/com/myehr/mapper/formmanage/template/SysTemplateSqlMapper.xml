@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.SysTemplateSqlMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.SysTemplateSql" >
+    <id column="TEMPLATE_SQL_ID" property="templateSqlId" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_ENTITY_NAME" property="templateEntityName" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_ENTITY_OTHER_NAME" property="templateEntityOtherName" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_PROPERTY" property="templateProperty" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_LINK_SYMBOL" property="templateLinkSymbol" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_CONDITION" property="templateCondition" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_SORT" property="templateSort" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_ID" property="templateId" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_ENTITY_ID" property="templateEntityId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEMPLATE_SQL_ID, TEMPLATE_ENTITY_NAME, TEMPLATE_ENTITY_OTHER_NAME, TEMPLATE_PROPERTY, 
+    TEMPLATE_LINK_SYMBOL, TEMPLATE_CONDITION, TEMPLATE_SORT, TEMPLATE_ID, TEMPLATE_ENTITY_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSqlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_SQL
+    where TEMPLATE_SQL_ID = #{templateSqlId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_SQL
+    where TEMPLATE_SQL_ID = #{templateSqlId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSqlExample" >
+    delete from SYS_TEMPLATE_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSql" >
+    insert into SYS_TEMPLATE_SQL (TEMPLATE_ENTITY_NAME, 
+      TEMPLATE_ENTITY_OTHER_NAME, TEMPLATE_PROPERTY, 
+      TEMPLATE_LINK_SYMBOL, TEMPLATE_CONDITION, 
+      TEMPLATE_SORT, TEMPLATE_ID, TEMPLATE_ENTITY_ID
+      )
+    values (#{templateEntityName,jdbcType=VARCHAR}, 
+      #{templateEntityOtherName,jdbcType=VARCHAR}, #{templateProperty,jdbcType=VARCHAR}, 
+      #{templateLinkSymbol,jdbcType=VARCHAR}, #{templateCondition,jdbcType=VARCHAR}, 
+      #{templateSort,jdbcType=VARCHAR}, #{templateId,jdbcType=DECIMAL}, #{templateEntityId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSql" >
+    insert into SYS_TEMPLATE_SQL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateSqlId != null" >
+        TEMPLATE_SQL_ID,
+      </if>
+      <if test="templateEntityName != null" >
+        TEMPLATE_ENTITY_NAME,
+      </if>
+      <if test="templateEntityOtherName != null" >
+        TEMPLATE_ENTITY_OTHER_NAME,
+      </if>
+      <if test="templateProperty != null" >
+        TEMPLATE_PROPERTY,
+      </if>
+      <if test="templateLinkSymbol != null" >
+        TEMPLATE_LINK_SYMBOL,
+      </if>
+      <if test="templateCondition != null" >
+        TEMPLATE_CONDITION,
+      </if>
+      <if test="templateSort != null" >
+        TEMPLATE_SORT,
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="templateEntityId != null" >
+        TEMPLATE_ENTITY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateSqlId != null" >
+        #{templateSqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateEntityName != null" >
+        #{templateEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateEntityOtherName != null" >
+        #{templateEntityOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateProperty != null" >
+        #{templateProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="templateLinkSymbol != null" >
+        #{templateLinkSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="templateCondition != null" >
+        #{templateCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="templateSort != null" >
+        #{templateSort,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateEntityId != null" >
+        #{templateEntityId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSqlExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_SQL
+    <set >
+      <if test="record.templateSqlId != null" >
+        TEMPLATE_SQL_ID = #{record.templateSqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateEntityName != null" >
+        TEMPLATE_ENTITY_NAME = #{record.templateEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateEntityOtherName != null" >
+        TEMPLATE_ENTITY_OTHER_NAME = #{record.templateEntityOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateProperty != null" >
+        TEMPLATE_PROPERTY = #{record.templateProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateLinkSymbol != null" >
+        TEMPLATE_LINK_SYMBOL = #{record.templateLinkSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateCondition != null" >
+        TEMPLATE_CONDITION = #{record.templateCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateSort != null" >
+        TEMPLATE_SORT = #{record.templateSort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateEntityId != null" >
+        TEMPLATE_ENTITY_ID = #{record.templateEntityId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_SQL
+    set TEMPLATE_SQL_ID = #{record.templateSqlId,jdbcType=DECIMAL},
+      TEMPLATE_ENTITY_NAME = #{record.templateEntityName,jdbcType=VARCHAR},
+      TEMPLATE_ENTITY_OTHER_NAME = #{record.templateEntityOtherName,jdbcType=VARCHAR},
+      TEMPLATE_PROPERTY = #{record.templateProperty,jdbcType=VARCHAR},
+      TEMPLATE_LINK_SYMBOL = #{record.templateLinkSymbol,jdbcType=VARCHAR},
+      TEMPLATE_CONDITION = #{record.templateCondition,jdbcType=VARCHAR},
+      TEMPLATE_SORT = #{record.templateSort,jdbcType=VARCHAR},
+      TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      TEMPLATE_ENTITY_ID = #{record.templateEntityId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSql" >
+    update SYS_TEMPLATE_SQL
+    <set >
+      <if test="templateEntityName != null" >
+        TEMPLATE_ENTITY_NAME = #{templateEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateEntityOtherName != null" >
+        TEMPLATE_ENTITY_OTHER_NAME = #{templateEntityOtherName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateProperty != null" >
+        TEMPLATE_PROPERTY = #{templateProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="templateLinkSymbol != null" >
+        TEMPLATE_LINK_SYMBOL = #{templateLinkSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="templateCondition != null" >
+        TEMPLATE_CONDITION = #{templateCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="templateSort != null" >
+        TEMPLATE_SORT = #{templateSort,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID = #{templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateEntityId != null" >
+        TEMPLATE_ENTITY_ID = #{templateEntityId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where TEMPLATE_SQL_ID = #{templateSqlId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.SysTemplateSql" >
+    update SYS_TEMPLATE_SQL
+    set TEMPLATE_ENTITY_NAME = #{templateEntityName,jdbcType=VARCHAR},
+      TEMPLATE_ENTITY_OTHER_NAME = #{templateEntityOtherName,jdbcType=VARCHAR},
+      TEMPLATE_PROPERTY = #{templateProperty,jdbcType=VARCHAR},
+      TEMPLATE_LINK_SYMBOL = #{templateLinkSymbol,jdbcType=VARCHAR},
+      TEMPLATE_CONDITION = #{templateCondition,jdbcType=VARCHAR},
+      TEMPLATE_SORT = #{templateSort,jdbcType=VARCHAR},
+      TEMPLATE_ID = #{templateId,jdbcType=DECIMAL},
+      TEMPLATE_ENTITY_ID = #{templateEntityId,jdbcType=DECIMAL}
+    where TEMPLATE_SQL_ID = #{templateSqlId,jdbcType=DECIMAL}
+  </update>
+</mapper>

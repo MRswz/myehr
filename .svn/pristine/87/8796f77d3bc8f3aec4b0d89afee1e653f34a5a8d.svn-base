@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.entity.SysEntityExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.entity.SysEntityExpand" >
+    <id column="ENTITY_ID" property="entityId" jdbcType="INTEGER" />
+    <result column="ENTITY_CODE" property="entityCode" jdbcType="VARCHAR" />
+    <result column="ENTITY_TABLENAME" property="entityTablename" jdbcType="VARCHAR" />
+    <result column="ENTITY_TYPE" property="entityType" jdbcType="VARCHAR" />
+    <result column="ENTITY_CHINANAME" property="entityChinaname" jdbcType="VARCHAR" />
+    <result column="ENTITY_SORT" property="entitySort" jdbcType="INTEGER" />
+    <result column="ENTITY_DES" property="entityDes" jdbcType="VARCHAR" />
+    <result column="ENTITY_STATE" property="entityState" jdbcType="VARCHAR" />
+    <result column="ENTITY_MARK" property="entityMark" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="FIELD_CODE" property="fieldCode" jdbcType="VARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="VARCHAR" />
+    <result column="FIELD_LEN" property="fieldLen" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ENTITY_ID, ENTITY_CODE, ENTITY_TABLENAME, ENTITY_TYPE, ENTITY_CHINANAME, ENTITY_SORT, 
+    ENTITY_DES, ENTITY_STATE, ENTITY_MARK, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+    APPROVE_TIME, DELETE_MARK
+  </sql>
+  <select id="selectEntityWithKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select sys_entity.*,sys_field.FIELD_CODE, sys_field.FIELD_TYPE, sys_field.FIELD_LEN
+     from sys_entity,sys_field 
+     where sys_entity.ENTITY_ID = sys_field.FIELD_ENTITY_ID 
+     and sys_entity.ENTITY_CODE in (${entityCodes})
+     and sys_field.FIELD_IS_KEY ='Y'
+  </select>
+  
+  
+</mapper>

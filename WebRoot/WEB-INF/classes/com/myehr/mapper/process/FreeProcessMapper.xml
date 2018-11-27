@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.process.FreeProcessMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.process.FreeProcess" >
+    <id column="free_process_id" property="freeProcessId" jdbcType="DECIMAL" />
+    <result column="free_process_commit" property="freeProcessCommit" jdbcType="NVARCHAR" />
+    <result column="free_process_approve" property="freeProcessApprove" jdbcType="NVARCHAR" />
+    <result column="free_now_user" property="freeNowUser" jdbcType="NVARCHAR" />
+    <result column="free_form_id" property="freeFormId" jdbcType="NVARCHAR" />
+    <result column="free_pk_id" property="freePkId" jdbcType="NVARCHAR" />
+    <result column="free_next_user" property="freeNextUser" jdbcType="NVARCHAR" />
+    <result column="free_node_status" property="freeNodeStatus" jdbcType="NVARCHAR" />
+    <result column="free_all_status" property="freeAllStatus" jdbcType="NVARCHAR" />
+    <result column="free_start_time" property="freeStartTime" jdbcType="TIMESTAMP" />
+    <result column="free_ent_time" property="freeEntTime" jdbcType="TIMESTAMP" />
+    <result column="free_node_start_time" property="freeNodeStartTime" jdbcType="TIMESTAMP" />
+    <result column="free_node_end_time" property="freeNodeEndTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    free_process_id, free_process_commit, free_process_approve, free_now_user, free_form_id, 
+    free_pk_id, free_next_user, free_node_status, free_all_status, free_start_time, free_ent_time, 
+    free_node_start_time, free_node_end_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.process.FreeProcessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from free_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from free_process
+    where free_process_id = #{freeProcessId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from free_process
+    where free_process_id = #{freeProcessId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.process.FreeProcessExample" >
+    delete from free_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.process.FreeProcess" >
+    insert into free_process (free_process_commit, 
+      free_process_approve, free_now_user, free_form_id, 
+      free_pk_id, free_next_user, free_node_status, 
+      free_all_status, free_start_time, free_ent_time, 
+      free_node_start_time, free_node_end_time)
+    values (#{freeProcessCommit,jdbcType=NVARCHAR}, 
+      #{freeProcessApprove,jdbcType=NVARCHAR}, #{freeNowUser,jdbcType=NVARCHAR}, #{freeFormId,jdbcType=NVARCHAR}, 
+      #{freePkId,jdbcType=NVARCHAR}, #{freeNextUser,jdbcType=NVARCHAR}, #{freeNodeStatus,jdbcType=NVARCHAR}, 
+      #{freeAllStatus,jdbcType=NVARCHAR}, #{freeStartTime,jdbcType=TIMESTAMP}, #{freeEntTime,jdbcType=TIMESTAMP}, 
+      #{freeNodeStartTime,jdbcType=TIMESTAMP}, #{freeNodeEndTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.process.FreeProcess" >
+    insert into free_process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="freeProcessId != null" >
+        free_process_id,
+      </if>
+      <if test="freeProcessCommit != null" >
+        free_process_commit,
+      </if>
+      <if test="freeProcessApprove != null" >
+        free_process_approve,
+      </if>
+      <if test="freeNowUser != null" >
+        free_now_user,
+      </if>
+      <if test="freeFormId != null" >
+        free_form_id,
+      </if>
+      <if test="freePkId != null" >
+        free_pk_id,
+      </if>
+      <if test="freeNextUser != null" >
+        free_next_user,
+      </if>
+      <if test="freeNodeStatus != null" >
+        free_node_status,
+      </if>
+      <if test="freeAllStatus != null" >
+        free_all_status,
+      </if>
+      <if test="freeStartTime != null" >
+        free_start_time,
+      </if>
+      <if test="freeEntTime != null" >
+        free_ent_time,
+      </if>
+      <if test="freeNodeStartTime != null" >
+        free_node_start_time,
+      </if>
+      <if test="freeNodeEndTime != null" >
+        free_node_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="freeProcessId != null" >
+        #{freeProcessId,jdbcType=DECIMAL},
+      </if>
+      <if test="freeProcessCommit != null" >
+        #{freeProcessCommit,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeProcessApprove != null" >
+        #{freeProcessApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNowUser != null" >
+        #{freeNowUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeFormId != null" >
+        #{freeFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="freePkId != null" >
+        #{freePkId,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNextUser != null" >
+        #{freeNextUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNodeStatus != null" >
+        #{freeNodeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeAllStatus != null" >
+        #{freeAllStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeStartTime != null" >
+        #{freeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeEntTime != null" >
+        #{freeEntTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeNodeStartTime != null" >
+        #{freeNodeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeNodeEndTime != null" >
+        #{freeNodeEndTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.process.FreeProcessExample" resultType="java.lang.Integer" >
+    select count(*) from free_process
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update free_process
+    <set >
+      <if test="record.freeProcessId != null" >
+        free_process_id = #{record.freeProcessId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freeProcessCommit != null" >
+        free_process_commit = #{record.freeProcessCommit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeProcessApprove != null" >
+        free_process_approve = #{record.freeProcessApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeNowUser != null" >
+        free_now_user = #{record.freeNowUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeFormId != null" >
+        free_form_id = #{record.freeFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freePkId != null" >
+        free_pk_id = #{record.freePkId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeNextUser != null" >
+        free_next_user = #{record.freeNextUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeNodeStatus != null" >
+        free_node_status = #{record.freeNodeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeAllStatus != null" >
+        free_all_status = #{record.freeAllStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.freeStartTime != null" >
+        free_start_time = #{record.freeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.freeEntTime != null" >
+        free_ent_time = #{record.freeEntTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.freeNodeStartTime != null" >
+        free_node_start_time = #{record.freeNodeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.freeNodeEndTime != null" >
+        free_node_end_time = #{record.freeNodeEndTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update free_process
+    set free_process_id = #{record.freeProcessId,jdbcType=DECIMAL},
+      free_process_commit = #{record.freeProcessCommit,jdbcType=NVARCHAR},
+      free_process_approve = #{record.freeProcessApprove,jdbcType=NVARCHAR},
+      free_now_user = #{record.freeNowUser,jdbcType=NVARCHAR},
+      free_form_id = #{record.freeFormId,jdbcType=NVARCHAR},
+      free_pk_id = #{record.freePkId,jdbcType=NVARCHAR},
+      free_next_user = #{record.freeNextUser,jdbcType=NVARCHAR},
+      free_node_status = #{record.freeNodeStatus,jdbcType=NVARCHAR},
+      free_all_status = #{record.freeAllStatus,jdbcType=NVARCHAR},
+      free_start_time = #{record.freeStartTime,jdbcType=TIMESTAMP},
+      free_ent_time = #{record.freeEntTime,jdbcType=TIMESTAMP},
+      free_node_start_time = #{record.freeNodeStartTime,jdbcType=TIMESTAMP},
+      free_node_end_time = #{record.freeNodeEndTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.process.FreeProcess" >
+    update free_process
+    <set >
+      <if test="freeProcessCommit != null" >
+        free_process_commit = #{freeProcessCommit,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeProcessApprove != null" >
+        free_process_approve = #{freeProcessApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNowUser != null" >
+        free_now_user = #{freeNowUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeFormId != null" >
+        free_form_id = #{freeFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="freePkId != null" >
+        free_pk_id = #{freePkId,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNextUser != null" >
+        free_next_user = #{freeNextUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeNodeStatus != null" >
+        free_node_status = #{freeNodeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeAllStatus != null" >
+        free_all_status = #{freeAllStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="freeStartTime != null" >
+        free_start_time = #{freeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeEntTime != null" >
+        free_ent_time = #{freeEntTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeNodeStartTime != null" >
+        free_node_start_time = #{freeNodeStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freeNodeEndTime != null" >
+        free_node_end_time = #{freeNodeEndTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where free_process_id = #{freeProcessId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.process.FreeProcess" >
+    update free_process
+    set free_process_commit = #{freeProcessCommit,jdbcType=NVARCHAR},
+      free_process_approve = #{freeProcessApprove,jdbcType=NVARCHAR},
+      free_now_user = #{freeNowUser,jdbcType=NVARCHAR},
+      free_form_id = #{freeFormId,jdbcType=NVARCHAR},
+      free_pk_id = #{freePkId,jdbcType=NVARCHAR},
+      free_next_user = #{freeNextUser,jdbcType=NVARCHAR},
+      free_node_status = #{freeNodeStatus,jdbcType=NVARCHAR},
+      free_all_status = #{freeAllStatus,jdbcType=NVARCHAR},
+      free_start_time = #{freeStartTime,jdbcType=TIMESTAMP},
+      free_ent_time = #{freeEntTime,jdbcType=TIMESTAMP},
+      free_node_start_time = #{freeNodeStartTime,jdbcType=TIMESTAMP},
+      free_node_end_time = #{freeNodeEndTime,jdbcType=TIMESTAMP}
+    where free_process_id = #{freeProcessId,jdbcType=DECIMAL}
+  </update>
+</mapper>

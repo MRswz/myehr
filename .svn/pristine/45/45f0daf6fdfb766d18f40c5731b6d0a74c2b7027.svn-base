@@ -1,0 +1,156 @@
+<%@ page language="java" import="java.util.*" import="com.myehr.common.util.LangUtil" pageEncoding="UTF-8"%>
+<%@ include file="/common/common.jsp" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<link rel="stylesheet" href="jscss/css/pictureViewer.css" type="text/css"></link>
+	<script type="text/javascript" src="jscss/js/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="jscss/js/pictureViewer.js"></script>
+</head>
+<style>
+.tableCell{
+	min-height:10px !important;
+	padding:0;
+}
+</style>
+<body style="text-align:center">
+<div class='TagWall' >
+	<label style='display:inline-block'>标签: </label><div id='TagWall' style='display:inline-block'></div>
+</div>
+<div class="row" style="margin:0;background-color:#eee"  id="CARD_FORM">
+	
+</div>	
+<script>
+$(function () {
+	showFormList();
+});
+window.onload=function(){
+	addHtml_FormTag('FormTags','TagWall');
+}
+function showFormList(){
+	$("#CARD_FORM").html("");
+	var formInfos = getFormBaseInfo();
+	for(var i=0;i<formInfos.length;i++){
+		var cell =  '<div class="col-md-6 col-sm-12 col-lg-4 PicWall">'+
+					'	<div class="image-list" id="wall'+i+'">'+
+					'		<div class="" style="padding:30px">'+
+					'			<div class="row cell" style="width:160px;font-size:12px;border:none">'+
+					'				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 tableCell">'+
+					'					<h4>表单类型:</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 tableCell">'+
+					'					<h4>'+formInfos[i].showInfo.formTypeName+'</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 tableCell">'+
+					'					<h4>主要用途:</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 tableCell">'+
+					'					<h4>'+formInfos[i].showInfo.formFunction+'</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 tableCell">'+
+					'					<h4>表单数量:</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 tableCell">'+
+					'					<h4>'+formInfos[i].number+'</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 tableCell">'+
+					'					<h4>表单分类:</h4>'+
+					'				</div>'+
+					'				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 tableCell">';
+					
+					
+			var tags = formInfos[i].showInfo.formTag;
+			if(tags!=null){
+				var tagx = tags.split(",");
+				cell += '<ul class=\"tag-list-sm\" style=\"padding: 0\">';	
+				for(var k=1;k<tagx.length-1;k++){
+					cell += '<li><a id=\"tag_'+k+'\">'+tagx[k]+'</a></li>';
+				}
+				cell += '</ul>';
+			}
+				
+			
+			cell += '				</div>'+
+					'				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">'+
+					'					<input class="btn btn-info" style="width:50px" value="创建" onclick="creatForm('+formInfos[i].showInfo.formType+')"/>'+
+					'				</div>'+
+					'			</div>'+
+					'		</div>';
+			if(formInfos[i].showInfo.formPic!=null){
+				var pics = formInfos[i].showInfo.formPic.split(",");
+				for(var j=0;j<pics.length;j++){
+					cell += '<div class="cover coverImg"><img src="http://192.168.0.115:9999/表单图片/'+pics[j]+'" alt=""></div>';
+				}
+			}else{
+				cell += '<div class="cover coverImg"><img src="http://192.168.0.115:9999/表单图片/0.png" alt=""></div>';
+				cell += '<div class="cover coverImg"><img src="http://192.168.0.115:9999/表单图片/1.png" alt=""></div>';
+			}
+
+			cell += '</div></div>';
+			$("#CARD_FORM").append(cell);
+	}
+	for(var i=0;i<formInfos.length;i++){
+		$('#wall'+i).on('click', '.cover', function () {
+			var this_ = $(this);
+			var images = this_.parents('.image-list').find('.cover');
+			var imagesArr = new Array();
+			$.each(images, function (i, image) {
+				imagesArr.push($(image).children('img').attr('src'));
+			});
+			$.pictureViewer({
+				images: imagesArr, //需要查看的图片，数据类型为数组
+				initImageIndex: this_.index(), //初始查看第几张图片，默认1
+				scrollSwitch: true //是否使用鼠标滚轮切换图片，默认false
+			});
+		});
+	}
+}
+
+var tags_Form = "";
+function getFormBaseInfo(){
+	var url='/myehr/form/showFormBaseInfo.action?tags='+tags_Form;
+	var datas = [];
+	$.ajax({
+		url:url,
+		type: 'post',
+		cache: true,
+		async: false,
+		success: function (data) {
+			datas = data;
+		}
+	});
+	return datas;
+}
+function addHtml_FormTag(dictName,id){
+	var html = "";
+	data = getDictData(dictName);
+	html = "<ul class=\"tag-list\" style=\"padding: 0\">";
+	for(var i=0;i<data.length;i++){
+		html += "<li onclick=\"changeTag_FormTag('"+data[i].dictEntryCode+"')\"><a id=\"tag_"+data[i].dictEntryCode+"\" class=\"\" >"+data[i].dictEntryName+"</a></li>"
+	}
+	html += "</ul>";
+	$("#"+id).html(html);
+}	
+
+
+function changeTag_FormTag(type){
+	tags_Form = "";
+	if($("#tag_"+type).attr("class")!="tag"){
+		$("#tag_"+type).attr("class","tag");
+		$("#tag_"+type).css("background-color","orange");
+	}else{
+		$("#tag_"+type).attr("class","");
+		$("#tag_"+type).css("background-color","#f3f3f4");
+	}
+	var tag = $(".tag");
+	for(var i=0;i<tag.length;i++){
+		tags_Form += tag[i].innerText+","
+	}
+	if(tags_Form.length>0){
+		tags_Form = tags_Form.substring(0, tags_Form.length-1);
+	}
+	showFormList();
+}	
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+@charset "UTF-8"
+.icon-home{
+	background: url(../../images/icons/navicon/icon_home.png) center center;
+}
+.icon-exit{
+	background: url(../../images/icons/navicon/icon_exit.png) center center;
+}
+.icon-function{
+	background: url(../../images/icons/navicon/icon_function_white.png) center center;
+}
+.icon-system{
+	background: url(../../images/icons/navicon/icon_system_white.png) center center;
+}
+.icon-power{
+	background: url(../../images/icons/navicon/icon_power_white.png) center center;
+}
+.icon-organzation{
+	background: url(../../images/icons/navicon/icon_organization_white.png) center center;
+}
+.icon-person{
+	background: url(../../images/icons/navicon/icon_person_white.png) center center;
+}
+.icon-wellfale{
+	background: url(../../images/icons/navicon/icon_wellfale_white.png) center center;
+}
+.icon-examine{
+	background: url(../../images/icons/navicon/icon_examine_white.png) center center;
+}

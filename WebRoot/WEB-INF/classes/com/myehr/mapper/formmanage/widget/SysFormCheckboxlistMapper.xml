@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormCheckboxlistMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormCheckboxlist" >
+    <id column="CHECKBOXLIST_ID" property="checkboxlistId" jdbcType="DECIMAL" />
+    <result column="CHECKBOXLIST_FORM_COLUMN_ID" property="checkboxlistFormColumnId" jdbcType="DECIMAL" />
+    <result column="CHECKBOXLIST_CHECK_TYPE" property="checkboxlistCheckType" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_CHECK_SELF" property="checkboxlistCheckSelf" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_CHECK_FUN" property="checkboxlistCheckFun" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_INIT_FUN" property="checkboxlistInitFun" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_VALUECHANGE_FUN" property="checkboxlistValuechangeFun" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_CLICK_FUN" property="checkboxlistClickFun" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_DATA_FROM_TYPE" property="checkboxlistDataFromType" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_DATA_FROM_VALUE" property="checkboxlistDataFromValue" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_GUI_INIT_TYPE" property="checkboxlistGuiInitType" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_GUI_INIT_VALUE" property="checkboxlistGuiInitValue" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_TEXTFIELD" property="checkboxlistTextfield" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_VALUEFIELD" property="checkboxlistValuefield" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_DATAFIELD" property="checkboxlistDatafield" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_REPEATLAYOUT" property="checkboxlistRepeatlayout" jdbcType="VARCHAR" />
+    <result column="CHECKBOXLIST_REPEATITEMS" property="checkboxlistRepeatitems" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CHECKBOXLIST_ID, CHECKBOXLIST_FORM_COLUMN_ID, CHECKBOXLIST_CHECK_TYPE, CHECKBOXLIST_CHECK_SELF, 
+    CHECKBOXLIST_CHECK_FUN, CHECKBOXLIST_INIT_FUN, CHECKBOXLIST_VALUECHANGE_FUN, CHECKBOXLIST_CLICK_FUN, 
+    CHECKBOXLIST_DATA_FROM_TYPE, CHECKBOXLIST_DATA_FROM_VALUE, CHECKBOXLIST_GUI_INIT_TYPE, 
+    CHECKBOXLIST_GUI_INIT_VALUE, CHECKBOXLIST_TEXTFIELD, CHECKBOXLIST_VALUEFIELD, CHECKBOXLIST_DATAFIELD, 
+    CHECKBOXLIST_REPEATLAYOUT, CHECKBOXLIST_REPEATITEMS, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_CHECKBOXLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_CHECKBOXLIST
+    where CHECKBOXLIST_ID = #{checkboxlistId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_CHECKBOXLIST
+    where CHECKBOXLIST_ID = #{checkboxlistId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlistExample" >
+    delete from SYS_FORM_CHECKBOXLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlist" useGeneratedKeys="true" keyProperty="checkboxlistId" keyColumn="CHECKBOXLIST_ID">
+    insert into SYS_FORM_CHECKBOXLIST (CHECKBOXLIST_FORM_COLUMN_ID, 
+      CHECKBOXLIST_CHECK_TYPE, CHECKBOXLIST_CHECK_SELF, 
+      CHECKBOXLIST_CHECK_FUN, CHECKBOXLIST_INIT_FUN, 
+      CHECKBOXLIST_VALUECHANGE_FUN, CHECKBOXLIST_CLICK_FUN, 
+      CHECKBOXLIST_DATA_FROM_TYPE, CHECKBOXLIST_DATA_FROM_VALUE, 
+      CHECKBOXLIST_GUI_INIT_TYPE, CHECKBOXLIST_GUI_INIT_VALUE, 
+      CHECKBOXLIST_TEXTFIELD, CHECKBOXLIST_VALUEFIELD, 
+      CHECKBOXLIST_DATAFIELD, CHECKBOXLIST_REPEATLAYOUT, 
+      CHECKBOXLIST_REPEATITEMS, OPERATOR_TIME, 
+      OPERATOR_NAME)
+    values (#{checkboxlistFormColumnId,jdbcType=DECIMAL}, 
+      #{checkboxlistCheckType,jdbcType=VARCHAR}, #{checkboxlistCheckSelf,jdbcType=VARCHAR}, 
+      #{checkboxlistCheckFun,jdbcType=VARCHAR}, #{checkboxlistInitFun,jdbcType=VARCHAR}, 
+      #{checkboxlistValuechangeFun,jdbcType=VARCHAR}, #{checkboxlistClickFun,jdbcType=VARCHAR}, 
+      #{checkboxlistDataFromType,jdbcType=VARCHAR}, #{checkboxlistDataFromValue,jdbcType=VARCHAR}, 
+      #{checkboxlistGuiInitType,jdbcType=VARCHAR}, #{checkboxlistGuiInitValue,jdbcType=VARCHAR}, 
+      #{checkboxlistTextfield,jdbcType=VARCHAR}, #{checkboxlistValuefield,jdbcType=VARCHAR}, 
+      #{checkboxlistDatafield,jdbcType=VARCHAR}, #{checkboxlistRepeatlayout,jdbcType=VARCHAR}, 
+      #{checkboxlistRepeatitems,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlist" >
+    insert into SYS_FORM_CHECKBOXLIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="checkboxlistId != null" >
+        CHECKBOXLIST_ID,
+      </if>
+      <if test="checkboxlistFormColumnId != null" >
+        CHECKBOXLIST_FORM_COLUMN_ID,
+      </if>
+      <if test="checkboxlistCheckType != null" >
+        CHECKBOXLIST_CHECK_TYPE,
+      </if>
+      <if test="checkboxlistCheckSelf != null" >
+        CHECKBOXLIST_CHECK_SELF,
+      </if>
+      <if test="checkboxlistCheckFun != null" >
+        CHECKBOXLIST_CHECK_FUN,
+      </if>
+      <if test="checkboxlistInitFun != null" >
+        CHECKBOXLIST_INIT_FUN,
+      </if>
+      <if test="checkboxlistValuechangeFun != null" >
+        CHECKBOXLIST_VALUECHANGE_FUN,
+      </if>
+      <if test="checkboxlistClickFun != null" >
+        CHECKBOXLIST_CLICK_FUN,
+      </if>
+      <if test="checkboxlistDataFromType != null" >
+        CHECKBOXLIST_DATA_FROM_TYPE,
+      </if>
+      <if test="checkboxlistDataFromValue != null" >
+        CHECKBOXLIST_DATA_FROM_VALUE,
+      </if>
+      <if test="checkboxlistGuiInitType != null" >
+        CHECKBOXLIST_GUI_INIT_TYPE,
+      </if>
+      <if test="checkboxlistGuiInitValue != null" >
+        CHECKBOXLIST_GUI_INIT_VALUE,
+      </if>
+      <if test="checkboxlistTextfield != null" >
+        CHECKBOXLIST_TEXTFIELD,
+      </if>
+      <if test="checkboxlistValuefield != null" >
+        CHECKBOXLIST_VALUEFIELD,
+      </if>
+      <if test="checkboxlistDatafield != null" >
+        CHECKBOXLIST_DATAFIELD,
+      </if>
+      <if test="checkboxlistRepeatlayout != null" >
+        CHECKBOXLIST_REPEATLAYOUT,
+      </if>
+      <if test="checkboxlistRepeatitems != null" >
+        CHECKBOXLIST_REPEATITEMS,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="checkboxlistId != null" >
+        #{checkboxlistId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkboxlistFormColumnId != null" >
+        #{checkboxlistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkboxlistCheckType != null" >
+        #{checkboxlistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistCheckSelf != null" >
+        #{checkboxlistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistCheckFun != null" >
+        #{checkboxlistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistInitFun != null" >
+        #{checkboxlistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistValuechangeFun != null" >
+        #{checkboxlistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistClickFun != null" >
+        #{checkboxlistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDataFromType != null" >
+        #{checkboxlistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDataFromValue != null" >
+        #{checkboxlistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistGuiInitType != null" >
+        #{checkboxlistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistGuiInitValue != null" >
+        #{checkboxlistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistTextfield != null" >
+        #{checkboxlistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistValuefield != null" >
+        #{checkboxlistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDatafield != null" >
+        #{checkboxlistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistRepeatlayout != null" >
+        #{checkboxlistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistRepeatitems != null" >
+        #{checkboxlistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlistExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_CHECKBOXLIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_CHECKBOXLIST
+    <set >
+      <if test="record.checkboxlistId != null" >
+        CHECKBOXLIST_ID = #{record.checkboxlistId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkboxlistFormColumnId != null" >
+        CHECKBOXLIST_FORM_COLUMN_ID = #{record.checkboxlistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkboxlistCheckType != null" >
+        CHECKBOXLIST_CHECK_TYPE = #{record.checkboxlistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistCheckSelf != null" >
+        CHECKBOXLIST_CHECK_SELF = #{record.checkboxlistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistCheckFun != null" >
+        CHECKBOXLIST_CHECK_FUN = #{record.checkboxlistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistInitFun != null" >
+        CHECKBOXLIST_INIT_FUN = #{record.checkboxlistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistValuechangeFun != null" >
+        CHECKBOXLIST_VALUECHANGE_FUN = #{record.checkboxlistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistClickFun != null" >
+        CHECKBOXLIST_CLICK_FUN = #{record.checkboxlistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistDataFromType != null" >
+        CHECKBOXLIST_DATA_FROM_TYPE = #{record.checkboxlistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistDataFromValue != null" >
+        CHECKBOXLIST_DATA_FROM_VALUE = #{record.checkboxlistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistGuiInitType != null" >
+        CHECKBOXLIST_GUI_INIT_TYPE = #{record.checkboxlistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistGuiInitValue != null" >
+        CHECKBOXLIST_GUI_INIT_VALUE = #{record.checkboxlistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistTextfield != null" >
+        CHECKBOXLIST_TEXTFIELD = #{record.checkboxlistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistValuefield != null" >
+        CHECKBOXLIST_VALUEFIELD = #{record.checkboxlistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistDatafield != null" >
+        CHECKBOXLIST_DATAFIELD = #{record.checkboxlistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistRepeatlayout != null" >
+        CHECKBOXLIST_REPEATLAYOUT = #{record.checkboxlistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkboxlistRepeatitems != null" >
+        CHECKBOXLIST_REPEATITEMS = #{record.checkboxlistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_CHECKBOXLIST
+    set CHECKBOXLIST_ID = #{record.checkboxlistId,jdbcType=DECIMAL},
+      CHECKBOXLIST_FORM_COLUMN_ID = #{record.checkboxlistFormColumnId,jdbcType=DECIMAL},
+      CHECKBOXLIST_CHECK_TYPE = #{record.checkboxlistCheckType,jdbcType=VARCHAR},
+      CHECKBOXLIST_CHECK_SELF = #{record.checkboxlistCheckSelf,jdbcType=VARCHAR},
+      CHECKBOXLIST_CHECK_FUN = #{record.checkboxlistCheckFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_INIT_FUN = #{record.checkboxlistInitFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_VALUECHANGE_FUN = #{record.checkboxlistValuechangeFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_CLICK_FUN = #{record.checkboxlistClickFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATA_FROM_TYPE = #{record.checkboxlistDataFromType,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATA_FROM_VALUE = #{record.checkboxlistDataFromValue,jdbcType=VARCHAR},
+      CHECKBOXLIST_GUI_INIT_TYPE = #{record.checkboxlistGuiInitType,jdbcType=VARCHAR},
+      CHECKBOXLIST_GUI_INIT_VALUE = #{record.checkboxlistGuiInitValue,jdbcType=VARCHAR},
+      CHECKBOXLIST_TEXTFIELD = #{record.checkboxlistTextfield,jdbcType=VARCHAR},
+      CHECKBOXLIST_VALUEFIELD = #{record.checkboxlistValuefield,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATAFIELD = #{record.checkboxlistDatafield,jdbcType=VARCHAR},
+      CHECKBOXLIST_REPEATLAYOUT = #{record.checkboxlistRepeatlayout,jdbcType=VARCHAR},
+      CHECKBOXLIST_REPEATITEMS = #{record.checkboxlistRepeatitems,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlist" >
+    update SYS_FORM_CHECKBOXLIST
+    <set >
+      <if test="checkboxlistFormColumnId != null" >
+        CHECKBOXLIST_FORM_COLUMN_ID = #{checkboxlistFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkboxlistCheckType != null" >
+        CHECKBOXLIST_CHECK_TYPE = #{checkboxlistCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistCheckSelf != null" >
+        CHECKBOXLIST_CHECK_SELF = #{checkboxlistCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistCheckFun != null" >
+        CHECKBOXLIST_CHECK_FUN = #{checkboxlistCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistInitFun != null" >
+        CHECKBOXLIST_INIT_FUN = #{checkboxlistInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistValuechangeFun != null" >
+        CHECKBOXLIST_VALUECHANGE_FUN = #{checkboxlistValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistClickFun != null" >
+        CHECKBOXLIST_CLICK_FUN = #{checkboxlistClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDataFromType != null" >
+        CHECKBOXLIST_DATA_FROM_TYPE = #{checkboxlistDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDataFromValue != null" >
+        CHECKBOXLIST_DATA_FROM_VALUE = #{checkboxlistDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistGuiInitType != null" >
+        CHECKBOXLIST_GUI_INIT_TYPE = #{checkboxlistGuiInitType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistGuiInitValue != null" >
+        CHECKBOXLIST_GUI_INIT_VALUE = #{checkboxlistGuiInitValue,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistTextfield != null" >
+        CHECKBOXLIST_TEXTFIELD = #{checkboxlistTextfield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistValuefield != null" >
+        CHECKBOXLIST_VALUEFIELD = #{checkboxlistValuefield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistDatafield != null" >
+        CHECKBOXLIST_DATAFIELD = #{checkboxlistDatafield,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistRepeatlayout != null" >
+        CHECKBOXLIST_REPEATLAYOUT = #{checkboxlistRepeatlayout,jdbcType=VARCHAR},
+      </if>
+      <if test="checkboxlistRepeatitems != null" >
+        CHECKBOXLIST_REPEATITEMS = #{checkboxlistRepeatitems,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHECKBOXLIST_ID = #{checkboxlistId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormCheckboxlist" >
+    update SYS_FORM_CHECKBOXLIST
+    set CHECKBOXLIST_FORM_COLUMN_ID = #{checkboxlistFormColumnId,jdbcType=DECIMAL},
+      CHECKBOXLIST_CHECK_TYPE = #{checkboxlistCheckType,jdbcType=VARCHAR},
+      CHECKBOXLIST_CHECK_SELF = #{checkboxlistCheckSelf,jdbcType=VARCHAR},
+      CHECKBOXLIST_CHECK_FUN = #{checkboxlistCheckFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_INIT_FUN = #{checkboxlistInitFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_VALUECHANGE_FUN = #{checkboxlistValuechangeFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_CLICK_FUN = #{checkboxlistClickFun,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATA_FROM_TYPE = #{checkboxlistDataFromType,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATA_FROM_VALUE = #{checkboxlistDataFromValue,jdbcType=VARCHAR},
+      CHECKBOXLIST_GUI_INIT_TYPE = #{checkboxlistGuiInitType,jdbcType=VARCHAR},
+      CHECKBOXLIST_GUI_INIT_VALUE = #{checkboxlistGuiInitValue,jdbcType=VARCHAR},
+      CHECKBOXLIST_TEXTFIELD = #{checkboxlistTextfield,jdbcType=VARCHAR},
+      CHECKBOXLIST_VALUEFIELD = #{checkboxlistValuefield,jdbcType=VARCHAR},
+      CHECKBOXLIST_DATAFIELD = #{checkboxlistDatafield,jdbcType=VARCHAR},
+      CHECKBOXLIST_REPEATLAYOUT = #{checkboxlistRepeatlayout,jdbcType=VARCHAR},
+      CHECKBOXLIST_REPEATITEMS = #{checkboxlistRepeatitems,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where CHECKBOXLIST_ID = #{checkboxlistId,jdbcType=DECIMAL}
+  </update>
+</mapper>

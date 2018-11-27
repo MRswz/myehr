@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysParam.SysSourceMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysParam.SysSource" >
+    <id column="SYS_SOURCE_ID" property="sysSourceId" jdbcType="DECIMAL" />
+    <result column="SYS_SOURCE_CODE" property="sysSourceCode" jdbcType="NVARCHAR" />
+    <result column="SYS_SOURCE_NAME" property="sysSourceName" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_DRIVER" property="sysSoruceDriver" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_DRIVER_VALUE" property="sysSoruceDriverValue" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_URL" property="sysSoruceUrl" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_URL_VALUE" property="sysSoruceUrlValue" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_USERNAME" property="sysSoruceUsername" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_USERNAME_VALUE" property="sysSoruceUsernameValue" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_PASSWORD" property="sysSorucePassword" jdbcType="NVARCHAR" />
+    <result column="SYS_SORUCE_PASSWORD_VALUE" property="sysSorucePasswordValue" jdbcType="NVARCHAR" />
+    <result column="SYS_SOURCE_TYPE" property="sysSourceType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SYS_SOURCE_ID, SYS_SOURCE_CODE, SYS_SOURCE_NAME, SYS_SORUCE_DRIVER, SYS_SORUCE_DRIVER_VALUE, 
+    SYS_SORUCE_URL, SYS_SORUCE_URL_VALUE, SYS_SORUCE_USERNAME, SYS_SORUCE_USERNAME_VALUE, 
+    SYS_SORUCE_PASSWORD, SYS_SORUCE_PASSWORD_VALUE, SYS_SOURCE_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysParam.SysSourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_SOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_SOURCE
+    where SYS_SOURCE_ID = #{sysSourceId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_SOURCE
+    where SYS_SOURCE_ID = #{sysSourceId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysParam.SysSourceExample" >
+    delete from SYS_SOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysParam.SysSource" >
+    insert into SYS_SOURCE (SYS_SOURCE_CODE, SYS_SOURCE_NAME, 
+      SYS_SORUCE_DRIVER, SYS_SORUCE_DRIVER_VALUE, 
+      SYS_SORUCE_URL, SYS_SORUCE_URL_VALUE, SYS_SORUCE_USERNAME, 
+      SYS_SORUCE_USERNAME_VALUE, SYS_SORUCE_PASSWORD, 
+      SYS_SORUCE_PASSWORD_VALUE, SYS_SOURCE_TYPE
+      )
+    values (#{sysSourceCode,jdbcType=NVARCHAR}, #{sysSourceName,jdbcType=NVARCHAR}, 
+      #{sysSoruceDriver,jdbcType=NVARCHAR}, #{sysSoruceDriverValue,jdbcType=NVARCHAR}, 
+      #{sysSoruceUrl,jdbcType=NVARCHAR}, #{sysSoruceUrlValue,jdbcType=NVARCHAR}, #{sysSoruceUsername,jdbcType=NVARCHAR}, 
+      #{sysSoruceUsernameValue,jdbcType=NVARCHAR}, #{sysSorucePassword,jdbcType=NVARCHAR}, 
+      #{sysSorucePasswordValue,jdbcType=NVARCHAR}, #{sysSourceType,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysParam.SysSource" >
+    insert into SYS_SOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysSourceId != null" >
+        SYS_SOURCE_ID,
+      </if>
+      <if test="sysSourceCode != null" >
+        SYS_SOURCE_CODE,
+      </if>
+      <if test="sysSourceName != null" >
+        SYS_SOURCE_NAME,
+      </if>
+      <if test="sysSoruceDriver != null" >
+        SYS_SORUCE_DRIVER,
+      </if>
+      <if test="sysSoruceDriverValue != null" >
+        SYS_SORUCE_DRIVER_VALUE,
+      </if>
+      <if test="sysSoruceUrl != null" >
+        SYS_SORUCE_URL,
+      </if>
+      <if test="sysSoruceUrlValue != null" >
+        SYS_SORUCE_URL_VALUE,
+      </if>
+      <if test="sysSoruceUsername != null" >
+        SYS_SORUCE_USERNAME,
+      </if>
+      <if test="sysSoruceUsernameValue != null" >
+        SYS_SORUCE_USERNAME_VALUE,
+      </if>
+      <if test="sysSorucePassword != null" >
+        SYS_SORUCE_PASSWORD,
+      </if>
+      <if test="sysSorucePasswordValue != null" >
+        SYS_SORUCE_PASSWORD_VALUE,
+      </if>
+      <if test="sysSourceType != null" >
+        SYS_SOURCE_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysSourceId != null" >
+        #{sysSourceId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysSourceCode != null" >
+        #{sysSourceCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSourceName != null" >
+        #{sysSourceName,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceDriver != null" >
+        #{sysSoruceDriver,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceDriverValue != null" >
+        #{sysSoruceDriverValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUrl != null" >
+        #{sysSoruceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUrlValue != null" >
+        #{sysSoruceUrlValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUsername != null" >
+        #{sysSoruceUsername,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUsernameValue != null" >
+        #{sysSoruceUsernameValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSorucePassword != null" >
+        #{sysSorucePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSorucePasswordValue != null" >
+        #{sysSorucePasswordValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSourceType != null" >
+        #{sysSourceType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysParam.SysSourceExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_SOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_SOURCE
+    <set >
+      <if test="record.sysSourceId != null" >
+        SYS_SOURCE_ID = #{record.sysSourceId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysSourceCode != null" >
+        SYS_SOURCE_CODE = #{record.sysSourceCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSourceName != null" >
+        SYS_SOURCE_NAME = #{record.sysSourceName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceDriver != null" >
+        SYS_SORUCE_DRIVER = #{record.sysSoruceDriver,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceDriverValue != null" >
+        SYS_SORUCE_DRIVER_VALUE = #{record.sysSoruceDriverValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceUrl != null" >
+        SYS_SORUCE_URL = #{record.sysSoruceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceUrlValue != null" >
+        SYS_SORUCE_URL_VALUE = #{record.sysSoruceUrlValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceUsername != null" >
+        SYS_SORUCE_USERNAME = #{record.sysSoruceUsername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSoruceUsernameValue != null" >
+        SYS_SORUCE_USERNAME_VALUE = #{record.sysSoruceUsernameValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSorucePassword != null" >
+        SYS_SORUCE_PASSWORD = #{record.sysSorucePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSorucePasswordValue != null" >
+        SYS_SORUCE_PASSWORD_VALUE = #{record.sysSorucePasswordValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysSourceType != null" >
+        SYS_SOURCE_TYPE = #{record.sysSourceType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_SOURCE
+    set SYS_SOURCE_ID = #{record.sysSourceId,jdbcType=DECIMAL},
+      SYS_SOURCE_CODE = #{record.sysSourceCode,jdbcType=NVARCHAR},
+      SYS_SOURCE_NAME = #{record.sysSourceName,jdbcType=NVARCHAR},
+      SYS_SORUCE_DRIVER = #{record.sysSoruceDriver,jdbcType=NVARCHAR},
+      SYS_SORUCE_DRIVER_VALUE = #{record.sysSoruceDriverValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_URL = #{record.sysSoruceUrl,jdbcType=NVARCHAR},
+      SYS_SORUCE_URL_VALUE = #{record.sysSoruceUrlValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_USERNAME = #{record.sysSoruceUsername,jdbcType=NVARCHAR},
+      SYS_SORUCE_USERNAME_VALUE = #{record.sysSoruceUsernameValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_PASSWORD = #{record.sysSorucePassword,jdbcType=NVARCHAR},
+      SYS_SORUCE_PASSWORD_VALUE = #{record.sysSorucePasswordValue,jdbcType=NVARCHAR},
+      SYS_SOURCE_TYPE = #{record.sysSourceType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysParam.SysSource" >
+    update SYS_SOURCE
+    <set >
+      <if test="sysSourceCode != null" >
+        SYS_SOURCE_CODE = #{sysSourceCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSourceName != null" >
+        SYS_SOURCE_NAME = #{sysSourceName,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceDriver != null" >
+        SYS_SORUCE_DRIVER = #{sysSoruceDriver,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceDriverValue != null" >
+        SYS_SORUCE_DRIVER_VALUE = #{sysSoruceDriverValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUrl != null" >
+        SYS_SORUCE_URL = #{sysSoruceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUrlValue != null" >
+        SYS_SORUCE_URL_VALUE = #{sysSoruceUrlValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUsername != null" >
+        SYS_SORUCE_USERNAME = #{sysSoruceUsername,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSoruceUsernameValue != null" >
+        SYS_SORUCE_USERNAME_VALUE = #{sysSoruceUsernameValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSorucePassword != null" >
+        SYS_SORUCE_PASSWORD = #{sysSorucePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSorucePasswordValue != null" >
+        SYS_SORUCE_PASSWORD_VALUE = #{sysSorucePasswordValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysSourceType != null" >
+        SYS_SOURCE_TYPE = #{sysSourceType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where SYS_SOURCE_ID = #{sysSourceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysParam.SysSource" >
+    update SYS_SOURCE
+    set SYS_SOURCE_CODE = #{sysSourceCode,jdbcType=NVARCHAR},
+      SYS_SOURCE_NAME = #{sysSourceName,jdbcType=NVARCHAR},
+      SYS_SORUCE_DRIVER = #{sysSoruceDriver,jdbcType=NVARCHAR},
+      SYS_SORUCE_DRIVER_VALUE = #{sysSoruceDriverValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_URL = #{sysSoruceUrl,jdbcType=NVARCHAR},
+      SYS_SORUCE_URL_VALUE = #{sysSoruceUrlValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_USERNAME = #{sysSoruceUsername,jdbcType=NVARCHAR},
+      SYS_SORUCE_USERNAME_VALUE = #{sysSoruceUsernameValue,jdbcType=NVARCHAR},
+      SYS_SORUCE_PASSWORD = #{sysSorucePassword,jdbcType=NVARCHAR},
+      SYS_SORUCE_PASSWORD_VALUE = #{sysSorucePasswordValue,jdbcType=NVARCHAR},
+      SYS_SOURCE_TYPE = #{sysSourceType,jdbcType=NVARCHAR}
+    where SYS_SOURCE_ID = #{sysSourceId,jdbcType=DECIMAL}
+  </update>
+</mapper>

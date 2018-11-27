@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonExportColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonExportColumn" >
+    <id column="EXPORT_COLUMN_ID" property="exportColumnId" jdbcType="DECIMAL" />
+    <result column="EXPORT_COLUMN_REL_ID" property="exportColumnRelId" jdbcType="DECIMAL" />
+    <result column="EXPORT_COLUMN_TYPE" property="exportColumnType" jdbcType="NVARCHAR" />
+    <result column="export_column_dict_type" property="exportColumnDictType" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="export_column_button_id" property="exportColumnButtonId" jdbcType="DECIMAL" />
+    <result column="export_column_bus_key" property="exportColumnBusKey" jdbcType="NVARCHAR" />
+    <result column="export_re_column_rel_id" property="exportReColumnRelId" jdbcType="DECIMAL" />
+    <result column="EXPORT_COLUMN_SORT" property="exportColumnSort" jdbcType="DECIMAL" />
+    <result column="export_column_forbid" property="exportColumnForbid" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EXPORT_COLUMN_ID, EXPORT_COLUMN_REL_ID, EXPORT_COLUMN_TYPE, export_column_dict_type, 
+    OPERATOR_NAME, OPERATOR_TIME, export_column_button_id, export_column_bus_key, export_re_column_rel_id, 
+    EXPORT_COLUMN_SORT, export_column_forbid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_EXPORT_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_EXPORT_COLUMN
+    where EXPORT_COLUMN_ID = #{exportColumnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_EXPORT_COLUMN
+    where EXPORT_COLUMN_ID = #{exportColumnId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumnExample" >
+    delete from SYS_FORM_BUTTON_EXPORT_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumn" >
+    insert into SYS_FORM_BUTTON_EXPORT_COLUMN (EXPORT_COLUMN_REL_ID, 
+      EXPORT_COLUMN_TYPE, export_column_dict_type, 
+      OPERATOR_NAME, OPERATOR_TIME, export_column_button_id, 
+      export_column_bus_key, export_re_column_rel_id, 
+      EXPORT_COLUMN_SORT, export_column_forbid)
+    values (#{exportColumnRelId,jdbcType=DECIMAL}, 
+      #{exportColumnType,jdbcType=NVARCHAR}, #{exportColumnDictType,jdbcType=NVARCHAR}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, #{exportColumnButtonId,jdbcType=DECIMAL}, 
+      #{exportColumnBusKey,jdbcType=NVARCHAR}, #{exportReColumnRelId,jdbcType=DECIMAL}, 
+      #{exportColumnSort,jdbcType=DECIMAL}, #{exportColumnForbid,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumn" >
+    insert into SYS_FORM_BUTTON_EXPORT_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exportColumnId != null" >
+        EXPORT_COLUMN_ID,
+      </if>
+      <if test="exportColumnRelId != null" >
+        EXPORT_COLUMN_REL_ID,
+      </if>
+      <if test="exportColumnType != null" >
+        EXPORT_COLUMN_TYPE,
+      </if>
+      <if test="exportColumnDictType != null" >
+        export_column_dict_type,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="exportColumnButtonId != null" >
+        export_column_button_id,
+      </if>
+      <if test="exportColumnBusKey != null" >
+        export_column_bus_key,
+      </if>
+      <if test="exportReColumnRelId != null" >
+        export_re_column_rel_id,
+      </if>
+      <if test="exportColumnSort != null" >
+        EXPORT_COLUMN_SORT,
+      </if>
+      <if test="exportColumnForbid != null" >
+        export_column_forbid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exportColumnId != null" >
+        #{exportColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnRelId != null" >
+        #{exportColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnType != null" >
+        #{exportColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="exportColumnDictType != null" >
+        #{exportColumnDictType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exportColumnButtonId != null" >
+        #{exportColumnButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnBusKey != null" >
+        #{exportColumnBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="exportReColumnRelId != null" >
+        #{exportReColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnSort != null" >
+        #{exportColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnForbid != null" >
+        #{exportColumnForbid,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_EXPORT_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_EXPORT_COLUMN
+    <set >
+      <if test="record.exportColumnId != null" >
+        EXPORT_COLUMN_ID = #{record.exportColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exportColumnRelId != null" >
+        EXPORT_COLUMN_REL_ID = #{record.exportColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exportColumnType != null" >
+        EXPORT_COLUMN_TYPE = #{record.exportColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.exportColumnDictType != null" >
+        export_column_dict_type = #{record.exportColumnDictType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exportColumnButtonId != null" >
+        export_column_button_id = #{record.exportColumnButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exportColumnBusKey != null" >
+        export_column_bus_key = #{record.exportColumnBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.exportReColumnRelId != null" >
+        export_re_column_rel_id = #{record.exportReColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exportColumnSort != null" >
+        EXPORT_COLUMN_SORT = #{record.exportColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exportColumnForbid != null" >
+        export_column_forbid = #{record.exportColumnForbid,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_EXPORT_COLUMN
+    set EXPORT_COLUMN_ID = #{record.exportColumnId,jdbcType=DECIMAL},
+      EXPORT_COLUMN_REL_ID = #{record.exportColumnRelId,jdbcType=DECIMAL},
+      EXPORT_COLUMN_TYPE = #{record.exportColumnType,jdbcType=NVARCHAR},
+      export_column_dict_type = #{record.exportColumnDictType,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      export_column_button_id = #{record.exportColumnButtonId,jdbcType=DECIMAL},
+      export_column_bus_key = #{record.exportColumnBusKey,jdbcType=NVARCHAR},
+      export_re_column_rel_id = #{record.exportReColumnRelId,jdbcType=DECIMAL},
+      EXPORT_COLUMN_SORT = #{record.exportColumnSort,jdbcType=DECIMAL},
+      export_column_forbid = #{record.exportColumnForbid,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumn" >
+    update SYS_FORM_BUTTON_EXPORT_COLUMN
+    <set >
+      <if test="exportColumnRelId != null" >
+        EXPORT_COLUMN_REL_ID = #{exportColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnType != null" >
+        EXPORT_COLUMN_TYPE = #{exportColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="exportColumnDictType != null" >
+        export_column_dict_type = #{exportColumnDictType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exportColumnButtonId != null" >
+        export_column_button_id = #{exportColumnButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnBusKey != null" >
+        export_column_bus_key = #{exportColumnBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="exportReColumnRelId != null" >
+        export_re_column_rel_id = #{exportReColumnRelId,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnSort != null" >
+        EXPORT_COLUMN_SORT = #{exportColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="exportColumnForbid != null" >
+        export_column_forbid = #{exportColumnForbid,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where EXPORT_COLUMN_ID = #{exportColumnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportColumn" >
+    update SYS_FORM_BUTTON_EXPORT_COLUMN
+    set EXPORT_COLUMN_REL_ID = #{exportColumnRelId,jdbcType=DECIMAL},
+      EXPORT_COLUMN_TYPE = #{exportColumnType,jdbcType=NVARCHAR},
+      export_column_dict_type = #{exportColumnDictType,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      export_column_button_id = #{exportColumnButtonId,jdbcType=DECIMAL},
+      export_column_bus_key = #{exportColumnBusKey,jdbcType=NVARCHAR},
+      export_re_column_rel_id = #{exportReColumnRelId,jdbcType=DECIMAL},
+      EXPORT_COLUMN_SORT = #{exportColumnSort,jdbcType=DECIMAL},
+      export_column_forbid = #{exportColumnForbid,jdbcType=NVARCHAR}
+    where EXPORT_COLUMN_ID = #{exportColumnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

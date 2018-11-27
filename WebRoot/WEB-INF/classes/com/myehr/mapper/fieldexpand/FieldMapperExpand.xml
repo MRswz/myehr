@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myehr.mapper.fieldexpand.FieldMapperExpand">
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.field.SysField" >
+    <id column="FIELD_ID" property="fieldId" jdbcType="INTEGER" />
+    <result column="FIELD_CODE" property="fieldCode" jdbcType="VARCHAR" />
+    <result column="FIELD_ENTITY_ID" property="fieldEntityId" jdbcType="INTEGER" />
+    <result column="FIELD_TABLENAME" property="fieldTablename" jdbcType="VARCHAR" />
+    <result column="FIELD_CHINA_NAME" property="fieldChinaName" jdbcType="VARCHAR" />
+    <result column="FIELD_IS_NULL" property="fieldIsNull" jdbcType="VARCHAR" />
+    <result column="FIELD_IS_KEY" property="fieldIsKey" jdbcType="VARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="VARCHAR" />
+    <result column="FIELD_LEN" property="fieldLen" jdbcType="VARCHAR" />
+    <result column="FIELD_DICT" property="fieldDict" jdbcType="VARCHAR" />
+    <result column="FIELD_SORT" property="fieldSort" jdbcType="INTEGER" />
+    <result column="FIELD_STATE" property="fieldState" jdbcType="VARCHAR" />
+    <result column="FIELD_IS_MARK" property="fieldIsMark" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+    <result column="FIELD_DATA_TYPE" property="fieldDataType" jdbcType="VARCHAR" />
+    <result column="FIELD_IS_LOG" property="fieldIsLog" jdbcType="VARCHAR" />
+    <result column="FIELD_IS_BUS_KEY" property="fieldIsBusKey" jdbcType="VARCHAR" />
+    <result column="CONTROL_TYPE" property="controlType" jdbcType="VARCHAR" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="VARCHAR" />
+    <result column="FIELD_RULE_ID" property="fieldRuleId" jdbcType="DECIMAL" />
+    <result column="FIELD_RULE_MAX" property="fieldRuleMax" jdbcType="NVARCHAR" />
+    <result column="FIELD_RULE_NAME" property="fieldRuleName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Base_Column_List" >
+    FIELD_ID, FIELD_CODE, FIELD_ENTITY_ID, FIELD_TABLENAME, FIELD_CHINA_NAME, FIELD_IS_NULL, 
+    FIELD_IS_KEY, FIELD_TYPE, FIELD_LEN, FIELD_DICT, FIELD_SORT, FIELD_STATE, FIELD_IS_MARK, 
+    OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK, 
+    FIELD_DATA_TYPE, FIELD_IS_LOG, FIELD_IS_BUS_KEY, CONTROL_TYPE, DICT_CODE,FIELD_RULE_ID
+    FIELD_RULE_MAX,FIELD_RULE_NAME
+  </sql>
+  <select id="searchByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+		${sql}
+  </select>
+  
+  <select id="getAllField" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		${sql}
+  </select>
+  
+  <select id="operation3" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		${sql}
+  </select>
+  
+  <update id="operation4" parameterType="java.util.Map" >
+  		${sql}
+  </update>
+  
+  <select id="operation2" parameterType="java.util.Map" resultType="java.lang.String">
+  		${sql}
+  </select>
+  
+  <select id="operation" parameterType="java.util.Map">
+  		${sql}
+  </select>
+  
+  <select id="getFieldsByEntitycode" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		${sql}
+  </select>
+</mapper>

@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormconfigMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfig" >
+    <id column="FORM_DEF_ID" property="formDefId" jdbcType="DECIMAL" />
+    <result column="FORM_DEF_CODE" property="formDefCode" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_NAME" property="formDefName" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_LAYOUT_TYPE" property="formDefLayoutType" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_DESC" property="formDefDesc" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_DATA_TYPE" property="formDefDataType" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_ROW_COUNT" property="formDefRowCount" jdbcType="NVARCHAR" />
+    <result column="FORM_URL" property="formUrl" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_FOLDER_ID" property="formDefFolderId" jdbcType="DECIMAL" />
+    <result column="FORM_LABLE_WIDTH" property="formLableWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_SAVETABLE" property="formDefSavetable" jdbcType="NVARCHAR" />
+    <result column="FORM_OTHER_COLUMN_SQL" property="formOtherColumnSql" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_IS_PROCESS" property="formDefIsProcess" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_PROCESS_DEF_NAME" property="formDefProcessDefName" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_URL" property="formSubmitUrl" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_TIME" property="formSubmitTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_SUBMIT_USER_ID" property="formSubmitUserId" jdbcType="DECIMAL" />
+    <result column="FORM_DEF_PROCESS_DEF_NAME_TEXT" property="formDefProcessDefNameText" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_STATUS" property="formSubmitStatus" jdbcType="NVARCHAR" />
+    <result column="IS_SHOW_FLOW_TITLE" property="isShowFlowTitle" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_DEF_INIT_QZ_JS" property="formDefInitQzJs" jdbcType="NVARCHAR" />
+    <result column="FORM_AUTHORITY_IS_CONTROL" property="formAuthorityIsControl" jdbcType="NVARCHAR" />
+    <result column="EXPAND_1" property="expand1" jdbcType="NVARCHAR" />
+    <result column="EXPAND_FIELD" property="expandField" jdbcType="NVARCHAR" />
+    <result column="IS_APP" property="isApp" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_INIT_QZ_SQL" property="formDefInitQzSql" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_ID" property="templateId" jdbcType="DECIMAL" />
+    <result column="ACT_MODEL_ID" property="actModelId" jdbcType="NVARCHAR" />
+    <result column="IS_FILEMANAGE" property="isFilemanage" jdbcType="NVARCHAR" />
+    <result column="IS_ORG_POWER" property="isOrgPower" jdbcType="NVARCHAR" />
+    <result column="IS_EMP_POWER" property="isEmpPower" jdbcType="NVARCHAR" />
+    <result column="IS_COMMENT" property="isComment" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_SOURCE" property="formDefSource" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_CONFIG" property="fileuploadConfig" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" extends="BaseResultMap" >
+    <result column="FORM_DEF_ENTITY_SQL" property="formDefEntitySql" jdbcType="LONGVARCHAR" />
+    <result column="FORM_DEF_SQL" property="formDefSql" jdbcType="LONGVARCHAR" />
+    <result column="ORDER_SQL" property="orderSql" jdbcType="LONGVARCHAR" />
+    <result column="POWER_SQL" property="powerSql" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_DEF_ID, FORM_DEF_CODE, FORM_DEF_NAME, FORM_DEF_LAYOUT_TYPE, FORM_DEF_DESC, FORM_DEF_DATA_TYPE, 
+    FORM_DEF_ROW_COUNT, FORM_URL, FORM_DEF_FOLDER_ID, FORM_LABLE_WIDTH, FORM_DEF_SAVETABLE, 
+    FORM_OTHER_COLUMN_SQL, FORM_DEF_IS_PROCESS, FORM_DEF_PROCESS_DEF_NAME, FORM_SUBMIT_URL, 
+    FORM_SUBMIT_TIME, FORM_SUBMIT_USER_ID, FORM_DEF_PROCESS_DEF_NAME_TEXT, FORM_SUBMIT_STATUS, 
+    IS_SHOW_FLOW_TITLE, OPERATOR_NAME, OPERATOR_TIME, FORM_DEF_INIT_QZ_JS, FORM_AUTHORITY_IS_CONTROL, 
+    EXPAND_1, EXPAND_FIELD, IS_APP, FORM_DEF_INIT_QZ_SQL, TEMPLATE_ID, ACT_MODEL_ID, 
+    IS_FILEMANAGE, IS_ORG_POWER, IS_EMP_POWER, IS_COMMENT, FORM_DEF_SOURCE, FILEUPLOAD_CONFIG
+  </sql>
+  <sql id="Blob_Column_List" >
+    FORM_DEF_ENTITY_SQL, FORM_DEF_SQL, ORDER_SQL, POWER_SQL
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_FORMCONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_FORMCONFIG
+    where FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORMCONFIG
+    where FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigExample" >
+    delete from SYS_FORMCONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" useGeneratedKeys="true" keyProperty="formDefId" keyColumn="FORM_DEF_ID">
+    insert into SYS_FORMCONFIG ( FORM_DEF_CODE, FORM_DEF_NAME, 
+      FORM_DEF_LAYOUT_TYPE, FORM_DEF_DESC, FORM_DEF_DATA_TYPE, 
+      FORM_DEF_ROW_COUNT, FORM_URL, FORM_DEF_FOLDER_ID, 
+      FORM_LABLE_WIDTH, FORM_DEF_SAVETABLE, FORM_OTHER_COLUMN_SQL, 
+      FORM_DEF_IS_PROCESS, FORM_DEF_PROCESS_DEF_NAME, 
+      FORM_SUBMIT_URL, FORM_SUBMIT_TIME, FORM_SUBMIT_USER_ID, 
+      FORM_DEF_PROCESS_DEF_NAME_TEXT, FORM_SUBMIT_STATUS, 
+      IS_SHOW_FLOW_TITLE, OPERATOR_NAME, OPERATOR_TIME, 
+      FORM_DEF_INIT_QZ_JS, FORM_AUTHORITY_IS_CONTROL, 
+      EXPAND_1, EXPAND_FIELD, IS_APP, 
+      FORM_DEF_INIT_QZ_SQL, TEMPLATE_ID, ACT_MODEL_ID, 
+      IS_FILEMANAGE, IS_ORG_POWER, IS_EMP_POWER, 
+      IS_COMMENT, FORM_DEF_SOURCE, FILEUPLOAD_CONFIG, 
+      FORM_DEF_ENTITY_SQL, FORM_DEF_SQL, ORDER_SQL, 
+      POWER_SQL)
+    values ( #{formDefCode,jdbcType=NVARCHAR}, #{formDefName,jdbcType=NVARCHAR}, 
+      #{formDefLayoutType,jdbcType=NVARCHAR}, #{formDefDesc,jdbcType=NVARCHAR}, #{formDefDataType,jdbcType=NVARCHAR}, 
+      #{formDefRowCount,jdbcType=NVARCHAR}, #{formUrl,jdbcType=NVARCHAR}, #{formDefFolderId,jdbcType=DECIMAL}, 
+      #{formLableWidth,jdbcType=NVARCHAR}, #{formDefSavetable,jdbcType=NVARCHAR}, #{formOtherColumnSql,jdbcType=NVARCHAR}, 
+      #{formDefIsProcess,jdbcType=NVARCHAR}, #{formDefProcessDefName,jdbcType=NVARCHAR}, 
+      #{formSubmitUrl,jdbcType=NVARCHAR}, #{formSubmitTime,jdbcType=TIMESTAMP}, #{formSubmitUserId,jdbcType=DECIMAL}, 
+      #{formDefProcessDefNameText,jdbcType=NVARCHAR}, #{formSubmitStatus,jdbcType=NVARCHAR}, 
+      #{isShowFlowTitle,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{formDefInitQzJs,jdbcType=NVARCHAR}, #{formAuthorityIsControl,jdbcType=NVARCHAR}, 
+      #{expand1,jdbcType=NVARCHAR}, #{expandField,jdbcType=NVARCHAR}, #{isApp,jdbcType=NVARCHAR}, 
+      #{formDefInitQzSql,jdbcType=NVARCHAR}, #{templateId,jdbcType=DECIMAL}, #{actModelId,jdbcType=NVARCHAR}, 
+      #{isFilemanage,jdbcType=NVARCHAR}, #{isOrgPower,jdbcType=NVARCHAR}, #{isEmpPower,jdbcType=NVARCHAR}, 
+      #{isComment,jdbcType=NVARCHAR}, #{formDefSource,jdbcType=NVARCHAR}, #{fileuploadConfig,jdbcType=NVARCHAR}, 
+      #{formDefEntitySql,jdbcType=LONGVARCHAR}, #{formDefSql,jdbcType=LONGVARCHAR}, #{orderSql,jdbcType=LONGVARCHAR}, 
+      #{powerSql,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" >
+    insert into SYS_FORMCONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formDefId != null" >
+        FORM_DEF_ID,
+      </if>
+      <if test="formDefCode != null" >
+        FORM_DEF_CODE,
+      </if>
+      <if test="formDefName != null" >
+        FORM_DEF_NAME,
+      </if>
+      <if test="formDefLayoutType != null" >
+        FORM_DEF_LAYOUT_TYPE,
+      </if>
+      <if test="formDefDesc != null" >
+        FORM_DEF_DESC,
+      </if>
+      <if test="formDefDataType != null" >
+        FORM_DEF_DATA_TYPE,
+      </if>
+      <if test="formDefRowCount != null" >
+        FORM_DEF_ROW_COUNT,
+      </if>
+      <if test="formUrl != null" >
+        FORM_URL,
+      </if>
+      <if test="formDefFolderId != null" >
+        FORM_DEF_FOLDER_ID,
+      </if>
+      <if test="formLableWidth != null" >
+        FORM_LABLE_WIDTH,
+      </if>
+      <if test="formDefSavetable != null" >
+        FORM_DEF_SAVETABLE,
+      </if>
+      <if test="formOtherColumnSql != null" >
+        FORM_OTHER_COLUMN_SQL,
+      </if>
+      <if test="formDefIsProcess != null" >
+        FORM_DEF_IS_PROCESS,
+      </if>
+      <if test="formDefProcessDefName != null" >
+        FORM_DEF_PROCESS_DEF_NAME,
+      </if>
+      <if test="formSubmitUrl != null" >
+        FORM_SUBMIT_URL,
+      </if>
+      <if test="formSubmitTime != null" >
+        FORM_SUBMIT_TIME,
+      </if>
+      <if test="formSubmitUserId != null" >
+        FORM_SUBMIT_USER_ID,
+      </if>
+      <if test="formDefProcessDefNameText != null" >
+        FORM_DEF_PROCESS_DEF_NAME_TEXT,
+      </if>
+      <if test="formSubmitStatus != null" >
+        FORM_SUBMIT_STATUS,
+      </if>
+      <if test="isShowFlowTitle != null" >
+        IS_SHOW_FLOW_TITLE,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="formDefInitQzJs != null" >
+        FORM_DEF_INIT_QZ_JS,
+      </if>
+      <if test="formAuthorityIsControl != null" >
+        FORM_AUTHORITY_IS_CONTROL,
+      </if>
+      <if test="expand1 != null" >
+        EXPAND_1,
+      </if>
+      <if test="expandField != null" >
+        EXPAND_FIELD,
+      </if>
+      <if test="isApp != null" >
+        IS_APP,
+      </if>
+      <if test="formDefInitQzSql != null" >
+        FORM_DEF_INIT_QZ_SQL,
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="actModelId != null" >
+        ACT_MODEL_ID,
+      </if>
+      <if test="isFilemanage != null" >
+        IS_FILEMANAGE,
+      </if>
+      <if test="isOrgPower != null" >
+        IS_ORG_POWER,
+      </if>
+      <if test="isEmpPower != null" >
+        IS_EMP_POWER,
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT,
+      </if>
+      <if test="formDefSource != null" >
+        FORM_DEF_SOURCE,
+      </if>
+      <if test="fileuploadConfig != null" >
+        FILEUPLOAD_CONFIG,
+      </if>
+      <if test="formDefEntitySql != null" >
+        FORM_DEF_ENTITY_SQL,
+      </if>
+      <if test="formDefSql != null" >
+        FORM_DEF_SQL,
+      </if>
+      <if test="orderSql != null" >
+        ORDER_SQL,
+      </if>
+      <if test="powerSql != null" >
+        POWER_SQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formDefId != null" >
+        #{formDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formDefCode != null" >
+        #{formDefCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefName != null" >
+        #{formDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefLayoutType != null" >
+        #{formDefLayoutType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefDesc != null" >
+        #{formDefDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefDataType != null" >
+        #{formDefDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefRowCount != null" >
+        #{formDefRowCount,jdbcType=NVARCHAR},
+      </if>
+      <if test="formUrl != null" >
+        #{formUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefFolderId != null" >
+        #{formDefFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="formLableWidth != null" >
+        #{formLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefSavetable != null" >
+        #{formDefSavetable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formOtherColumnSql != null" >
+        #{formOtherColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefIsProcess != null" >
+        #{formDefIsProcess,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefProcessDefName != null" >
+        #{formDefProcessDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitUrl != null" >
+        #{formSubmitUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitTime != null" >
+        #{formSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formSubmitUserId != null" >
+        #{formSubmitUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="formDefProcessDefNameText != null" >
+        #{formDefProcessDefNameText,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitStatus != null" >
+        #{formSubmitStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowFlowTitle != null" >
+        #{isShowFlowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formDefInitQzJs != null" >
+        #{formDefInitQzJs,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAuthorityIsControl != null" >
+        #{formAuthorityIsControl,jdbcType=NVARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        #{expand1,jdbcType=NVARCHAR},
+      </if>
+      <if test="expandField != null" >
+        #{expandField,jdbcType=NVARCHAR},
+      </if>
+      <if test="isApp != null" >
+        #{isApp,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefInitQzSql != null" >
+        #{formDefInitQzSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="actModelId != null" >
+        #{actModelId,jdbcType=NVARCHAR},
+      </if>
+      <if test="isFilemanage != null" >
+        #{isFilemanage,jdbcType=NVARCHAR},
+      </if>
+      <if test="isOrgPower != null" >
+        #{isOrgPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="isEmpPower != null" >
+        #{isEmpPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="isComment != null" >
+        #{isComment,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefSource != null" >
+        #{formDefSource,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadConfig != null" >
+        #{fileuploadConfig,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefEntitySql != null" >
+        #{formDefEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="formDefSql != null" >
+        #{formDefSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orderSql != null" >
+        #{orderSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="powerSql != null" >
+        #{powerSql,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORMCONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORMCONFIG
+    <set >
+      <if test="record.formDefId != null" >
+        FORM_DEF_ID = #{record.formDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formDefCode != null" >
+        FORM_DEF_CODE = #{record.formDefCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefName != null" >
+        FORM_DEF_NAME = #{record.formDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefLayoutType != null" >
+        FORM_DEF_LAYOUT_TYPE = #{record.formDefLayoutType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefDesc != null" >
+        FORM_DEF_DESC = #{record.formDefDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefDataType != null" >
+        FORM_DEF_DATA_TYPE = #{record.formDefDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefRowCount != null" >
+        FORM_DEF_ROW_COUNT = #{record.formDefRowCount,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formUrl != null" >
+        FORM_URL = #{record.formUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefFolderId != null" >
+        FORM_DEF_FOLDER_ID = #{record.formDefFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formLableWidth != null" >
+        FORM_LABLE_WIDTH = #{record.formLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefSavetable != null" >
+        FORM_DEF_SAVETABLE = #{record.formDefSavetable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formOtherColumnSql != null" >
+        FORM_OTHER_COLUMN_SQL = #{record.formOtherColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefIsProcess != null" >
+        FORM_DEF_IS_PROCESS = #{record.formDefIsProcess,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefProcessDefName != null" >
+        FORM_DEF_PROCESS_DEF_NAME = #{record.formDefProcessDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formSubmitUrl != null" >
+        FORM_SUBMIT_URL = #{record.formSubmitUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formSubmitTime != null" >
+        FORM_SUBMIT_TIME = #{record.formSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formSubmitUserId != null" >
+        FORM_SUBMIT_USER_ID = #{record.formSubmitUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formDefProcessDefNameText != null" >
+        FORM_DEF_PROCESS_DEF_NAME_TEXT = #{record.formDefProcessDefNameText,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formSubmitStatus != null" >
+        FORM_SUBMIT_STATUS = #{record.formSubmitStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isShowFlowTitle != null" >
+        IS_SHOW_FLOW_TITLE = #{record.isShowFlowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formDefInitQzJs != null" >
+        FORM_DEF_INIT_QZ_JS = #{record.formDefInitQzJs,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formAuthorityIsControl != null" >
+        FORM_AUTHORITY_IS_CONTROL = #{record.formAuthorityIsControl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expand1 != null" >
+        EXPAND_1 = #{record.expand1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandField != null" >
+        EXPAND_FIELD = #{record.expandField,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isApp != null" >
+        IS_APP = #{record.isApp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefInitQzSql != null" >
+        FORM_DEF_INIT_QZ_SQL = #{record.formDefInitQzSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actModelId != null" >
+        ACT_MODEL_ID = #{record.actModelId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isFilemanage != null" >
+        IS_FILEMANAGE = #{record.isFilemanage,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isOrgPower != null" >
+        IS_ORG_POWER = #{record.isOrgPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isEmpPower != null" >
+        IS_EMP_POWER = #{record.isEmpPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isComment != null" >
+        IS_COMMENT = #{record.isComment,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefSource != null" >
+        FORM_DEF_SOURCE = #{record.formDefSource,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadConfig != null" >
+        FILEUPLOAD_CONFIG = #{record.fileuploadConfig,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefEntitySql != null" >
+        FORM_DEF_ENTITY_SQL = #{record.formDefEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.formDefSql != null" >
+        FORM_DEF_SQL = #{record.formDefSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.orderSql != null" >
+        ORDER_SQL = #{record.orderSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.powerSql != null" >
+        POWER_SQL = #{record.powerSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_FORMCONFIG
+    set FORM_DEF_ID = #{record.formDefId,jdbcType=DECIMAL},
+      FORM_DEF_CODE = #{record.formDefCode,jdbcType=NVARCHAR},
+      FORM_DEF_NAME = #{record.formDefName,jdbcType=NVARCHAR},
+      FORM_DEF_LAYOUT_TYPE = #{record.formDefLayoutType,jdbcType=NVARCHAR},
+      FORM_DEF_DESC = #{record.formDefDesc,jdbcType=NVARCHAR},
+      FORM_DEF_DATA_TYPE = #{record.formDefDataType,jdbcType=NVARCHAR},
+      FORM_DEF_ROW_COUNT = #{record.formDefRowCount,jdbcType=NVARCHAR},
+      FORM_URL = #{record.formUrl,jdbcType=NVARCHAR},
+      FORM_DEF_FOLDER_ID = #{record.formDefFolderId,jdbcType=DECIMAL},
+      FORM_LABLE_WIDTH = #{record.formLableWidth,jdbcType=NVARCHAR},
+      FORM_DEF_SAVETABLE = #{record.formDefSavetable,jdbcType=NVARCHAR},
+      FORM_OTHER_COLUMN_SQL = #{record.formOtherColumnSql,jdbcType=NVARCHAR},
+      FORM_DEF_IS_PROCESS = #{record.formDefIsProcess,jdbcType=NVARCHAR},
+      FORM_DEF_PROCESS_DEF_NAME = #{record.formDefProcessDefName,jdbcType=NVARCHAR},
+      FORM_SUBMIT_URL = #{record.formSubmitUrl,jdbcType=NVARCHAR},
+      FORM_SUBMIT_TIME = #{record.formSubmitTime,jdbcType=TIMESTAMP},
+      FORM_SUBMIT_USER_ID = #{record.formSubmitUserId,jdbcType=DECIMAL},
+      FORM_DEF_PROCESS_DEF_NAME_TEXT = #{record.formDefProcessDefNameText,jdbcType=NVARCHAR},
+      FORM_SUBMIT_STATUS = #{record.formSubmitStatus,jdbcType=NVARCHAR},
+      IS_SHOW_FLOW_TITLE = #{record.isShowFlowTitle,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FORM_DEF_INIT_QZ_JS = #{record.formDefInitQzJs,jdbcType=NVARCHAR},
+      FORM_AUTHORITY_IS_CONTROL = #{record.formAuthorityIsControl,jdbcType=NVARCHAR},
+      EXPAND_1 = #{record.expand1,jdbcType=NVARCHAR},
+      EXPAND_FIELD = #{record.expandField,jdbcType=NVARCHAR},
+      IS_APP = #{record.isApp,jdbcType=NVARCHAR},
+      FORM_DEF_INIT_QZ_SQL = #{record.formDefInitQzSql,jdbcType=NVARCHAR},
+      TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      ACT_MODEL_ID = #{record.actModelId,jdbcType=NVARCHAR},
+      IS_FILEMANAGE = #{record.isFilemanage,jdbcType=NVARCHAR},
+      IS_ORG_POWER = #{record.isOrgPower,jdbcType=NVARCHAR},
+      IS_EMP_POWER = #{record.isEmpPower,jdbcType=NVARCHAR},
+      IS_COMMENT = #{record.isComment,jdbcType=NVARCHAR},
+      FORM_DEF_SOURCE = #{record.formDefSource,jdbcType=NVARCHAR},
+      FILEUPLOAD_CONFIG = #{record.fileuploadConfig,jdbcType=NVARCHAR},
+      FORM_DEF_ENTITY_SQL = #{record.formDefEntitySql,jdbcType=LONGVARCHAR},
+      FORM_DEF_SQL = #{record.formDefSql,jdbcType=LONGVARCHAR},
+      ORDER_SQL = #{record.orderSql,jdbcType=LONGVARCHAR},
+      POWER_SQL = #{record.powerSql,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORMCONFIG
+    set FORM_DEF_ID = #{record.formDefId,jdbcType=DECIMAL},
+      FORM_DEF_CODE = #{record.formDefCode,jdbcType=NVARCHAR},
+      FORM_DEF_NAME = #{record.formDefName,jdbcType=NVARCHAR},
+      FORM_DEF_LAYOUT_TYPE = #{record.formDefLayoutType,jdbcType=NVARCHAR},
+      FORM_DEF_DESC = #{record.formDefDesc,jdbcType=NVARCHAR},
+      FORM_DEF_DATA_TYPE = #{record.formDefDataType,jdbcType=NVARCHAR},
+      FORM_DEF_ROW_COUNT = #{record.formDefRowCount,jdbcType=NVARCHAR},
+      FORM_URL = #{record.formUrl,jdbcType=NVARCHAR},
+      FORM_DEF_FOLDER_ID = #{record.formDefFolderId,jdbcType=DECIMAL},
+      FORM_LABLE_WIDTH = #{record.formLableWidth,jdbcType=NVARCHAR},
+      FORM_DEF_SAVETABLE = #{record.formDefSavetable,jdbcType=NVARCHAR},
+      FORM_OTHER_COLUMN_SQL = #{record.formOtherColumnSql,jdbcType=NVARCHAR},
+      FORM_DEF_IS_PROCESS = #{record.formDefIsProcess,jdbcType=NVARCHAR},
+      FORM_DEF_PROCESS_DEF_NAME = #{record.formDefProcessDefName,jdbcType=NVARCHAR},
+      FORM_SUBMIT_URL = #{record.formSubmitUrl,jdbcType=NVARCHAR},
+      FORM_SUBMIT_TIME = #{record.formSubmitTime,jdbcType=TIMESTAMP},
+      FORM_SUBMIT_USER_ID = #{record.formSubmitUserId,jdbcType=DECIMAL},
+      FORM_DEF_PROCESS_DEF_NAME_TEXT = #{record.formDefProcessDefNameText,jdbcType=NVARCHAR},
+      FORM_SUBMIT_STATUS = #{record.formSubmitStatus,jdbcType=NVARCHAR},
+      IS_SHOW_FLOW_TITLE = #{record.isShowFlowTitle,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FORM_DEF_INIT_QZ_JS = #{record.formDefInitQzJs,jdbcType=NVARCHAR},
+      FORM_AUTHORITY_IS_CONTROL = #{record.formAuthorityIsControl,jdbcType=NVARCHAR},
+      EXPAND_1 = #{record.expand1,jdbcType=NVARCHAR},
+      EXPAND_FIELD = #{record.expandField,jdbcType=NVARCHAR},
+      IS_APP = #{record.isApp,jdbcType=NVARCHAR},
+      FORM_DEF_INIT_QZ_SQL = #{record.formDefInitQzSql,jdbcType=NVARCHAR},
+      TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      ACT_MODEL_ID = #{record.actModelId,jdbcType=NVARCHAR},
+      IS_FILEMANAGE = #{record.isFilemanage,jdbcType=NVARCHAR},
+      IS_ORG_POWER = #{record.isOrgPower,jdbcType=NVARCHAR},
+      IS_EMP_POWER = #{record.isEmpPower,jdbcType=NVARCHAR},
+      IS_COMMENT = #{record.isComment,jdbcType=NVARCHAR},
+      FORM_DEF_SOURCE = #{record.formDefSource,jdbcType=NVARCHAR},
+      FILEUPLOAD_CONFIG = #{record.fileuploadConfig,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" >
+    update SYS_FORMCONFIG
+    <set >
+      <if test="formDefCode != null" >
+        FORM_DEF_CODE = #{formDefCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefName != null" >
+        FORM_DEF_NAME = #{formDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefLayoutType != null" >
+        FORM_DEF_LAYOUT_TYPE = #{formDefLayoutType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefDesc != null" >
+        FORM_DEF_DESC = #{formDefDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefDataType != null" >
+        FORM_DEF_DATA_TYPE = #{formDefDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefRowCount != null" >
+        FORM_DEF_ROW_COUNT = #{formDefRowCount,jdbcType=NVARCHAR},
+      </if>
+      <if test="formUrl != null" >
+        FORM_URL = #{formUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefFolderId != null" >
+        FORM_DEF_FOLDER_ID = #{formDefFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="formLableWidth != null" >
+        FORM_LABLE_WIDTH = #{formLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefSavetable != null" >
+        FORM_DEF_SAVETABLE = #{formDefSavetable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formOtherColumnSql != null" >
+        FORM_OTHER_COLUMN_SQL = #{formOtherColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefIsProcess != null" >
+        FORM_DEF_IS_PROCESS = #{formDefIsProcess,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefProcessDefName != null" >
+        FORM_DEF_PROCESS_DEF_NAME = #{formDefProcessDefName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitUrl != null" >
+        FORM_SUBMIT_URL = #{formSubmitUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitTime != null" >
+        FORM_SUBMIT_TIME = #{formSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formSubmitUserId != null" >
+        FORM_SUBMIT_USER_ID = #{formSubmitUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="formDefProcessDefNameText != null" >
+        FORM_DEF_PROCESS_DEF_NAME_TEXT = #{formDefProcessDefNameText,jdbcType=NVARCHAR},
+      </if>
+      <if test="formSubmitStatus != null" >
+        FORM_SUBMIT_STATUS = #{formSubmitStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowFlowTitle != null" >
+        IS_SHOW_FLOW_TITLE = #{isShowFlowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formDefInitQzJs != null" >
+        FORM_DEF_INIT_QZ_JS = #{formDefInitQzJs,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAuthorityIsControl != null" >
+        FORM_AUTHORITY_IS_CONTROL = #{formAuthorityIsControl,jdbcType=NVARCHAR},
+      </if>
+      <if test="expand1 != null" >
+        EXPAND_1 = #{expand1,jdbcType=NVARCHAR},
+      </if>
+      <if test="expandField != null" >
+        EXPAND_FIELD = #{expandField,jdbcType=NVARCHAR},
+      </if>
+      <if test="isApp != null" >
+        IS_APP = #{isApp,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefInitQzSql != null" >
+        FORM_DEF_INIT_QZ_SQL = #{formDefInitQzSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID = #{templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="actModelId != null" >
+        ACT_MODEL_ID = #{actModelId,jdbcType=NVARCHAR},
+      </if>
+      <if test="isFilemanage != null" >
+        IS_FILEMANAGE = #{isFilemanage,jdbcType=NVARCHAR},
+      </if>
+      <if test="isOrgPower != null" >
+        IS_ORG_POWER = #{isOrgPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="isEmpPower != null" >
+        IS_EMP_POWER = #{isEmpPower,jdbcType=NVARCHAR},
+      </if>
+      <if test="isComment != null" >
+        IS_COMMENT = #{isComment,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefSource != null" >
+        FORM_DEF_SOURCE = #{formDefSource,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadConfig != null" >
+        FILEUPLOAD_CONFIG = #{fileuploadConfig,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefEntitySql != null" >
+        FORM_DEF_ENTITY_SQL = #{formDefEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="formDefSql != null" >
+        FORM_DEF_SQL = #{formDefSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orderSql != null" >
+        ORDER_SQL = #{orderSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="powerSql != null" >
+        POWER_SQL = #{powerSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" >
+    update SYS_FORMCONFIG
+    set FORM_DEF_CODE = #{formDefCode,jdbcType=NVARCHAR},
+      FORM_DEF_NAME = #{formDefName,jdbcType=NVARCHAR},
+      FORM_DEF_LAYOUT_TYPE = #{formDefLayoutType,jdbcType=NVARCHAR},
+      FORM_DEF_DESC = #{formDefDesc,jdbcType=NVARCHAR},
+      FORM_DEF_DATA_TYPE = #{formDefDataType,jdbcType=NVARCHAR},
+      FORM_DEF_ROW_COUNT = #{formDefRowCount,jdbcType=NVARCHAR},
+      FORM_URL = #{formUrl,jdbcType=NVARCHAR},
+      FORM_DEF_FOLDER_ID = #{formDefFolderId,jdbcType=DECIMAL},
+      FORM_LABLE_WIDTH = #{formLableWidth,jdbcType=NVARCHAR},
+      FORM_DEF_SAVETABLE = #{formDefSavetable,jdbcType=NVARCHAR},
+      FORM_OTHER_COLUMN_SQL = #{formOtherColumnSql,jdbcType=NVARCHAR},
+      FORM_DEF_IS_PROCESS = #{formDefIsProcess,jdbcType=NVARCHAR},
+      FORM_DEF_PROCESS_DEF_NAME = #{formDefProcessDefName,jdbcType=NVARCHAR},
+      FORM_SUBMIT_URL = #{formSubmitUrl,jdbcType=NVARCHAR},
+      FORM_SUBMIT_TIME = #{formSubmitTime,jdbcType=TIMESTAMP},
+      FORM_SUBMIT_USER_ID = #{formSubmitUserId,jdbcType=DECIMAL},
+      FORM_DEF_PROCESS_DEF_NAME_TEXT = #{formDefProcessDefNameText,jdbcType=NVARCHAR},
+      FORM_SUBMIT_STATUS = #{formSubmitStatus,jdbcType=NVARCHAR},
+      IS_SHOW_FLOW_TITLE = #{isShowFlowTitle,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FORM_DEF_INIT_QZ_JS = #{formDefInitQzJs,jdbcType=NVARCHAR},
+      FORM_AUTHORITY_IS_CONTROL = #{formAuthorityIsControl,jdbcType=NVARCHAR},
+      EXPAND_1 = #{expand1,jdbcType=NVARCHAR},
+      EXPAND_FIELD = #{expandField,jdbcType=NVARCHAR},
+      IS_APP = #{isApp,jdbcType=NVARCHAR},
+      FORM_DEF_INIT_QZ_SQL = #{formDefInitQzSql,jdbcType=NVARCHAR},
+      TEMPLATE_ID = #{templateId,jdbcType=DECIMAL},
+      ACT_MODEL_ID = #{actModelId,jdbcType=NVARCHAR},
+      IS_FILEMANAGE = #{isFilemanage,jdbcType=NVARCHAR},
+      IS_ORG_POWER = #{isOrgPower,jdbcType=NVARCHAR},
+      IS_EMP_POWER = #{isEmpPower,jdbcType=NVARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=NVARCHAR},
+      FORM_DEF_SOURCE = #{formDefSource,jdbcType=NVARCHAR},
+      FILEUPLOAD_CONFIG = #{fileuploadConfig,jdbcType=NVARCHAR},
+      FORM_DEF_ENTITY_SQL = #{formDefEntitySql,jdbcType=LONGVARCHAR},
+      FORM_DEF_SQL = #{formDefSql,jdbcType=LONGVARCHAR},
+      ORDER_SQL = #{orderSql,jdbcType=LONGVARCHAR},
+      POWER_SQL = #{powerSql,jdbcType=LONGVARCHAR}
+    where FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormconfig" >
+    update SYS_FORMCONFIG
+    set FORM_DEF_CODE = #{formDefCode,jdbcType=NVARCHAR},
+      FORM_DEF_NAME = #{formDefName,jdbcType=NVARCHAR},
+      FORM_DEF_LAYOUT_TYPE = #{formDefLayoutType,jdbcType=NVARCHAR},
+      FORM_DEF_DESC = #{formDefDesc,jdbcType=NVARCHAR},
+      FORM_DEF_DATA_TYPE = #{formDefDataType,jdbcType=NVARCHAR},
+      FORM_DEF_ROW_COUNT = #{formDefRowCount,jdbcType=NVARCHAR},
+      FORM_URL = #{formUrl,jdbcType=NVARCHAR},
+      FORM_DEF_FOLDER_ID = #{formDefFolderId,jdbcType=DECIMAL},
+      FORM_LABLE_WIDTH = #{formLableWidth,jdbcType=NVARCHAR},
+      FORM_DEF_SAVETABLE = #{formDefSavetable,jdbcType=NVARCHAR},
+      FORM_OTHER_COLUMN_SQL = #{formOtherColumnSql,jdbcType=NVARCHAR},
+      FORM_DEF_IS_PROCESS = #{formDefIsProcess,jdbcType=NVARCHAR},
+      FORM_DEF_PROCESS_DEF_NAME = #{formDefProcessDefName,jdbcType=NVARCHAR},
+      FORM_SUBMIT_URL = #{formSubmitUrl,jdbcType=NVARCHAR},
+      FORM_SUBMIT_TIME = #{formSubmitTime,jdbcType=TIMESTAMP},
+      FORM_SUBMIT_USER_ID = #{formSubmitUserId,jdbcType=DECIMAL},
+      FORM_DEF_PROCESS_DEF_NAME_TEXT = #{formDefProcessDefNameText,jdbcType=NVARCHAR},
+      FORM_SUBMIT_STATUS = #{formSubmitStatus,jdbcType=NVARCHAR},
+      IS_SHOW_FLOW_TITLE = #{isShowFlowTitle,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FORM_DEF_INIT_QZ_JS = #{formDefInitQzJs,jdbcType=NVARCHAR},
+      FORM_AUTHORITY_IS_CONTROL = #{formAuthorityIsControl,jdbcType=NVARCHAR},
+      EXPAND_1 = #{expand1,jdbcType=NVARCHAR},
+      EXPAND_FIELD = #{expandField,jdbcType=NVARCHAR},
+      IS_APP = #{isApp,jdbcType=NVARCHAR},
+      FORM_DEF_INIT_QZ_SQL = #{formDefInitQzSql,jdbcType=NVARCHAR},
+      TEMPLATE_ID = #{templateId,jdbcType=DECIMAL},
+      ACT_MODEL_ID = #{actModelId,jdbcType=NVARCHAR},
+      IS_FILEMANAGE = #{isFilemanage,jdbcType=NVARCHAR},
+      IS_ORG_POWER = #{isOrgPower,jdbcType=NVARCHAR},
+      IS_EMP_POWER = #{isEmpPower,jdbcType=NVARCHAR},
+      IS_COMMENT = #{isComment,jdbcType=NVARCHAR},
+      FORM_DEF_SOURCE = #{formDefSource,jdbcType=NVARCHAR},
+      FILEUPLOAD_CONFIG = #{fileuploadConfig,jdbcType=NVARCHAR}
+    where FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL}
+  </update>
+</mapper>

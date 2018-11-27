@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFileuploadMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFileupload" >
+    <id column="FILEID" property="fileid" jdbcType="DECIMAL" />
+    <result column="FILENAME" property="filename" jdbcType="NVARCHAR" />
+    <result column="FILEPATH" property="filepath" jdbcType="NVARCHAR" />
+    <result column="UPLOADUSER" property="uploaduser" jdbcType="NVARCHAR" />
+    <result column="UPLOADTIME" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="SAVETYPE" property="savetype" jdbcType="DECIMAL" />
+    <result column="CONTENTTYPE" property="contenttype" jdbcType="NVARCHAR" />
+    <result column="CLIENTFILENAME" property="clientfilename" jdbcType="NVARCHAR" />
+    <result column="CLIENTPATH" property="clientpath" jdbcType="NVARCHAR" />
+    <result column="NAME" property="name" jdbcType="NVARCHAR" />
+    <result column="FILE_SIZE" property="fileSize" jdbcType="DECIMAL" />
+    <result column="FILEHASH" property="filehash" jdbcType="NVARCHAR" />
+    <result column="FTP_IP" property="ftpIp" jdbcType="NVARCHAR" />
+    <result column="FTPUSERNAME" property="ftpusername" jdbcType="NVARCHAR" />
+    <result column="FTPPASSWORD" property="ftppassword" jdbcType="NVARCHAR" />
+    <result column="FTPPORT" property="ftpport" jdbcType="DECIMAL" />
+    <result column="OBJ_TYPE" property="objType" jdbcType="NVARCHAR" />
+    <result column="OBJ_ID" property="objId" jdbcType="NVARCHAR" />
+    <result column="FILE_TAG" property="fileTag" jdbcType="NVARCHAR" />
+    <result column="FILE_FOLDER" property="fileFolder" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.widget.SysFileupload" extends="BaseResultMap" >
+    <result column="FILEDATA" property="filedata" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FILEID, FILENAME, FILEPATH, UPLOADUSER, UPLOADTIME, SAVETYPE, CONTENTTYPE, CLIENTFILENAME, 
+    CLIENTPATH, NAME, FILE_SIZE, FILEHASH, FTP_IP, FTPUSERNAME, FTPPASSWORD, FTPPORT, 
+    OBJ_TYPE, OBJ_ID, FILE_TAG, FILE_FOLDER
+  </sql>
+  <sql id="Blob_Column_List" >
+    FILEDATA
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.widget.SysFileuploadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFileuploadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_FILEUPLOAD
+    where FILEID = #{fileid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FILEUPLOAD
+    where FILEID = #{fileid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFileuploadExample" >
+    delete from SYS_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFileupload" useGeneratedKeys="true" keyProperty="fileid" keyColumn="FILEID">
+    insert into SYS_FILEUPLOAD (FILENAME, FILEPATH, 
+      UPLOADUSER, UPLOADTIME, SAVETYPE, 
+      CONTENTTYPE, CLIENTFILENAME, CLIENTPATH, 
+      NAME, FILE_SIZE, FILEHASH, 
+      FTP_IP, FTPUSERNAME, FTPPASSWORD, 
+      FTPPORT, OBJ_TYPE, OBJ_ID, 
+      FILE_TAG, FILE_FOLDER, FILEDATA
+      )
+    values ( #{filename,jdbcType=NVARCHAR}, #{filepath,jdbcType=NVARCHAR}, 
+      #{uploaduser,jdbcType=NVARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, #{savetype,jdbcType=DECIMAL}, 
+      #{contenttype,jdbcType=NVARCHAR}, #{clientfilename,jdbcType=NVARCHAR}, #{clientpath,jdbcType=NVARCHAR}, 
+      #{name,jdbcType=NVARCHAR}, #{fileSize,jdbcType=DECIMAL}, #{filehash,jdbcType=NVARCHAR}, 
+      #{ftpIp,jdbcType=NVARCHAR}, #{ftpusername,jdbcType=NVARCHAR}, #{ftppassword,jdbcType=NVARCHAR}, 
+      #{ftpport,jdbcType=DECIMAL}, #{objType,jdbcType=NVARCHAR}, #{objId,jdbcType=NVARCHAR}, 
+      #{fileTag,jdbcType=NVARCHAR}, #{fileFolder,jdbcType=NVARCHAR}, #{filedata,jdbcType=VARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFileupload" >
+    insert into SYS_FILEUPLOAD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FILEID,
+      </if>
+      <if test="filename != null" >
+        FILENAME,
+      </if>
+      <if test="filepath != null" >
+        FILEPATH,
+      </if>
+      <if test="uploaduser != null" >
+        UPLOADUSER,
+      </if>
+      <if test="uploadtime != null" >
+        UPLOADTIME,
+      </if>
+      <if test="savetype != null" >
+        SAVETYPE,
+      </if>
+      <if test="contenttype != null" >
+        CONTENTTYPE,
+      </if>
+      <if test="clientfilename != null" >
+        CLIENTFILENAME,
+      </if>
+      <if test="clientpath != null" >
+        CLIENTPATH,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+      <if test="filehash != null" >
+        FILEHASH,
+      </if>
+      <if test="ftpIp != null" >
+        FTP_IP,
+      </if>
+      <if test="ftpusername != null" >
+        FTPUSERNAME,
+      </if>
+      <if test="ftppassword != null" >
+        FTPPASSWORD,
+      </if>
+      <if test="ftpport != null" >
+        FTPPORT,
+      </if>
+      <if test="objType != null" >
+        OBJ_TYPE,
+      </if>
+      <if test="objId != null" >
+        OBJ_ID,
+      </if>
+      <if test="fileTag != null" >
+        FILE_TAG,
+      </if>
+      <if test="fileFolder != null" >
+        FILE_FOLDER,
+      </if>
+      <if test="filedata != null" >
+        FILEDATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=DECIMAL},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=NVARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="uploaduser != null" >
+        #{uploaduser,jdbcType=NVARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="savetype != null" >
+        #{savetype,jdbcType=DECIMAL},
+      </if>
+      <if test="contenttype != null" >
+        #{contenttype,jdbcType=NVARCHAR},
+      </if>
+      <if test="clientfilename != null" >
+        #{clientfilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="clientpath != null" >
+        #{clientpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=DECIMAL},
+      </if>
+      <if test="filehash != null" >
+        #{filehash,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpIp != null" >
+        #{ftpIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpusername != null" >
+        #{ftpusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftppassword != null" >
+        #{ftppassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpport != null" >
+        #{ftpport,jdbcType=DECIMAL},
+      </if>
+      <if test="objType != null" >
+        #{objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="objId != null" >
+        #{objId,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileTag != null" >
+        #{fileTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileFolder != null" >
+        #{fileFolder,jdbcType=NVARCHAR},
+      </if>
+      <if test="filedata != null" >
+        #{filedata,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFileuploadExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FILEUPLOAD
+    <set >
+      <if test="record.fileid != null" >
+        FILEID = #{record.fileid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.filename != null" >
+        FILENAME = #{record.filename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.filepath != null" >
+        FILEPATH = #{record.filepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uploaduser != null" >
+        UPLOADUSER = #{record.uploaduser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        UPLOADTIME = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.savetype != null" >
+        SAVETYPE = #{record.savetype,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contenttype != null" >
+        CONTENTTYPE = #{record.contenttype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.clientfilename != null" >
+        CLIENTFILENAME = #{record.clientfilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.clientpath != null" >
+        CLIENTPATH = #{record.clientpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileSize != null" >
+        FILE_SIZE = #{record.fileSize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.filehash != null" >
+        FILEHASH = #{record.filehash,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ftpIp != null" >
+        FTP_IP = #{record.ftpIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ftpusername != null" >
+        FTPUSERNAME = #{record.ftpusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ftppassword != null" >
+        FTPPASSWORD = #{record.ftppassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ftpport != null" >
+        FTPPORT = #{record.ftpport,jdbcType=DECIMAL},
+      </if>
+      <if test="record.objType != null" >
+        OBJ_TYPE = #{record.objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.objId != null" >
+        OBJ_ID = #{record.objId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileTag != null" >
+        FILE_TAG = #{record.fileTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileFolder != null" >
+        FILE_FOLDER = #{record.fileFolder,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.filedata != null" >
+        FILEDATA = #{record.filedata,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_FILEUPLOAD
+    set FILEID = #{record.fileid,jdbcType=DECIMAL},
+      FILENAME = #{record.filename,jdbcType=NVARCHAR},
+      FILEPATH = #{record.filepath,jdbcType=NVARCHAR},
+      UPLOADUSER = #{record.uploaduser,jdbcType=NVARCHAR},
+      UPLOADTIME = #{record.uploadtime,jdbcType=TIMESTAMP},
+      SAVETYPE = #{record.savetype,jdbcType=DECIMAL},
+      CONTENTTYPE = #{record.contenttype,jdbcType=NVARCHAR},
+      CLIENTFILENAME = #{record.clientfilename,jdbcType=NVARCHAR},
+      CLIENTPATH = #{record.clientpath,jdbcType=NVARCHAR},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      FILE_SIZE = #{record.fileSize,jdbcType=DECIMAL},
+      FILEHASH = #{record.filehash,jdbcType=NVARCHAR},
+      FTP_IP = #{record.ftpIp,jdbcType=NVARCHAR},
+      FTPUSERNAME = #{record.ftpusername,jdbcType=NVARCHAR},
+      FTPPASSWORD = #{record.ftppassword,jdbcType=NVARCHAR},
+      FTPPORT = #{record.ftpport,jdbcType=DECIMAL},
+      OBJ_TYPE = #{record.objType,jdbcType=NVARCHAR},
+      OBJ_ID = #{record.objId,jdbcType=NVARCHAR},
+      FILE_TAG = #{record.fileTag,jdbcType=NVARCHAR},
+      FILE_FOLDER = #{record.fileFolder,jdbcType=NVARCHAR},
+      FILEDATA = #{record.filedata,jdbcType=VARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FILEUPLOAD
+    set FILEID = #{record.fileid,jdbcType=DECIMAL},
+      FILENAME = #{record.filename,jdbcType=NVARCHAR},
+      FILEPATH = #{record.filepath,jdbcType=NVARCHAR},
+      UPLOADUSER = #{record.uploaduser,jdbcType=NVARCHAR},
+      UPLOADTIME = #{record.uploadtime,jdbcType=TIMESTAMP},
+      SAVETYPE = #{record.savetype,jdbcType=DECIMAL},
+      CONTENTTYPE = #{record.contenttype,jdbcType=NVARCHAR},
+      CLIENTFILENAME = #{record.clientfilename,jdbcType=NVARCHAR},
+      CLIENTPATH = #{record.clientpath,jdbcType=NVARCHAR},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      FILE_SIZE = #{record.fileSize,jdbcType=DECIMAL},
+      FILEHASH = #{record.filehash,jdbcType=NVARCHAR},
+      FTP_IP = #{record.ftpIp,jdbcType=NVARCHAR},
+      FTPUSERNAME = #{record.ftpusername,jdbcType=NVARCHAR},
+      FTPPASSWORD = #{record.ftppassword,jdbcType=NVARCHAR},
+      FTPPORT = #{record.ftpport,jdbcType=DECIMAL},
+      OBJ_TYPE = #{record.objType,jdbcType=NVARCHAR},
+      OBJ_ID = #{record.objId,jdbcType=NVARCHAR},
+      FILE_TAG = #{record.fileTag,jdbcType=NVARCHAR},
+      FILE_FOLDER = #{record.fileFolder,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFileupload" >
+    update SYS_FILEUPLOAD
+    <set >
+      <if test="filename != null" >
+        FILENAME = #{filename,jdbcType=NVARCHAR},
+      </if>
+      <if test="filepath != null" >
+        FILEPATH = #{filepath,jdbcType=NVARCHAR},
+      </if>
+      <if test="uploaduser != null" >
+        UPLOADUSER = #{uploaduser,jdbcType=NVARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        UPLOADTIME = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="savetype != null" >
+        SAVETYPE = #{savetype,jdbcType=DECIMAL},
+      </if>
+      <if test="contenttype != null" >
+        CONTENTTYPE = #{contenttype,jdbcType=NVARCHAR},
+      </if>
+      <if test="clientfilename != null" >
+        CLIENTFILENAME = #{clientfilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="clientpath != null" >
+        CLIENTPATH = #{clientpath,jdbcType=NVARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+      </if>
+      <if test="filehash != null" >
+        FILEHASH = #{filehash,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpIp != null" >
+        FTP_IP = #{ftpIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpusername != null" >
+        FTPUSERNAME = #{ftpusername,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftppassword != null" >
+        FTPPASSWORD = #{ftppassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="ftpport != null" >
+        FTPPORT = #{ftpport,jdbcType=DECIMAL},
+      </if>
+      <if test="objType != null" >
+        OBJ_TYPE = #{objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="objId != null" >
+        OBJ_ID = #{objId,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileTag != null" >
+        FILE_TAG = #{fileTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileFolder != null" >
+        FILE_FOLDER = #{fileFolder,jdbcType=NVARCHAR},
+      </if>
+      <if test="filedata != null" >
+        FILEDATA = #{filedata,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where FILEID = #{fileid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.widget.SysFileupload" >
+    update SYS_FILEUPLOAD
+    set FILENAME = #{filename,jdbcType=NVARCHAR},
+      FILEPATH = #{filepath,jdbcType=NVARCHAR},
+      UPLOADUSER = #{uploaduser,jdbcType=NVARCHAR},
+      UPLOADTIME = #{uploadtime,jdbcType=TIMESTAMP},
+      SAVETYPE = #{savetype,jdbcType=DECIMAL},
+      CONTENTTYPE = #{contenttype,jdbcType=NVARCHAR},
+      CLIENTFILENAME = #{clientfilename,jdbcType=NVARCHAR},
+      CLIENTPATH = #{clientpath,jdbcType=NVARCHAR},
+      NAME = #{name,jdbcType=NVARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+      FILEHASH = #{filehash,jdbcType=NVARCHAR},
+      FTP_IP = #{ftpIp,jdbcType=NVARCHAR},
+      FTPUSERNAME = #{ftpusername,jdbcType=NVARCHAR},
+      FTPPASSWORD = #{ftppassword,jdbcType=NVARCHAR},
+      FTPPORT = #{ftpport,jdbcType=DECIMAL},
+      OBJ_TYPE = #{objType,jdbcType=NVARCHAR},
+      OBJ_ID = #{objId,jdbcType=NVARCHAR},
+      FILE_TAG = #{fileTag,jdbcType=NVARCHAR},
+      FILE_FOLDER = #{fileFolder,jdbcType=NVARCHAR},
+      FILEDATA = #{filedata,jdbcType=VARBINARY}
+    where FILEID = #{fileid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFileupload" >
+    update SYS_FILEUPLOAD
+    set FILENAME = #{filename,jdbcType=NVARCHAR},
+      FILEPATH = #{filepath,jdbcType=NVARCHAR},
+      UPLOADUSER = #{uploaduser,jdbcType=NVARCHAR},
+      UPLOADTIME = #{uploadtime,jdbcType=TIMESTAMP},
+      SAVETYPE = #{savetype,jdbcType=DECIMAL},
+      CONTENTTYPE = #{contenttype,jdbcType=NVARCHAR},
+      CLIENTFILENAME = #{clientfilename,jdbcType=NVARCHAR},
+      CLIENTPATH = #{clientpath,jdbcType=NVARCHAR},
+      NAME = #{name,jdbcType=NVARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=DECIMAL},
+      FILEHASH = #{filehash,jdbcType=NVARCHAR},
+      FTP_IP = #{ftpIp,jdbcType=NVARCHAR},
+      FTPUSERNAME = #{ftpusername,jdbcType=NVARCHAR},
+      FTPPASSWORD = #{ftppassword,jdbcType=NVARCHAR},
+      FTPPORT = #{ftpport,jdbcType=DECIMAL},
+      OBJ_TYPE = #{objType,jdbcType=NVARCHAR},
+      OBJ_ID = #{objId,jdbcType=NVARCHAR},
+      FILE_TAG = #{fileTag,jdbcType=NVARCHAR},
+      FILE_FOLDER = #{fileFolder,jdbcType=NVARCHAR}
+    where FILEID = #{fileid,jdbcType=DECIMAL}
+  </update>
+</mapper>

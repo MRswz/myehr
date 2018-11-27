@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormChartsMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormCharts" >
+    <id column="form_charts_id" property="formChartsId" jdbcType="DECIMAL" />
+    <result column="form_charts_type" property="formChartsType" jdbcType="NVARCHAR" />
+    <result column="form_charts_color" property="formChartsColor" jdbcType="NVARCHAR" />
+    <result column="form_charts_title" property="formChartsTitle" jdbcType="NVARCHAR" />
+    <result column="form_charts_tooltip" property="formChartsTooltip" jdbcType="NVARCHAR" />
+    <result column="form_charts_toolbox" property="formChartsToolbox" jdbcType="NVARCHAR" />
+    <result column="form_charts_hide_table" property="formChartsHideTable" jdbcType="NVARCHAR" />
+    <result column="form_charts_show_legend" property="formChartsShowLegend" jdbcType="NVARCHAR" />
+    <result column="form_charts_legend_name" property="formChartsLegendName" jdbcType="NVARCHAR" />
+    <result column="form_charts_x_axis" property="formChartsXAxis" jdbcType="NVARCHAR" />
+    <result column="form_charts_y_axis" property="formChartsYAxis" jdbcType="NVARCHAR" />
+    <result column="form_charts_form_id" property="formChartsFormId" jdbcType="DECIMAL" />
+    <result column="form_charts_select_form_id" property="formChartsSelectFormId" jdbcType="DECIMAL" />
+    <result column="form_charts_select_form_name" property="formChartsSelectFormName" jdbcType="NVARCHAR" />
+    <result column="form_charts_size" property="formChartsSize" jdbcType="NVARCHAR" />
+    <result column="form_charts_title_orient" property="formChartsTitleOrient" jdbcType="VARCHAR" />
+    <result column="form_charts_position_x" property="formChartsPositionX" jdbcType="VARCHAR" />
+    <result column="form_charts_position_y" property="formChartsPositionY" jdbcType="VARCHAR" />
+    <result column="form_charts_title_position" property="formChartsTitlePosition" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    form_charts_id, form_charts_type, form_charts_color, form_charts_title, form_charts_tooltip, 
+    form_charts_toolbox, form_charts_hide_table, form_charts_show_legend, form_charts_legend_name, 
+    form_charts_x_axis, form_charts_y_axis, form_charts_form_id, form_charts_select_form_id, 
+    form_charts_select_form_name, form_charts_size, form_charts_title_orient, form_charts_position_x, 
+    form_charts_position_y, form_charts_title_position
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormChartsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_form_charts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_form_charts
+    where form_charts_id = #{formChartsId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from sys_form_charts
+    where form_charts_id = #{formChartsId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormChartsExample" >
+    delete from sys_form_charts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormCharts" useGeneratedKeys="true" keyProperty="formChartsId" keyColumn="form_charts_id">
+    insert into sys_form_charts ( form_charts_type, form_charts_color, 
+      form_charts_title, form_charts_tooltip, form_charts_toolbox, 
+      form_charts_hide_table, form_charts_show_legend, 
+      form_charts_legend_name, form_charts_x_axis, 
+      form_charts_y_axis, form_charts_form_id, form_charts_select_form_id, 
+      form_charts_select_form_name, form_charts_size, 
+      form_charts_title_orient, form_charts_position_x, 
+      form_charts_position_y, form_charts_title_position
+      )
+    values (#{formChartsType,jdbcType=NVARCHAR}, #{formChartsColor,jdbcType=NVARCHAR}, 
+      #{formChartsTitle,jdbcType=NVARCHAR}, #{formChartsTooltip,jdbcType=NVARCHAR}, #{formChartsToolbox,jdbcType=NVARCHAR}, 
+      #{formChartsHideTable,jdbcType=NVARCHAR}, #{formChartsShowLegend,jdbcType=NVARCHAR}, 
+      #{formChartsLegendName,jdbcType=NVARCHAR}, #{formChartsXAxis,jdbcType=NVARCHAR}, 
+      #{formChartsYAxis,jdbcType=NVARCHAR}, #{formChartsFormId,jdbcType=DECIMAL}, #{formChartsSelectFormId,jdbcType=DECIMAL}, 
+      #{formChartsSelectFormName,jdbcType=NVARCHAR}, #{formChartsSize,jdbcType=NVARCHAR}, 
+      #{formChartsTitleOrient,jdbcType=VARCHAR}, #{formChartsPositionX,jdbcType=VARCHAR}, 
+      #{formChartsPositionY,jdbcType=VARCHAR}, #{formChartsTitlePosition,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormCharts" >
+    insert into sys_form_charts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formChartsId != null" >
+        form_charts_id,
+      </if>
+      <if test="formChartsType != null" >
+        form_charts_type,
+      </if>
+      <if test="formChartsColor != null" >
+        form_charts_color,
+      </if>
+      <if test="formChartsTitle != null" >
+        form_charts_title,
+      </if>
+      <if test="formChartsTooltip != null" >
+        form_charts_tooltip,
+      </if>
+      <if test="formChartsToolbox != null" >
+        form_charts_toolbox,
+      </if>
+      <if test="formChartsHideTable != null" >
+        form_charts_hide_table,
+      </if>
+      <if test="formChartsShowLegend != null" >
+        form_charts_show_legend,
+      </if>
+      <if test="formChartsLegendName != null" >
+        form_charts_legend_name,
+      </if>
+      <if test="formChartsXAxis != null" >
+        form_charts_x_axis,
+      </if>
+      <if test="formChartsYAxis != null" >
+        form_charts_y_axis,
+      </if>
+      <if test="formChartsFormId != null" >
+        form_charts_form_id,
+      </if>
+      <if test="formChartsSelectFormId != null" >
+        form_charts_select_form_id,
+      </if>
+      <if test="formChartsSelectFormName != null" >
+        form_charts_select_form_name,
+      </if>
+      <if test="formChartsSize != null" >
+        form_charts_size,
+      </if>
+      <if test="formChartsTitleOrient != null" >
+        form_charts_title_orient,
+      </if>
+      <if test="formChartsPositionX != null" >
+        form_charts_position_x,
+      </if>
+      <if test="formChartsPositionY != null" >
+        form_charts_position_y,
+      </if>
+      <if test="formChartsTitlePosition != null" >
+        form_charts_title_position,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formChartsId != null" >
+        #{formChartsId,jdbcType=DECIMAL},
+      </if>
+      <if test="formChartsType != null" >
+        #{formChartsType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsColor != null" >
+        #{formChartsColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTitle != null" >
+        #{formChartsTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTooltip != null" >
+        #{formChartsTooltip,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsToolbox != null" >
+        #{formChartsToolbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsHideTable != null" >
+        #{formChartsHideTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsShowLegend != null" >
+        #{formChartsShowLegend,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsLegendName != null" >
+        #{formChartsLegendName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsXAxis != null" >
+        #{formChartsXAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsYAxis != null" >
+        #{formChartsYAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsFormId != null" >
+        #{formChartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formChartsSelectFormId != null" >
+        #{formChartsSelectFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formChartsSelectFormName != null" >
+        #{formChartsSelectFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsSize != null" >
+        #{formChartsSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTitleOrient != null" >
+        #{formChartsTitleOrient,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsPositionX != null" >
+        #{formChartsPositionX,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsPositionY != null" >
+        #{formChartsPositionY,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsTitlePosition != null" >
+        #{formChartsTitlePosition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormChartsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_form_charts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_form_charts
+    <set >
+      <if test="record.formChartsId != null" >
+        form_charts_id = #{record.formChartsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formChartsType != null" >
+        form_charts_type = #{record.formChartsType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsColor != null" >
+        form_charts_color = #{record.formChartsColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsTitle != null" >
+        form_charts_title = #{record.formChartsTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsTooltip != null" >
+        form_charts_tooltip = #{record.formChartsTooltip,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsToolbox != null" >
+        form_charts_toolbox = #{record.formChartsToolbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsHideTable != null" >
+        form_charts_hide_table = #{record.formChartsHideTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsShowLegend != null" >
+        form_charts_show_legend = #{record.formChartsShowLegend,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsLegendName != null" >
+        form_charts_legend_name = #{record.formChartsLegendName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsXAxis != null" >
+        form_charts_x_axis = #{record.formChartsXAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsYAxis != null" >
+        form_charts_y_axis = #{record.formChartsYAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsFormId != null" >
+        form_charts_form_id = #{record.formChartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formChartsSelectFormId != null" >
+        form_charts_select_form_id = #{record.formChartsSelectFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formChartsSelectFormName != null" >
+        form_charts_select_form_name = #{record.formChartsSelectFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsSize != null" >
+        form_charts_size = #{record.formChartsSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formChartsTitleOrient != null" >
+        form_charts_title_orient = #{record.formChartsTitleOrient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formChartsPositionX != null" >
+        form_charts_position_x = #{record.formChartsPositionX,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formChartsPositionY != null" >
+        form_charts_position_y = #{record.formChartsPositionY,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formChartsTitlePosition != null" >
+        form_charts_title_position = #{record.formChartsTitlePosition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_form_charts
+    set form_charts_id = #{record.formChartsId,jdbcType=DECIMAL},
+      form_charts_type = #{record.formChartsType,jdbcType=NVARCHAR},
+      form_charts_color = #{record.formChartsColor,jdbcType=NVARCHAR},
+      form_charts_title = #{record.formChartsTitle,jdbcType=NVARCHAR},
+      form_charts_tooltip = #{record.formChartsTooltip,jdbcType=NVARCHAR},
+      form_charts_toolbox = #{record.formChartsToolbox,jdbcType=NVARCHAR},
+      form_charts_hide_table = #{record.formChartsHideTable,jdbcType=NVARCHAR},
+      form_charts_show_legend = #{record.formChartsShowLegend,jdbcType=NVARCHAR},
+      form_charts_legend_name = #{record.formChartsLegendName,jdbcType=NVARCHAR},
+      form_charts_x_axis = #{record.formChartsXAxis,jdbcType=NVARCHAR},
+      form_charts_y_axis = #{record.formChartsYAxis,jdbcType=NVARCHAR},
+      form_charts_form_id = #{record.formChartsFormId,jdbcType=DECIMAL},
+      form_charts_select_form_id = #{record.formChartsSelectFormId,jdbcType=DECIMAL},
+      form_charts_select_form_name = #{record.formChartsSelectFormName,jdbcType=NVARCHAR},
+      form_charts_size = #{record.formChartsSize,jdbcType=NVARCHAR},
+      form_charts_title_orient = #{record.formChartsTitleOrient,jdbcType=VARCHAR},
+      form_charts_position_x = #{record.formChartsPositionX,jdbcType=VARCHAR},
+      form_charts_position_y = #{record.formChartsPositionY,jdbcType=VARCHAR},
+      form_charts_title_position = #{record.formChartsTitlePosition,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormCharts" >
+    update sys_form_charts
+    <set >
+      <if test="formChartsType != null" >
+        form_charts_type = #{formChartsType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsColor != null" >
+        form_charts_color = #{formChartsColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTitle != null" >
+        form_charts_title = #{formChartsTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTooltip != null" >
+        form_charts_tooltip = #{formChartsTooltip,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsToolbox != null" >
+        form_charts_toolbox = #{formChartsToolbox,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsHideTable != null" >
+        form_charts_hide_table = #{formChartsHideTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsShowLegend != null" >
+        form_charts_show_legend = #{formChartsShowLegend,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsLegendName != null" >
+        form_charts_legend_name = #{formChartsLegendName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsXAxis != null" >
+        form_charts_x_axis = #{formChartsXAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsYAxis != null" >
+        form_charts_y_axis = #{formChartsYAxis,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsFormId != null" >
+        form_charts_form_id = #{formChartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formChartsSelectFormId != null" >
+        form_charts_select_form_id = #{formChartsSelectFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formChartsSelectFormName != null" >
+        form_charts_select_form_name = #{formChartsSelectFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsSize != null" >
+        form_charts_size = #{formChartsSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="formChartsTitleOrient != null" >
+        form_charts_title_orient = #{formChartsTitleOrient,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsPositionX != null" >
+        form_charts_position_x = #{formChartsPositionX,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsPositionY != null" >
+        form_charts_position_y = #{formChartsPositionY,jdbcType=VARCHAR},
+      </if>
+      <if test="formChartsTitlePosition != null" >
+        form_charts_title_position = #{formChartsTitlePosition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where form_charts_id = #{formChartsId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormCharts" >
+    update sys_form_charts
+    set form_charts_type = #{formChartsType,jdbcType=NVARCHAR},
+      form_charts_color = #{formChartsColor,jdbcType=NVARCHAR},
+      form_charts_title = #{formChartsTitle,jdbcType=NVARCHAR},
+      form_charts_tooltip = #{formChartsTooltip,jdbcType=NVARCHAR},
+      form_charts_toolbox = #{formChartsToolbox,jdbcType=NVARCHAR},
+      form_charts_hide_table = #{formChartsHideTable,jdbcType=NVARCHAR},
+      form_charts_show_legend = #{formChartsShowLegend,jdbcType=NVARCHAR},
+      form_charts_legend_name = #{formChartsLegendName,jdbcType=NVARCHAR},
+      form_charts_x_axis = #{formChartsXAxis,jdbcType=NVARCHAR},
+      form_charts_y_axis = #{formChartsYAxis,jdbcType=NVARCHAR},
+      form_charts_form_id = #{formChartsFormId,jdbcType=DECIMAL},
+      form_charts_select_form_id = #{formChartsSelectFormId,jdbcType=DECIMAL},
+      form_charts_select_form_name = #{formChartsSelectFormName,jdbcType=NVARCHAR},
+      form_charts_size = #{formChartsSize,jdbcType=NVARCHAR},
+      form_charts_title_orient = #{formChartsTitleOrient,jdbcType=VARCHAR},
+      form_charts_position_x = #{formChartsPositionX,jdbcType=VARCHAR},
+      form_charts_position_y = #{formChartsPositionY,jdbcType=VARCHAR},
+      form_charts_title_position = #{formChartsTitlePosition,jdbcType=VARCHAR}
+    where form_charts_id = #{formChartsId,jdbcType=DECIMAL}
+  </update>
+</mapper>

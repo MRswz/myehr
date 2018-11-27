@@ -1,0 +1,20 @@
+package com.myehr.controller.actfree;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myehr.mapper.formmanage.form.SysActfreeWayMapper;
+import com.myehr.pojo.formmanage.form.SysActfreeWay;
+
+@Service
+public class ActFreeServiceImpl implements ActFreeService{
+	@Autowired
+	SysActfreeWayMapper sysactfreewaymapper;
+	@Override
+	public void addActFreeway(SysActfreeWay actfreeway){
+	  sysactfreewaymapper.insert(actfreeway);
+    }
+
+}

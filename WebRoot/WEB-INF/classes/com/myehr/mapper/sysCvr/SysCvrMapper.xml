@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysCvr.SysCvrMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysCvr.SysCvr" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="people_name" property="peopleName" jdbcType="NVARCHAR" />
+    <result column="people_sex" property="peopleSex" jdbcType="NVARCHAR" />
+    <result column="people_nation" property="peopleNation" jdbcType="NVARCHAR" />
+    <result column="people_birthday" property="peopleBirthday" jdbcType="TIMESTAMP" />
+    <result column="people_address" property="peopleAddress" jdbcType="NVARCHAR" />
+    <result column="people_id_code" property="peopleIdCode" jdbcType="NVARCHAR" />
+    <result column="department" property="department" jdbcType="NVARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="NVARCHAR" />
+    <result column="end_date" property="endDate" jdbcType="NVARCHAR" />
+    <result column="cvr_samid" property="cvrSamid" jdbcType="NVARCHAR" />
+    <result column="people_message" property="peopleMessage" jdbcType="NVARCHAR" />
+    <result column="READ_DATE" property="readDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.sysCvr.SysCvr" extends="BaseResultMap" >
+    <result column="people_picture" property="peoplePicture" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, people_name, people_sex, people_nation, people_birthday, people_address, people_id_code, 
+    department, start_date, end_date, cvr_samid, people_message, READ_DATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    people_picture
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.sysCvr.SysCvrExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_CVR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysCvr.SysCvrExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_CVR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_CVR
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_CVR
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysCvr.SysCvrExample" >
+    delete from SYS_CVR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    insert into SYS_CVR ( people_name, people_sex, 
+      people_nation, people_birthday, people_address, 
+      people_id_code, department, start_date, 
+      end_date, cvr_samid, people_message, 
+      READ_DATE, people_picture)
+    values ( #{peopleName,jdbcType=NVARCHAR}, #{peopleSex,jdbcType=NVARCHAR}, 
+      #{peopleNation,jdbcType=NVARCHAR}, #{peopleBirthday,jdbcType=TIMESTAMP}, #{peopleAddress,jdbcType=NVARCHAR}, 
+      #{peopleIdCode,jdbcType=NVARCHAR}, #{department,jdbcType=NVARCHAR}, #{startDate,jdbcType=NVARCHAR}, 
+      #{endDate,jdbcType=NVARCHAR}, #{cvrSamid,jdbcType=NVARCHAR}, #{peopleMessage,jdbcType=NVARCHAR}, 
+      #{readDate,jdbcType=TIMESTAMP}, #{peoplePicture,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    insert into SYS_CVR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="peopleName != null" >
+        people_name,
+      </if>
+      <if test="peopleSex != null" >
+        people_sex,
+      </if>
+      <if test="peopleNation != null" >
+        people_nation,
+      </if>
+      <if test="peopleBirthday != null" >
+        people_birthday,
+      </if>
+      <if test="peopleAddress != null" >
+        people_address,
+      </if>
+      <if test="peopleIdCode != null" >
+        people_id_code,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+      <if test="cvrSamid != null" >
+        cvr_samid,
+      </if>
+      <if test="peopleMessage != null" >
+        people_message,
+      </if>
+      <if test="readDate != null" >
+        READ_DATE,
+      </if>
+      <if test="peoplePicture != null" >
+        people_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="peopleName != null" >
+        #{peopleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleSex != null" >
+        #{peopleSex,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleNation != null" >
+        #{peopleNation,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleBirthday != null" >
+        #{peopleBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peopleAddress != null" >
+        #{peopleAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleIdCode != null" >
+        #{peopleIdCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=NVARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="cvrSamid != null" >
+        #{cvrSamid,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleMessage != null" >
+        #{peopleMessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="readDate != null" >
+        #{readDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peoplePicture != null" >
+        #{peoplePicture,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysCvr.SysCvrExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_CVR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_CVR
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.peopleName != null" >
+        people_name = #{record.peopleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.peopleSex != null" >
+        people_sex = #{record.peopleSex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.peopleNation != null" >
+        people_nation = #{record.peopleNation,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.peopleBirthday != null" >
+        people_birthday = #{record.peopleBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.peopleAddress != null" >
+        people_address = #{record.peopleAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.peopleIdCode != null" >
+        people_id_code = #{record.peopleIdCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.cvrSamid != null" >
+        cvr_samid = #{record.cvrSamid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.peopleMessage != null" >
+        people_message = #{record.peopleMessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.readDate != null" >
+        READ_DATE = #{record.readDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.peoplePicture != null" >
+        people_picture = #{record.peoplePicture,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_CVR
+    set id = #{record.id,jdbcType=INTEGER},
+      people_name = #{record.peopleName,jdbcType=NVARCHAR},
+      people_sex = #{record.peopleSex,jdbcType=NVARCHAR},
+      people_nation = #{record.peopleNation,jdbcType=NVARCHAR},
+      people_birthday = #{record.peopleBirthday,jdbcType=TIMESTAMP},
+      people_address = #{record.peopleAddress,jdbcType=NVARCHAR},
+      people_id_code = #{record.peopleIdCode,jdbcType=NVARCHAR},
+      department = #{record.department,jdbcType=NVARCHAR},
+      start_date = #{record.startDate,jdbcType=NVARCHAR},
+      end_date = #{record.endDate,jdbcType=NVARCHAR},
+      cvr_samid = #{record.cvrSamid,jdbcType=NVARCHAR},
+      people_message = #{record.peopleMessage,jdbcType=NVARCHAR},
+      READ_DATE = #{record.readDate,jdbcType=TIMESTAMP},
+      people_picture = #{record.peoplePicture,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_CVR
+    set id = #{record.id,jdbcType=INTEGER},
+      people_name = #{record.peopleName,jdbcType=NVARCHAR},
+      people_sex = #{record.peopleSex,jdbcType=NVARCHAR},
+      people_nation = #{record.peopleNation,jdbcType=NVARCHAR},
+      people_birthday = #{record.peopleBirthday,jdbcType=TIMESTAMP},
+      people_address = #{record.peopleAddress,jdbcType=NVARCHAR},
+      people_id_code = #{record.peopleIdCode,jdbcType=NVARCHAR},
+      department = #{record.department,jdbcType=NVARCHAR},
+      start_date = #{record.startDate,jdbcType=NVARCHAR},
+      end_date = #{record.endDate,jdbcType=NVARCHAR},
+      cvr_samid = #{record.cvrSamid,jdbcType=NVARCHAR},
+      people_message = #{record.peopleMessage,jdbcType=NVARCHAR},
+      READ_DATE = #{record.readDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    update SYS_CVR
+    <set >
+      <if test="peopleName != null" >
+        people_name = #{peopleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleSex != null" >
+        people_sex = #{peopleSex,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleNation != null" >
+        people_nation = #{peopleNation,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleBirthday != null" >
+        people_birthday = #{peopleBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peopleAddress != null" >
+        people_address = #{peopleAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleIdCode != null" >
+        people_id_code = #{peopleIdCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=NVARCHAR},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=NVARCHAR},
+      </if>
+      <if test="cvrSamid != null" >
+        cvr_samid = #{cvrSamid,jdbcType=NVARCHAR},
+      </if>
+      <if test="peopleMessage != null" >
+        people_message = #{peopleMessage,jdbcType=NVARCHAR},
+      </if>
+      <if test="readDate != null" >
+        READ_DATE = #{readDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="peoplePicture != null" >
+        people_picture = #{peoplePicture,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    update SYS_CVR
+    set people_name = #{peopleName,jdbcType=NVARCHAR},
+      people_sex = #{peopleSex,jdbcType=NVARCHAR},
+      people_nation = #{peopleNation,jdbcType=NVARCHAR},
+      people_birthday = #{peopleBirthday,jdbcType=TIMESTAMP},
+      people_address = #{peopleAddress,jdbcType=NVARCHAR},
+      people_id_code = #{peopleIdCode,jdbcType=NVARCHAR},
+      department = #{department,jdbcType=NVARCHAR},
+      start_date = #{startDate,jdbcType=NVARCHAR},
+      end_date = #{endDate,jdbcType=NVARCHAR},
+      cvr_samid = #{cvrSamid,jdbcType=NVARCHAR},
+      people_message = #{peopleMessage,jdbcType=NVARCHAR},
+      READ_DATE = #{readDate,jdbcType=TIMESTAMP},
+      people_picture = #{peoplePicture,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    update SYS_CVR
+    set people_name = #{peopleName,jdbcType=NVARCHAR},
+      people_sex = #{peopleSex,jdbcType=NVARCHAR},
+      people_nation = #{peopleNation,jdbcType=NVARCHAR},
+      people_birthday = #{peopleBirthday,jdbcType=TIMESTAMP},
+      people_address = #{peopleAddress,jdbcType=NVARCHAR},
+      people_id_code = #{peopleIdCode,jdbcType=NVARCHAR},
+      department = #{department,jdbcType=NVARCHAR},
+      start_date = #{startDate,jdbcType=NVARCHAR},
+      end_date = #{endDate,jdbcType=NVARCHAR},
+      cvr_samid = #{cvrSamid,jdbcType=NVARCHAR},
+      people_message = #{peopleMessage,jdbcType=NVARCHAR},
+      READ_DATE = #{readDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

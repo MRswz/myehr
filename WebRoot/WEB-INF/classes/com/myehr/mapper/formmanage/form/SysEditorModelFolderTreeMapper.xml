@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysEditorModelFolderTreeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysEditorModelFolderTree" >
+    <id column="FOLDER_TREE_ID" property="folderTreeId" jdbcType="DECIMAL" />
+    <result column="FOLDER_TREE_NAME" property="folderTreeName" jdbcType="NVARCHAR" />
+    <result column="FOLDER_TREE_PARENT_ID" property="folderTreeParentId" jdbcType="DECIMAL" />
+    <result column="FOLDER_TREE_SEQ" property="folderTreeSeq" jdbcType="NVARCHAR" />
+    <result column="FOLDER_TREE_CODE" property="folderTreeCode" jdbcType="NVARCHAR" />
+    <result column="FOLDER_TREE_DESC" property="folderTreeDesc" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FOLDER_TREE_ID, FOLDER_TREE_NAME, FOLDER_TREE_PARENT_ID, FOLDER_TREE_SEQ, FOLDER_TREE_CODE, 
+    FOLDER_TREE_DESC, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTreeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EDITOR_MODEL_FOLDER_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EDITOR_MODEL_FOLDER_TREE
+    where FOLDER_TREE_ID = #{folderTreeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_EDITOR_MODEL_FOLDER_TREE
+    where FOLDER_TREE_ID = #{folderTreeId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTreeExample" >
+    delete from SYS_EDITOR_MODEL_FOLDER_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTree" >
+    insert into SYS_EDITOR_MODEL_FOLDER_TREE (FOLDER_TREE_NAME, FOLDER_TREE_PARENT_ID, 
+      FOLDER_TREE_SEQ, FOLDER_TREE_CODE, FOLDER_TREE_DESC, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{folderTreeName,jdbcType=NVARCHAR}, #{folderTreeParentId,jdbcType=DECIMAL}, 
+      #{folderTreeSeq,jdbcType=NVARCHAR}, #{folderTreeCode,jdbcType=NVARCHAR}, #{folderTreeDesc,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTree" >
+    insert into SYS_EDITOR_MODEL_FOLDER_TREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="folderTreeId != null" >
+        FOLDER_TREE_ID,
+      </if>
+      <if test="folderTreeName != null" >
+        FOLDER_TREE_NAME,
+      </if>
+      <if test="folderTreeParentId != null" >
+        FOLDER_TREE_PARENT_ID,
+      </if>
+      <if test="folderTreeSeq != null" >
+        FOLDER_TREE_SEQ,
+      </if>
+      <if test="folderTreeCode != null" >
+        FOLDER_TREE_CODE,
+      </if>
+      <if test="folderTreeDesc != null" >
+        FOLDER_TREE_DESC,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="folderTreeId != null" >
+        #{folderTreeId,jdbcType=DECIMAL},
+      </if>
+      <if test="folderTreeName != null" >
+        #{folderTreeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeParentId != null" >
+        #{folderTreeParentId,jdbcType=DECIMAL},
+      </if>
+      <if test="folderTreeSeq != null" >
+        #{folderTreeSeq,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeCode != null" >
+        #{folderTreeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeDesc != null" >
+        #{folderTreeDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTreeExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_EDITOR_MODEL_FOLDER_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_EDITOR_MODEL_FOLDER_TREE
+    <set >
+      <if test="record.folderTreeId != null" >
+        FOLDER_TREE_ID = #{record.folderTreeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.folderTreeName != null" >
+        FOLDER_TREE_NAME = #{record.folderTreeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.folderTreeParentId != null" >
+        FOLDER_TREE_PARENT_ID = #{record.folderTreeParentId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.folderTreeSeq != null" >
+        FOLDER_TREE_SEQ = #{record.folderTreeSeq,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.folderTreeCode != null" >
+        FOLDER_TREE_CODE = #{record.folderTreeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.folderTreeDesc != null" >
+        FOLDER_TREE_DESC = #{record.folderTreeDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_EDITOR_MODEL_FOLDER_TREE
+    set FOLDER_TREE_ID = #{record.folderTreeId,jdbcType=DECIMAL},
+      FOLDER_TREE_NAME = #{record.folderTreeName,jdbcType=NVARCHAR},
+      FOLDER_TREE_PARENT_ID = #{record.folderTreeParentId,jdbcType=DECIMAL},
+      FOLDER_TREE_SEQ = #{record.folderTreeSeq,jdbcType=NVARCHAR},
+      FOLDER_TREE_CODE = #{record.folderTreeCode,jdbcType=NVARCHAR},
+      FOLDER_TREE_DESC = #{record.folderTreeDesc,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTree" >
+    update SYS_EDITOR_MODEL_FOLDER_TREE
+    <set >
+      <if test="folderTreeName != null" >
+        FOLDER_TREE_NAME = #{folderTreeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeParentId != null" >
+        FOLDER_TREE_PARENT_ID = #{folderTreeParentId,jdbcType=DECIMAL},
+      </if>
+      <if test="folderTreeSeq != null" >
+        FOLDER_TREE_SEQ = #{folderTreeSeq,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeCode != null" >
+        FOLDER_TREE_CODE = #{folderTreeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="folderTreeDesc != null" >
+        FOLDER_TREE_DESC = #{folderTreeDesc,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where FOLDER_TREE_ID = #{folderTreeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelFolderTree" >
+    update SYS_EDITOR_MODEL_FOLDER_TREE
+    set FOLDER_TREE_NAME = #{folderTreeName,jdbcType=NVARCHAR},
+      FOLDER_TREE_PARENT_ID = #{folderTreeParentId,jdbcType=DECIMAL},
+      FOLDER_TREE_SEQ = #{folderTreeSeq,jdbcType=NVARCHAR},
+      FOLDER_TREE_CODE = #{folderTreeCode,jdbcType=NVARCHAR},
+      FOLDER_TREE_DESC = #{folderTreeDesc,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR}
+    where FOLDER_TREE_ID = #{folderTreeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

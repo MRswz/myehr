@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormWhereMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormWhere" >
+    <id column="FORM_WHERE_ID" property="formWhereId" jdbcType="DECIMAL" />
+    <result column="FORM_WHERE_FORM_DEF_ID" property="formWhereFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_WHERE_COLUMN_ID" property="formWhereColumnId" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_CP_RULE" property="formWhereCpRule" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_VALUE_TYPE" property="formWhereValueType" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_VALUE" property="formWhereValue" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_JOIN_RULE" property="formWhereJoinRule" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_SORT" property="formWhereSort" jdbcType="DECIMAL" />
+    <result column="FORM_WHERE_NULL_IS" property="formWhereNullIs" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_LEFT_BRACKET" property="formWhereLeftBracket" jdbcType="VARCHAR" />
+    <result column="FORM_WHERE_RIGHT_BRACKET" property="formWhereRightBracket" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_WHERE_ID, FORM_WHERE_FORM_DEF_ID, FORM_WHERE_COLUMN_ID, FORM_WHERE_CP_RULE, 
+    FORM_WHERE_VALUE_TYPE, FORM_WHERE_VALUE, FORM_WHERE_JOIN_RULE, FORM_WHERE_SORT, FORM_WHERE_NULL_IS, 
+    FORM_WHERE_LEFT_BRACKET, FORM_WHERE_RIGHT_BRACKET, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormWhereExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_WHERE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_WHERE
+    where FORM_WHERE_ID = #{formWhereId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_WHERE
+    where FORM_WHERE_ID = #{formWhereId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormWhereExample" >
+    delete from SYS_FORM_WHERE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormWhere" useGeneratedKeys="true" keyProperty="formWhereId" keyColumn="FORM_WHERE_ID" >
+    insert into SYS_FORM_WHERE (FORM_WHERE_FORM_DEF_ID, 
+      FORM_WHERE_COLUMN_ID, FORM_WHERE_CP_RULE, FORM_WHERE_VALUE_TYPE, 
+      FORM_WHERE_VALUE, FORM_WHERE_JOIN_RULE, FORM_WHERE_SORT, 
+      FORM_WHERE_NULL_IS, FORM_WHERE_LEFT_BRACKET, 
+      FORM_WHERE_RIGHT_BRACKET, OPERATOR_TIME, 
+      OPERATOR_NAME)
+    values (#{formWhereFormDefId,jdbcType=DECIMAL}, 
+      #{formWhereColumnId,jdbcType=VARCHAR}, #{formWhereCpRule,jdbcType=VARCHAR}, #{formWhereValueType,jdbcType=VARCHAR}, 
+      #{formWhereValue,jdbcType=VARCHAR}, #{formWhereJoinRule,jdbcType=VARCHAR}, #{formWhereSort,jdbcType=DECIMAL}, 
+      #{formWhereNullIs,jdbcType=VARCHAR}, #{formWhereLeftBracket,jdbcType=VARCHAR}, 
+      #{formWhereRightBracket,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormWhere" >
+    insert into SYS_FORM_WHERE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formWhereId != null" >
+        FORM_WHERE_ID,
+      </if>
+      <if test="formWhereFormDefId != null" >
+        FORM_WHERE_FORM_DEF_ID,
+      </if>
+      <if test="formWhereColumnId != null" >
+        FORM_WHERE_COLUMN_ID,
+      </if>
+      <if test="formWhereCpRule != null" >
+        FORM_WHERE_CP_RULE,
+      </if>
+      <if test="formWhereValueType != null" >
+        FORM_WHERE_VALUE_TYPE,
+      </if>
+      <if test="formWhereValue != null" >
+        FORM_WHERE_VALUE,
+      </if>
+      <if test="formWhereJoinRule != null" >
+        FORM_WHERE_JOIN_RULE,
+      </if>
+      <if test="formWhereSort != null" >
+        FORM_WHERE_SORT,
+      </if>
+      <if test="formWhereNullIs != null" >
+        FORM_WHERE_NULL_IS,
+      </if>
+      <if test="formWhereLeftBracket != null" >
+        FORM_WHERE_LEFT_BRACKET,
+      </if>
+      <if test="formWhereRightBracket != null" >
+        FORM_WHERE_RIGHT_BRACKET,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formWhereId != null" >
+        #{formWhereId,jdbcType=DECIMAL},
+      </if>
+      <if test="formWhereFormDefId != null" >
+        #{formWhereFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formWhereColumnId != null" >
+        #{formWhereColumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereCpRule != null" >
+        #{formWhereCpRule,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereValueType != null" >
+        #{formWhereValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereValue != null" >
+        #{formWhereValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereJoinRule != null" >
+        #{formWhereJoinRule,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereSort != null" >
+        #{formWhereSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formWhereNullIs != null" >
+        #{formWhereNullIs,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereLeftBracket != null" >
+        #{formWhereLeftBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereRightBracket != null" >
+        #{formWhereRightBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormWhereExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_WHERE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_WHERE
+    <set >
+      <if test="record.formWhereId != null" >
+        FORM_WHERE_ID = #{record.formWhereId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formWhereFormDefId != null" >
+        FORM_WHERE_FORM_DEF_ID = #{record.formWhereFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formWhereColumnId != null" >
+        FORM_WHERE_COLUMN_ID = #{record.formWhereColumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereCpRule != null" >
+        FORM_WHERE_CP_RULE = #{record.formWhereCpRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereValueType != null" >
+        FORM_WHERE_VALUE_TYPE = #{record.formWhereValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereValue != null" >
+        FORM_WHERE_VALUE = #{record.formWhereValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereJoinRule != null" >
+        FORM_WHERE_JOIN_RULE = #{record.formWhereJoinRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereSort != null" >
+        FORM_WHERE_SORT = #{record.formWhereSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formWhereNullIs != null" >
+        FORM_WHERE_NULL_IS = #{record.formWhereNullIs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereLeftBracket != null" >
+        FORM_WHERE_LEFT_BRACKET = #{record.formWhereLeftBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formWhereRightBracket != null" >
+        FORM_WHERE_RIGHT_BRACKET = #{record.formWhereRightBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_WHERE
+    set FORM_WHERE_ID = #{record.formWhereId,jdbcType=DECIMAL},
+      FORM_WHERE_FORM_DEF_ID = #{record.formWhereFormDefId,jdbcType=DECIMAL},
+      FORM_WHERE_COLUMN_ID = #{record.formWhereColumnId,jdbcType=VARCHAR},
+      FORM_WHERE_CP_RULE = #{record.formWhereCpRule,jdbcType=VARCHAR},
+      FORM_WHERE_VALUE_TYPE = #{record.formWhereValueType,jdbcType=VARCHAR},
+      FORM_WHERE_VALUE = #{record.formWhereValue,jdbcType=VARCHAR},
+      FORM_WHERE_JOIN_RULE = #{record.formWhereJoinRule,jdbcType=VARCHAR},
+      FORM_WHERE_SORT = #{record.formWhereSort,jdbcType=DECIMAL},
+      FORM_WHERE_NULL_IS = #{record.formWhereNullIs,jdbcType=VARCHAR},
+      FORM_WHERE_LEFT_BRACKET = #{record.formWhereLeftBracket,jdbcType=VARCHAR},
+      FORM_WHERE_RIGHT_BRACKET = #{record.formWhereRightBracket,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormWhere" >
+    update SYS_FORM_WHERE
+    <set >
+      <if test="formWhereFormDefId != null" >
+        FORM_WHERE_FORM_DEF_ID = #{formWhereFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formWhereColumnId != null" >
+        FORM_WHERE_COLUMN_ID = #{formWhereColumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereCpRule != null" >
+        FORM_WHERE_CP_RULE = #{formWhereCpRule,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereValueType != null" >
+        FORM_WHERE_VALUE_TYPE = #{formWhereValueType,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereValue != null" >
+        FORM_WHERE_VALUE = #{formWhereValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereJoinRule != null" >
+        FORM_WHERE_JOIN_RULE = #{formWhereJoinRule,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereSort != null" >
+        FORM_WHERE_SORT = #{formWhereSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formWhereNullIs != null" >
+        FORM_WHERE_NULL_IS = #{formWhereNullIs,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereLeftBracket != null" >
+        FORM_WHERE_LEFT_BRACKET = #{formWhereLeftBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="formWhereRightBracket != null" >
+        FORM_WHERE_RIGHT_BRACKET = #{formWhereRightBracket,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FORM_WHERE_ID = #{formWhereId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormWhere" >
+    update SYS_FORM_WHERE
+    set FORM_WHERE_FORM_DEF_ID = #{formWhereFormDefId,jdbcType=DECIMAL},
+      FORM_WHERE_COLUMN_ID = #{formWhereColumnId,jdbcType=VARCHAR},
+      FORM_WHERE_CP_RULE = #{formWhereCpRule,jdbcType=VARCHAR},
+      FORM_WHERE_VALUE_TYPE = #{formWhereValueType,jdbcType=VARCHAR},
+      FORM_WHERE_VALUE = #{formWhereValue,jdbcType=VARCHAR},
+      FORM_WHERE_JOIN_RULE = #{formWhereJoinRule,jdbcType=VARCHAR},
+      FORM_WHERE_SORT = #{formWhereSort,jdbcType=DECIMAL},
+      FORM_WHERE_NULL_IS = #{formWhereNullIs,jdbcType=VARCHAR},
+      FORM_WHERE_LEFT_BRACKET = #{formWhereLeftBracket,jdbcType=VARCHAR},
+      FORM_WHERE_RIGHT_BRACKET = #{formWhereRightBracket,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where FORM_WHERE_ID = #{formWhereId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonViewExesqlMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonViewExesql" >
+    <result column="FORM_BUTTON_ID" property="formButtonId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_DEF_ID" property="formButtonFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_TYPE" property="formButtonType" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CODE" property="formButtonCode" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_NAME" property="formButtonName" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_SORT" property="formButtonSort" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_ID" property="formButtonFormId" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_WIDTH" property="formButtonWidth" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_HEIGHT" property="formButtonHeight" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_ICON" property="formButtonIcon" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CSS" property="formButtonCss" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_WARNING_INFO" property="formButtonWarningInfo" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CHECK_FUN" property="formButtonCheckFun" jdbcType="VARCHAR" />
+    <result column="QZESQL" property="qzesql" jdbcType="CHAR" />
+    <result column="HZESQL" property="hzesql" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_BUTTON_ID, FORM_BUTTON_FORM_DEF_ID, FORM_BUTTON_TYPE, FORM_BUTTON_CODE, FORM_BUTTON_NAME, 
+    FORM_BUTTON_SORT, FORM_BUTTON_FORM_ID, FORM_BUTTON_WIDTH, FORM_BUTTON_HEIGHT, FORM_BUTTON_ICON, 
+    FORM_BUTTON_CSS, OPERATOR_TIME, OPERATOR_NAME, FORM_BUTTON_WARNING_INFO, FORM_BUTTON_CHECK_FUN, 
+    QZESQL, HZESQL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonViewExesqlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_VIEW_EXESQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonViewExesqlExample" >
+    delete from SYS_FORM_BUTTON_VIEW_EXESQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonViewExesql" >
+    insert into SYS_FORM_BUTTON_VIEW_EXESQL (FORM_BUTTON_ID, FORM_BUTTON_FORM_DEF_ID, 
+      FORM_BUTTON_TYPE, FORM_BUTTON_CODE, FORM_BUTTON_NAME, 
+      FORM_BUTTON_SORT, FORM_BUTTON_FORM_ID, FORM_BUTTON_WIDTH, 
+      FORM_BUTTON_HEIGHT, FORM_BUTTON_ICON, FORM_BUTTON_CSS, 
+      OPERATOR_TIME, OPERATOR_NAME, FORM_BUTTON_WARNING_INFO, 
+      FORM_BUTTON_CHECK_FUN, QZESQL, HZESQL
+      )
+    values (#{formButtonId,jdbcType=DECIMAL}, #{formButtonFormDefId,jdbcType=DECIMAL}, 
+      #{formButtonType,jdbcType=VARCHAR}, #{formButtonCode,jdbcType=VARCHAR}, #{formButtonName,jdbcType=VARCHAR}, 
+      #{formButtonSort,jdbcType=DECIMAL}, #{formButtonFormId,jdbcType=VARCHAR}, #{formButtonWidth,jdbcType=VARCHAR}, 
+      #{formButtonHeight,jdbcType=VARCHAR}, #{formButtonIcon,jdbcType=VARCHAR}, #{formButtonCss,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR}, #{formButtonWarningInfo,jdbcType=VARCHAR}, 
+      #{formButtonCheckFun,jdbcType=VARCHAR}, #{qzesql,jdbcType=CHAR}, #{hzesql,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonViewExesql" >
+    insert into SYS_FORM_BUTTON_VIEW_EXESQL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID,
+      </if>
+      <if test="formButtonFormDefId != null" >
+        FORM_BUTTON_FORM_DEF_ID,
+      </if>
+      <if test="formButtonType != null" >
+        FORM_BUTTON_TYPE,
+      </if>
+      <if test="formButtonCode != null" >
+        FORM_BUTTON_CODE,
+      </if>
+      <if test="formButtonName != null" >
+        FORM_BUTTON_NAME,
+      </if>
+      <if test="formButtonSort != null" >
+        FORM_BUTTON_SORT,
+      </if>
+      <if test="formButtonFormId != null" >
+        FORM_BUTTON_FORM_ID,
+      </if>
+      <if test="formButtonWidth != null" >
+        FORM_BUTTON_WIDTH,
+      </if>
+      <if test="formButtonHeight != null" >
+        FORM_BUTTON_HEIGHT,
+      </if>
+      <if test="formButtonIcon != null" >
+        FORM_BUTTON_ICON,
+      </if>
+      <if test="formButtonCss != null" >
+        FORM_BUTTON_CSS,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="formButtonWarningInfo != null" >
+        FORM_BUTTON_WARNING_INFO,
+      </if>
+      <if test="formButtonCheckFun != null" >
+        FORM_BUTTON_CHECK_FUN,
+      </if>
+      <if test="qzesql != null" >
+        QZESQL,
+      </if>
+      <if test="hzesql != null" >
+        HZESQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formButtonId != null" >
+        #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonFormDefId != null" >
+        #{formButtonFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonType != null" >
+        #{formButtonType,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonCode != null" >
+        #{formButtonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonName != null" >
+        #{formButtonName,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonSort != null" >
+        #{formButtonSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonFormId != null" >
+        #{formButtonFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonWidth != null" >
+        #{formButtonWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonHeight != null" >
+        #{formButtonHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonIcon != null" >
+        #{formButtonIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonCss != null" >
+        #{formButtonCss,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonWarningInfo != null" >
+        #{formButtonWarningInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="formButtonCheckFun != null" >
+        #{formButtonCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="qzesql != null" >
+        #{qzesql,jdbcType=CHAR},
+      </if>
+      <if test="hzesql != null" >
+        #{hzesql,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonViewExesqlExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_VIEW_EXESQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_VIEW_EXESQL
+    <set >
+      <if test="record.formButtonId != null" >
+        FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonFormDefId != null" >
+        FORM_BUTTON_FORM_DEF_ID = #{record.formButtonFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonType != null" >
+        FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonCode != null" >
+        FORM_BUTTON_CODE = #{record.formButtonCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonName != null" >
+        FORM_BUTTON_NAME = #{record.formButtonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonSort != null" >
+        FORM_BUTTON_SORT = #{record.formButtonSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonFormId != null" >
+        FORM_BUTTON_FORM_ID = #{record.formButtonFormId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonWidth != null" >
+        FORM_BUTTON_WIDTH = #{record.formButtonWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonHeight != null" >
+        FORM_BUTTON_HEIGHT = #{record.formButtonHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonIcon != null" >
+        FORM_BUTTON_ICON = #{record.formButtonIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonCss != null" >
+        FORM_BUTTON_CSS = #{record.formButtonCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonWarningInfo != null" >
+        FORM_BUTTON_WARNING_INFO = #{record.formButtonWarningInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formButtonCheckFun != null" >
+        FORM_BUTTON_CHECK_FUN = #{record.formButtonCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qzesql != null" >
+        QZESQL = #{record.qzesql,jdbcType=CHAR},
+      </if>
+      <if test="record.hzesql != null" >
+        HZESQL = #{record.hzesql,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_VIEW_EXESQL
+    set FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      FORM_BUTTON_FORM_DEF_ID = #{record.formButtonFormDefId,jdbcType=DECIMAL},
+      FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=VARCHAR},
+      FORM_BUTTON_CODE = #{record.formButtonCode,jdbcType=VARCHAR},
+      FORM_BUTTON_NAME = #{record.formButtonName,jdbcType=VARCHAR},
+      FORM_BUTTON_SORT = #{record.formButtonSort,jdbcType=DECIMAL},
+      FORM_BUTTON_FORM_ID = #{record.formButtonFormId,jdbcType=VARCHAR},
+      FORM_BUTTON_WIDTH = #{record.formButtonWidth,jdbcType=VARCHAR},
+      FORM_BUTTON_HEIGHT = #{record.formButtonHeight,jdbcType=VARCHAR},
+      FORM_BUTTON_ICON = #{record.formButtonIcon,jdbcType=VARCHAR},
+      FORM_BUTTON_CSS = #{record.formButtonCss,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      FORM_BUTTON_WARNING_INFO = #{record.formButtonWarningInfo,jdbcType=VARCHAR},
+      FORM_BUTTON_CHECK_FUN = #{record.formButtonCheckFun,jdbcType=VARCHAR},
+      QZESQL = #{record.qzesql,jdbcType=CHAR},
+      HZESQL = #{record.hzesql,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysRole.SysUserOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysRole.SysUserOrg" >
+    <id column="USER_ORG_ID" property="userOrgId" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+    <result column="Include_subordinate" property="includeSubordinate" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ORG_ID, USER_ID, ORG_ID, Include_subordinate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysRole.SysUserOrgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_USER_ORG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER_ORG
+    where USER_ORG_ID = #{userOrgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_USER_ORG
+    where USER_ORG_ID = #{userOrgId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysRole.SysUserOrgExample" >
+    delete from SYS_USER_ORG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysRole.SysUserOrg" >
+    insert into SYS_USER_ORG (USER_ID, ORG_ID, 
+      Include_subordinate)
+    values (#{userId,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, 
+      #{includeSubordinate,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysRole.SysUserOrg" >
+    insert into SYS_USER_ORG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userOrgId != null" >
+        USER_ORG_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="includeSubordinate != null" >
+        Include_subordinate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userOrgId != null" >
+        #{userOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="includeSubordinate != null" >
+        #{includeSubordinate,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysRole.SysUserOrgExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USER_ORG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USER_ORG
+    <set >
+      <if test="record.userOrgId != null" >
+        USER_ORG_ID = #{record.userOrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.includeSubordinate != null" >
+        Include_subordinate = #{record.includeSubordinate,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USER_ORG
+    set USER_ORG_ID = #{record.userOrgId,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      ORG_ID = #{record.orgId,jdbcType=INTEGER},
+      Include_subordinate = #{record.includeSubordinate,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysRole.SysUserOrg" >
+    update SYS_USER_ORG
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="includeSubordinate != null" >
+        Include_subordinate = #{includeSubordinate,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where USER_ORG_ID = #{userOrgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysRole.SysUserOrg" >
+    update SYS_USER_ORG
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      ORG_ID = #{orgId,jdbcType=INTEGER},
+      Include_subordinate = #{includeSubordinate,jdbcType=NVARCHAR}
+    where USER_ORG_ID = #{userOrgId,jdbcType=INTEGER}
+  </update>
+</mapper>

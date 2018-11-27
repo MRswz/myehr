@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormconfigMstTabDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetail" >
+    <id column="TAB_DETAIL_ID" property="tabDetailId" jdbcType="DECIMAL" />
+    <result column="MST_TAB_ID" property="mstTabId" jdbcType="DECIMAL" />
+    <result column="TAB_DETAIL_IS_FORM" property="tabDetailIsForm" jdbcType="NVARCHAR" />
+    <result column="TAB_DETAIL_FORM_URL" property="tabDetailFormUrl" jdbcType="NVARCHAR" />
+    <result column="TAB_DETAIL_FORM_ID" property="tabDetailFormId" jdbcType="DECIMAL" />
+    <result column="tab_detail_form_title" property="tabDetailFormTitle" jdbcType="NVARCHAR" />
+    <result column="TAB_DETAIL_SORT" property="tabDetailSort" jdbcType="DECIMAL" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="TAB_DETAIL_CONFIG" property="tabDetailConfig" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TAB_DETAIL_ID, MST_TAB_ID, TAB_DETAIL_IS_FORM, TAB_DETAIL_FORM_URL, TAB_DETAIL_FORM_ID, 
+    tab_detail_form_title, TAB_DETAIL_SORT, OPERATOR_NAME, OPERATOR_TIME, TAB_DETAIL_CONFIG
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_MST_TAB_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_MST_TAB_DETAIL
+    where TAB_DETAIL_ID = #{tabDetailId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORMCONFIG_MST_TAB_DETAIL
+    where TAB_DETAIL_ID = #{tabDetailId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetailExample" >
+    delete from SYS_FORMCONFIG_MST_TAB_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetail" useGeneratedKeys="true" keyProperty="tabDetailId" keyColumn="TAB_DETAIL_ID">
+    insert into SYS_FORMCONFIG_MST_TAB_DETAIL ( MST_TAB_ID, TAB_DETAIL_IS_FORM, 
+      TAB_DETAIL_FORM_URL, TAB_DETAIL_FORM_ID, tab_detail_form_title, 
+      TAB_DETAIL_SORT, OPERATOR_NAME, OPERATOR_TIME, 
+      TAB_DETAIL_CONFIG)
+    values (#{mstTabId,jdbcType=DECIMAL}, #{tabDetailIsForm,jdbcType=NVARCHAR}, 
+      #{tabDetailFormUrl,jdbcType=NVARCHAR}, #{tabDetailFormId,jdbcType=DECIMAL}, #{tabDetailFormTitle,jdbcType=NVARCHAR}, 
+      #{tabDetailSort,jdbcType=DECIMAL}, #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{tabDetailConfig,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetail" >
+    insert into SYS_FORMCONFIG_MST_TAB_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabDetailId != null" >
+        TAB_DETAIL_ID,
+      </if>
+      <if test="mstTabId != null" >
+        MST_TAB_ID,
+      </if>
+      <if test="tabDetailIsForm != null" >
+        TAB_DETAIL_IS_FORM,
+      </if>
+      <if test="tabDetailFormUrl != null" >
+        TAB_DETAIL_FORM_URL,
+      </if>
+      <if test="tabDetailFormId != null" >
+        TAB_DETAIL_FORM_ID,
+      </if>
+      <if test="tabDetailFormTitle != null" >
+        tab_detail_form_title,
+      </if>
+      <if test="tabDetailSort != null" >
+        TAB_DETAIL_SORT,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="tabDetailConfig != null" >
+        TAB_DETAIL_CONFIG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabDetailId != null" >
+        #{tabDetailId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabId != null" >
+        #{mstTabId,jdbcType=DECIMAL},
+      </if>
+      <if test="tabDetailIsForm != null" >
+        #{tabDetailIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailFormUrl != null" >
+        #{tabDetailFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailFormId != null" >
+        #{tabDetailFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="tabDetailFormTitle != null" >
+        #{tabDetailFormTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailSort != null" >
+        #{tabDetailSort,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tabDetailConfig != null" >
+        #{tabDetailConfig,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetailExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORMCONFIG_MST_TAB_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORMCONFIG_MST_TAB_DETAIL
+    <set >
+      <if test="record.tabDetailId != null" >
+        TAB_DETAIL_ID = #{record.tabDetailId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mstTabId != null" >
+        MST_TAB_ID = #{record.mstTabId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tabDetailIsForm != null" >
+        TAB_DETAIL_IS_FORM = #{record.tabDetailIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tabDetailFormUrl != null" >
+        TAB_DETAIL_FORM_URL = #{record.tabDetailFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tabDetailFormId != null" >
+        TAB_DETAIL_FORM_ID = #{record.tabDetailFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tabDetailFormTitle != null" >
+        tab_detail_form_title = #{record.tabDetailFormTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tabDetailSort != null" >
+        TAB_DETAIL_SORT = #{record.tabDetailSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tabDetailConfig != null" >
+        TAB_DETAIL_CONFIG = #{record.tabDetailConfig,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORMCONFIG_MST_TAB_DETAIL
+    set TAB_DETAIL_ID = #{record.tabDetailId,jdbcType=DECIMAL},
+      MST_TAB_ID = #{record.mstTabId,jdbcType=DECIMAL},
+      TAB_DETAIL_IS_FORM = #{record.tabDetailIsForm,jdbcType=NVARCHAR},
+      TAB_DETAIL_FORM_URL = #{record.tabDetailFormUrl,jdbcType=NVARCHAR},
+      TAB_DETAIL_FORM_ID = #{record.tabDetailFormId,jdbcType=DECIMAL},
+      tab_detail_form_title = #{record.tabDetailFormTitle,jdbcType=NVARCHAR},
+      TAB_DETAIL_SORT = #{record.tabDetailSort,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      TAB_DETAIL_CONFIG = #{record.tabDetailConfig,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetail" >
+    update SYS_FORMCONFIG_MST_TAB_DETAIL
+    <set >
+      <if test="mstTabId != null" >
+        MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL},
+      </if>
+      <if test="tabDetailIsForm != null" >
+        TAB_DETAIL_IS_FORM = #{tabDetailIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailFormUrl != null" >
+        TAB_DETAIL_FORM_URL = #{tabDetailFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailFormId != null" >
+        TAB_DETAIL_FORM_ID = #{tabDetailFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="tabDetailFormTitle != null" >
+        tab_detail_form_title = #{tabDetailFormTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="tabDetailSort != null" >
+        TAB_DETAIL_SORT = #{tabDetailSort,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tabDetailConfig != null" >
+        TAB_DETAIL_CONFIG = #{tabDetailConfig,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where TAB_DETAIL_ID = #{tabDetailId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabDetail" >
+    update SYS_FORMCONFIG_MST_TAB_DETAIL
+    set MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL},
+      TAB_DETAIL_IS_FORM = #{tabDetailIsForm,jdbcType=NVARCHAR},
+      TAB_DETAIL_FORM_URL = #{tabDetailFormUrl,jdbcType=NVARCHAR},
+      TAB_DETAIL_FORM_ID = #{tabDetailFormId,jdbcType=DECIMAL},
+      tab_detail_form_title = #{tabDetailFormTitle,jdbcType=NVARCHAR},
+      TAB_DETAIL_SORT = #{tabDetailSort,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      TAB_DETAIL_CONFIG = #{tabDetailConfig,jdbcType=NVARCHAR}
+    where TAB_DETAIL_ID = #{tabDetailId,jdbcType=DECIMAL}
+  </update>
+</mapper>

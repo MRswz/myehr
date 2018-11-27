@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormTextareaMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormTextarea" >
+    <id column="TEXTAREA_ID" property="textareaId" jdbcType="DECIMAL" />
+    <result column="TEXTAREA_FORM_COLUMN_ID" property="textareaFormColumnId" jdbcType="DECIMAL" />
+    <result column="TEXTAREA_CHECK_TYPE" property="textareaCheckType" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_CHECK_SELF" property="textareaCheckSelf" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_CHECK_FUN" property="textareaCheckFun" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_INIT_FUN" property="textareaInitFun" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_VALUECHANGE_FUN" property="textareaValuechangeFun" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_CLICK_FUN" property="textareaClickFun" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_DATA_FROM_TYPE" property="textareaDataFromType" jdbcType="VARCHAR" />
+    <result column="TEXTAREA_DATA_FROM_VALUE" property="textareaDataFromValue" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEXTAREA_ID, TEXTAREA_FORM_COLUMN_ID, TEXTAREA_CHECK_TYPE, TEXTAREA_CHECK_SELF, TEXTAREA_CHECK_FUN, 
+    TEXTAREA_INIT_FUN, TEXTAREA_VALUECHANGE_FUN, TEXTAREA_CLICK_FUN, TEXTAREA_DATA_FROM_TYPE, 
+    TEXTAREA_DATA_FROM_VALUE, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextareaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_TEXTAREA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_TEXTAREA
+    where TEXTAREA_ID = #{textareaId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_TEXTAREA
+    where TEXTAREA_ID = #{textareaId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextareaExample" >
+    delete from SYS_FORM_TEXTAREA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextarea" useGeneratedKeys="true" keyProperty="textareaId" keyColumn="TEXTAREA_ID">
+    insert into SYS_FORM_TEXTAREA ( TEXTAREA_FORM_COLUMN_ID, 
+      TEXTAREA_CHECK_TYPE, TEXTAREA_CHECK_SELF, TEXTAREA_CHECK_FUN, 
+      TEXTAREA_INIT_FUN, TEXTAREA_VALUECHANGE_FUN, 
+      TEXTAREA_CLICK_FUN, TEXTAREA_DATA_FROM_TYPE, 
+      TEXTAREA_DATA_FROM_VALUE, OPERATOR_TIME, 
+      OPERATOR_NAME)
+    values (#{textareaFormColumnId,jdbcType=DECIMAL}, 
+      #{textareaCheckType,jdbcType=VARCHAR}, #{textareaCheckSelf,jdbcType=VARCHAR}, #{textareaCheckFun,jdbcType=VARCHAR}, 
+      #{textareaInitFun,jdbcType=VARCHAR}, #{textareaValuechangeFun,jdbcType=VARCHAR}, 
+      #{textareaClickFun,jdbcType=VARCHAR}, #{textareaDataFromType,jdbcType=VARCHAR}, 
+      #{textareaDataFromValue,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextarea" >
+    insert into SYS_FORM_TEXTAREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="textareaId != null" >
+        TEXTAREA_ID,
+      </if>
+      <if test="textareaFormColumnId != null" >
+        TEXTAREA_FORM_COLUMN_ID,
+      </if>
+      <if test="textareaCheckType != null" >
+        TEXTAREA_CHECK_TYPE,
+      </if>
+      <if test="textareaCheckSelf != null" >
+        TEXTAREA_CHECK_SELF,
+      </if>
+      <if test="textareaCheckFun != null" >
+        TEXTAREA_CHECK_FUN,
+      </if>
+      <if test="textareaInitFun != null" >
+        TEXTAREA_INIT_FUN,
+      </if>
+      <if test="textareaValuechangeFun != null" >
+        TEXTAREA_VALUECHANGE_FUN,
+      </if>
+      <if test="textareaClickFun != null" >
+        TEXTAREA_CLICK_FUN,
+      </if>
+      <if test="textareaDataFromType != null" >
+        TEXTAREA_DATA_FROM_TYPE,
+      </if>
+      <if test="textareaDataFromValue != null" >
+        TEXTAREA_DATA_FROM_VALUE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="textareaId != null" >
+        #{textareaId,jdbcType=DECIMAL},
+      </if>
+      <if test="textareaFormColumnId != null" >
+        #{textareaFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="textareaCheckType != null" >
+        #{textareaCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaCheckSelf != null" >
+        #{textareaCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaCheckFun != null" >
+        #{textareaCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaInitFun != null" >
+        #{textareaInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaValuechangeFun != null" >
+        #{textareaValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaClickFun != null" >
+        #{textareaClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaDataFromType != null" >
+        #{textareaDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaDataFromValue != null" >
+        #{textareaDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextareaExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_TEXTAREA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_TEXTAREA
+    <set >
+      <if test="record.textareaId != null" >
+        TEXTAREA_ID = #{record.textareaId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.textareaFormColumnId != null" >
+        TEXTAREA_FORM_COLUMN_ID = #{record.textareaFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.textareaCheckType != null" >
+        TEXTAREA_CHECK_TYPE = #{record.textareaCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaCheckSelf != null" >
+        TEXTAREA_CHECK_SELF = #{record.textareaCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaCheckFun != null" >
+        TEXTAREA_CHECK_FUN = #{record.textareaCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaInitFun != null" >
+        TEXTAREA_INIT_FUN = #{record.textareaInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaValuechangeFun != null" >
+        TEXTAREA_VALUECHANGE_FUN = #{record.textareaValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaClickFun != null" >
+        TEXTAREA_CLICK_FUN = #{record.textareaClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaDataFromType != null" >
+        TEXTAREA_DATA_FROM_TYPE = #{record.textareaDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textareaDataFromValue != null" >
+        TEXTAREA_DATA_FROM_VALUE = #{record.textareaDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_TEXTAREA
+    set TEXTAREA_ID = #{record.textareaId,jdbcType=DECIMAL},
+      TEXTAREA_FORM_COLUMN_ID = #{record.textareaFormColumnId,jdbcType=DECIMAL},
+      TEXTAREA_CHECK_TYPE = #{record.textareaCheckType,jdbcType=VARCHAR},
+      TEXTAREA_CHECK_SELF = #{record.textareaCheckSelf,jdbcType=VARCHAR},
+      TEXTAREA_CHECK_FUN = #{record.textareaCheckFun,jdbcType=VARCHAR},
+      TEXTAREA_INIT_FUN = #{record.textareaInitFun,jdbcType=VARCHAR},
+      TEXTAREA_VALUECHANGE_FUN = #{record.textareaValuechangeFun,jdbcType=VARCHAR},
+      TEXTAREA_CLICK_FUN = #{record.textareaClickFun,jdbcType=VARCHAR},
+      TEXTAREA_DATA_FROM_TYPE = #{record.textareaDataFromType,jdbcType=VARCHAR},
+      TEXTAREA_DATA_FROM_VALUE = #{record.textareaDataFromValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextarea" >
+    update SYS_FORM_TEXTAREA
+    <set >
+      <if test="textareaFormColumnId != null" >
+        TEXTAREA_FORM_COLUMN_ID = #{textareaFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="textareaCheckType != null" >
+        TEXTAREA_CHECK_TYPE = #{textareaCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaCheckSelf != null" >
+        TEXTAREA_CHECK_SELF = #{textareaCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaCheckFun != null" >
+        TEXTAREA_CHECK_FUN = #{textareaCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaInitFun != null" >
+        TEXTAREA_INIT_FUN = #{textareaInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaValuechangeFun != null" >
+        TEXTAREA_VALUECHANGE_FUN = #{textareaValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaClickFun != null" >
+        TEXTAREA_CLICK_FUN = #{textareaClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaDataFromType != null" >
+        TEXTAREA_DATA_FROM_TYPE = #{textareaDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="textareaDataFromValue != null" >
+        TEXTAREA_DATA_FROM_VALUE = #{textareaDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TEXTAREA_ID = #{textareaId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormTextarea" >
+    update SYS_FORM_TEXTAREA
+    set TEXTAREA_FORM_COLUMN_ID = #{textareaFormColumnId,jdbcType=DECIMAL},
+      TEXTAREA_CHECK_TYPE = #{textareaCheckType,jdbcType=VARCHAR},
+      TEXTAREA_CHECK_SELF = #{textareaCheckSelf,jdbcType=VARCHAR},
+      TEXTAREA_CHECK_FUN = #{textareaCheckFun,jdbcType=VARCHAR},
+      TEXTAREA_INIT_FUN = #{textareaInitFun,jdbcType=VARCHAR},
+      TEXTAREA_VALUECHANGE_FUN = #{textareaValuechangeFun,jdbcType=VARCHAR},
+      TEXTAREA_CLICK_FUN = #{textareaClickFun,jdbcType=VARCHAR},
+      TEXTAREA_DATA_FROM_TYPE = #{textareaDataFromType,jdbcType=VARCHAR},
+      TEXTAREA_DATA_FROM_VALUE = #{textareaDataFromValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where TEXTAREA_ID = #{textareaId,jdbcType=DECIMAL}
+  </update>
+</mapper>

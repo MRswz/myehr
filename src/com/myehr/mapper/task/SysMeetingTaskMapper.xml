@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.task.SysMeetingTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.task.SysMeetingTask" >
+    <id column="sys_meeting_task_id" property="sysMeetingTaskId" jdbcType="DECIMAL" />
+    <result column="sys_task_id" property="sysTaskId" jdbcType="DECIMAL" />
+    <result column="sys_task_title" property="sysTaskTitle" jdbcType="NVARCHAR" />
+    <result column="sys_task_create_userid" property="sysTaskCreateUserid" jdbcType="DECIMAL" />
+    <result column="sys_task_create_time" property="sysTaskCreateTime" jdbcType="TIMESTAMP" />
+    <result column="sys_meeting_task_start" property="sysMeetingTaskStart" jdbcType="TIMESTAMP" />
+    <result column="sys_meeting_task_end" property="sysMeetingTaskEnd" jdbcType="TIMESTAMP" />
+    <result column="sys_meeting_task_hostid" property="sysMeetingTaskHostid" jdbcType="NVARCHAR" />
+    <result column="sys_meeting_task_children" property="sysMeetingTaskChildren" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.task.SysMeetingTask" extends="BaseResultMap" >
+    <result column="sys_meeting_task_participants" property="sysMeetingTaskParticipants" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sys_meeting_task_id, sys_task_id, sys_task_title, sys_task_create_userid, sys_task_create_time, 
+    sys_meeting_task_start, sys_meeting_task_end, sys_meeting_task_hostid, sys_meeting_task_children
+  </sql>
+  <sql id="Blob_Column_List" >
+    sys_meeting_task_participants
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.task.SysMeetingTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MEETING_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.task.SysMeetingTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MEETING_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MEETING_TASK
+    where sys_meeting_task_id = #{sysMeetingTaskId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_MEETING_TASK
+    where sys_meeting_task_id = #{sysMeetingTaskId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.task.SysMeetingTaskExample" >
+    delete from SYS_MEETING_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.task.SysMeetingTask" >
+    insert into SYS_MEETING_TASK (sys_task_id, sys_task_title, 
+      sys_task_create_userid, sys_task_create_time, 
+      sys_meeting_task_start, sys_meeting_task_end, 
+      sys_meeting_task_hostid, sys_meeting_task_children, 
+      sys_meeting_task_participants)
+    values (#{sysTaskId,jdbcType=DECIMAL}, #{sysTaskTitle,jdbcType=NVARCHAR}, 
+      #{sysTaskCreateUserid,jdbcType=DECIMAL}, #{sysTaskCreateTime,jdbcType=TIMESTAMP}, 
+      #{sysMeetingTaskStart,jdbcType=TIMESTAMP}, #{sysMeetingTaskEnd,jdbcType=TIMESTAMP}, 
+      #{sysMeetingTaskHostid,jdbcType=NVARCHAR}, #{sysMeetingTaskChildren,jdbcType=NVARCHAR}, 
+      #{sysMeetingTaskParticipants,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.task.SysMeetingTask" >
+    insert into SYS_MEETING_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysMeetingTaskId != null" >
+        sys_meeting_task_id,
+      </if>
+      <if test="sysTaskId != null" >
+        sys_task_id,
+      </if>
+      <if test="sysTaskTitle != null" >
+        sys_task_title,
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        sys_task_create_userid,
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        sys_task_create_time,
+      </if>
+      <if test="sysMeetingTaskStart != null" >
+        sys_meeting_task_start,
+      </if>
+      <if test="sysMeetingTaskEnd != null" >
+        sys_meeting_task_end,
+      </if>
+      <if test="sysMeetingTaskHostid != null" >
+        sys_meeting_task_hostid,
+      </if>
+      <if test="sysMeetingTaskChildren != null" >
+        sys_meeting_task_children,
+      </if>
+      <if test="sysMeetingTaskParticipants != null" >
+        sys_meeting_task_participants,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysMeetingTaskId != null" >
+        #{sysMeetingTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskId != null" >
+        #{sysTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskTitle != null" >
+        #{sysTaskTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        #{sysTaskCreateUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskStart != null" >
+        #{sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskEnd != null" >
+        #{sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskHostid != null" >
+        #{sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysMeetingTaskChildren != null" >
+        #{sysMeetingTaskChildren,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysMeetingTaskParticipants != null" >
+        #{sysMeetingTaskParticipants,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.task.SysMeetingTaskExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MEETING_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MEETING_TASK
+    <set >
+      <if test="record.sysMeetingTaskId != null" >
+        sys_meeting_task_id = #{record.sysMeetingTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskId != null" >
+        sys_task_id = #{record.sysTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskTitle != null" >
+        sys_task_title = #{record.sysTaskTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskCreateUserid != null" >
+        sys_task_create_userid = #{record.sysTaskCreateUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskCreateTime != null" >
+        sys_task_create_time = #{record.sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysMeetingTaskStart != null" >
+        sys_meeting_task_start = #{record.sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysMeetingTaskEnd != null" >
+        sys_meeting_task_end = #{record.sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysMeetingTaskHostid != null" >
+        sys_meeting_task_hostid = #{record.sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysMeetingTaskChildren != null" >
+        sys_meeting_task_children = #{record.sysMeetingTaskChildren,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysMeetingTaskParticipants != null" >
+        sys_meeting_task_participants = #{record.sysMeetingTaskParticipants,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_MEETING_TASK
+    set sys_meeting_task_id = #{record.sysMeetingTaskId,jdbcType=DECIMAL},
+      sys_task_id = #{record.sysTaskId,jdbcType=DECIMAL},
+      sys_task_title = #{record.sysTaskTitle,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{record.sysTaskCreateUserid,jdbcType=DECIMAL},
+      sys_task_create_time = #{record.sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_meeting_task_start = #{record.sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      sys_meeting_task_end = #{record.sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      sys_meeting_task_hostid = #{record.sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      sys_meeting_task_children = #{record.sysMeetingTaskChildren,jdbcType=NVARCHAR},
+      sys_meeting_task_participants = #{record.sysMeetingTaskParticipants,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MEETING_TASK
+    set sys_meeting_task_id = #{record.sysMeetingTaskId,jdbcType=DECIMAL},
+      sys_task_id = #{record.sysTaskId,jdbcType=DECIMAL},
+      sys_task_title = #{record.sysTaskTitle,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{record.sysTaskCreateUserid,jdbcType=DECIMAL},
+      sys_task_create_time = #{record.sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_meeting_task_start = #{record.sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      sys_meeting_task_end = #{record.sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      sys_meeting_task_hostid = #{record.sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      sys_meeting_task_children = #{record.sysMeetingTaskChildren,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.task.SysMeetingTask" >
+    update SYS_MEETING_TASK
+    <set >
+      <if test="sysTaskId != null" >
+        sys_task_id = #{sysTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskTitle != null" >
+        sys_task_title = #{sysTaskTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        sys_task_create_userid = #{sysTaskCreateUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        sys_task_create_time = #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskStart != null" >
+        sys_meeting_task_start = #{sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskEnd != null" >
+        sys_meeting_task_end = #{sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysMeetingTaskHostid != null" >
+        sys_meeting_task_hostid = #{sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysMeetingTaskChildren != null" >
+        sys_meeting_task_children = #{sysMeetingTaskChildren,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysMeetingTaskParticipants != null" >
+        sys_meeting_task_participants = #{sysMeetingTaskParticipants,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sys_meeting_task_id = #{sysMeetingTaskId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.task.SysMeetingTask" >
+    update SYS_MEETING_TASK
+    set sys_task_id = #{sysTaskId,jdbcType=DECIMAL},
+      sys_task_title = #{sysTaskTitle,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{sysTaskCreateUserid,jdbcType=DECIMAL},
+      sys_task_create_time = #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_meeting_task_start = #{sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      sys_meeting_task_end = #{sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      sys_meeting_task_hostid = #{sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      sys_meeting_task_children = #{sysMeetingTaskChildren,jdbcType=NVARCHAR},
+      sys_meeting_task_participants = #{sysMeetingTaskParticipants,jdbcType=LONGVARCHAR}
+    where sys_meeting_task_id = #{sysMeetingTaskId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.task.SysMeetingTask" >
+    update SYS_MEETING_TASK
+    set sys_task_id = #{sysTaskId,jdbcType=DECIMAL},
+      sys_task_title = #{sysTaskTitle,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{sysTaskCreateUserid,jdbcType=DECIMAL},
+      sys_task_create_time = #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_meeting_task_start = #{sysMeetingTaskStart,jdbcType=TIMESTAMP},
+      sys_meeting_task_end = #{sysMeetingTaskEnd,jdbcType=TIMESTAMP},
+      sys_meeting_task_hostid = #{sysMeetingTaskHostid,jdbcType=NVARCHAR},
+      sys_meeting_task_children = #{sysMeetingTaskChildren,jdbcType=NVARCHAR}
+    where sys_meeting_task_id = #{sysMeetingTaskId,jdbcType=DECIMAL}
+  </update>
+</mapper>

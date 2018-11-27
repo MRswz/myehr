@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.app.im.OrgVWyMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.app.im.OrgVWy" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="NVARCHAR" />
+    <result column="ENAME" property="ename" jdbcType="NVARCHAR" />
+    <result column="PARENTID" property="parentid" jdbcType="VARCHAR" />
+    <result column="XTYPE" property="xtype" jdbcType="VARCHAR" />
+    <result column="xorder" property="xorder" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CNAME, ENAME, PARENTID, XTYPE, xorder
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.app.im.OrgVWyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ORG_V_WY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.app.im.OrgVWyExample" >
+    delete from ORG_V_WY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.app.im.OrgVWy" >
+    insert into ORG_V_WY (ID, CNAME, ENAME, 
+      PARENTID, XTYPE, xorder
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cname,jdbcType=NVARCHAR}, #{ename,jdbcType=NVARCHAR}, 
+      #{parentid,jdbcType=VARCHAR}, #{xtype,jdbcType=VARCHAR}, #{xorder,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.app.im.OrgVWy" >
+    insert into ORG_V_WY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="ename != null" >
+        ENAME,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+      <if test="xtype != null" >
+        XTYPE,
+      </if>
+      <if test="xorder != null" >
+        xorder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=NVARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="xtype != null" >
+        #{xtype,jdbcType=VARCHAR},
+      </if>
+      <if test="xorder != null" >
+        #{xorder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.app.im.OrgVWyExample" resultType="java.lang.Integer" >
+    select count(*) from ORG_V_WY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ORG_V_WY
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        CNAME = #{record.cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ename != null" >
+        ENAME = #{record.ename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        PARENTID = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xtype != null" >
+        XTYPE = #{record.xtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xorder != null" >
+        xorder = #{record.xorder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ORG_V_WY
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CNAME = #{record.cname,jdbcType=NVARCHAR},
+      ENAME = #{record.ename,jdbcType=NVARCHAR},
+      PARENTID = #{record.parentid,jdbcType=VARCHAR},
+      XTYPE = #{record.xtype,jdbcType=VARCHAR},
+      xorder = #{record.xorder,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

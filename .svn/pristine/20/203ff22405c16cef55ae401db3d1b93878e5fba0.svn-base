@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysGridFilterMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysGridFilter" >
+    <id column="GRID_FILTER_ID" property="gridFilterId" jdbcType="DECIMAL" />
+    <result column="GRID_FILTER_FORM_DEF_ID" property="gridFilterFormDefId" jdbcType="DECIMAL" />
+    <result column="GRID_FILTER_ROW_COUNT" property="gridFilterRowCount" jdbcType="DECIMAL" />
+    <result column="GRID_FILTER_HEIGHT_GRADE" property="gridFilterHeightGrade" jdbcType="VARCHAR" />
+    <result column="GRID_FILTER_GROPU" property="gridFilterGropu" jdbcType="DECIMAL" />
+    <result column="GRID_FILTER_BTN_LAYOUT" property="gridFilterBtnLayout" jdbcType="VARCHAR" />
+    <result column="GRID_FILTER_LABLE_WIDTH" property="gridFilterLableWidth" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GRID_FILTER_ID, GRID_FILTER_FORM_DEF_ID, GRID_FILTER_ROW_COUNT, GRID_FILTER_HEIGHT_GRADE, 
+    GRID_FILTER_GROPU, GRID_FILTER_BTN_LAYOUT, GRID_FILTER_LABLE_WIDTH, OPERATOR_TIME, 
+    OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_GRID_FILTER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GRID_FILTER
+    where GRID_FILTER_ID = #{gridFilterId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_GRID_FILTER
+    where GRID_FILTER_ID = #{gridFilterId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterExample" >
+    delete from SYS_GRID_FILTER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysGridFilter" useGeneratedKeys="true" keyProperty="gridFilterId" keyColumn="GRID_FILTER_ID" >
+    insert into SYS_GRID_FILTER (GRID_FILTER_FORM_DEF_ID, 
+      GRID_FILTER_ROW_COUNT, GRID_FILTER_HEIGHT_GRADE, 
+      GRID_FILTER_GROPU, GRID_FILTER_BTN_LAYOUT, GRID_FILTER_LABLE_WIDTH, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{gridFilterFormDefId,jdbcType=DECIMAL}, 
+      #{gridFilterRowCount,jdbcType=DECIMAL}, #{gridFilterHeightGrade,jdbcType=VARCHAR}, 
+      #{gridFilterGropu,jdbcType=DECIMAL}, #{gridFilterBtnLayout,jdbcType=VARCHAR}, #{gridFilterLableWidth,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysGridFilter" >
+    insert into SYS_GRID_FILTER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gridFilterId != null" >
+        GRID_FILTER_ID,
+      </if>
+      <if test="gridFilterFormDefId != null" >
+        GRID_FILTER_FORM_DEF_ID,
+      </if>
+      <if test="gridFilterRowCount != null" >
+        GRID_FILTER_ROW_COUNT,
+      </if>
+      <if test="gridFilterHeightGrade != null" >
+        GRID_FILTER_HEIGHT_GRADE,
+      </if>
+      <if test="gridFilterGropu != null" >
+        GRID_FILTER_GROPU,
+      </if>
+      <if test="gridFilterBtnLayout != null" >
+        GRID_FILTER_BTN_LAYOUT,
+      </if>
+      <if test="gridFilterLableWidth != null" >
+        GRID_FILTER_LABLE_WIDTH,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gridFilterId != null" >
+        #{gridFilterId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterFormDefId != null" >
+        #{gridFilterFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterRowCount != null" >
+        #{gridFilterRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterHeightGrade != null" >
+        #{gridFilterHeightGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="gridFilterGropu != null" >
+        #{gridFilterGropu,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterBtnLayout != null" >
+        #{gridFilterBtnLayout,jdbcType=VARCHAR},
+      </if>
+      <if test="gridFilterLableWidth != null" >
+        #{gridFilterLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_GRID_FILTER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_GRID_FILTER
+    <set >
+      <if test="record.gridFilterId != null" >
+        GRID_FILTER_ID = #{record.gridFilterId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridFilterFormDefId != null" >
+        GRID_FILTER_FORM_DEF_ID = #{record.gridFilterFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridFilterRowCount != null" >
+        GRID_FILTER_ROW_COUNT = #{record.gridFilterRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridFilterHeightGrade != null" >
+        GRID_FILTER_HEIGHT_GRADE = #{record.gridFilterHeightGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridFilterGropu != null" >
+        GRID_FILTER_GROPU = #{record.gridFilterGropu,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridFilterBtnLayout != null" >
+        GRID_FILTER_BTN_LAYOUT = #{record.gridFilterBtnLayout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridFilterLableWidth != null" >
+        GRID_FILTER_LABLE_WIDTH = #{record.gridFilterLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_GRID_FILTER
+    set GRID_FILTER_ID = #{record.gridFilterId,jdbcType=DECIMAL},
+      GRID_FILTER_FORM_DEF_ID = #{record.gridFilterFormDefId,jdbcType=DECIMAL},
+      GRID_FILTER_ROW_COUNT = #{record.gridFilterRowCount,jdbcType=DECIMAL},
+      GRID_FILTER_HEIGHT_GRADE = #{record.gridFilterHeightGrade,jdbcType=VARCHAR},
+      GRID_FILTER_GROPU = #{record.gridFilterGropu,jdbcType=DECIMAL},
+      GRID_FILTER_BTN_LAYOUT = #{record.gridFilterBtnLayout,jdbcType=VARCHAR},
+      GRID_FILTER_LABLE_WIDTH = #{record.gridFilterLableWidth,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysGridFilter" >
+    update SYS_GRID_FILTER
+    <set >
+      <if test="gridFilterFormDefId != null" >
+        GRID_FILTER_FORM_DEF_ID = #{gridFilterFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterRowCount != null" >
+        GRID_FILTER_ROW_COUNT = #{gridFilterRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterHeightGrade != null" >
+        GRID_FILTER_HEIGHT_GRADE = #{gridFilterHeightGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="gridFilterGropu != null" >
+        GRID_FILTER_GROPU = #{gridFilterGropu,jdbcType=DECIMAL},
+      </if>
+      <if test="gridFilterBtnLayout != null" >
+        GRID_FILTER_BTN_LAYOUT = #{gridFilterBtnLayout,jdbcType=VARCHAR},
+      </if>
+      <if test="gridFilterLableWidth != null" >
+        GRID_FILTER_LABLE_WIDTH = #{gridFilterLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GRID_FILTER_ID = #{gridFilterId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysGridFilter" >
+    update SYS_GRID_FILTER
+    set GRID_FILTER_FORM_DEF_ID = #{gridFilterFormDefId,jdbcType=DECIMAL},
+      GRID_FILTER_ROW_COUNT = #{gridFilterRowCount,jdbcType=DECIMAL},
+      GRID_FILTER_HEIGHT_GRADE = #{gridFilterHeightGrade,jdbcType=VARCHAR},
+      GRID_FILTER_GROPU = #{gridFilterGropu,jdbcType=DECIMAL},
+      GRID_FILTER_BTN_LAYOUT = #{gridFilterBtnLayout,jdbcType=VARCHAR},
+      GRID_FILTER_LABLE_WIDTH = #{gridFilterLableWidth,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where GRID_FILTER_ID = #{gridFilterId,jdbcType=DECIMAL}
+  </update>
+</mapper>

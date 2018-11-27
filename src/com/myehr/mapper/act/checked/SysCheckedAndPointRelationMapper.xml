@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.act.checked.SysCheckedAndPointRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.act.checked.SysCheckedAndPointRelation" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CHECKED_ID" property="checkedId" jdbcType="DECIMAL" />
+    <result column="POINT_ID" property="pointId" jdbcType="DECIMAL" />
+    <result column="CHECKED_NAME" property="checkedName" jdbcType="NVARCHAR" />
+    <result column="POINT_REQUIRE" property="pointRequire" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="DUTY_TYPE" property="dutyType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CHECKED_ID, POINT_ID, CHECKED_NAME, POINT_REQUIRE, OPERATOR_TIME, OPERATOR_NAME, 
+    DUTY_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_CHECKED_AND_POINT_RELATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CHECKED_AND_POINT_RELATION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_CHECKED_AND_POINT_RELATION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelationExample" >
+    delete from SYS_CHECKED_AND_POINT_RELATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelation" >
+    insert into SYS_CHECKED_AND_POINT_RELATION (ID, CHECKED_ID, POINT_ID, 
+      CHECKED_NAME, POINT_REQUIRE, OPERATOR_TIME, 
+      OPERATOR_NAME, DUTY_TYPE)
+    values (#{id,jdbcType=DECIMAL}, #{checkedId,jdbcType=DECIMAL}, #{pointId,jdbcType=DECIMAL}, 
+      #{checkedName,jdbcType=NVARCHAR}, #{pointRequire,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{dutyType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelation" >
+    insert into SYS_CHECKED_AND_POINT_RELATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="checkedId != null" >
+        CHECKED_ID,
+      </if>
+      <if test="pointId != null" >
+        POINT_ID,
+      </if>
+      <if test="checkedName != null" >
+        CHECKED_NAME,
+      </if>
+      <if test="pointRequire != null" >
+        POINT_REQUIRE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="dutyType != null" >
+        DUTY_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedId != null" >
+        #{checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="pointId != null" >
+        #{pointId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedName != null" >
+        #{checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pointRequire != null" >
+        #{pointRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        #{dutyType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelationExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_CHECKED_AND_POINT_RELATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_CHECKED_AND_POINT_RELATION
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedId != null" >
+        CHECKED_ID = #{record.checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pointId != null" >
+        POINT_ID = #{record.pointId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedName != null" >
+        CHECKED_NAME = #{record.checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pointRequire != null" >
+        POINT_REQUIRE = #{record.pointRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dutyType != null" >
+        DUTY_TYPE = #{record.dutyType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_CHECKED_AND_POINT_RELATION
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CHECKED_ID = #{record.checkedId,jdbcType=DECIMAL},
+      POINT_ID = #{record.pointId,jdbcType=DECIMAL},
+      CHECKED_NAME = #{record.checkedName,jdbcType=NVARCHAR},
+      POINT_REQUIRE = #{record.pointRequire,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      DUTY_TYPE = #{record.dutyType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelation" >
+    update SYS_CHECKED_AND_POINT_RELATION
+    <set >
+      <if test="checkedId != null" >
+        CHECKED_ID = #{checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="pointId != null" >
+        POINT_ID = #{pointId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedName != null" >
+        CHECKED_NAME = #{checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="pointRequire != null" >
+        POINT_REQUIRE = #{pointRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        DUTY_TYPE = #{dutyType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.act.checked.SysCheckedAndPointRelation" >
+    update SYS_CHECKED_AND_POINT_RELATION
+    set CHECKED_ID = #{checkedId,jdbcType=DECIMAL},
+      POINT_ID = #{pointId,jdbcType=DECIMAL},
+      CHECKED_NAME = #{checkedName,jdbcType=NVARCHAR},
+      POINT_REQUIRE = #{pointRequire,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      DUTY_TYPE = #{dutyType,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

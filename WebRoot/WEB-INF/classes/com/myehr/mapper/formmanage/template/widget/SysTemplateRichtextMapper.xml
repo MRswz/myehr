@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.widget.SysTemplateRichtextMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtext" >
+    <id column="RICHTEXT_ID" property="richtextId" jdbcType="DECIMAL" />
+    <result column="RICHTEXT_TEMPLATE_COLUMN_ID" property="richtextTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="RICHTEXT_CHECK_FUN" property="richtextCheckFun" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_INIT_FUN" property="richtextInitFun" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_DATA_FROM_TYPE" property="richtextDataFromType" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_DATA_FROM_VALUE" property="richtextDataFromValue" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_TYPE" property="richtextType" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_CHECK_TYPE" property="richtextCheckType" jdbcType="NVARCHAR" />
+    <result column="RICHTEXT_READONLY" property="richtextReadonly" jdbcType="CHAR" />
+    <result column="RICHTEXT_CHECK_SELF" property="richtextCheckSelf" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RICHTEXT_ID, RICHTEXT_TEMPLATE_COLUMN_ID, RICHTEXT_CHECK_FUN, RICHTEXT_INIT_FUN, 
+    RICHTEXT_DATA_FROM_TYPE, RICHTEXT_DATA_FROM_VALUE, RICHTEXT_TYPE, OPERATOR_TIME, 
+    OPERATOR_NAME, RICHTEXT_CHECK_TYPE, RICHTEXT_READONLY, RICHTEXT_CHECK_SELF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtextExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_RICHTEXT
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_RICHTEXT
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtextExample" >
+    delete from SYS_TEMPLATE_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtext" useGeneratedKeys="true" keyProperty="richtextId" keyColumn="RICHTEXT_ID">
+    insert into SYS_TEMPLATE_RICHTEXT ( RICHTEXT_TEMPLATE_COLUMN_ID, 
+      RICHTEXT_CHECK_FUN, RICHTEXT_INIT_FUN, RICHTEXT_DATA_FROM_TYPE, 
+      RICHTEXT_DATA_FROM_VALUE, RICHTEXT_TYPE, 
+      OPERATOR_TIME, OPERATOR_NAME, RICHTEXT_CHECK_TYPE, 
+      RICHTEXT_READONLY, RICHTEXT_CHECK_SELF)
+    values (#{richtextTemplateColumnId,jdbcType=DECIMAL}, 
+      #{richtextCheckFun,jdbcType=NVARCHAR}, #{richtextInitFun,jdbcType=NVARCHAR}, #{richtextDataFromType,jdbcType=NVARCHAR}, 
+      #{richtextDataFromValue,jdbcType=NVARCHAR}, #{richtextType,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{richtextCheckType,jdbcType=NVARCHAR}, 
+      #{richtextReadonly,jdbcType=CHAR}, #{richtextCheckSelf,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtext" >
+    insert into SYS_TEMPLATE_RICHTEXT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="richtextId != null" >
+        RICHTEXT_ID,
+      </if>
+      <if test="richtextTemplateColumnId != null" >
+        RICHTEXT_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN,
+      </if>
+      <if test="richtextInitFun != null" >
+        RICHTEXT_INIT_FUN,
+      </if>
+      <if test="richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE,
+      </if>
+      <if test="richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE,
+      </if>
+      <if test="richtextType != null" >
+        RICHTEXT_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE,
+      </if>
+      <if test="richtextReadonly != null" >
+        RICHTEXT_READONLY,
+      </if>
+      <if test="richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="richtextId != null" >
+        #{richtextId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextTemplateColumnId != null" >
+        #{richtextTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextCheckFun != null" >
+        #{richtextCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextInitFun != null" >
+        #{richtextInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextDataFromType != null" >
+        #{richtextDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextDataFromValue != null" >
+        #{richtextDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextType != null" >
+        #{richtextType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextCheckType != null" >
+        #{richtextCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextReadonly != null" >
+        #{richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="richtextCheckSelf != null" >
+        #{richtextCheckSelf,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtextExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_RICHTEXT
+    <set >
+      <if test="record.richtextId != null" >
+        RICHTEXT_ID = #{record.richtextId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.richtextTemplateColumnId != null" >
+        RICHTEXT_TEMPLATE_COLUMN_ID = #{record.richtextTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN = #{record.richtextCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextInitFun != null" >
+        RICHTEXT_INIT_FUN = #{record.richtextInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE = #{record.richtextDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE = #{record.richtextDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextType != null" >
+        RICHTEXT_TYPE = #{record.richtextType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE = #{record.richtextCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.richtextReadonly != null" >
+        RICHTEXT_READONLY = #{record.richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="record.richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF = #{record.richtextCheckSelf,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_RICHTEXT
+    set RICHTEXT_ID = #{record.richtextId,jdbcType=DECIMAL},
+      RICHTEXT_TEMPLATE_COLUMN_ID = #{record.richtextTemplateColumnId,jdbcType=DECIMAL},
+      RICHTEXT_CHECK_FUN = #{record.richtextCheckFun,jdbcType=NVARCHAR},
+      RICHTEXT_INIT_FUN = #{record.richtextInitFun,jdbcType=NVARCHAR},
+      RICHTEXT_DATA_FROM_TYPE = #{record.richtextDataFromType,jdbcType=NVARCHAR},
+      RICHTEXT_DATA_FROM_VALUE = #{record.richtextDataFromValue,jdbcType=NVARCHAR},
+      RICHTEXT_TYPE = #{record.richtextType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      RICHTEXT_CHECK_TYPE = #{record.richtextCheckType,jdbcType=NVARCHAR},
+      RICHTEXT_READONLY = #{record.richtextReadonly,jdbcType=CHAR},
+      RICHTEXT_CHECK_SELF = #{record.richtextCheckSelf,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtext" >
+    update SYS_TEMPLATE_RICHTEXT
+    <set >
+      <if test="richtextTemplateColumnId != null" >
+        RICHTEXT_TEMPLATE_COLUMN_ID = #{richtextTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN = #{richtextCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextInitFun != null" >
+        RICHTEXT_INIT_FUN = #{richtextInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE = #{richtextDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE = #{richtextDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextType != null" >
+        RICHTEXT_TYPE = #{richtextType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE = #{richtextCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="richtextReadonly != null" >
+        RICHTEXT_READONLY = #{richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF = #{richtextCheckSelf,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateRichtext" >
+    update SYS_TEMPLATE_RICHTEXT
+    set RICHTEXT_TEMPLATE_COLUMN_ID = #{richtextTemplateColumnId,jdbcType=DECIMAL},
+      RICHTEXT_CHECK_FUN = #{richtextCheckFun,jdbcType=NVARCHAR},
+      RICHTEXT_INIT_FUN = #{richtextInitFun,jdbcType=NVARCHAR},
+      RICHTEXT_DATA_FROM_TYPE = #{richtextDataFromType,jdbcType=NVARCHAR},
+      RICHTEXT_DATA_FROM_VALUE = #{richtextDataFromValue,jdbcType=NVARCHAR},
+      RICHTEXT_TYPE = #{richtextType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      RICHTEXT_CHECK_TYPE = #{richtextCheckType,jdbcType=NVARCHAR},
+      RICHTEXT_READONLY = #{richtextReadonly,jdbcType=CHAR},
+      RICHTEXT_CHECK_SELF = #{richtextCheckSelf,jdbcType=NVARCHAR}
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </update>
+</mapper>

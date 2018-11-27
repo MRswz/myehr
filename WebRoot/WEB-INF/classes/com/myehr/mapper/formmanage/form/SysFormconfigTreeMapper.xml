@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormconfigTreeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfigTree" >
+    <id column="FORM_TREE_ID" property="formTreeId" jdbcType="DECIMAL" />
+    <result column="FORM_TREE_FORM_ID" property="formTreeFormId" jdbcType="DECIMAL" />
+    <result column="FORM_IS_LAZY" property="formIsLazy" jdbcType="VARCHAR" />
+    <result column="FORM_RESULT_AS_TREE" property="formResultAsTree" jdbcType="VARCHAR" />
+    <result column="FORM_CHECK_RECURSIVE" property="formCheckRecursive" jdbcType="VARCHAR" />
+    <result column="FORM_AUTO_CHECK_PARENT" property="formAutoCheckParent" jdbcType="VARCHAR" />
+    <result column="FORM_EXPAND_ON_LOAD" property="formExpandOnLoad" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_TREE_ICON" property="formShowTreeIcon" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_TREE_LINES" property="formShowTreeLines" jdbcType="VARCHAR" />
+    <result column="FORM_ALLOW_SELECT" property="formAllowSelect" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_CHECKBOX" property="formShowCheckbox" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_FOLDER_CHECKBOX" property="formShowFolderCheckbox" jdbcType="VARCHAR" />
+    <result column="FORM_EXPAND_ON_DBCLICK" property="formExpandOnDbclick" jdbcType="VARCHAR" />
+    <result column="FORM_EXPAND_ON_CLICK" property="formExpandOnClick" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_URL" property="formTreeUrl" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_VALUE" property="formTreeValue" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_ID_FIELD" property="formTreeIdField" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_TEXT_FIELD" property="formTreeTextField" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_PARENT_FIELD" property="formTreeParentField" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_DATA_FIELD" property="formTreeDataField" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_TREE_INIT_FUN" property="formTreeInitFun" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_LOAD_FUN" property="formTreeLoadFun" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_NODE_CLICK_FUN" property="formTreeNodeClickFun" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_CUSTOM_FUN" property="formTreeCustomFun" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_TREE_ONLY" property="formShowTreeOnly" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_TITLE" property="formShowTitle" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_TYPE" property="formTreeType" jdbcType="VARCHAR" />
+    <result column="FORM_TREE_SOLUTION_ID" property="formTreeSolutionId" jdbcType="DECIMAL" />
+    <result column="FORM_TREE_WIDTH" property="formTreeWidth" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_FILTER" property="formShowFilter" jdbcType="VARCHAR" />
+    <result column="FORM_SHOW_EMP_CONTAINER" property="formShowEmpContainer" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_TREE_ID, FORM_TREE_FORM_ID, FORM_IS_LAZY, FORM_RESULT_AS_TREE, FORM_CHECK_RECURSIVE, 
+    FORM_AUTO_CHECK_PARENT, FORM_EXPAND_ON_LOAD, FORM_SHOW_TREE_ICON, FORM_SHOW_TREE_LINES, 
+    FORM_ALLOW_SELECT, FORM_SHOW_CHECKBOX, FORM_SHOW_FOLDER_CHECKBOX, FORM_EXPAND_ON_DBCLICK, 
+    FORM_EXPAND_ON_CLICK, FORM_TREE_URL, FORM_TREE_VALUE, FORM_TREE_ID_FIELD, FORM_TREE_TEXT_FIELD, 
+    FORM_TREE_PARENT_FIELD, FORM_TREE_DATA_FIELD, OPERATOR_NAME, OPERATOR_TIME, FORM_TREE_INIT_FUN, 
+    FORM_TREE_LOAD_FUN, FORM_TREE_NODE_CLICK_FUN, FORM_TREE_CUSTOM_FUN, FORM_SHOW_TREE_ONLY, 
+    FORM_SHOW_TITLE, FORM_TREE_TYPE, FORM_TREE_SOLUTION_ID, FORM_TREE_WIDTH, FORM_SHOW_FILTER,FORM_SHOW_EMP_CONTAINER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTreeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_TREE
+    where FORM_TREE_ID = #{formTreeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORMCONFIG_TREE
+    where FORM_TREE_ID = #{formTreeId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTreeExample" >
+    delete from SYS_FORMCONFIG_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTree" useGeneratedKeys="true" keyProperty="formTreeId" keyColumn="FORM_TREE_ID"  >
+    insert into SYS_FORMCONFIG_TREE (FORM_TREE_FORM_ID, FORM_IS_LAZY, 
+      FORM_RESULT_AS_TREE, FORM_CHECK_RECURSIVE, FORM_AUTO_CHECK_PARENT, 
+      FORM_EXPAND_ON_LOAD, FORM_SHOW_TREE_ICON, FORM_SHOW_TREE_LINES, 
+      FORM_ALLOW_SELECT, FORM_SHOW_CHECKBOX, FORM_SHOW_FOLDER_CHECKBOX, 
+      FORM_EXPAND_ON_DBCLICK, FORM_EXPAND_ON_CLICK, 
+      FORM_TREE_URL, FORM_TREE_VALUE, FORM_TREE_ID_FIELD, 
+      FORM_TREE_TEXT_FIELD, FORM_TREE_PARENT_FIELD, 
+      FORM_TREE_DATA_FIELD, OPERATOR_NAME, OPERATOR_TIME, 
+      FORM_TREE_INIT_FUN, FORM_TREE_LOAD_FUN, FORM_TREE_NODE_CLICK_FUN, 
+      FORM_TREE_CUSTOM_FUN, FORM_SHOW_TREE_ONLY, FORM_SHOW_TITLE, 
+      FORM_TREE_TYPE, FORM_TREE_SOLUTION_ID, FORM_TREE_WIDTH, 
+      FORM_SHOW_FILTER,FORM_SHOW_EMP_CONTAINER)
+    values (#{formTreeFormId,jdbcType=DECIMAL}, #{formIsLazy,jdbcType=VARCHAR}, 
+      #{formResultAsTree,jdbcType=VARCHAR}, #{formCheckRecursive,jdbcType=VARCHAR}, #{formAutoCheckParent,jdbcType=VARCHAR}, 
+      #{formExpandOnLoad,jdbcType=VARCHAR}, #{formShowTreeIcon,jdbcType=VARCHAR}, #{formShowTreeLines,jdbcType=VARCHAR}, 
+      #{formAllowSelect,jdbcType=VARCHAR}, #{formShowCheckbox,jdbcType=VARCHAR}, #{formShowFolderCheckbox,jdbcType=VARCHAR}, 
+      #{formExpandOnDbclick,jdbcType=VARCHAR}, #{formExpandOnClick,jdbcType=VARCHAR}, 
+      #{formTreeUrl,jdbcType=VARCHAR}, #{formTreeValue,jdbcType=VARCHAR}, #{formTreeIdField,jdbcType=VARCHAR}, 
+      #{formTreeTextField,jdbcType=VARCHAR}, #{formTreeParentField,jdbcType=VARCHAR}, 
+      #{formTreeDataField,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{formTreeInitFun,jdbcType=VARCHAR}, #{formTreeLoadFun,jdbcType=VARCHAR}, #{formTreeNodeClickFun,jdbcType=VARCHAR}, 
+      #{formTreeCustomFun,jdbcType=VARCHAR}, #{formShowTreeOnly,jdbcType=VARCHAR}, #{formShowTitle,jdbcType=VARCHAR}, 
+      #{formTreeType,jdbcType=VARCHAR}, #{formTreeSolutionId,jdbcType=DECIMAL}, #{formTreeWidth,jdbcType=VARCHAR}, 
+      #{formShowFilter,jdbcType=VARCHAR},#{formShowEmpContainer,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTree" >
+    insert into SYS_FORMCONFIG_TREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formTreeId != null" >
+        FORM_TREE_ID,
+      </if>
+      <if test="formTreeFormId != null" >
+        FORM_TREE_FORM_ID,
+      </if>
+      <if test="formIsLazy != null" >
+        FORM_IS_LAZY,
+      </if>
+      <if test="formResultAsTree != null" >
+        FORM_RESULT_AS_TREE,
+      </if>
+      <if test="formCheckRecursive != null" >
+        FORM_CHECK_RECURSIVE,
+      </if>
+      <if test="formAutoCheckParent != null" >
+        FORM_AUTO_CHECK_PARENT,
+      </if>
+      <if test="formExpandOnLoad != null" >
+        FORM_EXPAND_ON_LOAD,
+      </if>
+      <if test="formShowTreeIcon != null" >
+        FORM_SHOW_TREE_ICON,
+      </if>
+      <if test="formShowTreeLines != null" >
+        FORM_SHOW_TREE_LINES,
+      </if>
+      <if test="formAllowSelect != null" >
+        FORM_ALLOW_SELECT,
+      </if>
+      <if test="formShowCheckbox != null" >
+        FORM_SHOW_CHECKBOX,
+      </if>
+      <if test="formShowFolderCheckbox != null" >
+        FORM_SHOW_FOLDER_CHECKBOX,
+      </if>
+      <if test="formExpandOnDbclick != null" >
+        FORM_EXPAND_ON_DBCLICK,
+      </if>
+      <if test="formExpandOnClick != null" >
+        FORM_EXPAND_ON_CLICK,
+      </if>
+      <if test="formTreeUrl != null" >
+        FORM_TREE_URL,
+      </if>
+      <if test="formTreeValue != null" >
+        FORM_TREE_VALUE,
+      </if>
+      <if test="formTreeIdField != null" >
+        FORM_TREE_ID_FIELD,
+      </if>
+      <if test="formTreeTextField != null" >
+        FORM_TREE_TEXT_FIELD,
+      </if>
+      <if test="formTreeParentField != null" >
+        FORM_TREE_PARENT_FIELD,
+      </if>
+      <if test="formTreeDataField != null" >
+        FORM_TREE_DATA_FIELD,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="formTreeInitFun != null" >
+        FORM_TREE_INIT_FUN,
+      </if>
+      <if test="formTreeLoadFun != null" >
+        FORM_TREE_LOAD_FUN,
+      </if>
+      <if test="formTreeNodeClickFun != null" >
+        FORM_TREE_NODE_CLICK_FUN,
+      </if>
+      <if test="formTreeCustomFun != null" >
+        FORM_TREE_CUSTOM_FUN,
+      </if>
+      <if test="formShowTreeOnly != null" >
+        FORM_SHOW_TREE_ONLY,
+      </if>
+      <if test="formShowTitle != null" >
+        FORM_SHOW_TITLE,
+      </if>
+      <if test="formTreeType != null" >
+        FORM_TREE_TYPE,
+      </if>
+      <if test="formTreeSolutionId != null" >
+        FORM_TREE_SOLUTION_ID,
+      </if>
+      <if test="formTreeWidth != null" >
+        FORM_TREE_WIDTH,
+      </if>
+      <if test="formShowFilter != null" >
+        FORM_SHOW_FILTER,
+      </if>
+      <if test="formShowEmpContainer != null" >
+        FORM_SHOW_EMP_CONTAINER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formTreeId != null" >
+        #{formTreeId,jdbcType=DECIMAL},
+      </if>
+      <if test="formTreeFormId != null" >
+        #{formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formIsLazy != null" >
+        #{formIsLazy,jdbcType=VARCHAR},
+      </if>
+      <if test="formResultAsTree != null" >
+        #{formResultAsTree,jdbcType=VARCHAR},
+      </if>
+      <if test="formCheckRecursive != null" >
+        #{formCheckRecursive,jdbcType=VARCHAR},
+      </if>
+      <if test="formAutoCheckParent != null" >
+        #{formAutoCheckParent,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnLoad != null" >
+        #{formExpandOnLoad,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeIcon != null" >
+        #{formShowTreeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeLines != null" >
+        #{formShowTreeLines,jdbcType=VARCHAR},
+      </if>
+      <if test="formAllowSelect != null" >
+        #{formAllowSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowCheckbox != null" >
+        #{formShowCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowFolderCheckbox != null" >
+        #{formShowFolderCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnDbclick != null" >
+        #{formExpandOnDbclick,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnClick != null" >
+        #{formExpandOnClick,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeUrl != null" >
+        #{formTreeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeValue != null" >
+        #{formTreeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeIdField != null" >
+        #{formTreeIdField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeTextField != null" >
+        #{formTreeTextField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeParentField != null" >
+        #{formTreeParentField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeDataField != null" >
+        #{formTreeDataField,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formTreeInitFun != null" >
+        #{formTreeInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeLoadFun != null" >
+        #{formTreeLoadFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeNodeClickFun != null" >
+        #{formTreeNodeClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeCustomFun != null" >
+        #{formTreeCustomFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeOnly != null" >
+        #{formShowTreeOnly,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTitle != null" >
+        #{formShowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeType != null" >
+        #{formTreeType,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeSolutionId != null" >
+        #{formTreeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="formTreeWidth != null" >
+        #{formTreeWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowFilter != null" >
+        #{formShowFilter,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowEmpContainer != null" >
+        #{formShowEmpContainer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTreeExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORMCONFIG_TREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORMCONFIG_TREE
+    <set >
+      <if test="record.formTreeId != null" >
+        FORM_TREE_ID = #{record.formTreeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formTreeFormId != null" >
+        FORM_TREE_FORM_ID = #{record.formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formIsLazy != null" >
+        FORM_IS_LAZY = #{record.formIsLazy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formResultAsTree != null" >
+        FORM_RESULT_AS_TREE = #{record.formResultAsTree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formCheckRecursive != null" >
+        FORM_CHECK_RECURSIVE = #{record.formCheckRecursive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formAutoCheckParent != null" >
+        FORM_AUTO_CHECK_PARENT = #{record.formAutoCheckParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formExpandOnLoad != null" >
+        FORM_EXPAND_ON_LOAD = #{record.formExpandOnLoad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowTreeIcon != null" >
+        FORM_SHOW_TREE_ICON = #{record.formShowTreeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowTreeLines != null" >
+        FORM_SHOW_TREE_LINES = #{record.formShowTreeLines,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formAllowSelect != null" >
+        FORM_ALLOW_SELECT = #{record.formAllowSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowCheckbox != null" >
+        FORM_SHOW_CHECKBOX = #{record.formShowCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowFolderCheckbox != null" >
+        FORM_SHOW_FOLDER_CHECKBOX = #{record.formShowFolderCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formExpandOnDbclick != null" >
+        FORM_EXPAND_ON_DBCLICK = #{record.formExpandOnDbclick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formExpandOnClick != null" >
+        FORM_EXPAND_ON_CLICK = #{record.formExpandOnClick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeUrl != null" >
+        FORM_TREE_URL = #{record.formTreeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeValue != null" >
+        FORM_TREE_VALUE = #{record.formTreeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeIdField != null" >
+        FORM_TREE_ID_FIELD = #{record.formTreeIdField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeTextField != null" >
+        FORM_TREE_TEXT_FIELD = #{record.formTreeTextField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeParentField != null" >
+        FORM_TREE_PARENT_FIELD = #{record.formTreeParentField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeDataField != null" >
+        FORM_TREE_DATA_FIELD = #{record.formTreeDataField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formTreeInitFun != null" >
+        FORM_TREE_INIT_FUN = #{record.formTreeInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeLoadFun != null" >
+        FORM_TREE_LOAD_FUN = #{record.formTreeLoadFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeNodeClickFun != null" >
+        FORM_TREE_NODE_CLICK_FUN = #{record.formTreeNodeClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeCustomFun != null" >
+        FORM_TREE_CUSTOM_FUN = #{record.formTreeCustomFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowTreeOnly != null" >
+        FORM_SHOW_TREE_ONLY = #{record.formShowTreeOnly,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowTitle != null" >
+        FORM_SHOW_TITLE = #{record.formShowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeType != null" >
+        FORM_TREE_TYPE = #{record.formTreeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTreeSolutionId != null" >
+        FORM_TREE_SOLUTION_ID = #{record.formTreeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formTreeWidth != null" >
+        FORM_TREE_WIDTH = #{record.formTreeWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowFilter != null" >
+        FORM_SHOW_FILTER = #{record.formShowFilter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formShowEmpContainer != null" >
+        FORM_SHOW_EMP_CONTAINER = #{record.formShowEmpContainer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORMCONFIG_TREE
+    set FORM_TREE_ID = #{record.formTreeId,jdbcType=DECIMAL},
+      FORM_TREE_FORM_ID = #{record.formTreeFormId,jdbcType=DECIMAL},
+      FORM_IS_LAZY = #{record.formIsLazy,jdbcType=VARCHAR},
+      FORM_RESULT_AS_TREE = #{record.formResultAsTree,jdbcType=VARCHAR},
+      FORM_CHECK_RECURSIVE = #{record.formCheckRecursive,jdbcType=VARCHAR},
+      FORM_AUTO_CHECK_PARENT = #{record.formAutoCheckParent,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_LOAD = #{record.formExpandOnLoad,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_ICON = #{record.formShowTreeIcon,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_LINES = #{record.formShowTreeLines,jdbcType=VARCHAR},
+      FORM_ALLOW_SELECT = #{record.formAllowSelect,jdbcType=VARCHAR},
+      FORM_SHOW_CHECKBOX = #{record.formShowCheckbox,jdbcType=VARCHAR},
+      FORM_SHOW_FOLDER_CHECKBOX = #{record.formShowFolderCheckbox,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_DBCLICK = #{record.formExpandOnDbclick,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_CLICK = #{record.formExpandOnClick,jdbcType=VARCHAR},
+      FORM_TREE_URL = #{record.formTreeUrl,jdbcType=VARCHAR},
+      FORM_TREE_VALUE = #{record.formTreeValue,jdbcType=VARCHAR},
+      FORM_TREE_ID_FIELD = #{record.formTreeIdField,jdbcType=VARCHAR},
+      FORM_TREE_TEXT_FIELD = #{record.formTreeTextField,jdbcType=VARCHAR},
+      FORM_TREE_PARENT_FIELD = #{record.formTreeParentField,jdbcType=VARCHAR},
+      FORM_TREE_DATA_FIELD = #{record.formTreeDataField,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FORM_TREE_INIT_FUN = #{record.formTreeInitFun,jdbcType=VARCHAR},
+      FORM_TREE_LOAD_FUN = #{record.formTreeLoadFun,jdbcType=VARCHAR},
+      FORM_TREE_NODE_CLICK_FUN = #{record.formTreeNodeClickFun,jdbcType=VARCHAR},
+      FORM_TREE_CUSTOM_FUN = #{record.formTreeCustomFun,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_ONLY = #{record.formShowTreeOnly,jdbcType=VARCHAR},
+      FORM_SHOW_TITLE = #{record.formShowTitle,jdbcType=VARCHAR},
+      FORM_TREE_TYPE = #{record.formTreeType,jdbcType=VARCHAR},
+      FORM_TREE_SOLUTION_ID = #{record.formTreeSolutionId,jdbcType=DECIMAL},
+      FORM_TREE_WIDTH = #{record.formTreeWidth,jdbcType=VARCHAR},
+      FORM_SHOW_FILTER = #{record.formShowFilter,jdbcType=VARCHAR},
+      FORM_SHOW_EMP_CONTAINER = #{record.formShowEmpContainer,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTree" >
+    update SYS_FORMCONFIG_TREE
+    <set >
+      <if test="formTreeFormId != null" >
+        FORM_TREE_FORM_ID = #{formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formIsLazy != null" >
+        FORM_IS_LAZY = #{formIsLazy,jdbcType=VARCHAR},
+      </if>
+      <if test="formResultAsTree != null" >
+        FORM_RESULT_AS_TREE = #{formResultAsTree,jdbcType=VARCHAR},
+      </if>
+      <if test="formCheckRecursive != null" >
+        FORM_CHECK_RECURSIVE = #{formCheckRecursive,jdbcType=VARCHAR},
+      </if>
+      <if test="formAutoCheckParent != null" >
+        FORM_AUTO_CHECK_PARENT = #{formAutoCheckParent,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnLoad != null" >
+        FORM_EXPAND_ON_LOAD = #{formExpandOnLoad,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeIcon != null" >
+        FORM_SHOW_TREE_ICON = #{formShowTreeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeLines != null" >
+        FORM_SHOW_TREE_LINES = #{formShowTreeLines,jdbcType=VARCHAR},
+      </if>
+      <if test="formAllowSelect != null" >
+        FORM_ALLOW_SELECT = #{formAllowSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowCheckbox != null" >
+        FORM_SHOW_CHECKBOX = #{formShowCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowFolderCheckbox != null" >
+        FORM_SHOW_FOLDER_CHECKBOX = #{formShowFolderCheckbox,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnDbclick != null" >
+        FORM_EXPAND_ON_DBCLICK = #{formExpandOnDbclick,jdbcType=VARCHAR},
+      </if>
+      <if test="formExpandOnClick != null" >
+        FORM_EXPAND_ON_CLICK = #{formExpandOnClick,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeUrl != null" >
+        FORM_TREE_URL = #{formTreeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeValue != null" >
+        FORM_TREE_VALUE = #{formTreeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeIdField != null" >
+        FORM_TREE_ID_FIELD = #{formTreeIdField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeTextField != null" >
+        FORM_TREE_TEXT_FIELD = #{formTreeTextField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeParentField != null" >
+        FORM_TREE_PARENT_FIELD = #{formTreeParentField,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeDataField != null" >
+        FORM_TREE_DATA_FIELD = #{formTreeDataField,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formTreeInitFun != null" >
+        FORM_TREE_INIT_FUN = #{formTreeInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeLoadFun != null" >
+        FORM_TREE_LOAD_FUN = #{formTreeLoadFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeNodeClickFun != null" >
+        FORM_TREE_NODE_CLICK_FUN = #{formTreeNodeClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeCustomFun != null" >
+        FORM_TREE_CUSTOM_FUN = #{formTreeCustomFun,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTreeOnly != null" >
+        FORM_SHOW_TREE_ONLY = #{formShowTreeOnly,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowTitle != null" >
+        FORM_SHOW_TITLE = #{formShowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeType != null" >
+        FORM_TREE_TYPE = #{formTreeType,jdbcType=VARCHAR},
+      </if>
+      <if test="formTreeSolutionId != null" >
+        FORM_TREE_SOLUTION_ID = #{formTreeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="formTreeWidth != null" >
+        FORM_TREE_WIDTH = #{formTreeWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowFilter != null" >
+        FORM_SHOW_FILTER = #{formShowFilter,jdbcType=VARCHAR},
+      </if>
+      <if test="formShowEmpContainer != null" >
+        FORM_SHOW_EMP_CONTAINER = #{formShowEmpContainer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FORM_TREE_ID = #{formTreeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigTree" >
+    update SYS_FORMCONFIG_TREE
+    set FORM_TREE_FORM_ID = #{formTreeFormId,jdbcType=DECIMAL},
+      FORM_IS_LAZY = #{formIsLazy,jdbcType=VARCHAR},
+      FORM_RESULT_AS_TREE = #{formResultAsTree,jdbcType=VARCHAR},
+      FORM_CHECK_RECURSIVE = #{formCheckRecursive,jdbcType=VARCHAR},
+      FORM_AUTO_CHECK_PARENT = #{formAutoCheckParent,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_LOAD = #{formExpandOnLoad,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_ICON = #{formShowTreeIcon,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_LINES = #{formShowTreeLines,jdbcType=VARCHAR},
+      FORM_ALLOW_SELECT = #{formAllowSelect,jdbcType=VARCHAR},
+      FORM_SHOW_CHECKBOX = #{formShowCheckbox,jdbcType=VARCHAR},
+      FORM_SHOW_FOLDER_CHECKBOX = #{formShowFolderCheckbox,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_DBCLICK = #{formExpandOnDbclick,jdbcType=VARCHAR},
+      FORM_EXPAND_ON_CLICK = #{formExpandOnClick,jdbcType=VARCHAR},
+      FORM_TREE_URL = #{formTreeUrl,jdbcType=VARCHAR},
+      FORM_TREE_VALUE = #{formTreeValue,jdbcType=VARCHAR},
+      FORM_TREE_ID_FIELD = #{formTreeIdField,jdbcType=VARCHAR},
+      FORM_TREE_TEXT_FIELD = #{formTreeTextField,jdbcType=VARCHAR},
+      FORM_TREE_PARENT_FIELD = #{formTreeParentField,jdbcType=VARCHAR},
+      FORM_TREE_DATA_FIELD = #{formTreeDataField,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FORM_TREE_INIT_FUN = #{formTreeInitFun,jdbcType=VARCHAR},
+      FORM_TREE_LOAD_FUN = #{formTreeLoadFun,jdbcType=VARCHAR},
+      FORM_TREE_NODE_CLICK_FUN = #{formTreeNodeClickFun,jdbcType=VARCHAR},
+      FORM_TREE_CUSTOM_FUN = #{formTreeCustomFun,jdbcType=VARCHAR},
+      FORM_SHOW_TREE_ONLY = #{formShowTreeOnly,jdbcType=VARCHAR},
+      FORM_SHOW_TITLE = #{formShowTitle,jdbcType=VARCHAR},
+      FORM_TREE_TYPE = #{formTreeType,jdbcType=VARCHAR},
+      FORM_TREE_SOLUTION_ID = #{formTreeSolutionId,jdbcType=DECIMAL},
+      FORM_TREE_WIDTH = #{formTreeWidth,jdbcType=VARCHAR},
+      FORM_SHOW_FILTER = #{formShowFilter,jdbcType=VARCHAR},
+      FORM_SHOW_EMP_CONTAINER = #{formShowEmpContainer,jdbcType=VARCHAR}
+    where FORM_TREE_ID = #{formTreeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

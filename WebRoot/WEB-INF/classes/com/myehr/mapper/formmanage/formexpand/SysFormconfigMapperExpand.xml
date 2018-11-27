@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.formexpand.SysFormconfigMapperExpand" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfig" >
+    <id column="FORM_DEF_ID" property="formDefId" jdbcType="DECIMAL" />
+    <result column="FORM_DEF_CODE" property="formDefCode" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_NAME" property="formDefName" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_LAYOUT_TYPE" property="formDefLayoutType" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_DESC" property="formDefDesc" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_DATA_TYPE" property="formDefDataType" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_ROW_COUNT" property="formDefRowCount" jdbcType="NVARCHAR" />
+    <result column="FORM_URL" property="formUrl" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_FOLDER_ID" property="formDefFolderId" jdbcType="DECIMAL" />
+    <result column="FORM_LABLE_WIDTH" property="formLableWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_SAVETABLE" property="formDefSavetable" jdbcType="NVARCHAR" />
+    <result column="FORM_OTHER_COLUMN_SQL" property="formOtherColumnSql" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_IS_PROCESS" property="formDefIsProcess" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_PROCESS_DEF_NAME" property="formDefProcessDefName" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_URL" property="formSubmitUrl" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_TIME" property="formSubmitTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_SUBMIT_USER_ID" property="formSubmitUserId" jdbcType="DECIMAL" />
+    <result column="FORM_DEF_PROCESS_DEF_NAME_TEXT" property="formDefProcessDefNameText" jdbcType="NVARCHAR" />
+    <result column="FORM_SUBMIT_STATUS" property="formSubmitStatus" jdbcType="NVARCHAR" />
+    <result column="IS_SHOW_FLOW_TITLE" property="isShowFlowTitle" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_DEF_INIT_QZ_JS" property="formDefInitQzJs" jdbcType="NVARCHAR" />
+    <result column="FORM_AUTHORITY_IS_CONTROL" property="formAuthorityIsControl" jdbcType="NVARCHAR" />
+    <result column="EXPAND_1" property="expand1" jdbcType="NVARCHAR" />
+    <result column="EXPAND_FIELD" property="expandField" jdbcType="NVARCHAR" />
+    <result column="IS_APP" property="isApp" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_INIT_QZ_SQL" property="formDefInitQzSql" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_ID" property="templateId" jdbcType="DECIMAL" />
+    <result column="ACT_MODEL_ID" property="actModelId" jdbcType="NVARCHAR" />
+    <result column="IS_FILEMANAGE" property="isFilemanage" jdbcType="NVARCHAR" />
+    <result column="IS_ORG_POWER" property="isOrgPower" jdbcType="NVARCHAR" />
+    <result column="IS_EMP_POWER" property="isEmpPower" jdbcType="NVARCHAR" />
+    <result column="IS_COMMENT" property="isComment" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs" extends="BaseResultMap" >
+    <result column="FORM_DEF_ENTITY_SQL" property="formDefEntitySql" jdbcType="LONGVARCHAR" />
+    <result column="FORM_DEF_SQL" property="formDefSql" jdbcType="LONGVARCHAR" />
+    <result column="ORDER_SQL" property="orderSql" jdbcType="LONGVARCHAR" />
+    <result column="POWER_SQL" property="powerSql" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapEntityAndFieldCode" type="com.myehr.pojo.formmanage.form.EntityAndFieldCode">
+    <result column="FIELD_CODE" property="entityCode" jdbcType="VARCHAR" />
+    <result column="ENTITY_CODE" property="fieldCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_DEF_ID, FORM_DEF_CODE, FORM_DEF_NAME, FORM_DEF_LAYOUT_TYPE, FORM_DEF_DESC, FORM_DEF_DATA_TYPE, 
+    FORM_DEF_ROW_COUNT, FORM_URL, FORM_DEF_FOLDER_ID, FORM_LABLE_WIDTH, FORM_DEF_SAVETABLE, 
+    FORM_OTHER_COLUMN_SQL, FORM_DEF_IS_PROCESS, FORM_DEF_PROCESS_DEF_NAME, FORM_SUBMIT_URL, 
+    FORM_SUBMIT_TIME, FORM_SUBMIT_USER_ID, FORM_DEF_PROCESS_DEF_NAME_TEXT, FORM_SUBMIT_STATUS, 
+    IS_SHOW_FLOW_TITLE, OPERATOR_NAME, OPERATOR_TIME, FORM_DEF_INIT_QZ_JS, FORM_AUTHORITY_IS_CONTROL, 
+    EXPAND_1, EXPAND_FIELD, IS_APP, FORM_DEF_INIT_QZ_SQL, TEMPLATE_ID, ACT_MODEL_ID, 
+    IS_FILEMANAGE, IS_ORG_POWER, IS_EMP_POWER, IS_COMMENT
+  </sql>
+  <sql id="Blob_Column_List" >
+    FORM_DEF_ENTITY_SQL, FORM_DEF_SQL, ORDER_SQL, POWER_SQL
+  </sql>
+  <select id="operation5" parameterType="java.util.Map" resultMap="ResultMapEntityAndFieldCode">
+		${sql}
+  </select>
+  
+  <select id="operation4" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+		${sql}
+  </select>
+  
+  <select id="operation3" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		${sql}
+  </select>
+  
+  <select id="operation2" parameterType="java.util.Map" resultType="java.lang.String">
+  		${sql}
+  </select>
+  
+  <select id="operation" parameterType="java.util.Map">
+  		${sql}
+  </select>
+  
+  <select id="updateSubmitUrl" parameterType="java.util.Map">
+  		UPDATE SYS_FORMCONFIG SET FORM_SUBMIT_URL  = #{submitUrl}  WHERE  FORM_DEF_ID = #{formDefId}  
+  </select>
+  
+  <select id="updataFormFolderId" parameterType="java.util.Map">
+  		UPDATE SYS_FORMCONFIG SET FORM_DEF_FOLDER_ID  = #{formFolderId}  WHERE  FORM_DEF_ID = #{formDefId}  
+  </select>
+  
+  <select id="updateFormEntitySql" parameterType="java.util.Map">
+  		update sys_formconfig
+   set form_def_entity_sql   = #{entitySql},
+       form_def_savetable    = #{tablename},
+       FORM_DEF_SQL          = #{excSql},
+       FORM_OTHER_COLUMN_SQL = #{otherColumn}
+ where form_def_id = #{formId} 
+  </select>
+  
+  <select id="getFormconfigWithBLOBsById" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  		select * from sys_formconfig where form_def_id = #{formDefId} 
+  </select>
+</mapper>

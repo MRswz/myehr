@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.field.DataFieldMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.field.DataField" >
+    <id column="DT_ID" property="dtId" jdbcType="INTEGER" />
+    <result column="FIELD_CODE" property="fieldCode" jdbcType="VARCHAR" />
+    <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+    <result column="ISREQUIRED" property="isrequired" jdbcType="VARCHAR" />
+    <result column="ISPK" property="ispk" jdbcType="VARCHAR" />
+    <result column="ISNK" property="isnk" jdbcType="VARCHAR" />
+    <result column="FIELD_ENGLISHNAME" property="fieldEnglishname" jdbcType="VARCHAR" />
+    <result column="TABLE_CODE" property="tableCode" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="ENTITY_CODE" property="entityCode" jdbcType="VARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="VARCHAR" />
+    <result column="FIELD_LEN" property="fieldLen" jdbcType="VARCHAR" />
+    <result column="DATA_TYPE" property="dataType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DT_ID, FIELD_CODE, FIELD_NAME, ISREQUIRED, ISPK, ISNK, FIELD_ENGLISHNAME, TABLE_CODE, 
+    TABLE_NAME, ENTITY_CODE, FIELD_TYPE, FIELD_LEN, DATA_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.field.DataFieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from data_field
+    where DT_ID = #{dtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from data_field
+    where DT_ID = #{dtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.field.DataFieldExample" >
+    delete from data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.field.DataField" >
+    insert into data_field (DT_ID, FIELD_CODE, FIELD_NAME, 
+      ISREQUIRED, ISPK, ISNK, 
+      FIELD_ENGLISHNAME, TABLE_CODE, TABLE_NAME, 
+      ENTITY_CODE, FIELD_TYPE, FIELD_LEN, 
+      DATA_TYPE)
+    values (#{dtId,jdbcType=INTEGER}, #{fieldCode,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{isrequired,jdbcType=VARCHAR}, #{ispk,jdbcType=VARCHAR}, #{isnk,jdbcType=VARCHAR}, 
+      #{fieldEnglishname,jdbcType=VARCHAR}, #{tableCode,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{entityCode,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{fieldLen,jdbcType=VARCHAR}, 
+      #{dataType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.field.DataField" >
+    insert into data_field
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dtId != null" >
+        DT_ID,
+      </if>
+      <if test="fieldCode != null" >
+        FIELD_CODE,
+      </if>
+      <if test="fieldName != null" >
+        FIELD_NAME,
+      </if>
+      <if test="isrequired != null" >
+        ISREQUIRED,
+      </if>
+      <if test="ispk != null" >
+        ISPK,
+      </if>
+      <if test="isnk != null" >
+        ISNK,
+      </if>
+      <if test="fieldEnglishname != null" >
+        FIELD_ENGLISHNAME,
+      </if>
+      <if test="tableCode != null" >
+        TABLE_CODE,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="entityCode != null" >
+        ENTITY_CODE,
+      </if>
+      <if test="fieldType != null" >
+        FIELD_TYPE,
+      </if>
+      <if test="fieldLen != null" >
+        FIELD_LEN,
+      </if>
+      <if test="dataType != null" >
+        DATA_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dtId != null" >
+        #{dtId,jdbcType=INTEGER},
+      </if>
+      <if test="fieldCode != null" >
+        #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null" >
+        #{isrequired,jdbcType=VARCHAR},
+      </if>
+      <if test="ispk != null" >
+        #{ispk,jdbcType=VARCHAR},
+      </if>
+      <if test="isnk != null" >
+        #{isnk,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldEnglishname != null" >
+        #{fieldEnglishname,jdbcType=VARCHAR},
+      </if>
+      <if test="tableCode != null" >
+        #{tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityCode != null" >
+        #{entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldLen != null" >
+        #{fieldLen,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.field.DataFieldExample" resultType="java.lang.Integer" >
+    select count(*) from data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update data_field
+    <set >
+      <if test="record.dtId != null" >
+        DT_ID = #{record.dtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldCode != null" >
+        FIELD_CODE = #{record.fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldName != null" >
+        FIELD_NAME = #{record.fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null" >
+        ISREQUIRED = #{record.isrequired,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ispk != null" >
+        ISPK = #{record.ispk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnk != null" >
+        ISNK = #{record.isnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldEnglishname != null" >
+        FIELD_ENGLISHNAME = #{record.fieldEnglishname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableCode != null" >
+        TABLE_CODE = #{record.tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityCode != null" >
+        ENTITY_CODE = #{record.entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldType != null" >
+        FIELD_TYPE = #{record.fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldLen != null" >
+        FIELD_LEN = #{record.fieldLen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataType != null" >
+        DATA_TYPE = #{record.dataType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update data_field
+    set DT_ID = #{record.dtId,jdbcType=INTEGER},
+      FIELD_CODE = #{record.fieldCode,jdbcType=VARCHAR},
+      FIELD_NAME = #{record.fieldName,jdbcType=VARCHAR},
+      ISREQUIRED = #{record.isrequired,jdbcType=VARCHAR},
+      ISPK = #{record.ispk,jdbcType=VARCHAR},
+      ISNK = #{record.isnk,jdbcType=VARCHAR},
+      FIELD_ENGLISHNAME = #{record.fieldEnglishname,jdbcType=VARCHAR},
+      TABLE_CODE = #{record.tableCode,jdbcType=VARCHAR},
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      ENTITY_CODE = #{record.entityCode,jdbcType=VARCHAR},
+      FIELD_TYPE = #{record.fieldType,jdbcType=VARCHAR},
+      FIELD_LEN = #{record.fieldLen,jdbcType=VARCHAR},
+      DATA_TYPE = #{record.dataType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.field.DataField" >
+    update data_field
+    <set >
+      <if test="fieldCode != null" >
+        FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null" >
+        ISREQUIRED = #{isrequired,jdbcType=VARCHAR},
+      </if>
+      <if test="ispk != null" >
+        ISPK = #{ispk,jdbcType=VARCHAR},
+      </if>
+      <if test="isnk != null" >
+        ISNK = #{isnk,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldEnglishname != null" >
+        FIELD_ENGLISHNAME = #{fieldEnglishname,jdbcType=VARCHAR},
+      </if>
+      <if test="tableCode != null" >
+        TABLE_CODE = #{tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityCode != null" >
+        ENTITY_CODE = #{entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        FIELD_TYPE = #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldLen != null" >
+        FIELD_LEN = #{fieldLen,jdbcType=VARCHAR},
+      </if>
+      <if test="dataType != null" >
+        DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DT_ID = #{dtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.field.DataField" >
+    update data_field
+    set FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
+      FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      ISREQUIRED = #{isrequired,jdbcType=VARCHAR},
+      ISPK = #{ispk,jdbcType=VARCHAR},
+      ISNK = #{isnk,jdbcType=VARCHAR},
+      FIELD_ENGLISHNAME = #{fieldEnglishname,jdbcType=VARCHAR},
+      TABLE_CODE = #{tableCode,jdbcType=VARCHAR},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      ENTITY_CODE = #{entityCode,jdbcType=VARCHAR},
+      FIELD_TYPE = #{fieldType,jdbcType=VARCHAR},
+      FIELD_LEN = #{fieldLen,jdbcType=VARCHAR},
+      DATA_TYPE = #{dataType,jdbcType=VARCHAR}
+    where DT_ID = #{dtId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.calendar.AttendEmpshiftgroupSchedueMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="empid" property="empid" jdbcType="INTEGER" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="shiftorg" property="shiftorg" jdbcType="INTEGER" />
+    <result column="attmonth" property="attmonth" jdbcType="TIMESTAMP" />
+    <result column="term" property="term" jdbcType="TIMESTAMP" />
+    <result column="daytype" property="daytype" jdbcType="INTEGER" />
+    <result column="groupid" property="groupid" jdbcType="INTEGER" />
+    <result column="shifttype" property="shifttype" jdbcType="INTEGER" />
+    <result column="worktimes" property="worktimes" jdbcType="DECIMAL" />
+    <result column="begintime1" property="begintime1" jdbcType="TIMESTAMP" />
+    <result column="endtime1" property="endtime1" jdbcType="TIMESTAMP" />
+    <result column="begintime2" property="begintime2" jdbcType="TIMESTAMP" />
+    <result column="endtime2" property="endtime2" jdbcType="TIMESTAMP" />
+    <result column="cardtimes" property="cardtimes" jdbcType="INTEGER" />
+    <result column="scanendtime" property="scanendtime" jdbcType="TIMESTAMP" />
+    <result column="scanbegintime" property="scanbegintime" jdbcType="TIMESTAMP" />
+    <result column="latemiu" property="latemiu" jdbcType="INTEGER" />
+    <result column="lateabs" property="lateabs" jdbcType="INTEGER" />
+    <result column="earlymiu" property="earlymiu" jdbcType="INTEGER" />
+    <result column="earlabs" property="earlabs" jdbcType="INTEGER" />
+    <result column="flextime" property="flextime" jdbcType="INTEGER" />
+    <result column="holidyot3" property="holidyot3" jdbcType="INTEGER" />
+    <result column="zoneid" property="zoneid" jdbcType="INTEGER" />
+    <result column="lockshift" property="lockshift" jdbcType="INTEGER" />
+    <result column="newshifttype" property="newshifttype" jdbcType="INTEGER" />
+    <result column="restdate" property="restdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, empid, orgid, shiftorg, attmonth, term, daytype, groupid, shifttype, worktimes, 
+    begintime1, endtime1, begintime2, endtime2, cardtimes, scanendtime, scanbegintime, 
+    latemiu, lateabs, earlymiu, earlabs, flextime, holidyot3, zoneid, lockshift, newshifttype, 
+    restdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ATTEND_EMPSHIFTGROUP_SCHEDUE
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ATTEND_EMPSHIFTGROUP_SCHEDUE
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedueExample" >
+    delete from ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue" >
+    insert into ATTEND_EMPSHIFTGROUP_SCHEDUE (empid, orgid, 
+      shiftorg, attmonth, term, 
+      daytype, groupid, shifttype, 
+      worktimes, begintime1, endtime1, 
+      begintime2, endtime2, cardtimes, 
+      scanendtime, scanbegintime, latemiu, 
+      lateabs, earlymiu, earlabs, 
+      flextime, holidyot3, zoneid, 
+      lockshift, newshifttype, restdate
+      )
+    values (#{empid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, 
+      #{shiftorg,jdbcType=INTEGER}, #{attmonth,jdbcType=TIMESTAMP}, #{term,jdbcType=TIMESTAMP}, 
+      #{daytype,jdbcType=INTEGER}, #{groupid,jdbcType=INTEGER}, #{shifttype,jdbcType=INTEGER}, 
+      #{worktimes,jdbcType=DECIMAL}, #{begintime1,jdbcType=TIMESTAMP}, #{endtime1,jdbcType=TIMESTAMP}, 
+      #{begintime2,jdbcType=TIMESTAMP}, #{endtime2,jdbcType=TIMESTAMP}, #{cardtimes,jdbcType=INTEGER}, 
+      #{scanendtime,jdbcType=TIMESTAMP}, #{scanbegintime,jdbcType=TIMESTAMP}, #{latemiu,jdbcType=INTEGER}, 
+      #{lateabs,jdbcType=INTEGER}, #{earlymiu,jdbcType=INTEGER}, #{earlabs,jdbcType=INTEGER}, 
+      #{flextime,jdbcType=INTEGER}, #{holidyot3,jdbcType=INTEGER}, #{zoneid,jdbcType=INTEGER}, 
+      #{lockshift,jdbcType=INTEGER}, #{newshifttype,jdbcType=INTEGER}, #{restdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue" >
+    insert into ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="empid != null" >
+        empid,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="shiftorg != null" >
+        shiftorg,
+      </if>
+      <if test="attmonth != null" >
+        attmonth,
+      </if>
+      <if test="term != null" >
+        term,
+      </if>
+      <if test="daytype != null" >
+        daytype,
+      </if>
+      <if test="groupid != null" >
+        groupid,
+      </if>
+      <if test="shifttype != null" >
+        shifttype,
+      </if>
+      <if test="worktimes != null" >
+        worktimes,
+      </if>
+      <if test="begintime1 != null" >
+        begintime1,
+      </if>
+      <if test="endtime1 != null" >
+        endtime1,
+      </if>
+      <if test="begintime2 != null" >
+        begintime2,
+      </if>
+      <if test="endtime2 != null" >
+        endtime2,
+      </if>
+      <if test="cardtimes != null" >
+        cardtimes,
+      </if>
+      <if test="scanendtime != null" >
+        scanendtime,
+      </if>
+      <if test="scanbegintime != null" >
+        scanbegintime,
+      </if>
+      <if test="latemiu != null" >
+        latemiu,
+      </if>
+      <if test="lateabs != null" >
+        lateabs,
+      </if>
+      <if test="earlymiu != null" >
+        earlymiu,
+      </if>
+      <if test="earlabs != null" >
+        earlabs,
+      </if>
+      <if test="flextime != null" >
+        flextime,
+      </if>
+      <if test="holidyot3 != null" >
+        holidyot3,
+      </if>
+      <if test="zoneid != null" >
+        zoneid,
+      </if>
+      <if test="lockshift != null" >
+        lockshift,
+      </if>
+      <if test="newshifttype != null" >
+        newshifttype,
+      </if>
+      <if test="restdate != null" >
+        restdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null" >
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="shiftorg != null" >
+        #{shiftorg,jdbcType=INTEGER},
+      </if>
+      <if test="attmonth != null" >
+        #{attmonth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=TIMESTAMP},
+      </if>
+      <if test="daytype != null" >
+        #{daytype,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="shifttype != null" >
+        #{shifttype,jdbcType=INTEGER},
+      </if>
+      <if test="worktimes != null" >
+        #{worktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="begintime1 != null" >
+        #{begintime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime1 != null" >
+        #{endtime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime2 != null" >
+        #{begintime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime2 != null" >
+        #{endtime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardtimes != null" >
+        #{cardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="scanendtime != null" >
+        #{scanendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scanbegintime != null" >
+        #{scanbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latemiu != null" >
+        #{latemiu,jdbcType=INTEGER},
+      </if>
+      <if test="lateabs != null" >
+        #{lateabs,jdbcType=INTEGER},
+      </if>
+      <if test="earlymiu != null" >
+        #{earlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="earlabs != null" >
+        #{earlabs,jdbcType=INTEGER},
+      </if>
+      <if test="flextime != null" >
+        #{flextime,jdbcType=INTEGER},
+      </if>
+      <if test="holidyot3 != null" >
+        #{holidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="zoneid != null" >
+        #{zoneid,jdbcType=INTEGER},
+      </if>
+      <if test="lockshift != null" >
+        #{lockshift,jdbcType=INTEGER},
+      </if>
+      <if test="newshifttype != null" >
+        #{newshifttype,jdbcType=INTEGER},
+      </if>
+      <if test="restdate != null" >
+        #{restdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedueExample" resultType="java.lang.Integer" >
+    select count(*) from ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.empid != null" >
+        empid = #{record.empid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgid != null" >
+        orgid = #{record.orgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shiftorg != null" >
+        shiftorg = #{record.shiftorg,jdbcType=INTEGER},
+      </if>
+      <if test="record.attmonth != null" >
+        attmonth = #{record.attmonth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.term != null" >
+        term = #{record.term,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.daytype != null" >
+        daytype = #{record.daytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupid != null" >
+        groupid = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shifttype != null" >
+        shifttype = #{record.shifttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.worktimes != null" >
+        worktimes = #{record.worktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="record.begintime1 != null" >
+        begintime1 = #{record.begintime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime1 != null" >
+        endtime1 = #{record.endtime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.begintime2 != null" >
+        begintime2 = #{record.begintime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime2 != null" >
+        endtime2 = #{record.endtime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cardtimes != null" >
+        cardtimes = #{record.cardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.scanendtime != null" >
+        scanendtime = #{record.scanendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.scanbegintime != null" >
+        scanbegintime = #{record.scanbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.latemiu != null" >
+        latemiu = #{record.latemiu,jdbcType=INTEGER},
+      </if>
+      <if test="record.lateabs != null" >
+        lateabs = #{record.lateabs,jdbcType=INTEGER},
+      </if>
+      <if test="record.earlymiu != null" >
+        earlymiu = #{record.earlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="record.earlabs != null" >
+        earlabs = #{record.earlabs,jdbcType=INTEGER},
+      </if>
+      <if test="record.flextime != null" >
+        flextime = #{record.flextime,jdbcType=INTEGER},
+      </if>
+      <if test="record.holidyot3 != null" >
+        holidyot3 = #{record.holidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="record.zoneid != null" >
+        zoneid = #{record.zoneid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lockshift != null" >
+        lockshift = #{record.lockshift,jdbcType=INTEGER},
+      </if>
+      <if test="record.newshifttype != null" >
+        newshifttype = #{record.newshifttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.restdate != null" >
+        restdate = #{record.restdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ATTEND_EMPSHIFTGROUP_SCHEDUE
+    set id = #{record.id,jdbcType=INTEGER},
+      empid = #{record.empid,jdbcType=INTEGER},
+      orgid = #{record.orgid,jdbcType=INTEGER},
+      shiftorg = #{record.shiftorg,jdbcType=INTEGER},
+      attmonth = #{record.attmonth,jdbcType=TIMESTAMP},
+      term = #{record.term,jdbcType=TIMESTAMP},
+      daytype = #{record.daytype,jdbcType=INTEGER},
+      groupid = #{record.groupid,jdbcType=INTEGER},
+      shifttype = #{record.shifttype,jdbcType=INTEGER},
+      worktimes = #{record.worktimes,jdbcType=DECIMAL},
+      begintime1 = #{record.begintime1,jdbcType=TIMESTAMP},
+      endtime1 = #{record.endtime1,jdbcType=TIMESTAMP},
+      begintime2 = #{record.begintime2,jdbcType=TIMESTAMP},
+      endtime2 = #{record.endtime2,jdbcType=TIMESTAMP},
+      cardtimes = #{record.cardtimes,jdbcType=INTEGER},
+      scanendtime = #{record.scanendtime,jdbcType=TIMESTAMP},
+      scanbegintime = #{record.scanbegintime,jdbcType=TIMESTAMP},
+      latemiu = #{record.latemiu,jdbcType=INTEGER},
+      lateabs = #{record.lateabs,jdbcType=INTEGER},
+      earlymiu = #{record.earlymiu,jdbcType=INTEGER},
+      earlabs = #{record.earlabs,jdbcType=INTEGER},
+      flextime = #{record.flextime,jdbcType=INTEGER},
+      holidyot3 = #{record.holidyot3,jdbcType=INTEGER},
+      zoneid = #{record.zoneid,jdbcType=INTEGER},
+      lockshift = #{record.lockshift,jdbcType=INTEGER},
+      newshifttype = #{record.newshifttype,jdbcType=INTEGER},
+      restdate = #{record.restdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue" >
+    update ATTEND_EMPSHIFTGROUP_SCHEDUE
+    <set >
+      <if test="empid != null" >
+        empid = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="shiftorg != null" >
+        shiftorg = #{shiftorg,jdbcType=INTEGER},
+      </if>
+      <if test="attmonth != null" >
+        attmonth = #{attmonth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="term != null" >
+        term = #{term,jdbcType=TIMESTAMP},
+      </if>
+      <if test="daytype != null" >
+        daytype = #{daytype,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="shifttype != null" >
+        shifttype = #{shifttype,jdbcType=INTEGER},
+      </if>
+      <if test="worktimes != null" >
+        worktimes = #{worktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="begintime1 != null" >
+        begintime1 = #{begintime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime1 != null" >
+        endtime1 = #{endtime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime2 != null" >
+        begintime2 = #{begintime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime2 != null" >
+        endtime2 = #{endtime2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardtimes != null" >
+        cardtimes = #{cardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="scanendtime != null" >
+        scanendtime = #{scanendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scanbegintime != null" >
+        scanbegintime = #{scanbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latemiu != null" >
+        latemiu = #{latemiu,jdbcType=INTEGER},
+      </if>
+      <if test="lateabs != null" >
+        lateabs = #{lateabs,jdbcType=INTEGER},
+      </if>
+      <if test="earlymiu != null" >
+        earlymiu = #{earlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="earlabs != null" >
+        earlabs = #{earlabs,jdbcType=INTEGER},
+      </if>
+      <if test="flextime != null" >
+        flextime = #{flextime,jdbcType=INTEGER},
+      </if>
+      <if test="holidyot3 != null" >
+        holidyot3 = #{holidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="zoneid != null" >
+        zoneid = #{zoneid,jdbcType=INTEGER},
+      </if>
+      <if test="lockshift != null" >
+        lockshift = #{lockshift,jdbcType=INTEGER},
+      </if>
+      <if test="newshifttype != null" >
+        newshifttype = #{newshifttype,jdbcType=INTEGER},
+      </if>
+      <if test="restdate != null" >
+        restdate = #{restdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.calendar.AttendEmpshiftgroupSchedue" >
+    update ATTEND_EMPSHIFTGROUP_SCHEDUE
+    set empid = #{empid,jdbcType=INTEGER},
+      orgid = #{orgid,jdbcType=INTEGER},
+      shiftorg = #{shiftorg,jdbcType=INTEGER},
+      attmonth = #{attmonth,jdbcType=TIMESTAMP},
+      term = #{term,jdbcType=TIMESTAMP},
+      daytype = #{daytype,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=INTEGER},
+      shifttype = #{shifttype,jdbcType=INTEGER},
+      worktimes = #{worktimes,jdbcType=DECIMAL},
+      begintime1 = #{begintime1,jdbcType=TIMESTAMP},
+      endtime1 = #{endtime1,jdbcType=TIMESTAMP},
+      begintime2 = #{begintime2,jdbcType=TIMESTAMP},
+      endtime2 = #{endtime2,jdbcType=TIMESTAMP},
+      cardtimes = #{cardtimes,jdbcType=INTEGER},
+      scanendtime = #{scanendtime,jdbcType=TIMESTAMP},
+      scanbegintime = #{scanbegintime,jdbcType=TIMESTAMP},
+      latemiu = #{latemiu,jdbcType=INTEGER},
+      lateabs = #{lateabs,jdbcType=INTEGER},
+      earlymiu = #{earlymiu,jdbcType=INTEGER},
+      earlabs = #{earlabs,jdbcType=INTEGER},
+      flextime = #{flextime,jdbcType=INTEGER},
+      holidyot3 = #{holidyot3,jdbcType=INTEGER},
+      zoneid = #{zoneid,jdbcType=INTEGER},
+      lockshift = #{lockshift,jdbcType=INTEGER},
+      newshifttype = #{newshifttype,jdbcType=INTEGER},
+      restdate = #{restdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

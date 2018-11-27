@@ -1,0 +1,105 @@
+.CCM_ELEMENT{
+	position: static;
+	padding:0;
+}
+.CCM_ELEMENT_ROW {
+	padding: 0 30px 0 15px;
+}
+.CCM_LABEL{
+	float:left;
+	font-size:14px;
+	width:100px;
+	line-height: 30px;
+	margin:0;
+}
+.CCM_GROUP{
+	margin-bottom:20px;
+	
+}
+.CCM_DISABLE_INPUT{
+	border:none;
+	float:left;
+	padding:0;
+	height:30px;
+	background-color:#fff !important;
+	box-shadow:none;
+}
+.CCM_INPUT{
+	float:left;
+	padding:0;
+	height:30px;
+	background-color:#fff;
+}
+.CCM_TEXTAREA{
+	float:left;
+	padding:0;
+	background-color:#fff;
+}
+.CCM_COL{
+	margin:5px 0;
+	height:55px;
+}
+.CCM_COL_TEXTAREA{
+	margin:5px 0;
+}
+
+.CCM_SELECT{
+	width:200px;
+	float:left;
+	padding:0;
+	height:30px;
+	background-color:#fff;
+}
+.CCM_DATE_INPUT{
+	width:134px;
+	float:left;
+	height:30px;
+	padding:0;
+	background-color:#fff !important;
+}
+.CCD_ROW{
+	padding:0 !important;
+	display:block;
+}
+.CCD_DELET_BUTTON{
+	position: absolute;
+	right: 30px;
+	font-size: 25px;
+}
+.CCD_SAVE_BUTTON{
+	position: absolute;
+	right: 30px;
+	font-size: 25px;
+	top:50px;
+}
+.CCD_TITLE{
+	display:inline-block;
+	font-size:18;
+	text-align:left;
+	height: 36px;
+	line-height: 33px;
+	color:#999;
+	cursor: pointer;
+	margin:0 20 0 15px;
+}
+.CCD_TITLE_BUTTON{
+	line-height:33px;
+	width:30px;
+	height:36px;
+	font-size:20px;
+	cursor:hand;
+}
+.CCD_ADD{
+	min-height:110px !important;
+}
+.fadeInRight{
+	padding:0;
+}
+.BUSSINESS_ID_value{
+	float:left;
+	height:12px;
+	margin:11px 0;
+}
+.CC_REQUMARK{
+	
+}

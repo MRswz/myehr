@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysdict.SysDictEntryMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.dict.SysDictEntry" >
+    <id column="DICT_ENTRY_ID" property="dictEntryId" jdbcType="INTEGER" />
+    <result column="DICT_ENTRY_CODE" property="dictEntryCode" jdbcType="VARCHAR" />
+    <result column="DICT_ENTRY_NAME" property="dictEntryName" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_ID" property="dictTypeId" jdbcType="INTEGER" />
+    <result column="DICT_ENTRY_REMARK" property="dictEntryRemark" jdbcType="VARCHAR" />
+    <result column="DICT_PARENT_CODE" property="dictParentCode" jdbcType="VARCHAR" />
+    <result column="DICT_ENTRY_SORT" property="dictEntrySort" jdbcType="REAL" />
+    <result column="DICT_ENTRY_SEQ" property="dictEntrySeq" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_CODE" property="dictTypeCode" jdbcType="VARCHAR" />
+    <result column="DICT_TYPE_NAME" property="dictTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DICT_ENTRY_ID, DICT_ENTRY_CODE, DICT_ENTRY_NAME, DICT_TYPE_ID, DICT_ENTRY_REMARK, 
+    DICT_PARENT_CODE, DICT_ENTRY_SORT, DICT_ENTRY_SEQ, OPERATOR_NAME, OPERATOR_TIME, 
+    APPROVE_NAME, APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.SysDictEntryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_dict_entry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict_entry
+    where DICT_ENTRY_ID = #{dictEntryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_dict_entry
+    where DICT_ENTRY_ID = #{dictEntryId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.SysDictEntryExample" >
+    delete from sys_dict_entry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.SysDictEntry" >
+    insert into sys_dict_entry (DICT_ENTRY_CODE, DICT_ENTRY_NAME, 
+      DICT_TYPE_ID, DICT_ENTRY_REMARK, DICT_PARENT_CODE, 
+      DICT_ENTRY_SORT, DICT_ENTRY_SEQ, OPERATOR_NAME, 
+      OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, 
+      DELETE_MARK, DELETE_MARK_BACK)
+    values (#{dictEntryCode,jdbcType=VARCHAR}, #{dictEntryName,jdbcType=VARCHAR}, 
+      #{dictTypeId,jdbcType=INTEGER}, #{dictEntryRemark,jdbcType=VARCHAR}, #{dictParentCode,jdbcType=VARCHAR}, 
+      #{dictEntrySort,jdbcType=REAL}, #{dictEntrySeq,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{approveName,jdbcType=VARCHAR}, #{approveTime,jdbcType=TIMESTAMP}, 
+      #{deleteMark,jdbcType=VARCHAR}, #{deleteMarkBack,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.SysDictEntry" >
+    insert into sys_dict_entry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictEntryId != null" >
+        DICT_ENTRY_ID,
+      </if>
+      <if test="dictEntryCode != null" >
+        DICT_ENTRY_CODE,
+      </if>
+      <if test="dictEntryName != null" >
+        DICT_ENTRY_NAME,
+      </if>
+      <if test="dictTypeId != null" >
+        DICT_TYPE_ID,
+      </if>
+      <if test="dictEntryRemark != null" >
+        DICT_ENTRY_REMARK,
+      </if>
+      <if test="dictParentCode != null" >
+        DICT_PARENT_CODE,
+      </if>
+      <if test="dictEntrySort != null" >
+        DICT_ENTRY_SORT,
+      </if>
+      <if test="dictEntrySeq != null" >
+        DICT_ENTRY_SEQ,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictEntryId != null" >
+        #{dictEntryId,jdbcType=INTEGER},
+      </if>
+      <if test="dictEntryCode != null" >
+        #{dictEntryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEntryName != null" >
+        #{dictEntryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictTypeId != null" >
+        #{dictTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="dictEntryRemark != null" >
+        #{dictEntryRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dictParentCode != null" >
+        #{dictParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEntrySort != null" >
+        #{dictEntrySort,jdbcType=REAL},
+      </if>
+      <if test="dictEntrySeq != null" >
+        #{dictEntrySeq,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.SysDictEntryExample" resultType="java.lang.Integer" >
+    select count(*) from sys_dict_entry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_dict_entry
+    <set >
+      <if test="record.dictEntryId != null" >
+        DICT_ENTRY_ID = #{record.dictEntryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictEntryCode != null" >
+        DICT_ENTRY_CODE = #{record.dictEntryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEntryName != null" >
+        DICT_ENTRY_NAME = #{record.dictEntryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictTypeId != null" >
+        DICT_TYPE_ID = #{record.dictTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictEntryRemark != null" >
+        DICT_ENTRY_REMARK = #{record.dictEntryRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictParentCode != null" >
+        DICT_PARENT_CODE = #{record.dictParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEntrySort != null" >
+        DICT_ENTRY_SORT = #{record.dictEntrySort,jdbcType=REAL},
+      </if>
+      <if test="record.dictEntrySeq != null" >
+        DICT_ENTRY_SEQ = #{record.dictEntrySeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_dict_entry
+    set DICT_ENTRY_ID = #{record.dictEntryId,jdbcType=INTEGER},
+      DICT_ENTRY_CODE = #{record.dictEntryCode,jdbcType=VARCHAR},
+      DICT_ENTRY_NAME = #{record.dictEntryName,jdbcType=VARCHAR},
+      DICT_TYPE_ID = #{record.dictTypeId,jdbcType=INTEGER},
+      DICT_ENTRY_REMARK = #{record.dictEntryRemark,jdbcType=VARCHAR},
+      DICT_PARENT_CODE = #{record.dictParentCode,jdbcType=VARCHAR},
+      DICT_ENTRY_SORT = #{record.dictEntrySort,jdbcType=REAL},
+      DICT_ENTRY_SEQ = #{record.dictEntrySeq,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.SysDictEntry" >
+    update sys_dict_entry
+    <set >
+      <if test="dictEntryCode != null" >
+        DICT_ENTRY_CODE = #{dictEntryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEntryName != null" >
+        DICT_ENTRY_NAME = #{dictEntryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictTypeId != null" >
+        DICT_TYPE_ID = #{dictTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="dictEntryRemark != null" >
+        DICT_ENTRY_REMARK = #{dictEntryRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dictParentCode != null" >
+        DICT_PARENT_CODE = #{dictParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEntrySort != null" >
+        DICT_ENTRY_SORT = #{dictEntrySort,jdbcType=REAL},
+      </if>
+      <if test="dictEntrySeq != null" >
+        DICT_ENTRY_SEQ = #{dictEntrySeq,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DICT_ENTRY_ID = #{dictEntryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.SysDictEntry" >
+    update sys_dict_entry
+    set DICT_ENTRY_CODE = #{dictEntryCode,jdbcType=VARCHAR},
+      DICT_ENTRY_NAME = #{dictEntryName,jdbcType=VARCHAR},
+      DICT_TYPE_ID = #{dictTypeId,jdbcType=INTEGER},
+      DICT_ENTRY_REMARK = #{dictEntryRemark,jdbcType=VARCHAR},
+      DICT_PARENT_CODE = #{dictParentCode,jdbcType=VARCHAR},
+      DICT_ENTRY_SORT = #{dictEntrySort,jdbcType=REAL},
+      DICT_ENTRY_SEQ = #{dictEntrySeq,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR}
+    where DICT_ENTRY_ID = #{dictEntryId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,87 @@
+@charset "utf-8";
+.noselect
+        {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        html
+        {
+            width: 100%;
+            height: 100%;
+        }
+        
+        body
+        {
+            background: radial-gradient(#ACBEC8, #3A4E57);
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Raleway' , sans-serif;
+        }
+        
+        
+        .testtext
+        {
+            width: 100%;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            padding-top: 30vh;
+            font-size: 48px;
+            text-shadow: 0 0 6px #333;
+        }
+        
+        .text
+        {
+            width: 100%;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            padding: 40px 0;
+            font-size: 48px;
+            line-height: 30px;
+        }
+        
+        .text a
+        {
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 20px;
+            color: white;
+        }
+        
+        .window
+        {
+            width: 500px;
+            height: 300px;
+            background: #181818;
+            margin-left: -250px;
+            left: 50%;
+            position: absolute;
+        }
+        
+        .pew
+        {
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #111;
+            background: #E31836;
+            cursor: default;
+        }
+        
+        .container
+        {
+            width: 100%;
+            height: calc(100% - 30px);
+            color: #eee;
+            padding: 35px 0 0 0;
+            text-align: center;
+            font-size: 36px;
+        }

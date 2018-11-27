@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormYkReportQueryparamsMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparams" >
+    <id column="QUERY_PARAM_ID" property="queryParamId" jdbcType="DECIMAL" />
+    <result column="REPORT_ID" property="reportId" jdbcType="DECIMAL" />
+    <result column="PARAMS_ID" property="paramsId" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="COLSPAN_COUNT" property="colspanCount" jdbcType="DECIMAL" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="PARAMS_WIDTH" property="paramsWidth" jdbcType="NVARCHAR" />
+    <result column="SHOW_TYPE" property="showType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    QUERY_PARAM_ID, REPORT_ID, PARAMS_ID, SORT, COLSPAN_COUNT, OPERATOR_NAME, OPERATOR_TIME, 
+    PARAMS_WIDTH, SHOW_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparamsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_YK_REPORT_QUERYPARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_YK_REPORT_QUERYPARAMS
+    where QUERY_PARAM_ID = #{queryParamId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_FORM_YK_REPORT_QUERYPARAMS
+    where QUERY_PARAM_ID = #{queryParamId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparamsExample" >
+    delete from SYS_FORM_YK_REPORT_QUERYPARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparams" >
+    insert into SYS_FORM_YK_REPORT_QUERYPARAMS (REPORT_ID, PARAMS_ID, 
+      SORT, COLSPAN_COUNT, OPERATOR_NAME, 
+      OPERATOR_TIME, PARAMS_WIDTH, SHOW_TYPE
+      )
+    values (#{reportId,jdbcType=DECIMAL}, #{paramsId,jdbcType=DECIMAL}, 
+      #{sort,jdbcType=DECIMAL}, #{colspanCount,jdbcType=DECIMAL}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{paramsWidth,jdbcType=NVARCHAR}, #{showType,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparams" >
+    insert into SYS_FORM_YK_REPORT_QUERYPARAMS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="queryParamId != null" >
+        QUERY_PARAM_ID,
+      </if>
+      <if test="reportId != null" >
+        REPORT_ID,
+      </if>
+      <if test="paramsId != null" >
+        PARAMS_ID,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+      <if test="colspanCount != null" >
+        COLSPAN_COUNT,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="paramsWidth != null" >
+        PARAMS_WIDTH,
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="queryParamId != null" >
+        #{queryParamId,jdbcType=DECIMAL},
+      </if>
+      <if test="reportId != null" >
+        #{reportId,jdbcType=DECIMAL},
+      </if>
+      <if test="paramsId != null" >
+        #{paramsId,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="colspanCount != null" >
+        #{colspanCount,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramsWidth != null" >
+        #{paramsWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="showType != null" >
+        #{showType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparamsExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_YK_REPORT_QUERYPARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_YK_REPORT_QUERYPARAMS
+    <set >
+      <if test="record.queryParamId != null" >
+        QUERY_PARAM_ID = #{record.queryParamId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportId != null" >
+        REPORT_ID = #{record.reportId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paramsId != null" >
+        PARAMS_ID = #{record.paramsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.colspanCount != null" >
+        COLSPAN_COUNT = #{record.colspanCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paramsWidth != null" >
+        PARAMS_WIDTH = #{record.paramsWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showType != null" >
+        SHOW_TYPE = #{record.showType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_YK_REPORT_QUERYPARAMS
+    set QUERY_PARAM_ID = #{record.queryParamId,jdbcType=DECIMAL},
+      REPORT_ID = #{record.reportId,jdbcType=DECIMAL},
+      PARAMS_ID = #{record.paramsId,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      COLSPAN_COUNT = #{record.colspanCount,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      PARAMS_WIDTH = #{record.paramsWidth,jdbcType=NVARCHAR},
+      SHOW_TYPE = #{record.showType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparams" >
+    update SYS_FORM_YK_REPORT_QUERYPARAMS
+    <set >
+      <if test="reportId != null" >
+        REPORT_ID = #{reportId,jdbcType=DECIMAL},
+      </if>
+      <if test="paramsId != null" >
+        PARAMS_ID = #{paramsId,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="colspanCount != null" >
+        COLSPAN_COUNT = #{colspanCount,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramsWidth != null" >
+        PARAMS_WIDTH = #{paramsWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE = #{showType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where QUERY_PARAM_ID = #{queryParamId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormYkReportQueryparams" >
+    update SYS_FORM_YK_REPORT_QUERYPARAMS
+    set REPORT_ID = #{reportId,jdbcType=DECIMAL},
+      PARAMS_ID = #{paramsId,jdbcType=DECIMAL},
+      SORT = #{sort,jdbcType=DECIMAL},
+      COLSPAN_COUNT = #{colspanCount,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      PARAMS_WIDTH = #{paramsWidth,jdbcType=NVARCHAR},
+      SHOW_TYPE = #{showType,jdbcType=NVARCHAR}
+    where QUERY_PARAM_ID = #{queryParamId,jdbcType=DECIMAL}
+  </update>
+</mapper>

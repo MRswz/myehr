@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysComment" >
+    <id column="id" property="id" jdbcType="DECIMAL" />
+    <result column="formId" property="formid" jdbcType="DECIMAL" />
+    <result column="keyId" property="keyid" jdbcType="DECIMAL" />
+    <result column="name" property="name" jdbcType="NVARCHAR" />
+    <result column="advanced" property="advanced" jdbcType="INTEGER" />
+    <result column="fashion" property="fashion" jdbcType="INTEGER" />
+    <result column="convenient" property="convenient" jdbcType="INTEGER" />
+    <result column="stable" property="stable" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="NVARCHAR" />
+    <result column="description" property="description" jdbcType="NVARCHAR" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="ip" property="ip" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, formId, keyId, name, advanced, fashion, convenient, stable, content, description, 
+    datetime, ip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_COMMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_COMMENT
+    where id = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_COMMENT
+    where id = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysCommentExample" >
+    delete from SYS_COMMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysComment" >
+    insert into SYS_COMMENT (id, formId, keyId, 
+      name, advanced, fashion, 
+      convenient, stable, content, 
+      description, datetime, ip
+      )
+    values (#{id,jdbcType=DECIMAL}, #{formid,jdbcType=DECIMAL}, #{keyid,jdbcType=DECIMAL}, 
+      #{name,jdbcType=NVARCHAR}, #{advanced,jdbcType=INTEGER}, #{fashion,jdbcType=INTEGER}, 
+      #{convenient,jdbcType=INTEGER}, #{stable,jdbcType=INTEGER}, #{content,jdbcType=NVARCHAR}, 
+      #{description,jdbcType=NVARCHAR}, #{datetime,jdbcType=TIMESTAMP}, #{ip,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysComment" >
+    insert into SYS_COMMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="formid != null" >
+        formId,
+      </if>
+      <if test="keyid != null" >
+        keyId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="advanced != null" >
+        advanced,
+      </if>
+      <if test="fashion != null" >
+        fashion,
+      </if>
+      <if test="convenient != null" >
+        convenient,
+      </if>
+      <if test="stable != null" >
+        stable,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=DECIMAL},
+      </if>
+      <if test="keyid != null" >
+        #{keyid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="advanced != null" >
+        #{advanced,jdbcType=INTEGER},
+      </if>
+      <if test="fashion != null" >
+        #{fashion,jdbcType=INTEGER},
+      </if>
+      <if test="convenient != null" >
+        #{convenient,jdbcType=INTEGER},
+      </if>
+      <if test="stable != null" >
+        #{stable,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysCommentExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_COMMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_COMMENT
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formid != null" >
+        formId = #{record.formid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.keyid != null" >
+        keyId = #{record.keyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.advanced != null" >
+        advanced = #{record.advanced,jdbcType=INTEGER},
+      </if>
+      <if test="record.fashion != null" >
+        fashion = #{record.fashion,jdbcType=INTEGER},
+      </if>
+      <if test="record.convenient != null" >
+        convenient = #{record.convenient,jdbcType=INTEGER},
+      </if>
+      <if test="record.stable != null" >
+        stable = #{record.stable,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_COMMENT
+    set id = #{record.id,jdbcType=DECIMAL},
+      formId = #{record.formid,jdbcType=DECIMAL},
+      keyId = #{record.keyid,jdbcType=DECIMAL},
+      name = #{record.name,jdbcType=NVARCHAR},
+      advanced = #{record.advanced,jdbcType=INTEGER},
+      fashion = #{record.fashion,jdbcType=INTEGER},
+      convenient = #{record.convenient,jdbcType=INTEGER},
+      stable = #{record.stable,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=NVARCHAR},
+      description = #{record.description,jdbcType=NVARCHAR},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      ip = #{record.ip,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysComment" >
+    update SYS_COMMENT
+    <set >
+      <if test="formid != null" >
+        formId = #{formid,jdbcType=DECIMAL},
+      </if>
+      <if test="keyid != null" >
+        keyId = #{keyid,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=NVARCHAR},
+      </if>
+      <if test="advanced != null" >
+        advanced = #{advanced,jdbcType=INTEGER},
+      </if>
+      <if test="fashion != null" >
+        fashion = #{fashion,jdbcType=INTEGER},
+      </if>
+      <if test="convenient != null" >
+        convenient = #{convenient,jdbcType=INTEGER},
+      </if>
+      <if test="stable != null" >
+        stable = #{stable,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=NVARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=NVARCHAR},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysComment" >
+    update SYS_COMMENT
+    set formId = #{formid,jdbcType=DECIMAL},
+      keyId = #{keyid,jdbcType=DECIMAL},
+      name = #{name,jdbcType=NVARCHAR},
+      advanced = #{advanced,jdbcType=INTEGER},
+      fashion = #{fashion,jdbcType=INTEGER},
+      convenient = #{convenient,jdbcType=INTEGER},
+      stable = #{stable,jdbcType=INTEGER},
+      content = #{content,jdbcType=NVARCHAR},
+      description = #{description,jdbcType=NVARCHAR},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=NVARCHAR}
+    where id = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

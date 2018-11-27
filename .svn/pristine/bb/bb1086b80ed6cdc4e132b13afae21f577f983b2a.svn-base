@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysMailsendRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="COUNTTIMES" property="counttimes" jdbcType="INTEGER" />
+    <result column="SENDTIME" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="FEEDBACK" property="feedback" jdbcType="NVARCHAR" />
+    <result column="MAILTO" property="mailto" jdbcType="NVARCHAR" />
+    <result column="MAILLCC" property="maillcc" jdbcType="NVARCHAR" />
+    <result column="MAILBC" property="mailbc" jdbcType="NVARCHAR" />
+    <result column="MAILTITLE" property="mailtitle" jdbcType="NVARCHAR" />
+    <result column="Attachments" property="attachments" jdbcType="NVARCHAR" />
+    <result column="RESULT" property="result" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.button.SysMailsendRecord" extends="BaseResultMap" >
+    <result column="MAILCONTENT" property="mailcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, COUNTTIMES, SENDTIME, FEEDBACK, MAILTO, MAILLCC, MAILBC, MAILTITLE, Attachments, 
+    RESULT
+  </sql>
+  <sql id="Blob_Column_List" >
+    MAILCONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MAILSEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MAILSEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MAILSEND_RECORD
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_MAILSEND_RECORD
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecordExample" >
+    delete from SYS_MAILSEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    insert into SYS_MAILSEND_RECORD (COUNTTIMES, SENDTIME, 
+      FEEDBACK, MAILTO, MAILLCC, 
+      MAILBC, MAILTITLE, Attachments, 
+      RESULT, MAILCONTENT)
+    values (#{counttimes,jdbcType=INTEGER}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{feedback,jdbcType=NVARCHAR}, #{mailto,jdbcType=NVARCHAR}, #{maillcc,jdbcType=NVARCHAR}, 
+      #{mailbc,jdbcType=NVARCHAR}, #{mailtitle,jdbcType=NVARCHAR}, #{attachments,jdbcType=NVARCHAR}, 
+      #{result,jdbcType=INTEGER}, #{mailcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    insert into SYS_MAILSEND_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="counttimes != null" >
+        COUNTTIMES,
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME,
+      </if>
+      <if test="feedback != null" >
+        FEEDBACK,
+      </if>
+      <if test="mailto != null" >
+        MAILTO,
+      </if>
+      <if test="maillcc != null" >
+        MAILLCC,
+      </if>
+      <if test="mailbc != null" >
+        MAILBC,
+      </if>
+      <if test="mailtitle != null" >
+        MAILTITLE,
+      </if>
+      <if test="attachments != null" >
+        Attachments,
+      </if>
+      <if test="result != null" >
+        RESULT,
+      </if>
+      <if test="mailcontent != null" >
+        MAILCONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="counttimes != null" >
+        #{counttimes,jdbcType=INTEGER},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedback != null" >
+        #{feedback,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailto != null" >
+        #{mailto,jdbcType=NVARCHAR},
+      </if>
+      <if test="maillcc != null" >
+        #{maillcc,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailbc != null" >
+        #{mailbc,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailtitle != null" >
+        #{mailtitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="attachments != null" >
+        #{attachments,jdbcType=NVARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="mailcontent != null" >
+        #{mailcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecordExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MAILSEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MAILSEND_RECORD
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.counttimes != null" >
+        COUNTTIMES = #{record.counttimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendtime != null" >
+        SENDTIME = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.feedback != null" >
+        FEEDBACK = #{record.feedback,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mailto != null" >
+        MAILTO = #{record.mailto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.maillcc != null" >
+        MAILLCC = #{record.maillcc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mailbc != null" >
+        MAILBC = #{record.mailbc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mailtitle != null" >
+        MAILTITLE = #{record.mailtitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.attachments != null" >
+        Attachments = #{record.attachments,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.result != null" >
+        RESULT = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.mailcontent != null" >
+        MAILCONTENT = #{record.mailcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_MAILSEND_RECORD
+    set ID = #{record.id,jdbcType=INTEGER},
+      COUNTTIMES = #{record.counttimes,jdbcType=INTEGER},
+      SENDTIME = #{record.sendtime,jdbcType=TIMESTAMP},
+      FEEDBACK = #{record.feedback,jdbcType=NVARCHAR},
+      MAILTO = #{record.mailto,jdbcType=NVARCHAR},
+      MAILLCC = #{record.maillcc,jdbcType=NVARCHAR},
+      MAILBC = #{record.mailbc,jdbcType=NVARCHAR},
+      MAILTITLE = #{record.mailtitle,jdbcType=NVARCHAR},
+      Attachments = #{record.attachments,jdbcType=NVARCHAR},
+      RESULT = #{record.result,jdbcType=INTEGER},
+      MAILCONTENT = #{record.mailcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MAILSEND_RECORD
+    set ID = #{record.id,jdbcType=INTEGER},
+      COUNTTIMES = #{record.counttimes,jdbcType=INTEGER},
+      SENDTIME = #{record.sendtime,jdbcType=TIMESTAMP},
+      FEEDBACK = #{record.feedback,jdbcType=NVARCHAR},
+      MAILTO = #{record.mailto,jdbcType=NVARCHAR},
+      MAILLCC = #{record.maillcc,jdbcType=NVARCHAR},
+      MAILBC = #{record.mailbc,jdbcType=NVARCHAR},
+      MAILTITLE = #{record.mailtitle,jdbcType=NVARCHAR},
+      Attachments = #{record.attachments,jdbcType=NVARCHAR},
+      RESULT = #{record.result,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    update SYS_MAILSEND_RECORD
+    <set >
+      <if test="counttimes != null" >
+        COUNTTIMES = #{counttimes,jdbcType=INTEGER},
+      </if>
+      <if test="sendtime != null" >
+        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feedback != null" >
+        FEEDBACK = #{feedback,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailto != null" >
+        MAILTO = #{mailto,jdbcType=NVARCHAR},
+      </if>
+      <if test="maillcc != null" >
+        MAILLCC = #{maillcc,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailbc != null" >
+        MAILBC = #{mailbc,jdbcType=NVARCHAR},
+      </if>
+      <if test="mailtitle != null" >
+        MAILTITLE = #{mailtitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="attachments != null" >
+        Attachments = #{attachments,jdbcType=NVARCHAR},
+      </if>
+      <if test="result != null" >
+        RESULT = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="mailcontent != null" >
+        MAILCONTENT = #{mailcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    update SYS_MAILSEND_RECORD
+    set COUNTTIMES = #{counttimes,jdbcType=INTEGER},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      FEEDBACK = #{feedback,jdbcType=NVARCHAR},
+      MAILTO = #{mailto,jdbcType=NVARCHAR},
+      MAILLCC = #{maillcc,jdbcType=NVARCHAR},
+      MAILBC = #{mailbc,jdbcType=NVARCHAR},
+      MAILTITLE = #{mailtitle,jdbcType=NVARCHAR},
+      Attachments = #{attachments,jdbcType=NVARCHAR},
+      RESULT = #{result,jdbcType=INTEGER},
+      MAILCONTENT = #{mailcontent,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysMailsendRecord" >
+    update SYS_MAILSEND_RECORD
+    set COUNTTIMES = #{counttimes,jdbcType=INTEGER},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      FEEDBACK = #{feedback,jdbcType=NVARCHAR},
+      MAILTO = #{mailto,jdbcType=NVARCHAR},
+      MAILLCC = #{maillcc,jdbcType=NVARCHAR},
+      MAILBC = #{mailbc,jdbcType=NVARCHAR},
+      MAILTITLE = #{mailtitle,jdbcType=NVARCHAR},
+      Attachments = #{attachments,jdbcType=NVARCHAR},
+      RESULT = #{result,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

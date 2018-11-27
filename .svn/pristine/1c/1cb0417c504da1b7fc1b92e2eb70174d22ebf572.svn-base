@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysInterfaceSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysInterfaceScheme" >
+    <id column="interface_scheme_id" property="interfaceSchemeId" jdbcType="DECIMAL" />
+    <result column="interface_scheme_code" property="interfaceSchemeCode" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_name" property="interfaceSchemeName" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_user" property="interfaceSchemeUser" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_type" property="interfaceSchemeType" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_create_user" property="interfaceSchemeCreateUser" jdbcType="DECIMAL" />
+    <result column="interface_scheme_create_time" property="interfaceSchemeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="interface_scheme_operator" property="interfaceSchemeOperator" jdbcType="DECIMAL" />
+    <result column="interface_scheme_operate_time" property="interfaceSchemeOperateTime" jdbcType="TIMESTAMP" />
+    <result column="interface_scheme_status" property="interfaceSchemeStatus" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_category" property="interfaceSchemeCategory" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_url" property="interfaceSchemeUrl" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_usercode" property="interfaceSchemeUsercode" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_password" property="interfaceSchemePassword" jdbcType="NVARCHAR" />
+    <result column="interface_scheme_pager" property="interfaceSchemePager" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.form.SysInterfaceSchemeWithBLOBs" extends="BaseResultMap" >
+    <result column="interface_scheme_entity_sql" property="interfaceSchemeEntitySql" jdbcType="LONGVARCHAR" />
+    <result column="interface_scheme_def_sql" property="interfaceSchemeDefSql" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    interface_scheme_id, interface_scheme_code, interface_scheme_name, interface_scheme_user, 
+    interface_scheme_type, interface_scheme_create_user, interface_scheme_create_time, 
+    interface_scheme_operator, interface_scheme_operate_time, interface_scheme_status, 
+    interface_scheme_category, interface_scheme_url, interface_scheme_usercode, interface_scheme_password, 
+    interface_scheme_pager
+  </sql>
+  <sql id="Blob_Column_List" >
+    interface_scheme_entity_sql, interface_scheme_def_sql
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_interface_scheme
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_interface_scheme
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_interface_scheme
+    where interface_scheme_id = #{interfaceSchemeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_interface_scheme
+    where interface_scheme_id = #{interfaceSchemeId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeExample" >
+    delete from sys_interface_scheme
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeWithBLOBs" >
+    insert into sys_interface_scheme (interface_scheme_code, 
+      interface_scheme_name, interface_scheme_user, 
+      interface_scheme_type, interface_scheme_create_user, 
+      interface_scheme_create_time, interface_scheme_operator, 
+      interface_scheme_operate_time, interface_scheme_status, 
+      interface_scheme_category, interface_scheme_url, 
+      interface_scheme_usercode, interface_scheme_password, 
+      interface_scheme_pager, interface_scheme_entity_sql, 
+      interface_scheme_def_sql)
+    values (#{interfaceSchemeCode,jdbcType=NVARCHAR}, 
+      #{interfaceSchemeName,jdbcType=NVARCHAR}, #{interfaceSchemeUser,jdbcType=NVARCHAR}, 
+      #{interfaceSchemeType,jdbcType=NVARCHAR}, #{interfaceSchemeCreateUser,jdbcType=DECIMAL}, 
+      #{interfaceSchemeCreateTime,jdbcType=TIMESTAMP}, #{interfaceSchemeOperator,jdbcType=DECIMAL}, 
+      #{interfaceSchemeOperateTime,jdbcType=TIMESTAMP}, #{interfaceSchemeStatus,jdbcType=NVARCHAR}, 
+      #{interfaceSchemeCategory,jdbcType=NVARCHAR}, #{interfaceSchemeUrl,jdbcType=NVARCHAR}, 
+      #{interfaceSchemeUsercode,jdbcType=NVARCHAR}, #{interfaceSchemePassword,jdbcType=NVARCHAR}, 
+      #{interfaceSchemePager,jdbcType=NVARCHAR}, #{interfaceSchemeEntitySql,jdbcType=LONGVARCHAR}, 
+      #{interfaceSchemeDefSql,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeWithBLOBs" >
+    insert into sys_interface_scheme
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="interfaceSchemeId != null" >
+        interface_scheme_id,
+      </if>
+      <if test="interfaceSchemeCode != null" >
+        interface_scheme_code,
+      </if>
+      <if test="interfaceSchemeName != null" >
+        interface_scheme_name,
+      </if>
+      <if test="interfaceSchemeUser != null" >
+        interface_scheme_user,
+      </if>
+      <if test="interfaceSchemeType != null" >
+        interface_scheme_type,
+      </if>
+      <if test="interfaceSchemeCreateUser != null" >
+        interface_scheme_create_user,
+      </if>
+      <if test="interfaceSchemeCreateTime != null" >
+        interface_scheme_create_time,
+      </if>
+      <if test="interfaceSchemeOperator != null" >
+        interface_scheme_operator,
+      </if>
+      <if test="interfaceSchemeOperateTime != null" >
+        interface_scheme_operate_time,
+      </if>
+      <if test="interfaceSchemeStatus != null" >
+        interface_scheme_status,
+      </if>
+      <if test="interfaceSchemeCategory != null" >
+        interface_scheme_category,
+      </if>
+      <if test="interfaceSchemeUrl != null" >
+        interface_scheme_url,
+      </if>
+      <if test="interfaceSchemeUsercode != null" >
+        interface_scheme_usercode,
+      </if>
+      <if test="interfaceSchemePassword != null" >
+        interface_scheme_password,
+      </if>
+      <if test="interfaceSchemePager != null" >
+        interface_scheme_pager,
+      </if>
+      <if test="interfaceSchemeEntitySql != null" >
+        interface_scheme_entity_sql,
+      </if>
+      <if test="interfaceSchemeDefSql != null" >
+        interface_scheme_def_sql,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="interfaceSchemeId != null" >
+        #{interfaceSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="interfaceSchemeCode != null" >
+        #{interfaceSchemeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeName != null" >
+        #{interfaceSchemeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUser != null" >
+        #{interfaceSchemeUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeType != null" >
+        #{interfaceSchemeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeCreateUser != null" >
+        #{interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      </if>
+      <if test="interfaceSchemeCreateTime != null" >
+        #{interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceSchemeOperator != null" >
+        #{interfaceSchemeOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="interfaceSchemeOperateTime != null" >
+        #{interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceSchemeStatus != null" >
+        #{interfaceSchemeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeCategory != null" >
+        #{interfaceSchemeCategory,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUrl != null" >
+        #{interfaceSchemeUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUsercode != null" >
+        #{interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemePassword != null" >
+        #{interfaceSchemePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemePager != null" >
+        #{interfaceSchemePager,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeEntitySql != null" >
+        #{interfaceSchemeEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="interfaceSchemeDefSql != null" >
+        #{interfaceSchemeDefSql,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeExample" resultType="java.lang.Integer" >
+    select count(*) from sys_interface_scheme
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_interface_scheme
+    <set >
+      <if test="record.interfaceSchemeId != null" >
+        interface_scheme_id = #{record.interfaceSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interfaceSchemeCode != null" >
+        interface_scheme_code = #{record.interfaceSchemeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeName != null" >
+        interface_scheme_name = #{record.interfaceSchemeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeUser != null" >
+        interface_scheme_user = #{record.interfaceSchemeUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeType != null" >
+        interface_scheme_type = #{record.interfaceSchemeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeCreateUser != null" >
+        interface_scheme_create_user = #{record.interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interfaceSchemeCreateTime != null" >
+        interface_scheme_create_time = #{record.interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.interfaceSchemeOperator != null" >
+        interface_scheme_operator = #{record.interfaceSchemeOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interfaceSchemeOperateTime != null" >
+        interface_scheme_operate_time = #{record.interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.interfaceSchemeStatus != null" >
+        interface_scheme_status = #{record.interfaceSchemeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeCategory != null" >
+        interface_scheme_category = #{record.interfaceSchemeCategory,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeUrl != null" >
+        interface_scheme_url = #{record.interfaceSchemeUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeUsercode != null" >
+        interface_scheme_usercode = #{record.interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemePassword != null" >
+        interface_scheme_password = #{record.interfaceSchemePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemePager != null" >
+        interface_scheme_pager = #{record.interfaceSchemePager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeEntitySql != null" >
+        interface_scheme_entity_sql = #{record.interfaceSchemeEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.interfaceSchemeDefSql != null" >
+        interface_scheme_def_sql = #{record.interfaceSchemeDefSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_interface_scheme
+    set interface_scheme_id = #{record.interfaceSchemeId,jdbcType=DECIMAL},
+      interface_scheme_code = #{record.interfaceSchemeCode,jdbcType=NVARCHAR},
+      interface_scheme_name = #{record.interfaceSchemeName,jdbcType=NVARCHAR},
+      interface_scheme_user = #{record.interfaceSchemeUser,jdbcType=NVARCHAR},
+      interface_scheme_type = #{record.interfaceSchemeType,jdbcType=NVARCHAR},
+      interface_scheme_create_user = #{record.interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      interface_scheme_create_time = #{record.interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      interface_scheme_operator = #{record.interfaceSchemeOperator,jdbcType=DECIMAL},
+      interface_scheme_operate_time = #{record.interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      interface_scheme_status = #{record.interfaceSchemeStatus,jdbcType=NVARCHAR},
+      interface_scheme_category = #{record.interfaceSchemeCategory,jdbcType=NVARCHAR},
+      interface_scheme_url = #{record.interfaceSchemeUrl,jdbcType=NVARCHAR},
+      interface_scheme_usercode = #{record.interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      interface_scheme_password = #{record.interfaceSchemePassword,jdbcType=NVARCHAR},
+      interface_scheme_pager = #{record.interfaceSchemePager,jdbcType=NVARCHAR},
+      interface_scheme_entity_sql = #{record.interfaceSchemeEntitySql,jdbcType=LONGVARCHAR},
+      interface_scheme_def_sql = #{record.interfaceSchemeDefSql,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_interface_scheme
+    set interface_scheme_id = #{record.interfaceSchemeId,jdbcType=DECIMAL},
+      interface_scheme_code = #{record.interfaceSchemeCode,jdbcType=NVARCHAR},
+      interface_scheme_name = #{record.interfaceSchemeName,jdbcType=NVARCHAR},
+      interface_scheme_user = #{record.interfaceSchemeUser,jdbcType=NVARCHAR},
+      interface_scheme_type = #{record.interfaceSchemeType,jdbcType=NVARCHAR},
+      interface_scheme_create_user = #{record.interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      interface_scheme_create_time = #{record.interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      interface_scheme_operator = #{record.interfaceSchemeOperator,jdbcType=DECIMAL},
+      interface_scheme_operate_time = #{record.interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      interface_scheme_status = #{record.interfaceSchemeStatus,jdbcType=NVARCHAR},
+      interface_scheme_category = #{record.interfaceSchemeCategory,jdbcType=NVARCHAR},
+      interface_scheme_url = #{record.interfaceSchemeUrl,jdbcType=NVARCHAR},
+      interface_scheme_usercode = #{record.interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      interface_scheme_password = #{record.interfaceSchemePassword,jdbcType=NVARCHAR},
+      interface_scheme_pager = #{record.interfaceSchemePager,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeWithBLOBs" >
+    update sys_interface_scheme
+    <set >
+      <if test="interfaceSchemeCode != null" >
+        interface_scheme_code = #{interfaceSchemeCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeName != null" >
+        interface_scheme_name = #{interfaceSchemeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUser != null" >
+        interface_scheme_user = #{interfaceSchemeUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeType != null" >
+        interface_scheme_type = #{interfaceSchemeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeCreateUser != null" >
+        interface_scheme_create_user = #{interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      </if>
+      <if test="interfaceSchemeCreateTime != null" >
+        interface_scheme_create_time = #{interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceSchemeOperator != null" >
+        interface_scheme_operator = #{interfaceSchemeOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="interfaceSchemeOperateTime != null" >
+        interface_scheme_operate_time = #{interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceSchemeStatus != null" >
+        interface_scheme_status = #{interfaceSchemeStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeCategory != null" >
+        interface_scheme_category = #{interfaceSchemeCategory,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUrl != null" >
+        interface_scheme_url = #{interfaceSchemeUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeUsercode != null" >
+        interface_scheme_usercode = #{interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemePassword != null" >
+        interface_scheme_password = #{interfaceSchemePassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemePager != null" >
+        interface_scheme_pager = #{interfaceSchemePager,jdbcType=NVARCHAR},
+      </if>
+      <if test="interfaceSchemeEntitySql != null" >
+        interface_scheme_entity_sql = #{interfaceSchemeEntitySql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="interfaceSchemeDefSql != null" >
+        interface_scheme_def_sql = #{interfaceSchemeDefSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where interface_scheme_id = #{interfaceSchemeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceSchemeWithBLOBs" >
+    update sys_interface_scheme
+    set interface_scheme_code = #{interfaceSchemeCode,jdbcType=NVARCHAR},
+      interface_scheme_name = #{interfaceSchemeName,jdbcType=NVARCHAR},
+      interface_scheme_user = #{interfaceSchemeUser,jdbcType=NVARCHAR},
+      interface_scheme_type = #{interfaceSchemeType,jdbcType=NVARCHAR},
+      interface_scheme_create_user = #{interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      interface_scheme_create_time = #{interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      interface_scheme_operator = #{interfaceSchemeOperator,jdbcType=DECIMAL},
+      interface_scheme_operate_time = #{interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      interface_scheme_status = #{interfaceSchemeStatus,jdbcType=NVARCHAR},
+      interface_scheme_category = #{interfaceSchemeCategory,jdbcType=NVARCHAR},
+      interface_scheme_url = #{interfaceSchemeUrl,jdbcType=NVARCHAR},
+      interface_scheme_usercode = #{interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      interface_scheme_password = #{interfaceSchemePassword,jdbcType=NVARCHAR},
+      interface_scheme_pager = #{interfaceSchemePager,jdbcType=NVARCHAR},
+      interface_scheme_entity_sql = #{interfaceSchemeEntitySql,jdbcType=LONGVARCHAR},
+      interface_scheme_def_sql = #{interfaceSchemeDefSql,jdbcType=LONGVARCHAR}
+    where interface_scheme_id = #{interfaceSchemeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysInterfaceScheme" >
+    update sys_interface_scheme
+    set interface_scheme_code = #{interfaceSchemeCode,jdbcType=NVARCHAR},
+      interface_scheme_name = #{interfaceSchemeName,jdbcType=NVARCHAR},
+      interface_scheme_user = #{interfaceSchemeUser,jdbcType=NVARCHAR},
+      interface_scheme_type = #{interfaceSchemeType,jdbcType=NVARCHAR},
+      interface_scheme_create_user = #{interfaceSchemeCreateUser,jdbcType=DECIMAL},
+      interface_scheme_create_time = #{interfaceSchemeCreateTime,jdbcType=TIMESTAMP},
+      interface_scheme_operator = #{interfaceSchemeOperator,jdbcType=DECIMAL},
+      interface_scheme_operate_time = #{interfaceSchemeOperateTime,jdbcType=TIMESTAMP},
+      interface_scheme_status = #{interfaceSchemeStatus,jdbcType=NVARCHAR},
+      interface_scheme_category = #{interfaceSchemeCategory,jdbcType=NVARCHAR},
+      interface_scheme_url = #{interfaceSchemeUrl,jdbcType=NVARCHAR},
+      interface_scheme_usercode = #{interfaceSchemeUsercode,jdbcType=NVARCHAR},
+      interface_scheme_password = #{interfaceSchemePassword,jdbcType=NVARCHAR},
+      interface_scheme_pager = #{interfaceSchemePager,jdbcType=NVARCHAR}
+    where interface_scheme_id = #{interfaceSchemeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

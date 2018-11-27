@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonInterfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonInterface" >
+    <id column="BUTTON_INTERFACE_ID" property="buttonInterfaceId" jdbcType="DECIMAL" />
+    <result column="BUTTON_INTERFACE_BUTTON_ID" property="buttonInterfaceButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_INTERFACE_SCHEME_ID" property="buttonInterfaceSchemeId" jdbcType="DECIMAL" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_INTERFACE_ID, BUTTON_INTERFACE_BUTTON_ID, BUTTON_INTERFACE_SCHEME_ID, OPERATOR_NAME, 
+    OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterfaceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTERFACE
+    where BUTTON_INTERFACE_ID = #{buttonInterfaceId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_INTERFACE
+    where BUTTON_INTERFACE_ID = #{buttonInterfaceId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterfaceExample" >
+    delete from SYS_FORM_BUTTON_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterface" >
+    insert into SYS_FORM_BUTTON_INTERFACE (BUTTON_INTERFACE_BUTTON_ID, 
+      BUTTON_INTERFACE_SCHEME_ID, OPERATOR_NAME, 
+      OPERATOR_TIME)
+    values (#{buttonInterfaceButtonId,jdbcType=DECIMAL}, 
+      #{buttonInterfaceSchemeId,jdbcType=DECIMAL}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterface" >
+    insert into SYS_FORM_BUTTON_INTERFACE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonInterfaceId != null" >
+        BUTTON_INTERFACE_ID,
+      </if>
+      <if test="buttonInterfaceButtonId != null" >
+        BUTTON_INTERFACE_BUTTON_ID,
+      </if>
+      <if test="buttonInterfaceSchemeId != null" >
+        BUTTON_INTERFACE_SCHEME_ID,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonInterfaceId != null" >
+        #{buttonInterfaceId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonInterfaceButtonId != null" >
+        #{buttonInterfaceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonInterfaceSchemeId != null" >
+        #{buttonInterfaceSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterfaceExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_INTERFACE
+    <set >
+      <if test="record.buttonInterfaceId != null" >
+        BUTTON_INTERFACE_ID = #{record.buttonInterfaceId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonInterfaceButtonId != null" >
+        BUTTON_INTERFACE_BUTTON_ID = #{record.buttonInterfaceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonInterfaceSchemeId != null" >
+        BUTTON_INTERFACE_SCHEME_ID = #{record.buttonInterfaceSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_INTERFACE
+    set BUTTON_INTERFACE_ID = #{record.buttonInterfaceId,jdbcType=DECIMAL},
+      BUTTON_INTERFACE_BUTTON_ID = #{record.buttonInterfaceButtonId,jdbcType=DECIMAL},
+      BUTTON_INTERFACE_SCHEME_ID = #{record.buttonInterfaceSchemeId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterface" >
+    update SYS_FORM_BUTTON_INTERFACE
+    <set >
+      <if test="buttonInterfaceButtonId != null" >
+        BUTTON_INTERFACE_BUTTON_ID = #{buttonInterfaceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonInterfaceSchemeId != null" >
+        BUTTON_INTERFACE_SCHEME_ID = #{buttonInterfaceSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BUTTON_INTERFACE_ID = #{buttonInterfaceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonInterface" >
+    update SYS_FORM_BUTTON_INTERFACE
+    set BUTTON_INTERFACE_BUTTON_ID = #{buttonInterfaceButtonId,jdbcType=DECIMAL},
+      BUTTON_INTERFACE_SCHEME_ID = #{buttonInterfaceSchemeId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where BUTTON_INTERFACE_ID = #{buttonInterfaceId,jdbcType=DECIMAL}
+  </update>
+</mapper>

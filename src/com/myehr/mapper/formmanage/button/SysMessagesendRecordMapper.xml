@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysMessagesendRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MESSAGETYPE" property="messagetype" jdbcType="INTEGER" />
+    <result column="SENDTO" property="sendto" jdbcType="NVARCHAR" />
+    <result column="SENDSTATUS" property="sendstatus" jdbcType="INTEGER" />
+    <result column="FALSEREASON" property="falsereason" jdbcType="NVARCHAR" />
+    <result column="FEEDBACK" property="feedback" jdbcType="INTEGER" />
+    <result column="MESSAGETITLE" property="messagetitle" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.button.SysMessagesendRecord" extends="BaseResultMap" >
+    <result column="MESSAGECONTENT" property="messagecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MESSAGETYPE, SENDTO, SENDSTATUS, FALSEREASON, FEEDBACK, MESSAGETITLE
+  </sql>
+  <sql id="Blob_Column_List" >
+    MESSAGECONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MESSAGESEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MESSAGESEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_MESSAGESEND_RECORD
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_MESSAGESEND_RECORD
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecordExample" >
+    delete from SYS_MESSAGESEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    insert into SYS_MESSAGESEND_RECORD (MESSAGETYPE, SENDTO, 
+      SENDSTATUS, FALSEREASON, FEEDBACK, 
+      MESSAGETITLE, MESSAGECONTENT)
+    values (#{messagetype,jdbcType=INTEGER}, #{sendto,jdbcType=NVARCHAR}, 
+      #{sendstatus,jdbcType=INTEGER}, #{falsereason,jdbcType=NVARCHAR}, #{feedback,jdbcType=INTEGER}, 
+      #{messagetitle,jdbcType=NVARCHAR}, #{messagecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    insert into SYS_MESSAGESEND_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE,
+      </if>
+      <if test="sendto != null" >
+        SENDTO,
+      </if>
+      <if test="sendstatus != null" >
+        SENDSTATUS,
+      </if>
+      <if test="falsereason != null" >
+        FALSEREASON,
+      </if>
+      <if test="feedback != null" >
+        FEEDBACK,
+      </if>
+      <if test="messagetitle != null" >
+        MESSAGETITLE,
+      </if>
+      <if test="messagecontent != null" >
+        MESSAGECONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="sendto != null" >
+        #{sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendstatus != null" >
+        #{sendstatus,jdbcType=INTEGER},
+      </if>
+      <if test="falsereason != null" >
+        #{falsereason,jdbcType=NVARCHAR},
+      </if>
+      <if test="feedback != null" >
+        #{feedback,jdbcType=INTEGER},
+      </if>
+      <if test="messagetitle != null" >
+        #{messagetitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecordExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MESSAGESEND_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MESSAGESEND_RECORD
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagetype != null" >
+        MESSAGETYPE = #{record.messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendto != null" >
+        SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendstatus != null" >
+        SENDSTATUS = #{record.sendstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.falsereason != null" >
+        FALSEREASON = #{record.falsereason,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.feedback != null" >
+        FEEDBACK = #{record.feedback,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagetitle != null" >
+        MESSAGETITLE = #{record.messagetitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.messagecontent != null" >
+        MESSAGECONTENT = #{record.messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_MESSAGESEND_RECORD
+    set ID = #{record.id,jdbcType=INTEGER},
+      MESSAGETYPE = #{record.messagetype,jdbcType=INTEGER},
+      SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      SENDSTATUS = #{record.sendstatus,jdbcType=INTEGER},
+      FALSEREASON = #{record.falsereason,jdbcType=NVARCHAR},
+      FEEDBACK = #{record.feedback,jdbcType=INTEGER},
+      MESSAGETITLE = #{record.messagetitle,jdbcType=NVARCHAR},
+      MESSAGECONTENT = #{record.messagecontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MESSAGESEND_RECORD
+    set ID = #{record.id,jdbcType=INTEGER},
+      MESSAGETYPE = #{record.messagetype,jdbcType=INTEGER},
+      SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      SENDSTATUS = #{record.sendstatus,jdbcType=INTEGER},
+      FALSEREASON = #{record.falsereason,jdbcType=NVARCHAR},
+      FEEDBACK = #{record.feedback,jdbcType=INTEGER},
+      MESSAGETITLE = #{record.messagetitle,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    update SYS_MESSAGESEND_RECORD
+    <set >
+      <if test="messagetype != null" >
+        MESSAGETYPE = #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="sendto != null" >
+        SENDTO = #{sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendstatus != null" >
+        SENDSTATUS = #{sendstatus,jdbcType=INTEGER},
+      </if>
+      <if test="falsereason != null" >
+        FALSEREASON = #{falsereason,jdbcType=NVARCHAR},
+      </if>
+      <if test="feedback != null" >
+        FEEDBACK = #{feedback,jdbcType=INTEGER},
+      </if>
+      <if test="messagetitle != null" >
+        MESSAGETITLE = #{messagetitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        MESSAGECONTENT = #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    update SYS_MESSAGESEND_RECORD
+    set MESSAGETYPE = #{messagetype,jdbcType=INTEGER},
+      SENDTO = #{sendto,jdbcType=NVARCHAR},
+      SENDSTATUS = #{sendstatus,jdbcType=INTEGER},
+      FALSEREASON = #{falsereason,jdbcType=NVARCHAR},
+      FEEDBACK = #{feedback,jdbcType=INTEGER},
+      MESSAGETITLE = #{messagetitle,jdbcType=NVARCHAR},
+      MESSAGECONTENT = #{messagecontent,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysMessagesendRecord" >
+    update SYS_MESSAGESEND_RECORD
+    set MESSAGETYPE = #{messagetype,jdbcType=INTEGER},
+      SENDTO = #{sendto,jdbcType=NVARCHAR},
+      SENDSTATUS = #{sendstatus,jdbcType=INTEGER},
+      FALSEREASON = #{falsereason,jdbcType=NVARCHAR},
+      FEEDBACK = #{feedback,jdbcType=INTEGER},
+      MESSAGETITLE = #{messagetitle,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

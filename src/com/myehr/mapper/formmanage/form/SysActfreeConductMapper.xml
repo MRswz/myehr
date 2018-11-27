@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysActfreeConductMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysActfreeConduct" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TASKID" property="taskid" jdbcType="VARCHAR" />
+    <result column="ASSIGNEE" property="assignee" jdbcType="VARCHAR" />
+    <result column="OVERTIME" property="overtime" jdbcType="TIMESTAMP" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="NEXTASSIGNEE" property="nextassignee" jdbcType="VARCHAR" />
+    <result column="ORDERBY" property="orderby" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TASKID, ASSIGNEE, OVERTIME, TITLE, NEXTASSIGNEE, ORDERBY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ACTFREE_CONDUCT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ACTFREE_CONDUCT
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_ACTFREE_CONDUCT
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConductExample" >
+    delete from SYS_ACTFREE_CONDUCT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConduct" >
+    insert into SYS_ACTFREE_CONDUCT ( TASKID, ASSIGNEE, 
+      OVERTIME, TITLE, NEXTASSIGNEE, 
+      ORDERBY)
+    values ( #{taskid,jdbcType=VARCHAR}, #{assignee,jdbcType=VARCHAR}, 
+      #{overtime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{nextassignee,jdbcType=VARCHAR}, 
+      #{orderby,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConduct" >
+    insert into SYS_ACTFREE_CONDUCT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="taskid != null" >
+        TASKID,
+      </if>
+      <if test="assignee != null" >
+        ASSIGNEE,
+      </if>
+      <if test="overtime != null" >
+        OVERTIME,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="nextassignee != null" >
+        NEXTASSIGNEE,
+      </if>
+      <if test="orderby != null" >
+        ORDERBY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="assignee != null" >
+        #{assignee,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null" >
+        #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="nextassignee != null" >
+        #{nextassignee,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConductExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ACTFREE_CONDUCT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ACTFREE_CONDUCT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskid != null" >
+        TASKID = #{record.taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assignee != null" >
+        ASSIGNEE = #{record.assignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overtime != null" >
+        OVERTIME = #{record.overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextassignee != null" >
+        NEXTASSIGNEE = #{record.nextassignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderby != null" >
+        ORDERBY = #{record.orderby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ACTFREE_CONDUCT
+    set ID = #{record.id,jdbcType=INTEGER},
+      TASKID = #{record.taskid,jdbcType=VARCHAR},
+      ASSIGNEE = #{record.assignee,jdbcType=VARCHAR},
+      OVERTIME = #{record.overtime,jdbcType=TIMESTAMP},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      NEXTASSIGNEE = #{record.nextassignee,jdbcType=VARCHAR},
+      ORDERBY = #{record.orderby,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConduct" >
+    update SYS_ACTFREE_CONDUCT
+    <set >
+      <if test="taskid != null" >
+        TASKID = #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="assignee != null" >
+        ASSIGNEE = #{assignee,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null" >
+        OVERTIME = #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="nextassignee != null" >
+        NEXTASSIGNEE = #{nextassignee,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        ORDERBY = #{orderby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysActfreeConduct" >
+    update SYS_ACTFREE_CONDUCT
+    set TASKID = #{taskid,jdbcType=VARCHAR},
+      ASSIGNEE = #{assignee,jdbcType=VARCHAR},
+      OVERTIME = #{overtime,jdbcType=TIMESTAMP},
+      TITLE = #{title,jdbcType=VARCHAR},
+      NEXTASSIGNEE = #{nextassignee,jdbcType=VARCHAR},
+      ORDERBY = #{orderby,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

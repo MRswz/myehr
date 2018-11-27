@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormColumnExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    <id column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_FORM_DEF_ID" property="formColumnFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_ENTITY_ID" property="formColumnEntityId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLUMN_ID" property="formColumnColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_ENTITY_TABLENAME" property="formEntityTablename" jdbcType="NVARCHAR" />
+    <result column="FORM_FIELD_TABLENAME" property="formFieldTablename" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_US_NAME" property="formColumnUsName" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_LABLE" property="formColumnLable" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_LABLE_WIDTH" property="formColumnLableWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_SQL" property="formColumnSql" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_GUI_TYPE" property="formColumnGuiType" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_WIDTH" property="formColumnWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ALIGN" property="formColumnAlign" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_HEIGHT" property="formColumnHeight" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_SORT" property="formColumnSort" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_SHOW_TYPE" property="formColumnShowType" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ROW_SPAN" property="formColumnRowSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COL_SPAN" property="formColumnColSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_REQUIRED" property="formColumnRequired" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_GROUP_ID" property="formColumnGroupId" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_CHANGE_FUN" property="formColumnChangeFun" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_INIT_FUN" property="formColumnInitFun" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ISLOCKET" property="formColumnIslocket" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_RIGIST" property="formColumnRigist" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TYPE" property="formColumnType" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TOTAL" property="formColumnTotal" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_IS_DEV" property="formColumnIsDev" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_MAX_LENGTH" property="formColumnMaxLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_MIN_LENGTH" property="formColumnMinLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLOR" property="formColumnColor" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_COLOR_CONDITION" property="formColumnColorCondition" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_POSITION_ID" property="formColumnPositionId" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TEMPLATE_COLUMN_ID" property="formColumnTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_POSITION_SORT" property="formColumnPositionSort" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_COLUMN_ID, FORM_COLUMN_FORM_DEF_ID, FORM_COLUMN_ENTITY_ID, FORM_COLUMN_COLUMN_ID, 
+    FORM_ENTITY_TABLENAME, FORM_FIELD_TABLENAME, FORM_COLUMN_US_NAME, FORM_COLUMN_LABLE, 
+    FORM_COLUMN_LABLE_WIDTH, FORM_COLUMN_SQL, FORM_COLUMN_GUI_TYPE, FORM_COLUMN_WIDTH, 
+    FORM_COLUMN_ALIGN, FORM_COLUMN_HEIGHT, FORM_COLUMN_SORT, FORM_COLUMN_SHOW_TYPE, FORM_COLUMN_ROW_SPAN, 
+    FORM_COLUMN_COL_SPAN, FORM_COLUMN_REQUIRED, FORM_COLUMN_GROUP_ID, FORM_COLUMN_CHANGE_FUN, 
+    FORM_COLUMN_INIT_FUN, FORM_COLUMN_ISLOCKET, FORM_COLUMN_RIGIST, FORM_COLUMN_TYPE, 
+    OPERATOR_TIME, OPERATOR_NAME, FORM_COLUMN_TOTAL, FORM_COLUMN_IS_DEV, FORM_COLUMN_MAX_LENGTH, 
+    FORM_COLUMN_MIN_LENGTH, FORM_COLUMN_COLOR, FORM_COLUMN_COLOR_CONDITION, FORM_COLUMN_POSITION_ID, 
+    FORM_COLUMN_TEMPLATE_COLUMN_ID, FORM_COLUMN_POSITION_SORT
+  </sql>
+  
+  <select id="selectPkColumn" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select sys_form_column.*
+    from sys_form_column left join sys_field
+ 		on sys_form_column.form_field_tablename = sys_field.field_tablename
+ 		where sys_form_column.form_column_entity_id = sys_field.field_entity_id
+  		and sys_form_column.form_column_form_def_id = #{formId,jdbcType=DECIMAL}
+   		and sys_field.field_is_key = 'Y'
+  </select>
+  
+  <select id="operation" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  		${sql}
+  </select>
+  
+  <select id="queryColumnsByFormId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  		select * from sys_form_column where 1=1
+  		<if test="formId != null" >
+       		and FORM_COLUMN_FORM_DEF_ID = #{formId,jdbcType=DECIMAL}
+       		order by FORM_COLUMN_POSITION_SORT,FORM_COLUMN_SORT
+      	</if>
+  </select>
+  <select id="queryColumnsByFormIdAndUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  		SELECT
+			*
+		FROM
+			sys_form_column
+		WHERE
+			form_column_id IN (
+				SELECT
+					FORM_COLUMN_ID
+				FROM
+					sys_field_role
+				WHERE
+					ROLE_ID IN (
+						SELECT
+							ROLE_ID
+						FROM
+							SYS_USER_ROLE
+						WHERE
+							USER_ID = #{userId,jdbcType=DECIMAL}
+					)
+				AND FORM_ID = #{formId,jdbcType=DECIMAL}
+				AND (FORM_COLUMN_TYPE = '1' or FORM_COLUMN_TYPE = '2')
+			)
+  </select>
+  <select id="queryImportColumnsByFormIdAndUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  		SELECT
+			*
+		FROM
+			sys_form_column
+		WHERE
+			form_column_id IN (
+				SELECT
+					FORM_COLUMN_ID
+				FROM
+					sys_field_role
+				WHERE
+					ROLE_ID IN (
+						SELECT
+							ROLE_ID
+						FROM
+							SYS_USER_ROLE
+						WHERE
+							USER_ID = #{userId,jdbcType=DECIMAL}
+					)
+				AND FORM_ID = #{formId,jdbcType=DECIMAL}
+				AND (FORM_COLUMN_TYPE = '1' or FORM_COLUMN_TYPE = '2')
+			) AND (FORM_COLUMN_SHOW_TYPE = 'show' OR FORM_COLUMN_SHOW_TYPE = 'readonly')
+			
+  </select>
+  
+  <select id="queryColumnsByFormIdAndUserIdAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_SHOW_TYPE,FORM_COLUMN_GUI_TYPE,1 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	form_column_id IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND FORM_COLUMN_TYPE = 1
+	)
+	union
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_SHOW_TYPE,FORM_COLUMN_GUI_TYPE,2 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	form_column_id IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND FORM_COLUMN_TYPE = 2
+	) and form_column_id NOT IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND FORM_COLUMN_TYPE = 1
+	)
+	union
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_SHOW_TYPE,FORM_COLUMN_GUI_TYPE,3 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	form_column_id IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND FORM_COLUMN_TYPE = 3
+	)and form_column_id NOT IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND (FORM_COLUMN_TYPE = 1 or FORM_COLUMN_TYPE = 2)
+	)
+	union
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_SHOW_TYPE,FORM_COLUMN_GUI_TYPE,4 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	form_column_id IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND FORM_COLUMN_TYPE = 4
+	) and form_column_id NOT IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+		AND (FORM_COLUMN_TYPE = 1 or FORM_COLUMN_TYPE = 2 or FORM_COLUMN_TYPE = 3)
+	)
+	union
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_SHOW_TYPE,FORM_COLUMN_GUI_TYPE,0 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	FORM_column_form_def_ID = #{formId,jdbcType=DECIMAL} and
+	form_column_id not IN (
+		SELECT
+			FORM_COLUMN_ID
+		FROM
+			sys_field_role
+		WHERE
+			ROLE_ID IN (
+				SELECT
+					ROLE_ID
+				FROM
+					SYS_USER_ROLE
+				WHERE
+					USER_ID = #{userId,jdbcType=DECIMAL}
+			)
+		AND FORM_ID = #{formId,jdbcType=DECIMAL}
+	)
+  </select>
+  
+  <select id="queryColumnsByFormIdAndUserId1" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	SELECT FORM_ENTITY_TABLENAME,FORM_FIELD_TABLENAME,FORM_COLUMN_TYPE,FORM_COLUMN_GUI_TYPE,1 FORM_COLUMN_US_NAME FROM sys_form_column
+WHERE
+	FORM_COLUMN_FORM_DEF_ID  = #{formId,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 查当前字段对于实体字段信息 -->
+  <select id="queryEntityColumnByColumnId" resultType="java.util.Map" parameterType="java.util.Map" >
+  		SELECT 
+			T1.FIELD_ID            "fieldId",
+			T1.FIELD_CODE          "fieldCode",
+			T1.FIELD_ENTITY_ID     "fieldEntityId",
+			T1.FIELD_TABLENAME     "fieldTablename",
+			T1.FIELD_CHINA_NAME    "fieldChinaName",
+			T1.FIELD_IS_NULL       "fieldIsNull",
+			T1.FIELD_IS_KEY        "fieldIsKey",
+			T1.FIELD_TYPE          "fieldType",
+			T1.FIELD_LEN           "fieldLen",
+			T1.FIELD_DICT          "fieldDict",
+			T1.FIELD_SORT          "fieldSort",
+			T1.FIELD_STATE         "fieldState",
+			T1.FIELD_IS_MARK       "fieldIsMark",
+			T1.OPERATOR_NAME       "operatorName",
+			T1.OPERATOR_TIME       "operatorTime",
+			T1.APPROVE_NAME        "approveName",
+			T1.APPROVE_TIME        "approveTime",
+			T1.DELETE_MARK         "deleteMark",
+			T1.DELETE_MARK_BACK    "deleteMarkBack",
+			T1.FIELD_DATA_TYPE     "fieldDataType",
+			T1.FIELD_IS_LOG      	"fieldIsLog",
+			T1.FIELD_IS_BUS_KEY  	"fieldIsBusKey",
+			T2.ENTITY_CODE "entityCode", T2.ENTITY_TABLENAME "entityTableName", T2.ENTITY_CHINANAME "entityChinaname"
+		FROM SYS_FIELD T1
+		JOIN SYS_ENTITY T2 ON T1.FIELD_ENTITY_ID = T2.ENTITY_ID
+		WHERE T2.DELETE_MARK = 'N'
+		and t1.FIELD_ID = #{fieldId}
+  		
+  </select>
+  
+  <select id="isPkColumn" parameterType="java.util.Map" resultType="java.util.Map">
+		select t1.*,t3.entity_tablename
+		        from sys_field t1
+		        join sys_entity t3 on t1.field_entity_id = t3.entity_id
+		        join sys_form_column t2 on t2.form_column_entity_id = t1.field_entity_id
+		                               and t2.form_column_column_id = t1.field_id
+		                               and t2.form_column_type = '1'
+		                               and t1.field_is_key = 'Y'
+		                         	   and t2.form_column_id = #{columnId}
+		                         	    and t3.entity_tablename = #{saveTable}
+					
+	</select>
+
+	<select id="isBusPkColumn" parameterType="java.util.Map" resultType="java.util.Map">
+			select t1.FIELD_ID "fieldId",t1.FIELD_ENTITY_ID "fieldEntityId", t1.FIELD_CHINA_NAME "fieldChinaname",
+			 t1.FIELD_TABLENAME "fieldTablename",
+			 t1.FIELD_TYPE "fieldType",t3.entity_tablename
+			        from sys_field t1
+			        join sys_entity t3 on t1.field_entity_id = t3.entity_id
+			        join sys_form_column t2 on t2.form_column_entity_id = t1.field_entity_id
+			                               and t2.form_column_column_id = t1.field_id
+			                               and t2.form_column_type = '1'
+			                               and t1.field_is_bus_key = 'Y'
+			                         	   and t2.form_column_id = #{columnId}
+			                         	    and t3.entity_tablename = #{saveTable}
+						
+	</select>
+
+  
+  
+</mapper>

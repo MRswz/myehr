@@ -1,0 +1,237 @@
+package com.myehr.service.flow;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
+import org.activiti.engine.ActivitiException;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.Model;
+import org.activiti.engine.repository.ModelQuery;
+import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.myehr.common.utils.ActUtils;
+import com.myehr.mapper.activiti.expand.ActNodePropertiesExpandMapper;
+import com.myehr.pojo.activiti.expand.ActNodePropertiesExpand;
+import com.myehr.pojo.activiti.expand.ActNodePropertiesExpandExample;
+
+/**
+ * 流程模型相关Controller
+ * @author ThinkGem
+ * @version 2013-11-03
+ */
+@Service
+@Transactional(readOnly = true)
+public class ActModelService {
+
+	@Autowired
+	private RepositoryService repositoryService;
+	
+//	@Autowired
+//	private ObjectMapper objectMapper;
+	protected ObjectMapper objectMapper = new ObjectMapper();
+	
+	@Autowired
+	private ActNodePropertiesExpandMapper actNodePropertiesExpandMapper;
+
+	/**
+	 * 流程模型列表
+	 */
+	public List<org.activiti.engine.repository.Model> modelList(List<org.activiti.engine.repository.Model> page, String category) {
+
+		ModelQuery modelQuery = repositoryService.createModelQuery().latestVersion().orderByLastUpdateTime().desc();
+		
+		if (StringUtils.isNotEmpty(category)){
+			modelQuery.modelCategory(category);
+		}
+		
+		//page.setCount(modelQuery.count());
+		//page.setList(modelQuery.listPage(page.getFirstResult(), page.getMaxResults()));
+
+		return page;
+	}
+
+	/**
+	 * 创建模型
+	 * @throws UnsupportedEncodingException 
+	 */
+	@Transactional(readOnly = false)
+	public Model create(String name, String key, String description, String category) throws UnsupportedEncodingException {
+		
+		ObjectNode editorNode = objectMapper.createObjectNode();
+		editorNode.put("id", "canvas");
+		editorNode.put("resourceId", "canvas");
+		ObjectNode properties = objectMapper.createObjectNode();
+		properties.put("process_author", "wanglifeng");
+		editorNode.put("properties", properties);
+		ObjectNode stencilset = objectMapper.createObjectNode();
+		stencilset.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
+		editorNode.put("stencilset", stencilset);
+		
+		Model modelData = repositoryService.newModel();
+		description = StringUtils.defaultString(description);
+		modelData.setKey(StringUtils.defaultString(key));
+		modelData.setName(name);
+		modelData.setCategory(category);
+		modelData.setVersion(Integer.parseInt(String.valueOf(repositoryService.createModelQuery().modelKey(modelData.getKey()).count()+1)));
+
+		ObjectNode modelObjectNode = objectMapper.createObjectNode();
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, name);
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, modelData.getVersion());
+		modelObjectNode.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
+		modelData.setMetaInfo(modelObjectNode.toString());
+		
+		repositoryService.saveModel(modelData);
+		repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
+		
+		return modelData;
+	}
+
+	/**
+	 * 根据Model部署流程
+	 */
+	@Transactional(readOnly = false)
+	public String deploy(String id) {
+		String message = "";
+		try {
+			org.activiti.engine.repository.Model modelData = repositoryService.getModel(id);
+			BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+			JsonNode editorNode = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
+			
+			String modelId = ActUtils.getJsonNodeByKey(editorNode, "resourceId").toString();
+			
+			modelId = modelId.replace("\"", "");
+			ActNodePropertiesExpandExample example = new ActNodePropertiesExpandExample();
+			ActNodePropertiesExpandExample.Criteria criteria = example.createCriteria();
+			criteria.andActModelIdEqualTo(modelId);
+			actNodePropertiesExpandMapper.deleteByExample(example);
+			
+			JsonNode childShapes = ActUtils.getJsonNodeByKey(editorNode, "childShapes");
+			List<JsonNode> properties =  ActUtils.getJsonNodeListByKey(childShapes, "properties");
+			
+			
+			//节点属性拓展
+			for (int i = 0; i < properties.size(); i++) {
+				JsonNode property = ActUtils.getJsonNodeByKey(properties.get(i), "properties");
+
+				ActNodePropertiesExpand actNodePropertiesExpand =new ActNodePropertiesExpand();
+				actNodePropertiesExpand.setActNodePropertyExpandId(UUID.randomUUID().toString());
+				actNodePropertiesExpand.setActModelId(modelId);
+				actNodePropertiesExpand.setActNodeKey(ActUtils.getJsonNodeValueByKey(property, "overrideid").toString().replaceAll("\"", ""));
+				actNodePropertiesExpand.setActNodeName(ActUtils.getJsonNodeValueByKey(property, "name").toString().replaceAll("\"", ""));
+				actNodePropertiesExpand.setIsSkipNobodyApprove(ActUtils.getJsonNodeValueByKey(property, "isskipwherenobodyapprove").toString().replaceAll("\"", ""));//是否无人审批自动通过
+				actNodePropertiesExpand.setIsAppointNobodyApprove(ActUtils.getJsonNodeValueByKey(property, "isappointwherenobodyapprove").toString().replaceAll("\"", ""));//是否无人审批自动指定结果
+				actNodePropertiesExpand.setIsSkipRepeatedApprove(ActUtils.getJsonNodeValueByKey(property, "isskipwhererepeatedapprove").toString().replaceAll("\"", ""));//重复审批自动跳过
+				actNodePropertiesExpand.setIsAllowReturn(ActUtils.getJsonNodeValueByKey(property, "isallowreturn").toString().replaceAll("\"", ""));//是否允许驳回
+				actNodePropertiesExpand.setIsAllowBatchApprove(ActUtils.getJsonNodeValueByKey(property, "isallowbatchapprove").toString().replaceAll("\"", ""));//是否允许批量审批
+				actNodePropertiesExpand.setIsProhibitViewingFlowChart(ActUtils.getJsonNodeValueByKey(property, "isprohibitviewingflowchart").toString().replaceAll("\"", ""));//是否允许查看流程图
+				actNodePropertiesExpand.setShowPassButton(ActUtils.getJsonNodeValueByKey(property, "showpassbutton").toString().replaceAll("\"", ""));//显示通过按钮
+				actNodePropertiesExpand.setShowRejectButton(ActUtils.getJsonNodeValueByKey(property, "showrejectbutton").toString().replaceAll("\"", ""));//显示驳回按钮
+				actNodePropertiesExpand.setShowSuspendButton(ActUtils.getJsonNodeValueByKey(property, "showsuspendbutton").toString().replaceAll("\"", ""));//显示挂起按钮
+				actNodePropertiesExpand.setShowStopButton(ActUtils.getJsonNodeValueByKey(property, "showstopbutton").toString().replaceAll("\"", ""));//显示终止按钮
+				actNodePropertiesExpand.setIsAutomaticallyPass(ActUtils.getJsonNodeValueByKey(property, "isautomaticallypass").toString().replaceAll("\"", ""));//是否自动审批
+				
+				JsonNode formkeydefinition = ActUtils.getJsonNodeByKey(property, "formkeydefinition");
+				if (formkeydefinition!=null) {
+					String actNodeFormId = ActUtils.getJsonNodeValueByKey(formkeydefinition, "id");
+					if (!actNodeFormId.equals("")) {
+						actNodeFormId = actNodeFormId.replace("\"", "");
+						actNodePropertiesExpand.setActNodeFormId(Long.valueOf(actNodeFormId));
+					}
+				}
+				
+				actNodePropertiesExpandMapper.insert(actNodePropertiesExpand);
+				
+			}
+			
+			BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
+			BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+			byte[] bpmnBytes = xmlConverter.convertToXML(bpmnModel);
+			String processName = modelData.getName();
+			if (!StringUtils.endsWith(processName, ".bpmn20.xml")){
+				processName += ".bpmn20.xml";
+			}
+//			System.out.println("========="+processName+"============"+modelData.getName());
+			ByteArrayInputStream in = new ByteArrayInputStream(bpmnBytes);
+			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
+					.addInputStream(processName, in).deploy();
+//					.addString(processName, new String(bpmnBytes)).deploy();
+			
+			// 设置流程分类
+			List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).list();
+			for (ProcessDefinition processDefinition : list) {
+				repositoryService.setProcessDefinitionCategory(processDefinition.getId(), modelData.getCategory());
+				message = "部署成功，流程ID=" + processDefinition.getId();
+			}
+			if (list.size() == 0){
+				message = "部署失败，没有流程。";
+			}
+		} catch (Exception e) {
+			throw new ActivitiException("设计模型图不正确，检查模型正确性，模型ID="+id, e);
+		}
+		return message;
+	}
+	
+	/**
+	 * 导出model的xml文件
+	 * @throws IOException 
+	 * @throws JsonProcessingException 
+	 */
+	public void export(String id, HttpServletResponse response) {
+		try {
+			org.activiti.engine.repository.Model modelData = repositoryService.getModel(id);
+			BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+			JsonNode editorNode = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
+			BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
+			BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+			byte[] bpmnBytes = xmlConverter.convertToXML(bpmnModel);
+
+			ByteArrayInputStream in = new ByteArrayInputStream(bpmnBytes);
+			IOUtils.copy(in, response.getOutputStream());
+			String filename = bpmnModel.getMainProcess().getId() + ".bpmn20.xml";
+			response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+			response.flushBuffer();
+		} catch (Exception e) {
+			throw new ActivitiException("导出model的xml文件失败，模型ID="+id, e);
+		}
+		
+	}
+
+	/**
+	 * 更新Model分类
+	 */
+	@Transactional(readOnly = false)
+	public void updateCategory(String id, String category) {
+		org.activiti.engine.repository.Model modelData = repositoryService.getModel(id);
+		modelData.setCategory(category);
+		repositoryService.saveModel(modelData);
+	}
+	
+	/**
+	 * 删除模型
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public void delete(String id) {
+		repositoryService.deleteModel(id);
+	}
+}

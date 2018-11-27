@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActRuVariableMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActRuVariable" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="REV_" property="rev" jdbcType="DECIMAL" />
+    <result column="TYPE_" property="type" jdbcType="OTHER" />
+    <result column="NAME_" property="name" jdbcType="OTHER" />
+    <result column="EXECUTION_ID_" property="executionId" jdbcType="OTHER" />
+    <result column="PROC_INST_ID_" property="procInstId" jdbcType="OTHER" />
+    <result column="TASK_ID_" property="taskId" jdbcType="OTHER" />
+    <result column="BYTEARRAY_ID_" property="bytearrayId" jdbcType="OTHER" />
+    <result column="DOUBLE_" property="doubleType" jdbcType="DECIMAL" />
+    <result column="LONG_" property="longType" jdbcType="DECIMAL" />
+    <result column="TEXT_" property="text" jdbcType="OTHER" />
+    <result column="TEXT2_" property="text2" jdbcType="OTHER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, REV_, TYPE_, NAME_, EXECUTION_ID_, PROC_INST_ID_, TASK_ID_, BYTEARRAY_ID_, DOUBLE_, 
+    LONG_, TEXT_, TEXT2_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActRuVariableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_RU_VARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_RU_VARIABLE
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_RU_VARIABLE
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActRuVariableExample" >
+    delete from ACT_RU_VARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActRuVariable" >
+    insert into ACT_RU_VARIABLE (ID_, REV_, TYPE_, NAME_, 
+      EXECUTION_ID_, PROC_INST_ID_, TASK_ID_, 
+      BYTEARRAY_ID_, DOUBLE_, LONG_, 
+      TEXT_, TEXT2_)
+    values (#{id,jdbcType=OTHER}, #{rev,jdbcType=DECIMAL}, #{type,jdbcType=OTHER}, #{name,jdbcType=OTHER}, 
+      #{executionId,jdbcType=OTHER}, #{procInstId,jdbcType=OTHER}, #{taskId,jdbcType=OTHER}, 
+      #{bytearrayId,jdbcType=OTHER}, #{doubleType,jdbcType=DECIMAL}, #{longType,jdbcType=DECIMAL}, 
+      #{text,jdbcType=OTHER}, #{text2,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActRuVariable" >
+    insert into ACT_RU_VARIABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="rev != null" >
+        REV_,
+      </if>
+      <if test="type != null" >
+        TYPE_,
+      </if>
+      <if test="name != null" >
+        NAME_,
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_,
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_,
+      </if>
+      <if test="taskId != null" >
+        TASK_ID_,
+      </if>
+      <if test="bytearrayId != null" >
+        BYTEARRAY_ID_,
+      </if>
+      <if test="doubleType != null" >
+        DOUBLE_,
+      </if>
+      <if test="longType != null" >
+        LONG_,
+      </if>
+      <if test="text != null" >
+        TEXT_,
+      </if>
+      <if test="text2 != null" >
+        TEXT2_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="rev != null" >
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="executionId != null" >
+        #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="bytearrayId != null" >
+        #{bytearrayId,jdbcType=OTHER},
+      </if>
+      <if test="doubleType != null" >
+        #{doubleType,jdbcType=DECIMAL},
+      </if>
+      <if test="longType != null" >
+        #{longType,jdbcType=DECIMAL},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=OTHER},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActRuVariableExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_RU_VARIABLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_RU_VARIABLE
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.rev != null" >
+        REV_ = #{record.rev,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null" >
+        TYPE_ = #{record.type,jdbcType=OTHER},
+      </if>
+      <if test="record.name != null" >
+        NAME_ = #{record.name,jdbcType=OTHER},
+      </if>
+      <if test="record.executionId != null" >
+        EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      </if>
+      <if test="record.procInstId != null" >
+        PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      </if>
+      <if test="record.taskId != null" >
+        TASK_ID_ = #{record.taskId,jdbcType=OTHER},
+      </if>
+      <if test="record.bytearrayId != null" >
+        BYTEARRAY_ID_ = #{record.bytearrayId,jdbcType=OTHER},
+      </if>
+      <if test="record.doubleType != null" >
+        DOUBLE_ = #{record.doubleType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.longType != null" >
+        LONG_ = #{record.longType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.text != null" >
+        TEXT_ = #{record.text,jdbcType=OTHER},
+      </if>
+      <if test="record.text2 != null" >
+        TEXT2_ = #{record.text2,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_RU_VARIABLE
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      TYPE_ = #{record.type,jdbcType=OTHER},
+      NAME_ = #{record.name,jdbcType=OTHER},
+      EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      TASK_ID_ = #{record.taskId,jdbcType=OTHER},
+      BYTEARRAY_ID_ = #{record.bytearrayId,jdbcType=OTHER},
+      DOUBLE_ = #{record.doubleType,jdbcType=DECIMAL},
+      LONG_ = #{record.longType,jdbcType=DECIMAL},
+      TEXT_ = #{record.text,jdbcType=OTHER},
+      TEXT2_ = #{record.text2,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActRuVariable" >
+    update ACT_RU_VARIABLE
+    <set >
+      <if test="rev != null" >
+        REV_ = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE_ = #{type,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        NAME_ = #{name,jdbcType=OTHER},
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null" >
+        TASK_ID_ = #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="bytearrayId != null" >
+        BYTEARRAY_ID_ = #{bytearrayId,jdbcType=OTHER},
+      </if>
+      <if test="doubleType != null" >
+        DOUBLE_ = #{doubleType,jdbcType=DECIMAL},
+      </if>
+      <if test="longType != null" >
+        LONG_ = #{longType,jdbcType=DECIMAL},
+      </if>
+      <if test="text != null" >
+        TEXT_ = #{text,jdbcType=OTHER},
+      </if>
+      <if test="text2 != null" >
+        TEXT2_ = #{text2,jdbcType=OTHER},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActRuVariable" >
+    update ACT_RU_VARIABLE
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      TYPE_ = #{type,jdbcType=OTHER},
+      NAME_ = #{name,jdbcType=OTHER},
+      EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      TASK_ID_ = #{taskId,jdbcType=OTHER},
+      BYTEARRAY_ID_ = #{bytearrayId,jdbcType=OTHER},
+      DOUBLE_ = #{doubleType,jdbcType=DECIMAL},
+      LONG_ = #{longType,jdbcType=DECIMAL},
+      TEXT_ = #{text,jdbcType=OTHER},
+      TEXT2_ = #{text2,jdbcType=OTHER}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

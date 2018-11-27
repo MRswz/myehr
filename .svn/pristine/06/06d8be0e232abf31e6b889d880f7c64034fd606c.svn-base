@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormShowInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormShowInfo" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="FORM_TYPE" property="formType" jdbcType="VARCHAR" />
+    <result column="FORM_FUNCTION" property="formFunction" jdbcType="VARCHAR" />
+    <result column="FORM_PIC" property="formPic" jdbcType="VARCHAR" />
+    <result column="FORM_TAG" property="formTag" jdbcType="VARCHAR" />
+    <result column="FORM_TYPE_NAME" property="formTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FORM_TYPE, FORM_FUNCTION, FORM_PIC, FORM_TAG, FORM_TYPE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormShowInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_SHOW_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormShowInfoExample" >
+    delete from SYS_FORM_SHOW_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormShowInfo" >
+    insert into SYS_FORM_SHOW_INFO (FORM_TYPE, FORM_FUNCTION, 
+      FORM_PIC, FORM_TAG, FORM_TYPE_NAME
+      )
+    values ( #{formType,jdbcType=VARCHAR}, #{formFunction,jdbcType=VARCHAR}, 
+      #{formPic,jdbcType=VARCHAR}, #{formTag,jdbcType=VARCHAR}, #{formTypeName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormShowInfo" >
+    insert into SYS_FORM_SHOW_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="formType != null" >
+        FORM_TYPE,
+      </if>
+      <if test="formFunction != null" >
+        FORM_FUNCTION,
+      </if>
+      <if test="formPic != null" >
+        FORM_PIC,
+      </if>
+      <if test="formTag != null" >
+        FORM_TAG,
+      </if>
+      <if test="formTypeName != null" >
+        FORM_TYPE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="formType != null" >
+        #{formType,jdbcType=VARCHAR},
+      </if>
+      <if test="formFunction != null" >
+        #{formFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="formPic != null" >
+        #{formPic,jdbcType=VARCHAR},
+      </if>
+      <if test="formTag != null" >
+        #{formTag,jdbcType=VARCHAR},
+      </if>
+      <if test="formTypeName != null" >
+        #{formTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormShowInfoExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_SHOW_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_SHOW_INFO
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formType != null" >
+        FORM_TYPE = #{record.formType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formFunction != null" >
+        FORM_FUNCTION = #{record.formFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formPic != null" >
+        FORM_PIC = #{record.formPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTag != null" >
+        FORM_TAG = #{record.formTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formTypeName != null" >
+        FORM_TYPE_NAME = #{record.formTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_SHOW_INFO
+    set ID = #{record.id,jdbcType=DECIMAL},
+      FORM_TYPE = #{record.formType,jdbcType=VARCHAR},
+      FORM_FUNCTION = #{record.formFunction,jdbcType=VARCHAR},
+      FORM_PIC = #{record.formPic,jdbcType=VARCHAR},
+      FORM_TAG = #{record.formTag,jdbcType=VARCHAR},
+      FORM_TYPE_NAME = #{record.formTypeName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

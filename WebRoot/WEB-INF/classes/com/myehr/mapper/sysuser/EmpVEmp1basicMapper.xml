@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.EmpVEmp1basicMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.EmpVEmp1basic" >
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="EMPID" property="empid" jdbcType="INTEGER" />
+    <result column="EMPCODE" property="empcode" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="NVARCHAR" />
+    <result column="SEX" property="sex" jdbcType="NVARCHAR" />
+    <result column="DEPID" property="depid" jdbcType="VARCHAR" />
+    <result column="JOBID" property="jobid" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="VARCHAR" />
+    <result column="WORKEMAIL" property="workemail" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="WORKPHONE" property="workphone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USERID, EMPID, EMPCODE, CNAME, SEX, DEPID, JOBID, BIRTHDAY, WORKEMAIL, MOBILE, WORKPHONE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysuser.EmpVEmp1basicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from EMP_V_EMP1BASIC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysuser.EmpVEmp1basicExample" >
+    delete from EMP_V_EMP1BASIC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysuser.EmpVEmp1basic" >
+    insert into EMP_V_EMP1BASIC (USERID, EMPID, EMPCODE, 
+      CNAME, SEX, DEPID, 
+      JOBID, BIRTHDAY, WORKEMAIL, 
+      MOBILE, WORKPHONE)
+    values (#{userid,jdbcType=VARCHAR}, #{empid,jdbcType=INTEGER}, #{empcode,jdbcType=VARCHAR}, 
+      #{cname,jdbcType=NVARCHAR}, #{sex,jdbcType=NVARCHAR}, #{depid,jdbcType=VARCHAR}, 
+      #{jobid,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{workemail,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{workphone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysuser.EmpVEmp1basic" >
+    insert into EMP_V_EMP1BASIC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="empid != null" >
+        EMPID,
+      </if>
+      <if test="empcode != null" >
+        EMPCODE,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="depid != null" >
+        DEPID,
+      </if>
+      <if test="jobid != null" >
+        JOBID,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="workemail != null" >
+        WORKEMAIL,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="workphone != null" >
+        WORKPHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="empid != null" >
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="empcode != null" >
+        #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=NVARCHAR},
+      </if>
+      <if test="depid != null" >
+        #{depid,jdbcType=VARCHAR},
+      </if>
+      <if test="jobid != null" >
+        #{jobid,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="workemail != null" >
+        #{workemail,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="workphone != null" >
+        #{workphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysuser.EmpVEmp1basicExample" resultType="java.lang.Integer" >
+    select count(*) from EMP_V_EMP1BASIC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update EMP_V_EMP1BASIC
+    <set >
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empid != null" >
+        EMPID = #{record.empid,jdbcType=INTEGER},
+      </if>
+      <if test="record.empcode != null" >
+        EMPCODE = #{record.empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        CNAME = #{record.cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.depid != null" >
+        DEPID = #{record.depid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobid != null" >
+        JOBID = #{record.jobid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        BIRTHDAY = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workemail != null" >
+        WORKEMAIL = #{record.workemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workphone != null" >
+        WORKPHONE = #{record.workphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update EMP_V_EMP1BASIC
+    set USERID = #{record.userid,jdbcType=VARCHAR},
+      EMPID = #{record.empid,jdbcType=INTEGER},
+      EMPCODE = #{record.empcode,jdbcType=VARCHAR},
+      CNAME = #{record.cname,jdbcType=NVARCHAR},
+      SEX = #{record.sex,jdbcType=NVARCHAR},
+      DEPID = #{record.depid,jdbcType=VARCHAR},
+      JOBID = #{record.jobid,jdbcType=VARCHAR},
+      BIRTHDAY = #{record.birthday,jdbcType=VARCHAR},
+      WORKEMAIL = #{record.workemail,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      WORKPHONE = #{record.workphone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

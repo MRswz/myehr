@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系人</title>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row" id="lianxiren">
+
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "./test.json",
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data.Jsondata);
+                    var type = data.Jsondata;
+                    var carType = {
+                        data: []
+                    }
+                    for(var i in type){
+                        if (type.hasOwnProperty(i)) { //filter,只输出type的私有属性
+                            console.log(i,":",type[i]);
+                            var myArr = type[i].data.list;
+                            for(var j = 0; j<myArr.length ; j++){
+                                myArr[j]["rule"] = type[i].rule;
+                                console.log(myArr[j]);
+                                carType.data.push(myArr[j]);
+                            }
+                        };
+                    }
+                    console.log(carType);
+                }
+            });
+        });
+         
+    </script>
+
+</body>
+
+</html>

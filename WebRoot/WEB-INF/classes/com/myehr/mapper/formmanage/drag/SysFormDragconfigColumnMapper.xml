@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.drag.SysFormDragconfigColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumn" >
+    <id column="DRAGCONFIG_COLUMN_ID" property="dragconfigColumnId" jdbcType="DECIMAL" />
+    <result column="DRAGCONFIG_ID" property="dragconfigId" jdbcType="DECIMAL" />
+    <result column="FORM_ID" property="formId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DRAGCONFIG_COLUMN_ID, DRAGCONFIG_ID, FORM_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_DRAGCONFIG_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_DRAGCONFIG_COLUMN
+    where DRAGCONFIG_COLUMN_ID = #{dragconfigColumnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_DRAGCONFIG_COLUMN
+    where DRAGCONFIG_COLUMN_ID = #{dragconfigColumnId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumnExample" >
+    delete from SYS_FORM_DRAGCONFIG_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumn" >
+    insert into SYS_FORM_DRAGCONFIG_COLUMN ( DRAGCONFIG_ID, 
+      FORM_ID)
+    values ( #{dragconfigId,jdbcType=DECIMAL}, 
+      #{formId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumn" >
+    insert into SYS_FORM_DRAGCONFIG_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dragconfigColumnId != null" >
+        DRAGCONFIG_COLUMN_ID,
+      </if>
+      <if test="dragconfigId != null" >
+        DRAGCONFIG_ID,
+      </if>
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dragconfigColumnId != null" >
+        #{dragconfigColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="dragconfigId != null" >
+        #{dragconfigId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_DRAGCONFIG_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_DRAGCONFIG_COLUMN
+    <set >
+      <if test="record.dragconfigColumnId != null" >
+        DRAGCONFIG_COLUMN_ID = #{record.dragconfigColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dragconfigId != null" >
+        DRAGCONFIG_ID = #{record.dragconfigId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formId != null" >
+        FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_DRAGCONFIG_COLUMN
+    set DRAGCONFIG_COLUMN_ID = #{record.dragconfigColumnId,jdbcType=DECIMAL},
+      DRAGCONFIG_ID = #{record.dragconfigId,jdbcType=DECIMAL},
+      FORM_ID = #{record.formId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumn" >
+    update SYS_FORM_DRAGCONFIG_COLUMN
+    <set >
+      <if test="dragconfigId != null" >
+        DRAGCONFIG_ID = #{dragconfigId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        FORM_ID = #{formId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DRAGCONFIG_COLUMN_ID = #{dragconfigColumnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.drag.SysFormDragconfigColumn" >
+    update SYS_FORM_DRAGCONFIG_COLUMN
+    set DRAGCONFIG_ID = #{dragconfigId,jdbcType=DECIMAL},
+      FORM_ID = #{formId,jdbcType=DECIMAL}
+    where DRAGCONFIG_COLUMN_ID = #{dragconfigColumnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

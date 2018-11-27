@@ -1,0 +1,55 @@
+package com.myehr.pojo.formmanage.template.gridbycard;
+
+import java.util.Date;
+
+public class SysGridbycardTemplate {
+    private Integer templateId;
+
+    private String templateCode;
+
+    private String templateName;
+
+    private String operatorName;
+
+    private Date operatorTime;
+
+    public Integer getTemplateId() {
+        return templateId;
+    }
+
+    public void setTemplateId(Integer templateId) {
+        this.templateId = templateId;
+    }
+
+    public String getTemplateCode() {
+        return templateCode;
+    }
+
+    public void setTemplateCode(String templateCode) {
+        this.templateCode = templateCode == null ? null : templateCode.trim();
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName == null ? null : templateName.trim();
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName == null ? null : operatorName.trim();
+    }
+
+    public Date getOperatorTime() {
+        return operatorTime;
+    }
+
+    public void setOperatorTime(Date operatorTime) {
+        this.operatorTime = operatorTime;
+    }
+}

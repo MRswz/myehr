@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myehr.mapper.sysMenuRoleExpand.SysMenuRoleExpandMapper">
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysMenuRole.SysMenuRole">
+    <id column="MENU_ROLE_ID" jdbcType="INTEGER" property="menuRoleId" />
+    <result column="MENU_ID" jdbcType="INTEGER" property="menuId" />
+    <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="MENU_ROLE_REMARK" jdbcType="VARCHAR" property="menuRoleRemark" />
+    <result column="OPERATOR_NAME" jdbcType="VARCHAR" property="operatorName" />
+    <result column="OPERATOR_TIME" jdbcType="TIMESTAMP" property="operatorTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MENU_ROLE_ID, MENU_ID, ROLE_ID, MENU_ROLE_REMARK, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  
+  
+  <select id="searchSysMenuRoleList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu_role
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  
+  
+  <delete id="delete" parameterType="java.util.Map" >
+    delete 
+    from sys_menu_role 
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  
+  
+</mapper>

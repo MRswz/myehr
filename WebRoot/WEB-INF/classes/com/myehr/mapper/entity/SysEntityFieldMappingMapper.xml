@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.entity.SysEntityFieldMappingMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.entity.SysEntityFieldMapping" >
+    <id column="entity_field_mapping_id" property="entityFieldMappingId" jdbcType="DECIMAL" />
+    <result column="entity_mapping_code" property="entityMappingCode" jdbcType="VARCHAR" />
+    <result column="entity_field_old_code" property="entityFieldOldCode" jdbcType="VARCHAR" />
+    <result column="entity_field_new_code" property="entityFieldNewCode" jdbcType="VARCHAR" />
+    <result column="entity_field_type" property="entityFieldType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    entity_field_mapping_id, entity_mapping_code, entity_field_old_code, entity_field_new_code, 
+    entity_field_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.entity.SysEntityFieldMappingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_entity_field_mapping
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_entity_field_mapping
+    where entity_field_mapping_id = #{entityFieldMappingId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_entity_field_mapping
+    where entity_field_mapping_id = #{entityFieldMappingId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.entity.SysEntityFieldMappingExample" >
+    delete from sys_entity_field_mapping
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.entity.SysEntityFieldMapping" >
+    insert into sys_entity_field_mapping (entity_mapping_code, 
+      entity_field_old_code, entity_field_new_code, 
+      entity_field_type)
+    values (#{entityMappingCode,jdbcType=VARCHAR}, 
+      #{entityFieldOldCode,jdbcType=VARCHAR}, #{entityFieldNewCode,jdbcType=VARCHAR}, 
+      #{entityFieldType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.entity.SysEntityFieldMapping" >
+    insert into sys_entity_field_mapping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="entityFieldMappingId != null" >
+        entity_field_mapping_id,
+      </if>
+      <if test="entityMappingCode != null" >
+        entity_mapping_code,
+      </if>
+      <if test="entityFieldOldCode != null" >
+        entity_field_old_code,
+      </if>
+      <if test="entityFieldNewCode != null" >
+        entity_field_new_code,
+      </if>
+      <if test="entityFieldType != null" >
+        entity_field_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="entityFieldMappingId != null" >
+        #{entityFieldMappingId,jdbcType=DECIMAL},
+      </if>
+      <if test="entityMappingCode != null" >
+        #{entityMappingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldOldCode != null" >
+        #{entityFieldOldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldNewCode != null" >
+        #{entityFieldNewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldType != null" >
+        #{entityFieldType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.entity.SysEntityFieldMappingExample" resultType="java.lang.Integer" >
+    select count(*) from sys_entity_field_mapping
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_entity_field_mapping
+    <set >
+      <if test="record.entityFieldMappingId != null" >
+        entity_field_mapping_id = #{record.entityFieldMappingId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.entityMappingCode != null" >
+        entity_mapping_code = #{record.entityMappingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityFieldOldCode != null" >
+        entity_field_old_code = #{record.entityFieldOldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityFieldNewCode != null" >
+        entity_field_new_code = #{record.entityFieldNewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityFieldType != null" >
+        entity_field_type = #{record.entityFieldType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_entity_field_mapping
+    set entity_field_mapping_id = #{record.entityFieldMappingId,jdbcType=DECIMAL},
+      entity_mapping_code = #{record.entityMappingCode,jdbcType=VARCHAR},
+      entity_field_old_code = #{record.entityFieldOldCode,jdbcType=VARCHAR},
+      entity_field_new_code = #{record.entityFieldNewCode,jdbcType=VARCHAR},
+      entity_field_type = #{record.entityFieldType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.entity.SysEntityFieldMapping" >
+    update sys_entity_field_mapping
+    <set >
+      <if test="entityMappingCode != null" >
+        entity_mapping_code = #{entityMappingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldOldCode != null" >
+        entity_field_old_code = #{entityFieldOldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldNewCode != null" >
+        entity_field_new_code = #{entityFieldNewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityFieldType != null" >
+        entity_field_type = #{entityFieldType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where entity_field_mapping_id = #{entityFieldMappingId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.entity.SysEntityFieldMapping" >
+    update sys_entity_field_mapping
+    set entity_mapping_code = #{entityMappingCode,jdbcType=VARCHAR},
+      entity_field_old_code = #{entityFieldOldCode,jdbcType=VARCHAR},
+      entity_field_new_code = #{entityFieldNewCode,jdbcType=VARCHAR},
+      entity_field_type = #{entityFieldType,jdbcType=VARCHAR}
+    where entity_field_mapping_id = #{entityFieldMappingId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysRule" >
+    <id column="RULE_ID" property="ruleId" jdbcType="DECIMAL" />
+    <result column="RULE_CODE" property="ruleCode" jdbcType="NVARCHAR" />
+    <result column="RULE_INFO" property="ruleInfo" jdbcType="NVARCHAR" />
+    <result column="RULE_NAME" property="ruleName" jdbcType="NVARCHAR" />
+    <result column="RULE_STATUS" property="ruleStatus" jdbcType="NVARCHAR" />
+    <result column="RULE_SORT" property="ruleSort" jdbcType="DECIMAL" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="NVARCHAR" />
+    <result column="RULE_SOLUTION_ID" property="ruleSolutionId" jdbcType="DECIMAL" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="RULE_ISEXC" property="ruleIsexc" jdbcType="NVARCHAR" />
+    <result column="RULE_FORM_ID" property="ruleFormId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.form.SysRuleWithBLOBs" extends="BaseResultMap" >
+    <result column="RULE_JAVA_SQL" property="ruleJavaSql" jdbcType="LONGVARCHAR" />
+    <result column="RULE_EXE_SQL" property="ruleExeSql" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RULE_ID, RULE_CODE, RULE_INFO, RULE_NAME, RULE_STATUS, RULE_SORT, OPERATOR_TIME, 
+    OPERATOR_NAME, APPROVE_TIME, APPROVE_NAME, RULE_SOLUTION_ID, DELETE_MARK, RULE_ISEXC, 
+    RULE_FORM_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    RULE_JAVA_SQL, RULE_EXE_SQL
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_RULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_RULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_RULE
+    where RULE_ID = #{ruleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_RULE
+    where RULE_ID = #{ruleId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysRuleExample" >
+    delete from SYS_RULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysRuleWithBLOBs" >
+    insert into SYS_RULE (RULE_CODE, RULE_INFO, 
+      RULE_NAME, RULE_STATUS, RULE_SORT, 
+      OPERATOR_TIME, OPERATOR_NAME, APPROVE_TIME, 
+      APPROVE_NAME, RULE_SOLUTION_ID, DELETE_MARK, 
+      RULE_ISEXC, RULE_FORM_ID, RULE_JAVA_SQL, 
+      RULE_EXE_SQL)
+    values (#{ruleCode,jdbcType=NVARCHAR}, #{ruleInfo,jdbcType=NVARCHAR}, 
+      #{ruleName,jdbcType=NVARCHAR}, #{ruleStatus,jdbcType=NVARCHAR}, #{ruleSort,jdbcType=DECIMAL}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{approveTime,jdbcType=TIMESTAMP}, 
+      #{approveName,jdbcType=NVARCHAR}, #{ruleSolutionId,jdbcType=DECIMAL}, #{deleteMark,jdbcType=NVARCHAR}, 
+      #{ruleIsexc,jdbcType=NVARCHAR}, #{ruleFormId,jdbcType=INTEGER}, #{ruleJavaSql,jdbcType=LONGVARCHAR}, 
+      #{ruleExeSql,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysRuleWithBLOBs" >
+    insert into SYS_RULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        RULE_ID,
+      </if>
+      <if test="ruleCode != null" >
+        RULE_CODE,
+      </if>
+      <if test="ruleInfo != null" >
+        RULE_INFO,
+      </if>
+      <if test="ruleName != null" >
+        RULE_NAME,
+      </if>
+      <if test="ruleStatus != null" >
+        RULE_STATUS,
+      </if>
+      <if test="ruleSort != null" >
+        RULE_SORT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="ruleSolutionId != null" >
+        RULE_SOLUTION_ID,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="ruleIsexc != null" >
+        RULE_ISEXC,
+      </if>
+      <if test="ruleFormId != null" >
+        RULE_FORM_ID,
+      </if>
+      <if test="ruleJavaSql != null" >
+        RULE_JAVA_SQL,
+      </if>
+      <if test="ruleExeSql != null" >
+        RULE_EXE_SQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        #{ruleId,jdbcType=DECIMAL},
+      </if>
+      <if test="ruleCode != null" >
+        #{ruleCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleInfo != null" >
+        #{ruleInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleName != null" >
+        #{ruleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleStatus != null" >
+        #{ruleStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleSort != null" >
+        #{ruleSort,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleSolutionId != null" >
+        #{ruleSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleIsexc != null" >
+        #{ruleIsexc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleFormId != null" >
+        #{ruleFormId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleJavaSql != null" >
+        #{ruleJavaSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ruleExeSql != null" >
+        #{ruleExeSql,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysRuleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_RULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_RULE
+    <set >
+      <if test="record.ruleId != null" >
+        RULE_ID = #{record.ruleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ruleCode != null" >
+        RULE_CODE = #{record.ruleCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleInfo != null" >
+        RULE_INFO = #{record.ruleInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleName != null" >
+        RULE_NAME = #{record.ruleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleStatus != null" >
+        RULE_STATUS = #{record.ruleStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleSort != null" >
+        RULE_SORT = #{record.ruleSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleSolutionId != null" >
+        RULE_SOLUTION_ID = #{record.ruleSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleIsexc != null" >
+        RULE_ISEXC = #{record.ruleIsexc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ruleFormId != null" >
+        RULE_FORM_ID = #{record.ruleFormId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ruleJavaSql != null" >
+        RULE_JAVA_SQL = #{record.ruleJavaSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ruleExeSql != null" >
+        RULE_EXE_SQL = #{record.ruleExeSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_RULE
+    set RULE_ID = #{record.ruleId,jdbcType=DECIMAL},
+      RULE_CODE = #{record.ruleCode,jdbcType=NVARCHAR},
+      RULE_INFO = #{record.ruleInfo,jdbcType=NVARCHAR},
+      RULE_NAME = #{record.ruleName,jdbcType=NVARCHAR},
+      RULE_STATUS = #{record.ruleStatus,jdbcType=NVARCHAR},
+      RULE_SORT = #{record.ruleSort,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      RULE_SOLUTION_ID = #{record.ruleSolutionId,jdbcType=DECIMAL},
+      DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      RULE_ISEXC = #{record.ruleIsexc,jdbcType=NVARCHAR},
+      RULE_FORM_ID = #{record.ruleFormId,jdbcType=INTEGER},
+      RULE_JAVA_SQL = #{record.ruleJavaSql,jdbcType=LONGVARCHAR},
+      RULE_EXE_SQL = #{record.ruleExeSql,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_RULE
+    set RULE_ID = #{record.ruleId,jdbcType=DECIMAL},
+      RULE_CODE = #{record.ruleCode,jdbcType=NVARCHAR},
+      RULE_INFO = #{record.ruleInfo,jdbcType=NVARCHAR},
+      RULE_NAME = #{record.ruleName,jdbcType=NVARCHAR},
+      RULE_STATUS = #{record.ruleStatus,jdbcType=NVARCHAR},
+      RULE_SORT = #{record.ruleSort,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      RULE_SOLUTION_ID = #{record.ruleSolutionId,jdbcType=DECIMAL},
+      DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      RULE_ISEXC = #{record.ruleIsexc,jdbcType=NVARCHAR},
+      RULE_FORM_ID = #{record.ruleFormId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysRuleWithBLOBs" >
+    update SYS_RULE
+    <set >
+      <if test="ruleCode != null" >
+        RULE_CODE = #{ruleCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleInfo != null" >
+        RULE_INFO = #{ruleInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleName != null" >
+        RULE_NAME = #{ruleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleStatus != null" >
+        RULE_STATUS = #{ruleStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleSort != null" >
+        RULE_SORT = #{ruleSort,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleSolutionId != null" >
+        RULE_SOLUTION_ID = #{ruleSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleIsexc != null" >
+        RULE_ISEXC = #{ruleIsexc,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruleFormId != null" >
+        RULE_FORM_ID = #{ruleFormId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleJavaSql != null" >
+        RULE_JAVA_SQL = #{ruleJavaSql,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ruleExeSql != null" >
+        RULE_EXE_SQL = #{ruleExeSql,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where RULE_ID = #{ruleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysRuleWithBLOBs" >
+    update SYS_RULE
+    set RULE_CODE = #{ruleCode,jdbcType=NVARCHAR},
+      RULE_INFO = #{ruleInfo,jdbcType=NVARCHAR},
+      RULE_NAME = #{ruleName,jdbcType=NVARCHAR},
+      RULE_STATUS = #{ruleStatus,jdbcType=NVARCHAR},
+      RULE_SORT = #{ruleSort,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      RULE_SOLUTION_ID = #{ruleSolutionId,jdbcType=DECIMAL},
+      DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      RULE_ISEXC = #{ruleIsexc,jdbcType=NVARCHAR},
+      RULE_FORM_ID = #{ruleFormId,jdbcType=INTEGER},
+      RULE_JAVA_SQL = #{ruleJavaSql,jdbcType=LONGVARCHAR},
+      RULE_EXE_SQL = #{ruleExeSql,jdbcType=LONGVARCHAR}
+    where RULE_ID = #{ruleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysRule" >
+    update SYS_RULE
+    set RULE_CODE = #{ruleCode,jdbcType=NVARCHAR},
+      RULE_INFO = #{ruleInfo,jdbcType=NVARCHAR},
+      RULE_NAME = #{ruleName,jdbcType=NVARCHAR},
+      RULE_STATUS = #{ruleStatus,jdbcType=NVARCHAR},
+      RULE_SORT = #{ruleSort,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      RULE_SOLUTION_ID = #{ruleSolutionId,jdbcType=DECIMAL},
+      DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      RULE_ISEXC = #{ruleIsexc,jdbcType=NVARCHAR},
+      RULE_FORM_ID = #{ruleFormId,jdbcType=INTEGER}
+    where RULE_ID = #{ruleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

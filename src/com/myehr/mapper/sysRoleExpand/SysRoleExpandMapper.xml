@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysRoleExpand.SysRoleExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysRole.SysRole" >
+    <id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_DESC" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR" />
+    <result column="ROLE_PARENT_CODE" property="roleParentCode" jdbcType="VARCHAR" />
+    <result column="ROLE_STATUS" property="roleStatus" jdbcType="VARCHAR" />
+    <result column="ROLE_TIME_START" property="roleTimeStart" jdbcType="TIMESTAMP" />
+    <result column="ROLE_TIME_END" property="roleTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="ROLE_SEQ" property="roleSeq" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_CODE, ROLE_NAME, ROLE_DESC, ROLE_TYPE, ROLE_PARENT_CODE, ROLE_STATUS, 
+    ROLE_TIME_START, ROLE_TIME_END, ROLE_SEQ, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+    APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK
+  </sql>
+  
+    <select id="select" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		sys_role
+	WHERE
+	   (ROLE_CODE LIKE #{condition}
+	OR ROLE_NAME LIKE #{condition}
+	OR ROLE_PARENT_CODE LIKE #{condition}
+	OR ROLE_TYPE LIKE #{condition}
+	OR ROLE_STATUS LIKE #{condition})
+	AND DELETE_MARK = #{deleteMark}
+  </select>
+  <select id="getAllSysRole" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		 ${sql}
+  </select>
+  <select id="getTotalSysRole" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		 ${sql}
+  </select>
+  
+  <select id="getByRoleCode" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		sys_role
+	WHERE
+		ROLE_CODE = #{id}
+	
+	
+	</select>
+  
+ 
+</mapper>

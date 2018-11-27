@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Handsontable</title>
+  <%@include file="/common/common.jsp"%>
+  <script data-jsfiddle="common" src="dist/handsontable.full.js"></script>
+  <link data-jsfiddle="common" rel="stylesheet" media="screen" href="dist/handsontable.full.css">
+
+  <link data-jsfiddle="common" rel="stylesheet" media="screen" href="css/samples.css">
+  <script src="js/samples.js"></script>
+  <script src="dist/jquery.min.js"></script>
+  <script src="js/highlight/highlight.pack.js"></script>
+  <link rel="stylesheet" media="screen" href="js/highlight/styles/github.css">
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+  <link rel="canonical" href="http://handsontable.com/">
+  <script src="js/ga.js"></script>
+  <link rel="stylesheet" media="screen" href="github-buttons/github-buttons.css">
+  <script src="github-buttons/github-buttons.js" async></script>
+</head>
+
+<body class="home">
+<div class="columnLayout">
+	<div class="rowLayout">
+      	<div class="descLayout">
+        	<div class="pad" data-jsfiddle="example">
+        		<div id="example"></div>
+        	</div>
+      	</div>
+      	<div class="codeLayout">
+        	<div class="jsFiddle inline-buttons">
+          		<button class="show-source"></button>
+          		<button class="jsFiddleLink" data-runfiddle="example">Edit in jsFiddle</button>
+          		<button name="dump" data-dump="#example" data-instance="hot" title="Prints current data source to Firebug/Chrome Dev Tools">Dump data to console</button>
+        	</div>
+		    <script data-jsfiddle="example">
+		    init();
+		    function init(){
+				$.ajax({
+		            url: '${pageContext.request.contextPath }/calendar/queryItem.action',
+		            type: 'POST',
+			        cache: false,
+			        contentType: 'application/json;charset=utf-8',
+		            success: function(data) { // 获取当前月的数据
+		            	var html="";
+		            	var html1="";
+		            	html1+="<div>"+data[1].parentCode+"：";
+		            	html1+="<input type=\"radio\" name=\"paiban\" value=\""+data[1].itemName+"\" title=\""+data[1].itemCode+"\"/>"+data[1].itemCode;
+		            	for(var i=0;i<data.length-1;i++){
+		            		if(data[i].parentCode==data[i+1].parentCode){
+		            			html1+="<input type=\"radio\" name=\"paiban\" value=\""+data[i+1].itemName+"\" title=\""+data[i+1].itemCode+"\"/>"+data[i+1].itemCode;
+		            		}else{
+		            			html1+="</div>";
+		            			html1+="<br>";
+		            			html1+="<div>"+data[i+1].parentCode+"：";
+		            			html1+="<input type=\"radio\" name=\"paiban\" value=\""+data[i+1].itemName+"\" title=\""+data[i+1].itemCode+"\"/>"+data[i+1].itemCode;
+		            		}
+		            	}
+		            	html1+="</div>";
+		            	$("#updateWork1").html(html1);
+		            }
+		        });
+    		}
+		    var data = [
+		              ['', 'Maserati', 'Mazda', 'Mercedes', 'Mini', 'Mitsubishi'],
+		              ['2009', 0, 2941, 4303, 354, 5814],
+		              ['2010', 3, 2905, 2867, 412, 5284],
+		              ['2011', 4, 2517, 4822, 552, 6127],
+		              ['2012', 2, 2422, 5399, 776, 4151]
+		            ],
+		            container = document.getElementById('example'),
+		            hot;
+		
+		          hot = new Handsontable(container, {
+		            data: data,
+		            minSpareRows: 1,
+		            colHeaders: true,
+		            contextMenu: true
+		          });
+		
+		        </script>
+      	</div>
+    </div>
+	<script type="text/javascript">
+	      var showSourceElements = document.querySelectorAll('.show-source');
+	
+	      for(var i = 0; i < showSourceElements.length ; i++) {
+	        var showElem = showSourceElements[i];
+	        showElem.addEventListener('mousedown', function (event) {
+	          event.preventDefault();
+	
+	          if(showElem.className.indexOf('shown') > -1) {
+	            showElem.className = showElem.className.replace('shown', '');
+	          } else {
+	            showElem.className += ' shown';
+	          }
+	
+	          var preJS = document.querySelectorAll('pre.javascript');
+	          for(var j = 0; j < preJS.length; j++) {
+	            if(preJS[j].style.display == '') {
+	              preJS[j].style.display = 'block';
+	            } else {
+	              preJS[j].style.display = '';
+	            }
+	          }
+	
+	          var codeLay = document.querySelectorAll('.codeLayout');
+	          for(var j = 0; j < codeLay.length; j++) {
+	            if(codeLay[j].className.indexOf('codeLayoutExpanded') > -1) {
+	              codeLay[j].className = codeLay[j].className.replace('codeLayoutExpanded', '');
+	            } else {
+	              codeLay[j].className += ' codeLayoutExpanded';
+	            }
+	          }
+	
+	        });
+	      }
+	
+	      var verHolders = document.querySelectorAll('.ver');
+	      for(var i = 0; i < verHolders.length; i++) {
+	        var verText = document.createTextNode(hot.version);
+	        verHolders[i].appendChild(verText);
+	      }
+	    </script>
+</div>
+</body>
+</html>

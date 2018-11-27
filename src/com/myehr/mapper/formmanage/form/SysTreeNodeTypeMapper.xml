@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysTreeNodeTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysTreeNodeType" >
+    <id column="TREE_NODE_TYPE_ID" property="treeNodeTypeId" jdbcType="DECIMAL" />
+    <result column="TREE_NODE_TYPE_CODE" property="treeNodeTypeCode" jdbcType="VARCHAR" />
+    <result column="TREE_NODE_TYPE_ICON" property="treeNodeTypeIcon" jdbcType="VARCHAR" />
+    <result column="TREE_NODE_TYPE_TITTLE" property="treeNodeTypeTittle" jdbcType="VARCHAR" />
+    <result column="TREE_NODE_TYPE_EXC_TYPE" property="treeNodeTypeExcType" jdbcType="VARCHAR" />
+    <result column="TREE_NODE_TYPE_FORM_ID" property="treeNodeTypeFormId" jdbcType="DECIMAL" />
+    <result column="FORM_TREE_FORM_ID" property="formTreeFormId" jdbcType="DECIMAL" />
+    <result column="TREE_NODE_TYPE_URL" property="treeNodeTypeUrl" jdbcType="VARCHAR" />
+    <result column="TREE_NODE_TYPE_FORM_NAME" property="treeNodeTypeFormName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TREE_NODE_TYPE_ID, TREE_NODE_TYPE_CODE, TREE_NODE_TYPE_ICON, TREE_NODE_TYPE_TITTLE, 
+    TREE_NODE_TYPE_EXC_TYPE, TREE_NODE_TYPE_FORM_ID, FORM_TREE_FORM_ID, TREE_NODE_TYPE_URL, 
+    TREE_NODE_TYPE_FORM_NAME, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TREE_NODE_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TREE_NODE_TYPE
+    where TREE_NODE_TYPE_ID = #{treeNodeTypeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TREE_NODE_TYPE
+    where TREE_NODE_TYPE_ID = #{treeNodeTypeId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeTypeExample" >
+    delete from SYS_TREE_NODE_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeType" useGeneratedKeys="true" keyProperty="treeNodeTypeId" keyColumn="TREE_NODE_TYPE_ID">
+    insert into SYS_TREE_NODE_TYPE (TREE_NODE_TYPE_CODE, 
+      TREE_NODE_TYPE_ICON, TREE_NODE_TYPE_TITTLE, TREE_NODE_TYPE_EXC_TYPE, 
+      TREE_NODE_TYPE_FORM_ID, FORM_TREE_FORM_ID, TREE_NODE_TYPE_URL, 
+      TREE_NODE_TYPE_FORM_NAME, OPERATOR_NAME, OPERATOR_TIME
+      )
+    values (#{treeNodeTypeCode,jdbcType=VARCHAR}, 
+      #{treeNodeTypeIcon,jdbcType=VARCHAR}, #{treeNodeTypeTittle,jdbcType=VARCHAR}, #{treeNodeTypeExcType,jdbcType=VARCHAR}, 
+      #{treeNodeTypeFormId,jdbcType=DECIMAL}, #{formTreeFormId,jdbcType=DECIMAL}, #{treeNodeTypeUrl,jdbcType=VARCHAR}, 
+      #{treeNodeTypeFormName,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeType" >
+    insert into SYS_TREE_NODE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="treeNodeTypeId != null" >
+        TREE_NODE_TYPE_ID,
+      </if>
+      <if test="treeNodeTypeCode != null" >
+        TREE_NODE_TYPE_CODE,
+      </if>
+      <if test="treeNodeTypeIcon != null" >
+        TREE_NODE_TYPE_ICON,
+      </if>
+      <if test="treeNodeTypeTittle != null" >
+        TREE_NODE_TYPE_TITTLE,
+      </if>
+      <if test="treeNodeTypeExcType != null" >
+        TREE_NODE_TYPE_EXC_TYPE,
+      </if>
+      <if test="treeNodeTypeFormId != null" >
+        TREE_NODE_TYPE_FORM_ID,
+      </if>
+      <if test="formTreeFormId != null" >
+        FORM_TREE_FORM_ID,
+      </if>
+      <if test="treeNodeTypeUrl != null" >
+        TREE_NODE_TYPE_URL,
+      </if>
+      <if test="treeNodeTypeFormName != null" >
+        TREE_NODE_TYPE_FORM_NAME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="treeNodeTypeId != null" >
+        #{treeNodeTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeNodeTypeCode != null" >
+        #{treeNodeTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeIcon != null" >
+        #{treeNodeTypeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeTittle != null" >
+        #{treeNodeTypeTittle,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeExcType != null" >
+        #{treeNodeTypeExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeFormId != null" >
+        #{treeNodeTypeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formTreeFormId != null" >
+        #{formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeNodeTypeUrl != null" >
+        #{treeNodeTypeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeFormName != null" >
+        #{treeNodeTypeFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeTypeExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TREE_NODE_TYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TREE_NODE_TYPE
+    <set >
+      <if test="record.treeNodeTypeId != null" >
+        TREE_NODE_TYPE_ID = #{record.treeNodeTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeNodeTypeCode != null" >
+        TREE_NODE_TYPE_CODE = #{record.treeNodeTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeNodeTypeIcon != null" >
+        TREE_NODE_TYPE_ICON = #{record.treeNodeTypeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeNodeTypeTittle != null" >
+        TREE_NODE_TYPE_TITTLE = #{record.treeNodeTypeTittle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeNodeTypeExcType != null" >
+        TREE_NODE_TYPE_EXC_TYPE = #{record.treeNodeTypeExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeNodeTypeFormId != null" >
+        TREE_NODE_TYPE_FORM_ID = #{record.treeNodeTypeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formTreeFormId != null" >
+        FORM_TREE_FORM_ID = #{record.formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeNodeTypeUrl != null" >
+        TREE_NODE_TYPE_URL = #{record.treeNodeTypeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeNodeTypeFormName != null" >
+        TREE_NODE_TYPE_FORM_NAME = #{record.treeNodeTypeFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TREE_NODE_TYPE
+    set TREE_NODE_TYPE_ID = #{record.treeNodeTypeId,jdbcType=DECIMAL},
+      TREE_NODE_TYPE_CODE = #{record.treeNodeTypeCode,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_ICON = #{record.treeNodeTypeIcon,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_TITTLE = #{record.treeNodeTypeTittle,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_EXC_TYPE = #{record.treeNodeTypeExcType,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_FORM_ID = #{record.treeNodeTypeFormId,jdbcType=DECIMAL},
+      FORM_TREE_FORM_ID = #{record.formTreeFormId,jdbcType=DECIMAL},
+      TREE_NODE_TYPE_URL = #{record.treeNodeTypeUrl,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_FORM_NAME = #{record.treeNodeTypeFormName,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeType" >
+    update SYS_TREE_NODE_TYPE
+    <set >
+      <if test="treeNodeTypeCode != null" >
+        TREE_NODE_TYPE_CODE = #{treeNodeTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeIcon != null" >
+        TREE_NODE_TYPE_ICON = #{treeNodeTypeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeTittle != null" >
+        TREE_NODE_TYPE_TITTLE = #{treeNodeTypeTittle,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeExcType != null" >
+        TREE_NODE_TYPE_EXC_TYPE = #{treeNodeTypeExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeFormId != null" >
+        TREE_NODE_TYPE_FORM_ID = #{treeNodeTypeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formTreeFormId != null" >
+        FORM_TREE_FORM_ID = #{formTreeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeNodeTypeUrl != null" >
+        TREE_NODE_TYPE_URL = #{treeNodeTypeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="treeNodeTypeFormName != null" >
+        TREE_NODE_TYPE_FORM_NAME = #{treeNodeTypeFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TREE_NODE_TYPE_ID = #{treeNodeTypeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysTreeNodeType" >
+    update SYS_TREE_NODE_TYPE
+    set TREE_NODE_TYPE_CODE = #{treeNodeTypeCode,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_ICON = #{treeNodeTypeIcon,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_TITTLE = #{treeNodeTypeTittle,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_EXC_TYPE = #{treeNodeTypeExcType,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_FORM_ID = #{treeNodeTypeFormId,jdbcType=DECIMAL},
+      FORM_TREE_FORM_ID = #{formTreeFormId,jdbcType=DECIMAL},
+      TREE_NODE_TYPE_URL = #{treeNodeTypeUrl,jdbcType=VARCHAR},
+      TREE_NODE_TYPE_FORM_NAME = #{treeNodeTypeFormName,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where TREE_NODE_TYPE_ID = #{treeNodeTypeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

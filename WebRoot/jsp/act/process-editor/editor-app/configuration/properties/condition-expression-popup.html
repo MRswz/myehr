@@ -1,0 +1,43 @@
+
+<div class="modal" ng-controller="KisBpmConditionExpressionPopupCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>PROPERTY.SEQUENCEFLOW.CONDITION.TITLE</h2>
+			</div>
+			<div class="modal-body">
+				<div class="row" style="height: 300px;">
+					<div class="col-md-4" style="height: 300px;">
+						<div class="panel panel-default" style="height: 350px;overflow:scroll;">
+							<div class="panel-heading">
+								<h3 class="panel-title">参数树params</h3>
+							</div>
+							<div class="panel-body" style="padding: 5px;">
+								<ul id="params_tree" class="ztree" ztree ng-model="selectNode"></ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8" style="height: 300px;">
+						<ul class="nav nav-tabs">
+							<li class="active" ng-click="setActive('assigneeField')"><a
+								href="#">{{'PROPERTY.SEQUENCEFLOW.CONDITION.STATIC' |
+									translate}}</a></li>
+						</ul>
+						<div class="tab-content"
+							style="background: #fff; margin-bottom: 5px; height: 260px;">
+							<div class="tab-pane am-fade active" style="padding: 5px;">
+								<textarea id="conditionExpression" rows="10"
+									class="form-control" ng-model="conditionExpression.value"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+					<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.SysUser" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_CODE" property="userCode" jdbcType="NVARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="NVARCHAR" />
+    <result column="USER_TALEPHONE" property="userTalephone" jdbcType="NVARCHAR" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="NVARCHAR" />
+    <result column="USER_STATUS" property="userStatus" jdbcType="NVARCHAR" />
+    <result column="USER_TIME_START" property="userTimeStart" jdbcType="TIMESTAMP" />
+    <result column="USER_TIME_END" property="userTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="USER_STYLE" property="userStyle" jdbcType="NVARCHAR" />
+    <result column="USER_LASTLOGIN" property="userLastlogin" jdbcType="TIMESTAMP" />
+    <result column="USER_ERRCOUNT" property="userErrcount" jdbcType="INTEGER" />
+    <result column="USER_IPADDRESS" property="userIpaddress" jdbcType="NVARCHAR" />
+    <result column="USER_REMARK" property="userRemark" jdbcType="NVARCHAR" />
+    <result column="EMP_ID" property="empId" jdbcType="INTEGER" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="NVARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="ORG_UNIT" property="orgUnit" jdbcType="NVARCHAR" />
+    <result column="AREA_UNIT" property="areaUnit" jdbcType="NVARCHAR" />
+    <result column="PERSON_UNIT" property="personUnit" jdbcType="NVARCHAR" />
+    <result column="PAY_UNIT" property="payUnit" jdbcType="NVARCHAR" />
+    <result column="ATT_UNIT" property="attUnit" jdbcType="NVARCHAR" />
+    <result column="PERFORMANCE_UNIY" property="performanceUniy" jdbcType="NVARCHAR" />
+    <result column="PROJECT_UNIT" property="projectUnit" jdbcType="NVARCHAR" />
+    <result column="BUSINESS_LINE" property="businessLine" jdbcType="NVARCHAR" />
+    <result column="SCHEME_ID" property="schemeId" jdbcType="NVARCHAR" />
+    <result column="USER_ISAGENT" property="userIsagent" jdbcType="INTEGER" />
+    <result column="USER_IM_CODE" property="userImCode" jdbcType="NVARCHAR" />
+    <result column="USER_CATEGORY" property="userCategory" jdbcType="INTEGER" />
+    <result column="HEAD" property="head" jdbcType="VARCHAR" />
+    <result column="COMIP" property="comip" jdbcType="INTEGER" />
+    <result column="DEPID" property="depid" jdbcType="INTEGER" />
+    <result column="JOBID" property="jobid" jdbcType="INTEGER" />
+    <result column="EMP_UNIT" property="empUnit" jdbcType="INTEGER" />
+    <result column="ATTEND_UNIT" property="attendUnit" jdbcType="INTEGER" />
+    <result column="PER_UNIT" property="perUnit" jdbcType="INTEGER" />
+    <result column="Limit_IP" property="limitIp" jdbcType="VARCHAR" />
+    <result column="USER_IP" property="userIp" jdbcType="VARCHAR" />
+    <result column="DIGITAL" property="digital" jdbcType="VARCHAR" />
+    <result column="LOCKING_TIME" property="lockingTime" jdbcType="TIMESTAMP" />
+    <result column="UNLOCK_TIME" property="unlockTime" jdbcType="TIMESTAMP" />
+    <result column="NAIL_IM" property="nailIm" jdbcType="VARCHAR" />
+    <result column="WECHAT_IM" property="wechatIm" jdbcType="VARCHAR" />
+    <result column="TENCENT_IM" property="tencentIm" jdbcType="VARCHAR" />
+    <result column="USER_EQUIPMENT" property="userEquipment" jdbcType="VARCHAR" />
+    <result column="PASSWORD_WARNING_TIME" property="passwordWarningTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_CODE, USER_NAME, USER_PASSWORD, USER_TALEPHONE, USER_EMAIL, USER_STATUS, 
+    USER_TIME_START, USER_TIME_END, USER_STYLE, USER_LASTLOGIN, USER_ERRCOUNT, USER_IPADDRESS, 
+    USER_REMARK, EMP_ID, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK, 
+    ORG_UNIT, AREA_UNIT, PERSON_UNIT, PAY_UNIT, ATT_UNIT, PERFORMANCE_UNIY, PROJECT_UNIT, 
+    BUSINESS_LINE, SCHEME_ID, USER_ISAGENT, USER_IM_CODE, USER_CATEGORY, HEAD, COMIP, 
+    DEPID, JOBID, EMP_UNIT, ATTEND_UNIT, PER_UNIT, Limit_IP, USER_IP, DIGITAL, LOCKING_TIME, 
+    UNLOCK_TIME, NAIL_IM, WECHAT_IM, TENCENT_IM, USER_EQUIPMENT, PASSWORD_WARNING_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysuser.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_USER
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysuser.SysUserExample" >
+    delete from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysuser.SysUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
+    insert into SYS_USER ( USER_CODE, USER_NAME, 
+      USER_PASSWORD, USER_TALEPHONE, USER_EMAIL, 
+      USER_STATUS, USER_TIME_START, USER_TIME_END, 
+      USER_STYLE, USER_LASTLOGIN, USER_ERRCOUNT, 
+      USER_IPADDRESS, USER_REMARK, EMP_ID, 
+      OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+      APPROVE_TIME, DELETE_MARK, ORG_UNIT, 
+      AREA_UNIT, PERSON_UNIT, PAY_UNIT, 
+      ATT_UNIT, PERFORMANCE_UNIY, PROJECT_UNIT, 
+      BUSINESS_LINE, SCHEME_ID, USER_ISAGENT, 
+      USER_IM_CODE, USER_CATEGORY, HEAD, 
+      COMIP, DEPID, JOBID, 
+      EMP_UNIT, ATTEND_UNIT, PER_UNIT, 
+      Limit_IP, USER_IP, DIGITAL, 
+      LOCKING_TIME, UNLOCK_TIME, NAIL_IM, 
+      WECHAT_IM, TENCENT_IM, USER_EQUIPMENT, 
+      PASSWORD_WARNING_TIME)
+    values ( #{userCode,jdbcType=NVARCHAR}, #{userName,jdbcType=NVARCHAR}, 
+      #{userPassword,jdbcType=NVARCHAR}, #{userTalephone,jdbcType=NVARCHAR}, #{userEmail,jdbcType=NVARCHAR}, 
+      #{userStatus,jdbcType=NVARCHAR}, #{userTimeStart,jdbcType=TIMESTAMP}, #{userTimeEnd,jdbcType=TIMESTAMP}, 
+      #{userStyle,jdbcType=NVARCHAR}, #{userLastlogin,jdbcType=TIMESTAMP}, #{userErrcount,jdbcType=INTEGER}, 
+      #{userIpaddress,jdbcType=NVARCHAR}, #{userRemark,jdbcType=NVARCHAR}, #{empId,jdbcType=INTEGER}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, #{approveName,jdbcType=NVARCHAR}, 
+      #{approveTime,jdbcType=TIMESTAMP}, #{deleteMark,jdbcType=NVARCHAR}, #{orgUnit,jdbcType=NVARCHAR}, 
+      #{areaUnit,jdbcType=NVARCHAR}, #{personUnit,jdbcType=NVARCHAR}, #{payUnit,jdbcType=NVARCHAR}, 
+      #{attUnit,jdbcType=NVARCHAR}, #{performanceUniy,jdbcType=NVARCHAR}, #{projectUnit,jdbcType=NVARCHAR}, 
+      #{businessLine,jdbcType=NVARCHAR}, #{schemeId,jdbcType=NVARCHAR}, #{userIsagent,jdbcType=INTEGER}, 
+      #{userImCode,jdbcType=NVARCHAR}, #{userCategory,jdbcType=INTEGER}, #{head,jdbcType=VARCHAR}, 
+      #{comip,jdbcType=INTEGER}, #{depid,jdbcType=INTEGER}, #{jobid,jdbcType=INTEGER}, 
+      #{empUnit,jdbcType=INTEGER}, #{attendUnit,jdbcType=INTEGER}, #{perUnit,jdbcType=INTEGER}, 
+      #{limitIp,jdbcType=VARCHAR}, #{userIp,jdbcType=VARCHAR}, #{digital,jdbcType=VARCHAR}, 
+      #{lockingTime,jdbcType=TIMESTAMP}, #{unlockTime,jdbcType=TIMESTAMP}, #{nailIm,jdbcType=VARCHAR}, 
+      #{wechatIm,jdbcType=VARCHAR}, #{tencentIm,jdbcType=VARCHAR}, #{userEquipment,jdbcType=VARCHAR}, 
+      #{passwordWarningTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysuser.SysUser" >
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD,
+      </if>
+      <if test="userTalephone != null" >
+        USER_TALEPHONE,
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL,
+      </if>
+      <if test="userStatus != null" >
+        USER_STATUS,
+      </if>
+      <if test="userTimeStart != null" >
+        USER_TIME_START,
+      </if>
+      <if test="userTimeEnd != null" >
+        USER_TIME_END,
+      </if>
+      <if test="userStyle != null" >
+        USER_STYLE,
+      </if>
+      <if test="userLastlogin != null" >
+        USER_LASTLOGIN,
+      </if>
+      <if test="userErrcount != null" >
+        USER_ERRCOUNT,
+      </if>
+      <if test="userIpaddress != null" >
+        USER_IPADDRESS,
+      </if>
+      <if test="userRemark != null" >
+        USER_REMARK,
+      </if>
+      <if test="empId != null" >
+        EMP_ID,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="orgUnit != null" >
+        ORG_UNIT,
+      </if>
+      <if test="areaUnit != null" >
+        AREA_UNIT,
+      </if>
+      <if test="personUnit != null" >
+        PERSON_UNIT,
+      </if>
+      <if test="payUnit != null" >
+        PAY_UNIT,
+      </if>
+      <if test="attUnit != null" >
+        ATT_UNIT,
+      </if>
+      <if test="performanceUniy != null" >
+        PERFORMANCE_UNIY,
+      </if>
+      <if test="projectUnit != null" >
+        PROJECT_UNIT,
+      </if>
+      <if test="businessLine != null" >
+        BUSINESS_LINE,
+      </if>
+      <if test="schemeId != null" >
+        SCHEME_ID,
+      </if>
+      <if test="userIsagent != null" >
+        USER_ISAGENT,
+      </if>
+      <if test="userImCode != null" >
+        USER_IM_CODE,
+      </if>
+      <if test="userCategory != null" >
+        USER_CATEGORY,
+      </if>
+      <if test="head != null" >
+        HEAD,
+      </if>
+      <if test="comip != null" >
+        COMIP,
+      </if>
+      <if test="depid != null" >
+        DEPID,
+      </if>
+      <if test="jobid != null" >
+        JOBID,
+      </if>
+      <if test="empUnit != null" >
+        EMP_UNIT,
+      </if>
+      <if test="attendUnit != null" >
+        ATTEND_UNIT,
+      </if>
+      <if test="perUnit != null" >
+        PER_UNIT,
+      </if>
+      <if test="limitIp != null" >
+        Limit_IP,
+      </if>
+      <if test="userIp != null" >
+        USER_IP,
+      </if>
+      <if test="digital != null" >
+        DIGITAL,
+      </if>
+      <if test="lockingTime != null" >
+        LOCKING_TIME,
+      </if>
+      <if test="unlockTime != null" >
+        UNLOCK_TIME,
+      </if>
+      <if test="nailIm != null" >
+        NAIL_IM,
+      </if>
+      <if test="wechatIm != null" >
+        WECHAT_IM,
+      </if>
+      <if test="tencentIm != null" >
+        TENCENT_IM,
+      </if>
+      <if test="userEquipment != null" >
+        USER_EQUIPMENT,
+      </if>
+      <if test="passwordWarningTime != null" >
+        PASSWORD_WARNING_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="userTalephone != null" >
+        #{userTalephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="userTimeStart != null" >
+        #{userTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userTimeEnd != null" >
+        #{userTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStyle != null" >
+        #{userStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="userLastlogin != null" >
+        #{userLastlogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userErrcount != null" >
+        #{userErrcount,jdbcType=INTEGER},
+      </if>
+      <if test="userIpaddress != null" >
+        #{userIpaddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="userRemark != null" >
+        #{userRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="orgUnit != null" >
+        #{orgUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="areaUnit != null" >
+        #{areaUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="personUnit != null" >
+        #{personUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="payUnit != null" >
+        #{payUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="attUnit != null" >
+        #{attUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="performanceUniy != null" >
+        #{performanceUniy,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectUnit != null" >
+        #{projectUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="businessLine != null" >
+        #{businessLine,jdbcType=NVARCHAR},
+      </if>
+      <if test="schemeId != null" >
+        #{schemeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="userIsagent != null" >
+        #{userIsagent,jdbcType=INTEGER},
+      </if>
+      <if test="userImCode != null" >
+        #{userImCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="userCategory != null" >
+        #{userCategory,jdbcType=INTEGER},
+      </if>
+      <if test="head != null" >
+        #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="comip != null" >
+        #{comip,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null" >
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="jobid != null" >
+        #{jobid,jdbcType=INTEGER},
+      </if>
+      <if test="empUnit != null" >
+        #{empUnit,jdbcType=INTEGER},
+      </if>
+      <if test="attendUnit != null" >
+        #{attendUnit,jdbcType=INTEGER},
+      </if>
+      <if test="perUnit != null" >
+        #{perUnit,jdbcType=INTEGER},
+      </if>
+      <if test="limitIp != null" >
+        #{limitIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null" >
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="digital != null" >
+        #{digital,jdbcType=VARCHAR},
+      </if>
+      <if test="lockingTime != null" >
+        #{lockingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unlockTime != null" >
+        #{unlockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nailIm != null" >
+        #{nailIm,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatIm != null" >
+        #{wechatIm,jdbcType=VARCHAR},
+      </if>
+      <if test="tencentIm != null" >
+        #{tencentIm,jdbcType=VARCHAR},
+      </if>
+      <if test="userEquipment != null" >
+        #{userEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordWarningTime != null" >
+        #{passwordWarningTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysuser.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USER
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userCode != null" >
+        USER_CODE = #{record.userCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        USER_PASSWORD = #{record.userPassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userTalephone != null" >
+        USER_TALEPHONE = #{record.userTalephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        USER_EMAIL = #{record.userEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userStatus != null" >
+        USER_STATUS = #{record.userStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userTimeStart != null" >
+        USER_TIME_START = #{record.userTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userTimeEnd != null" >
+        USER_TIME_END = #{record.userTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userStyle != null" >
+        USER_STYLE = #{record.userStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userLastlogin != null" >
+        USER_LASTLOGIN = #{record.userLastlogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userErrcount != null" >
+        USER_ERRCOUNT = #{record.userErrcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.userIpaddress != null" >
+        USER_IPADDRESS = #{record.userIpaddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userRemark != null" >
+        USER_REMARK = #{record.userRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        EMP_ID = #{record.empId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.orgUnit != null" >
+        ORG_UNIT = #{record.orgUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.areaUnit != null" >
+        AREA_UNIT = #{record.areaUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.personUnit != null" >
+        PERSON_UNIT = #{record.personUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.payUnit != null" >
+        PAY_UNIT = #{record.payUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.attUnit != null" >
+        ATT_UNIT = #{record.attUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.performanceUniy != null" >
+        PERFORMANCE_UNIY = #{record.performanceUniy,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.projectUnit != null" >
+        PROJECT_UNIT = #{record.projectUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.businessLine != null" >
+        BUSINESS_LINE = #{record.businessLine,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.schemeId != null" >
+        SCHEME_ID = #{record.schemeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userIsagent != null" >
+        USER_ISAGENT = #{record.userIsagent,jdbcType=INTEGER},
+      </if>
+      <if test="record.userImCode != null" >
+        USER_IM_CODE = #{record.userImCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userCategory != null" >
+        USER_CATEGORY = #{record.userCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.head != null" >
+        HEAD = #{record.head,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comip != null" >
+        COMIP = #{record.comip,jdbcType=INTEGER},
+      </if>
+      <if test="record.depid != null" >
+        DEPID = #{record.depid,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobid != null" >
+        JOBID = #{record.jobid,jdbcType=INTEGER},
+      </if>
+      <if test="record.empUnit != null" >
+        EMP_UNIT = #{record.empUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.attendUnit != null" >
+        ATTEND_UNIT = #{record.attendUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.perUnit != null" >
+        PER_UNIT = #{record.perUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitIp != null" >
+        Limit_IP = #{record.limitIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIp != null" >
+        USER_IP = #{record.userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.digital != null" >
+        DIGITAL = #{record.digital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockingTime != null" >
+        LOCKING_TIME = #{record.lockingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unlockTime != null" >
+        UNLOCK_TIME = #{record.unlockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nailIm != null" >
+        NAIL_IM = #{record.nailIm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatIm != null" >
+        WECHAT_IM = #{record.wechatIm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tencentIm != null" >
+        TENCENT_IM = #{record.tencentIm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEquipment != null" >
+        USER_EQUIPMENT = #{record.userEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordWarningTime != null" >
+        PASSWORD_WARNING_TIME = #{record.passwordWarningTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USER
+    set USER_ID = #{record.userId,jdbcType=INTEGER},
+      USER_CODE = #{record.userCode,jdbcType=NVARCHAR},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      USER_PASSWORD = #{record.userPassword,jdbcType=NVARCHAR},
+      USER_TALEPHONE = #{record.userTalephone,jdbcType=NVARCHAR},
+      USER_EMAIL = #{record.userEmail,jdbcType=NVARCHAR},
+      USER_STATUS = #{record.userStatus,jdbcType=NVARCHAR},
+      USER_TIME_START = #{record.userTimeStart,jdbcType=TIMESTAMP},
+      USER_TIME_END = #{record.userTimeEnd,jdbcType=TIMESTAMP},
+      USER_STYLE = #{record.userStyle,jdbcType=NVARCHAR},
+      USER_LASTLOGIN = #{record.userLastlogin,jdbcType=TIMESTAMP},
+      USER_ERRCOUNT = #{record.userErrcount,jdbcType=INTEGER},
+      USER_IPADDRESS = #{record.userIpaddress,jdbcType=NVARCHAR},
+      USER_REMARK = #{record.userRemark,jdbcType=NVARCHAR},
+      EMP_ID = #{record.empId,jdbcType=INTEGER},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      ORG_UNIT = #{record.orgUnit,jdbcType=NVARCHAR},
+      AREA_UNIT = #{record.areaUnit,jdbcType=NVARCHAR},
+      PERSON_UNIT = #{record.personUnit,jdbcType=NVARCHAR},
+      PAY_UNIT = #{record.payUnit,jdbcType=NVARCHAR},
+      ATT_UNIT = #{record.attUnit,jdbcType=NVARCHAR},
+      PERFORMANCE_UNIY = #{record.performanceUniy,jdbcType=NVARCHAR},
+      PROJECT_UNIT = #{record.projectUnit,jdbcType=NVARCHAR},
+      BUSINESS_LINE = #{record.businessLine,jdbcType=NVARCHAR},
+      SCHEME_ID = #{record.schemeId,jdbcType=NVARCHAR},
+      USER_ISAGENT = #{record.userIsagent,jdbcType=INTEGER},
+      USER_IM_CODE = #{record.userImCode,jdbcType=NVARCHAR},
+      USER_CATEGORY = #{record.userCategory,jdbcType=INTEGER},
+      HEAD = #{record.head,jdbcType=VARCHAR},
+      COMIP = #{record.comip,jdbcType=INTEGER},
+      DEPID = #{record.depid,jdbcType=INTEGER},
+      JOBID = #{record.jobid,jdbcType=INTEGER},
+      EMP_UNIT = #{record.empUnit,jdbcType=INTEGER},
+      ATTEND_UNIT = #{record.attendUnit,jdbcType=INTEGER},
+      PER_UNIT = #{record.perUnit,jdbcType=INTEGER},
+      Limit_IP = #{record.limitIp,jdbcType=VARCHAR},
+      USER_IP = #{record.userIp,jdbcType=VARCHAR},
+      DIGITAL = #{record.digital,jdbcType=VARCHAR},
+      LOCKING_TIME = #{record.lockingTime,jdbcType=TIMESTAMP},
+      UNLOCK_TIME = #{record.unlockTime,jdbcType=TIMESTAMP},
+      NAIL_IM = #{record.nailIm,jdbcType=VARCHAR},
+      WECHAT_IM = #{record.wechatIm,jdbcType=VARCHAR},
+      TENCENT_IM = #{record.tencentIm,jdbcType=VARCHAR},
+      USER_EQUIPMENT = #{record.userEquipment,jdbcType=VARCHAR},
+      PASSWORD_WARNING_TIME = #{record.passwordWarningTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysuser.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="userCode != null" >
+        USER_CODE = #{userCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD = #{userPassword,jdbcType=NVARCHAR},
+      </if>
+      <if test="userTalephone != null" >
+        USER_TALEPHONE = #{userTalephone,jdbcType=NVARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL = #{userEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="userStatus != null" >
+        USER_STATUS = #{userStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="userTimeStart != null" >
+        USER_TIME_START = #{userTimeStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userTimeEnd != null" >
+        USER_TIME_END = #{userTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStyle != null" >
+        USER_STYLE = #{userStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="userLastlogin != null" >
+        USER_LASTLOGIN = #{userLastlogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userErrcount != null" >
+        USER_ERRCOUNT = #{userErrcount,jdbcType=INTEGER},
+      </if>
+      <if test="userIpaddress != null" >
+        USER_IPADDRESS = #{userIpaddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="userRemark != null" >
+        USER_REMARK = #{userRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="empId != null" >
+        EMP_ID = #{empId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="orgUnit != null" >
+        ORG_UNIT = #{orgUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="areaUnit != null" >
+        AREA_UNIT = #{areaUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="personUnit != null" >
+        PERSON_UNIT = #{personUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="payUnit != null" >
+        PAY_UNIT = #{payUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="attUnit != null" >
+        ATT_UNIT = #{attUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="performanceUniy != null" >
+        PERFORMANCE_UNIY = #{performanceUniy,jdbcType=NVARCHAR},
+      </if>
+      <if test="projectUnit != null" >
+        PROJECT_UNIT = #{projectUnit,jdbcType=NVARCHAR},
+      </if>
+      <if test="businessLine != null" >
+        BUSINESS_LINE = #{businessLine,jdbcType=NVARCHAR},
+      </if>
+      <if test="schemeId != null" >
+        SCHEME_ID = #{schemeId,jdbcType=NVARCHAR},
+      </if>
+      <if test="userIsagent != null" >
+        USER_ISAGENT = #{userIsagent,jdbcType=INTEGER},
+      </if>
+      <if test="userImCode != null" >
+        USER_IM_CODE = #{userImCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="userCategory != null" >
+        USER_CATEGORY = #{userCategory,jdbcType=INTEGER},
+      </if>
+      <if test="head != null" >
+        HEAD = #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="comip != null" >
+        COMIP = #{comip,jdbcType=INTEGER},
+      </if>
+      <if test="depid != null" >
+        DEPID = #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="jobid != null" >
+        JOBID = #{jobid,jdbcType=INTEGER},
+      </if>
+      <if test="empUnit != null" >
+        EMP_UNIT = #{empUnit,jdbcType=INTEGER},
+      </if>
+      <if test="attendUnit != null" >
+        ATTEND_UNIT = #{attendUnit,jdbcType=INTEGER},
+      </if>
+      <if test="perUnit != null" >
+        PER_UNIT = #{perUnit,jdbcType=INTEGER},
+      </if>
+      <if test="limitIp != null" >
+        Limit_IP = #{limitIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null" >
+        USER_IP = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="digital != null" >
+        DIGITAL = #{digital,jdbcType=VARCHAR},
+      </if>
+      <if test="lockingTime != null" >
+        LOCKING_TIME = #{lockingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unlockTime != null" >
+        UNLOCK_TIME = #{unlockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nailIm != null" >
+        NAIL_IM = #{nailIm,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatIm != null" >
+        WECHAT_IM = #{wechatIm,jdbcType=VARCHAR},
+      </if>
+      <if test="tencentIm != null" >
+        TENCENT_IM = #{tencentIm,jdbcType=VARCHAR},
+      </if>
+      <if test="userEquipment != null" >
+        USER_EQUIPMENT = #{userEquipment,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordWarningTime != null" >
+        PASSWORD_WARNING_TIME = #{passwordWarningTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysuser.SysUser" >
+    update SYS_USER
+    set USER_CODE = #{userCode,jdbcType=NVARCHAR},
+      USER_NAME = #{userName,jdbcType=NVARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=NVARCHAR},
+      USER_TALEPHONE = #{userTalephone,jdbcType=NVARCHAR},
+      USER_EMAIL = #{userEmail,jdbcType=NVARCHAR},
+      USER_STATUS = #{userStatus,jdbcType=NVARCHAR},
+      USER_TIME_START = #{userTimeStart,jdbcType=TIMESTAMP},
+      USER_TIME_END = #{userTimeEnd,jdbcType=TIMESTAMP},
+      USER_STYLE = #{userStyle,jdbcType=NVARCHAR},
+      USER_LASTLOGIN = #{userLastlogin,jdbcType=TIMESTAMP},
+      USER_ERRCOUNT = #{userErrcount,jdbcType=INTEGER},
+      USER_IPADDRESS = #{userIpaddress,jdbcType=NVARCHAR},
+      USER_REMARK = #{userRemark,jdbcType=NVARCHAR},
+      EMP_ID = #{empId,jdbcType=INTEGER},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      ORG_UNIT = #{orgUnit,jdbcType=NVARCHAR},
+      AREA_UNIT = #{areaUnit,jdbcType=NVARCHAR},
+      PERSON_UNIT = #{personUnit,jdbcType=NVARCHAR},
+      PAY_UNIT = #{payUnit,jdbcType=NVARCHAR},
+      ATT_UNIT = #{attUnit,jdbcType=NVARCHAR},
+      PERFORMANCE_UNIY = #{performanceUniy,jdbcType=NVARCHAR},
+      PROJECT_UNIT = #{projectUnit,jdbcType=NVARCHAR},
+      BUSINESS_LINE = #{businessLine,jdbcType=NVARCHAR},
+      SCHEME_ID = #{schemeId,jdbcType=NVARCHAR},
+      USER_ISAGENT = #{userIsagent,jdbcType=INTEGER},
+      USER_IM_CODE = #{userImCode,jdbcType=NVARCHAR},
+      USER_CATEGORY = #{userCategory,jdbcType=INTEGER},
+      HEAD = #{head,jdbcType=VARCHAR},
+      COMIP = #{comip,jdbcType=INTEGER},
+      DEPID = #{depid,jdbcType=INTEGER},
+      JOBID = #{jobid,jdbcType=INTEGER},
+      EMP_UNIT = #{empUnit,jdbcType=INTEGER},
+      ATTEND_UNIT = #{attendUnit,jdbcType=INTEGER},
+      PER_UNIT = #{perUnit,jdbcType=INTEGER},
+      Limit_IP = #{limitIp,jdbcType=VARCHAR},
+      USER_IP = #{userIp,jdbcType=VARCHAR},
+      DIGITAL = #{digital,jdbcType=VARCHAR},
+      LOCKING_TIME = #{lockingTime,jdbcType=TIMESTAMP},
+      UNLOCK_TIME = #{unlockTime,jdbcType=TIMESTAMP},
+      NAIL_IM = #{nailIm,jdbcType=VARCHAR},
+      WECHAT_IM = #{wechatIm,jdbcType=VARCHAR},
+      TENCENT_IM = #{tencentIm,jdbcType=VARCHAR},
+      USER_EQUIPMENT = #{userEquipment,jdbcType=VARCHAR},
+      PASSWORD_WARNING_TIME = #{passwordWarningTime,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

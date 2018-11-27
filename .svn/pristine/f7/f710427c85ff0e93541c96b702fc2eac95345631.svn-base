@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.act.checked.SysActCheckedpointResultMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.act.checked.SysActCheckedpointResult" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="CHECKEDPOINT_ID" property="checkedpointId" jdbcType="DECIMAL" />
+    <result column="CHECK_STATUS" property="checkStatus" jdbcType="VARCHAR" />
+    <result column="CHECK_RESULT" property="checkResult" jdbcType="NVARCHAR" />
+    <result column="POINT_TYPE" property="pointType" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TASK_ID, CHECKEDPOINT_ID, CHECK_STATUS, CHECK_RESULT, POINT_TYPE, OPERATOR_TIME, 
+    OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ACT_CHECKEDPOINT_RESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ACT_CHECKEDPOINT_RESULT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ACT_CHECKEDPOINT_RESULT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResultExample" >
+    delete from SYS_ACT_CHECKEDPOINT_RESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResult" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_ACT_CHECKEDPOINT_RESULT (TASK_ID, CHECKEDPOINT_ID, 
+      CHECK_STATUS, CHECK_RESULT, POINT_TYPE, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{taskId,jdbcType=VARCHAR}, #{checkedpointId,jdbcType=DECIMAL}, 
+      #{checkStatus,jdbcType=VARCHAR}, #{checkResult,jdbcType=NVARCHAR}, #{pointType,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResult" >
+    insert into SYS_ACT_CHECKEDPOINT_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="taskId != null" >
+        TASK_ID,
+      </if>
+      <if test="checkedpointId != null" >
+        CHECKEDPOINT_ID,
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS,
+      </if>
+      <if test="checkResult != null" >
+        CHECK_RESULT,
+      </if>
+      <if test="pointType != null" >
+        POINT_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedpointId != null" >
+        #{checkedpointId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkResult != null" >
+        #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="pointType != null" >
+        #{pointType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResultExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ACT_CHECKEDPOINT_RESULT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ACT_CHECKEDPOINT_RESULT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.taskId != null" >
+        TASK_ID = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkedpointId != null" >
+        CHECKEDPOINT_ID = #{record.checkedpointId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkStatus != null" >
+        CHECK_STATUS = #{record.checkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkResult != null" >
+        CHECK_RESULT = #{record.checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pointType != null" >
+        POINT_TYPE = #{record.pointType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ACT_CHECKEDPOINT_RESULT
+    set ID = #{record.id,jdbcType=DECIMAL},
+      TASK_ID = #{record.taskId,jdbcType=VARCHAR},
+      CHECKEDPOINT_ID = #{record.checkedpointId,jdbcType=DECIMAL},
+      CHECK_STATUS = #{record.checkStatus,jdbcType=VARCHAR},
+      CHECK_RESULT = #{record.checkResult,jdbcType=NVARCHAR},
+      POINT_TYPE = #{record.pointType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResult" >
+    update SYS_ACT_CHECKEDPOINT_RESULT
+    <set >
+      <if test="taskId != null" >
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedpointId != null" >
+        CHECKEDPOINT_ID = #{checkedpointId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS = #{checkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkResult != null" >
+        CHECK_RESULT = #{checkResult,jdbcType=NVARCHAR},
+      </if>
+      <if test="pointType != null" >
+        POINT_TYPE = #{pointType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.act.checked.SysActCheckedpointResult" >
+    update SYS_ACT_CHECKEDPOINT_RESULT
+    set TASK_ID = #{taskId,jdbcType=VARCHAR},
+      CHECKEDPOINT_ID = #{checkedpointId,jdbcType=DECIMAL},
+      CHECK_STATUS = #{checkStatus,jdbcType=VARCHAR},
+      CHECK_RESULT = #{checkResult,jdbcType=NVARCHAR},
+      POINT_TYPE = #{pointType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

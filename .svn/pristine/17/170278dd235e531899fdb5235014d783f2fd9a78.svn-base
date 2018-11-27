@@ -1,0 +1,22 @@
+@charset "UTF-8";
+html{font-size:62.5%;font-family:'helvetica neue',tahoma,arial,'hiragino sans gb','Simsun',sans-serif} 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,hr{margin:0;padding:0}
+body{line-height:1.333;font-size:12px}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-family:arial,'hiragino sans gb','microsoft yahei','Simsun',sans-serif}
+li{list-style:none}
+a:link,a:visited{text-decoration:none}
+
+.nav-logo{text-align: center; float: left; }
+.nav-logo img{height: 45px;padding: 7px 5px 15px 10px;}
+.navbg{background: url(../../images/mainFrame/topbg.png) repeat; float: left;width: 100%; overflow: hidden;}
+.company-name{color: #fff;font-size: 20px;line-height: 65px; float: left;font-family: "microsoft yahei";letter-spacing: 2px;}
+.nav-tab{float: left;}
+.nav-tab a{padding: 22px 20px;font-size: 16px;color: #fff;line-height: 60px;}
+.nav-tab a.now,.nav-tab a:hover{background: #0196c1;}
+.navbg .user{float: right;margin-right:20px;}
+.user .home{padding:0px 15px 0px 30px;background: url(../../images/icons/navicon/icon_home.png) no-repeat 10px center;margin-right: 0px;}
+.user a{padding: 0px 15px;line-height: 60px; color: #fff;}
+.user a.user-name{padding:0px 15px 0px 15px;}
+.user span{padding:0px 0px 0px 0px;display: inline-block;width: 2px; height: 17px; background: url(../../images/mainFrame/line.png) no-repeat center center;}
+.user .search input{width: 100px;}
+.user .exit{padding: 0px 15px 0px 30px; background:url(../../images/icons/navicon/icon_exit.png) no-repeat 10px center; }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysCvr.SysCvrExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysCvr.SysCvr" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="people_name" property="peopleName" jdbcType="VARCHAR" />
+    <result column="people_sex" property="peopleSex" jdbcType="VARCHAR" />
+    <result column="people_nation" property="peopleNation" jdbcType="VARCHAR" />
+    <result column="people_birthday" property="peopleBirthday" jdbcType="TIMESTAMP" />
+    <result column="people_address" property="peopleAddress" jdbcType="VARCHAR" />
+    <result column="people_id_code" property="peopleIdCode" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="VARCHAR" />
+    <result column="end_date" property="endDate" jdbcType="VARCHAR" />
+    <result column="read_date" property="readDate" jdbcType="TIMESTAMP" />
+    <result column="cvr_samid" property="cvrSamid" jdbcType="VARCHAR" />
+    <result column="people_message" property="peopleMessage" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.sysCvr.SysCvr" extends="BaseResultMap" >
+    <result column="people_picture" property="peoplePicture" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, people_name, people_sex, people_nation, people_birthday, people_address, people_id_code, 
+    department, start_date, end_date,read_date, cvr_samid, people_message
+  </sql>
+  <sql id="Blob_Column_List" >
+    people_picture
+  </sql>
+  <insert id="insert" parameterType="com.myehr.pojo.sysCvr.SysCvr" >
+    insert into SYS_CVR (people_name, people_sex, 
+      people_nation, people_birthday, people_address, 
+      people_id_code, department, start_date, 
+      end_date,read_date, cvr_samid, people_message, 
+      people_picture)
+    values ( #{peopleName,jdbcType=VARCHAR}, #{peopleSex,jdbcType=VARCHAR}, 
+      #{peopleNation,jdbcType=VARCHAR}, #{peopleBirthday,jdbcType=TIMESTAMP}, #{peopleAddress,jdbcType=VARCHAR}, 
+      #{peopleIdCode,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{startDate,jdbcType=VARCHAR}, 
+      #{endDate,jdbcType=VARCHAR}, #{readDate,jdbcType=TIMESTAMP}, #{cvrSamid,jdbcType=VARCHAR}, #{peopleMessage,jdbcType=VARCHAR}, 
+      #{peoplePicture,jdbcType=LONGVARBINARY})
+  </insert>
+  
+  
+  <update id="update" parameterType="map" >
+    update SYS_CVR
+    set
+      people_picture = #{peoplePicture,jdbcType=LONGVARBINARY}
+      where  people_id_code = #{peopleIdCode,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateReadDate" parameterType="map" >
+    update SYS_CVR
+    set
+      read_date = #{readDate,jdbcType=LONGVARBINARY}
+      where  people_id_code = #{peopleIdCode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateMessage" parameterType="map" >
+    update SYS_CVR
+    set
+      people_name = #{peopleName,jdbcType=VARCHAR},
+      people_sex = #{peopleSex,jdbcType=VARCHAR},
+      people_nation = #{peopleNation,jdbcType=VARCHAR},
+      people_address = #{peopleAddress,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=VARCHAR},
+      end_date = #{endDate,jdbcType=VARCHAR}
+      read_date = #{readDate,jdbcType=LONGVARBINARY}
+      where  people_id_code = #{peopleIdCode,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

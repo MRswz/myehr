@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysmenu.SysSystemSchemeMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysmenu.SysSystemSchemeMenu" >
+    <id column="SCHEME_MENU_ID" property="schemeMenuId" jdbcType="DECIMAL" />
+    <result column="SYS_SYSTEM_SCHEME_ID" property="sysSystemSchemeId" jdbcType="DECIMAL" />
+    <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_DESC" property="menuDesc" jdbcType="VARCHAR" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="VARCHAR" />
+    <result column="MENU_PARENT_CODE" property="menuParentCode" jdbcType="VARCHAR" />
+    <result column="MENU_SORT" property="menuSort" jdbcType="DECIMAL" />
+    <result column="MENU_SEQ" property="menuSeq" jdbcType="VARCHAR" />
+    <result column="MENU_ICON_CODE" property="menuIconCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="SYS_MENU_ID" property="sysMenuId" jdbcType="DECIMAL" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="DATE" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="MENU_DICT_CODE" property="menuDictCode" jdbcType="VARCHAR" />
+    <result column="MENU_IS_DYNAMIC_FORM" property="menuIsDynamicForm" jdbcType="VARCHAR" />
+    <result column="MENU_FORM_ID" property="menuFormId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SCHEME_MENU_ID, SYS_SYSTEM_SCHEME_ID, MENU_CODE, MENU_NAME, MENU_DESC, MENU_TYPE, 
+    MENU_PARENT_CODE, MENU_SORT, MENU_SEQ, MENU_ICON_CODE, OPERATOR_NAME, SYS_MENU_ID, 
+    OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK, MENU_URL, 
+    MENU_DICT_CODE, MENU_IS_DYNAMIC_FORM, MENU_FORM_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_SYSTEM_SCHEME_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_SYSTEM_SCHEME_MENU
+    where SCHEME_MENU_ID = #{schemeMenuId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_SYSTEM_SCHEME_MENU
+    where SCHEME_MENU_ID = #{schemeMenuId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenuExample" >
+    delete from SYS_SYSTEM_SCHEME_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenu" >
+    insert into SYS_SYSTEM_SCHEME_MENU (SYS_SYSTEM_SCHEME_ID, 
+      MENU_CODE, MENU_NAME, MENU_DESC, 
+      MENU_TYPE, MENU_PARENT_CODE, MENU_SORT, 
+      MENU_SEQ, MENU_ICON_CODE, OPERATOR_NAME, 
+      SYS_MENU_ID, OPERATOR_TIME, APPROVE_NAME, 
+      APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK, 
+      MENU_URL, MENU_DICT_CODE, MENU_IS_DYNAMIC_FORM, 
+      MENU_FORM_ID)
+    values (#{sysSystemSchemeId,jdbcType=DECIMAL}, 
+      #{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuDesc,jdbcType=VARCHAR}, 
+      #{menuType,jdbcType=VARCHAR}, #{menuParentCode,jdbcType=VARCHAR}, #{menuSort,jdbcType=DECIMAL}, 
+      #{menuSeq,jdbcType=VARCHAR}, #{menuIconCode,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, 
+      #{sysMenuId,jdbcType=DECIMAL}, #{operatorTime,jdbcType=DATE}, #{approveName,jdbcType=VARCHAR}, 
+      #{approveTime,jdbcType=DATE}, #{deleteMark,jdbcType=VARCHAR}, #{deleteMarkBack,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuDictCode,jdbcType=VARCHAR}, #{menuIsDynamicForm,jdbcType=VARCHAR}, 
+      #{menuFormId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenu" >
+    insert into SYS_SYSTEM_SCHEME_MENU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="schemeMenuId != null" >
+        SCHEME_MENU_ID,
+      </if>
+      <if test="sysSystemSchemeId != null" >
+        SYS_SYSTEM_SCHEME_ID,
+      </if>
+      <if test="menuCode != null" >
+        MENU_CODE,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC,
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE,
+      </if>
+      <if test="menuParentCode != null" >
+        MENU_PARENT_CODE,
+      </if>
+      <if test="menuSort != null" >
+        MENU_SORT,
+      </if>
+      <if test="menuSeq != null" >
+        MENU_SEQ,
+      </if>
+      <if test="menuIconCode != null" >
+        MENU_ICON_CODE,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="sysMenuId != null" >
+        SYS_MENU_ID,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="menuDictCode != null" >
+        MENU_DICT_CODE,
+      </if>
+      <if test="menuIsDynamicForm != null" >
+        MENU_IS_DYNAMIC_FORM,
+      </if>
+      <if test="menuFormId != null" >
+        MENU_FORM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="schemeMenuId != null" >
+        #{schemeMenuId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysSystemSchemeId != null" >
+        #{sysSystemSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuCode != null" >
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentCode != null" >
+        #{menuParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSort != null" >
+        #{menuSort,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSeq != null" >
+        #{menuSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconCode != null" >
+        #{menuIconCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMenuId != null" >
+        #{sysMenuId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=DATE},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDictCode != null" >
+        #{menuDictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIsDynamicForm != null" >
+        #{menuIsDynamicForm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFormId != null" >
+        #{menuFormId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenuExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_SYSTEM_SCHEME_MENU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_SYSTEM_SCHEME_MENU
+    <set >
+      <if test="record.schemeMenuId != null" >
+        SCHEME_MENU_ID = #{record.schemeMenuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysSystemSchemeId != null" >
+        SYS_SYSTEM_SCHEME_ID = #{record.sysSystemSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuCode != null" >
+        MENU_CODE = #{record.menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuName != null" >
+        MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuDesc != null" >
+        MENU_DESC = #{record.menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuType != null" >
+        MENU_TYPE = #{record.menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParentCode != null" >
+        MENU_PARENT_CODE = #{record.menuParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuSort != null" >
+        MENU_SORT = #{record.menuSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuSeq != null" >
+        MENU_SEQ = #{record.menuSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuIconCode != null" >
+        MENU_ICON_CODE = #{record.menuIconCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysMenuId != null" >
+        SYS_MENU_ID = #{record.sysMenuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=DATE},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuUrl != null" >
+        MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuDictCode != null" >
+        MENU_DICT_CODE = #{record.menuDictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuIsDynamicForm != null" >
+        MENU_IS_DYNAMIC_FORM = #{record.menuIsDynamicForm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuFormId != null" >
+        MENU_FORM_ID = #{record.menuFormId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_SYSTEM_SCHEME_MENU
+    set SCHEME_MENU_ID = #{record.schemeMenuId,jdbcType=DECIMAL},
+      SYS_SYSTEM_SCHEME_ID = #{record.sysSystemSchemeId,jdbcType=DECIMAL},
+      MENU_CODE = #{record.menuCode,jdbcType=VARCHAR},
+      MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      MENU_DESC = #{record.menuDesc,jdbcType=VARCHAR},
+      MENU_TYPE = #{record.menuType,jdbcType=VARCHAR},
+      MENU_PARENT_CODE = #{record.menuParentCode,jdbcType=VARCHAR},
+      MENU_SORT = #{record.menuSort,jdbcType=DECIMAL},
+      MENU_SEQ = #{record.menuSeq,jdbcType=VARCHAR},
+      MENU_ICON_CODE = #{record.menuIconCode,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      SYS_MENU_ID = #{record.sysMenuId,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=DATE},
+      DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR},
+      MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
+      MENU_DICT_CODE = #{record.menuDictCode,jdbcType=VARCHAR},
+      MENU_IS_DYNAMIC_FORM = #{record.menuIsDynamicForm,jdbcType=VARCHAR},
+      MENU_FORM_ID = #{record.menuFormId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenu" >
+    update SYS_SYSTEM_SCHEME_MENU
+    <set >
+      <if test="sysSystemSchemeId != null" >
+        SYS_SYSTEM_SCHEME_ID = #{sysSystemSchemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuCode != null" >
+        MENU_CODE = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null" >
+        MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentCode != null" >
+        MENU_PARENT_CODE = #{menuParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSort != null" >
+        MENU_SORT = #{menuSort,jdbcType=DECIMAL},
+      </if>
+      <if test="menuSeq != null" >
+        MENU_SEQ = #{menuSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIconCode != null" >
+        MENU_ICON_CODE = #{menuIconCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMenuId != null" >
+        SYS_MENU_ID = #{sysMenuId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=DATE},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDictCode != null" >
+        MENU_DICT_CODE = #{menuDictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIsDynamicForm != null" >
+        MENU_IS_DYNAMIC_FORM = #{menuIsDynamicForm,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFormId != null" >
+        MENU_FORM_ID = #{menuFormId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SCHEME_MENU_ID = #{schemeMenuId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeMenu" >
+    update SYS_SYSTEM_SCHEME_MENU
+    set SYS_SYSTEM_SCHEME_ID = #{sysSystemSchemeId,jdbcType=DECIMAL},
+      MENU_CODE = #{menuCode,jdbcType=VARCHAR},
+      MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_DESC = #{menuDesc,jdbcType=VARCHAR},
+      MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      MENU_PARENT_CODE = #{menuParentCode,jdbcType=VARCHAR},
+      MENU_SORT = #{menuSort,jdbcType=DECIMAL},
+      MENU_SEQ = #{menuSeq,jdbcType=VARCHAR},
+      MENU_ICON_CODE = #{menuIconCode,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      SYS_MENU_ID = #{sysMenuId,jdbcType=DECIMAL},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=DATE},
+      DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      MENU_DICT_CODE = #{menuDictCode,jdbcType=VARCHAR},
+      MENU_IS_DYNAMIC_FORM = #{menuIsDynamicForm,jdbcType=VARCHAR},
+      MENU_FORM_ID = #{menuFormId,jdbcType=VARCHAR}
+    where SCHEME_MENU_ID = #{schemeMenuId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,input,textarea,span,hr{margin: 0;padding: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+body {font-family:"Microsoft Yahei";}
+/*标题*/
+.salaryfml-main{margin:10px auto auto;width:80%;max-width:1360px;min-width:1000px;background-color:#f9f9f9;overflow:auto;border:3px solid #2a8fbd;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+.salaryfml-title{position:relative;height:45px;width:100%;line-height:45px;font-size: 16px;border-bottom:1px solid #cfcfd3;}
+.salaryfml-close{float:right;height:34px;width:34px;background:url(../images/salaryfml-close.png);border:0;}
+.salaryfml-title span{display:inline-block;width:25%;min-width:120px;height:45px;text-align:center;color:#3695c0;border-bottom:2px solid #2a8fbd;}
+.salaryfml-title span img{margin-right:1.5%;vertical-align:middle;border:0;}
+
+/*长沙身份证*/
+.csidtitle{letter-spacing: 4px;}
+.csid{margin-top: 70px;width: 100%;letter-spacing: 4px;}
+.csleft{float: left;width: 20%;text-align: right;}
+.csleft img{margin-top: 13px;width: 56%;max-width: 150px;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;}
+.cscenter{float: left;width: 50%;}
+.cscenter table{margin: 0 auto;}
+.cscleft{text-align: right;width: 35%;vertical-align: top;color: #666;height: 60px;line-height: 60px;font-family: "microsoft yahei";font-size: 16px;}
+.cscright{text-align: left;width: 65%;}
+.cscright span{display: block;padding: 0 10px;width: 100%;color: #999;min-height: 35px;line-height: 35px;font-family: "microsoft yahei";font-size: 16px;background-color: #eee;border: 1px solid #d2d2d2;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;outline: none;}
+.csright{float: left;width: 20%;}
+.csright button{display: block;margin: 10px auto 60px;padding:10px;width: 68%;color: #fff;height: 67px;font-family: "microsoft yahei";font-size: 20px;border: 0;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;outline: none;letter-spacing: 4px;}
+.csright button img{margin-right: 15px;}
+.csright button.read{background-color: #ff7e00;}
+.csright button.read:hover{background-color: #ff7300;}
+.csright button.save{background-color: #5da7c9;}
+.csright button.save:hover{background-color: #5d9cc9;}

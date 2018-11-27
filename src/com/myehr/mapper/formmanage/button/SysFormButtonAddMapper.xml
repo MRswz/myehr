@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonAddMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonAdd" >
+    <id column="BUTTON_ADD_ID" property="buttonAddId" jdbcType="DECIMAL" />
+    <result column="BUTTON_ADD_BUTTON_ID" property="buttonAddButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_ADD_EXC_TYPE" property="buttonAddExcType" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_TYPE" property="buttonAddType" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_SUCCESS_DEAL" property="buttonAddSuccessDeal" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_SUCCESS_SELF_FUN" property="buttonAddSuccessSelfFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_FUN" property="buttonAddFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_URL" property="buttonAddUrl" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_SQL" property="buttonAddSql" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_INIT_FUN" property="buttonAddInitFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_HEIGHT" property="buttonAddHeight" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_WIDTH" property="buttonAddWidth" jdbcType="VARCHAR" />
+    <result column="BUTTON_FORM_ID" property="buttonFormId" jdbcType="DECIMAL" />
+    <result column="BUTTON_FORM_NAME" property="buttonFormName" jdbcType="VARCHAR" />
+    <result column="BUTTON_ADD_TITLE" property="buttonAddTitle" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_ADD_ID, BUTTON_ADD_BUTTON_ID, BUTTON_ADD_EXC_TYPE, BUTTON_ADD_TYPE, BUTTON_ADD_SUCCESS_DEAL, 
+    BUTTON_ADD_SUCCESS_SELF_FUN, BUTTON_ADD_FUN, BUTTON_ADD_URL, BUTTON_ADD_SQL, BUTTON_ADD_INIT_FUN, 
+    BUTTON_ADD_HEIGHT, BUTTON_ADD_WIDTH, BUTTON_FORM_ID, BUTTON_FORM_NAME, BUTTON_ADD_TITLE, 
+    OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAddExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_ADD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_ADD
+    where BUTTON_ADD_ID = #{buttonAddId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_ADD
+    where BUTTON_ADD_ID = #{buttonAddId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAddExample" >
+    delete from SYS_FORM_BUTTON_ADD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAdd" >
+    insert into SYS_FORM_BUTTON_ADD (BUTTON_ADD_BUTTON_ID, BUTTON_ADD_EXC_TYPE, 
+      BUTTON_ADD_TYPE, BUTTON_ADD_SUCCESS_DEAL, BUTTON_ADD_SUCCESS_SELF_FUN, 
+      BUTTON_ADD_FUN, BUTTON_ADD_URL, BUTTON_ADD_SQL, 
+      BUTTON_ADD_INIT_FUN, BUTTON_ADD_HEIGHT, BUTTON_ADD_WIDTH, 
+      BUTTON_FORM_ID, BUTTON_FORM_NAME, BUTTON_ADD_TITLE, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{buttonAddButtonId,jdbcType=DECIMAL}, #{buttonAddExcType,jdbcType=VARCHAR}, 
+      #{buttonAddType,jdbcType=VARCHAR}, #{buttonAddSuccessDeal,jdbcType=VARCHAR}, #{buttonAddSuccessSelfFun,jdbcType=VARCHAR}, 
+      #{buttonAddFun,jdbcType=VARCHAR}, #{buttonAddUrl,jdbcType=VARCHAR}, #{buttonAddSql,jdbcType=VARCHAR}, 
+      #{buttonAddInitFun,jdbcType=VARCHAR}, #{buttonAddHeight,jdbcType=VARCHAR}, #{buttonAddWidth,jdbcType=VARCHAR}, 
+      #{buttonFormId,jdbcType=DECIMAL}, #{buttonFormName,jdbcType=VARCHAR}, #{buttonAddTitle,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAdd" >
+    insert into SYS_FORM_BUTTON_ADD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonAddId != null" >
+        BUTTON_ADD_ID,
+      </if>
+      <if test="buttonAddButtonId != null" >
+        BUTTON_ADD_BUTTON_ID,
+      </if>
+      <if test="buttonAddExcType != null" >
+        BUTTON_ADD_EXC_TYPE,
+      </if>
+      <if test="buttonAddType != null" >
+        BUTTON_ADD_TYPE,
+      </if>
+      <if test="buttonAddSuccessDeal != null" >
+        BUTTON_ADD_SUCCESS_DEAL,
+      </if>
+      <if test="buttonAddSuccessSelfFun != null" >
+        BUTTON_ADD_SUCCESS_SELF_FUN,
+      </if>
+      <if test="buttonAddFun != null" >
+        BUTTON_ADD_FUN,
+      </if>
+      <if test="buttonAddUrl != null" >
+        BUTTON_ADD_URL,
+      </if>
+      <if test="buttonAddSql != null" >
+        BUTTON_ADD_SQL,
+      </if>
+      <if test="buttonAddInitFun != null" >
+        BUTTON_ADD_INIT_FUN,
+      </if>
+      <if test="buttonAddHeight != null" >
+        BUTTON_ADD_HEIGHT,
+      </if>
+      <if test="buttonAddWidth != null" >
+        BUTTON_ADD_WIDTH,
+      </if>
+      <if test="buttonFormId != null" >
+        BUTTON_FORM_ID,
+      </if>
+      <if test="buttonFormName != null" >
+        BUTTON_FORM_NAME,
+      </if>
+      <if test="buttonAddTitle != null" >
+        BUTTON_ADD_TITLE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonAddId != null" >
+        #{buttonAddId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonAddButtonId != null" >
+        #{buttonAddButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonAddExcType != null" >
+        #{buttonAddExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddType != null" >
+        #{buttonAddType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSuccessDeal != null" >
+        #{buttonAddSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSuccessSelfFun != null" >
+        #{buttonAddSuccessSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddFun != null" >
+        #{buttonAddFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddUrl != null" >
+        #{buttonAddUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSql != null" >
+        #{buttonAddSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddInitFun != null" >
+        #{buttonAddInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddHeight != null" >
+        #{buttonAddHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddWidth != null" >
+        #{buttonAddWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonFormId != null" >
+        #{buttonFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonFormName != null" >
+        #{buttonFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddTitle != null" >
+        #{buttonAddTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAddExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_ADD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_ADD
+    <set >
+      <if test="record.buttonAddId != null" >
+        BUTTON_ADD_ID = #{record.buttonAddId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonAddButtonId != null" >
+        BUTTON_ADD_BUTTON_ID = #{record.buttonAddButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonAddExcType != null" >
+        BUTTON_ADD_EXC_TYPE = #{record.buttonAddExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddType != null" >
+        BUTTON_ADD_TYPE = #{record.buttonAddType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddSuccessDeal != null" >
+        BUTTON_ADD_SUCCESS_DEAL = #{record.buttonAddSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddSuccessSelfFun != null" >
+        BUTTON_ADD_SUCCESS_SELF_FUN = #{record.buttonAddSuccessSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddFun != null" >
+        BUTTON_ADD_FUN = #{record.buttonAddFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddUrl != null" >
+        BUTTON_ADD_URL = #{record.buttonAddUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddSql != null" >
+        BUTTON_ADD_SQL = #{record.buttonAddSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddInitFun != null" >
+        BUTTON_ADD_INIT_FUN = #{record.buttonAddInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddHeight != null" >
+        BUTTON_ADD_HEIGHT = #{record.buttonAddHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddWidth != null" >
+        BUTTON_ADD_WIDTH = #{record.buttonAddWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonFormId != null" >
+        BUTTON_FORM_ID = #{record.buttonFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonFormName != null" >
+        BUTTON_FORM_NAME = #{record.buttonFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonAddTitle != null" >
+        BUTTON_ADD_TITLE = #{record.buttonAddTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_ADD
+    set BUTTON_ADD_ID = #{record.buttonAddId,jdbcType=DECIMAL},
+      BUTTON_ADD_BUTTON_ID = #{record.buttonAddButtonId,jdbcType=DECIMAL},
+      BUTTON_ADD_EXC_TYPE = #{record.buttonAddExcType,jdbcType=VARCHAR},
+      BUTTON_ADD_TYPE = #{record.buttonAddType,jdbcType=VARCHAR},
+      BUTTON_ADD_SUCCESS_DEAL = #{record.buttonAddSuccessDeal,jdbcType=VARCHAR},
+      BUTTON_ADD_SUCCESS_SELF_FUN = #{record.buttonAddSuccessSelfFun,jdbcType=VARCHAR},
+      BUTTON_ADD_FUN = #{record.buttonAddFun,jdbcType=VARCHAR},
+      BUTTON_ADD_URL = #{record.buttonAddUrl,jdbcType=VARCHAR},
+      BUTTON_ADD_SQL = #{record.buttonAddSql,jdbcType=VARCHAR},
+      BUTTON_ADD_INIT_FUN = #{record.buttonAddInitFun,jdbcType=VARCHAR},
+      BUTTON_ADD_HEIGHT = #{record.buttonAddHeight,jdbcType=VARCHAR},
+      BUTTON_ADD_WIDTH = #{record.buttonAddWidth,jdbcType=VARCHAR},
+      BUTTON_FORM_ID = #{record.buttonFormId,jdbcType=DECIMAL},
+      BUTTON_FORM_NAME = #{record.buttonFormName,jdbcType=VARCHAR},
+      BUTTON_ADD_TITLE = #{record.buttonAddTitle,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAdd" >
+    update SYS_FORM_BUTTON_ADD
+    <set >
+      <if test="buttonAddButtonId != null" >
+        BUTTON_ADD_BUTTON_ID = #{buttonAddButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonAddExcType != null" >
+        BUTTON_ADD_EXC_TYPE = #{buttonAddExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddType != null" >
+        BUTTON_ADD_TYPE = #{buttonAddType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSuccessDeal != null" >
+        BUTTON_ADD_SUCCESS_DEAL = #{buttonAddSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSuccessSelfFun != null" >
+        BUTTON_ADD_SUCCESS_SELF_FUN = #{buttonAddSuccessSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddFun != null" >
+        BUTTON_ADD_FUN = #{buttonAddFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddUrl != null" >
+        BUTTON_ADD_URL = #{buttonAddUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddSql != null" >
+        BUTTON_ADD_SQL = #{buttonAddSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddInitFun != null" >
+        BUTTON_ADD_INIT_FUN = #{buttonAddInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddHeight != null" >
+        BUTTON_ADD_HEIGHT = #{buttonAddHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddWidth != null" >
+        BUTTON_ADD_WIDTH = #{buttonAddWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonFormId != null" >
+        BUTTON_FORM_ID = #{buttonFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonFormName != null" >
+        BUTTON_FORM_NAME = #{buttonFormName,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonAddTitle != null" >
+        BUTTON_ADD_TITLE = #{buttonAddTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUTTON_ADD_ID = #{buttonAddId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonAdd" >
+    update SYS_FORM_BUTTON_ADD
+    set BUTTON_ADD_BUTTON_ID = #{buttonAddButtonId,jdbcType=DECIMAL},
+      BUTTON_ADD_EXC_TYPE = #{buttonAddExcType,jdbcType=VARCHAR},
+      BUTTON_ADD_TYPE = #{buttonAddType,jdbcType=VARCHAR},
+      BUTTON_ADD_SUCCESS_DEAL = #{buttonAddSuccessDeal,jdbcType=VARCHAR},
+      BUTTON_ADD_SUCCESS_SELF_FUN = #{buttonAddSuccessSelfFun,jdbcType=VARCHAR},
+      BUTTON_ADD_FUN = #{buttonAddFun,jdbcType=VARCHAR},
+      BUTTON_ADD_URL = #{buttonAddUrl,jdbcType=VARCHAR},
+      BUTTON_ADD_SQL = #{buttonAddSql,jdbcType=VARCHAR},
+      BUTTON_ADD_INIT_FUN = #{buttonAddInitFun,jdbcType=VARCHAR},
+      BUTTON_ADD_HEIGHT = #{buttonAddHeight,jdbcType=VARCHAR},
+      BUTTON_ADD_WIDTH = #{buttonAddWidth,jdbcType=VARCHAR},
+      BUTTON_FORM_ID = #{buttonFormId,jdbcType=DECIMAL},
+      BUTTON_FORM_NAME = #{buttonFormName,jdbcType=VARCHAR},
+      BUTTON_ADD_TITLE = #{buttonAddTitle,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where BUTTON_ADD_ID = #{buttonAddId,jdbcType=DECIMAL}
+  </update>
+</mapper>

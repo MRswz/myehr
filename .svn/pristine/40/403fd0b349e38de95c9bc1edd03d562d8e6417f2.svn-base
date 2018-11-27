@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.ApproveAccreditMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.ApproveAccredit" >
+    <result column="approve_accredit_id" property="approveAccreditId" jdbcType="DECIMAL" />
+    <result column="approve_user_id" property="approveUserId" jdbcType="DECIMAL" />
+    <result column="authorizer_user_id" property="authorizerUserId" jdbcType="DECIMAL" />
+    <result column="authorization_state" property="authorizationState" jdbcType="NVARCHAR" />
+    <result column="authorization_time" property="authorizationTime" jdbcType="TIMESTAMP" />
+    <result column="failure_time" property="failureTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    approve_accredit_id, approve_user_id, authorizer_user_id, authorization_state, authorization_time, 
+    failure_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysuser.ApproveAccreditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from approve_accredit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysuser.ApproveAccreditExample" >
+    delete from approve_accredit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysuser.ApproveAccredit" >
+    insert into approve_accredit (approve_user_id, 
+      authorizer_user_id, authorization_state, 
+      authorization_time, failure_time)
+    values (#{approveUserId,jdbcType=DECIMAL}, 
+      #{authorizerUserId,jdbcType=DECIMAL}, #{authorizationState,jdbcType=NVARCHAR}, 
+      #{authorizationTime,jdbcType=TIMESTAMP}, #{failureTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysuser.ApproveAccredit" >
+    insert into approve_accredit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="approveAccreditId != null" >
+        approve_accredit_id,
+      </if>
+      <if test="approveUserId != null" >
+        approve_user_id,
+      </if>
+      <if test="authorizerUserId != null" >
+        authorizer_user_id,
+      </if>
+      <if test="authorizationState != null" >
+        authorization_state,
+      </if>
+      <if test="authorizationTime != null" >
+        authorization_time,
+      </if>
+      <if test="failureTime != null" >
+        failure_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="approveAccreditId != null" >
+        #{approveAccreditId,jdbcType=DECIMAL},
+      </if>
+      <if test="approveUserId != null" >
+        #{approveUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="authorizerUserId != null" >
+        #{authorizerUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="authorizationState != null" >
+        #{authorizationState,jdbcType=NVARCHAR},
+      </if>
+      <if test="authorizationTime != null" >
+        #{authorizationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failureTime != null" >
+        #{failureTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysuser.ApproveAccreditExample" resultType="java.lang.Integer" >
+    select count(*) from approve_accredit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update approve_accredit
+    <set >
+      <if test="record.approveAccreditId != null" >
+        approve_accredit_id = #{record.approveAccreditId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.approveUserId != null" >
+        approve_user_id = #{record.approveUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.authorizerUserId != null" >
+        authorizer_user_id = #{record.authorizerUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.authorizationState != null" >
+        authorization_state = #{record.authorizationState,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.authorizationTime != null" >
+        authorization_time = #{record.authorizationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failureTime != null" >
+        failure_time = #{record.failureTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update approve_accredit
+    set approve_accredit_id = #{record.approveAccreditId,jdbcType=DECIMAL},
+      approve_user_id = #{record.approveUserId,jdbcType=DECIMAL},
+      authorizer_user_id = #{record.authorizerUserId,jdbcType=DECIMAL},
+      authorization_state = #{record.authorizationState,jdbcType=NVARCHAR},
+      authorization_time = #{record.authorizationTime,jdbcType=TIMESTAMP},
+      failure_time = #{record.failureTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

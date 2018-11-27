@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.widget.SysTemplateDatepickerMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepicker" >
+    <id column="DATEPICKER_ID" property="datepickerId" jdbcType="DECIMAL" />
+    <result column="DATEPICKER_TEMPLATE_COLUMN_ID" property="datepickerTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="DATEPICKER_CHECK_TYPE" property="datepickerCheckType" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_CHECK_SELF" property="datepickerCheckSelf" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_CHECK_FUN" property="datepickerCheckFun" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_INIT_FUN" property="datepickerInitFun" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_VALUECHANGE_FUN" property="datepickerValuechangeFun" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_CLICK_FUN" property="datepickerClickFun" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_DATA_FROM_TYPE" property="datepickerDataFromType" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_DATA_FROM_VALUE" property="datepickerDataFromValue" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_FORMAT" property="datepickerFormat" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_TIMEFORMAT" property="datepickerTimeformat" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_SHOWTIME" property="datepickerShowtime" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_SHOWOKBUTTON" property="datepickerShowokbutton" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_SHOWCLEARBUTTON" property="datepickerShowclearbutton" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_ALLOWINPUT" property="datepickerAllowinput" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_SHOWTODAYBUTTON" property="datepickerShowtodaybutton" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="DATEPICKER_DRAWDATE_FUN" property="datepickerDrawdateFun" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DATEPICKER_ID, DATEPICKER_TEMPLATE_COLUMN_ID, DATEPICKER_CHECK_TYPE, DATEPICKER_CHECK_SELF, 
+    DATEPICKER_CHECK_FUN, DATEPICKER_INIT_FUN, DATEPICKER_VALUECHANGE_FUN, DATEPICKER_CLICK_FUN, 
+    DATEPICKER_DATA_FROM_TYPE, DATEPICKER_DATA_FROM_VALUE, DATEPICKER_FORMAT, DATEPICKER_TIMEFORMAT, 
+    DATEPICKER_SHOWTIME, DATEPICKER_SHOWOKBUTTON, DATEPICKER_SHOWCLEARBUTTON, DATEPICKER_ALLOWINPUT, 
+    DATEPICKER_SHOWTODAYBUTTON, OPERATOR_TIME, OPERATOR_NAME, DATEPICKER_DRAWDATE_FUN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepickerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_DATEPICKER
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_DATEPICKER
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepickerExample" >
+    delete from SYS_TEMPLATE_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepicker" useGeneratedKeys="true" keyProperty="datepickerId" keyColumn="DATEPICKER_ID">
+    insert into SYS_TEMPLATE_DATEPICKER ( DATEPICKER_TEMPLATE_COLUMN_ID, 
+      DATEPICKER_CHECK_TYPE, DATEPICKER_CHECK_SELF, 
+      DATEPICKER_CHECK_FUN, DATEPICKER_INIT_FUN, 
+      DATEPICKER_VALUECHANGE_FUN, DATEPICKER_CLICK_FUN, 
+      DATEPICKER_DATA_FROM_TYPE, DATEPICKER_DATA_FROM_VALUE, 
+      DATEPICKER_FORMAT, DATEPICKER_TIMEFORMAT, 
+      DATEPICKER_SHOWTIME, DATEPICKER_SHOWOKBUTTON, 
+      DATEPICKER_SHOWCLEARBUTTON, DATEPICKER_ALLOWINPUT, 
+      DATEPICKER_SHOWTODAYBUTTON, OPERATOR_TIME, 
+      OPERATOR_NAME, DATEPICKER_DRAWDATE_FUN)
+    values ( #{datepickerTemplateColumnId,jdbcType=DECIMAL}, 
+      #{datepickerCheckType,jdbcType=NVARCHAR}, #{datepickerCheckSelf,jdbcType=NVARCHAR}, 
+      #{datepickerCheckFun,jdbcType=NVARCHAR}, #{datepickerInitFun,jdbcType=NVARCHAR}, 
+      #{datepickerValuechangeFun,jdbcType=NVARCHAR}, #{datepickerClickFun,jdbcType=NVARCHAR}, 
+      #{datepickerDataFromType,jdbcType=NVARCHAR}, #{datepickerDataFromValue,jdbcType=NVARCHAR}, 
+      #{datepickerFormat,jdbcType=NVARCHAR}, #{datepickerTimeformat,jdbcType=NVARCHAR}, 
+      #{datepickerShowtime,jdbcType=NVARCHAR}, #{datepickerShowokbutton,jdbcType=NVARCHAR}, 
+      #{datepickerShowclearbutton,jdbcType=NVARCHAR}, #{datepickerAllowinput,jdbcType=NVARCHAR}, 
+      #{datepickerShowtodaybutton,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{datepickerDrawdateFun,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepicker" >
+    insert into SYS_TEMPLATE_DATEPICKER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datepickerId != null" >
+        DATEPICKER_ID,
+      </if>
+      <if test="datepickerTemplateColumnId != null" >
+        DATEPICKER_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE,
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF,
+      </if>
+      <if test="datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN,
+      </if>
+      <if test="datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN,
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN,
+      </if>
+      <if test="datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN,
+      </if>
+      <if test="datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE,
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE,
+      </if>
+      <if test="datepickerFormat != null" >
+        DATEPICKER_FORMAT,
+      </if>
+      <if test="datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT,
+      </if>
+      <if test="datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME,
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON,
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON,
+      </if>
+      <if test="datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT,
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datepickerId != null" >
+        #{datepickerId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerTemplateColumnId != null" >
+        #{datepickerTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerCheckType != null" >
+        #{datepickerCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        #{datepickerCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerCheckFun != null" >
+        #{datepickerCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerInitFun != null" >
+        #{datepickerInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        #{datepickerValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerClickFun != null" >
+        #{datepickerClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDataFromType != null" >
+        #{datepickerDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        #{datepickerDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerFormat != null" >
+        #{datepickerFormat,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerTimeformat != null" >
+        #{datepickerTimeformat,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowtime != null" >
+        #{datepickerShowtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        #{datepickerShowokbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        #{datepickerShowclearbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerAllowinput != null" >
+        #{datepickerAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        #{datepickerShowtodaybutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        #{datepickerDrawdateFun,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepickerExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_DATEPICKER
+    <set >
+      <if test="record.datepickerId != null" >
+        DATEPICKER_ID = #{record.datepickerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.datepickerTemplateColumnId != null" >
+        DATEPICKER_TEMPLATE_COLUMN_ID = #{record.datepickerTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE = #{record.datepickerCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF = #{record.datepickerCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN = #{record.datepickerCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN = #{record.datepickerInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN = #{record.datepickerValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN = #{record.datepickerClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE = #{record.datepickerDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE = #{record.datepickerDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerFormat != null" >
+        DATEPICKER_FORMAT = #{record.datepickerFormat,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT = #{record.datepickerTimeformat,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME = #{record.datepickerShowtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON = #{record.datepickerShowokbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON = #{record.datepickerShowclearbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT = #{record.datepickerAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON = #{record.datepickerShowtodaybutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN = #{record.datepickerDrawdateFun,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_DATEPICKER
+    set DATEPICKER_ID = #{record.datepickerId,jdbcType=DECIMAL},
+      DATEPICKER_TEMPLATE_COLUMN_ID = #{record.datepickerTemplateColumnId,jdbcType=DECIMAL},
+      DATEPICKER_CHECK_TYPE = #{record.datepickerCheckType,jdbcType=NVARCHAR},
+      DATEPICKER_CHECK_SELF = #{record.datepickerCheckSelf,jdbcType=NVARCHAR},
+      DATEPICKER_CHECK_FUN = #{record.datepickerCheckFun,jdbcType=NVARCHAR},
+      DATEPICKER_INIT_FUN = #{record.datepickerInitFun,jdbcType=NVARCHAR},
+      DATEPICKER_VALUECHANGE_FUN = #{record.datepickerValuechangeFun,jdbcType=NVARCHAR},
+      DATEPICKER_CLICK_FUN = #{record.datepickerClickFun,jdbcType=NVARCHAR},
+      DATEPICKER_DATA_FROM_TYPE = #{record.datepickerDataFromType,jdbcType=NVARCHAR},
+      DATEPICKER_DATA_FROM_VALUE = #{record.datepickerDataFromValue,jdbcType=NVARCHAR},
+      DATEPICKER_FORMAT = #{record.datepickerFormat,jdbcType=NVARCHAR},
+      DATEPICKER_TIMEFORMAT = #{record.datepickerTimeformat,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWTIME = #{record.datepickerShowtime,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWOKBUTTON = #{record.datepickerShowokbutton,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWCLEARBUTTON = #{record.datepickerShowclearbutton,jdbcType=NVARCHAR},
+      DATEPICKER_ALLOWINPUT = #{record.datepickerAllowinput,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWTODAYBUTTON = #{record.datepickerShowtodaybutton,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      DATEPICKER_DRAWDATE_FUN = #{record.datepickerDrawdateFun,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepicker" >
+    update SYS_TEMPLATE_DATEPICKER
+    <set >
+      <if test="datepickerTemplateColumnId != null" >
+        DATEPICKER_TEMPLATE_COLUMN_ID = #{datepickerTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE = #{datepickerCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF = #{datepickerCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN = #{datepickerCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN = #{datepickerInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN = #{datepickerValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN = #{datepickerClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE = #{datepickerDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE = #{datepickerDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerFormat != null" >
+        DATEPICKER_FORMAT = #{datepickerFormat,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT = #{datepickerTimeformat,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME = #{datepickerShowtime,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON = #{datepickerShowokbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON = #{datepickerShowclearbutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT = #{datepickerAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON = #{datepickerShowtodaybutton,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN = #{datepickerDrawdateFun,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateDatepicker" >
+    update SYS_TEMPLATE_DATEPICKER
+    set DATEPICKER_TEMPLATE_COLUMN_ID = #{datepickerTemplateColumnId,jdbcType=DECIMAL},
+      DATEPICKER_CHECK_TYPE = #{datepickerCheckType,jdbcType=NVARCHAR},
+      DATEPICKER_CHECK_SELF = #{datepickerCheckSelf,jdbcType=NVARCHAR},
+      DATEPICKER_CHECK_FUN = #{datepickerCheckFun,jdbcType=NVARCHAR},
+      DATEPICKER_INIT_FUN = #{datepickerInitFun,jdbcType=NVARCHAR},
+      DATEPICKER_VALUECHANGE_FUN = #{datepickerValuechangeFun,jdbcType=NVARCHAR},
+      DATEPICKER_CLICK_FUN = #{datepickerClickFun,jdbcType=NVARCHAR},
+      DATEPICKER_DATA_FROM_TYPE = #{datepickerDataFromType,jdbcType=NVARCHAR},
+      DATEPICKER_DATA_FROM_VALUE = #{datepickerDataFromValue,jdbcType=NVARCHAR},
+      DATEPICKER_FORMAT = #{datepickerFormat,jdbcType=NVARCHAR},
+      DATEPICKER_TIMEFORMAT = #{datepickerTimeformat,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWTIME = #{datepickerShowtime,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWOKBUTTON = #{datepickerShowokbutton,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWCLEARBUTTON = #{datepickerShowclearbutton,jdbcType=NVARCHAR},
+      DATEPICKER_ALLOWINPUT = #{datepickerAllowinput,jdbcType=NVARCHAR},
+      DATEPICKER_SHOWTODAYBUTTON = #{datepickerShowtodaybutton,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      DATEPICKER_DRAWDATE_FUN = #{datepickerDrawdateFun,jdbcType=NVARCHAR}
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActHiAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActHiAttachment" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="REV_" property="rev" jdbcType="DECIMAL" />
+    <result column="USER_ID_" property="userId" jdbcType="OTHER" />
+    <result column="NAME_" property="name" jdbcType="OTHER" />
+    <result column="DESCRIPTION_" property="description" jdbcType="OTHER" />
+    <result column="TYPE_" property="type" jdbcType="OTHER" />
+    <result column="TASK_ID_" property="taskId" jdbcType="OTHER" />
+    <result column="PROC_INST_ID_" property="procInstId" jdbcType="OTHER" />
+    <result column="URL_" property="url" jdbcType="OTHER" />
+    <result column="CONTENT_ID_" property="contentId" jdbcType="OTHER" />
+    <result column="TIME_" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, REV_, USER_ID_, NAME_, DESCRIPTION_, TYPE_, TASK_ID_, PROC_INST_ID_, URL_, CONTENT_ID_, 
+    TIME_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActHiAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_HI_ATTACHMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_HI_ATTACHMENT
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_HI_ATTACHMENT
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActHiAttachmentExample" >
+    delete from ACT_HI_ATTACHMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActHiAttachment" >
+    insert into ACT_HI_ATTACHMENT (ID_, REV_, USER_ID_, 
+      NAME_, DESCRIPTION_, TYPE_, 
+      TASK_ID_, PROC_INST_ID_, URL_, 
+      CONTENT_ID_, TIME_)
+    values (#{id,jdbcType=OTHER}, #{rev,jdbcType=DECIMAL}, #{userId,jdbcType=OTHER}, 
+      #{name,jdbcType=OTHER}, #{description,jdbcType=OTHER}, #{type,jdbcType=OTHER}, 
+      #{taskId,jdbcType=OTHER}, #{procInstId,jdbcType=OTHER}, #{url,jdbcType=OTHER}, 
+      #{contentId,jdbcType=OTHER}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActHiAttachment" >
+    insert into ACT_HI_ATTACHMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="rev != null" >
+        REV_,
+      </if>
+      <if test="userId != null" >
+        USER_ID_,
+      </if>
+      <if test="name != null" >
+        NAME_,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION_,
+      </if>
+      <if test="type != null" >
+        TYPE_,
+      </if>
+      <if test="taskId != null" >
+        TASK_ID_,
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_,
+      </if>
+      <if test="url != null" >
+        URL_,
+      </if>
+      <if test="contentId != null" >
+        CONTENT_ID_,
+      </if>
+      <if test="time != null" >
+        TIME_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="rev != null" >
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=OTHER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=OTHER},
+      </if>
+      <if test="contentId != null" >
+        #{contentId,jdbcType=OTHER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActHiAttachmentExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_HI_ATTACHMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_HI_ATTACHMENT
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.rev != null" >
+        REV_ = #{record.rev,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID_ = #{record.userId,jdbcType=OTHER},
+      </if>
+      <if test="record.name != null" >
+        NAME_ = #{record.name,jdbcType=OTHER},
+      </if>
+      <if test="record.description != null" >
+        DESCRIPTION_ = #{record.description,jdbcType=OTHER},
+      </if>
+      <if test="record.type != null" >
+        TYPE_ = #{record.type,jdbcType=OTHER},
+      </if>
+      <if test="record.taskId != null" >
+        TASK_ID_ = #{record.taskId,jdbcType=OTHER},
+      </if>
+      <if test="record.procInstId != null" >
+        PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      </if>
+      <if test="record.url != null" >
+        URL_ = #{record.url,jdbcType=OTHER},
+      </if>
+      <if test="record.contentId != null" >
+        CONTENT_ID_ = #{record.contentId,jdbcType=OTHER},
+      </if>
+      <if test="record.time != null" >
+        TIME_ = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_HI_ATTACHMENT
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      USER_ID_ = #{record.userId,jdbcType=OTHER},
+      NAME_ = #{record.name,jdbcType=OTHER},
+      DESCRIPTION_ = #{record.description,jdbcType=OTHER},
+      TYPE_ = #{record.type,jdbcType=OTHER},
+      TASK_ID_ = #{record.taskId,jdbcType=OTHER},
+      PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      URL_ = #{record.url,jdbcType=OTHER},
+      CONTENT_ID_ = #{record.contentId,jdbcType=OTHER},
+      TIME_ = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActHiAttachment" >
+    update ACT_HI_ATTACHMENT
+    <set >
+      <if test="rev != null" >
+        REV_ = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        USER_ID_ = #{userId,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        NAME_ = #{name,jdbcType=OTHER},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION_ = #{description,jdbcType=OTHER},
+      </if>
+      <if test="type != null" >
+        TYPE_ = #{type,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null" >
+        TASK_ID_ = #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="url != null" >
+        URL_ = #{url,jdbcType=OTHER},
+      </if>
+      <if test="contentId != null" >
+        CONTENT_ID_ = #{contentId,jdbcType=OTHER},
+      </if>
+      <if test="time != null" >
+        TIME_ = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActHiAttachment" >
+    update ACT_HI_ATTACHMENT
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      USER_ID_ = #{userId,jdbcType=OTHER},
+      NAME_ = #{name,jdbcType=OTHER},
+      DESCRIPTION_ = #{description,jdbcType=OTHER},
+      TYPE_ = #{type,jdbcType=OTHER},
+      TASK_ID_ = #{taskId,jdbcType=OTHER},
+      PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      URL_ = #{url,jdbcType=OTHER},
+      CONTENT_ID_ = #{contentId,jdbcType=OTHER},
+      TIME_ = #{time,jdbcType=TIMESTAMP}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

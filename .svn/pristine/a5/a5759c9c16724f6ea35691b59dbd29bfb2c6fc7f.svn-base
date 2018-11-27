@@ -1,0 +1,272 @@
+package com.myehr.controller.sysParam;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.myehr.common.mybatis.Pager;
+import com.myehr.common.util.GetDBPropertiesValue;
+import com.myehr.common.util.XmlUtil;
+import com.myehr.controller.dict.param.ResultMapNew;
+import com.myehr.controller.form.parambean.CardformInitDataParams;
+import com.myehr.controller.form.parambean.SaveButtonParams;
+import com.myehr.mapper.sysParam.SysSourceMapper;
+import com.myehr.mapper.sysParam.SysSystemParamMapper;
+import com.myehr.pojo.sysParam.SysSource;
+import com.myehr.pojo.sysParam.SysSourceExample;
+import com.myehr.pojo.sysParam.SysSystemParam;
+import com.myehr.pojo.sysParam.SysSystemParamExample;
+import com.myehr.test.dao.TMapperExt;
+
+@Controller
+@RequestMapping("/systemParam")
+public class SysParamController {
+	
+//	@Autowired
+	@Resource(name = "TMapperExt")
+	private TMapperExt tMapperExt;
+	
+	@Autowired
+	private SysSystemParamMapper sysSystemParamMapper;
+	
+	@Autowired
+	private SysSourceMapper sysSourceMapper;
+	
+	@RequestMapping("/querySystemParam")
+	public @ResponseBody ResultMapNew querySystemParam(HttpServletRequest request, @RequestBody CardformInitDataParams params) throws Exception{
+		Map filter = params.getFilter();
+		String offset = params.getOffset();
+		String limit = params.getLimit();
+		//Map paramsMap = params.getParamsMap();
+		Pager page = params.getPage();
+		page = new Pager();
+		if(offset==null&&limit==null){
+			
+		}else {
+			int start=Integer.parseInt(offset);
+			page.setStart(start); //不能设置为0
+			page.setLimt(Integer.parseInt(limit));
+		}
+		
+		String sysParamType = (String) filter.get("sysParamType");
+		String deleteMark = (String) filter.get("deleteMark");
+		String wheres="";
+		if (sysParamType!=null && sysParamType!="") {
+			wheres += " and o.SYS_PARAM_TYPE = '"+sysParamType+"' ";
+		}
+		String searchValue = (String) filter.get("searchValue");
+		if (searchValue!=null && searchValue!="") {
+			wheres += " and ( o.SYS_PARAM_ENTRY like "+" '%"+searchValue+"%' "+
+					  "or o.SYS_PARAM_CODE like "+" '%"+searchValue+"%' )";
+		}
+		if (deleteMark!=null && deleteMark!="") {
+			wheres += " and SYS_DICT_TYPE.DELETE_MARK = "+" '"+deleteMark+"' ";
+		}
+		
+		String sql = "select o.SYS_PARAM_ID as sysParamId, " +
+				" o.SYS_PARAM_TYPE as sysParamType, "+
+				" o.SYS_PARAM_CODE as sysParamCode, "+
+				" o.SYS_PARAM_ENTRY as sysParamEntry, "+
+				" o.SYS_PARAM_VALUE1 as sysParamValue1, "+
+				" o.SYS_PARAM_VALUE2 as sysParamValue2, "+
+				" o.SYS_PARAM_REMARK as sysParamRemark "+
+				" from sys_system_param o where 1=1 "+wheres;
+		List<Map> schemes = tMapperExt.queryByFormDefSql(sql);
+		
+		ResultMapNew resultMap=new ResultMapNew();
+		
+		List<Map> schemeList = new ArrayList<Map>();
+		int end = 0;
+		if (page.getStart()+page.getLimt()>schemes.size()) {
+			end = schemes.size();
+		}else {
+			end = page.getStart()+page.getLimt();
+		}
+		
+		for (int i = page.getStart(); i < end; i++) {
+			schemeList.add(schemes.get(i));
+		}
+
+		resultMap.setTotal(schemes.size());
+		resultMap.setRows(schemeList);
+		return resultMap;
+	}
+	
+	@RequestMapping("/querySystemSource")
+	public @ResponseBody ResultMapNew querySystemSource(HttpServletRequest request, @RequestBody CardformInitDataParams params) throws Exception{
+		Map filter = params.getFilter();
+		String offset = params.getOffset();
+		String limit = params.getLimit();
+		//Map paramsMap = params.getParamsMap();
+		Pager page = params.getPage();
+		page = new Pager();
+		if(offset==null&&limit==null){
+			
+		}else {
+			int start=Integer.parseInt(offset);
+			page.setStart(start); //不能设置为0
+			page.setLimt(Integer.parseInt(limit));
+		}
+		
+		String sysParamType = (String) filter.get("sysParamType");
+		String wheres="";
+		if (sysParamType!=null && sysParamType!="") {
+			wheres += " and o.SYS_PARAM_TYPE = '"+sysParamType+"' ";
+		}
+		String searchValue = (String) filter.get("searchValue");
+		if (searchValue!=null && searchValue!="") {
+			wheres += " and ( o.SYS_PARAM_ENTRY like "+" '%"+searchValue+"%' "+
+					  "or o.SYS_PARAM_CODE like "+" '%"+searchValue+"%' )";
+		}
+		
+		String sql = "select * from sys_source where 1=1 ";
+		List<Map> schemes = tMapperExt.queryByFormDefSql(sql);
+		
+		ResultMapNew resultMap=new ResultMapNew();
+		
+		List<Map> schemeList = new ArrayList<Map>();
+		int end = 0;
+		if (page.getStart()+page.getLimt()>schemes.size()) {
+			end = schemes.size();
+		}else {
+			end = page.getStart()+page.getLimt();
+		}
+		
+		for (int i = page.getStart(); i < end; i++) {
+			schemeList.add(schemes.get(i));
+		}
+
+		resultMap.setTotal(schemes.size());
+		resultMap.setRows(schemeList);
+		return resultMap;
+	}
+	
+	@RequestMapping("/querySystemParamById")
+	public @ResponseBody SysSystemParam querySystemParamById(HttpServletRequest request) throws Exception{
+		
+		String sysParamId = request.getParameter("sysParamId");
+		SysSystemParamExample example = new SysSystemParamExample();
+		com.myehr.pojo.sysParam.SysSystemParamExample.Criteria criteria = example.createCriteria();
+		criteria.andSysParamIdEqualTo(Long.valueOf(sysParamId));
+		
+		SysSystemParam systemParam = sysSystemParamMapper.selectByExample(example).get(0);
+		return systemParam;
+	}
+	
+	@RequestMapping("/querySystemSourceById")
+	public @ResponseBody SysSource querySystemSourceById(HttpServletRequest request) throws Exception{
+		
+		String sysSourceId = request.getParameter("sysSourceId");
+		SysSourceExample example = new SysSourceExample();
+		example.or().andSysSourceIdEqualTo(Long.valueOf(sysSourceId));
+		SysSource sysSource = sysSourceMapper.selectByExample(example).get(0);
+		return sysSource;
+	}
+	
+	@RequestMapping("/startSystemSourceById")
+	public @ResponseBody SysSource startSystemSourceById(HttpServletRequest request) throws Exception{
+		
+		String sysSourceId = request.getParameter("sysSourceId");
+		SysSourceExample example = new SysSourceExample();
+		example.or().andSysSourceIdEqualTo(Long.valueOf(sysSourceId));
+		SysSource sysSource = sysSourceMapper.selectByExample(example).get(0);
+		
+		String path =  System.getProperty("user.dir").replace("\\", "/").replace("bin", "");
+		path = path+"webapps/myehr/WEB-INF/classes/db.properties";
+		String path1 = "E:/109svn/myehrMssql/myehr_0_SQLSERVER/config/db.properties";
+		GetDBPropertiesValue.writeProperties(path, sysSource.getSysSoruceDriver(),sysSource.getSysSoruceDriverValue());
+		GetDBPropertiesValue.writeProperties(path, sysSource.getSysSoruceUrl(),sysSource.getSysSoruceUrlValue());
+		GetDBPropertiesValue.writeProperties(path, sysSource.getSysSoruceUsername(),sysSource.getSysSoruceUsernameValue());
+		GetDBPropertiesValue.writeProperties(path, sysSource.getSysSorucePassword(),sysSource.getSysSorucePasswordValue());
+		GetDBPropertiesValue.writeProperties(path1, sysSource.getSysSoruceDriver(),sysSource.getSysSoruceDriverValue());
+		GetDBPropertiesValue.writeProperties(path1, sysSource.getSysSoruceUrl(),sysSource.getSysSoruceUrlValue());
+		GetDBPropertiesValue.writeProperties(path1, sysSource.getSysSoruceUsername(),sysSource.getSysSoruceUsernameValue());
+		GetDBPropertiesValue.writeProperties(path1, sysSource.getSysSorucePassword(),sysSource.getSysSorucePasswordValue());
+		
+		XmlUtil.addSysSource(sysSource);
+		
+		return sysSource;
+	}
+	
+	@RequestMapping("/saveSystemParam")
+	public @ResponseBody String saveSystemParam(HttpServletRequest request, @RequestBody SaveButtonParams params) throws Exception{
+		String menuJson = "";
+		
+		Map param = params.getParam();
+		Map paramsMap = params.getParamsMap();
+		int reCode = 0;
+		
+		String sysParamId = (String) param.get("sysParamId");
+		SysSystemParam systemParam = new SysSystemParam();
+		if (sysParamId==null || sysParamId=="") {
+			systemParam.setSysParamType((String) param.get("sysParamType"));
+			systemParam.setSysParamCode((String) param.get("sysParamCode"));
+			systemParam.setSysParamEntry((String) param.get("sysParamEntry"));
+			systemParam.setSysParamValue1((String) param.get("sysParamValue1"));
+			systemParam.setSysParamValue2((String) param.get("sysParamValue2"));
+			systemParam.setSysParamRemark((String) param.get("sysParamRemark"));
+			reCode = sysSystemParamMapper.insert(systemParam);
+		}else {
+			systemParam.setSysParamId(Long.valueOf(sysParamId));
+			systemParam.setSysParamType((String) param.get("sysParamType"));
+			systemParam.setSysParamCode((String) param.get("sysParamCode"));
+			systemParam.setSysParamEntry((String) param.get("sysParamEntry"));
+			systemParam.setSysParamValue1((String) param.get("sysParamValue1"));
+			systemParam.setSysParamValue2((String) param.get("sysParamValue2"));
+			systemParam.setSysParamRemark((String) param.get("sysParamRemark"));
+			reCode = sysSystemParamMapper.updateByPrimaryKey(systemParam);
+		}
+		
+		return menuJson;
+	}
+	
+	@RequestMapping("/saveSystemSource")
+	public @ResponseBody String saveSystemSource(HttpServletRequest request, @RequestBody SaveButtonParams params) throws Exception{
+		
+		Map param = params.getParam();
+		int reCode = 0;
+		
+		String sysSourceId = (String) param.get("sysSourceId");
+		SysSource sysSource = new SysSource();
+		if (sysSourceId==null || sysSourceId=="") {
+			sysSource.setSysSourceType((String) param.get("sysSourceType"));
+			sysSource.setSysSourceCode((String) param.get("sysSourceCode"));
+			sysSource.setSysSourceName((String) param.get("sysSourceName"));
+			sysSource.setSysSoruceDriver((String) param.get("sysSoruceDriver"));
+			sysSource.setSysSoruceDriverValue((String) param.get("sysSoruceDriverValue"));
+			sysSource.setSysSoruceUrl((String) param.get("sysSoruceUrl"));
+			sysSource.setSysSoruceUrlValue((String) param.get("sysSoruceUrlValue"));
+			sysSource.setSysSoruceUsername((String) param.get("sysSoruceUsername"));
+			sysSource.setSysSoruceUsernameValue((String) param.get("sysSoruceUsernameValue"));
+			sysSource.setSysSorucePassword((String) param.get("sysSorucePassword"));
+			sysSource.setSysSorucePasswordValue((String) param.get("sysSorucePasswordValue"));
+			reCode = sysSourceMapper.insert(sysSource);
+		}else {
+			sysSource.setSysSourceId(Long.valueOf(sysSourceId));
+			sysSource.setSysSourceType((String) param.get("sysSourceType"));
+			sysSource.setSysSourceCode((String) param.get("sysSourceCode"));
+			sysSource.setSysSourceName((String) param.get("sysSourceName"));
+			sysSource.setSysSoruceDriver((String) param.get("sysSoruceDriver"));
+			sysSource.setSysSoruceDriverValue((String) param.get("sysSoruceDriverValue"));
+			sysSource.setSysSoruceUrl((String) param.get("sysSoruceUrl"));
+			sysSource.setSysSoruceUrlValue((String) param.get("sysSoruceUrlValue"));
+			sysSource.setSysSoruceUsername((String) param.get("sysSoruceUsername"));
+			sysSource.setSysSoruceUsernameValue((String) param.get("sysSoruceUsernameValue"));
+			sysSource.setSysSorucePassword((String) param.get("sysSorucePassword"));
+			sysSource.setSysSorucePasswordValue((String) param.get("sysSorucePasswordValue"));
+			reCode = sysSourceMapper.updateByPrimaryKey(sysSource);
+		}
+		
+		return reCode+"";
+	}
+	
+}

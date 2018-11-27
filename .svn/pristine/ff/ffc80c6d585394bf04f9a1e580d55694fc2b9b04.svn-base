@@ -1,0 +1,4 @@
+#Fri Mar 31 09:50:31 CST 2017
+eclipse.preferences.version=1
+validator.Checked=WebRoot/js/src/lay/modules/layer.js,WebRoot/js/src/layui.js,WebRoot/js/nui/ext/nui-ext.js,WebRoot/js/nui/jquery/jquery-1.8.1.min.js,WebRoot/js/nui/resource/ckeditor/ckeditor.js,WebRoot/js/layer/mobile/layer.js,WebRoot/js/assets/jquery.min.js
+validator.Unchecked=

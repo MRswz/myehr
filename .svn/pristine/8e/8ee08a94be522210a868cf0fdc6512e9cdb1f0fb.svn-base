@@ -1,0 +1,23 @@
+package com.myehr.pojo.activiti;
+
+public class ActIdMembershipKey {
+    private Object userId;
+
+    private Object groupId;
+
+    public Object getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Object userId) {
+        this.userId = userId;
+    }
+
+    public Object getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Object groupId) {
+        this.groupId = groupId;
+    }
+}

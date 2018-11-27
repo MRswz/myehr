@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormDatepickerMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormDatepicker" >
+    <id column="DATEPICKER_ID" property="datepickerId" jdbcType="DECIMAL" />
+    <result column="DATEPICKER_FORM_COLUMN_ID" property="datepickerFormColumnId" jdbcType="DECIMAL" />
+    <result column="DATEPICKER_CHECK_TYPE" property="datepickerCheckType" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_CHECK_SELF" property="datepickerCheckSelf" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_CHECK_FUN" property="datepickerCheckFun" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_INIT_FUN" property="datepickerInitFun" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_VALUECHANGE_FUN" property="datepickerValuechangeFun" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_CLICK_FUN" property="datepickerClickFun" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_DATA_FROM_TYPE" property="datepickerDataFromType" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_DATA_FROM_VALUE" property="datepickerDataFromValue" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_FORMAT" property="datepickerFormat" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_TIMEFORMAT" property="datepickerTimeformat" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_SHOWTIME" property="datepickerShowtime" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_SHOWOKBUTTON" property="datepickerShowokbutton" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_SHOWCLEARBUTTON" property="datepickerShowclearbutton" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_ALLOWINPUT" property="datepickerAllowinput" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_SHOWTODAYBUTTON" property="datepickerShowtodaybutton" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="DATEPICKER_DRAWDATE_FUN" property="datepickerDrawdateFun" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DATEPICKER_ID, DATEPICKER_FORM_COLUMN_ID, DATEPICKER_CHECK_TYPE, DATEPICKER_CHECK_SELF, 
+    DATEPICKER_CHECK_FUN, DATEPICKER_INIT_FUN, DATEPICKER_VALUECHANGE_FUN, DATEPICKER_CLICK_FUN, 
+    DATEPICKER_DATA_FROM_TYPE, DATEPICKER_DATA_FROM_VALUE, DATEPICKER_FORMAT, DATEPICKER_TIMEFORMAT, 
+    DATEPICKER_SHOWTIME, DATEPICKER_SHOWOKBUTTON, DATEPICKER_SHOWCLEARBUTTON, DATEPICKER_ALLOWINPUT, 
+    DATEPICKER_SHOWTODAYBUTTON, OPERATOR_TIME, OPERATOR_NAME, DATEPICKER_DRAWDATE_FUN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepickerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_DATEPICKER
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_DATEPICKER
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepickerExample" >
+    delete from SYS_FORM_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepicker" useGeneratedKeys="true" keyProperty="datepickerId" keyColumn="DATEPICKER_ID">
+    insert into SYS_FORM_DATEPICKER ( DATEPICKER_FORM_COLUMN_ID, 
+      DATEPICKER_CHECK_TYPE, DATEPICKER_CHECK_SELF, 
+      DATEPICKER_CHECK_FUN, DATEPICKER_INIT_FUN, 
+      DATEPICKER_VALUECHANGE_FUN, DATEPICKER_CLICK_FUN, 
+      DATEPICKER_DATA_FROM_TYPE, DATEPICKER_DATA_FROM_VALUE, 
+      DATEPICKER_FORMAT, DATEPICKER_TIMEFORMAT, 
+      DATEPICKER_SHOWTIME, DATEPICKER_SHOWOKBUTTON, 
+      DATEPICKER_SHOWCLEARBUTTON, DATEPICKER_ALLOWINPUT, 
+      DATEPICKER_SHOWTODAYBUTTON, OPERATOR_TIME, 
+      OPERATOR_NAME, DATEPICKER_DRAWDATE_FUN)
+    values ( #{datepickerFormColumnId,jdbcType=DECIMAL}, 
+      #{datepickerCheckType,jdbcType=VARCHAR}, #{datepickerCheckSelf,jdbcType=VARCHAR}, 
+      #{datepickerCheckFun,jdbcType=VARCHAR}, #{datepickerInitFun,jdbcType=VARCHAR}, 
+      #{datepickerValuechangeFun,jdbcType=VARCHAR}, #{datepickerClickFun,jdbcType=VARCHAR}, 
+      #{datepickerDataFromType,jdbcType=VARCHAR}, #{datepickerDataFromValue,jdbcType=VARCHAR}, 
+      #{datepickerFormat,jdbcType=VARCHAR}, #{datepickerTimeformat,jdbcType=VARCHAR}, 
+      #{datepickerShowtime,jdbcType=VARCHAR}, #{datepickerShowokbutton,jdbcType=VARCHAR}, 
+      #{datepickerShowclearbutton,jdbcType=VARCHAR}, #{datepickerAllowinput,jdbcType=VARCHAR}, 
+      #{datepickerShowtodaybutton,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=VARCHAR}, #{datepickerDrawdateFun,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepicker" >
+    insert into SYS_FORM_DATEPICKER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datepickerId != null" >
+        DATEPICKER_ID,
+      </if>
+      <if test="datepickerFormColumnId != null" >
+        DATEPICKER_FORM_COLUMN_ID,
+      </if>
+      <if test="datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE,
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF,
+      </if>
+      <if test="datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN,
+      </if>
+      <if test="datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN,
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN,
+      </if>
+      <if test="datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN,
+      </if>
+      <if test="datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE,
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE,
+      </if>
+      <if test="datepickerFormat != null" >
+        DATEPICKER_FORMAT,
+      </if>
+      <if test="datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT,
+      </if>
+      <if test="datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME,
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON,
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON,
+      </if>
+      <if test="datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT,
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datepickerId != null" >
+        #{datepickerId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerFormColumnId != null" >
+        #{datepickerFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerCheckType != null" >
+        #{datepickerCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        #{datepickerCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerCheckFun != null" >
+        #{datepickerCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerInitFun != null" >
+        #{datepickerInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        #{datepickerValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerClickFun != null" >
+        #{datepickerClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDataFromType != null" >
+        #{datepickerDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        #{datepickerDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerFormat != null" >
+        #{datepickerFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerTimeformat != null" >
+        #{datepickerTimeformat,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowtime != null" >
+        #{datepickerShowtime,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        #{datepickerShowokbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        #{datepickerShowclearbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerAllowinput != null" >
+        #{datepickerAllowinput,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        #{datepickerShowtodaybutton,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        #{datepickerDrawdateFun,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepickerExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_DATEPICKER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_DATEPICKER
+    <set >
+      <if test="record.datepickerId != null" >
+        DATEPICKER_ID = #{record.datepickerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.datepickerFormColumnId != null" >
+        DATEPICKER_FORM_COLUMN_ID = #{record.datepickerFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE = #{record.datepickerCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF = #{record.datepickerCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN = #{record.datepickerCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN = #{record.datepickerInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN = #{record.datepickerValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN = #{record.datepickerClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE = #{record.datepickerDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE = #{record.datepickerDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerFormat != null" >
+        DATEPICKER_FORMAT = #{record.datepickerFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT = #{record.datepickerTimeformat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME = #{record.datepickerShowtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON = #{record.datepickerShowokbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON = #{record.datepickerShowclearbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT = #{record.datepickerAllowinput,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON = #{record.datepickerShowtodaybutton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN = #{record.datepickerDrawdateFun,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_DATEPICKER
+    set DATEPICKER_ID = #{record.datepickerId,jdbcType=DECIMAL},
+      DATEPICKER_FORM_COLUMN_ID = #{record.datepickerFormColumnId,jdbcType=DECIMAL},
+      DATEPICKER_CHECK_TYPE = #{record.datepickerCheckType,jdbcType=VARCHAR},
+      DATEPICKER_CHECK_SELF = #{record.datepickerCheckSelf,jdbcType=VARCHAR},
+      DATEPICKER_CHECK_FUN = #{record.datepickerCheckFun,jdbcType=VARCHAR},
+      DATEPICKER_INIT_FUN = #{record.datepickerInitFun,jdbcType=VARCHAR},
+      DATEPICKER_VALUECHANGE_FUN = #{record.datepickerValuechangeFun,jdbcType=VARCHAR},
+      DATEPICKER_CLICK_FUN = #{record.datepickerClickFun,jdbcType=VARCHAR},
+      DATEPICKER_DATA_FROM_TYPE = #{record.datepickerDataFromType,jdbcType=VARCHAR},
+      DATEPICKER_DATA_FROM_VALUE = #{record.datepickerDataFromValue,jdbcType=VARCHAR},
+      DATEPICKER_FORMAT = #{record.datepickerFormat,jdbcType=VARCHAR},
+      DATEPICKER_TIMEFORMAT = #{record.datepickerTimeformat,jdbcType=VARCHAR},
+      DATEPICKER_SHOWTIME = #{record.datepickerShowtime,jdbcType=VARCHAR},
+      DATEPICKER_SHOWOKBUTTON = #{record.datepickerShowokbutton,jdbcType=VARCHAR},
+      DATEPICKER_SHOWCLEARBUTTON = #{record.datepickerShowclearbutton,jdbcType=VARCHAR},
+      DATEPICKER_ALLOWINPUT = #{record.datepickerAllowinput,jdbcType=VARCHAR},
+      DATEPICKER_SHOWTODAYBUTTON = #{record.datepickerShowtodaybutton,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      DATEPICKER_DRAWDATE_FUN = #{record.datepickerDrawdateFun,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepicker" >
+    update SYS_FORM_DATEPICKER
+    <set >
+      <if test="datepickerFormColumnId != null" >
+        DATEPICKER_FORM_COLUMN_ID = #{datepickerFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="datepickerCheckType != null" >
+        DATEPICKER_CHECK_TYPE = #{datepickerCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerCheckSelf != null" >
+        DATEPICKER_CHECK_SELF = #{datepickerCheckSelf,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerCheckFun != null" >
+        DATEPICKER_CHECK_FUN = #{datepickerCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerInitFun != null" >
+        DATEPICKER_INIT_FUN = #{datepickerInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerValuechangeFun != null" >
+        DATEPICKER_VALUECHANGE_FUN = #{datepickerValuechangeFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerClickFun != null" >
+        DATEPICKER_CLICK_FUN = #{datepickerClickFun,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDataFromType != null" >
+        DATEPICKER_DATA_FROM_TYPE = #{datepickerDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDataFromValue != null" >
+        DATEPICKER_DATA_FROM_VALUE = #{datepickerDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerFormat != null" >
+        DATEPICKER_FORMAT = #{datepickerFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerTimeformat != null" >
+        DATEPICKER_TIMEFORMAT = #{datepickerTimeformat,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowtime != null" >
+        DATEPICKER_SHOWTIME = #{datepickerShowtime,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowokbutton != null" >
+        DATEPICKER_SHOWOKBUTTON = #{datepickerShowokbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowclearbutton != null" >
+        DATEPICKER_SHOWCLEARBUTTON = #{datepickerShowclearbutton,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerAllowinput != null" >
+        DATEPICKER_ALLOWINPUT = #{datepickerAllowinput,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerShowtodaybutton != null" >
+        DATEPICKER_SHOWTODAYBUTTON = #{datepickerShowtodaybutton,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="datepickerDrawdateFun != null" >
+        DATEPICKER_DRAWDATE_FUN = #{datepickerDrawdateFun,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormDatepicker" >
+    update SYS_FORM_DATEPICKER
+    set DATEPICKER_FORM_COLUMN_ID = #{datepickerFormColumnId,jdbcType=DECIMAL},
+      DATEPICKER_CHECK_TYPE = #{datepickerCheckType,jdbcType=VARCHAR},
+      DATEPICKER_CHECK_SELF = #{datepickerCheckSelf,jdbcType=VARCHAR},
+      DATEPICKER_CHECK_FUN = #{datepickerCheckFun,jdbcType=VARCHAR},
+      DATEPICKER_INIT_FUN = #{datepickerInitFun,jdbcType=VARCHAR},
+      DATEPICKER_VALUECHANGE_FUN = #{datepickerValuechangeFun,jdbcType=VARCHAR},
+      DATEPICKER_CLICK_FUN = #{datepickerClickFun,jdbcType=VARCHAR},
+      DATEPICKER_DATA_FROM_TYPE = #{datepickerDataFromType,jdbcType=VARCHAR},
+      DATEPICKER_DATA_FROM_VALUE = #{datepickerDataFromValue,jdbcType=VARCHAR},
+      DATEPICKER_FORMAT = #{datepickerFormat,jdbcType=VARCHAR},
+      DATEPICKER_TIMEFORMAT = #{datepickerTimeformat,jdbcType=VARCHAR},
+      DATEPICKER_SHOWTIME = #{datepickerShowtime,jdbcType=VARCHAR},
+      DATEPICKER_SHOWOKBUTTON = #{datepickerShowokbutton,jdbcType=VARCHAR},
+      DATEPICKER_SHOWCLEARBUTTON = #{datepickerShowclearbutton,jdbcType=VARCHAR},
+      DATEPICKER_ALLOWINPUT = #{datepickerAllowinput,jdbcType=VARCHAR},
+      DATEPICKER_SHOWTODAYBUTTON = #{datepickerShowtodaybutton,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      DATEPICKER_DRAWDATE_FUN = #{datepickerDrawdateFun,jdbcType=VARCHAR}
+    where DATEPICKER_ID = #{datepickerId,jdbcType=DECIMAL}
+  </update>
+</mapper>

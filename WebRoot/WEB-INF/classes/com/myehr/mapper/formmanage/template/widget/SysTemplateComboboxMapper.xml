@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.widget.SysTemplateComboboxMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.widget.SysTemplateCombobox" >
+    <id column="COMBOBOX_ID" property="comboboxId" jdbcType="DECIMAL" />
+    <result column="COMBOBOX_TEMPLATE_COLUMN_ID" property="comboboxTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="COMBOBOX_CHECK_TYPE" property="comboboxCheckType" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_CHECK_SELF" property="comboboxCheckSelf" jdbcType="NVARCHAR" />
+    <result column="COMBOBOXCHECK_FUN" property="comboboxcheckFun" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_INIT_FUN" property="comboboxInitFun" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_VALUECHANGE_FUN" property="comboboxValuechangeFun" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_CLICK_FUN" property="comboboxClickFun" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_DATA_FROM_TYPE" property="comboboxDataFromType" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_DATA_FROM_VALUE" property="comboboxDataFromValue" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_GUI_INIT_TYPE" property="comboboxGuiInitType" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_GUI_INIT_VALUE" property="comboboxGuiInitValue" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_TEXTFIELD" property="comboboxTextfield" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_VALUEFIELD" property="comboboxValuefield" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_DATAFIELD" property="comboboxDatafield" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_EMPTYTEXT" property="comboboxEmptytext" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_ALLOWINPUT" property="comboboxAllowinput" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_MULTISELECT" property="comboboxMultiselect" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_SHOWNULLITEM" property="comboboxShownullitem" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_NULLITEMTEXT" property="comboboxNullitemtext" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_GUI_INIT_EXCSQL_ID" property="comboboxGuiInitExcsqlId" jdbcType="DECIMAL" />
+    <result column="COMBOBOX_ISTEXT" property="comboboxIstext" jdbcType="NVARCHAR" />
+    <result column="combobox_is_search" property="comboboxIsSearch" jdbcType="NVARCHAR" />
+    <result column="COMBOBOX_DICT_SQL" property="comboboxDictSql" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    COMBOBOX_ID, COMBOBOX_TEMPLATE_COLUMN_ID, COMBOBOX_CHECK_TYPE, COMBOBOX_CHECK_SELF, 
+    COMBOBOXCHECK_FUN, COMBOBOX_INIT_FUN, COMBOBOX_VALUECHANGE_FUN, COMBOBOX_CLICK_FUN, 
+    COMBOBOX_DATA_FROM_TYPE, COMBOBOX_DATA_FROM_VALUE, COMBOBOX_GUI_INIT_TYPE, COMBOBOX_GUI_INIT_VALUE, 
+    COMBOBOX_TEXTFIELD, COMBOBOX_VALUEFIELD, COMBOBOX_DATAFIELD, COMBOBOX_EMPTYTEXT, 
+    COMBOBOX_ALLOWINPUT, COMBOBOX_MULTISELECT, COMBOBOX_SHOWNULLITEM, COMBOBOX_NULLITEMTEXT, 
+    OPERATOR_TIME, OPERATOR_NAME, COMBOBOX_GUI_INIT_EXCSQL_ID, COMBOBOX_ISTEXT, combobox_is_search, 
+    COMBOBOX_DICT_SQL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateComboboxExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_COMBOBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_COMBOBOX
+    where COMBOBOX_ID = #{comboboxId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_COMBOBOX
+    where COMBOBOX_ID = #{comboboxId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateComboboxExample" >
+    delete from SYS_TEMPLATE_COMBOBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateCombobox" useGeneratedKeys="true" keyProperty="comboboxId" keyColumn="COMBOBOX_ID"
+  >
+    insert into SYS_TEMPLATE_COMBOBOX ( COMBOBOX_TEMPLATE_COLUMN_ID, 
+      COMBOBOX_CHECK_TYPE, COMBOBOX_CHECK_SELF, 
+      COMBOBOXCHECK_FUN, COMBOBOX_INIT_FUN, COMBOBOX_VALUECHANGE_FUN, 
+      COMBOBOX_CLICK_FUN, COMBOBOX_DATA_FROM_TYPE, 
+      COMBOBOX_DATA_FROM_VALUE, COMBOBOX_GUI_INIT_TYPE, 
+      COMBOBOX_GUI_INIT_VALUE, COMBOBOX_TEXTFIELD, 
+      COMBOBOX_VALUEFIELD, COMBOBOX_DATAFIELD, 
+      COMBOBOX_EMPTYTEXT, COMBOBOX_ALLOWINPUT, 
+      COMBOBOX_MULTISELECT, COMBOBOX_SHOWNULLITEM, 
+      COMBOBOX_NULLITEMTEXT, OPERATOR_TIME, 
+      OPERATOR_NAME, COMBOBOX_GUI_INIT_EXCSQL_ID, 
+      COMBOBOX_ISTEXT, combobox_is_search, COMBOBOX_DICT_SQL
+      )
+    values ( #{comboboxTemplateColumnId,jdbcType=DECIMAL}, 
+      #{comboboxCheckType,jdbcType=NVARCHAR}, #{comboboxCheckSelf,jdbcType=NVARCHAR}, 
+      #{comboboxcheckFun,jdbcType=NVARCHAR}, #{comboboxInitFun,jdbcType=NVARCHAR}, #{comboboxValuechangeFun,jdbcType=NVARCHAR}, 
+      #{comboboxClickFun,jdbcType=NVARCHAR}, #{comboboxDataFromType,jdbcType=NVARCHAR}, 
+      #{comboboxDataFromValue,jdbcType=NVARCHAR}, #{comboboxGuiInitType,jdbcType=NVARCHAR}, 
+      #{comboboxGuiInitValue,jdbcType=NVARCHAR}, #{comboboxTextfield,jdbcType=NVARCHAR}, 
+      #{comboboxValuefield,jdbcType=NVARCHAR}, #{comboboxDatafield,jdbcType=NVARCHAR}, 
+      #{comboboxEmptytext,jdbcType=NVARCHAR}, #{comboboxAllowinput,jdbcType=NVARCHAR}, 
+      #{comboboxMultiselect,jdbcType=NVARCHAR}, #{comboboxShownullitem,jdbcType=NVARCHAR}, 
+      #{comboboxNullitemtext,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{comboboxGuiInitExcsqlId,jdbcType=DECIMAL}, 
+      #{comboboxIstext,jdbcType=NVARCHAR}, #{comboboxIsSearch,jdbcType=NVARCHAR}, #{comboboxDictSql,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateCombobox" >
+    insert into SYS_TEMPLATE_COMBOBOX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="comboboxId != null" >
+        COMBOBOX_ID,
+      </if>
+      <if test="comboboxTemplateColumnId != null" >
+        COMBOBOX_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="comboboxCheckType != null" >
+        COMBOBOX_CHECK_TYPE,
+      </if>
+      <if test="comboboxCheckSelf != null" >
+        COMBOBOX_CHECK_SELF,
+      </if>
+      <if test="comboboxcheckFun != null" >
+        COMBOBOXCHECK_FUN,
+      </if>
+      <if test="comboboxInitFun != null" >
+        COMBOBOX_INIT_FUN,
+      </if>
+      <if test="comboboxValuechangeFun != null" >
+        COMBOBOX_VALUECHANGE_FUN,
+      </if>
+      <if test="comboboxClickFun != null" >
+        COMBOBOX_CLICK_FUN,
+      </if>
+      <if test="comboboxDataFromType != null" >
+        COMBOBOX_DATA_FROM_TYPE,
+      </if>
+      <if test="comboboxDataFromValue != null" >
+        COMBOBOX_DATA_FROM_VALUE,
+      </if>
+      <if test="comboboxGuiInitType != null" >
+        COMBOBOX_GUI_INIT_TYPE,
+      </if>
+      <if test="comboboxGuiInitValue != null" >
+        COMBOBOX_GUI_INIT_VALUE,
+      </if>
+      <if test="comboboxTextfield != null" >
+        COMBOBOX_TEXTFIELD,
+      </if>
+      <if test="comboboxValuefield != null" >
+        COMBOBOX_VALUEFIELD,
+      </if>
+      <if test="comboboxDatafield != null" >
+        COMBOBOX_DATAFIELD,
+      </if>
+      <if test="comboboxEmptytext != null" >
+        COMBOBOX_EMPTYTEXT,
+      </if>
+      <if test="comboboxAllowinput != null" >
+        COMBOBOX_ALLOWINPUT,
+      </if>
+      <if test="comboboxMultiselect != null" >
+        COMBOBOX_MULTISELECT,
+      </if>
+      <if test="comboboxShownullitem != null" >
+        COMBOBOX_SHOWNULLITEM,
+      </if>
+      <if test="comboboxNullitemtext != null" >
+        COMBOBOX_NULLITEMTEXT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="comboboxGuiInitExcsqlId != null" >
+        COMBOBOX_GUI_INIT_EXCSQL_ID,
+      </if>
+      <if test="comboboxIstext != null" >
+        COMBOBOX_ISTEXT,
+      </if>
+      <if test="comboboxIsSearch != null" >
+        combobox_is_search,
+      </if>
+      <if test="comboboxDictSql != null" >
+        COMBOBOX_DICT_SQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="comboboxId != null" >
+        #{comboboxId,jdbcType=DECIMAL},
+      </if>
+      <if test="comboboxTemplateColumnId != null" >
+        #{comboboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="comboboxCheckType != null" >
+        #{comboboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxCheckSelf != null" >
+        #{comboboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxcheckFun != null" >
+        #{comboboxcheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxInitFun != null" >
+        #{comboboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxValuechangeFun != null" >
+        #{comboboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxClickFun != null" >
+        #{comboboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDataFromType != null" >
+        #{comboboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDataFromValue != null" >
+        #{comboboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitType != null" >
+        #{comboboxGuiInitType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitValue != null" >
+        #{comboboxGuiInitValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxTextfield != null" >
+        #{comboboxTextfield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxValuefield != null" >
+        #{comboboxValuefield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDatafield != null" >
+        #{comboboxDatafield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxEmptytext != null" >
+        #{comboboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxAllowinput != null" >
+        #{comboboxAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxMultiselect != null" >
+        #{comboboxMultiselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxShownullitem != null" >
+        #{comboboxShownullitem,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxNullitemtext != null" >
+        #{comboboxNullitemtext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitExcsqlId != null" >
+        #{comboboxGuiInitExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="comboboxIstext != null" >
+        #{comboboxIstext,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxIsSearch != null" >
+        #{comboboxIsSearch,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDictSql != null" >
+        #{comboboxDictSql,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateComboboxExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_COMBOBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_COMBOBOX
+    <set >
+      <if test="record.comboboxId != null" >
+        COMBOBOX_ID = #{record.comboboxId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comboboxTemplateColumnId != null" >
+        COMBOBOX_TEMPLATE_COLUMN_ID = #{record.comboboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comboboxCheckType != null" >
+        COMBOBOX_CHECK_TYPE = #{record.comboboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxCheckSelf != null" >
+        COMBOBOX_CHECK_SELF = #{record.comboboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxcheckFun != null" >
+        COMBOBOXCHECK_FUN = #{record.comboboxcheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxInitFun != null" >
+        COMBOBOX_INIT_FUN = #{record.comboboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxValuechangeFun != null" >
+        COMBOBOX_VALUECHANGE_FUN = #{record.comboboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxClickFun != null" >
+        COMBOBOX_CLICK_FUN = #{record.comboboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxDataFromType != null" >
+        COMBOBOX_DATA_FROM_TYPE = #{record.comboboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxDataFromValue != null" >
+        COMBOBOX_DATA_FROM_VALUE = #{record.comboboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxGuiInitType != null" >
+        COMBOBOX_GUI_INIT_TYPE = #{record.comboboxGuiInitType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxGuiInitValue != null" >
+        COMBOBOX_GUI_INIT_VALUE = #{record.comboboxGuiInitValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxTextfield != null" >
+        COMBOBOX_TEXTFIELD = #{record.comboboxTextfield,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxValuefield != null" >
+        COMBOBOX_VALUEFIELD = #{record.comboboxValuefield,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxDatafield != null" >
+        COMBOBOX_DATAFIELD = #{record.comboboxDatafield,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxEmptytext != null" >
+        COMBOBOX_EMPTYTEXT = #{record.comboboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxAllowinput != null" >
+        COMBOBOX_ALLOWINPUT = #{record.comboboxAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxMultiselect != null" >
+        COMBOBOX_MULTISELECT = #{record.comboboxMultiselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxShownullitem != null" >
+        COMBOBOX_SHOWNULLITEM = #{record.comboboxShownullitem,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxNullitemtext != null" >
+        COMBOBOX_NULLITEMTEXT = #{record.comboboxNullitemtext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxGuiInitExcsqlId != null" >
+        COMBOBOX_GUI_INIT_EXCSQL_ID = #{record.comboboxGuiInitExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comboboxIstext != null" >
+        COMBOBOX_ISTEXT = #{record.comboboxIstext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxIsSearch != null" >
+        combobox_is_search = #{record.comboboxIsSearch,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.comboboxDictSql != null" >
+        COMBOBOX_DICT_SQL = #{record.comboboxDictSql,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_COMBOBOX
+    set COMBOBOX_ID = #{record.comboboxId,jdbcType=DECIMAL},
+      COMBOBOX_TEMPLATE_COLUMN_ID = #{record.comboboxTemplateColumnId,jdbcType=DECIMAL},
+      COMBOBOX_CHECK_TYPE = #{record.comboboxCheckType,jdbcType=NVARCHAR},
+      COMBOBOX_CHECK_SELF = #{record.comboboxCheckSelf,jdbcType=NVARCHAR},
+      COMBOBOXCHECK_FUN = #{record.comboboxcheckFun,jdbcType=NVARCHAR},
+      COMBOBOX_INIT_FUN = #{record.comboboxInitFun,jdbcType=NVARCHAR},
+      COMBOBOX_VALUECHANGE_FUN = #{record.comboboxValuechangeFun,jdbcType=NVARCHAR},
+      COMBOBOX_CLICK_FUN = #{record.comboboxClickFun,jdbcType=NVARCHAR},
+      COMBOBOX_DATA_FROM_TYPE = #{record.comboboxDataFromType,jdbcType=NVARCHAR},
+      COMBOBOX_DATA_FROM_VALUE = #{record.comboboxDataFromValue,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_TYPE = #{record.comboboxGuiInitType,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_VALUE = #{record.comboboxGuiInitValue,jdbcType=NVARCHAR},
+      COMBOBOX_TEXTFIELD = #{record.comboboxTextfield,jdbcType=NVARCHAR},
+      COMBOBOX_VALUEFIELD = #{record.comboboxValuefield,jdbcType=NVARCHAR},
+      COMBOBOX_DATAFIELD = #{record.comboboxDatafield,jdbcType=NVARCHAR},
+      COMBOBOX_EMPTYTEXT = #{record.comboboxEmptytext,jdbcType=NVARCHAR},
+      COMBOBOX_ALLOWINPUT = #{record.comboboxAllowinput,jdbcType=NVARCHAR},
+      COMBOBOX_MULTISELECT = #{record.comboboxMultiselect,jdbcType=NVARCHAR},
+      COMBOBOX_SHOWNULLITEM = #{record.comboboxShownullitem,jdbcType=NVARCHAR},
+      COMBOBOX_NULLITEMTEXT = #{record.comboboxNullitemtext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_EXCSQL_ID = #{record.comboboxGuiInitExcsqlId,jdbcType=DECIMAL},
+      COMBOBOX_ISTEXT = #{record.comboboxIstext,jdbcType=NVARCHAR},
+      combobox_is_search = #{record.comboboxIsSearch,jdbcType=NVARCHAR},
+      COMBOBOX_DICT_SQL = #{record.comboboxDictSql,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateCombobox" >
+    update SYS_TEMPLATE_COMBOBOX
+    <set >
+      <if test="comboboxTemplateColumnId != null" >
+        COMBOBOX_TEMPLATE_COLUMN_ID = #{comboboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="comboboxCheckType != null" >
+        COMBOBOX_CHECK_TYPE = #{comboboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxCheckSelf != null" >
+        COMBOBOX_CHECK_SELF = #{comboboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxcheckFun != null" >
+        COMBOBOXCHECK_FUN = #{comboboxcheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxInitFun != null" >
+        COMBOBOX_INIT_FUN = #{comboboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxValuechangeFun != null" >
+        COMBOBOX_VALUECHANGE_FUN = #{comboboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxClickFun != null" >
+        COMBOBOX_CLICK_FUN = #{comboboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDataFromType != null" >
+        COMBOBOX_DATA_FROM_TYPE = #{comboboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDataFromValue != null" >
+        COMBOBOX_DATA_FROM_VALUE = #{comboboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitType != null" >
+        COMBOBOX_GUI_INIT_TYPE = #{comboboxGuiInitType,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitValue != null" >
+        COMBOBOX_GUI_INIT_VALUE = #{comboboxGuiInitValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxTextfield != null" >
+        COMBOBOX_TEXTFIELD = #{comboboxTextfield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxValuefield != null" >
+        COMBOBOX_VALUEFIELD = #{comboboxValuefield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDatafield != null" >
+        COMBOBOX_DATAFIELD = #{comboboxDatafield,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxEmptytext != null" >
+        COMBOBOX_EMPTYTEXT = #{comboboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxAllowinput != null" >
+        COMBOBOX_ALLOWINPUT = #{comboboxAllowinput,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxMultiselect != null" >
+        COMBOBOX_MULTISELECT = #{comboboxMultiselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxShownullitem != null" >
+        COMBOBOX_SHOWNULLITEM = #{comboboxShownullitem,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxNullitemtext != null" >
+        COMBOBOX_NULLITEMTEXT = #{comboboxNullitemtext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxGuiInitExcsqlId != null" >
+        COMBOBOX_GUI_INIT_EXCSQL_ID = #{comboboxGuiInitExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="comboboxIstext != null" >
+        COMBOBOX_ISTEXT = #{comboboxIstext,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxIsSearch != null" >
+        combobox_is_search = #{comboboxIsSearch,jdbcType=NVARCHAR},
+      </if>
+      <if test="comboboxDictSql != null" >
+        COMBOBOX_DICT_SQL = #{comboboxDictSql,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where COMBOBOX_ID = #{comboboxId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateCombobox" >
+    update SYS_TEMPLATE_COMBOBOX
+    set COMBOBOX_TEMPLATE_COLUMN_ID = #{comboboxTemplateColumnId,jdbcType=DECIMAL},
+      COMBOBOX_CHECK_TYPE = #{comboboxCheckType,jdbcType=NVARCHAR},
+      COMBOBOX_CHECK_SELF = #{comboboxCheckSelf,jdbcType=NVARCHAR},
+      COMBOBOXCHECK_FUN = #{comboboxcheckFun,jdbcType=NVARCHAR},
+      COMBOBOX_INIT_FUN = #{comboboxInitFun,jdbcType=NVARCHAR},
+      COMBOBOX_VALUECHANGE_FUN = #{comboboxValuechangeFun,jdbcType=NVARCHAR},
+      COMBOBOX_CLICK_FUN = #{comboboxClickFun,jdbcType=NVARCHAR},
+      COMBOBOX_DATA_FROM_TYPE = #{comboboxDataFromType,jdbcType=NVARCHAR},
+      COMBOBOX_DATA_FROM_VALUE = #{comboboxDataFromValue,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_TYPE = #{comboboxGuiInitType,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_VALUE = #{comboboxGuiInitValue,jdbcType=NVARCHAR},
+      COMBOBOX_TEXTFIELD = #{comboboxTextfield,jdbcType=NVARCHAR},
+      COMBOBOX_VALUEFIELD = #{comboboxValuefield,jdbcType=NVARCHAR},
+      COMBOBOX_DATAFIELD = #{comboboxDatafield,jdbcType=NVARCHAR},
+      COMBOBOX_EMPTYTEXT = #{comboboxEmptytext,jdbcType=NVARCHAR},
+      COMBOBOX_ALLOWINPUT = #{comboboxAllowinput,jdbcType=NVARCHAR},
+      COMBOBOX_MULTISELECT = #{comboboxMultiselect,jdbcType=NVARCHAR},
+      COMBOBOX_SHOWNULLITEM = #{comboboxShownullitem,jdbcType=NVARCHAR},
+      COMBOBOX_NULLITEMTEXT = #{comboboxNullitemtext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      COMBOBOX_GUI_INIT_EXCSQL_ID = #{comboboxGuiInitExcsqlId,jdbcType=DECIMAL},
+      COMBOBOX_ISTEXT = #{comboboxIstext,jdbcType=NVARCHAR},
+      combobox_is_search = #{comboboxIsSearch,jdbcType=NVARCHAR},
+      COMBOBOX_DICT_SQL = #{comboboxDictSql,jdbcType=NVARCHAR}
+    where COMBOBOX_ID = #{comboboxId,jdbcType=DECIMAL}
+  </update>
+</mapper>

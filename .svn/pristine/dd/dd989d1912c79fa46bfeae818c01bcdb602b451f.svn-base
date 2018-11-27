@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.calendar.KbasecodeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.calendar.Kbasecode" >
+    <id column="KBC_ID" property="kbcId" jdbcType="NUMERIC" />
+    <result column="Item_Name" property="itemName" jdbcType="CHAR" />
+    <result column="Type_Code" property="typeCode" jdbcType="VARCHAR" />
+    <result column="Item_Code" property="itemCode" jdbcType="VARCHAR" />
+    <result column="Item_Alias" property="itemAlias" jdbcType="NUMERIC" />
+    <result column="PinYin_Code" property="pinyinCode" jdbcType="INTEGER" />
+    <result column="BaseKind" property="basekind" jdbcType="INTEGER" />
+    <result column="KBaseCode01" property="kbasecode01" jdbcType="VARCHAR" />
+    <result column="Parent_Code" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KBC_ID, Item_Name, Type_Code, Item_Code, Item_Alias, PinYin_Code, BaseKind, KBaseCode01, 
+    Parent_Code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.KbasecodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from KBaseCode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from KBaseCode
+    where KBC_ID = #{kbcId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from KBaseCode
+    where KBC_ID = #{kbcId,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.calendar.KbasecodeExample" >
+    delete from KBaseCode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.calendar.Kbasecode" >
+    insert into KBaseCode (Item_Name, Type_Code, 
+      Item_Code, Item_Alias, PinYin_Code, 
+      BaseKind, KBaseCode01, Parent_Code
+      )
+    values ( #{itemName,jdbcType=CHAR}, #{typeCode,jdbcType=VARCHAR}, 
+      #{itemCode,jdbcType=VARCHAR}, #{itemAlias,jdbcType=NUMERIC}, #{pinyinCode,jdbcType=INTEGER}, 
+      #{basekind,jdbcType=INTEGER}, #{kbasecode01,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.calendar.Kbasecode" >
+    insert into KBaseCode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kbcId != null" >
+        KBC_ID,
+      </if>
+      <if test="itemName != null" >
+        Item_Name,
+      </if>
+      <if test="typeCode != null" >
+        Type_Code,
+      </if>
+      <if test="itemCode != null" >
+        Item_Code,
+      </if>
+      <if test="itemAlias != null" >
+        Item_Alias,
+      </if>
+      <if test="pinyinCode != null" >
+        PinYin_Code,
+      </if>
+      <if test="basekind != null" >
+        BaseKind,
+      </if>
+      <if test="kbasecode01 != null" >
+        KBaseCode01,
+      </if>
+      <if test="parentCode != null" >
+        Parent_Code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kbcId != null" >
+        #{kbcId,jdbcType=NUMERIC},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=CHAR},
+      </if>
+      <if test="typeCode != null" >
+        #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCode != null" >
+        #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemAlias != null" >
+        #{itemAlias,jdbcType=NUMERIC},
+      </if>
+      <if test="pinyinCode != null" >
+        #{pinyinCode,jdbcType=INTEGER},
+      </if>
+      <if test="basekind != null" >
+        #{basekind,jdbcType=INTEGER},
+      </if>
+      <if test="kbasecode01 != null" >
+        #{kbasecode01,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.calendar.KbasecodeExample" resultType="java.lang.Integer" >
+    select count(*) from KBaseCode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update KBaseCode
+    <set >
+      <if test="record.kbcId != null" >
+        KBC_ID = #{record.kbcId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.itemName != null" >
+        Item_Name = #{record.itemName,jdbcType=CHAR},
+      </if>
+      <if test="record.typeCode != null" >
+        Type_Code = #{record.typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemCode != null" >
+        Item_Code = #{record.itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemAlias != null" >
+        Item_Alias = #{record.itemAlias,jdbcType=NUMERIC},
+      </if>
+      <if test="record.pinyinCode != null" >
+        PinYin_Code = #{record.pinyinCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.basekind != null" >
+        BaseKind = #{record.basekind,jdbcType=INTEGER},
+      </if>
+      <if test="record.kbasecode01 != null" >
+        KBaseCode01 = #{record.kbasecode01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCode != null" >
+        Parent_Code = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update KBaseCode
+    set KBC_ID = #{record.kbcId,jdbcType=NUMERIC},
+      Item_Name = #{record.itemName,jdbcType=CHAR},
+      Type_Code = #{record.typeCode,jdbcType=VARCHAR},
+      Item_Code = #{record.itemCode,jdbcType=VARCHAR},
+      Item_Alias = #{record.itemAlias,jdbcType=NUMERIC},
+      PinYin_Code = #{record.pinyinCode,jdbcType=INTEGER},
+      BaseKind = #{record.basekind,jdbcType=INTEGER},
+      KBaseCode01 = #{record.kbasecode01,jdbcType=VARCHAR},
+      Parent_Code = #{record.parentCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.calendar.Kbasecode" >
+    update KBaseCode
+    <set >
+      <if test="itemName != null" >
+        Item_Name = #{itemName,jdbcType=CHAR},
+      </if>
+      <if test="typeCode != null" >
+        Type_Code = #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemCode != null" >
+        Item_Code = #{itemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemAlias != null" >
+        Item_Alias = #{itemAlias,jdbcType=NUMERIC},
+      </if>
+      <if test="pinyinCode != null" >
+        PinYin_Code = #{pinyinCode,jdbcType=INTEGER},
+      </if>
+      <if test="basekind != null" >
+        BaseKind = #{basekind,jdbcType=INTEGER},
+      </if>
+      <if test="kbasecode01 != null" >
+        KBaseCode01 = #{kbasecode01,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        Parent_Code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where KBC_ID = #{kbcId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.calendar.Kbasecode" >
+    update KBaseCode
+    set Item_Name = #{itemName,jdbcType=CHAR},
+      Type_Code = #{typeCode,jdbcType=VARCHAR},
+      Item_Code = #{itemCode,jdbcType=VARCHAR},
+      Item_Alias = #{itemAlias,jdbcType=NUMERIC},
+      PinYin_Code = #{pinyinCode,jdbcType=INTEGER},
+      BaseKind = #{basekind,jdbcType=INTEGER},
+      KBaseCode01 = #{kbasecode01,jdbcType=VARCHAR},
+      Parent_Code = #{parentCode,jdbcType=VARCHAR}
+    where KBC_ID = #{kbcId,jdbcType=NUMERIC}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysFlowMenu.SysFlowMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysFlowMenu.SysFlowMenu" >
+    <id column="FLOW_MENU_ID" property="flowMenuId" jdbcType="INTEGER" />
+    <result column="FLOW_MENU_NAME" property="flowMenuName" jdbcType="VARCHAR" />
+    <result column="FLOW_MENU_DEF_ID" property="flowMenuDefId" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FLOW_MENU_SORT" property="flowMenuSort" jdbcType="REAL" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="VARCHAR" />
+    <result column="FLOW_MENU_URL" property="flowMenuUrl" jdbcType="VARCHAR" />
+    <result column="FLOW_OPERATOR_NAME" property="flowOperatorName" jdbcType="VARCHAR" />
+    <result column="FLOW_MENU_PT_URL" property="flowMenuPtUrl" jdbcType="VARCHAR" />
+    <result column="FLOW_MENU_HD_URL" property="flowMenuHdUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FLOW_MENU_ID, FLOW_MENU_NAME, FLOW_MENU_DEF_ID, OPERATOR_NAME, OPERATOR_TIME, FLOW_MENU_SORT, 
+    MENU_TYPE, FLOW_MENU_URL, FLOW_OPERATOR_NAME, FLOW_MENU_PT_URL, FLOW_MENU_HD_URL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_flow_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_flow_menu
+    where FLOW_MENU_ID = #{flowMenuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_flow_menu
+    where FLOW_MENU_ID = #{flowMenuId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenuExample" >
+    delete from sys_flow_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenu" >
+    insert into sys_flow_menu (FLOW_MENU_ID, FLOW_MENU_NAME, FLOW_MENU_DEF_ID, 
+      OPERATOR_NAME, OPERATOR_TIME, FLOW_MENU_SORT, 
+      MENU_TYPE, FLOW_MENU_URL, FLOW_OPERATOR_NAME, 
+      FLOW_MENU_PT_URL, FLOW_MENU_HD_URL)
+    values (#{flowMenuId,jdbcType=INTEGER}, #{flowMenuName,jdbcType=VARCHAR}, #{flowMenuDefId,jdbcType=VARCHAR}, 
+      #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, #{flowMenuSort,jdbcType=REAL}, 
+      #{menuType,jdbcType=VARCHAR}, #{flowMenuUrl,jdbcType=VARCHAR}, #{flowOperatorName,jdbcType=VARCHAR}, 
+      #{flowMenuPtUrl,jdbcType=VARCHAR}, #{flowMenuHdUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenu" >
+    insert into sys_flow_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="flowMenuId != null" >
+        FLOW_MENU_ID,
+      </if>
+      <if test="flowMenuName != null" >
+        FLOW_MENU_NAME,
+      </if>
+      <if test="flowMenuDefId != null" >
+        FLOW_MENU_DEF_ID,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="flowMenuSort != null" >
+        FLOW_MENU_SORT,
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE,
+      </if>
+      <if test="flowMenuUrl != null" >
+        FLOW_MENU_URL,
+      </if>
+      <if test="flowOperatorName != null" >
+        FLOW_OPERATOR_NAME,
+      </if>
+      <if test="flowMenuPtUrl != null" >
+        FLOW_MENU_PT_URL,
+      </if>
+      <if test="flowMenuHdUrl != null" >
+        FLOW_MENU_HD_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="flowMenuId != null" >
+        #{flowMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="flowMenuName != null" >
+        #{flowMenuName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuDefId != null" >
+        #{flowMenuDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flowMenuSort != null" >
+        #{flowMenuSort,jdbcType=REAL},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuUrl != null" >
+        #{flowMenuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="flowOperatorName != null" >
+        #{flowOperatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuPtUrl != null" >
+        #{flowMenuPtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuHdUrl != null" >
+        #{flowMenuHdUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenuExample" resultType="java.lang.Integer" >
+    select count(*) from sys_flow_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_flow_menu
+    <set >
+      <if test="record.flowMenuId != null" >
+        FLOW_MENU_ID = #{record.flowMenuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowMenuName != null" >
+        FLOW_MENU_NAME = #{record.flowMenuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowMenuDefId != null" >
+        FLOW_MENU_DEF_ID = #{record.flowMenuDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.flowMenuSort != null" >
+        FLOW_MENU_SORT = #{record.flowMenuSort,jdbcType=REAL},
+      </if>
+      <if test="record.menuType != null" >
+        MENU_TYPE = #{record.menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowMenuUrl != null" >
+        FLOW_MENU_URL = #{record.flowMenuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowOperatorName != null" >
+        FLOW_OPERATOR_NAME = #{record.flowOperatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowMenuPtUrl != null" >
+        FLOW_MENU_PT_URL = #{record.flowMenuPtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowMenuHdUrl != null" >
+        FLOW_MENU_HD_URL = #{record.flowMenuHdUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_flow_menu
+    set FLOW_MENU_ID = #{record.flowMenuId,jdbcType=INTEGER},
+      FLOW_MENU_NAME = #{record.flowMenuName,jdbcType=VARCHAR},
+      FLOW_MENU_DEF_ID = #{record.flowMenuDefId,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FLOW_MENU_SORT = #{record.flowMenuSort,jdbcType=REAL},
+      MENU_TYPE = #{record.menuType,jdbcType=VARCHAR},
+      FLOW_MENU_URL = #{record.flowMenuUrl,jdbcType=VARCHAR},
+      FLOW_OPERATOR_NAME = #{record.flowOperatorName,jdbcType=VARCHAR},
+      FLOW_MENU_PT_URL = #{record.flowMenuPtUrl,jdbcType=VARCHAR},
+      FLOW_MENU_HD_URL = #{record.flowMenuHdUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenu" >
+    update sys_flow_menu
+    <set >
+      <if test="flowMenuName != null" >
+        FLOW_MENU_NAME = #{flowMenuName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuDefId != null" >
+        FLOW_MENU_DEF_ID = #{flowMenuDefId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flowMenuSort != null" >
+        FLOW_MENU_SORT = #{flowMenuSort,jdbcType=REAL},
+      </if>
+      <if test="menuType != null" >
+        MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuUrl != null" >
+        FLOW_MENU_URL = #{flowMenuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="flowOperatorName != null" >
+        FLOW_OPERATOR_NAME = #{flowOperatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuPtUrl != null" >
+        FLOW_MENU_PT_URL = #{flowMenuPtUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="flowMenuHdUrl != null" >
+        FLOW_MENU_HD_URL = #{flowMenuHdUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FLOW_MENU_ID = #{flowMenuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysFlowMenu.SysFlowMenu" >
+    update sys_flow_menu
+    set FLOW_MENU_NAME = #{flowMenuName,jdbcType=VARCHAR},
+      FLOW_MENU_DEF_ID = #{flowMenuDefId,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FLOW_MENU_SORT = #{flowMenuSort,jdbcType=REAL},
+      MENU_TYPE = #{menuType,jdbcType=VARCHAR},
+      FLOW_MENU_URL = #{flowMenuUrl,jdbcType=VARCHAR},
+      FLOW_OPERATOR_NAME = #{flowOperatorName,jdbcType=VARCHAR},
+      FLOW_MENU_PT_URL = #{flowMenuPtUrl,jdbcType=VARCHAR},
+      FLOW_MENU_HD_URL = #{flowMenuHdUrl,jdbcType=VARCHAR}
+    where FLOW_MENU_ID = #{flowMenuId,jdbcType=INTEGER}
+  </update>
+</mapper>

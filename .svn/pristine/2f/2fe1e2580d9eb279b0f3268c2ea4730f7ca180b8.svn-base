@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.fileinput.SysFileCheckedPointMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.fileinput.SysFileCheckedPoint" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CHECKED_ID" property="checkedId" jdbcType="DECIMAL" />
+    <result column="CHECKED_REQUIRE" property="checkedRequire" jdbcType="NVARCHAR" />
+    <result column="IS_ACHIEVE" property="isAchieve" jdbcType="NVARCHAR" />
+    <result column="CHECKED_CONTENT" property="checkedContent" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CHECKED_ID, CHECKED_REQUIRE, IS_ACHIEVE, CHECKED_CONTENT, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPointExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FILE_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FILE_CHECKED_POINT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FILE_CHECKED_POINT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPointExample" >
+    delete from SYS_FILE_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPoint" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_FILE_CHECKED_POINT (CHECKED_ID, CHECKED_REQUIRE, 
+      IS_ACHIEVE, CHECKED_CONTENT, OPERATOR_TIME, 
+      OPERATOR_NAME)
+    values (#{checkedId,jdbcType=DECIMAL}, #{checkedRequire,jdbcType=NVARCHAR}, 
+      #{isAchieve,jdbcType=NVARCHAR}, #{checkedContent,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPoint" >
+    insert into SYS_FILE_CHECKED_POINT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="checkedId != null" >
+        CHECKED_ID,
+      </if>
+      <if test="checkedRequire != null" >
+        CHECKED_REQUIRE,
+      </if>
+      <if test="isAchieve != null" >
+        IS_ACHIEVE,
+      </if>
+      <if test="checkedContent != null" >
+        CHECKED_CONTENT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedId != null" >
+        #{checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedRequire != null" >
+        #{checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="isAchieve != null" >
+        #{isAchieve,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkedContent != null" >
+        #{checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPointExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FILE_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FILE_CHECKED_POINT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedId != null" >
+        CHECKED_ID = #{record.checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedRequire != null" >
+        CHECKED_REQUIRE = #{record.checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAchieve != null" >
+        IS_ACHIEVE = #{record.isAchieve,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkedContent != null" >
+        CHECKED_CONTENT = #{record.checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FILE_CHECKED_POINT
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CHECKED_ID = #{record.checkedId,jdbcType=DECIMAL},
+      CHECKED_REQUIRE = #{record.checkedRequire,jdbcType=NVARCHAR},
+      IS_ACHIEVE = #{record.isAchieve,jdbcType=NVARCHAR},
+      CHECKED_CONTENT = #{record.checkedContent,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPoint" >
+    update SYS_FILE_CHECKED_POINT
+    <set >
+      <if test="checkedId != null" >
+        CHECKED_ID = #{checkedId,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedRequire != null" >
+        CHECKED_REQUIRE = #{checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="isAchieve != null" >
+        IS_ACHIEVE = #{isAchieve,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkedContent != null" >
+        CHECKED_CONTENT = #{checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.fileinput.SysFileCheckedPoint" >
+    update SYS_FILE_CHECKED_POINT
+    set CHECKED_ID = #{checkedId,jdbcType=DECIMAL},
+      CHECKED_REQUIRE = #{checkedRequire,jdbcType=NVARCHAR},
+      IS_ACHIEVE = #{isAchieve,jdbcType=NVARCHAR},
+      CHECKED_CONTENT = #{checkedContent,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

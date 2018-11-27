@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.gantt.PmPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.gantt.PmPlan" >
+    <id column="PROJECTSCHEDULE_ID" property="projectscheduleId" jdbcType="INTEGER" />
+    <result column="PS_PRO_ID" property="psProId" jdbcType="INTEGER" />
+    <result column="PS_PRO_STAGE" property="psProStage" jdbcType="NVARCHAR" />
+    <result column="P_ID" property="pId" jdbcType="INTEGER" />
+    <result column="PS_RESOURCES" property="psResources" jdbcType="NVARCHAR" />
+    <result column="PS_JOBCONTENT" property="psJobcontent" jdbcType="NVARCHAR" />
+    <result column="PS_IMPLE" property="psImple" jdbcType="NVARCHAR" />
+    <result column="PS_USER" property="psUser" jdbcType="NVARCHAR" />
+    <result column="PS_STARTDATE" property="psStartdate" jdbcType="TIMESTAMP" />
+    <result column="PS_ENDDATE" property="psEnddate" jdbcType="TIMESTAMP" />
+    <result column="PS_WORKTIME" property="psWorktime" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PROJECTSCHEDULE_ID, PS_PRO_ID, PS_PRO_STAGE, P_ID, PS_RESOURCES, PS_JOBCONTENT, PS_IMPLE, 
+    PS_USER, PS_STARTDATE, PS_ENDDATE, PS_WORKTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.gantt.PmPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PM_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from PM_PLAN
+    where PROJECTSCHEDULE_ID = #{projectscheduleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from PM_PLAN
+    where PROJECTSCHEDULE_ID = #{projectscheduleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.gantt.PmPlanExample" >
+    delete from PM_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.gantt.PmPlan" >
+    insert into PM_PLAN (PS_PRO_ID, PS_PRO_STAGE, 
+      P_ID, PS_RESOURCES, PS_JOBCONTENT, 
+      PS_IMPLE, PS_USER, PS_STARTDATE, 
+      PS_ENDDATE, PS_WORKTIME)
+    values (#{psProId,jdbcType=INTEGER}, #{psProStage,jdbcType=NVARCHAR}, 
+      #{pId,jdbcType=INTEGER}, #{psResources,jdbcType=NVARCHAR}, #{psJobcontent,jdbcType=NVARCHAR}, 
+      #{psImple,jdbcType=NVARCHAR}, #{psUser,jdbcType=NVARCHAR}, #{psStartdate,jdbcType=TIMESTAMP}, 
+      #{psEnddate,jdbcType=TIMESTAMP}, #{psWorktime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.gantt.PmPlan" >
+    insert into PM_PLAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectscheduleId != null" >
+        PROJECTSCHEDULE_ID,
+      </if>
+      <if test="psProId != null" >
+        PS_PRO_ID,
+      </if>
+      <if test="psProStage != null" >
+        PS_PRO_STAGE,
+      </if>
+      <if test="pId != null" >
+        P_ID,
+      </if>
+      <if test="psResources != null" >
+        PS_RESOURCES,
+      </if>
+      <if test="psJobcontent != null" >
+        PS_JOBCONTENT,
+      </if>
+      <if test="psImple != null" >
+        PS_IMPLE,
+      </if>
+      <if test="psUser != null" >
+        PS_USER,
+      </if>
+      <if test="psStartdate != null" >
+        PS_STARTDATE,
+      </if>
+      <if test="psEnddate != null" >
+        PS_ENDDATE,
+      </if>
+      <if test="psWorktime != null" >
+        PS_WORKTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectscheduleId != null" >
+        #{projectscheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="psProId != null" >
+        #{psProId,jdbcType=INTEGER},
+      </if>
+      <if test="psProStage != null" >
+        #{psProStage,jdbcType=NVARCHAR},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="psResources != null" >
+        #{psResources,jdbcType=NVARCHAR},
+      </if>
+      <if test="psJobcontent != null" >
+        #{psJobcontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="psImple != null" >
+        #{psImple,jdbcType=NVARCHAR},
+      </if>
+      <if test="psUser != null" >
+        #{psUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="psStartdate != null" >
+        #{psStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psEnddate != null" >
+        #{psEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psWorktime != null" >
+        #{psWorktime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.gantt.PmPlanExample" resultType="java.lang.Integer" >
+    select count(*) from PM_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update PM_PLAN
+    <set >
+      <if test="record.projectscheduleId != null" >
+        PROJECTSCHEDULE_ID = #{record.projectscheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.psProId != null" >
+        PS_PRO_ID = #{record.psProId,jdbcType=INTEGER},
+      </if>
+      <if test="record.psProStage != null" >
+        PS_PRO_STAGE = #{record.psProStage,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        P_ID = #{record.pId,jdbcType=INTEGER},
+      </if>
+      <if test="record.psResources != null" >
+        PS_RESOURCES = #{record.psResources,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.psJobcontent != null" >
+        PS_JOBCONTENT = #{record.psJobcontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.psImple != null" >
+        PS_IMPLE = #{record.psImple,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.psUser != null" >
+        PS_USER = #{record.psUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.psStartdate != null" >
+        PS_STARTDATE = #{record.psStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.psEnddate != null" >
+        PS_ENDDATE = #{record.psEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.psWorktime != null" >
+        PS_WORKTIME = #{record.psWorktime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update PM_PLAN
+    set PROJECTSCHEDULE_ID = #{record.projectscheduleId,jdbcType=INTEGER},
+      PS_PRO_ID = #{record.psProId,jdbcType=INTEGER},
+      PS_PRO_STAGE = #{record.psProStage,jdbcType=NVARCHAR},
+      P_ID = #{record.pId,jdbcType=INTEGER},
+      PS_RESOURCES = #{record.psResources,jdbcType=NVARCHAR},
+      PS_JOBCONTENT = #{record.psJobcontent,jdbcType=NVARCHAR},
+      PS_IMPLE = #{record.psImple,jdbcType=NVARCHAR},
+      PS_USER = #{record.psUser,jdbcType=NVARCHAR},
+      PS_STARTDATE = #{record.psStartdate,jdbcType=TIMESTAMP},
+      PS_ENDDATE = #{record.psEnddate,jdbcType=TIMESTAMP},
+      PS_WORKTIME = #{record.psWorktime,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.gantt.PmPlan" >
+    update PM_PLAN
+    <set >
+      <if test="psProId != null" >
+        PS_PRO_ID = #{psProId,jdbcType=INTEGER},
+      </if>
+      <if test="psProStage != null" >
+        PS_PRO_STAGE = #{psProStage,jdbcType=NVARCHAR},
+      </if>
+      <if test="pId != null" >
+        P_ID = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="psResources != null" >
+        PS_RESOURCES = #{psResources,jdbcType=NVARCHAR},
+      </if>
+      <if test="psJobcontent != null" >
+        PS_JOBCONTENT = #{psJobcontent,jdbcType=NVARCHAR},
+      </if>
+      <if test="psImple != null" >
+        PS_IMPLE = #{psImple,jdbcType=NVARCHAR},
+      </if>
+      <if test="psUser != null" >
+        PS_USER = #{psUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="psStartdate != null" >
+        PS_STARTDATE = #{psStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psEnddate != null" >
+        PS_ENDDATE = #{psEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psWorktime != null" >
+        PS_WORKTIME = #{psWorktime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PROJECTSCHEDULE_ID = #{projectscheduleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.gantt.PmPlan" >
+    update PM_PLAN
+    set PS_PRO_ID = #{psProId,jdbcType=INTEGER},
+      PS_PRO_STAGE = #{psProStage,jdbcType=NVARCHAR},
+      P_ID = #{pId,jdbcType=INTEGER},
+      PS_RESOURCES = #{psResources,jdbcType=NVARCHAR},
+      PS_JOBCONTENT = #{psJobcontent,jdbcType=NVARCHAR},
+      PS_IMPLE = #{psImple,jdbcType=NVARCHAR},
+      PS_USER = #{psUser,jdbcType=NVARCHAR},
+      PS_STARTDATE = #{psStartdate,jdbcType=TIMESTAMP},
+      PS_ENDDATE = #{psEnddate,jdbcType=TIMESTAMP},
+      PS_WORKTIME = #{psWorktime,jdbcType=INTEGER}
+    where PROJECTSCHEDULE_ID = #{projectscheduleId,jdbcType=INTEGER}
+  </update>
+</mapper>

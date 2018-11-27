@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.SysTemplateColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.SysTemplateColumn" >
+    <id column="TEMPLATE_COLUMN_ID" property="templateColumnId" jdbcType="INTEGER" />
+    <result column="IS_SHOW_PC_LIST" property="isShowPcList" jdbcType="NVARCHAR" />
+    <result column="IS_SHOW_PC_CARD" property="isShowPcCard" jdbcType="NVARCHAR" />
+    <result column="IS_SHOW_APP_LIST" property="isShowAppList" jdbcType="NVARCHAR" />
+    <result column="IS_SHOW_APP_CARD" property="isShowAppCard" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_EXPRESSION" property="templateColumnExpression" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_TABLE_OTHER" property="templateColumnTableOther" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_OTHER_NAME" property="templateColumnOtherName" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_ENTITY_ID" property="templateColumnEntityId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_COLUMN_ID" property="templateColumnColumnId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_ENTITY_TABLENAME" property="templateEntityTablename" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_FIELD_TABLENAME" property="templateFieldTablename" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_US_NAME" property="templateColumnUsName" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_LABEL" property="templateColumnLabel" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_LABEL_WIDTH" property="templateColumnLabelWidth" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_GUI_TYPE" property="templateColumnGuiType" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_WIDTH" property="templateColumnWidth" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_ALIGN" property="templateColumnAlign" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_HEIGHT" property="templateColumnHeight" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_SORT" property="templateColumnSort" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_SHOW_TYPE" property="templateColumnShowType" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_TEMPLATE_ID" property="templateTemplateId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_REQUIRED" property="templateColumnRequired" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_COL_SPAN" property="templateColumnColSpan" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_COLUMN_TOTAL" property="templateColumnTotal" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_MAX_LENGTH" property="templateColumnMaxLength" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_COLUMN_MIN_LENGTH" property="templateColumnMinLength" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_COLUMN_COLOR" property="templateColumnColor" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_COLUMN_COLOR_CONDITION" property="templateColumnColorCondition" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_COLUMN_GROUP_ID" property="templateColumnGroupId" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEMPLATE_COLUMN_ID, IS_SHOW_PC_LIST, IS_SHOW_PC_CARD, IS_SHOW_APP_LIST, IS_SHOW_APP_CARD, 
+    TEMPLATE_COLUMN_EXPRESSION, TEMPLATE_COLUMN_TABLE_OTHER, TEMPLATE_COLUMN_OTHER_NAME, 
+    TEMPLATE_COLUMN_ENTITY_ID, TEMPLATE_COLUMN_COLUMN_ID, TEMPLATE_ENTITY_TABLENAME, 
+    TEMPLATE_FIELD_TABLENAME, TEMPLATE_COLUMN_US_NAME, TEMPLATE_COLUMN_LABEL, TEMPLATE_COLUMN_LABEL_WIDTH, 
+    TEMPLATE_COLUMN_GUI_TYPE, TEMPLATE_COLUMN_WIDTH, TEMPLATE_COLUMN_ALIGN, TEMPLATE_COLUMN_HEIGHT, 
+    TEMPLATE_COLUMN_SORT, TEMPLATE_COLUMN_SHOW_TYPE, TEMPLATE_TEMPLATE_ID, TEMPLATE_COLUMN_REQUIRED, 
+    TEMPLATE_COLUMN_COL_SPAN, TEMPLATE_COLUMN_TOTAL, TEMPLATE_COLUMN_MAX_LENGTH, TEMPLATE_COLUMN_MIN_LENGTH, 
+    TEMPLATE_COLUMN_COLOR, TEMPLATE_COLUMN_COLOR_CONDITION, TEMPLATE_COLUMN_GROUP_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_COLUMN
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_TEMPLATE_COLUMN
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumnExample" >
+    delete from SYS_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumn" useGeneratedKeys="true" keyProperty="templateColumnId" keyColumn="TEMPLATE_COLUMN_ID">
+    insert into SYS_TEMPLATE_COLUMN ( IS_SHOW_PC_LIST, 
+      IS_SHOW_PC_CARD, IS_SHOW_APP_LIST, IS_SHOW_APP_CARD, 
+      TEMPLATE_COLUMN_EXPRESSION, TEMPLATE_COLUMN_TABLE_OTHER, 
+      TEMPLATE_COLUMN_OTHER_NAME, TEMPLATE_COLUMN_ENTITY_ID, 
+      TEMPLATE_COLUMN_COLUMN_ID, TEMPLATE_ENTITY_TABLENAME, 
+      TEMPLATE_FIELD_TABLENAME, TEMPLATE_COLUMN_US_NAME, 
+      TEMPLATE_COLUMN_LABEL, TEMPLATE_COLUMN_LABEL_WIDTH, 
+      TEMPLATE_COLUMN_GUI_TYPE, TEMPLATE_COLUMN_WIDTH, 
+      TEMPLATE_COLUMN_ALIGN, TEMPLATE_COLUMN_HEIGHT, 
+      TEMPLATE_COLUMN_SORT, TEMPLATE_COLUMN_SHOW_TYPE, 
+      TEMPLATE_TEMPLATE_ID, TEMPLATE_COLUMN_REQUIRED, 
+      TEMPLATE_COLUMN_COL_SPAN, TEMPLATE_COLUMN_TOTAL, 
+      TEMPLATE_COLUMN_MAX_LENGTH, TEMPLATE_COLUMN_MIN_LENGTH, 
+      TEMPLATE_COLUMN_COLOR, TEMPLATE_COLUMN_COLOR_CONDITION, 
+      TEMPLATE_COLUMN_GROUP_ID)
+    values ( #{isShowPcList,jdbcType=NVARCHAR}, 
+      #{isShowPcCard,jdbcType=NVARCHAR}, #{isShowAppList,jdbcType=NVARCHAR}, #{isShowAppCard,jdbcType=NVARCHAR}, 
+      #{templateColumnExpression,jdbcType=NVARCHAR}, #{templateColumnTableOther,jdbcType=NVARCHAR}, 
+      #{templateColumnOtherName,jdbcType=NVARCHAR}, #{templateColumnEntityId,jdbcType=INTEGER}, 
+      #{templateColumnColumnId,jdbcType=INTEGER}, #{templateEntityTablename,jdbcType=NVARCHAR}, 
+      #{templateFieldTablename,jdbcType=NVARCHAR}, #{templateColumnUsName,jdbcType=NVARCHAR}, 
+      #{templateColumnLabel,jdbcType=NVARCHAR}, #{templateColumnLabelWidth,jdbcType=NVARCHAR}, 
+      #{templateColumnGuiType,jdbcType=NVARCHAR}, #{templateColumnWidth,jdbcType=NVARCHAR}, 
+      #{templateColumnAlign,jdbcType=NVARCHAR}, #{templateColumnHeight,jdbcType=NVARCHAR}, 
+      #{templateColumnSort,jdbcType=INTEGER}, #{templateColumnShowType,jdbcType=NVARCHAR}, 
+      #{templateTemplateId,jdbcType=INTEGER}, #{templateColumnRequired,jdbcType=NVARCHAR}, 
+      #{templateColumnColSpan,jdbcType=DECIMAL}, #{templateColumnTotal,jdbcType=NVARCHAR}, 
+      #{templateColumnMaxLength,jdbcType=DECIMAL}, #{templateColumnMinLength,jdbcType=DECIMAL}, 
+      #{templateColumnColor,jdbcType=VARCHAR}, #{templateColumnColorCondition,jdbcType=VARCHAR}, 
+      #{templateColumnGroupId,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumn" >
+    insert into SYS_TEMPLATE_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateColumnId != null" >
+        TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="isShowPcList != null" >
+        IS_SHOW_PC_LIST,
+      </if>
+      <if test="isShowPcCard != null" >
+        IS_SHOW_PC_CARD,
+      </if>
+      <if test="isShowAppList != null" >
+        IS_SHOW_APP_LIST,
+      </if>
+      <if test="isShowAppCard != null" >
+        IS_SHOW_APP_CARD,
+      </if>
+      <if test="templateColumnExpression != null" >
+        TEMPLATE_COLUMN_EXPRESSION,
+      </if>
+      <if test="templateColumnTableOther != null" >
+        TEMPLATE_COLUMN_TABLE_OTHER,
+      </if>
+      <if test="templateColumnOtherName != null" >
+        TEMPLATE_COLUMN_OTHER_NAME,
+      </if>
+      <if test="templateColumnEntityId != null" >
+        TEMPLATE_COLUMN_ENTITY_ID,
+      </if>
+      <if test="templateColumnColumnId != null" >
+        TEMPLATE_COLUMN_COLUMN_ID,
+      </if>
+      <if test="templateEntityTablename != null" >
+        TEMPLATE_ENTITY_TABLENAME,
+      </if>
+      <if test="templateFieldTablename != null" >
+        TEMPLATE_FIELD_TABLENAME,
+      </if>
+      <if test="templateColumnUsName != null" >
+        TEMPLATE_COLUMN_US_NAME,
+      </if>
+      <if test="templateColumnLabel != null" >
+        TEMPLATE_COLUMN_LABEL,
+      </if>
+      <if test="templateColumnLabelWidth != null" >
+        TEMPLATE_COLUMN_LABEL_WIDTH,
+      </if>
+      <if test="templateColumnGuiType != null" >
+        TEMPLATE_COLUMN_GUI_TYPE,
+      </if>
+      <if test="templateColumnWidth != null" >
+        TEMPLATE_COLUMN_WIDTH,
+      </if>
+      <if test="templateColumnAlign != null" >
+        TEMPLATE_COLUMN_ALIGN,
+      </if>
+      <if test="templateColumnHeight != null" >
+        TEMPLATE_COLUMN_HEIGHT,
+      </if>
+      <if test="templateColumnSort != null" >
+        TEMPLATE_COLUMN_SORT,
+      </if>
+      <if test="templateColumnShowType != null" >
+        TEMPLATE_COLUMN_SHOW_TYPE,
+      </if>
+      <if test="templateTemplateId != null" >
+        TEMPLATE_TEMPLATE_ID,
+      </if>
+      <if test="templateColumnRequired != null" >
+        TEMPLATE_COLUMN_REQUIRED,
+      </if>
+      <if test="templateColumnColSpan != null" >
+        TEMPLATE_COLUMN_COL_SPAN,
+      </if>
+      <if test="templateColumnTotal != null" >
+        TEMPLATE_COLUMN_TOTAL,
+      </if>
+      <if test="templateColumnMaxLength != null" >
+        TEMPLATE_COLUMN_MAX_LENGTH,
+      </if>
+      <if test="templateColumnMinLength != null" >
+        TEMPLATE_COLUMN_MIN_LENGTH,
+      </if>
+      <if test="templateColumnColor != null" >
+        TEMPLATE_COLUMN_COLOR,
+      </if>
+      <if test="templateColumnColorCondition != null" >
+        TEMPLATE_COLUMN_COLOR_CONDITION,
+      </if>
+      <if test="templateColumnGroupId != null" >
+        TEMPLATE_COLUMN_GROUP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateColumnId != null" >
+        #{templateColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="isShowPcList != null" >
+        #{isShowPcList,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowPcCard != null" >
+        #{isShowPcCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowAppList != null" >
+        #{isShowAppList,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowAppCard != null" >
+        #{isShowAppCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnExpression != null" >
+        #{templateColumnExpression,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnTableOther != null" >
+        #{templateColumnTableOther,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnOtherName != null" >
+        #{templateColumnOtherName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnEntityId != null" >
+        #{templateColumnEntityId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnColumnId != null" >
+        #{templateColumnColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="templateEntityTablename != null" >
+        #{templateEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateFieldTablename != null" >
+        #{templateFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnUsName != null" >
+        #{templateColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLabel != null" >
+        #{templateColumnLabel,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLabelWidth != null" >
+        #{templateColumnLabelWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnGuiType != null" >
+        #{templateColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnWidth != null" >
+        #{templateColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnAlign != null" >
+        #{templateColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnHeight != null" >
+        #{templateColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnSort != null" >
+        #{templateColumnSort,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnShowType != null" >
+        #{templateColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateTemplateId != null" >
+        #{templateTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnRequired != null" >
+        #{templateColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnColSpan != null" >
+        #{templateColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnTotal != null" >
+        #{templateColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnMaxLength != null" >
+        #{templateColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnMinLength != null" >
+        #{templateColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnColor != null" >
+        #{templateColumnColor,jdbcType=VARCHAR},
+      </if>
+      <if test="templateColumnColorCondition != null" >
+        #{templateColumnColorCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="templateColumnGroupId != null" >
+        #{templateColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_COLUMN
+    <set >
+      <if test="record.templateColumnId != null" >
+        TEMPLATE_COLUMN_ID = #{record.templateColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isShowPcList != null" >
+        IS_SHOW_PC_LIST = #{record.isShowPcList,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isShowPcCard != null" >
+        IS_SHOW_PC_CARD = #{record.isShowPcCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isShowAppList != null" >
+        IS_SHOW_APP_LIST = #{record.isShowAppList,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isShowAppCard != null" >
+        IS_SHOW_APP_CARD = #{record.isShowAppCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnExpression != null" >
+        TEMPLATE_COLUMN_EXPRESSION = #{record.templateColumnExpression,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnTableOther != null" >
+        TEMPLATE_COLUMN_TABLE_OTHER = #{record.templateColumnTableOther,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnOtherName != null" >
+        TEMPLATE_COLUMN_OTHER_NAME = #{record.templateColumnOtherName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnEntityId != null" >
+        TEMPLATE_COLUMN_ENTITY_ID = #{record.templateColumnEntityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnColumnId != null" >
+        TEMPLATE_COLUMN_COLUMN_ID = #{record.templateColumnColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateEntityTablename != null" >
+        TEMPLATE_ENTITY_TABLENAME = #{record.templateEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateFieldTablename != null" >
+        TEMPLATE_FIELD_TABLENAME = #{record.templateFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnUsName != null" >
+        TEMPLATE_COLUMN_US_NAME = #{record.templateColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnLabel != null" >
+        TEMPLATE_COLUMN_LABEL = #{record.templateColumnLabel,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnLabelWidth != null" >
+        TEMPLATE_COLUMN_LABEL_WIDTH = #{record.templateColumnLabelWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnGuiType != null" >
+        TEMPLATE_COLUMN_GUI_TYPE = #{record.templateColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnWidth != null" >
+        TEMPLATE_COLUMN_WIDTH = #{record.templateColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnAlign != null" >
+        TEMPLATE_COLUMN_ALIGN = #{record.templateColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnHeight != null" >
+        TEMPLATE_COLUMN_HEIGHT = #{record.templateColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnSort != null" >
+        TEMPLATE_COLUMN_SORT = #{record.templateColumnSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnShowType != null" >
+        TEMPLATE_COLUMN_SHOW_TYPE = #{record.templateColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateTemplateId != null" >
+        TEMPLATE_TEMPLATE_ID = #{record.templateTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnRequired != null" >
+        TEMPLATE_COLUMN_REQUIRED = #{record.templateColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnColSpan != null" >
+        TEMPLATE_COLUMN_COL_SPAN = #{record.templateColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateColumnTotal != null" >
+        TEMPLATE_COLUMN_TOTAL = #{record.templateColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnMaxLength != null" >
+        TEMPLATE_COLUMN_MAX_LENGTH = #{record.templateColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateColumnMinLength != null" >
+        TEMPLATE_COLUMN_MIN_LENGTH = #{record.templateColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateColumnColor != null" >
+        TEMPLATE_COLUMN_COLOR = #{record.templateColumnColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateColumnColorCondition != null" >
+        TEMPLATE_COLUMN_COLOR_CONDITION = #{record.templateColumnColorCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateColumnGroupId != null" >
+        TEMPLATE_COLUMN_GROUP_ID = #{record.templateColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_COLUMN
+    set TEMPLATE_COLUMN_ID = #{record.templateColumnId,jdbcType=INTEGER},
+      IS_SHOW_PC_LIST = #{record.isShowPcList,jdbcType=NVARCHAR},
+      IS_SHOW_PC_CARD = #{record.isShowPcCard,jdbcType=NVARCHAR},
+      IS_SHOW_APP_LIST = #{record.isShowAppList,jdbcType=NVARCHAR},
+      IS_SHOW_APP_CARD = #{record.isShowAppCard,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_EXPRESSION = #{record.templateColumnExpression,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_TABLE_OTHER = #{record.templateColumnTableOther,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_OTHER_NAME = #{record.templateColumnOtherName,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_ENTITY_ID = #{record.templateColumnEntityId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_COLUMN_ID = #{record.templateColumnColumnId,jdbcType=INTEGER},
+      TEMPLATE_ENTITY_TABLENAME = #{record.templateEntityTablename,jdbcType=NVARCHAR},
+      TEMPLATE_FIELD_TABLENAME = #{record.templateFieldTablename,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_US_NAME = #{record.templateColumnUsName,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LABEL = #{record.templateColumnLabel,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LABEL_WIDTH = #{record.templateColumnLabelWidth,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_GUI_TYPE = #{record.templateColumnGuiType,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_WIDTH = #{record.templateColumnWidth,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_ALIGN = #{record.templateColumnAlign,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_HEIGHT = #{record.templateColumnHeight,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_SORT = #{record.templateColumnSort,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_SHOW_TYPE = #{record.templateColumnShowType,jdbcType=NVARCHAR},
+      TEMPLATE_TEMPLATE_ID = #{record.templateTemplateId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_REQUIRED = #{record.templateColumnRequired,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_COL_SPAN = #{record.templateColumnColSpan,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_TOTAL = #{record.templateColumnTotal,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_MAX_LENGTH = #{record.templateColumnMaxLength,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_MIN_LENGTH = #{record.templateColumnMinLength,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_COLOR = #{record.templateColumnColor,jdbcType=VARCHAR},
+      TEMPLATE_COLUMN_COLOR_CONDITION = #{record.templateColumnColorCondition,jdbcType=VARCHAR},
+      TEMPLATE_COLUMN_GROUP_ID = #{record.templateColumnGroupId,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumn" >
+    update SYS_TEMPLATE_COLUMN
+    <set >
+      <if test="isShowPcList != null" >
+        IS_SHOW_PC_LIST = #{isShowPcList,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowPcCard != null" >
+        IS_SHOW_PC_CARD = #{isShowPcCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowAppList != null" >
+        IS_SHOW_APP_LIST = #{isShowAppList,jdbcType=NVARCHAR},
+      </if>
+      <if test="isShowAppCard != null" >
+        IS_SHOW_APP_CARD = #{isShowAppCard,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnExpression != null" >
+        TEMPLATE_COLUMN_EXPRESSION = #{templateColumnExpression,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnTableOther != null" >
+        TEMPLATE_COLUMN_TABLE_OTHER = #{templateColumnTableOther,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnOtherName != null" >
+        TEMPLATE_COLUMN_OTHER_NAME = #{templateColumnOtherName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnEntityId != null" >
+        TEMPLATE_COLUMN_ENTITY_ID = #{templateColumnEntityId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnColumnId != null" >
+        TEMPLATE_COLUMN_COLUMN_ID = #{templateColumnColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="templateEntityTablename != null" >
+        TEMPLATE_ENTITY_TABLENAME = #{templateEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateFieldTablename != null" >
+        TEMPLATE_FIELD_TABLENAME = #{templateFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnUsName != null" >
+        TEMPLATE_COLUMN_US_NAME = #{templateColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLabel != null" >
+        TEMPLATE_COLUMN_LABEL = #{templateColumnLabel,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLabelWidth != null" >
+        TEMPLATE_COLUMN_LABEL_WIDTH = #{templateColumnLabelWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnGuiType != null" >
+        TEMPLATE_COLUMN_GUI_TYPE = #{templateColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnWidth != null" >
+        TEMPLATE_COLUMN_WIDTH = #{templateColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnAlign != null" >
+        TEMPLATE_COLUMN_ALIGN = #{templateColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnHeight != null" >
+        TEMPLATE_COLUMN_HEIGHT = #{templateColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnSort != null" >
+        TEMPLATE_COLUMN_SORT = #{templateColumnSort,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnShowType != null" >
+        TEMPLATE_COLUMN_SHOW_TYPE = #{templateColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateTemplateId != null" >
+        TEMPLATE_TEMPLATE_ID = #{templateTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnRequired != null" >
+        TEMPLATE_COLUMN_REQUIRED = #{templateColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnColSpan != null" >
+        TEMPLATE_COLUMN_COL_SPAN = #{templateColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnTotal != null" >
+        TEMPLATE_COLUMN_TOTAL = #{templateColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnMaxLength != null" >
+        TEMPLATE_COLUMN_MAX_LENGTH = #{templateColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnMinLength != null" >
+        TEMPLATE_COLUMN_MIN_LENGTH = #{templateColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="templateColumnColor != null" >
+        TEMPLATE_COLUMN_COLOR = #{templateColumnColor,jdbcType=VARCHAR},
+      </if>
+      <if test="templateColumnColorCondition != null" >
+        TEMPLATE_COLUMN_COLOR_CONDITION = #{templateColumnColorCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="templateColumnGroupId != null" >
+        TEMPLATE_COLUMN_GROUP_ID = #{templateColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.SysTemplateColumn" >
+    update SYS_TEMPLATE_COLUMN
+    set IS_SHOW_PC_LIST = #{isShowPcList,jdbcType=NVARCHAR},
+      IS_SHOW_PC_CARD = #{isShowPcCard,jdbcType=NVARCHAR},
+      IS_SHOW_APP_LIST = #{isShowAppList,jdbcType=NVARCHAR},
+      IS_SHOW_APP_CARD = #{isShowAppCard,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_EXPRESSION = #{templateColumnExpression,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_TABLE_OTHER = #{templateColumnTableOther,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_OTHER_NAME = #{templateColumnOtherName,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_ENTITY_ID = #{templateColumnEntityId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_COLUMN_ID = #{templateColumnColumnId,jdbcType=INTEGER},
+      TEMPLATE_ENTITY_TABLENAME = #{templateEntityTablename,jdbcType=NVARCHAR},
+      TEMPLATE_FIELD_TABLENAME = #{templateFieldTablename,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_US_NAME = #{templateColumnUsName,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LABEL = #{templateColumnLabel,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LABEL_WIDTH = #{templateColumnLabelWidth,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_GUI_TYPE = #{templateColumnGuiType,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_WIDTH = #{templateColumnWidth,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_ALIGN = #{templateColumnAlign,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_HEIGHT = #{templateColumnHeight,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_SORT = #{templateColumnSort,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_SHOW_TYPE = #{templateColumnShowType,jdbcType=NVARCHAR},
+      TEMPLATE_TEMPLATE_ID = #{templateTemplateId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_REQUIRED = #{templateColumnRequired,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_COL_SPAN = #{templateColumnColSpan,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_TOTAL = #{templateColumnTotal,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_MAX_LENGTH = #{templateColumnMaxLength,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_MIN_LENGTH = #{templateColumnMinLength,jdbcType=DECIMAL},
+      TEMPLATE_COLUMN_COLOR = #{templateColumnColor,jdbcType=VARCHAR},
+      TEMPLATE_COLUMN_COLOR_CONDITION = #{templateColumnColorCondition,jdbcType=VARCHAR},
+      TEMPLATE_COLUMN_GROUP_ID = #{templateColumnGroupId,jdbcType=NVARCHAR}
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </update>
+</mapper>

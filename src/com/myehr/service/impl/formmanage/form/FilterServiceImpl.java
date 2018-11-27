@@ -1,0 +1,65 @@
+package com.myehr.service.impl.formmanage.form;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.myehr.mapper.formmanage.form.SysGridFilterMapper;
+import com.myehr.mapper.formmanage.formexpand.FormFilterColumnExpand;
+import com.myehr.mapper.formmanage.formexpand.FormFilterColumnMapperExpand;
+import com.myehr.pojo.formmanage.form.SysGridFilter;
+import com.myehr.pojo.formmanage.form.SysGridFilterColumn;
+import com.myehr.pojo.formmanage.form.SysGridFilterExample;
+import com.myehr.service.formmanage.form.IFilterService;
+
+public class FilterServiceImpl implements IFilterService{
+	
+	@Autowired
+	FormFilterColumnMapperExpand formFilterColumnMapperExpand;
+	
+	@Autowired
+	SysGridFilterMapper sysGridFilterMapper;
+
+	@Override
+	public List<SysGridFilterColumn> queryFilterColumnList(String formId) {
+		// TODO Auto-generated method stub
+		List<SysGridFilterColumn> list1=new ArrayList<SysGridFilterColumn>();
+		List<FormFilterColumnExpand> list = formFilterColumnMapperExpand.getFormFilterColumnById(formId);
+		if (list != null && list.size() > 0) {
+			for (int i = 0; i < list.size(); i++) {
+				SysGridFilterColumn sysGridFilterColumn = new SysGridFilterColumn();
+				sysGridFilterColumn.setFormColumnSort(list.get(i).getFormColumnSort());
+				sysGridFilterColumn.setGridColumnColSpan(list.get(i).getGridColumnColSpan());
+				sysGridFilterColumn.setGridColumnFilterRule(list.get(i).getGridColumnFilterRule());
+				sysGridFilterColumn.setGridColumnIsIntervais(list.get(i).getGridColumnIsIntervais());
+				sysGridFilterColumn.setQueryColumnId(list.get(i).getQueryColumnId());
+				sysGridFilterColumn.setGridColumnLable(list.get(i).getGridColumnLable());
+				sysGridFilterColumn.setGridColumnWidth(list.get(i).getGridColumnWidth());
+				sysGridFilterColumn.setGridColumnId(list.get(i).getGridColumnId());
+				sysGridFilterColumn.setIsshowmobile(list.get(i).getIsshowmobile());
+				sysGridFilterColumn.setIsshowweb(list.get(i).getIsshowweb());
+				list1.add(sysGridFilterColumn);
+			}
+			return list1;
+		}
+		System.out.println("info:表单ID为:"+formId+",找不到对应查询字段信息(SysGridFilterColumn)");
+		return null;
+	}
+	
+	@Override
+	public SysGridFilter queryFilterInfo(String formId) {
+		// TODO Auto-generated method stub
+		SysGridFilterExample example = new SysGridFilterExample();
+		SysGridFilterExample.Criteria criteria =  example.createCriteria();
+		criteria.andGridFilterFormDefIdEqualTo(new BigDecimal(formId));
+		List<SysGridFilter> list = sysGridFilterMapper.selectByExample(example);
+		if(list!=null&&list.size()>0){
+			return list.get(0);
+		}
+		System.out.println("info:表单ID为:"+formId+",找不到对应查询字段信息(SysGridFilterColumn)");
+		return null;
+	}
+
+}

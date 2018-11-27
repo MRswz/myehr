@@ -1,0 +1,1 @@
+﻿{"msgCode":"0000","Jsondata":{"jsonstr1":{"rule":"201","data":{  "list": [    {      "cLevelName": "舒适型",      "cLevel": "100"    },    {      "cLevelName": "行政级",      "cLevel": "200"    },    {      "cLevelName": "商务型",      "cLevel": "400"    }  ]}},"jsonstr2":{"rule":"301","data":{  "list": [    {      "cLevelName": "普通型",      "cLevel": "600"    }  ]}}}}

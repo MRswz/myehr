@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.validation.SysSoftwareValidationMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.validation.SysSoftwareValidation" >
+    <id column="software_validation_id" property="softwareValidationId" jdbcType="DECIMAL" />
+    <result column="software_validation_name" property="softwareValidationName" jdbcType="NVARCHAR" />
+    <result column="software_validation_org" property="softwareValidationOrg" jdbcType="NVARCHAR" />
+    <result column="software_validation_contacts" property="softwareValidationContacts" jdbcType="NVARCHAR" />
+    <result column="software_validation_phone" property="softwareValidationPhone" jdbcType="NVARCHAR" />
+    <result column="software_validation_email" property="softwareValidationEmail" jdbcType="NVARCHAR" />
+    <result column="software_validation_ip" property="softwareValidationIp" jdbcType="NVARCHAR" />
+    <result column="software_validation_hardware" property="softwareValidationHardware" jdbcType="NVARCHAR" />
+    <result column="software_validation_online_user" property="softwareValidationOnlineUser" jdbcType="NVARCHAR" />
+    <result column="software_validation_user_number" property="softwareValidationUserNumber" jdbcType="NVARCHAR" />
+    <result column="software_validation_table_number" property="softwareValidationTableNumber" jdbcType="NVARCHAR" />
+    <result column="software_validation_source_number" property="softwareValidationSourceNumber" jdbcType="NVARCHAR" />
+    <result column="software_validation_user_status" property="softwareValidationUserStatus" jdbcType="NVARCHAR" />
+    <result column="software_validation_installation_time" property="softwareValidationInstallationTime" jdbcType="TIMESTAMP" />
+    <result column="software_validation_effective_time" property="softwareValidationEffectiveTime" jdbcType="TIMESTAMP" />
+    <result column="software_validation_authentication_time" property="softwareValidationAuthenticationTime" jdbcType="TIMESTAMP" />
+    <result column="software_validation_authentication_user" property="softwareValidationAuthenticationUser" jdbcType="NVARCHAR" />
+    <result column="software_validation_user_key" property="softwareValidationUserKey" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    software_validation_id, software_validation_name, software_validation_org, software_validation_contacts, 
+    software_validation_phone, software_validation_email, software_validation_ip, software_validation_hardware, 
+    software_validation_online_user, software_validation_user_number, software_validation_table_number, 
+    software_validation_source_number, software_validation_user_status, software_validation_installation_time, 
+    software_validation_effective_time, software_validation_authentication_time, software_validation_authentication_user, 
+    software_validation_user_key
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.validation.SysSoftwareValidationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_software_validation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_software_validation
+    where software_validation_id = #{softwareValidationId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_software_validation
+    where software_validation_id = #{softwareValidationId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.validation.SysSoftwareValidationExample" >
+    delete from sys_software_validation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.validation.SysSoftwareValidation" >
+    insert into sys_software_validation (software_validation_name, 
+      software_validation_org, software_validation_contacts, 
+      software_validation_phone, software_validation_email, 
+      software_validation_ip, software_validation_hardware, 
+      software_validation_online_user, software_validation_user_number, 
+      software_validation_table_number, software_validation_source_number, 
+      software_validation_user_status, software_validation_installation_time, 
+      software_validation_effective_time, software_validation_authentication_time, 
+      software_validation_authentication_user, software_validation_user_key
+      )
+    values (#{softwareValidationName,jdbcType=NVARCHAR}, 
+      #{softwareValidationOrg,jdbcType=NVARCHAR}, #{softwareValidationContacts,jdbcType=NVARCHAR}, 
+      #{softwareValidationPhone,jdbcType=NVARCHAR}, #{softwareValidationEmail,jdbcType=NVARCHAR}, 
+      #{softwareValidationIp,jdbcType=NVARCHAR}, #{softwareValidationHardware,jdbcType=NVARCHAR}, 
+      #{softwareValidationOnlineUser,jdbcType=NVARCHAR}, #{softwareValidationUserNumber,jdbcType=NVARCHAR}, 
+      #{softwareValidationTableNumber,jdbcType=NVARCHAR}, #{softwareValidationSourceNumber,jdbcType=NVARCHAR}, 
+      #{softwareValidationUserStatus,jdbcType=NVARCHAR}, #{softwareValidationInstallationTime,jdbcType=TIMESTAMP}, 
+      #{softwareValidationEffectiveTime,jdbcType=TIMESTAMP}, #{softwareValidationAuthenticationTime,jdbcType=TIMESTAMP}, 
+      #{softwareValidationAuthenticationUser,jdbcType=NVARCHAR}, #{softwareValidationUserKey,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.validation.SysSoftwareValidation" >
+    insert into sys_software_validation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="softwareValidationId != null" >
+        software_validation_id,
+      </if>
+      <if test="softwareValidationName != null" >
+        software_validation_name,
+      </if>
+      <if test="softwareValidationOrg != null" >
+        software_validation_org,
+      </if>
+      <if test="softwareValidationContacts != null" >
+        software_validation_contacts,
+      </if>
+      <if test="softwareValidationPhone != null" >
+        software_validation_phone,
+      </if>
+      <if test="softwareValidationEmail != null" >
+        software_validation_email,
+      </if>
+      <if test="softwareValidationIp != null" >
+        software_validation_ip,
+      </if>
+      <if test="softwareValidationHardware != null" >
+        software_validation_hardware,
+      </if>
+      <if test="softwareValidationOnlineUser != null" >
+        software_validation_online_user,
+      </if>
+      <if test="softwareValidationUserNumber != null" >
+        software_validation_user_number,
+      </if>
+      <if test="softwareValidationTableNumber != null" >
+        software_validation_table_number,
+      </if>
+      <if test="softwareValidationSourceNumber != null" >
+        software_validation_source_number,
+      </if>
+      <if test="softwareValidationUserStatus != null" >
+        software_validation_user_status,
+      </if>
+      <if test="softwareValidationInstallationTime != null" >
+        software_validation_installation_time,
+      </if>
+      <if test="softwareValidationEffectiveTime != null" >
+        software_validation_effective_time,
+      </if>
+      <if test="softwareValidationAuthenticationTime != null" >
+        software_validation_authentication_time,
+      </if>
+      <if test="softwareValidationAuthenticationUser != null" >
+        software_validation_authentication_user,
+      </if>
+      <if test="softwareValidationUserKey != null" >
+        software_validation_user_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="softwareValidationId != null" >
+        #{softwareValidationId,jdbcType=DECIMAL},
+      </if>
+      <if test="softwareValidationName != null" >
+        #{softwareValidationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationOrg != null" >
+        #{softwareValidationOrg,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationContacts != null" >
+        #{softwareValidationContacts,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationPhone != null" >
+        #{softwareValidationPhone,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationEmail != null" >
+        #{softwareValidationEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationIp != null" >
+        #{softwareValidationIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationHardware != null" >
+        #{softwareValidationHardware,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationOnlineUser != null" >
+        #{softwareValidationOnlineUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserNumber != null" >
+        #{softwareValidationUserNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationTableNumber != null" >
+        #{softwareValidationTableNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationSourceNumber != null" >
+        #{softwareValidationSourceNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserStatus != null" >
+        #{softwareValidationUserStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationInstallationTime != null" >
+        #{softwareValidationInstallationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationEffectiveTime != null" >
+        #{softwareValidationEffectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationAuthenticationTime != null" >
+        #{softwareValidationAuthenticationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationAuthenticationUser != null" >
+        #{softwareValidationAuthenticationUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserKey != null" >
+        #{softwareValidationUserKey,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.validation.SysSoftwareValidationExample" resultType="java.lang.Integer" >
+    select count(*) from sys_software_validation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_software_validation
+    <set >
+      <if test="record.softwareValidationId != null" >
+        software_validation_id = #{record.softwareValidationId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.softwareValidationName != null" >
+        software_validation_name = #{record.softwareValidationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationOrg != null" >
+        software_validation_org = #{record.softwareValidationOrg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationContacts != null" >
+        software_validation_contacts = #{record.softwareValidationContacts,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationPhone != null" >
+        software_validation_phone = #{record.softwareValidationPhone,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationEmail != null" >
+        software_validation_email = #{record.softwareValidationEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationIp != null" >
+        software_validation_ip = #{record.softwareValidationIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationHardware != null" >
+        software_validation_hardware = #{record.softwareValidationHardware,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationOnlineUser != null" >
+        software_validation_online_user = #{record.softwareValidationOnlineUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationUserNumber != null" >
+        software_validation_user_number = #{record.softwareValidationUserNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationTableNumber != null" >
+        software_validation_table_number = #{record.softwareValidationTableNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationSourceNumber != null" >
+        software_validation_source_number = #{record.softwareValidationSourceNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationUserStatus != null" >
+        software_validation_user_status = #{record.softwareValidationUserStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationInstallationTime != null" >
+        software_validation_installation_time = #{record.softwareValidationInstallationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.softwareValidationEffectiveTime != null" >
+        software_validation_effective_time = #{record.softwareValidationEffectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.softwareValidationAuthenticationTime != null" >
+        software_validation_authentication_time = #{record.softwareValidationAuthenticationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.softwareValidationAuthenticationUser != null" >
+        software_validation_authentication_user = #{record.softwareValidationAuthenticationUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.softwareValidationUserKey != null" >
+        software_validation_user_key = #{record.softwareValidationUserKey,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_software_validation
+    set software_validation_id = #{record.softwareValidationId,jdbcType=DECIMAL},
+      software_validation_name = #{record.softwareValidationName,jdbcType=NVARCHAR},
+      software_validation_org = #{record.softwareValidationOrg,jdbcType=NVARCHAR},
+      software_validation_contacts = #{record.softwareValidationContacts,jdbcType=NVARCHAR},
+      software_validation_phone = #{record.softwareValidationPhone,jdbcType=NVARCHAR},
+      software_validation_email = #{record.softwareValidationEmail,jdbcType=NVARCHAR},
+      software_validation_ip = #{record.softwareValidationIp,jdbcType=NVARCHAR},
+      software_validation_hardware = #{record.softwareValidationHardware,jdbcType=NVARCHAR},
+      software_validation_online_user = #{record.softwareValidationOnlineUser,jdbcType=NVARCHAR},
+      software_validation_user_number = #{record.softwareValidationUserNumber,jdbcType=NVARCHAR},
+      software_validation_table_number = #{record.softwareValidationTableNumber,jdbcType=NVARCHAR},
+      software_validation_source_number = #{record.softwareValidationSourceNumber,jdbcType=NVARCHAR},
+      software_validation_user_status = #{record.softwareValidationUserStatus,jdbcType=NVARCHAR},
+      software_validation_installation_time = #{record.softwareValidationInstallationTime,jdbcType=TIMESTAMP},
+      software_validation_effective_time = #{record.softwareValidationEffectiveTime,jdbcType=TIMESTAMP},
+      software_validation_authentication_time = #{record.softwareValidationAuthenticationTime,jdbcType=TIMESTAMP},
+      software_validation_authentication_user = #{record.softwareValidationAuthenticationUser,jdbcType=NVARCHAR},
+      software_validation_user_key = #{record.softwareValidationUserKey,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.validation.SysSoftwareValidation" >
+    update sys_software_validation
+    <set >
+      <if test="softwareValidationName != null" >
+        software_validation_name = #{softwareValidationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationOrg != null" >
+        software_validation_org = #{softwareValidationOrg,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationContacts != null" >
+        software_validation_contacts = #{softwareValidationContacts,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationPhone != null" >
+        software_validation_phone = #{softwareValidationPhone,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationEmail != null" >
+        software_validation_email = #{softwareValidationEmail,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationIp != null" >
+        software_validation_ip = #{softwareValidationIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationHardware != null" >
+        software_validation_hardware = #{softwareValidationHardware,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationOnlineUser != null" >
+        software_validation_online_user = #{softwareValidationOnlineUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserNumber != null" >
+        software_validation_user_number = #{softwareValidationUserNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationTableNumber != null" >
+        software_validation_table_number = #{softwareValidationTableNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationSourceNumber != null" >
+        software_validation_source_number = #{softwareValidationSourceNumber,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserStatus != null" >
+        software_validation_user_status = #{softwareValidationUserStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationInstallationTime != null" >
+        software_validation_installation_time = #{softwareValidationInstallationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationEffectiveTime != null" >
+        software_validation_effective_time = #{softwareValidationEffectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationAuthenticationTime != null" >
+        software_validation_authentication_time = #{softwareValidationAuthenticationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softwareValidationAuthenticationUser != null" >
+        software_validation_authentication_user = #{softwareValidationAuthenticationUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="softwareValidationUserKey != null" >
+        software_validation_user_key = #{softwareValidationUserKey,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where software_validation_id = #{softwareValidationId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.validation.SysSoftwareValidation" >
+    update sys_software_validation
+    set software_validation_name = #{softwareValidationName,jdbcType=NVARCHAR},
+      software_validation_org = #{softwareValidationOrg,jdbcType=NVARCHAR},
+      software_validation_contacts = #{softwareValidationContacts,jdbcType=NVARCHAR},
+      software_validation_phone = #{softwareValidationPhone,jdbcType=NVARCHAR},
+      software_validation_email = #{softwareValidationEmail,jdbcType=NVARCHAR},
+      software_validation_ip = #{softwareValidationIp,jdbcType=NVARCHAR},
+      software_validation_hardware = #{softwareValidationHardware,jdbcType=NVARCHAR},
+      software_validation_online_user = #{softwareValidationOnlineUser,jdbcType=NVARCHAR},
+      software_validation_user_number = #{softwareValidationUserNumber,jdbcType=NVARCHAR},
+      software_validation_table_number = #{softwareValidationTableNumber,jdbcType=NVARCHAR},
+      software_validation_source_number = #{softwareValidationSourceNumber,jdbcType=NVARCHAR},
+      software_validation_user_status = #{softwareValidationUserStatus,jdbcType=NVARCHAR},
+      software_validation_installation_time = #{softwareValidationInstallationTime,jdbcType=TIMESTAMP},
+      software_validation_effective_time = #{softwareValidationEffectiveTime,jdbcType=TIMESTAMP},
+      software_validation_authentication_time = #{softwareValidationAuthenticationTime,jdbcType=TIMESTAMP},
+      software_validation_authentication_user = #{softwareValidationAuthenticationUser,jdbcType=NVARCHAR},
+      software_validation_user_key = #{softwareValidationUserKey,jdbcType=NVARCHAR}
+    where software_validation_id = #{softwareValidationId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Tree Demo</title>
+	<link rel="stylesheet" href="zTreeStyle/zTreeStyle.css" type="text/css">
+</head>
+<body>
+	<div class="zTreeDemoBackground">
+		<ul id="treeDemo1" class="ztree"></ul>
+	</div>
+选中：<sapn id="checkCount"></sapn><br/>
+未选中：<sapn id="nocheckCount"></sapn>
+</body>
+<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="demo.js"></script>
+
+	
+
+
+
+
+
+</html>

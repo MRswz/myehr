@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.app.grid.SysAppClassMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.app.grid.SysAppClass" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="FONT_STYLE" property="fontStyle" jdbcType="NVARCHAR" />
+    <result column="TAG_STYLE" property="tagStyle" jdbcType="NVARCHAR" />
+    <result column="ISBLOD" property="isblod" jdbcType="NVARCHAR" />
+    <result column="ISHIDDEN" property="ishidden" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FONT_STYLE, TAG_STYLE, ISBLOD, ISHIDDEN, FORM_COLUMN_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.app.grid.SysAppClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_APP_CLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_APP_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_APP_CLASS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.app.grid.SysAppClassExample" >
+    delete from SYS_APP_CLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.app.grid.SysAppClass" >
+    insert into SYS_APP_CLASS ( FONT_STYLE, TAG_STYLE, 
+      ISBLOD, ISHIDDEN, FORM_COLUMN_ID
+      )
+    values ( #{fontStyle,jdbcType=NVARCHAR}, #{tagStyle,jdbcType=NVARCHAR}, 
+      #{isblod,jdbcType=NVARCHAR}, #{ishidden,jdbcType=NVARCHAR}, #{formColumnId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.app.grid.SysAppClass" >
+    insert into SYS_APP_CLASS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fontStyle != null" >
+        FONT_STYLE,
+      </if>
+      <if test="tagStyle != null" >
+        TAG_STYLE,
+      </if>
+      <if test="isblod != null" >
+        ISBLOD,
+      </if>
+      <if test="ishidden != null" >
+        ISHIDDEN,
+      </if>
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="fontStyle != null" >
+        #{fontStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="tagStyle != null" >
+        #{tagStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="isblod != null" >
+        #{isblod,jdbcType=NVARCHAR},
+      </if>
+      <if test="ishidden != null" >
+        #{ishidden,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnId != null" >
+        #{formColumnId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.app.grid.SysAppClassExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_APP_CLASS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_APP_CLASS
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fontStyle != null" >
+        FONT_STYLE = #{record.fontStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tagStyle != null" >
+        TAG_STYLE = #{record.tagStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isblod != null" >
+        ISBLOD = #{record.isblod,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ishidden != null" >
+        ISHIDDEN = #{record.ishidden,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnId != null" >
+        FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_APP_CLASS
+    set ID = #{record.id,jdbcType=DECIMAL},
+      FONT_STYLE = #{record.fontStyle,jdbcType=NVARCHAR},
+      TAG_STYLE = #{record.tagStyle,jdbcType=NVARCHAR},
+      ISBLOD = #{record.isblod,jdbcType=NVARCHAR},
+      ISHIDDEN = #{record.ishidden,jdbcType=NVARCHAR},
+      FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.app.grid.SysAppClass" >
+    update SYS_APP_CLASS
+    <set >
+      <if test="fontStyle != null" >
+        FONT_STYLE = #{fontStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="tagStyle != null" >
+        TAG_STYLE = #{tagStyle,jdbcType=NVARCHAR},
+      </if>
+      <if test="isblod != null" >
+        ISBLOD = #{isblod,jdbcType=NVARCHAR},
+      </if>
+      <if test="ishidden != null" >
+        ISHIDDEN = #{ishidden,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.app.grid.SysAppClass" >
+    update SYS_APP_CLASS
+    set FONT_STYLE = #{fontStyle,jdbcType=NVARCHAR},
+      TAG_STYLE = #{tagStyle,jdbcType=NVARCHAR},
+      ISBLOD = #{isblod,jdbcType=NVARCHAR},
+      ISHIDDEN = #{ishidden,jdbcType=NVARCHAR},
+      FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

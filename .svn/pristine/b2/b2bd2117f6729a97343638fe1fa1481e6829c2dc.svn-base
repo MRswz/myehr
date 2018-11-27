@@ -1,0 +1,39 @@
+
+<div class="modal" ng-controller="KisBpmFormkeydefinitionPopupCtrl">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+				<h2 translate>选择表单</h2>
+			</div>
+			<div class="modal-body">
+				<div class="row" style="height: 350px;">
+					<div class="col-md-6" style="height: 350px;">
+						<div class="panel panel-default" style="height: 350px;overflow:scroll;">
+							<div class="panel-heading">
+								<h3 class="panel-title">表单树</h3>
+							</div>
+							<div class="panel-body" style="padding: 5px;">
+								<ul id="form_tree" class="ztree" formtree ng-model="formkeydefinition"></ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6" style="height: 350px;">
+						<div class="panel panel-default" style="height: 350px;">
+							<div class="panel-heading">
+								<h3 class="panel-title">selected</h3>
+							</div>
+							<div class="panel-body" style="padding: 5px;">
+								{{formkeydefinition.name}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+					<button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

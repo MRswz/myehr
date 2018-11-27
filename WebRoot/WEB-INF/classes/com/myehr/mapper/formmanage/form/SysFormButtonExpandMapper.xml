@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormButtonExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormButton" >
+    <id column="FORM_BUTTON_ID" property="formButtonId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_DEF_ID" property="formButtonFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_TYPE" property="formButtonType" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CODE" property="formButtonCode" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_NAME" property="formButtonName" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_SORT" property="formButtonSort" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_ID" property="formButtonFormId" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_WIDTH" property="formButtonWidth" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_HEIGHT" property="formButtonHeight" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_ICON" property="formButtonIcon" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CSS" property="formButtonCss" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_WARNING_INFO" property="formButtonWarningInfo" jdbcType="VARCHAR" />
+    <result column="FORM_BUTTON_CHECK_FUN" property="formButtonCheckFun" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_BUTTON_ID, FORM_BUTTON_FORM_DEF_ID, FORM_BUTTON_TYPE, FORM_BUTTON_CODE, FORM_BUTTON_NAME, 
+    FORM_BUTTON_SORT, FORM_BUTTON_FORM_ID, FORM_BUTTON_WIDTH, FORM_BUTTON_HEIGHT, FORM_BUTTON_ICON, 
+    FORM_BUTTON_CSS, OPERATOR_TIME, OPERATOR_NAME, FORM_BUTTON_WARNING_INFO, FORM_BUTTON_CHECK_FUN
+  </sql>
+  
+  <select id="queryFormButtonByFormId"  resultMap="BaseResultMap" parameterType="java.lang.String">
+	select * from SYS_FORM_BUTTON where 1=1
+  		<if test="formId != null" >
+       		and FORM_BUTTON_FORM_DEF_ID = #{formId,jdbcType=DECIMAL}
+      </if>
+	
+	<!-- select 
+	    FORM_BUTTON_ID ,
+	    FORM_BUTTON_FORM_DEF_ID ,
+	    FORM_BUTTON_TYPE  "formButtonType",
+	    FORM_BUTTON_CODE  "formButtonCode",
+	    FORM_BUTTON_NAME  "formButtonName",
+	    FORM_BUTTON_SORT  "formButtonSort",
+	    FORM_BUTTON_FORM_ID "formButtonFormId",
+	    FORM_BUTTON_WIDTH "formButtonWidth",
+	    FORM_BUTTON_HEIGHT  "formButtonHeight",
+	    FORM_BUTTON_ICON  "formButtonIcon",
+	    FORM_BUTTON_CSS "formButtonCss",
+	    OPERATOR_TIME "operatorTime",
+	    OPERATOR_NAME "operatorName",
+	    FORM_BUTTON_WARNING_INFO  "formButtonWarningInfo",
+	    FORM_BUTTON_CHECK_FUN "formButtonCheckFun",
+	      (case
+	        when ses2.exec_sql_id is not null then
+	         '已编写脚本'
+	        else
+	         '未编写脚本'
+	      end) "qzesql" ,
+	      (case
+	        when ses.exec_sql_id is not null then
+	         '已编写脚本'
+	        else
+	         '未编写脚本'
+	      end) "hzesql" 
+	 from SYS_FORM_BUTTON t
+	 left join (select *
+	              from sys_exec_sql
+	             where exec_sql_type = 'EXECSQL_BUTTON_HZ_TYPE') ses on ses.exec_sql_relaid =
+	                                                                    t.form_button_id
+	 left join (select *
+	              from sys_exec_sql
+	             where exec_sql_type = 'EXECSQL_BUTTON_QZ_TYPE') ses2 on ses2.exec_sql_relaid =
+	             														t.form_button_id
+	    where  t.FORM_BUTTON_FORM_DEF_ID = #{formId}
+	    
+	   order by t.FORM_BUTTON_SORT -->
+  	
+  </select>
+  
+</mapper>

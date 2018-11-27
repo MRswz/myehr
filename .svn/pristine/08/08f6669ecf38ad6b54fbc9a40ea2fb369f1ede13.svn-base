@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonSaveMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonSave" >
+    <id column="BUTTON_SAVE_ID" property="buttonSaveId" jdbcType="DECIMAL" />
+    <result column="BUTTON_SAVE_BUTTON_ID" property="buttonSaveButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_SAVE_TYPE" property="buttonSaveType" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_EXC_TYPE" property="buttonSaveExcType" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_FUN" property="buttonSaveFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_URL" property="buttonSaveUrl" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_SQL" property="buttonSaveSql" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_INIT_FUN" property="buttonSaveInitFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_SUCCESS_DEAL" property="buttonSaveSuccessDeal" jdbcType="VARCHAR" />
+    <result column="BUTTON_SAVE_SUCCESS_FUN" property="buttonSaveSuccessFun" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_SAVE_ID, BUTTON_SAVE_BUTTON_ID, BUTTON_SAVE_TYPE, BUTTON_SAVE_EXC_TYPE, BUTTON_SAVE_FUN, 
+    BUTTON_SAVE_URL, BUTTON_SAVE_SQL, BUTTON_SAVE_INIT_FUN, BUTTON_SAVE_SUCCESS_DEAL, 
+    BUTTON_SAVE_SUCCESS_FUN, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSaveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_SAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_SAVE
+    where BUTTON_SAVE_ID = #{buttonSaveId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_SAVE
+    where BUTTON_SAVE_ID = #{buttonSaveId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSaveExample" >
+    delete from SYS_FORM_BUTTON_SAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSave" >
+    insert into SYS_FORM_BUTTON_SAVE (BUTTON_SAVE_BUTTON_ID, 
+      BUTTON_SAVE_TYPE, BUTTON_SAVE_EXC_TYPE, BUTTON_SAVE_FUN, 
+      BUTTON_SAVE_URL, BUTTON_SAVE_SQL, BUTTON_SAVE_INIT_FUN, 
+      BUTTON_SAVE_SUCCESS_DEAL, BUTTON_SAVE_SUCCESS_FUN, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{buttonSaveButtonId,jdbcType=DECIMAL}, 
+      #{buttonSaveType,jdbcType=VARCHAR}, #{buttonSaveExcType,jdbcType=VARCHAR}, #{buttonSaveFun,jdbcType=VARCHAR}, 
+      #{buttonSaveUrl,jdbcType=VARCHAR}, #{buttonSaveSql,jdbcType=VARCHAR}, #{buttonSaveInitFun,jdbcType=VARCHAR}, 
+      #{buttonSaveSuccessDeal,jdbcType=VARCHAR}, #{buttonSaveSuccessFun,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSave" >
+    insert into SYS_FORM_BUTTON_SAVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonSaveId != null" >
+        BUTTON_SAVE_ID,
+      </if>
+      <if test="buttonSaveButtonId != null" >
+        BUTTON_SAVE_BUTTON_ID,
+      </if>
+      <if test="buttonSaveType != null" >
+        BUTTON_SAVE_TYPE,
+      </if>
+      <if test="buttonSaveExcType != null" >
+        BUTTON_SAVE_EXC_TYPE,
+      </if>
+      <if test="buttonSaveFun != null" >
+        BUTTON_SAVE_FUN,
+      </if>
+      <if test="buttonSaveUrl != null" >
+        BUTTON_SAVE_URL,
+      </if>
+      <if test="buttonSaveSql != null" >
+        BUTTON_SAVE_SQL,
+      </if>
+      <if test="buttonSaveInitFun != null" >
+        BUTTON_SAVE_INIT_FUN,
+      </if>
+      <if test="buttonSaveSuccessDeal != null" >
+        BUTTON_SAVE_SUCCESS_DEAL,
+      </if>
+      <if test="buttonSaveSuccessFun != null" >
+        BUTTON_SAVE_SUCCESS_FUN,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonSaveId != null" >
+        #{buttonSaveId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonSaveButtonId != null" >
+        #{buttonSaveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonSaveType != null" >
+        #{buttonSaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveExcType != null" >
+        #{buttonSaveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveFun != null" >
+        #{buttonSaveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveUrl != null" >
+        #{buttonSaveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSql != null" >
+        #{buttonSaveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveInitFun != null" >
+        #{buttonSaveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSuccessDeal != null" >
+        #{buttonSaveSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSuccessFun != null" >
+        #{buttonSaveSuccessFun,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSaveExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_SAVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_SAVE
+    <set >
+      <if test="record.buttonSaveId != null" >
+        BUTTON_SAVE_ID = #{record.buttonSaveId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonSaveButtonId != null" >
+        BUTTON_SAVE_BUTTON_ID = #{record.buttonSaveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonSaveType != null" >
+        BUTTON_SAVE_TYPE = #{record.buttonSaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveExcType != null" >
+        BUTTON_SAVE_EXC_TYPE = #{record.buttonSaveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveFun != null" >
+        BUTTON_SAVE_FUN = #{record.buttonSaveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveUrl != null" >
+        BUTTON_SAVE_URL = #{record.buttonSaveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveSql != null" >
+        BUTTON_SAVE_SQL = #{record.buttonSaveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveInitFun != null" >
+        BUTTON_SAVE_INIT_FUN = #{record.buttonSaveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveSuccessDeal != null" >
+        BUTTON_SAVE_SUCCESS_DEAL = #{record.buttonSaveSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonSaveSuccessFun != null" >
+        BUTTON_SAVE_SUCCESS_FUN = #{record.buttonSaveSuccessFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_SAVE
+    set BUTTON_SAVE_ID = #{record.buttonSaveId,jdbcType=DECIMAL},
+      BUTTON_SAVE_BUTTON_ID = #{record.buttonSaveButtonId,jdbcType=DECIMAL},
+      BUTTON_SAVE_TYPE = #{record.buttonSaveType,jdbcType=VARCHAR},
+      BUTTON_SAVE_EXC_TYPE = #{record.buttonSaveExcType,jdbcType=VARCHAR},
+      BUTTON_SAVE_FUN = #{record.buttonSaveFun,jdbcType=VARCHAR},
+      BUTTON_SAVE_URL = #{record.buttonSaveUrl,jdbcType=VARCHAR},
+      BUTTON_SAVE_SQL = #{record.buttonSaveSql,jdbcType=VARCHAR},
+      BUTTON_SAVE_INIT_FUN = #{record.buttonSaveInitFun,jdbcType=VARCHAR},
+      BUTTON_SAVE_SUCCESS_DEAL = #{record.buttonSaveSuccessDeal,jdbcType=VARCHAR},
+      BUTTON_SAVE_SUCCESS_FUN = #{record.buttonSaveSuccessFun,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSave" >
+    update SYS_FORM_BUTTON_SAVE
+    <set >
+      <if test="buttonSaveButtonId != null" >
+        BUTTON_SAVE_BUTTON_ID = #{buttonSaveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonSaveType != null" >
+        BUTTON_SAVE_TYPE = #{buttonSaveType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveExcType != null" >
+        BUTTON_SAVE_EXC_TYPE = #{buttonSaveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveFun != null" >
+        BUTTON_SAVE_FUN = #{buttonSaveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveUrl != null" >
+        BUTTON_SAVE_URL = #{buttonSaveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSql != null" >
+        BUTTON_SAVE_SQL = #{buttonSaveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveInitFun != null" >
+        BUTTON_SAVE_INIT_FUN = #{buttonSaveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSuccessDeal != null" >
+        BUTTON_SAVE_SUCCESS_DEAL = #{buttonSaveSuccessDeal,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonSaveSuccessFun != null" >
+        BUTTON_SAVE_SUCCESS_FUN = #{buttonSaveSuccessFun,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUTTON_SAVE_ID = #{buttonSaveId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonSave" >
+    update SYS_FORM_BUTTON_SAVE
+    set BUTTON_SAVE_BUTTON_ID = #{buttonSaveButtonId,jdbcType=DECIMAL},
+      BUTTON_SAVE_TYPE = #{buttonSaveType,jdbcType=VARCHAR},
+      BUTTON_SAVE_EXC_TYPE = #{buttonSaveExcType,jdbcType=VARCHAR},
+      BUTTON_SAVE_FUN = #{buttonSaveFun,jdbcType=VARCHAR},
+      BUTTON_SAVE_URL = #{buttonSaveUrl,jdbcType=VARCHAR},
+      BUTTON_SAVE_SQL = #{buttonSaveSql,jdbcType=VARCHAR},
+      BUTTON_SAVE_INIT_FUN = #{buttonSaveInitFun,jdbcType=VARCHAR},
+      BUTTON_SAVE_SUCCESS_DEAL = #{buttonSaveSuccessDeal,jdbcType=VARCHAR},
+      BUTTON_SAVE_SUCCESS_FUN = #{buttonSaveSuccessFun,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where BUTTON_SAVE_ID = #{buttonSaveId,jdbcType=DECIMAL}
+  </update>
+</mapper>

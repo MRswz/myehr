@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系人</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style type="text/css">
+        /*这行很重要!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        html,body{min-height: 100%;}
+    </style>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row" id="lianxiren">
+
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        //当前页和一次显示多少条数据
+        var Currentpage = 1;
+        var pagesize = 10;
+        //animation.css
+        function animationHover(element, animation) {
+            element = $(element);
+            element.hover(
+                function () {
+                    element.addClass('animated ' + animation);
+                },
+                function () {
+                    //动画完成之前移除class
+                    window.setTimeout(function () {
+                        element.removeClass('animated ' + animation);
+                    }, 2000);
+                });
+        }
+        //作为一个对象的w和h属性返回视口的尺寸
+        function getViewportSize(w){
+            w = w || window;
+            if(w.innerWidth != null)
+                return {w: w.innerWidth, h: w.innerHeight};
+            var d = w.document;
+            if(document.compatMode == "CSS1Compat")
+                return {w: d.documentElement.clientWidth, h: d.documentElement.clientHeight};
+
+            return {w: d.body.clientWidth, h: d.body.clientHeight};
+        }
+        //检测滚动条是否滚动到页面底部
+        function isScrollToPageBottom(){
+            //文档高度
+            var documentHeight = document.documentElement.offsetHeight;
+            var viewPortHeight = getViewportSize().h;
+            var scrollHeight = window.pageYOffset ||
+                    document.documentElement.scrollTop ||
+                    document.body.scrollTop || 0;
+
+            return documentHeight - viewPortHeight - scrollHeight < 50;
+        }
+
+        //加载数据
+        function loadDataDynamic(){
+            //先显示正在加载中
+            if( $("#loadingLi").length === 0)
+                 $("#lianxiren").append("<div id='loadingLi' class='loading'>正在加载...</div>");
+            else{
+                $("#loadingLi").text("正在加载...").removeClass("space");
+            }
+            var loadingLi = document.getElementById("loadingLi");
+            //loadingLi.scrollIntoView();
+            //加载数据,数据加载完成后需要移除加载提示
+            var hasData = false, msg = "";
+            $.ajax({
+                url: "./2.json",
+                type: 'get',
+                dataType: 'json'
+            }).done(function(data){
+                    Currentpage++;
+                    console.log(data);
+                    var arr=data.rows;
+                    if(arr.length > 0){
+                        hasData = true;
+                        showDate(arr);
+                    }else{
+                        msg = "数据已加载到底了"
+                    }
+                    $("#lianxiren").append(loadingLi);
+            }).fail(function(){
+                msg = "数据加载失败!";
+             }).always(function(){
+                !hasData && setTimeout(function(){
+                    $(document.body).scrollTop(document.body.scrollTop -40);
+                }, 500);
+                    msg && $("#loadingLi").text(msg);
+                //重新监听滚动
+                setTimeout(watchScroll, 900);
+             });
+        }
+
+
+        //如果滚动条滚动到页面底部，需要加载新的数据,并且显示加载提示
+        function watchScroll(){
+            if(!isScrollToPageBottom()){
+                setTimeout( arguments.callee, 900);
+                return;            }
+            loadDataDynamic();
+        }
+
+        //获取区间中的一个随机数
+        function rand(n, m){
+            var random = Math.floor(Math.random()*(m-n+1)+n);
+            return random;
+        }
+
+        function showDate(arr) {
+            for (var i = arr.length - 1; i >= 0; i--) {
+
+                // 1.左右两部分,左边1个字段,右边4个
+                
+                var cellObj = $(
+                     '<div class="col-md-4 col-sm-4 col-lg-3">'+
+                     '    <div class="widget style1 navy-bg">'+
+                     '        <div class="row">'+
+                     '            <div class="col-xs-4">'+
+                     '                    <img width="100" height="100" style="margin:0 auto" alt="image" class="img-circle m-t-xs img-responsive" src="img/1.jpg">'+
+                     '            </div>'+
+                     '            <div class="col-xs-8 text-right">'+
+                     '                <h3><strong>'+ arr[i].PJB_POST_NAME +'</strong></h3>'+
+                     '                <p>'+ arr[i].PJB_BASE_PAY +'</p>'+
+                     '                <h4>'+ arr[i].PJB_COMMUNICATION +'</h4>'+
+                     '                <h2 class="font-bold">'+ arr[i].PJB_OTHER_PAY +'</h2>'+
+                     '            </div>'+
+                     '        </div>'+
+                     '    </div>'+
+                     '</div>'
+                     );
+				
+                //2全在右边,显示如第三个
+                // 控制颜色的是类名 navy-bg  lazur-bg  yellow-bg red-bg(任意取一个)
+                // 获取随机数用了上面一个函数rand()
+                var colorArr = ['navy-bg', 'lazur-bg', 'yellow-bg', 'red-bg'];
+                var random = rand(0, 4);
+                console.log(random);
+                /*
+                var cellObj = $(
+                    '<div class="col-md-4 col-sm-4 col-lg-3">'+
+                    '    <div class="content-box widget lazur-bg p-lg text-center">'+
+                    '        <div class="m-b-md">'+
+                    '            <img width="100" height="100" style="margin:0 auto" alt="image" class="img-circle m-t-xs img-responsive" src="img/1.jpg">'+
+                    '            <h1 class="m-xs">'+ arr[i].PJB_POST_NAME +'</h1>'+
+                    '            <h3 class="font-bold no-margins">'+ arr[i].PJB_BASE_PAY +'</h3>'+
+                    '            <small>'+ arr[i].PJB_COMMUNICATION +'</small>'+
+                    '        </div>'+
+                    '    </div>'+
+                    '</div>'
+                    );
+                  */  
+                cellObj.find('.content-box').addClass(colorArr[random]);
+                animationHover(cellObj, 'pulse');
+                $('#lianxiren').append(cellObj);
+
+            }
+        }
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "./2.json",
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    Currentpage++;
+                    console.log(data);
+                    var arr=data.rows;
+                    showDate(arr);
+                  }
+            });
+            //开始检测滚动条
+            watchScroll();
+        });
+
+    </script>
+
+</body>
+
+</html>

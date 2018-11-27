@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    <id column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_FORM_DEF_ID" property="formColumnFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_ENTITY_ID" property="formColumnEntityId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLUMN_ID" property="formColumnColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_ENTITY_TABLENAME" property="formEntityTablename" jdbcType="NVARCHAR" />
+    <result column="FORM_FIELD_TABLENAME" property="formFieldTablename" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_US_NAME" property="formColumnUsName" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_LABLE" property="formColumnLable" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_LABLE_WIDTH" property="formColumnLableWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_SQL" property="formColumnSql" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_GUI_TYPE" property="formColumnGuiType" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_WIDTH" property="formColumnWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ALIGN" property="formColumnAlign" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_HEIGHT" property="formColumnHeight" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_SORT" property="formColumnSort" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_SHOW_TYPE" property="formColumnShowType" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ROW_SPAN" property="formColumnRowSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COL_SPAN" property="formColumnColSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_REQUIRED" property="formColumnRequired" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_GROUP_ID" property="formColumnGroupId" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_CHANGE_FUN" property="formColumnChangeFun" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_INIT_FUN" property="formColumnInitFun" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_ISLOCKET" property="formColumnIslocket" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_RIGIST" property="formColumnRigist" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TYPE" property="formColumnType" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TOTAL" property="formColumnTotal" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_IS_DEV" property="formColumnIsDev" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_MAX_LENGTH" property="formColumnMaxLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_MIN_LENGTH" property="formColumnMinLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLOR" property="formColumnColor" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_COLOR_CONDITION" property="formColumnColorCondition" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_POSITION_ID" property="formColumnPositionId" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_TEMPLATE_COLUMN_ID" property="formColumnTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_POSITION_SORT" property="formColumnPositionSort" jdbcType="REAL" />
+    <result column="isShowWeb" property="isshowweb" jdbcType="VARCHAR" />
+    <result column="isShowMobile" property="isshowmobile" jdbcType="VARCHAR" />
+    <result column="defaultSort" property="defaultsort" jdbcType="VARCHAR" />
+    <result column="isSort" property="issort" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_COLUMN_ID, FORM_COLUMN_FORM_DEF_ID, FORM_COLUMN_ENTITY_ID, FORM_COLUMN_COLUMN_ID, 
+    FORM_ENTITY_TABLENAME, FORM_FIELD_TABLENAME, FORM_COLUMN_US_NAME, FORM_COLUMN_LABLE, 
+    FORM_COLUMN_LABLE_WIDTH, FORM_COLUMN_SQL, FORM_COLUMN_GUI_TYPE, FORM_COLUMN_WIDTH, 
+    FORM_COLUMN_ALIGN, FORM_COLUMN_HEIGHT, FORM_COLUMN_SORT, FORM_COLUMN_SHOW_TYPE, FORM_COLUMN_ROW_SPAN, 
+    FORM_COLUMN_COL_SPAN, FORM_COLUMN_REQUIRED, FORM_COLUMN_GROUP_ID, FORM_COLUMN_CHANGE_FUN, 
+    FORM_COLUMN_INIT_FUN, FORM_COLUMN_ISLOCKET, FORM_COLUMN_RIGIST, FORM_COLUMN_TYPE, 
+    OPERATOR_TIME, OPERATOR_NAME, FORM_COLUMN_TOTAL, FORM_COLUMN_IS_DEV, FORM_COLUMN_MAX_LENGTH, 
+    FORM_COLUMN_MIN_LENGTH, FORM_COLUMN_COLOR, FORM_COLUMN_COLOR_CONDITION, FORM_COLUMN_POSITION_ID, 
+    FORM_COLUMN_TEMPLATE_COLUMN_ID, FORM_COLUMN_POSITION_SORT, isShowWeb, isShowMobile, 
+    defaultSort, isSort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_COLUMN
+    where FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_COLUMN
+    where FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormColumnExample" >
+    delete from SYS_FORM_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormColumn" useGeneratedKeys="true" keyProperty="formColumnId" keyColumn="FORM_COLUMN_ID">
+    insert into SYS_FORM_COLUMN (FORM_COLUMN_FORM_DEF_ID, 
+      FORM_COLUMN_ENTITY_ID, FORM_COLUMN_COLUMN_ID, 
+      FORM_ENTITY_TABLENAME, FORM_FIELD_TABLENAME, 
+      FORM_COLUMN_US_NAME, FORM_COLUMN_LABLE, FORM_COLUMN_LABLE_WIDTH, 
+      FORM_COLUMN_SQL, FORM_COLUMN_GUI_TYPE, FORM_COLUMN_WIDTH, 
+      FORM_COLUMN_ALIGN, FORM_COLUMN_HEIGHT, FORM_COLUMN_SORT, 
+      FORM_COLUMN_SHOW_TYPE, FORM_COLUMN_ROW_SPAN, 
+      FORM_COLUMN_COL_SPAN, FORM_COLUMN_REQUIRED, 
+      FORM_COLUMN_GROUP_ID, FORM_COLUMN_CHANGE_FUN, 
+      FORM_COLUMN_INIT_FUN, FORM_COLUMN_ISLOCKET, 
+      FORM_COLUMN_RIGIST, FORM_COLUMN_TYPE, OPERATOR_TIME, 
+      OPERATOR_NAME, FORM_COLUMN_TOTAL, FORM_COLUMN_IS_DEV, 
+      FORM_COLUMN_MAX_LENGTH, FORM_COLUMN_MIN_LENGTH, 
+      FORM_COLUMN_COLOR, FORM_COLUMN_COLOR_CONDITION, 
+      FORM_COLUMN_POSITION_ID, FORM_COLUMN_TEMPLATE_COLUMN_ID, 
+      FORM_COLUMN_POSITION_SORT, isShowWeb, isShowMobile, 
+      defaultSort, isSort)
+    values (#{formColumnFormDefId,jdbcType=DECIMAL}, 
+      #{formColumnEntityId,jdbcType=DECIMAL}, #{formColumnColumnId,jdbcType=DECIMAL}, 
+      #{formEntityTablename,jdbcType=NVARCHAR}, #{formFieldTablename,jdbcType=NVARCHAR}, 
+      #{formColumnUsName,jdbcType=NVARCHAR}, #{formColumnLable,jdbcType=NVARCHAR}, #{formColumnLableWidth,jdbcType=NVARCHAR}, 
+      #{formColumnSql,jdbcType=NVARCHAR}, #{formColumnGuiType,jdbcType=NVARCHAR}, #{formColumnWidth,jdbcType=NVARCHAR}, 
+      #{formColumnAlign,jdbcType=NVARCHAR}, #{formColumnHeight,jdbcType=NVARCHAR}, #{formColumnSort,jdbcType=DECIMAL}, 
+      #{formColumnShowType,jdbcType=NVARCHAR}, #{formColumnRowSpan,jdbcType=DECIMAL}, 
+      #{formColumnColSpan,jdbcType=DECIMAL}, #{formColumnRequired,jdbcType=NVARCHAR}, 
+      #{formColumnGroupId,jdbcType=NVARCHAR}, #{formColumnChangeFun,jdbcType=NVARCHAR}, 
+      #{formColumnInitFun,jdbcType=NVARCHAR}, #{formColumnIslocket,jdbcType=NVARCHAR}, 
+      #{formColumnRigist,jdbcType=NVARCHAR}, #{formColumnType,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{formColumnTotal,jdbcType=NVARCHAR}, #{formColumnIsDev,jdbcType=NVARCHAR}, 
+      #{formColumnMaxLength,jdbcType=DECIMAL}, #{formColumnMinLength,jdbcType=DECIMAL}, 
+      #{formColumnColor,jdbcType=NVARCHAR}, #{formColumnColorCondition,jdbcType=NVARCHAR}, 
+      #{formColumnPositionId,jdbcType=NVARCHAR}, #{formColumnTemplateColumnId,jdbcType=DECIMAL}, 
+      #{formColumnPositionSort,jdbcType=REAL}, #{isshowweb,jdbcType=VARCHAR}, #{isshowmobile,jdbcType=VARCHAR}, 
+      #{defaultsort,jdbcType=VARCHAR}, #{issort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    insert into SYS_FORM_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID,
+      </if>
+      <if test="formColumnFormDefId != null" >
+        FORM_COLUMN_FORM_DEF_ID,
+      </if>
+      <if test="formColumnEntityId != null" >
+        FORM_COLUMN_ENTITY_ID,
+      </if>
+      <if test="formColumnColumnId != null" >
+        FORM_COLUMN_COLUMN_ID,
+      </if>
+      <if test="formEntityTablename != null" >
+        FORM_ENTITY_TABLENAME,
+      </if>
+      <if test="formFieldTablename != null" >
+        FORM_FIELD_TABLENAME,
+      </if>
+      <if test="formColumnUsName != null" >
+        FORM_COLUMN_US_NAME,
+      </if>
+      <if test="formColumnLable != null" >
+        FORM_COLUMN_LABLE,
+      </if>
+      <if test="formColumnLableWidth != null" >
+        FORM_COLUMN_LABLE_WIDTH,
+      </if>
+      <if test="formColumnSql != null" >
+        FORM_COLUMN_SQL,
+      </if>
+      <if test="formColumnGuiType != null" >
+        FORM_COLUMN_GUI_TYPE,
+      </if>
+      <if test="formColumnWidth != null" >
+        FORM_COLUMN_WIDTH,
+      </if>
+      <if test="formColumnAlign != null" >
+        FORM_COLUMN_ALIGN,
+      </if>
+      <if test="formColumnHeight != null" >
+        FORM_COLUMN_HEIGHT,
+      </if>
+      <if test="formColumnSort != null" >
+        FORM_COLUMN_SORT,
+      </if>
+      <if test="formColumnShowType != null" >
+        FORM_COLUMN_SHOW_TYPE,
+      </if>
+      <if test="formColumnRowSpan != null" >
+        FORM_COLUMN_ROW_SPAN,
+      </if>
+      <if test="formColumnColSpan != null" >
+        FORM_COLUMN_COL_SPAN,
+      </if>
+      <if test="formColumnRequired != null" >
+        FORM_COLUMN_REQUIRED,
+      </if>
+      <if test="formColumnGroupId != null" >
+        FORM_COLUMN_GROUP_ID,
+      </if>
+      <if test="formColumnChangeFun != null" >
+        FORM_COLUMN_CHANGE_FUN,
+      </if>
+      <if test="formColumnInitFun != null" >
+        FORM_COLUMN_INIT_FUN,
+      </if>
+      <if test="formColumnIslocket != null" >
+        FORM_COLUMN_ISLOCKET,
+      </if>
+      <if test="formColumnRigist != null" >
+        FORM_COLUMN_RIGIST,
+      </if>
+      <if test="formColumnType != null" >
+        FORM_COLUMN_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="formColumnTotal != null" >
+        FORM_COLUMN_TOTAL,
+      </if>
+      <if test="formColumnIsDev != null" >
+        FORM_COLUMN_IS_DEV,
+      </if>
+      <if test="formColumnMaxLength != null" >
+        FORM_COLUMN_MAX_LENGTH,
+      </if>
+      <if test="formColumnMinLength != null" >
+        FORM_COLUMN_MIN_LENGTH,
+      </if>
+      <if test="formColumnColor != null" >
+        FORM_COLUMN_COLOR,
+      </if>
+      <if test="formColumnColorCondition != null" >
+        FORM_COLUMN_COLOR_CONDITION,
+      </if>
+      <if test="formColumnPositionId != null" >
+        FORM_COLUMN_POSITION_ID,
+      </if>
+      <if test="formColumnTemplateColumnId != null" >
+        FORM_COLUMN_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="formColumnPositionSort != null" >
+        FORM_COLUMN_POSITION_SORT,
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb,
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile,
+      </if>
+      <if test="defaultsort != null" >
+        defaultSort,
+      </if>
+      <if test="issort != null" >
+        isSort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formColumnId != null" >
+        #{formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnFormDefId != null" >
+        #{formColumnFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnEntityId != null" >
+        #{formColumnEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColumnId != null" >
+        #{formColumnColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="formEntityTablename != null" >
+        #{formEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="formFieldTablename != null" >
+        #{formFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnUsName != null" >
+        #{formColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnLable != null" >
+        #{formColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnLableWidth != null" >
+        #{formColumnLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSql != null" >
+        #{formColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnGuiType != null" >
+        #{formColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnWidth != null" >
+        #{formColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnAlign != null" >
+        #{formColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnHeight != null" >
+        #{formColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSort != null" >
+        #{formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnShowType != null" >
+        #{formColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnRowSpan != null" >
+        #{formColumnRowSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColSpan != null" >
+        #{formColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnRequired != null" >
+        #{formColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnGroupId != null" >
+        #{formColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnChangeFun != null" >
+        #{formColumnChangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnInitFun != null" >
+        #{formColumnInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnIslocket != null" >
+        #{formColumnIslocket,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnRigist != null" >
+        #{formColumnRigist,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnType != null" >
+        #{formColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnTotal != null" >
+        #{formColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnIsDev != null" >
+        #{formColumnIsDev,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnMaxLength != null" >
+        #{formColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnMinLength != null" >
+        #{formColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColor != null" >
+        #{formColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnColorCondition != null" >
+        #{formColumnColorCondition,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnPositionId != null" >
+        #{formColumnPositionId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnTemplateColumnId != null" >
+        #{formColumnTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnPositionSort != null" >
+        #{formColumnPositionSort,jdbcType=REAL},
+      </if>
+      <if test="isshowweb != null" >
+        #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultsort != null" >
+        #{defaultsort,jdbcType=VARCHAR},
+      </if>
+      <if test="issort != null" >
+        #{issort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_COLUMN
+    <set >
+      <if test="record.formColumnId != null" >
+        FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnFormDefId != null" >
+        FORM_COLUMN_FORM_DEF_ID = #{record.formColumnFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnEntityId != null" >
+        FORM_COLUMN_ENTITY_ID = #{record.formColumnEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnColumnId != null" >
+        FORM_COLUMN_COLUMN_ID = #{record.formColumnColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formEntityTablename != null" >
+        FORM_ENTITY_TABLENAME = #{record.formEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formFieldTablename != null" >
+        FORM_FIELD_TABLENAME = #{record.formFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnUsName != null" >
+        FORM_COLUMN_US_NAME = #{record.formColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnLable != null" >
+        FORM_COLUMN_LABLE = #{record.formColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnLableWidth != null" >
+        FORM_COLUMN_LABLE_WIDTH = #{record.formColumnLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnSql != null" >
+        FORM_COLUMN_SQL = #{record.formColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnGuiType != null" >
+        FORM_COLUMN_GUI_TYPE = #{record.formColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnWidth != null" >
+        FORM_COLUMN_WIDTH = #{record.formColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnAlign != null" >
+        FORM_COLUMN_ALIGN = #{record.formColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnHeight != null" >
+        FORM_COLUMN_HEIGHT = #{record.formColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnSort != null" >
+        FORM_COLUMN_SORT = #{record.formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnShowType != null" >
+        FORM_COLUMN_SHOW_TYPE = #{record.formColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnRowSpan != null" >
+        FORM_COLUMN_ROW_SPAN = #{record.formColumnRowSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnColSpan != null" >
+        FORM_COLUMN_COL_SPAN = #{record.formColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnRequired != null" >
+        FORM_COLUMN_REQUIRED = #{record.formColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnGroupId != null" >
+        FORM_COLUMN_GROUP_ID = #{record.formColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnChangeFun != null" >
+        FORM_COLUMN_CHANGE_FUN = #{record.formColumnChangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnInitFun != null" >
+        FORM_COLUMN_INIT_FUN = #{record.formColumnInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnIslocket != null" >
+        FORM_COLUMN_ISLOCKET = #{record.formColumnIslocket,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnRigist != null" >
+        FORM_COLUMN_RIGIST = #{record.formColumnRigist,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnType != null" >
+        FORM_COLUMN_TYPE = #{record.formColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnTotal != null" >
+        FORM_COLUMN_TOTAL = #{record.formColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnIsDev != null" >
+        FORM_COLUMN_IS_DEV = #{record.formColumnIsDev,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnMaxLength != null" >
+        FORM_COLUMN_MAX_LENGTH = #{record.formColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnMinLength != null" >
+        FORM_COLUMN_MIN_LENGTH = #{record.formColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnColor != null" >
+        FORM_COLUMN_COLOR = #{record.formColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnColorCondition != null" >
+        FORM_COLUMN_COLOR_CONDITION = #{record.formColumnColorCondition,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnPositionId != null" >
+        FORM_COLUMN_POSITION_ID = #{record.formColumnPositionId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnTemplateColumnId != null" >
+        FORM_COLUMN_TEMPLATE_COLUMN_ID = #{record.formColumnTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnPositionSort != null" >
+        FORM_COLUMN_POSITION_SORT = #{record.formColumnPositionSort,jdbcType=REAL},
+      </if>
+      <if test="record.isshowweb != null" >
+        isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshowmobile != null" >
+        isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultsort != null" >
+        defaultSort = #{record.defaultsort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issort != null" >
+        isSort = #{record.issort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_COLUMN
+    set FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      FORM_COLUMN_FORM_DEF_ID = #{record.formColumnFormDefId,jdbcType=DECIMAL},
+      FORM_COLUMN_ENTITY_ID = #{record.formColumnEntityId,jdbcType=DECIMAL},
+      FORM_COLUMN_COLUMN_ID = #{record.formColumnColumnId,jdbcType=DECIMAL},
+      FORM_ENTITY_TABLENAME = #{record.formEntityTablename,jdbcType=NVARCHAR},
+      FORM_FIELD_TABLENAME = #{record.formFieldTablename,jdbcType=NVARCHAR},
+      FORM_COLUMN_US_NAME = #{record.formColumnUsName,jdbcType=NVARCHAR},
+      FORM_COLUMN_LABLE = #{record.formColumnLable,jdbcType=NVARCHAR},
+      FORM_COLUMN_LABLE_WIDTH = #{record.formColumnLableWidth,jdbcType=NVARCHAR},
+      FORM_COLUMN_SQL = #{record.formColumnSql,jdbcType=NVARCHAR},
+      FORM_COLUMN_GUI_TYPE = #{record.formColumnGuiType,jdbcType=NVARCHAR},
+      FORM_COLUMN_WIDTH = #{record.formColumnWidth,jdbcType=NVARCHAR},
+      FORM_COLUMN_ALIGN = #{record.formColumnAlign,jdbcType=NVARCHAR},
+      FORM_COLUMN_HEIGHT = #{record.formColumnHeight,jdbcType=NVARCHAR},
+      FORM_COLUMN_SORT = #{record.formColumnSort,jdbcType=DECIMAL},
+      FORM_COLUMN_SHOW_TYPE = #{record.formColumnShowType,jdbcType=NVARCHAR},
+      FORM_COLUMN_ROW_SPAN = #{record.formColumnRowSpan,jdbcType=DECIMAL},
+      FORM_COLUMN_COL_SPAN = #{record.formColumnColSpan,jdbcType=DECIMAL},
+      FORM_COLUMN_REQUIRED = #{record.formColumnRequired,jdbcType=NVARCHAR},
+      FORM_COLUMN_GROUP_ID = #{record.formColumnGroupId,jdbcType=NVARCHAR},
+      FORM_COLUMN_CHANGE_FUN = #{record.formColumnChangeFun,jdbcType=NVARCHAR},
+      FORM_COLUMN_INIT_FUN = #{record.formColumnInitFun,jdbcType=NVARCHAR},
+      FORM_COLUMN_ISLOCKET = #{record.formColumnIslocket,jdbcType=NVARCHAR},
+      FORM_COLUMN_RIGIST = #{record.formColumnRigist,jdbcType=NVARCHAR},
+      FORM_COLUMN_TYPE = #{record.formColumnType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      FORM_COLUMN_TOTAL = #{record.formColumnTotal,jdbcType=NVARCHAR},
+      FORM_COLUMN_IS_DEV = #{record.formColumnIsDev,jdbcType=NVARCHAR},
+      FORM_COLUMN_MAX_LENGTH = #{record.formColumnMaxLength,jdbcType=DECIMAL},
+      FORM_COLUMN_MIN_LENGTH = #{record.formColumnMinLength,jdbcType=DECIMAL},
+      FORM_COLUMN_COLOR = #{record.formColumnColor,jdbcType=NVARCHAR},
+      FORM_COLUMN_COLOR_CONDITION = #{record.formColumnColorCondition,jdbcType=NVARCHAR},
+      FORM_COLUMN_POSITION_ID = #{record.formColumnPositionId,jdbcType=NVARCHAR},
+      FORM_COLUMN_TEMPLATE_COLUMN_ID = #{record.formColumnTemplateColumnId,jdbcType=DECIMAL},
+      FORM_COLUMN_POSITION_SORT = #{record.formColumnPositionSort,jdbcType=REAL},
+      isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR},
+      defaultSort = #{record.defaultsort,jdbcType=VARCHAR},
+      isSort = #{record.issort,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    update SYS_FORM_COLUMN
+    <set >
+      <if test="formColumnFormDefId != null" >
+        FORM_COLUMN_FORM_DEF_ID = #{formColumnFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnEntityId != null" >
+        FORM_COLUMN_ENTITY_ID = #{formColumnEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColumnId != null" >
+        FORM_COLUMN_COLUMN_ID = #{formColumnColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="formEntityTablename != null" >
+        FORM_ENTITY_TABLENAME = #{formEntityTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="formFieldTablename != null" >
+        FORM_FIELD_TABLENAME = #{formFieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnUsName != null" >
+        FORM_COLUMN_US_NAME = #{formColumnUsName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnLable != null" >
+        FORM_COLUMN_LABLE = #{formColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnLableWidth != null" >
+        FORM_COLUMN_LABLE_WIDTH = #{formColumnLableWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSql != null" >
+        FORM_COLUMN_SQL = #{formColumnSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnGuiType != null" >
+        FORM_COLUMN_GUI_TYPE = #{formColumnGuiType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnWidth != null" >
+        FORM_COLUMN_WIDTH = #{formColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnAlign != null" >
+        FORM_COLUMN_ALIGN = #{formColumnAlign,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnHeight != null" >
+        FORM_COLUMN_HEIGHT = #{formColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSort != null" >
+        FORM_COLUMN_SORT = #{formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnShowType != null" >
+        FORM_COLUMN_SHOW_TYPE = #{formColumnShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnRowSpan != null" >
+        FORM_COLUMN_ROW_SPAN = #{formColumnRowSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColSpan != null" >
+        FORM_COLUMN_COL_SPAN = #{formColumnColSpan,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnRequired != null" >
+        FORM_COLUMN_REQUIRED = #{formColumnRequired,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnGroupId != null" >
+        FORM_COLUMN_GROUP_ID = #{formColumnGroupId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnChangeFun != null" >
+        FORM_COLUMN_CHANGE_FUN = #{formColumnChangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnInitFun != null" >
+        FORM_COLUMN_INIT_FUN = #{formColumnInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnIslocket != null" >
+        FORM_COLUMN_ISLOCKET = #{formColumnIslocket,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnRigist != null" >
+        FORM_COLUMN_RIGIST = #{formColumnRigist,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnType != null" >
+        FORM_COLUMN_TYPE = #{formColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnTotal != null" >
+        FORM_COLUMN_TOTAL = #{formColumnTotal,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnIsDev != null" >
+        FORM_COLUMN_IS_DEV = #{formColumnIsDev,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnMaxLength != null" >
+        FORM_COLUMN_MAX_LENGTH = #{formColumnMaxLength,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnMinLength != null" >
+        FORM_COLUMN_MIN_LENGTH = #{formColumnMinLength,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnColor != null" >
+        FORM_COLUMN_COLOR = #{formColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnColorCondition != null" >
+        FORM_COLUMN_COLOR_CONDITION = #{formColumnColorCondition,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnPositionId != null" >
+        FORM_COLUMN_POSITION_ID = #{formColumnPositionId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnTemplateColumnId != null" >
+        FORM_COLUMN_TEMPLATE_COLUMN_ID = #{formColumnTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnPositionSort != null" >
+        FORM_COLUMN_POSITION_SORT = #{formColumnPositionSort,jdbcType=REAL},
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile = #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultsort != null" >
+        defaultSort = #{defaultsort,jdbcType=VARCHAR},
+      </if>
+      <if test="issort != null" >
+        isSort = #{issort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    update SYS_FORM_COLUMN
+    set FORM_COLUMN_FORM_DEF_ID = #{formColumnFormDefId,jdbcType=DECIMAL},
+      FORM_COLUMN_ENTITY_ID = #{formColumnEntityId,jdbcType=DECIMAL},
+      FORM_COLUMN_COLUMN_ID = #{formColumnColumnId,jdbcType=DECIMAL},
+      FORM_ENTITY_TABLENAME = #{formEntityTablename,jdbcType=NVARCHAR},
+      FORM_FIELD_TABLENAME = #{formFieldTablename,jdbcType=NVARCHAR},
+      FORM_COLUMN_US_NAME = #{formColumnUsName,jdbcType=NVARCHAR},
+      FORM_COLUMN_LABLE = #{formColumnLable,jdbcType=NVARCHAR},
+      FORM_COLUMN_LABLE_WIDTH = #{formColumnLableWidth,jdbcType=NVARCHAR},
+      FORM_COLUMN_SQL = #{formColumnSql,jdbcType=NVARCHAR},
+      FORM_COLUMN_GUI_TYPE = #{formColumnGuiType,jdbcType=NVARCHAR},
+      FORM_COLUMN_WIDTH = #{formColumnWidth,jdbcType=NVARCHAR},
+      FORM_COLUMN_ALIGN = #{formColumnAlign,jdbcType=NVARCHAR},
+      FORM_COLUMN_HEIGHT = #{formColumnHeight,jdbcType=NVARCHAR},
+      FORM_COLUMN_SORT = #{formColumnSort,jdbcType=DECIMAL},
+      FORM_COLUMN_SHOW_TYPE = #{formColumnShowType,jdbcType=NVARCHAR},
+      FORM_COLUMN_ROW_SPAN = #{formColumnRowSpan,jdbcType=DECIMAL},
+      FORM_COLUMN_COL_SPAN = #{formColumnColSpan,jdbcType=DECIMAL},
+      FORM_COLUMN_REQUIRED = #{formColumnRequired,jdbcType=NVARCHAR},
+      FORM_COLUMN_GROUP_ID = #{formColumnGroupId,jdbcType=NVARCHAR},
+      FORM_COLUMN_CHANGE_FUN = #{formColumnChangeFun,jdbcType=NVARCHAR},
+      FORM_COLUMN_INIT_FUN = #{formColumnInitFun,jdbcType=NVARCHAR},
+      FORM_COLUMN_ISLOCKET = #{formColumnIslocket,jdbcType=NVARCHAR},
+      FORM_COLUMN_RIGIST = #{formColumnRigist,jdbcType=NVARCHAR},
+      FORM_COLUMN_TYPE = #{formColumnType,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      FORM_COLUMN_TOTAL = #{formColumnTotal,jdbcType=NVARCHAR},
+      FORM_COLUMN_IS_DEV = #{formColumnIsDev,jdbcType=NVARCHAR},
+      FORM_COLUMN_MAX_LENGTH = #{formColumnMaxLength,jdbcType=DECIMAL},
+      FORM_COLUMN_MIN_LENGTH = #{formColumnMinLength,jdbcType=DECIMAL},
+      FORM_COLUMN_COLOR = #{formColumnColor,jdbcType=NVARCHAR},
+      FORM_COLUMN_COLOR_CONDITION = #{formColumnColorCondition,jdbcType=NVARCHAR},
+      FORM_COLUMN_POSITION_ID = #{formColumnPositionId,jdbcType=NVARCHAR},
+      FORM_COLUMN_TEMPLATE_COLUMN_ID = #{formColumnTemplateColumnId,jdbcType=DECIMAL},
+      FORM_COLUMN_POSITION_SORT = #{formColumnPositionSort,jdbcType=REAL},
+      isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{isshowmobile,jdbcType=VARCHAR},
+      defaultSort = #{defaultsort,jdbcType=VARCHAR},
+      isSort = #{issort,jdbcType=VARCHAR}
+    where FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

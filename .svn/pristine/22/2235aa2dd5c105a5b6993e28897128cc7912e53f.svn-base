@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysUserExpand.SysUserMapperExpand" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.SysUser" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_CODE" property="userCode" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="USER_TALEPHONE" property="userTalephone" jdbcType="VARCHAR" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
+    <result column="USER_STATUS" property="userStatus" jdbcType="VARCHAR" />
+    <result column="USER_TIME_START" property="userTimeStart" jdbcType="TIMESTAMP" />
+    <result column="USER_TIME_END" property="userTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="USER_STYLE" property="userStyle" jdbcType="VARCHAR" />
+    <result column="USER_LASTLOGIN" property="userLastlogin" jdbcType="TIMESTAMP" />
+    <result column="USER_ERRCOUNT" property="userErrcount" jdbcType="INTEGER" />
+    <result column="USER_IPADDRESS" property="userIpaddress" jdbcType="VARCHAR" />
+    <result column="USER_REMARK" property="userRemark" jdbcType="VARCHAR" />
+    <result column="EMP_ID" property="empId" jdbcType="INTEGER" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SusUserSelect" type="com.myehr.pojo.sysuser.SysUserSelect"  extends="BaseResultMap">
+    <id column="EMP_CODE" property="empCode" jdbcType="VARCHAR" />
+    <result column="EMP_CHINA_NAME" property="empChinaName" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+    <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+    <result column="ORG_COMP_ID" property="orgCompId" jdbcType="INTEGER" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_COMP_NAME" property="orgCompName" jdbcType="VARCHAR" />
+    <result column="ORG_COMP_CODE" property="orgCompCode" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  
+  
+  
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_CODE, USER_NAME, USER_PASSWORD, USER_TALEPHONE, USER_EMAIL, USER_STATUS, 
+    USER_TIME_START, USER_TIME_END, USER_STYLE, USER_LASTLOGIN, USER_ERRCOUNT, USER_IPADDRESS, 
+    USER_REMARK, EMP_ID, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK
+  </sql>
+  
+  
+    <select id="searchByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		sys_user
+	WHERE
+	   (USER_CODE LIKE #{condition}
+	OR USER_NAME LIKE #{condition}
+	OR USER_TALEPHONE LIKE #{condition}
+	OR USER_EMAIL LIKE #{condition}
+	OR USER_REMARK LIKE #{condition})
+	AND DELETE_MARK = #{deleteMark}
+  </select>
+  
+  <select id="getAllSysUser" parameterType="java.util.Map" resultMap="SusUserSelect">
+  		${sql}
+  </select>
+  
+  
+    <select id="getTotalSysUser" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT COUNT(*) FROM SYS_USER
+  </select>
+  
+   <update id="updatePassword" parameterType="java.util.Map">
+  	update SYS_USER set USER_PASSWORD='${newPassword}'  where USER_ID=${userId}
+   </update>
+   
+   <update id="updatePasswordAdmin" parameterType="java.util.Map">
+  	update SYS_USER set USER_PASSWORD='${newPassword}'  where USER_ID in (${userId})
+   </update>
+  
+</mapper>

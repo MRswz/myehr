@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.task.SysTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.task.SysTask" >
+    <id column="sys_task_id" property="sysTaskId" jdbcType="DECIMAL" />
+    <result column="sys_task_empid" property="sysTaskEmpid" jdbcType="DECIMAL" />
+    <result column="sys_task_status" property="sysTaskStatus" jdbcType="NVARCHAR" />
+    <result column="sys_attaching_task" property="sysAttachingTask" jdbcType="NVARCHAR" />
+    <result column="sys_attaching_project" property="sysAttachingProject" jdbcType="NVARCHAR" />
+    <result column="sys_task_identifier" property="sysTaskIdentifier" jdbcType="NVARCHAR" />
+    <result column="sys_task_type" property="sysTaskType" jdbcType="NVARCHAR" />
+    <result column="sys_task_formid" property="sysTaskFormid" jdbcType="NVARCHAR" />
+    <result column="sys_task_create_userid" property="sysTaskCreateUserid" jdbcType="NVARCHAR" />
+    <result column="sys_task_create_time" property="sysTaskCreateTime" jdbcType="TIMESTAMP" />
+    <result column="sys_task_complete_userid" property="sysTaskCompleteUserid" jdbcType="DECIMAL" />
+    <result column="sys_task_complete_time" property="sysTaskCompleteTime" jdbcType="TIMESTAMP" />
+    <result column="sys_task_evaluator" property="sysTaskEvaluator" jdbcType="DECIMAL" />
+    <result column="sys_task_evaluation_time" property="sysTaskEvaluationTime" jdbcType="TIMESTAMP" />
+    <result column="sys_task_evaluation_info" property="sysTaskEvaluationInfo" jdbcType="NVARCHAR" />
+    <result column="sys_task_urgency" property="sysTaskUrgency" jdbcType="NVARCHAR" />
+    <result column="sys_task_importance" property="sysTaskImportance" jdbcType="NVARCHAR" />
+    <result column="sys_task_content" property="sysTaskContent" jdbcType="NVARCHAR" />
+    <result column="sys_task_calender_start" property="sysTaskCalenderStart" jdbcType="TIMESTAMP" />
+    <result column="sys_task_calender_end" property="sysTaskCalenderEnd" jdbcType="TIMESTAMP" />
+    <result column="proc_task_id" property="procTaskId" jdbcType="NVARCHAR" />
+    <result column="proc_ins_id" property="procInsId" jdbcType="NVARCHAR" />
+    <result column="proc_business_id" property="procBusinessId" jdbcType="NVARCHAR" />
+    <result column="proc_form_id" property="procFormId" jdbcType="DECIMAL" />
+    <result column="form_lable" property="formLable" jdbcType="NVARCHAR" />
+    <result column="form_recorID" property="formRecorid" jdbcType="INTEGER" />
+    <result column="sys_state" property="sysState" jdbcType="INTEGER" />
+    <result column="sys_title" property="sysTitle" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sys_task_id, sys_task_empid, sys_task_status, sys_attaching_task, sys_attaching_project, 
+    sys_task_identifier, sys_task_type, sys_task_formid, sys_task_create_userid, sys_task_create_time, 
+    sys_task_complete_userid, sys_task_complete_time, sys_task_evaluator, sys_task_evaluation_time, 
+    sys_task_evaluation_info, sys_task_urgency, sys_task_importance, sys_task_content, 
+    sys_task_calender_start, sys_task_calender_end, proc_task_id, proc_ins_id, proc_business_id, 
+    proc_form_id, form_lable, form_recorID, sys_state, sys_title
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.task.SysTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TASK
+    where sys_task_id = #{sysTaskId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_TASK
+    where sys_task_id = #{sysTaskId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.task.SysTaskExample" >
+    delete from SYS_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.task.SysTask" >
+    insert into SYS_TASK (sys_task_empid, sys_task_status, 
+      sys_attaching_task, sys_attaching_project, 
+      sys_task_identifier, sys_task_type, sys_task_formid, 
+      sys_task_create_userid, sys_task_create_time, 
+      sys_task_complete_userid, sys_task_complete_time, 
+      sys_task_evaluator, sys_task_evaluation_time, 
+      sys_task_evaluation_info, sys_task_urgency, 
+      sys_task_importance, sys_task_content, sys_task_calender_start, 
+      sys_task_calender_end, proc_task_id, proc_ins_id, 
+      proc_business_id, proc_form_id, form_lable, 
+      form_recorID, sys_state, sys_title
+      )
+    values (#{sysTaskEmpid,jdbcType=DECIMAL}, #{sysTaskStatus,jdbcType=NVARCHAR}, 
+      #{sysAttachingTask,jdbcType=NVARCHAR}, #{sysAttachingProject,jdbcType=NVARCHAR}, 
+      #{sysTaskIdentifier,jdbcType=NVARCHAR}, #{sysTaskType,jdbcType=NVARCHAR}, #{sysTaskFormid,jdbcType=NVARCHAR}, 
+      #{sysTaskCreateUserid,jdbcType=NVARCHAR}, #{sysTaskCreateTime,jdbcType=TIMESTAMP}, 
+      #{sysTaskCompleteUserid,jdbcType=DECIMAL}, #{sysTaskCompleteTime,jdbcType=TIMESTAMP}, 
+      #{sysTaskEvaluator,jdbcType=DECIMAL}, #{sysTaskEvaluationTime,jdbcType=TIMESTAMP}, 
+      #{sysTaskEvaluationInfo,jdbcType=NVARCHAR}, #{sysTaskUrgency,jdbcType=NVARCHAR}, 
+      #{sysTaskImportance,jdbcType=NVARCHAR}, #{sysTaskContent,jdbcType=NVARCHAR}, #{sysTaskCalenderStart,jdbcType=TIMESTAMP}, 
+      #{sysTaskCalenderEnd,jdbcType=TIMESTAMP}, #{procTaskId,jdbcType=NVARCHAR}, #{procInsId,jdbcType=NVARCHAR}, 
+      #{procBusinessId,jdbcType=NVARCHAR}, #{procFormId,jdbcType=DECIMAL}, #{formLable,jdbcType=NVARCHAR}, 
+      #{formRecorid,jdbcType=INTEGER}, #{sysState,jdbcType=INTEGER}, #{sysTitle,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.task.SysTask" >
+    insert into SYS_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysTaskId != null" >
+        sys_task_id,
+      </if>
+      <if test="sysTaskEmpid != null" >
+        sys_task_empid,
+      </if>
+      <if test="sysTaskStatus != null" >
+        sys_task_status,
+      </if>
+      <if test="sysAttachingTask != null" >
+        sys_attaching_task,
+      </if>
+      <if test="sysAttachingProject != null" >
+        sys_attaching_project,
+      </if>
+      <if test="sysTaskIdentifier != null" >
+        sys_task_identifier,
+      </if>
+      <if test="sysTaskType != null" >
+        sys_task_type,
+      </if>
+      <if test="sysTaskFormid != null" >
+        sys_task_formid,
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        sys_task_create_userid,
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        sys_task_create_time,
+      </if>
+      <if test="sysTaskCompleteUserid != null" >
+        sys_task_complete_userid,
+      </if>
+      <if test="sysTaskCompleteTime != null" >
+        sys_task_complete_time,
+      </if>
+      <if test="sysTaskEvaluator != null" >
+        sys_task_evaluator,
+      </if>
+      <if test="sysTaskEvaluationTime != null" >
+        sys_task_evaluation_time,
+      </if>
+      <if test="sysTaskEvaluationInfo != null" >
+        sys_task_evaluation_info,
+      </if>
+      <if test="sysTaskUrgency != null" >
+        sys_task_urgency,
+      </if>
+      <if test="sysTaskImportance != null" >
+        sys_task_importance,
+      </if>
+      <if test="sysTaskContent != null" >
+        sys_task_content,
+      </if>
+      <if test="sysTaskCalenderStart != null" >
+        sys_task_calender_start,
+      </if>
+      <if test="sysTaskCalenderEnd != null" >
+        sys_task_calender_end,
+      </if>
+      <if test="procTaskId != null" >
+        proc_task_id,
+      </if>
+      <if test="procInsId != null" >
+        proc_ins_id,
+      </if>
+      <if test="procBusinessId != null" >
+        proc_business_id,
+      </if>
+      <if test="procFormId != null" >
+        proc_form_id,
+      </if>
+      <if test="formLable != null" >
+        form_lable,
+      </if>
+      <if test="formRecorid != null" >
+        form_recorID,
+      </if>
+      <if test="sysState != null" >
+        sys_state,
+      </if>
+      <if test="sysTitle != null" >
+        sys_title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysTaskId != null" >
+        #{sysTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskEmpid != null" >
+        #{sysTaskEmpid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskStatus != null" >
+        #{sysTaskStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysAttachingTask != null" >
+        #{sysAttachingTask,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysAttachingProject != null" >
+        #{sysAttachingProject,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskIdentifier != null" >
+        #{sysTaskIdentifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskType != null" >
+        #{sysTaskType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskFormid != null" >
+        #{sysTaskFormid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        #{sysTaskCreateUserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskCompleteUserid != null" >
+        #{sysTaskCompleteUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskCompleteTime != null" >
+        #{sysTaskCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskEvaluator != null" >
+        #{sysTaskEvaluator,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskEvaluationTime != null" >
+        #{sysTaskEvaluationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskEvaluationInfo != null" >
+        #{sysTaskEvaluationInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskUrgency != null" >
+        #{sysTaskUrgency,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskImportance != null" >
+        #{sysTaskImportance,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskContent != null" >
+        #{sysTaskContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCalenderStart != null" >
+        #{sysTaskCalenderStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskCalenderEnd != null" >
+        #{sysTaskCalenderEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procTaskId != null" >
+        #{procTaskId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procInsId != null" >
+        #{procInsId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procBusinessId != null" >
+        #{procBusinessId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procFormId != null" >
+        #{procFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formLable != null" >
+        #{formLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRecorid != null" >
+        #{formRecorid,jdbcType=INTEGER},
+      </if>
+      <if test="sysState != null" >
+        #{sysState,jdbcType=INTEGER},
+      </if>
+      <if test="sysTitle != null" >
+        #{sysTitle,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.task.SysTaskExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TASK
+    <set >
+      <if test="record.sysTaskId != null" >
+        sys_task_id = #{record.sysTaskId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskEmpid != null" >
+        sys_task_empid = #{record.sysTaskEmpid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskStatus != null" >
+        sys_task_status = #{record.sysTaskStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysAttachingTask != null" >
+        sys_attaching_task = #{record.sysAttachingTask,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysAttachingProject != null" >
+        sys_attaching_project = #{record.sysAttachingProject,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskIdentifier != null" >
+        sys_task_identifier = #{record.sysTaskIdentifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskType != null" >
+        sys_task_type = #{record.sysTaskType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskFormid != null" >
+        sys_task_formid = #{record.sysTaskFormid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskCreateUserid != null" >
+        sys_task_create_userid = #{record.sysTaskCreateUserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskCreateTime != null" >
+        sys_task_create_time = #{record.sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTaskCompleteUserid != null" >
+        sys_task_complete_userid = #{record.sysTaskCompleteUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskCompleteTime != null" >
+        sys_task_complete_time = #{record.sysTaskCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTaskEvaluator != null" >
+        sys_task_evaluator = #{record.sysTaskEvaluator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTaskEvaluationTime != null" >
+        sys_task_evaluation_time = #{record.sysTaskEvaluationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTaskEvaluationInfo != null" >
+        sys_task_evaluation_info = #{record.sysTaskEvaluationInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskUrgency != null" >
+        sys_task_urgency = #{record.sysTaskUrgency,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskImportance != null" >
+        sys_task_importance = #{record.sysTaskImportance,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskContent != null" >
+        sys_task_content = #{record.sysTaskContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTaskCalenderStart != null" >
+        sys_task_calender_start = #{record.sysTaskCalenderStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTaskCalenderEnd != null" >
+        sys_task_calender_end = #{record.sysTaskCalenderEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.procTaskId != null" >
+        proc_task_id = #{record.procTaskId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.procInsId != null" >
+        proc_ins_id = #{record.procInsId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.procBusinessId != null" >
+        proc_business_id = #{record.procBusinessId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.procFormId != null" >
+        proc_form_id = #{record.procFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formLable != null" >
+        form_lable = #{record.formLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formRecorid != null" >
+        form_recorID = #{record.formRecorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysState != null" >
+        sys_state = #{record.sysState,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysTitle != null" >
+        sys_title = #{record.sysTitle,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TASK
+    set sys_task_id = #{record.sysTaskId,jdbcType=DECIMAL},
+      sys_task_empid = #{record.sysTaskEmpid,jdbcType=DECIMAL},
+      sys_task_status = #{record.sysTaskStatus,jdbcType=NVARCHAR},
+      sys_attaching_task = #{record.sysAttachingTask,jdbcType=NVARCHAR},
+      sys_attaching_project = #{record.sysAttachingProject,jdbcType=NVARCHAR},
+      sys_task_identifier = #{record.sysTaskIdentifier,jdbcType=NVARCHAR},
+      sys_task_type = #{record.sysTaskType,jdbcType=NVARCHAR},
+      sys_task_formid = #{record.sysTaskFormid,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{record.sysTaskCreateUserid,jdbcType=NVARCHAR},
+      sys_task_create_time = #{record.sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_task_complete_userid = #{record.sysTaskCompleteUserid,jdbcType=DECIMAL},
+      sys_task_complete_time = #{record.sysTaskCompleteTime,jdbcType=TIMESTAMP},
+      sys_task_evaluator = #{record.sysTaskEvaluator,jdbcType=DECIMAL},
+      sys_task_evaluation_time = #{record.sysTaskEvaluationTime,jdbcType=TIMESTAMP},
+      sys_task_evaluation_info = #{record.sysTaskEvaluationInfo,jdbcType=NVARCHAR},
+      sys_task_urgency = #{record.sysTaskUrgency,jdbcType=NVARCHAR},
+      sys_task_importance = #{record.sysTaskImportance,jdbcType=NVARCHAR},
+      sys_task_content = #{record.sysTaskContent,jdbcType=NVARCHAR},
+      sys_task_calender_start = #{record.sysTaskCalenderStart,jdbcType=TIMESTAMP},
+      sys_task_calender_end = #{record.sysTaskCalenderEnd,jdbcType=TIMESTAMP},
+      proc_task_id = #{record.procTaskId,jdbcType=NVARCHAR},
+      proc_ins_id = #{record.procInsId,jdbcType=NVARCHAR},
+      proc_business_id = #{record.procBusinessId,jdbcType=NVARCHAR},
+      proc_form_id = #{record.procFormId,jdbcType=DECIMAL},
+      form_lable = #{record.formLable,jdbcType=NVARCHAR},
+      form_recorID = #{record.formRecorid,jdbcType=INTEGER},
+      sys_state = #{record.sysState,jdbcType=INTEGER},
+      sys_title = #{record.sysTitle,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.task.SysTask" >
+    update SYS_TASK
+    <set >
+      <if test="sysTaskEmpid != null" >
+        sys_task_empid = #{sysTaskEmpid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskStatus != null" >
+        sys_task_status = #{sysTaskStatus,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysAttachingTask != null" >
+        sys_attaching_task = #{sysAttachingTask,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysAttachingProject != null" >
+        sys_attaching_project = #{sysAttachingProject,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskIdentifier != null" >
+        sys_task_identifier = #{sysTaskIdentifier,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskType != null" >
+        sys_task_type = #{sysTaskType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskFormid != null" >
+        sys_task_formid = #{sysTaskFormid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateUserid != null" >
+        sys_task_create_userid = #{sysTaskCreateUserid,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCreateTime != null" >
+        sys_task_create_time = #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskCompleteUserid != null" >
+        sys_task_complete_userid = #{sysTaskCompleteUserid,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskCompleteTime != null" >
+        sys_task_complete_time = #{sysTaskCompleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskEvaluator != null" >
+        sys_task_evaluator = #{sysTaskEvaluator,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTaskEvaluationTime != null" >
+        sys_task_evaluation_time = #{sysTaskEvaluationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskEvaluationInfo != null" >
+        sys_task_evaluation_info = #{sysTaskEvaluationInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskUrgency != null" >
+        sys_task_urgency = #{sysTaskUrgency,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskImportance != null" >
+        sys_task_importance = #{sysTaskImportance,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskContent != null" >
+        sys_task_content = #{sysTaskContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTaskCalenderStart != null" >
+        sys_task_calender_start = #{sysTaskCalenderStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTaskCalenderEnd != null" >
+        sys_task_calender_end = #{sysTaskCalenderEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procTaskId != null" >
+        proc_task_id = #{procTaskId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procInsId != null" >
+        proc_ins_id = #{procInsId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procBusinessId != null" >
+        proc_business_id = #{procBusinessId,jdbcType=NVARCHAR},
+      </if>
+      <if test="procFormId != null" >
+        proc_form_id = #{procFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="formLable != null" >
+        form_lable = #{formLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRecorid != null" >
+        form_recorID = #{formRecorid,jdbcType=INTEGER},
+      </if>
+      <if test="sysState != null" >
+        sys_state = #{sysState,jdbcType=INTEGER},
+      </if>
+      <if test="sysTitle != null" >
+        sys_title = #{sysTitle,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where sys_task_id = #{sysTaskId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.task.SysTask" >
+    update SYS_TASK
+    set sys_task_empid = #{sysTaskEmpid,jdbcType=DECIMAL},
+      sys_task_status = #{sysTaskStatus,jdbcType=NVARCHAR},
+      sys_attaching_task = #{sysAttachingTask,jdbcType=NVARCHAR},
+      sys_attaching_project = #{sysAttachingProject,jdbcType=NVARCHAR},
+      sys_task_identifier = #{sysTaskIdentifier,jdbcType=NVARCHAR},
+      sys_task_type = #{sysTaskType,jdbcType=NVARCHAR},
+      sys_task_formid = #{sysTaskFormid,jdbcType=NVARCHAR},
+      sys_task_create_userid = #{sysTaskCreateUserid,jdbcType=NVARCHAR},
+      sys_task_create_time = #{sysTaskCreateTime,jdbcType=TIMESTAMP},
+      sys_task_complete_userid = #{sysTaskCompleteUserid,jdbcType=DECIMAL},
+      sys_task_complete_time = #{sysTaskCompleteTime,jdbcType=TIMESTAMP},
+      sys_task_evaluator = #{sysTaskEvaluator,jdbcType=DECIMAL},
+      sys_task_evaluation_time = #{sysTaskEvaluationTime,jdbcType=TIMESTAMP},
+      sys_task_evaluation_info = #{sysTaskEvaluationInfo,jdbcType=NVARCHAR},
+      sys_task_urgency = #{sysTaskUrgency,jdbcType=NVARCHAR},
+      sys_task_importance = #{sysTaskImportance,jdbcType=NVARCHAR},
+      sys_task_content = #{sysTaskContent,jdbcType=NVARCHAR},
+      sys_task_calender_start = #{sysTaskCalenderStart,jdbcType=TIMESTAMP},
+      sys_task_calender_end = #{sysTaskCalenderEnd,jdbcType=TIMESTAMP},
+      proc_task_id = #{procTaskId,jdbcType=NVARCHAR},
+      proc_ins_id = #{procInsId,jdbcType=NVARCHAR},
+      proc_business_id = #{procBusinessId,jdbcType=NVARCHAR},
+      proc_form_id = #{procFormId,jdbcType=DECIMAL},
+      form_lable = #{formLable,jdbcType=NVARCHAR},
+      form_recorID = #{formRecorid,jdbcType=INTEGER},
+      sys_state = #{sysState,jdbcType=INTEGER},
+      sys_title = #{sysTitle,jdbcType=NVARCHAR}
+    where sys_task_id = #{sysTaskId,jdbcType=DECIMAL}
+  </update>
+</mapper>

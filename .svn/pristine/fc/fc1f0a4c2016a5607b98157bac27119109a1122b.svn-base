@@ -1,0 +1,958 @@
+var DDC = {
+    "dragconfig": {
+    	"dragconfigHtmlAll": "",
+        "dragconfigHtml": "",
+        "dragconfigCode": "",
+        "dragconfigId": ""
+    },
+    "dragconfigColumns": [
+        // {
+        //     "formId": "123"
+        // }
+    ]
+}
+
+
+
+// 是否支持localStorage
+function supportstorage() {
+	if (typeof window.localStorage=='object') 
+		return true;
+	else
+		return false;		
+}
+
+function handleSaveLayout() {
+	var e = $(".demo").html();
+	if (!stopsave && e != window.demoHtml) {
+		stopsave++;
+		window.demoHtml = e;
+		saveLayout();
+		stopsave--;
+	}
+}
+
+var layouthistory; 
+function saveLayout(){
+	var data = layouthistory;
+	if (!data) {
+		data={};
+		data.count = 0;
+		data.list = [];
+	}
+	console.log(data);
+	if (data.list.length>data.count) {
+		for (i=data.count;i<data.list.length;i++)
+			data.list[i]=null;
+	}
+	data.list[data.count] = window.demoHtml;
+	data.count++;
+	if (supportstorage()) {
+		localStorage.setItem("layoutdata",JSON.stringify(data));
+	}
+	layouthistory = data;
+	//console.log(data);
+	/*$.ajax({  
+		type: "POST",  
+		url: "/build/saveLayout",  
+		data: { layout: $('.demo').html() },  
+		success: function(data) {
+			//updateButtonsVisibility();
+		}
+	});*/
+}
+
+function downloadLayout(){
+	
+	$.ajax({  
+		type: "POST",  
+		url: "/build/downloadLayout",  
+		data: { layout: $('#download-layout').html() },  
+		success: function(data) { window.location.href = '/build/download'; }
+	});
+}
+
+function downloadHtmlLayout(){
+	$.ajax({  
+		type: "POST",  
+		url: "/build/downloadLayout",  
+		data: { layout: $('#download-layout').html() },  
+		success: function(data) { window.location.href = '/build/downloadHtml'; }
+	});
+}
+
+// 撤销布局
+function undoLayout() {
+	var data = layouthistory;
+	//console.log(data);
+	if (data) {
+		if (data.count<2) return false;
+		window.demoHtml = data.list[data.count-2];
+		data.count--;
+		$('.demo').html(window.demoHtml);
+		if (supportstorage()) {
+			localStorage.setItem("layoutdata",JSON.stringify(data));
+		}
+		return true;
+	}
+	return false;
+	/*$.ajax({  
+		type: "POST",  
+		url: "/build/getPreviousLayout",  
+		data: { },  
+		success: function(data) {
+			undoOperation(data);
+		}
+	});*/
+}
+
+function redoLayout() {
+	var data = layouthistory;
+	console.log(data);
+	if (data) {
+		if (data.list[data.count]) {
+			window.demoHtml = data.list[data.count];
+			data.count++;
+			$('.demo').html(window.demoHtml);
+			if (supportstorage()) {
+				localStorage.setItem("layoutdata",JSON.stringify(data));
+			}
+			return true;
+		}
+	}
+	return false;
+	/*
+	$.ajax({  
+		type: "POST",  
+		url: "/build/getPreviousLayout",  
+		data: { },  
+		success: function(data) {
+			redoOperation(data);
+		}
+	});*/
+}
+
+// 操作交互组件
+function handleJsIds() {
+	handleModalIds();
+	handleAccordionIds();
+	handleCarouselIds();
+	handleTabsIds();
+	handleBarIds();
+	handleLineIds();
+	handlePieIds();
+	handleTreeIds();
+}
+// 手风琴
+function handleAccordionIds() {
+	var e = $(".demo #myAccordion");
+	var t = randomNumber();
+	var n = "accordion-" + t;
+	var r;
+	e.attr("id", n);
+	e.find(".accordion-group").each(function(e, t) {
+		r = "accordion-element-" + randomNumber();
+		$(t).find(".accordion-toggle").each(function(e, t) {
+			$(t).attr("data-parent", "#" + n);
+			$(t).attr("href", "#" + r)
+		});
+		$(t).find(".accordion-body").each(function(e, t) {
+			$(t).attr("id", r)
+		})
+	})
+}
+// 轮播图
+function handleCarouselIds() {
+	var e = $(".demo #myCarousel");
+	var t = randomNumber();
+	var n = "carousel-" + t;
+	e.attr("id", n);
+	e.find(".carousel-indicators li").each(function(e, t) {
+		$(t).attr("data-target", "#" + n)
+	});
+	e.find(".left").attr("href", "#" + n);
+	e.find(".right").attr("href", "#" + n)
+}
+// 柱状图
+function handleBarIds() {
+	var e = $(".demo .echarts-bar");
+	var t = randomNumber();
+	var n = "bar-" + t;
+	e.attr("id", n);
+	console.log(e[0]);
+	if(e[0] !== undefined) {
+		initBarCharts(e[0]);
+	}
+}
+
+// 折线图
+function handleLineIds() {
+	var e = $(".demo .echarts-line");
+	var t = randomNumber();
+	var n = "line-" + t;
+	e.attr("id", n);
+	if(e[0] !== undefined) {
+		initLineCharts(e[0]);
+	}	
+}
+
+// 饼图
+function handlePieIds() {
+	var e = $(".demo .echarts-pie");
+	var t = randomNumber();
+	var n = "pie-" + t;
+	e.attr("id", n);
+	if(e[0] !== undefined) {
+		initPieCharts(e[0]);
+	}
+}
+
+// 树状图
+function handleTreeIds() {
+	var e = $(".demo .echarts-tree");
+	var t = randomNumber();
+	var n = "tree-" + t;
+	e.attr("id", n);
+	console.log(e[0]);
+	if(e[0] !== undefined) {
+		initTreeCharts(e[0]);
+	}
+}
+
+
+// 柱状图init
+function initBarCharts(Ele){
+	var myChart = echarts.init(Ele);
+	var options = {
+	    color: ['#3398DB'],
+	    tooltip : {
+	        trigger: 'axis',
+	        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+	            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+	        }
+	    },
+	    grid: {
+	        left: '3%',
+	        right: '4%',
+	        bottom: '3%',
+	        containLabel: true
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+	            axisTick: {
+	                alignWithLabel: true
+	            }
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'直接访问',
+	            type:'bar',
+	            barWidth: '60%',
+	            data:[10, 52, 200, 334, 390, 330, 220]
+	        }
+	    ]
+	};
+    myChart.setOption(options);
+    $(window).resize(myChart.resize);
+}
+
+// 折线图init
+function initLineCharts(Ele){
+	var myChart = echarts.init(Ele);
+	var options = {
+	    title: {
+	        text: '未来一周气温变化',
+	        subtext: '纯属虚构'
+	    },
+	    tooltip: {
+	        trigger: 'axis'
+	    },
+	    legend: {
+	        data:['最高气温','最低气温']
+	    },
+	    toolbox: {
+	        show: true,
+	        feature: {
+	            dataZoom: {
+	                yAxisIndex: 'none'
+	            },
+	            dataView: {readOnly: false},
+	            magicType: {type: ['line', 'bar']},
+	            restore: {},
+	            saveAsImage: {}
+	        }
+	    },
+	    xAxis:  {
+	        type: 'category',
+	        boundaryGap: false,
+	        data: ['周一','周二','周三','周四','周五','周六','周日']
+	    },
+	    yAxis: {
+	        type: 'value',
+	        axisLabel: {
+	            formatter: '{value} °C'
+	        }
+	    },
+	    series: [
+	        {
+	            name:'最高气温',
+	            type:'line',
+	            data:[11, 11, 15, 13, 12, 13, 10],
+	            markPoint: {
+	                data: [
+	                    {type: 'max', name: '最大值'},
+	                    {type: 'min', name: '最小值'}
+	                ]
+	            },
+	            markLine: {
+	                data: [
+	                    {type: 'average', name: '平均值'}
+	                ]
+	            }
+	        },
+	        {
+	            name:'最低气温',
+	            type:'line',
+	            data:[1, -2, 2, 5, 3, 2, 0],
+	            markPoint: {
+	                data: [
+	                    {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+	                ]
+	            },
+	            markLine: {
+	                data: [
+	                    {type: 'average', name: '平均值'},
+	                    [{
+	                        symbol: 'none',
+	                        x: '90%',
+	                        yAxis: 'max'
+	                    }, {
+	                        symbol: 'circle',
+	                        label: {
+	                            normal: {
+	                                position: 'start',
+	                                formatter: '最大值'
+	                            }
+	                        },
+	                        type: 'max',
+	                        name: '最高点'
+	                    }]
+	                ]
+	            }
+	        }
+	    ]
+	};
+
+    myChart.setOption(options);
+    $(window).resize(myChart.resize);
+}
+
+// 饼图init
+function initPieCharts(Ele){
+	var myChart = echarts.init(Ele);
+	var options = {
+	    title : {
+	        text: '某站点用户访问来源',
+	        subtext: '纯属虚构',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'left',
+	        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+	    },
+	    series : [
+	        {
+	            name: '访问来源',
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:[
+	                {value:335, name:'直接访问'},
+	                {value:310, name:'邮件营销'},
+	                {value:234, name:'联盟广告'},
+	                {value:135, name:'视频广告'},
+	                {value:1548, name:'搜索引擎'}
+	            ],
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                }
+	            }
+	        }
+	    ]
+	};
+
+    myChart.setOption(options);
+    $(window).resize(myChart.resize);
+}
+
+// 树状图init
+function initTreeCharts(Ele){
+    var myChart = echarts.init(Ele);
+	myChart.showLoading();
+	$.get('../flare.json', function (data) {
+	    myChart.hideLoading();
+
+	    echarts.util.each(data.children, function (datum, index) {
+	        index % 2 === 0 && (datum.collapsed = true);
+	    });
+
+	    myChart.setOption(option = {
+	        tooltip: {
+	            trigger: 'item',
+	            triggerOn: 'mousemove'
+	        },
+	        series: [
+	            {
+	                type: 'tree',
+
+	                data: [data],
+
+	                top: '1%',
+	                left: '7%',
+	                bottom: '1%',
+	                right: '20%',
+
+	                symbolSize: 7,
+
+	                label: {
+	                    normal: {
+	                        position: 'left',
+	                        verticalAlign: 'middle',
+	                        align: 'right',
+	                        fontSize: 9
+	                    }
+	                },
+
+	                leaves: {
+	                    label: {
+	                        normal: {
+	                            position: 'right',
+	                            verticalAlign: 'middle',
+	                            align: 'left'
+	                        }
+	                    }
+	                },
+
+	                expandAndCollapse: true,
+	                animationDuration: 550,
+	                animationDurationUpdate: 750
+	            }
+	        ]
+	    });
+	});
+	$(window).resize(myChart.resize);
+}
+// 触发遮体
+function handleModalIds() {
+	var e = $(".demo #myModalLink");
+	var t = randomNumber();
+	var n = "modal-container-" + t;
+	var r = "modal-" + t;
+	e.attr("id", r);
+	e.attr("href", "#" + n);
+	e.next().attr("id", n)
+}
+// 切换卡
+function handleTabsIds() {
+	var e = $(".demo #myTabs");
+	var t = randomNumber();
+	var n = "tabs-" + t;
+	e.attr("id", n);
+	e.find(".tab-pane").each(function(e, t) {
+		var n = $(t).attr("id");
+		var r = "panel-" + randomNumber();
+		$(t).attr("id", r);
+		$(t).parent().parent().find("a[href=#" + n + "]").attr("href", "#" + r)
+	})
+}
+function randomNumber() {
+	return randomFromInterval(1, 1e6)
+}
+function randomFromInterval(e, t) {
+	return Math.floor(Math.random() * (t - e + 1) + e)
+}
+
+//栅格系统生成器
+function gridSystemGenerator() {
+	$(".lyrow .preview input").bind("keyup", function() {
+		var e = 0;
+		var t = "";
+		var n = $(this).val().split(" ", 12);
+		$.each(n, function(n, r) {
+			e = e + parseInt(r);
+			t += '<div class="span' + r + ' column"></div>'
+		});
+		if (e == 12) {
+			$(this).parent().next().children().html(t);
+			$(this).parent().prev().show()
+		} else {
+			$(this).parent().prev().hide()
+		}
+	})
+}
+function configurationElm(e, t) {
+	// 编辑
+	$(".demo").delegate(".configuration > a", "click", function(e) {
+		e.preventDefault();
+		var t = $(this).parent().next().next().children();
+		$(this).toggleClass("active");
+		t.toggleClass($(this).attr("rel"))
+	});
+	// 增加bootstrap class效果名
+	$(".demo").delegate(".configuration .dropdown-menu a", "click", function(e) {
+		e.preventDefault();
+		var t = $(this).parent().parent();
+		var n = t.parent().parent().next().next().children();
+		t.find("li").removeClass("active");
+		$(this).parent().addClass("active");
+		var r = "";
+		t.find("a").each(function() {
+			r += $(this).attr("rel") + " "
+		});
+		t.parent().removeClass("open");
+		n.removeClass(r);
+		n.addClass($(this).attr("rel"))
+	});
+
+	//增加formId(修改bug 只加一个formID)
+	$(".demo").delegate(".configuration .addId", "click", function() {
+		var url = '/myehr/jsp/form/formcreate/formChoose.jsp?widget=bootout';
+		layer.open({
+			type:2,
+			closeBtn:1,
+			shadeClose:true,
+			area:['950','700'],
+			maxmin:true,
+			title:'选择表单',
+			content:url,
+			success:function(layero,index){
+			},
+			end:function(){}
+		}); 
+		// var t = $(this).parent().next().next().children();
+		var t = $(this).parent().parent().find('.view .box-content').eq(0);
+		var formTime = setInterval(function() {
+			if ($('#bootoutFormId').val() !== '') {
+				var formId = $('#bootoutFormId').val();
+				var formIdObj = {"formId": ""};
+				t.attr("id", formId);
+				if(t.html().indexOf("dragID") > 0) {
+		            var index = t.html().indexOf("dragID");
+		            var str1 = t.html().substring(index)
+//		            var index2 =  str1.indexOf('<');
+//		            var str2 = str1.substring(0, index2);
+		            var reg_str = '/'+str1+'/'
+		            t.html(t.html().replace(eval(reg_str), 'dragID'+formId));
+		        } else {
+					t.append('dragID'+formId);	
+		        }
+				formIdObj.formId = parseInt(formId);
+				DDC.dragconfigColumns.push(formIdObj);
+				clearInterval(formTime);
+				$('#bootoutFormId').val('');
+			}
+		}, 1000)
+		
+	})
+}
+function removeElm() {
+	$(".demo").delegate(".remove", "click", function(e) {
+		e.preventDefault();
+		// 判断是否有formID 删除
+		if ($(this).parent().find('.addId').length > 0) {
+			var delId = $(this).parent().find('.addId').attr('id');
+			var arr = DDC.dragconfigColumns;
+			for(var i=0;i<arr.length;i++) {
+				if(arr[i].formId == delId) {
+					DDC.dragconfigColumns.splice(i,1); 
+				}
+			}
+		}
+		$(this).parent().remove();
+		if (!$(".demo .lyrow").length > 0) {
+			clearDemo()
+		}
+	})
+	$(".demo").delegate(".close-link", "click", function(e) {
+		e.preventDefault();
+		$(this).parent().parent().parent().remove();
+		if (!$(".demo .lyrow").length > 0) {
+			clearDemo()
+		}
+	})
+}
+function clearDemo() {
+	$(".demo").empty();
+	layouthistory = null;
+	if (supportstorage())
+		localStorage.removeItem("layoutdata");
+}
+function removeMenuClasses() {
+	$("#menu-layoutit li button").removeClass("active")
+}
+function changeStructure(e, t) {
+	$("#download-layout ." + e).removeClass(e).addClass(t)
+}
+function cleanHtml(e) {
+	$(e).parent().append($(e).children().html())
+}
+// 生成源代码
+function downloadLayoutSrc() {
+	var e = "";
+	$("#download-layout").children().html($(".demo").html());
+	console.log($(".demo").html());
+	var t = $("#download-layout").children();
+	t.find(".preview, .configuration, .drag, .remove").remove();
+	t.find(".lyrow").addClass("removeClean");
+	t.find(".box-element").addClass("removeClean");
+	t.find(".lyrow .lyrow .lyrow .lyrow .lyrow .removeClean").each(function() {
+		console.log(this);
+		cleanHtml(this)
+	});
+	t.find(".lyrow .lyrow .lyrow .lyrow .removeClean").each(function() {
+		cleanHtml(this)
+	});
+	t.find(".lyrow .lyrow .lyrow .removeClean").each(function() {
+		cleanHtml(this)
+	});
+	t.find(".lyrow .lyrow .removeClean").each(function() {
+		cleanHtml(this)
+	});
+	t.find(".lyrow .removeClean").each(function() {
+		cleanHtml(this)
+	});
+	t.find(".removeClean").each(function() {
+		cleanHtml(this)
+	});
+	// t.find(".view").parent().remove();
+	// t.find(".lyrow").remove();
+	t.find(".box-content").empty();
+	t.find(".removeClean").remove();
+	t.find(".box-content").each(function(){
+		if(this.id) {
+			this.append("dragID"+this.id);
+		}
+	});
+	$("#download-layout .column").removeClass("ui-sortable");
+	$("#download-layout .row-fluid").removeClass("clearfix").children().removeClass("column");
+	if ($("#download-layout .container").length > 0) {
+		changeStructure("row-fluid", "row")
+	}
+	formatSrc = $.htmlClean($("#download-layout").html(), {
+		format: true,
+		allowedAttributes: [
+			["id"],
+			["class"],
+			["data-toggle"],
+			["data-target"],
+			["data-parent"],
+			["role"],
+			["data-dismiss"],
+			["aria-labelledby"],
+			["aria-hidden"],
+			["data-slide-to"],
+			["data-slide"],
+			["style"]
+		]
+	});
+	$("#download-layout").html(formatSrc);
+	$("#downloadModal textarea").empty();
+	$("#downloadModal textarea").val(formatSrc);
+	DDC.dragconfig.dragconfigHtml = formatSrc;
+	DDC.dragconfig.dragconfigHtmlAll = $(".demo").html();
+	DDC.dragconfig.dragconfigId = getQueryString('dragconfigId');
+	// 1.28 重新生成formID
+	DDC.dragconfigColumns = [];
+	$(formatSrc).find('.box-content').each(function(i) {
+    	var formIdObj = {"formId": ""};
+        var formId = $(this)[0].id;
+        formIdObj.formId = parseInt(formId);
+        DDC.dragconfigColumns.push(formIdObj);
+    })
+    // $(formatSrc).find('.echarts').each(function(i) {
+    // 	var formIdObj = {"formId": ""};
+    //     var formId = $(this)[0].id;
+    //     formIdObj.formId = parseInt(formId);
+    //     DDC.dragconfigColumns.push(formIdObj);
+    // })
+}
+
+var currentDocument = null;
+var timerSave = 1000;
+var stopsave = 0;
+var startdrag = 0;
+var demoHtml = $(".demo").html();
+var currenteditor = null;
+$(window).resize(function() {
+	$("body").css("min-height", $(window).height() - 90);
+	$(".demo").css("min-height", $(window).height() - 160)
+});
+
+
+// 11.23 看
+function restoreData(){
+	if (supportstorage()) {
+		layouthistory = JSON.parse(localStorage.getItem("layoutdata"));
+		if (!layouthistory) return false;
+		window.demoHtml = layouthistory.list[layouthistory.count-1];
+		if (window.demoHtml) $(".demo").html(window.demoHtml);
+	}
+}
+
+function getHTML(id) {
+	if (!id) {
+		alert('参数错误,请返回重试!');
+	}
+	$.ajax({  
+		type: "POST",  
+		url: "/myehr/dragconfig/getDragconfig.action?dragconfigId="+ id,  
+		// url: '../test.json',
+		cache: false,
+		contentType: 'application/json;charset=utf-8',
+		success: function(data) {
+			$(".demo").html(data.dragconfigHtmlAll);
+			// if(data.dragconfigHtml) {
+		 //        $(data.dragconfigHtml).find('.box').each(function(i) {
+		 //        	var formIdObj = {"formId": ""};
+		 //            var formId = $(this)[0].id;
+		 //            formIdObj.formId = parseInt(formId);
+		 //            DDC.dragconfigColumns.push(formIdObj);
+		 //        })
+		 //        $(data.dragconfigHtml).find('.echarts').each(function(i) {
+		 //        	var formIdObj = {"formId": ""};
+		 //            var formId = $(this)[0].id;
+		 //            formIdObj.formId = parseInt(formId);
+		 //            DDC.dragconfigColumns.push(formIdObj);
+		 //        })
+			// }
+		}
+	});
+}
+
+// 拖动排序
+function initContainer(){
+	$(".demo, .demo .column").sortable({
+		connectWith: ".column",
+		opacity: .35,
+		handle: ".drag",
+		start: function(e,t) {
+			if (!startdrag) stopsave++;
+			startdrag = 1;
+		},
+		stop: function(e,t) {
+			if(stopsave>0) stopsave--;
+			startdrag = 0;
+		}
+	});
+	configurationElm();
+}
+
+function getQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); return null; 
+} 
+$(document).ready(function() {
+	//折叠ibox
+	$('.collapse-link').click(function () {
+	    var ibox = $(this).closest('div.ibox');
+	    var button = $(this).find('i');
+	    var content = ibox.find('div.ibox-content');
+	    content.slideToggle(200);
+	    button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+	    ibox.toggleClass('').toggleClass('border-bottom');
+	    setTimeout(function () {
+	        ibox.resize();
+	        ibox.find('[id^=map-]').resize();
+	    }, 50);
+	});
+
+	//关闭ibox
+	$('.close-link').click(function () {
+	    var content = $(this).closest('div.ibox');
+	    content.remove();
+	});
+	
+	CKEDITOR.disableAutoInline = true;
+	getHTML(getQueryString('dragconfigId'));
+	// restoreData();
+	var contenthandle = CKEDITOR.replace( 'contenteditor' ,{
+		language: 'zh-cn',
+		contentsCss: ['css/bootstrap-combined.min.css'],
+		allowedContent: true
+	});
+	$("body").css("min-height", $(window).height() - 90);
+	$(".demo").css("min-height", $(window).height() - 160);
+	// 布局拖动
+	$(".sidebar-nav .lyrow").draggable({
+		connectToSortable: ".demo",
+		helper: "clone",
+		handle: ".drag",
+		start: function(e,t) {
+			if (!startdrag) stopsave++;
+			startdrag = 1;
+		},
+		drag: function(e, t) {
+			t.helper.width(400)
+		},
+		stop: function(e, t) {
+			$(".demo .column").sortable({
+				opacity: .35,
+				connectWith: ".column",
+				start: function(e,t) {
+					if (!startdrag) stopsave++;
+					startdrag = 1;
+				},
+				stop: function(e,t) {
+					if(stopsave>0) stopsave--;
+					startdrag = 0;
+				}
+			});
+			if(stopsave>0) stopsave--;
+			startdrag = 0;
+		}
+	});
+	// 其他组件拖动
+	$(".sidebar-nav .box").draggable({
+		connectToSortable: ".column",
+		helper: "clone",
+		handle: ".drag",
+		start: function(e,t) {
+			if (!startdrag) stopsave++;
+			startdrag = 1;
+		},
+		drag: function(e, t) {
+			t.helper.width(400)
+		},
+		stop: function() {
+			handleJsIds();
+			if(stopsave>0) stopsave--;
+			startdrag = 0;
+		}
+	});
+
+	initContainer();
+	$('body.edit .demo').on("click","[data-target=#editorModal]",function(e) {
+		e.preventDefault();
+		currenteditor = $(this).parent().parent().find('.view');
+		var eText = currenteditor.html();
+		contenthandle.setData(eText);
+	});
+	$("#savecontent").click(function(e) {
+		e.preventDefault();
+		currenteditor.html(contenthandle.getData());
+	});
+	$("[data-target=#downloadModal]").click(function(e) {
+		e.preventDefault();
+		downloadLayoutSrc();
+	});
+	$("[data-target=#sourceModal]").click(function(e) {
+		e.preventDefault();
+		$('#sourceeditor').val($(".demo").html());
+	});
+	$("#savesource").click(function(){
+		$('.demo').html($('#sourceeditor').val());
+		initContainer();
+		return;
+	});
+	$("[data-target=#shareModal]").click(function(e) {
+		e.preventDefault();
+		// 1210 生成，传递后台
+		$.ajax({  
+			type: "POST",  
+			url: "/myehr/dragconfig/updateDragconfig.action",  
+			data: JSON.stringify(DDC), 
+			cache: false,
+			contentType: 'application/json;charset=utf-8',
+			success: function(data) {
+				console.log(data);
+			}
+		});
+		// handleSaveLayout();
+	});
+	$("#download").click(function() {
+		downloadLayout();
+		return false;
+	});
+	$("#downloadhtml").click(function() {
+		downloadHtmlLayout();
+		return false
+	});
+	$("#edit").click(function() {
+		$("body").removeClass("devpreview sourcepreview");
+		$("body").addClass("edit");
+		removeMenuClasses();
+		$(this).addClass("active");
+		return false
+	});
+	// 清空
+	$("#clear").click(function(e) {
+		e.preventDefault();
+		clearDemo()
+	});
+	$("#devpreview").click(function() {
+		$("body").removeClass("edit sourcepreview");
+		$("body").addClass("devpreview");
+		removeMenuClasses();
+		$(this).addClass("active");
+		return false
+	});
+	$("#sourcepreview").click(function() {
+		$("body").removeClass("edit");
+		$("body").addClass("devpreview sourcepreview");
+		removeMenuClasses();
+		$(this).addClass("active");
+		return false
+	});
+	$("#fluidPage").click(function(e) {
+		e.preventDefault();
+		changeStructure("container", "container-fluid");
+		$("#fixedPage").removeClass("active");
+		$(this).addClass("active");
+		downloadLayoutSrc()
+	});
+	$("#fixedPage").click(function(e) {
+		e.preventDefault();
+		changeStructure("container-fluid", "container");
+		$("#fluidPage").removeClass("active");
+		$(this).addClass("active");
+		downloadLayoutSrc()
+	});
+	$(".nav-header").click(function() {
+		$(".sidebar-nav .boxes, .sidebar-nav .rows").hide();
+		$(this).next().slideDown()
+	});
+	// 撤销操作
+	$('#undo').click(function(){
+		stopsave++;
+		if (undoLayout()) initContainer();
+		stopsave--;
+	});
+	//重做操作搞不懂，不需要
+	$('#redo').click(function(){
+		stopsave++;
+		if (redoLayout()) initContainer();
+		stopsave--;
+	});
+	removeElm();
+	gridSystemGenerator();
+	setInterval(function() {
+		handleSaveLayout()
+	}, timerSave)
+})

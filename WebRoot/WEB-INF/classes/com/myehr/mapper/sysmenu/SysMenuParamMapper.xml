@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysmenu.SysMenuParamMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysmenu.SysMenuParam" >
+    <id column="MENU_PARAM_ID" property="menuParamId" jdbcType="DECIMAL" />
+    <result column="MENU_ID" property="menuId" jdbcType="DECIMAL" />
+    <result column="MENU_PARAM_NAME" property="menuParamName" jdbcType="VARCHAR" />
+    <result column="MENU_PARAM_DESC" property="menuParamDesc" jdbcType="VARCHAR" />
+    <result column="MENU_PARAM_FROM" property="menuParamFrom" jdbcType="VARCHAR" />
+    <result column="MENU_PARAM_VALUE" property="menuParamValue" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="DECIMAL" />
+    <result column="MENU_PARAM_CLASS" property="menuParamClass" jdbcType="VARCHAR" />
+    <result column="MENU_PARAM_TYPE" property="menuParamType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MENU_PARAM_ID, MENU_ID, MENU_PARAM_NAME, MENU_PARAM_DESC, MENU_PARAM_FROM, MENU_PARAM_VALUE, 
+    OPERATOR_TIME, OPERATOR_NAME, MENU_PARAM_CLASS, MENU_PARAM_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysmenu.SysMenuParamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MENU_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU_PARAM
+    where MENU_PARAM_ID = #{menuParamId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_MENU_PARAM
+    where MENU_PARAM_ID = #{menuParamId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysmenu.SysMenuParamExample" >
+    delete from SYS_MENU_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysmenu.SysMenuParam" >
+    insert into SYS_MENU_PARAM (MENU_ID, MENU_PARAM_NAME, 
+      MENU_PARAM_DESC, MENU_PARAM_FROM, MENU_PARAM_VALUE, 
+      OPERATOR_TIME, OPERATOR_NAME, MENU_PARAM_CLASS, 
+      MENU_PARAM_TYPE)
+    values (#{menuId,jdbcType=DECIMAL}, #{menuParamName,jdbcType=VARCHAR}, 
+      #{menuParamDesc,jdbcType=VARCHAR}, #{menuParamFrom,jdbcType=VARCHAR}, #{menuParamValue,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=DECIMAL}, #{menuParamClass,jdbcType=VARCHAR}, 
+      #{menuParamType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysmenu.SysMenuParam" >
+    insert into SYS_MENU_PARAM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuParamId != null" >
+        MENU_PARAM_ID,
+      </if>
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+      <if test="menuParamName != null" >
+        MENU_PARAM_NAME,
+      </if>
+      <if test="menuParamDesc != null" >
+        MENU_PARAM_DESC,
+      </if>
+      <if test="menuParamFrom != null" >
+        MENU_PARAM_FROM,
+      </if>
+      <if test="menuParamValue != null" >
+        MENU_PARAM_VALUE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="menuParamClass != null" >
+        MENU_PARAM_CLASS,
+      </if>
+      <if test="menuParamType != null" >
+        MENU_PARAM_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuParamId != null" >
+        #{menuParamId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuParamName != null" >
+        #{menuParamName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamDesc != null" >
+        #{menuParamDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamFrom != null" >
+        #{menuParamFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamValue != null" >
+        #{menuParamValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="menuParamClass != null" >
+        #{menuParamClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamType != null" >
+        #{menuParamType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysmenu.SysMenuParamExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_MENU_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_MENU_PARAM
+    <set >
+      <if test="record.menuParamId != null" >
+        MENU_PARAM_ID = #{record.menuParamId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuId != null" >
+        MENU_ID = #{record.menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuParamName != null" >
+        MENU_PARAM_NAME = #{record.menuParamName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParamDesc != null" >
+        MENU_PARAM_DESC = #{record.menuParamDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParamFrom != null" >
+        MENU_PARAM_FROM = #{record.menuParamFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParamValue != null" >
+        MENU_PARAM_VALUE = #{record.menuParamValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuParamClass != null" >
+        MENU_PARAM_CLASS = #{record.menuParamClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParamType != null" >
+        MENU_PARAM_TYPE = #{record.menuParamType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_MENU_PARAM
+    set MENU_PARAM_ID = #{record.menuParamId,jdbcType=DECIMAL},
+      MENU_ID = #{record.menuId,jdbcType=DECIMAL},
+      MENU_PARAM_NAME = #{record.menuParamName,jdbcType=VARCHAR},
+      MENU_PARAM_DESC = #{record.menuParamDesc,jdbcType=VARCHAR},
+      MENU_PARAM_FROM = #{record.menuParamFrom,jdbcType=VARCHAR},
+      MENU_PARAM_VALUE = #{record.menuParamValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=DECIMAL},
+      MENU_PARAM_CLASS = #{record.menuParamClass,jdbcType=VARCHAR},
+      MENU_PARAM_TYPE = #{record.menuParamType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysmenu.SysMenuParam" >
+    update SYS_MENU_PARAM
+    <set >
+      <if test="menuId != null" >
+        MENU_ID = #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuParamName != null" >
+        MENU_PARAM_NAME = #{menuParamName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamDesc != null" >
+        MENU_PARAM_DESC = #{menuParamDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamFrom != null" >
+        MENU_PARAM_FROM = #{menuParamFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamValue != null" >
+        MENU_PARAM_VALUE = #{menuParamValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="menuParamClass != null" >
+        MENU_PARAM_CLASS = #{menuParamClass,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParamType != null" >
+        MENU_PARAM_TYPE = #{menuParamType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MENU_PARAM_ID = #{menuParamId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysmenu.SysMenuParam" >
+    update SYS_MENU_PARAM
+    set MENU_ID = #{menuId,jdbcType=DECIMAL},
+      MENU_PARAM_NAME = #{menuParamName,jdbcType=VARCHAR},
+      MENU_PARAM_DESC = #{menuParamDesc,jdbcType=VARCHAR},
+      MENU_PARAM_FROM = #{menuParamFrom,jdbcType=VARCHAR},
+      MENU_PARAM_VALUE = #{menuParamValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=DECIMAL},
+      MENU_PARAM_CLASS = #{menuParamClass,jdbcType=VARCHAR},
+      MENU_PARAM_TYPE = #{menuParamType,jdbcType=VARCHAR}
+    where MENU_PARAM_ID = #{menuParamId,jdbcType=DECIMAL}
+  </update>
+</mapper>

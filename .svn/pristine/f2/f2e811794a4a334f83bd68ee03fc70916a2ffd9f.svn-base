@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActHiTaskinstMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActHiTaskinst" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="PROC_DEF_ID_" property="procDefId" jdbcType="OTHER" />
+    <result column="TASK_DEF_KEY_" property="taskDefKey" jdbcType="OTHER" />
+    <result column="PROC_INST_ID_" property="procInstId" jdbcType="OTHER" />
+    <result column="EXECUTION_ID_" property="executionId" jdbcType="OTHER" />
+    <result column="PARENT_TASK_ID_" property="parentTaskId" jdbcType="OTHER" />
+    <result column="NAME_" property="name" jdbcType="OTHER" />
+    <result column="DESCRIPTION_" property="description" jdbcType="OTHER" />
+    <result column="OWNER_" property="owner" jdbcType="OTHER" />
+    <result column="ASSIGNEE_" property="assignee" jdbcType="OTHER" />
+    <result column="START_TIME_" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="CLAIM_TIME_" property="claimTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME_" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="DURATION_" property="duration" jdbcType="DECIMAL" />
+    <result column="DELETE_REASON_" property="deleteReason" jdbcType="OTHER" />
+    <result column="PRIORITY_" property="priority" jdbcType="DECIMAL" />
+    <result column="DUE_DATE_" property="dueDate" jdbcType="TIMESTAMP" />
+    <result column="FORM_KEY_" property="formKey" jdbcType="OTHER" />
+    <result column="CATEGORY_" property="category" jdbcType="OTHER" />
+    <result column="TENANT_ID_" property="tenantId" jdbcType="OTHER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, PROC_DEF_ID_, TASK_DEF_KEY_, PROC_INST_ID_, EXECUTION_ID_, PARENT_TASK_ID_, 
+    NAME_, DESCRIPTION_, OWNER_, ASSIGNEE_, START_TIME_, CLAIM_TIME_, END_TIME_, DURATION_, 
+    DELETE_REASON_, PRIORITY_, DUE_DATE_, FORM_KEY_, CATEGORY_, TENANT_ID_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActHiTaskinstExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_HI_TASKINST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_HI_TASKINST
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_HI_TASKINST
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActHiTaskinstExample" >
+    delete from ACT_HI_TASKINST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActHiTaskinst" >
+    insert into ACT_HI_TASKINST (ID_, PROC_DEF_ID_, TASK_DEF_KEY_, 
+      PROC_INST_ID_, EXECUTION_ID_, PARENT_TASK_ID_, 
+      NAME_, DESCRIPTION_, OWNER_, 
+      ASSIGNEE_, START_TIME_, CLAIM_TIME_, 
+      END_TIME_, DURATION_, DELETE_REASON_, 
+      PRIORITY_, DUE_DATE_, FORM_KEY_, 
+      CATEGORY_, TENANT_ID_)
+    values (#{id,jdbcType=OTHER}, #{procDefId,jdbcType=OTHER}, #{taskDefKey,jdbcType=OTHER}, 
+      #{procInstId,jdbcType=OTHER}, #{executionId,jdbcType=OTHER}, #{parentTaskId,jdbcType=OTHER}, 
+      #{name,jdbcType=OTHER}, #{description,jdbcType=OTHER}, #{owner,jdbcType=OTHER}, 
+      #{assignee,jdbcType=OTHER}, #{startTime,jdbcType=TIMESTAMP}, #{claimTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{duration,jdbcType=DECIMAL}, #{deleteReason,jdbcType=OTHER}, 
+      #{priority,jdbcType=DECIMAL}, #{dueDate,jdbcType=TIMESTAMP}, #{formKey,jdbcType=OTHER}, 
+      #{category,jdbcType=OTHER}, #{tenantId,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActHiTaskinst" >
+    insert into ACT_HI_TASKINST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="procDefId != null" >
+        PROC_DEF_ID_,
+      </if>
+      <if test="taskDefKey != null" >
+        TASK_DEF_KEY_,
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_,
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_,
+      </if>
+      <if test="parentTaskId != null" >
+        PARENT_TASK_ID_,
+      </if>
+      <if test="name != null" >
+        NAME_,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION_,
+      </if>
+      <if test="owner != null" >
+        OWNER_,
+      </if>
+      <if test="assignee != null" >
+        ASSIGNEE_,
+      </if>
+      <if test="startTime != null" >
+        START_TIME_,
+      </if>
+      <if test="claimTime != null" >
+        CLAIM_TIME_,
+      </if>
+      <if test="endTime != null" >
+        END_TIME_,
+      </if>
+      <if test="duration != null" >
+        DURATION_,
+      </if>
+      <if test="deleteReason != null" >
+        DELETE_REASON_,
+      </if>
+      <if test="priority != null" >
+        PRIORITY_,
+      </if>
+      <if test="dueDate != null" >
+        DUE_DATE_,
+      </if>
+      <if test="formKey != null" >
+        FORM_KEY_,
+      </if>
+      <if test="category != null" >
+        CATEGORY_,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="procDefId != null" >
+        #{procDefId,jdbcType=OTHER},
+      </if>
+      <if test="taskDefKey != null" >
+        #{taskDefKey,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="executionId != null" >
+        #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="parentTaskId != null" >
+        #{parentTaskId,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=OTHER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=OTHER},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=OTHER},
+      </if>
+      <if test="assignee != null" >
+        #{assignee,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimTime != null" >
+        #{claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteReason != null" >
+        #{deleteReason,jdbcType=OTHER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=DECIMAL},
+      </if>
+      <if test="dueDate != null" >
+        #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formKey != null" >
+        #{formKey,jdbcType=OTHER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActHiTaskinstExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_HI_TASKINST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_HI_TASKINST
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.procDefId != null" >
+        PROC_DEF_ID_ = #{record.procDefId,jdbcType=OTHER},
+      </if>
+      <if test="record.taskDefKey != null" >
+        TASK_DEF_KEY_ = #{record.taskDefKey,jdbcType=OTHER},
+      </if>
+      <if test="record.procInstId != null" >
+        PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      </if>
+      <if test="record.executionId != null" >
+        EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      </if>
+      <if test="record.parentTaskId != null" >
+        PARENT_TASK_ID_ = #{record.parentTaskId,jdbcType=OTHER},
+      </if>
+      <if test="record.name != null" >
+        NAME_ = #{record.name,jdbcType=OTHER},
+      </if>
+      <if test="record.description != null" >
+        DESCRIPTION_ = #{record.description,jdbcType=OTHER},
+      </if>
+      <if test="record.owner != null" >
+        OWNER_ = #{record.owner,jdbcType=OTHER},
+      </if>
+      <if test="record.assignee != null" >
+        ASSIGNEE_ = #{record.assignee,jdbcType=OTHER},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME_ = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.claimTime != null" >
+        CLAIM_TIME_ = #{record.claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME_ = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.duration != null" >
+        DURATION_ = #{record.duration,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deleteReason != null" >
+        DELETE_REASON_ = #{record.deleteReason,jdbcType=OTHER},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY_ = #{record.priority,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dueDate != null" >
+        DUE_DATE_ = #{record.dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formKey != null" >
+        FORM_KEY_ = #{record.formKey,jdbcType=OTHER},
+      </if>
+      <if test="record.category != null" >
+        CATEGORY_ = #{record.category,jdbcType=OTHER},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID_ = #{record.tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_HI_TASKINST
+    set ID_ = #{record.id,jdbcType=OTHER},
+      PROC_DEF_ID_ = #{record.procDefId,jdbcType=OTHER},
+      TASK_DEF_KEY_ = #{record.taskDefKey,jdbcType=OTHER},
+      PROC_INST_ID_ = #{record.procInstId,jdbcType=OTHER},
+      EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      PARENT_TASK_ID_ = #{record.parentTaskId,jdbcType=OTHER},
+      NAME_ = #{record.name,jdbcType=OTHER},
+      DESCRIPTION_ = #{record.description,jdbcType=OTHER},
+      OWNER_ = #{record.owner,jdbcType=OTHER},
+      ASSIGNEE_ = #{record.assignee,jdbcType=OTHER},
+      START_TIME_ = #{record.startTime,jdbcType=TIMESTAMP},
+      CLAIM_TIME_ = #{record.claimTime,jdbcType=TIMESTAMP},
+      END_TIME_ = #{record.endTime,jdbcType=TIMESTAMP},
+      DURATION_ = #{record.duration,jdbcType=DECIMAL},
+      DELETE_REASON_ = #{record.deleteReason,jdbcType=OTHER},
+      PRIORITY_ = #{record.priority,jdbcType=DECIMAL},
+      DUE_DATE_ = #{record.dueDate,jdbcType=TIMESTAMP},
+      FORM_KEY_ = #{record.formKey,jdbcType=OTHER},
+      CATEGORY_ = #{record.category,jdbcType=OTHER},
+      TENANT_ID_ = #{record.tenantId,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActHiTaskinst" >
+    update ACT_HI_TASKINST
+    <set >
+      <if test="procDefId != null" >
+        PROC_DEF_ID_ = #{procDefId,jdbcType=OTHER},
+      </if>
+      <if test="taskDefKey != null" >
+        TASK_DEF_KEY_ = #{taskDefKey,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null" >
+        PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="parentTaskId != null" >
+        PARENT_TASK_ID_ = #{parentTaskId,jdbcType=OTHER},
+      </if>
+      <if test="name != null" >
+        NAME_ = #{name,jdbcType=OTHER},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION_ = #{description,jdbcType=OTHER},
+      </if>
+      <if test="owner != null" >
+        OWNER_ = #{owner,jdbcType=OTHER},
+      </if>
+      <if test="assignee != null" >
+        ASSIGNEE_ = #{assignee,jdbcType=OTHER},
+      </if>
+      <if test="startTime != null" >
+        START_TIME_ = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="claimTime != null" >
+        CLAIM_TIME_ = #{claimTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME_ = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null" >
+        DURATION_ = #{duration,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteReason != null" >
+        DELETE_REASON_ = #{deleteReason,jdbcType=OTHER},
+      </if>
+      <if test="priority != null" >
+        PRIORITY_ = #{priority,jdbcType=DECIMAL},
+      </if>
+      <if test="dueDate != null" >
+        DUE_DATE_ = #{dueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formKey != null" >
+        FORM_KEY_ = #{formKey,jdbcType=OTHER},
+      </if>
+      <if test="category != null" >
+        CATEGORY_ = #{category,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_ = #{tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActHiTaskinst" >
+    update ACT_HI_TASKINST
+    set PROC_DEF_ID_ = #{procDefId,jdbcType=OTHER},
+      TASK_DEF_KEY_ = #{taskDefKey,jdbcType=OTHER},
+      PROC_INST_ID_ = #{procInstId,jdbcType=OTHER},
+      EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      PARENT_TASK_ID_ = #{parentTaskId,jdbcType=OTHER},
+      NAME_ = #{name,jdbcType=OTHER},
+      DESCRIPTION_ = #{description,jdbcType=OTHER},
+      OWNER_ = #{owner,jdbcType=OTHER},
+      ASSIGNEE_ = #{assignee,jdbcType=OTHER},
+      START_TIME_ = #{startTime,jdbcType=TIMESTAMP},
+      CLAIM_TIME_ = #{claimTime,jdbcType=TIMESTAMP},
+      END_TIME_ = #{endTime,jdbcType=TIMESTAMP},
+      DURATION_ = #{duration,jdbcType=DECIMAL},
+      DELETE_REASON_ = #{deleteReason,jdbcType=OTHER},
+      PRIORITY_ = #{priority,jdbcType=DECIMAL},
+      DUE_DATE_ = #{dueDate,jdbcType=TIMESTAMP},
+      FORM_KEY_ = #{formKey,jdbcType=OTHER},
+      CATEGORY_ = #{category,jdbcType=OTHER},
+      TENANT_ID_ = #{tenantId,jdbcType=OTHER}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

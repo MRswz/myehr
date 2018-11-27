@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonIntroduceMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonIntroduce" >
+    <id column="INTRODUCE_ID" property="introduceId" jdbcType="DECIMAL" />
+    <result column="INTRODUCE_TYPE" property="introduceType" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_TITLE" property="introduceTitle" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_WIDTH" property="introduceWidth" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_HEIGHT" property="introduceHeight" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_FORM_ID" property="introduceFormId" jdbcType="DECIMAL" />
+    <result column="INTRODUCE_INIT_FUN" property="introduceInitFun" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_SELF_FUN" property="introduceSelfFun" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_URL" property="introduceUrl" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_BUTTON_ID" property="introduceButtonId" jdbcType="DECIMAL" />
+    <result column="INTRODUCE_EXCSQL_ID" property="introduceExcsqlId" jdbcType="DECIMAL" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INTRODUCE_ID, INTRODUCE_TYPE, INTRODUCE_TITLE, INTRODUCE_WIDTH, INTRODUCE_HEIGHT, 
+    INTRODUCE_FORM_ID, INTRODUCE_INIT_FUN, INTRODUCE_SELF_FUN, INTRODUCE_URL, INTRODUCE_BUTTON_ID, 
+    INTRODUCE_EXCSQL_ID, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTRODUCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTRODUCE
+    where INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_INTRODUCE
+    where INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduceExample" >
+    delete from SYS_FORM_BUTTON_INTRODUCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduce" >
+    insert into SYS_FORM_BUTTON_INTRODUCE (INTRODUCE_TYPE, INTRODUCE_TITLE, 
+      INTRODUCE_WIDTH, INTRODUCE_HEIGHT, INTRODUCE_FORM_ID, 
+      INTRODUCE_INIT_FUN, INTRODUCE_SELF_FUN, INTRODUCE_URL, 
+      INTRODUCE_BUTTON_ID, INTRODUCE_EXCSQL_ID, OPERATOR_NAME, 
+      OPERATOR_TIME)
+    values (#{introduceType,jdbcType=NVARCHAR}, #{introduceTitle,jdbcType=NVARCHAR}, 
+      #{introduceWidth,jdbcType=NVARCHAR}, #{introduceHeight,jdbcType=NVARCHAR}, #{introduceFormId,jdbcType=DECIMAL}, 
+      #{introduceInitFun,jdbcType=NVARCHAR}, #{introduceSelfFun,jdbcType=NVARCHAR}, #{introduceUrl,jdbcType=NVARCHAR}, 
+      #{introduceButtonId,jdbcType=DECIMAL}, #{introduceExcsqlId,jdbcType=DECIMAL}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduce" >
+    insert into SYS_FORM_BUTTON_INTRODUCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="introduceId != null" >
+        INTRODUCE_ID,
+      </if>
+      <if test="introduceType != null" >
+        INTRODUCE_TYPE,
+      </if>
+      <if test="introduceTitle != null" >
+        INTRODUCE_TITLE,
+      </if>
+      <if test="introduceWidth != null" >
+        INTRODUCE_WIDTH,
+      </if>
+      <if test="introduceHeight != null" >
+        INTRODUCE_HEIGHT,
+      </if>
+      <if test="introduceFormId != null" >
+        INTRODUCE_FORM_ID,
+      </if>
+      <if test="introduceInitFun != null" >
+        INTRODUCE_INIT_FUN,
+      </if>
+      <if test="introduceSelfFun != null" >
+        INTRODUCE_SELF_FUN,
+      </if>
+      <if test="introduceUrl != null" >
+        INTRODUCE_URL,
+      </if>
+      <if test="introduceButtonId != null" >
+        INTRODUCE_BUTTON_ID,
+      </if>
+      <if test="introduceExcsqlId != null" >
+        INTRODUCE_EXCSQL_ID,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="introduceId != null" >
+        #{introduceId,jdbcType=DECIMAL},
+      </if>
+      <if test="introduceType != null" >
+        #{introduceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceTitle != null" >
+        #{introduceTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceWidth != null" >
+        #{introduceWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceHeight != null" >
+        #{introduceHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceFormId != null" >
+        #{introduceFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="introduceInitFun != null" >
+        #{introduceInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceSelfFun != null" >
+        #{introduceSelfFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceUrl != null" >
+        #{introduceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceButtonId != null" >
+        #{introduceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="introduceExcsqlId != null" >
+        #{introduceExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduceExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_INTRODUCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_INTRODUCE
+    <set >
+      <if test="record.introduceId != null" >
+        INTRODUCE_ID = #{record.introduceId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.introduceType != null" >
+        INTRODUCE_TYPE = #{record.introduceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceTitle != null" >
+        INTRODUCE_TITLE = #{record.introduceTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceWidth != null" >
+        INTRODUCE_WIDTH = #{record.introduceWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceHeight != null" >
+        INTRODUCE_HEIGHT = #{record.introduceHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceFormId != null" >
+        INTRODUCE_FORM_ID = #{record.introduceFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.introduceInitFun != null" >
+        INTRODUCE_INIT_FUN = #{record.introduceInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceSelfFun != null" >
+        INTRODUCE_SELF_FUN = #{record.introduceSelfFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceUrl != null" >
+        INTRODUCE_URL = #{record.introduceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceButtonId != null" >
+        INTRODUCE_BUTTON_ID = #{record.introduceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.introduceExcsqlId != null" >
+        INTRODUCE_EXCSQL_ID = #{record.introduceExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_INTRODUCE
+    set INTRODUCE_ID = #{record.introduceId,jdbcType=DECIMAL},
+      INTRODUCE_TYPE = #{record.introduceType,jdbcType=NVARCHAR},
+      INTRODUCE_TITLE = #{record.introduceTitle,jdbcType=NVARCHAR},
+      INTRODUCE_WIDTH = #{record.introduceWidth,jdbcType=NVARCHAR},
+      INTRODUCE_HEIGHT = #{record.introduceHeight,jdbcType=NVARCHAR},
+      INTRODUCE_FORM_ID = #{record.introduceFormId,jdbcType=DECIMAL},
+      INTRODUCE_INIT_FUN = #{record.introduceInitFun,jdbcType=NVARCHAR},
+      INTRODUCE_SELF_FUN = #{record.introduceSelfFun,jdbcType=NVARCHAR},
+      INTRODUCE_URL = #{record.introduceUrl,jdbcType=NVARCHAR},
+      INTRODUCE_BUTTON_ID = #{record.introduceButtonId,jdbcType=DECIMAL},
+      INTRODUCE_EXCSQL_ID = #{record.introduceExcsqlId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduce" >
+    update SYS_FORM_BUTTON_INTRODUCE
+    <set >
+      <if test="introduceType != null" >
+        INTRODUCE_TYPE = #{introduceType,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceTitle != null" >
+        INTRODUCE_TITLE = #{introduceTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceWidth != null" >
+        INTRODUCE_WIDTH = #{introduceWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceHeight != null" >
+        INTRODUCE_HEIGHT = #{introduceHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceFormId != null" >
+        INTRODUCE_FORM_ID = #{introduceFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="introduceInitFun != null" >
+        INTRODUCE_INIT_FUN = #{introduceInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceSelfFun != null" >
+        INTRODUCE_SELF_FUN = #{introduceSelfFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceUrl != null" >
+        INTRODUCE_URL = #{introduceUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceButtonId != null" >
+        INTRODUCE_BUTTON_ID = #{introduceButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="introduceExcsqlId != null" >
+        INTRODUCE_EXCSQL_ID = #{introduceExcsqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntroduce" >
+    update SYS_FORM_BUTTON_INTRODUCE
+    set INTRODUCE_TYPE = #{introduceType,jdbcType=NVARCHAR},
+      INTRODUCE_TITLE = #{introduceTitle,jdbcType=NVARCHAR},
+      INTRODUCE_WIDTH = #{introduceWidth,jdbcType=NVARCHAR},
+      INTRODUCE_HEIGHT = #{introduceHeight,jdbcType=NVARCHAR},
+      INTRODUCE_FORM_ID = #{introduceFormId,jdbcType=DECIMAL},
+      INTRODUCE_INIT_FUN = #{introduceInitFun,jdbcType=NVARCHAR},
+      INTRODUCE_SELF_FUN = #{introduceSelfFun,jdbcType=NVARCHAR},
+      INTRODUCE_URL = #{introduceUrl,jdbcType=NVARCHAR},
+      INTRODUCE_BUTTON_ID = #{introduceButtonId,jdbcType=DECIMAL},
+      INTRODUCE_EXCSQL_ID = #{introduceExcsqlId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL}
+  </update>
+</mapper>

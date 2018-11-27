@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- 全局setting配置，根据需要添加 -->
+	<settings> 
+        <!-- 当返回数据类型为map，设置callSettersOnNulls会把值为null的key也返回 -->
+        <setting name="callSettersOnNulls" value="true"/> 
+    </settings>
+	<!-- 配置别名 -->
+	<typeAliases>
+		<!-- 批量扫描别名 -->
+		<package name="com.myehr.sqlfile"/>
+	</typeAliases>
+	
+	<!-- 分页插件配置 -->
+ 	<plugins>
+         <!-- PageHelper4.1.1 --> 
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="offsetAsPageNum" value="false"/>
+            <property name="rowBoundsWithCount" value="true"/>
+            <property name="pageSizeZero" value="true"/>
+            <property name="reasonable" value="false"/>
+            <property name="supportMethodsArguments" value="false"/>
+            <property name="returnPageInfo" value="none"/>
+        </plugin>
+    </plugins>  
+
+	<!-- 配置mapper
+	由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了。
+	必须遵循：mapper.xml和mapper.java文件同名且在一个目录 
+	 -->
+
+	<!-- <mappers>
+	
+	</mappers> -->
+</configuration>

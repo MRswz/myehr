@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormFileuploadMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormFileupload" >
+    <id column="FILEUPLOAD_ID" property="fileuploadId" jdbcType="DECIMAL" />
+    <result column="FILEUPLOAD_FORM_COLUMN_ID" property="fileuploadFormColumnId" jdbcType="DECIMAL" />
+    <result column="FILEUPLOAD_CHECK_FUN" property="fileuploadCheckFun" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_INIT_FUN" property="fileuploadInitFun" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_DATA_FROM_TYPE" property="fileuploadDataFromType" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_DATA_FROM_VALUE" property="fileuploadDataFromValue" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_TYPE" property="fileuploadType" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_ONLY_DOWNLOAD" property="fileuploadOnlyDownload" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_AUTO_UPLOAD" property="fileuploadAutoUpload" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_UPLOAD_FILETYPES" property="fileuploadUploadFiletypes" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FILEUPLOAD_MAX_FILE_COUNT" property="fileuploadMaxFileCount" jdbcType="DECIMAL" />
+    <result column="FILEUPLOAD_TAG_GUI_TYPE" property="fileuploadTagGuiType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FILEUPLOAD_ID, FILEUPLOAD_FORM_COLUMN_ID, FILEUPLOAD_CHECK_FUN, FILEUPLOAD_INIT_FUN, 
+    FILEUPLOAD_DATA_FROM_TYPE, FILEUPLOAD_DATA_FROM_VALUE, FILEUPLOAD_TYPE, FILEUPLOAD_ONLY_DOWNLOAD, 
+    FILEUPLOAD_AUTO_UPLOAD, FILEUPLOAD_UPLOAD_FILETYPES, OPERATOR_TIME, OPERATOR_NAME, 
+    FILEUPLOAD_MAX_FILE_COUNT, FILEUPLOAD_TAG_GUI_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileuploadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_FILEUPLOAD
+    where FILEUPLOAD_ID = #{fileuploadId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_FILEUPLOAD
+    where FILEUPLOAD_ID = #{fileuploadId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileuploadExample" >
+    delete from SYS_FORM_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileupload" useGeneratedKeys="true" keyProperty="fileuploadId" keyColumn="FILEUPLOAD_ID">
+    insert into SYS_FORM_FILEUPLOAD (FILEUPLOAD_FORM_COLUMN_ID, 
+      FILEUPLOAD_CHECK_FUN, FILEUPLOAD_INIT_FUN, 
+      FILEUPLOAD_DATA_FROM_TYPE, FILEUPLOAD_DATA_FROM_VALUE, 
+      FILEUPLOAD_TYPE, FILEUPLOAD_ONLY_DOWNLOAD, 
+      FILEUPLOAD_AUTO_UPLOAD, FILEUPLOAD_UPLOAD_FILETYPES, 
+      OPERATOR_TIME, OPERATOR_NAME, FILEUPLOAD_MAX_FILE_COUNT, 
+      FILEUPLOAD_TAG_GUI_TYPE)
+    values (#{fileuploadFormColumnId,jdbcType=DECIMAL}, 
+      #{fileuploadCheckFun,jdbcType=NVARCHAR}, #{fileuploadInitFun,jdbcType=NVARCHAR}, 
+      #{fileuploadDataFromType,jdbcType=NVARCHAR}, #{fileuploadDataFromValue,jdbcType=NVARCHAR}, 
+      #{fileuploadType,jdbcType=NVARCHAR}, #{fileuploadOnlyDownload,jdbcType=NVARCHAR}, 
+      #{fileuploadAutoUpload,jdbcType=NVARCHAR}, #{fileuploadUploadFiletypes,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{fileuploadMaxFileCount,jdbcType=DECIMAL}, 
+      #{fileuploadTagGuiType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileupload" >
+    insert into SYS_FORM_FILEUPLOAD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileuploadId != null" >
+        FILEUPLOAD_ID,
+      </if>
+      <if test="fileuploadFormColumnId != null" >
+        FILEUPLOAD_FORM_COLUMN_ID,
+      </if>
+      <if test="fileuploadCheckFun != null" >
+        FILEUPLOAD_CHECK_FUN,
+      </if>
+      <if test="fileuploadInitFun != null" >
+        FILEUPLOAD_INIT_FUN,
+      </if>
+      <if test="fileuploadDataFromType != null" >
+        FILEUPLOAD_DATA_FROM_TYPE,
+      </if>
+      <if test="fileuploadDataFromValue != null" >
+        FILEUPLOAD_DATA_FROM_VALUE,
+      </if>
+      <if test="fileuploadType != null" >
+        FILEUPLOAD_TYPE,
+      </if>
+      <if test="fileuploadOnlyDownload != null" >
+        FILEUPLOAD_ONLY_DOWNLOAD,
+      </if>
+      <if test="fileuploadAutoUpload != null" >
+        FILEUPLOAD_AUTO_UPLOAD,
+      </if>
+      <if test="fileuploadUploadFiletypes != null" >
+        FILEUPLOAD_UPLOAD_FILETYPES,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="fileuploadMaxFileCount != null" >
+        FILEUPLOAD_MAX_FILE_COUNT,
+      </if>
+      <if test="fileuploadTagGuiType != null" >
+        FILEUPLOAD_TAG_GUI_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileuploadId != null" >
+        #{fileuploadId,jdbcType=DECIMAL},
+      </if>
+      <if test="fileuploadFormColumnId != null" >
+        #{fileuploadFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="fileuploadCheckFun != null" >
+        #{fileuploadCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadInitFun != null" >
+        #{fileuploadInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadDataFromType != null" >
+        #{fileuploadDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadDataFromValue != null" >
+        #{fileuploadDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadType != null" >
+        #{fileuploadType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadOnlyDownload != null" >
+        #{fileuploadOnlyDownload,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadAutoUpload != null" >
+        #{fileuploadAutoUpload,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadUploadFiletypes != null" >
+        #{fileuploadUploadFiletypes,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadMaxFileCount != null" >
+        #{fileuploadMaxFileCount,jdbcType=DECIMAL},
+      </if>
+      <if test="fileuploadTagGuiType != null" >
+        #{fileuploadTagGuiType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileuploadExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_FILEUPLOAD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_FILEUPLOAD
+    <set >
+      <if test="record.fileuploadId != null" >
+        FILEUPLOAD_ID = #{record.fileuploadId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fileuploadFormColumnId != null" >
+        FILEUPLOAD_FORM_COLUMN_ID = #{record.fileuploadFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fileuploadCheckFun != null" >
+        FILEUPLOAD_CHECK_FUN = #{record.fileuploadCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadInitFun != null" >
+        FILEUPLOAD_INIT_FUN = #{record.fileuploadInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadDataFromType != null" >
+        FILEUPLOAD_DATA_FROM_TYPE = #{record.fileuploadDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadDataFromValue != null" >
+        FILEUPLOAD_DATA_FROM_VALUE = #{record.fileuploadDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadType != null" >
+        FILEUPLOAD_TYPE = #{record.fileuploadType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadOnlyDownload != null" >
+        FILEUPLOAD_ONLY_DOWNLOAD = #{record.fileuploadOnlyDownload,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadAutoUpload != null" >
+        FILEUPLOAD_AUTO_UPLOAD = #{record.fileuploadAutoUpload,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadUploadFiletypes != null" >
+        FILEUPLOAD_UPLOAD_FILETYPES = #{record.fileuploadUploadFiletypes,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileuploadMaxFileCount != null" >
+        FILEUPLOAD_MAX_FILE_COUNT = #{record.fileuploadMaxFileCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fileuploadTagGuiType != null" >
+        FILEUPLOAD_TAG_GUI_TYPE = #{record.fileuploadTagGuiType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_FILEUPLOAD
+    set FILEUPLOAD_ID = #{record.fileuploadId,jdbcType=DECIMAL},
+      FILEUPLOAD_FORM_COLUMN_ID = #{record.fileuploadFormColumnId,jdbcType=DECIMAL},
+      FILEUPLOAD_CHECK_FUN = #{record.fileuploadCheckFun,jdbcType=NVARCHAR},
+      FILEUPLOAD_INIT_FUN = #{record.fileuploadInitFun,jdbcType=NVARCHAR},
+      FILEUPLOAD_DATA_FROM_TYPE = #{record.fileuploadDataFromType,jdbcType=NVARCHAR},
+      FILEUPLOAD_DATA_FROM_VALUE = #{record.fileuploadDataFromValue,jdbcType=NVARCHAR},
+      FILEUPLOAD_TYPE = #{record.fileuploadType,jdbcType=NVARCHAR},
+      FILEUPLOAD_ONLY_DOWNLOAD = #{record.fileuploadOnlyDownload,jdbcType=NVARCHAR},
+      FILEUPLOAD_AUTO_UPLOAD = #{record.fileuploadAutoUpload,jdbcType=NVARCHAR},
+      FILEUPLOAD_UPLOAD_FILETYPES = #{record.fileuploadUploadFiletypes,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      FILEUPLOAD_MAX_FILE_COUNT = #{record.fileuploadMaxFileCount,jdbcType=DECIMAL},
+      FILEUPLOAD_TAG_GUI_TYPE = #{record.fileuploadTagGuiType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileupload" >
+    update SYS_FORM_FILEUPLOAD
+    <set >
+      <if test="fileuploadFormColumnId != null" >
+        FILEUPLOAD_FORM_COLUMN_ID = #{fileuploadFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="fileuploadCheckFun != null" >
+        FILEUPLOAD_CHECK_FUN = #{fileuploadCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadInitFun != null" >
+        FILEUPLOAD_INIT_FUN = #{fileuploadInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadDataFromType != null" >
+        FILEUPLOAD_DATA_FROM_TYPE = #{fileuploadDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadDataFromValue != null" >
+        FILEUPLOAD_DATA_FROM_VALUE = #{fileuploadDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadType != null" >
+        FILEUPLOAD_TYPE = #{fileuploadType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadOnlyDownload != null" >
+        FILEUPLOAD_ONLY_DOWNLOAD = #{fileuploadOnlyDownload,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadAutoUpload != null" >
+        FILEUPLOAD_AUTO_UPLOAD = #{fileuploadAutoUpload,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadUploadFiletypes != null" >
+        FILEUPLOAD_UPLOAD_FILETYPES = #{fileuploadUploadFiletypes,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fileuploadMaxFileCount != null" >
+        FILEUPLOAD_MAX_FILE_COUNT = #{fileuploadMaxFileCount,jdbcType=DECIMAL},
+      </if>
+      <if test="fileuploadTagGuiType != null" >
+        FILEUPLOAD_TAG_GUI_TYPE = #{fileuploadTagGuiType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where FILEUPLOAD_ID = #{fileuploadId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormFileupload" >
+    update SYS_FORM_FILEUPLOAD
+    set FILEUPLOAD_FORM_COLUMN_ID = #{fileuploadFormColumnId,jdbcType=DECIMAL},
+      FILEUPLOAD_CHECK_FUN = #{fileuploadCheckFun,jdbcType=NVARCHAR},
+      FILEUPLOAD_INIT_FUN = #{fileuploadInitFun,jdbcType=NVARCHAR},
+      FILEUPLOAD_DATA_FROM_TYPE = #{fileuploadDataFromType,jdbcType=NVARCHAR},
+      FILEUPLOAD_DATA_FROM_VALUE = #{fileuploadDataFromValue,jdbcType=NVARCHAR},
+      FILEUPLOAD_TYPE = #{fileuploadType,jdbcType=NVARCHAR},
+      FILEUPLOAD_ONLY_DOWNLOAD = #{fileuploadOnlyDownload,jdbcType=NVARCHAR},
+      FILEUPLOAD_AUTO_UPLOAD = #{fileuploadAutoUpload,jdbcType=NVARCHAR},
+      FILEUPLOAD_UPLOAD_FILETYPES = #{fileuploadUploadFiletypes,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      FILEUPLOAD_MAX_FILE_COUNT = #{fileuploadMaxFileCount,jdbcType=DECIMAL},
+      FILEUPLOAD_TAG_GUI_TYPE = #{fileuploadTagGuiType,jdbcType=NVARCHAR}
+    where FILEUPLOAD_ID = #{fileuploadId,jdbcType=DECIMAL}
+  </update>
+</mapper>

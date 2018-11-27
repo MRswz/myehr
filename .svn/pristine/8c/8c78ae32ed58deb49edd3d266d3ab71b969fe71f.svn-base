@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <!-- <link href="./flat/flat.css" rel="stylesheet"> -->
+    <link href="./flat/blue.css" rel="stylesheet">
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script src="./icheck.js"></script>
+</head>
+<body>
+    <ul id="demo-list">
+        <li>
+            <input type="checkbox" id="input-1" name="checkbox" value="1">
+            <label for="input-1">input-1</label>
+        </li>
+        <li>
+            <input type="checkbox" id="input-2" name="checkbox" value="2" checked>
+            <label for="input-2">input-2</label>
+        </li>
+        <li>
+            <input type="radio" id="input-3" name="city">
+            <label for="input-3">input-3</label>
+        </li>
+        <li>
+            <input type="radio" id="input-4" name="city" checked>
+            <label for="input-4">input-4</label>
+        </li>
+    </ul>
+
+    <ul id="city-list"></ul>
+
+
+    <input type="button" id="btn1" value="选中1 ,3">
+    <input type="button" id="btn2" value="不选中1 ,3">
+    <input type="button" id="btn3" value="2,4 不能选">
+    <input type="button" id="btn4" value="checkbox全选">
+    <input type="button" id="btn5" value="获得选中的所有值">
+</body>
+
+<script>
+$(document).ready(function(){
+    $.getJSON('./date.json', function(json, textStatus) {
+        console.log(json);
+        var tempDate = json;
+        var cityList = $('#city-list');
+        for(var i=0; i< tempDate.length; i++) {
+            if(tempDate[i].id !== '') {
+                var radiobox = $('<li><input type="radio" id='+ tempDate[i].id +' name="city"><label for='+ tempDate[i].id +'>'+ tempDate[i].text +'</label></li>');
+                cityList.append(radiobox);
+            }
+        }
+        $('#city-list input').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        $('input').iCheck('update');
+    });
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+    });
+    $('input').on('ifChecked', function(event){
+        console.log(event.type + ' callback');
+    });
+
+    $("#btn1").click(function(){
+        $('#input-1, #input-3').iCheck('check');
+    });
+
+    $("#btn2").click(function(){
+        $('#input-1, #input-3').iCheck('uncheck');
+    });
+
+    $("#btn3").click(function(){
+        $('#input-2, #input-4').iCheck('disable');
+    });
+
+    $("#btn4").click(function(){
+        $("[name='checkbox']").iCheck('check');
+    });
+
+    $("#btn5").click(function(){
+        var str="";
+        $("[name='checkbox'][checked]").each(function(){
+            str+=$(this).val()+",";
+        })
+        alert(str);
+    });
+});
+</script>
+</html>

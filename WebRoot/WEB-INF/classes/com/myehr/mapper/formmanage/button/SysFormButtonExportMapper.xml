@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonExportMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonExport" >
+    <id column="BUTTON_EXPORT_ID" property="buttonExportId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_ID" property="formButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_EXPORT_EXC_TYPE" property="buttonExportExcType" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_FUN" property="buttonExportFun" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_URL" property="buttonExportUrl" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_SQL" property="buttonExportSql" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_INIT_FUN" property="buttonExportInitFun" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_FILENAME" property="buttonExportFilename" jdbcType="NVARCHAR" />
+    <result column="BUTTON_EXPORT_FIELDNAMES" property="buttonExportFieldnames" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_EXPORT_ID, FORM_BUTTON_ID, BUTTON_EXPORT_EXC_TYPE, BUTTON_EXPORT_FUN, BUTTON_EXPORT_URL, 
+    BUTTON_EXPORT_SQL, BUTTON_EXPORT_INIT_FUN, BUTTON_EXPORT_FILENAME, BUTTON_EXPORT_FIELDNAMES, 
+    OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_EXPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_EXPORT
+    where BUTTON_EXPORT_ID = #{buttonExportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_EXPORT
+    where BUTTON_EXPORT_ID = #{buttonExportId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportExample" >
+    delete from SYS_FORM_BUTTON_EXPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExport" >
+    insert into SYS_FORM_BUTTON_EXPORT (FORM_BUTTON_ID, BUTTON_EXPORT_EXC_TYPE, 
+      BUTTON_EXPORT_FUN, BUTTON_EXPORT_URL, BUTTON_EXPORT_SQL, 
+      BUTTON_EXPORT_INIT_FUN, BUTTON_EXPORT_FILENAME, 
+      BUTTON_EXPORT_FIELDNAMES, OPERATOR_NAME, 
+      OPERATOR_TIME)
+    values (#{formButtonId,jdbcType=DECIMAL}, #{buttonExportExcType,jdbcType=NVARCHAR}, 
+      #{buttonExportFun,jdbcType=NVARCHAR}, #{buttonExportUrl,jdbcType=NVARCHAR}, #{buttonExportSql,jdbcType=NVARCHAR}, 
+      #{buttonExportInitFun,jdbcType=NVARCHAR}, #{buttonExportFilename,jdbcType=NVARCHAR}, 
+      #{buttonExportFieldnames,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExport" >
+    insert into SYS_FORM_BUTTON_EXPORT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonExportId != null" >
+        BUTTON_EXPORT_ID,
+      </if>
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID,
+      </if>
+      <if test="buttonExportExcType != null" >
+        BUTTON_EXPORT_EXC_TYPE,
+      </if>
+      <if test="buttonExportFun != null" >
+        BUTTON_EXPORT_FUN,
+      </if>
+      <if test="buttonExportUrl != null" >
+        BUTTON_EXPORT_URL,
+      </if>
+      <if test="buttonExportSql != null" >
+        BUTTON_EXPORT_SQL,
+      </if>
+      <if test="buttonExportInitFun != null" >
+        BUTTON_EXPORT_INIT_FUN,
+      </if>
+      <if test="buttonExportFilename != null" >
+        BUTTON_EXPORT_FILENAME,
+      </if>
+      <if test="buttonExportFieldnames != null" >
+        BUTTON_EXPORT_FIELDNAMES,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonExportId != null" >
+        #{buttonExportId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonId != null" >
+        #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonExportExcType != null" >
+        #{buttonExportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFun != null" >
+        #{buttonExportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportUrl != null" >
+        #{buttonExportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportSql != null" >
+        #{buttonExportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportInitFun != null" >
+        #{buttonExportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFilename != null" >
+        #{buttonExportFilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFieldnames != null" >
+        #{buttonExportFieldnames,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExportExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_EXPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_EXPORT
+    <set >
+      <if test="record.buttonExportId != null" >
+        BUTTON_EXPORT_ID = #{record.buttonExportId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonId != null" >
+        FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonExportExcType != null" >
+        BUTTON_EXPORT_EXC_TYPE = #{record.buttonExportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportFun != null" >
+        BUTTON_EXPORT_FUN = #{record.buttonExportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportUrl != null" >
+        BUTTON_EXPORT_URL = #{record.buttonExportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportSql != null" >
+        BUTTON_EXPORT_SQL = #{record.buttonExportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportInitFun != null" >
+        BUTTON_EXPORT_INIT_FUN = #{record.buttonExportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportFilename != null" >
+        BUTTON_EXPORT_FILENAME = #{record.buttonExportFilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonExportFieldnames != null" >
+        BUTTON_EXPORT_FIELDNAMES = #{record.buttonExportFieldnames,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_EXPORT
+    set BUTTON_EXPORT_ID = #{record.buttonExportId,jdbcType=DECIMAL},
+      FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      BUTTON_EXPORT_EXC_TYPE = #{record.buttonExportExcType,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FUN = #{record.buttonExportFun,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_URL = #{record.buttonExportUrl,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_SQL = #{record.buttonExportSql,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_INIT_FUN = #{record.buttonExportInitFun,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FILENAME = #{record.buttonExportFilename,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FIELDNAMES = #{record.buttonExportFieldnames,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExport" >
+    update SYS_FORM_BUTTON_EXPORT
+    <set >
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonExportExcType != null" >
+        BUTTON_EXPORT_EXC_TYPE = #{buttonExportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFun != null" >
+        BUTTON_EXPORT_FUN = #{buttonExportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportUrl != null" >
+        BUTTON_EXPORT_URL = #{buttonExportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportSql != null" >
+        BUTTON_EXPORT_SQL = #{buttonExportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportInitFun != null" >
+        BUTTON_EXPORT_INIT_FUN = #{buttonExportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFilename != null" >
+        BUTTON_EXPORT_FILENAME = #{buttonExportFilename,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonExportFieldnames != null" >
+        BUTTON_EXPORT_FIELDNAMES = #{buttonExportFieldnames,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BUTTON_EXPORT_ID = #{buttonExportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonExport" >
+    update SYS_FORM_BUTTON_EXPORT
+    set FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL},
+      BUTTON_EXPORT_EXC_TYPE = #{buttonExportExcType,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FUN = #{buttonExportFun,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_URL = #{buttonExportUrl,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_SQL = #{buttonExportSql,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_INIT_FUN = #{buttonExportInitFun,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FILENAME = #{buttonExportFilename,jdbcType=NVARCHAR},
+      BUTTON_EXPORT_FIELDNAMES = #{buttonExportFieldnames,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where BUTTON_EXPORT_ID = #{buttonExportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysmenu.SysSystemSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysmenu.SysSystemScheme" >
+    <id column="SCHEME_ID" property="schemeId" jdbcType="DECIMAL" />
+    <result column="SCHEME_NAME" property="schemeName" jdbcType="VARCHAR" />
+    <result column="SCHEME_CODE" property="schemeCode" jdbcType="VARCHAR" />
+    <result column="SCHEME_DEF_TYPE" property="schemeDefType" jdbcType="CHAR" />
+    <result column="SYSTEM_TITLE" property="systemTitle" jdbcType="VARCHAR" />
+    <result column="SYSTEM_LOG" property="systemLog" jdbcType="VARCHAR" />
+    <result column="DEVICE_TYPE" property="deviceType" jdbcType="CHAR" />
+    <result column="SCHEME_LEVEL" property="schemeLevel" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="DESK_TYPE" property="deskType" jdbcType="CHAR" />
+    <result column="SCHEME_SOURCE" property="schemeSource" jdbcType="VARCHAR" />
+    <result column="COMP_ID" property="compId" jdbcType="VARCHAR" />
+    <result column="MENU_NAVIGATE" property="menuNavigate" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.sysmenu.SysSystemSchemeWithBLOBs" extends="BaseResultMap" >
+    <result column="SCHEME_USER_IDS" property="schemeUserIds" jdbcType="CLOB" />
+    <result column="SCHEME_ROLE_IDS" property="schemeRoleIds" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SCHEME_ID, SCHEME_NAME, SCHEME_CODE, SCHEME_DEF_TYPE, SYSTEM_TITLE, SYSTEM_LOG, DEVICE_TYPE, 
+    SCHEME_LEVEL, STATUS, DESK_TYPE, SCHEME_SOURCE, COMP_ID, MENU_NAVIGATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    SCHEME_USER_IDS, SCHEME_ROLE_IDS
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_SYSTEM_SCHEME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_SYSTEM_SCHEME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_SYSTEM_SCHEME
+    where SCHEME_ID = #{schemeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_SYSTEM_SCHEME
+    where SCHEME_ID = #{schemeId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeExample" >
+    delete from SYS_SYSTEM_SCHEME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeWithBLOBs" >
+    insert into SYS_SYSTEM_SCHEME (SCHEME_NAME, SCHEME_CODE, 
+      SCHEME_DEF_TYPE, SYSTEM_TITLE, SYSTEM_LOG, 
+      DEVICE_TYPE, SCHEME_LEVEL, STATUS, 
+      DESK_TYPE, SCHEME_SOURCE, COMP_ID, 
+      MENU_NAVIGATE, SCHEME_USER_IDS, SCHEME_ROLE_IDS
+      )
+    values (#{schemeName,jdbcType=VARCHAR}, #{schemeCode,jdbcType=VARCHAR}, 
+      #{schemeDefType,jdbcType=CHAR}, #{systemTitle,jdbcType=VARCHAR}, #{systemLog,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=CHAR}, #{schemeLevel,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{deskType,jdbcType=CHAR}, #{schemeSource,jdbcType=VARCHAR}, #{compId,jdbcType=VARCHAR}, 
+      #{menuNavigate,jdbcType=CHAR}, #{schemeUserIds,jdbcType=CLOB}, #{schemeRoleIds,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeWithBLOBs" >
+    insert into SYS_SYSTEM_SCHEME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="schemeId != null" >
+        SCHEME_ID,
+      </if>
+      <if test="schemeName != null" >
+        SCHEME_NAME,
+      </if>
+      <if test="schemeCode != null" >
+        SCHEME_CODE,
+      </if>
+      <if test="schemeDefType != null" >
+        SCHEME_DEF_TYPE,
+      </if>
+      <if test="systemTitle != null" >
+        SYSTEM_TITLE,
+      </if>
+      <if test="systemLog != null" >
+        SYSTEM_LOG,
+      </if>
+      <if test="deviceType != null" >
+        DEVICE_TYPE,
+      </if>
+      <if test="schemeLevel != null" >
+        SCHEME_LEVEL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="deskType != null" >
+        DESK_TYPE,
+      </if>
+      <if test="schemeSource != null" >
+        SCHEME_SOURCE,
+      </if>
+      <if test="compId != null" >
+        COMP_ID,
+      </if>
+      <if test="menuNavigate != null" >
+        MENU_NAVIGATE,
+      </if>
+      <if test="schemeUserIds != null" >
+        SCHEME_USER_IDS,
+      </if>
+      <if test="schemeRoleIds != null" >
+        SCHEME_ROLE_IDS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="schemeId != null" >
+        #{schemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="schemeName != null" >
+        #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeCode != null" >
+        #{schemeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeDefType != null" >
+        #{schemeDefType,jdbcType=CHAR},
+      </if>
+      <if test="systemTitle != null" >
+        #{systemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="systemLog != null" >
+        #{systemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=CHAR},
+      </if>
+      <if test="schemeLevel != null" >
+        #{schemeLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="deskType != null" >
+        #{deskType,jdbcType=CHAR},
+      </if>
+      <if test="schemeSource != null" >
+        #{schemeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="compId != null" >
+        #{compId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuNavigate != null" >
+        #{menuNavigate,jdbcType=CHAR},
+      </if>
+      <if test="schemeUserIds != null" >
+        #{schemeUserIds,jdbcType=CLOB},
+      </if>
+      <if test="schemeRoleIds != null" >
+        #{schemeRoleIds,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_SYSTEM_SCHEME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_SYSTEM_SCHEME
+    <set >
+      <if test="record.schemeId != null" >
+        SCHEME_ID = #{record.schemeId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.schemeName != null" >
+        SCHEME_NAME = #{record.schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schemeCode != null" >
+        SCHEME_CODE = #{record.schemeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schemeDefType != null" >
+        SCHEME_DEF_TYPE = #{record.schemeDefType,jdbcType=CHAR},
+      </if>
+      <if test="record.systemTitle != null" >
+        SYSTEM_TITLE = #{record.systemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemLog != null" >
+        SYSTEM_LOG = #{record.systemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceType != null" >
+        DEVICE_TYPE = #{record.deviceType,jdbcType=CHAR},
+      </if>
+      <if test="record.schemeLevel != null" >
+        SCHEME_LEVEL = #{record.schemeLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deskType != null" >
+        DESK_TYPE = #{record.deskType,jdbcType=CHAR},
+      </if>
+      <if test="record.schemeSource != null" >
+        SCHEME_SOURCE = #{record.schemeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compId != null" >
+        COMP_ID = #{record.compId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuNavigate != null" >
+        MENU_NAVIGATE = #{record.menuNavigate,jdbcType=CHAR},
+      </if>
+      <if test="record.schemeUserIds != null" >
+        SCHEME_USER_IDS = #{record.schemeUserIds,jdbcType=CLOB},
+      </if>
+      <if test="record.schemeRoleIds != null" >
+        SCHEME_ROLE_IDS = #{record.schemeRoleIds,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_SYSTEM_SCHEME
+    set SCHEME_ID = #{record.schemeId,jdbcType=DECIMAL},
+      SCHEME_NAME = #{record.schemeName,jdbcType=VARCHAR},
+      SCHEME_CODE = #{record.schemeCode,jdbcType=VARCHAR},
+      SCHEME_DEF_TYPE = #{record.schemeDefType,jdbcType=CHAR},
+      SYSTEM_TITLE = #{record.systemTitle,jdbcType=VARCHAR},
+      SYSTEM_LOG = #{record.systemLog,jdbcType=VARCHAR},
+      DEVICE_TYPE = #{record.deviceType,jdbcType=CHAR},
+      SCHEME_LEVEL = #{record.schemeLevel,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DESK_TYPE = #{record.deskType,jdbcType=CHAR},
+      SCHEME_SOURCE = #{record.schemeSource,jdbcType=VARCHAR},
+      COMP_ID = #{record.compId,jdbcType=VARCHAR},
+      MENU_NAVIGATE = #{record.menuNavigate,jdbcType=CHAR},
+      SCHEME_USER_IDS = #{record.schemeUserIds,jdbcType=CLOB},
+      SCHEME_ROLE_IDS = #{record.schemeRoleIds,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_SYSTEM_SCHEME
+    set SCHEME_ID = #{record.schemeId,jdbcType=DECIMAL},
+      SCHEME_NAME = #{record.schemeName,jdbcType=VARCHAR},
+      SCHEME_CODE = #{record.schemeCode,jdbcType=VARCHAR},
+      SCHEME_DEF_TYPE = #{record.schemeDefType,jdbcType=CHAR},
+      SYSTEM_TITLE = #{record.systemTitle,jdbcType=VARCHAR},
+      SYSTEM_LOG = #{record.systemLog,jdbcType=VARCHAR},
+      DEVICE_TYPE = #{record.deviceType,jdbcType=CHAR},
+      SCHEME_LEVEL = #{record.schemeLevel,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DESK_TYPE = #{record.deskType,jdbcType=CHAR},
+      SCHEME_SOURCE = #{record.schemeSource,jdbcType=VARCHAR},
+      COMP_ID = #{record.compId,jdbcType=VARCHAR},
+      MENU_NAVIGATE = #{record.menuNavigate,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeWithBLOBs" >
+    update SYS_SYSTEM_SCHEME
+    <set >
+      <if test="schemeName != null" >
+        SCHEME_NAME = #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeCode != null" >
+        SCHEME_CODE = #{schemeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeDefType != null" >
+        SCHEME_DEF_TYPE = #{schemeDefType,jdbcType=CHAR},
+      </if>
+      <if test="systemTitle != null" >
+        SYSTEM_TITLE = #{systemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="systemLog != null" >
+        SYSTEM_LOG = #{systemLog,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        DEVICE_TYPE = #{deviceType,jdbcType=CHAR},
+      </if>
+      <if test="schemeLevel != null" >
+        SCHEME_LEVEL = #{schemeLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="deskType != null" >
+        DESK_TYPE = #{deskType,jdbcType=CHAR},
+      </if>
+      <if test="schemeSource != null" >
+        SCHEME_SOURCE = #{schemeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="compId != null" >
+        COMP_ID = #{compId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuNavigate != null" >
+        MENU_NAVIGATE = #{menuNavigate,jdbcType=CHAR},
+      </if>
+      <if test="schemeUserIds != null" >
+        SCHEME_USER_IDS = #{schemeUserIds,jdbcType=CLOB},
+      </if>
+      <if test="schemeRoleIds != null" >
+        SCHEME_ROLE_IDS = #{schemeRoleIds,jdbcType=CLOB},
+      </if>
+    </set>
+    where SCHEME_ID = #{schemeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.sysmenu.SysSystemSchemeWithBLOBs" >
+    update SYS_SYSTEM_SCHEME
+    set SCHEME_NAME = #{schemeName,jdbcType=VARCHAR},
+      SCHEME_CODE = #{schemeCode,jdbcType=VARCHAR},
+      SCHEME_DEF_TYPE = #{schemeDefType,jdbcType=CHAR},
+      SYSTEM_TITLE = #{systemTitle,jdbcType=VARCHAR},
+      SYSTEM_LOG = #{systemLog,jdbcType=VARCHAR},
+      DEVICE_TYPE = #{deviceType,jdbcType=CHAR},
+      SCHEME_LEVEL = #{schemeLevel,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DESK_TYPE = #{deskType,jdbcType=CHAR},
+      SCHEME_SOURCE = #{schemeSource,jdbcType=VARCHAR},
+      COMP_ID = #{compId,jdbcType=VARCHAR},
+      MENU_NAVIGATE = #{menuNavigate,jdbcType=CHAR},
+      SCHEME_USER_IDS = #{schemeUserIds,jdbcType=CLOB},
+      SCHEME_ROLE_IDS = #{schemeRoleIds,jdbcType=CLOB}
+    where SCHEME_ID = #{schemeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysmenu.SysSystemScheme" >
+    update SYS_SYSTEM_SCHEME
+    set SCHEME_NAME = #{schemeName,jdbcType=VARCHAR},
+      SCHEME_CODE = #{schemeCode,jdbcType=VARCHAR},
+      SCHEME_DEF_TYPE = #{schemeDefType,jdbcType=CHAR},
+      SYSTEM_TITLE = #{systemTitle,jdbcType=VARCHAR},
+      SYSTEM_LOG = #{systemLog,jdbcType=VARCHAR},
+      DEVICE_TYPE = #{deviceType,jdbcType=CHAR},
+      SCHEME_LEVEL = #{schemeLevel,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DESK_TYPE = #{deskType,jdbcType=CHAR},
+      SCHEME_SOURCE = #{schemeSource,jdbcType=VARCHAR},
+      COMP_ID = #{compId,jdbcType=VARCHAR},
+      MENU_NAVIGATE = #{menuNavigate,jdbcType=CHAR}
+    where SCHEME_ID = #{schemeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

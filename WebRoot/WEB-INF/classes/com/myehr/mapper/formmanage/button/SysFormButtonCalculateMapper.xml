@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonCalculateMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonCalculate" >
+    <id column="CALCULATE_ID" property="calculateId" jdbcType="DECIMAL" />
+    <result column="CALCULATE_BUTTON_ID" property="calculateButtonId" jdbcType="DECIMAL" />
+    <result column="CALCULATE_ROW_COUNT" property="calculateRowCount" jdbcType="DECIMAL" />
+    <result column="CALCULATE_WIN_TITLE" property="calculateWinTitle" jdbcType="VARCHAR" />
+    <result column="CALCULATE_WIN_HEIGHT" property="calculateWinHeight" jdbcType="VARCHAR" />
+    <result column="CALCULATE_WIN_WIDTH" property="calculateWinWidth" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CALCULATE_ID, CALCULATE_BUTTON_ID, CALCULATE_ROW_COUNT, CALCULATE_WIN_TITLE, CALCULATE_WIN_HEIGHT, 
+    CALCULATE_WIN_WIDTH, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_CALCULATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_CALCULATE
+    where CALCULATE_ID = #{calculateId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_CALCULATE
+    where CALCULATE_ID = #{calculateId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculateExample" >
+    delete from SYS_FORM_BUTTON_CALCULATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculate" >
+    insert into SYS_FORM_BUTTON_CALCULATE (CALCULATE_BUTTON_ID, CALCULATE_ROW_COUNT, 
+      CALCULATE_WIN_TITLE, CALCULATE_WIN_HEIGHT, 
+      CALCULATE_WIN_WIDTH, OPERATOR_NAME, OPERATOR_TIME
+      )
+    values (#{calculateButtonId,jdbcType=DECIMAL}, #{calculateRowCount,jdbcType=DECIMAL}, 
+      #{calculateWinTitle,jdbcType=VARCHAR}, #{calculateWinHeight,jdbcType=VARCHAR}, 
+      #{calculateWinWidth,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculate" >
+    insert into SYS_FORM_BUTTON_CALCULATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="calculateId != null" >
+        CALCULATE_ID,
+      </if>
+      <if test="calculateButtonId != null" >
+        CALCULATE_BUTTON_ID,
+      </if>
+      <if test="calculateRowCount != null" >
+        CALCULATE_ROW_COUNT,
+      </if>
+      <if test="calculateWinTitle != null" >
+        CALCULATE_WIN_TITLE,
+      </if>
+      <if test="calculateWinHeight != null" >
+        CALCULATE_WIN_HEIGHT,
+      </if>
+      <if test="calculateWinWidth != null" >
+        CALCULATE_WIN_WIDTH,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="calculateId != null" >
+        #{calculateId,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateButtonId != null" >
+        #{calculateButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateRowCount != null" >
+        #{calculateRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateWinTitle != null" >
+        #{calculateWinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateWinHeight != null" >
+        #{calculateWinHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateWinWidth != null" >
+        #{calculateWinWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculateExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_CALCULATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_CALCULATE
+    <set >
+      <if test="record.calculateId != null" >
+        CALCULATE_ID = #{record.calculateId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.calculateButtonId != null" >
+        CALCULATE_BUTTON_ID = #{record.calculateButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.calculateRowCount != null" >
+        CALCULATE_ROW_COUNT = #{record.calculateRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.calculateWinTitle != null" >
+        CALCULATE_WIN_TITLE = #{record.calculateWinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calculateWinHeight != null" >
+        CALCULATE_WIN_HEIGHT = #{record.calculateWinHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calculateWinWidth != null" >
+        CALCULATE_WIN_WIDTH = #{record.calculateWinWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_CALCULATE
+    set CALCULATE_ID = #{record.calculateId,jdbcType=DECIMAL},
+      CALCULATE_BUTTON_ID = #{record.calculateButtonId,jdbcType=DECIMAL},
+      CALCULATE_ROW_COUNT = #{record.calculateRowCount,jdbcType=DECIMAL},
+      CALCULATE_WIN_TITLE = #{record.calculateWinTitle,jdbcType=VARCHAR},
+      CALCULATE_WIN_HEIGHT = #{record.calculateWinHeight,jdbcType=VARCHAR},
+      CALCULATE_WIN_WIDTH = #{record.calculateWinWidth,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculate" >
+    update SYS_FORM_BUTTON_CALCULATE
+    <set >
+      <if test="calculateButtonId != null" >
+        CALCULATE_BUTTON_ID = #{calculateButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateRowCount != null" >
+        CALCULATE_ROW_COUNT = #{calculateRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="calculateWinTitle != null" >
+        CALCULATE_WIN_TITLE = #{calculateWinTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateWinHeight != null" >
+        CALCULATE_WIN_HEIGHT = #{calculateWinHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateWinWidth != null" >
+        CALCULATE_WIN_WIDTH = #{calculateWinWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CALCULATE_ID = #{calculateId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonCalculate" >
+    update SYS_FORM_BUTTON_CALCULATE
+    set CALCULATE_BUTTON_ID = #{calculateButtonId,jdbcType=DECIMAL},
+      CALCULATE_ROW_COUNT = #{calculateRowCount,jdbcType=DECIMAL},
+      CALCULATE_WIN_TITLE = #{calculateWinTitle,jdbcType=VARCHAR},
+      CALCULATE_WIN_HEIGHT = #{calculateWinHeight,jdbcType=VARCHAR},
+      CALCULATE_WIN_WIDTH = #{calculateWinWidth,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE}
+    where CALCULATE_ID = #{calculateId,jdbcType=DECIMAL}
+  </update>
+</mapper>

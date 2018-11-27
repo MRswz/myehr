@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" 
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd   
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd" default-autowire="byName">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		 <property name="locations">   
+         <list>  
+             <value>classpath:db.properties</value>    
+         </list>  
+         </property>
+	</bean>
+	
+	<!-- 主数据源配置 -->
+    <bean id="dafaultsource" class="org.apache.commons.dbcp.BasicDataSource"> 
+       <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" /> 
+       <property name="username" value="${jdbc.username}"></property>
+       <property name="password" value="${jdbc.password}" />
+       <!-- 最大连接数据库连接数 -->
+       <property name="maxActive" value="500" />
+       <!-- 最大等待连接中的数量 0标识没有限制 -->
+       <property name="maxIdle" value="10" />
+       <!-- 最大等待毫秒数 超时报错 -->
+       <property name="maxWait" value="500" />
+       <property name="defaultAutoCommit" value="true" />
+       <!-- 是否自我中断 -->
+       <property name="removeAbandoned" value="true" />
+       <property name="removeAbandonedTimeout" value="60" />
+   </bean>
+   
+   <!-- oracle数据源配置 -->
+   <bean id="oracle" class="org.apache.commons.dbcp.BasicDataSource"> 
+       <property name="driverClassName" value="${jdbc5.driver}" />
+        <property name="url" value="${jdbc5.url}" /> 
+       <property name="username" value="${jdbc5.username}"></property>
+       <property name="password" value="${jdbc5.password}" />
+       
+        <!-- 最大连接数据库连接数 -->
+        <property name="maxActive" value="500" />
+        <!-- 最大等待连接中的数量 0标识没有限制 -->
+        <property name="maxIdle" value="10" />
+        <!-- 最大等待毫秒数 超时报错 -->
+        <property name="maxWait" value="500" />
+        <property name="defaultAutoCommit" value="true" />
+        <!-- 是否自我中断 -->
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="60" />
+   </bean>
+   
+   <!-- oracle数据源配置 -->
+   <bean id="importdata" class="org.apache.commons.dbcp.BasicDataSource"> 
+       <property name="driverClassName" value="${jdbcI.driver}" />
+        <property name="url" value="${jdbcI.url}" /> 
+       <property name="username" value="${jdbcI.username}"></property>
+       <property name="password" value="${jdbcI.password}" />
+       
+        <!-- 最大连接数据库连接数 -->
+        <property name="maxActive" value="500" />
+        <!-- 最大等待连接中的数量 0标识没有限制 -->
+        <property name="maxIdle" value="10" />
+        <!-- 最大等待毫秒数 超时报错 -->
+        <property name="maxWait" value="500" />
+        <property name="defaultAutoCommit" value="true" />
+        <!-- 是否自我中断 -->
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="60" />
+   </bean>
+   
+   <!-- 配置主数据源bean -->
+    <bean id="dafaultsourcesqlsessionfactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dafaultsource"/>
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+		<property name="mapperLocations" value="classpath:com/myehr/sqlfile/*.xml" />
+    </bean>  
+    
+    <!-- 配置oracle数据源bean -->
+    <bean id="oraclesqlsessionfactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="oracle"/>
+		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+		<property name="mapperLocations" value="classpath:com/myehr/sqlfile/*.xml" />
+    </bean>
+    
+    
+    <!-- 配置导出数据源bean -->
+    <bean id="importdatasqlsessionfactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="importdata"/>
+		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+		<property name="mapperLocations" value="classpath:com/myehr/sqlfile/*.xml" />
+    </bean>
+    
+     <!-- 配置自定义的sqlsessiontemplate模板，注入相关配置 -->
+    <!-- <bean id="sqlsessiontemplate" class="com.myehr.common.util.datasource.CustomSqlsessionTemplate">
+        <constructor-arg ref="oraclesqlsessionfactory" />
+        <property name="targetsqlsessionfactorys">
+            <map>     
+                <entry value-ref="oraclesqlsessionfactory" key="oracle"/>
+                <entry value-ref="sqlserversqlsessionfactory" key="sqlserver"/>
+            </map> 
+        </property>
+    </bean>   -->
+     
+   <!-- 编写spring 配置文件的配置多数源映射关系 -->
+	<!-- <bean class="com.test.DynamicDataSource" id="dataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="testDataSource1" key="testDataSource1"></entry>
+				<entry value-ref="testDataSource2" key="testDataSource2"></entry>
+				<entry value-ref="oracleTest" key="oracleTest"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="testDataSource1">
+		</property>
+	</bean> -->
+
+    <!-- 输出可执行的SQL-->
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+		<property name="statementExecutableSqlLogEnable" value="true" />
+	</bean>
+    
+    <!-- mapper扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+		<property name="basePackage" value="com.myehr.mapper,com.myehr.mapper2,com.myehr.sqlfile"></property>
+		<property name="sqlSessionFactoryBeanName" value="dafaultsourcesqlsessionfactory" /> 
+		<!-- <property name="sqlSessionTemplateBeanName" value="sqlsessiontemplate"/> -->
+	</bean>
+    <!-- 事务begin-->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dafaultsource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" /> 
+	<!-- 事务end -->
+	<!-- 定义事务传播属性 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			对add、update、delete的方法进行事务
+			<tx:method name="*InTrasaction" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			对剩余的方法进行事务
+			<tx:method name="*" propagation="NOT_SUPPORTED"
+				read-only="true" />			
+		</tx:attributes>
+	</tx:advice> -->
+	<!-- <aop:config>
+		<aop:pointcut id="transactionPointCut" expression="execution(* com.test.dao.*.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointCut"
+			advice-ref="txAdvice" order="2" />
+		<aop:advisor advice-ref="dataSourceExchange" pointcut-ref="transactionPointCut" order="1"/>
+	</aop:config> -->	
+	<!-- <context:component-scan base-package="com.test.*"/>   -->
+				
+</beans>

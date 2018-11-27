@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.SysTemplateModelColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.SysTemplateModelColumn" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_CODE" property="templateCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_CODE" property="templateParamCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_CNAME" property="templateParamCname" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARENT_PARAM_CODE" property="templateParentParamCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_VALUE" property="templateParamValue" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_INIT_PARAM_VALUE" property="templateInitParamValue" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_VALUE_TYPE" property="templateParamValueType" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_WIDGET_TYPE" property="templateParamWidgetType" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PARAM_XU" property="templateParamXu" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_PARAM_TYPE" property="templateParamType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TEMPLATE_CODE, TEMPLATE_PARAM_CODE, TEMPLATE_PARAM_CNAME, TEMPLATE_PARENT_PARAM_CODE, 
+    TEMPLATE_PARAM_VALUE, TEMPLATE_INIT_PARAM_VALUE, TEMPLATE_PARAM_VALUE_TYPE, TEMPLATE_PARAM_WIDGET_TYPE, 
+    TEMPLATE_PARAM_XU, TEMPLATE_PARAM_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_MODEL_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_MODEL_COLUMN
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_MODEL_COLUMN
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumnExample" >
+    delete from SYS_TEMPLATE_MODEL_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumn" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_TEMPLATE_MODEL_COLUMN (TEMPLATE_CODE, TEMPLATE_PARAM_CODE, 
+      TEMPLATE_PARAM_CNAME, TEMPLATE_PARENT_PARAM_CODE, 
+      TEMPLATE_PARAM_VALUE, TEMPLATE_INIT_PARAM_VALUE, 
+      TEMPLATE_PARAM_VALUE_TYPE, TEMPLATE_PARAM_WIDGET_TYPE, 
+      TEMPLATE_PARAM_XU, TEMPLATE_PARAM_TYPE)
+    values (#{templateCode,jdbcType=NVARCHAR}, #{templateParamCode,jdbcType=NVARCHAR}, 
+      #{templateParamCname,jdbcType=NVARCHAR}, #{templateParentParamCode,jdbcType=NVARCHAR}, 
+      #{templateParamValue,jdbcType=NVARCHAR}, #{templateInitParamValue,jdbcType=NVARCHAR}, 
+      #{templateParamValueType,jdbcType=NVARCHAR}, #{templateParamWidgetType,jdbcType=NVARCHAR}, 
+      #{templateParamXu,jdbcType=VARCHAR}, #{templateParamType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumn" >
+    insert into SYS_TEMPLATE_MODEL_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="templateCode != null" >
+        TEMPLATE_CODE,
+      </if>
+      <if test="templateParamCode != null" >
+        TEMPLATE_PARAM_CODE,
+      </if>
+      <if test="templateParamCname != null" >
+        TEMPLATE_PARAM_CNAME,
+      </if>
+      <if test="templateParentParamCode != null" >
+        TEMPLATE_PARENT_PARAM_CODE,
+      </if>
+      <if test="templateParamValue != null" >
+        TEMPLATE_PARAM_VALUE,
+      </if>
+      <if test="templateInitParamValue != null" >
+        TEMPLATE_INIT_PARAM_VALUE,
+      </if>
+      <if test="templateParamValueType != null" >
+        TEMPLATE_PARAM_VALUE_TYPE,
+      </if>
+      <if test="templateParamWidgetType != null" >
+        TEMPLATE_PARAM_WIDGET_TYPE,
+      </if>
+      <if test="templateParamXu != null" >
+        TEMPLATE_PARAM_XU,
+      </if>
+      <if test="templateParamType != null" >
+        TEMPLATE_PARAM_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamCode != null" >
+        #{templateParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamCname != null" >
+        #{templateParamCname,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParentParamCode != null" >
+        #{templateParentParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamValue != null" >
+        #{templateParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateInitParamValue != null" >
+        #{templateInitParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamValueType != null" >
+        #{templateParamValueType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamWidgetType != null" >
+        #{templateParamWidgetType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamXu != null" >
+        #{templateParamXu,jdbcType=VARCHAR},
+      </if>
+      <if test="templateParamType != null" >
+        #{templateParamType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_MODEL_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_MODEL_COLUMN
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateCode != null" >
+        TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamCode != null" >
+        TEMPLATE_PARAM_CODE = #{record.templateParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamCname != null" >
+        TEMPLATE_PARAM_CNAME = #{record.templateParamCname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParentParamCode != null" >
+        TEMPLATE_PARENT_PARAM_CODE = #{record.templateParentParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamValue != null" >
+        TEMPLATE_PARAM_VALUE = #{record.templateParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateInitParamValue != null" >
+        TEMPLATE_INIT_PARAM_VALUE = #{record.templateInitParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamValueType != null" >
+        TEMPLATE_PARAM_VALUE_TYPE = #{record.templateParamValueType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamWidgetType != null" >
+        TEMPLATE_PARAM_WIDGET_TYPE = #{record.templateParamWidgetType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateParamXu != null" >
+        TEMPLATE_PARAM_XU = #{record.templateParamXu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateParamType != null" >
+        TEMPLATE_PARAM_TYPE = #{record.templateParamType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_MODEL_COLUMN
+    set ID = #{record.id,jdbcType=DECIMAL},
+      TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_CODE = #{record.templateParamCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_CNAME = #{record.templateParamCname,jdbcType=NVARCHAR},
+      TEMPLATE_PARENT_PARAM_CODE = #{record.templateParentParamCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_VALUE = #{record.templateParamValue,jdbcType=NVARCHAR},
+      TEMPLATE_INIT_PARAM_VALUE = #{record.templateInitParamValue,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_VALUE_TYPE = #{record.templateParamValueType,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_WIDGET_TYPE = #{record.templateParamWidgetType,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_XU = #{record.templateParamXu,jdbcType=VARCHAR},
+      TEMPLATE_PARAM_TYPE = #{record.templateParamType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumn" >
+    update SYS_TEMPLATE_MODEL_COLUMN
+    <set >
+      <if test="templateCode != null" >
+        TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamCode != null" >
+        TEMPLATE_PARAM_CODE = #{templateParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamCname != null" >
+        TEMPLATE_PARAM_CNAME = #{templateParamCname,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParentParamCode != null" >
+        TEMPLATE_PARENT_PARAM_CODE = #{templateParentParamCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamValue != null" >
+        TEMPLATE_PARAM_VALUE = #{templateParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateInitParamValue != null" >
+        TEMPLATE_INIT_PARAM_VALUE = #{templateInitParamValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamValueType != null" >
+        TEMPLATE_PARAM_VALUE_TYPE = #{templateParamValueType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamWidgetType != null" >
+        TEMPLATE_PARAM_WIDGET_TYPE = #{templateParamWidgetType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateParamXu != null" >
+        TEMPLATE_PARAM_XU = #{templateParamXu,jdbcType=VARCHAR},
+      </if>
+      <if test="templateParamType != null" >
+        TEMPLATE_PARAM_TYPE = #{templateParamType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelColumn" >
+    update SYS_TEMPLATE_MODEL_COLUMN
+    set TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_CODE = #{templateParamCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_CNAME = #{templateParamCname,jdbcType=NVARCHAR},
+      TEMPLATE_PARENT_PARAM_CODE = #{templateParentParamCode,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_VALUE = #{templateParamValue,jdbcType=NVARCHAR},
+      TEMPLATE_INIT_PARAM_VALUE = #{templateInitParamValue,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_VALUE_TYPE = #{templateParamValueType,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_WIDGET_TYPE = #{templateParamWidgetType,jdbcType=NVARCHAR},
+      TEMPLATE_PARAM_XU = #{templateParamXu,jdbcType=VARCHAR},
+      TEMPLATE_PARAM_TYPE = #{templateParamType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

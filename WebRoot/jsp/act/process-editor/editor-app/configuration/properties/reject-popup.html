@@ -1,0 +1,29 @@
+<div class="modal" ng-controller="KisBpmRejectTypePopupCtrl" data-onShow="showValue">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+                <!-- <label translate>PROPERTY.ASSIGNMENT.TITLE</label> -->
+                <label translate>reject type</label>
+            </div>
+            <div class="modal-body" style="background: #efefef;">
+			  	<label>
+				  <input type="radio" name="rejectType" value="none" ng-model="rejectType.id" />不能驳回
+				</label><br/>
+				<label>
+				  <input type="radio" name="rejectType" value="previous_node" ng-model="rejectType.id" />驳回到上节点
+				</label><br/>
+				<label>
+				  <input type="radio" name="rejectType" value="star_user" ng-model="rejectType.id" />驳回给提交人
+				</label><br/>
+				<label>
+				  <input type="radio" name="rejectType" value="free" ng-model="rejectType.id" />办理界面自由指定节点
+				</label>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+                <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>

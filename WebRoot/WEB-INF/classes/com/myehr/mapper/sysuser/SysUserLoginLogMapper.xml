@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.SysUserLoginLogMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.SysUserLoginLog" >
+    <id column="LOGIN_USER_LOG_ID" property="loginUserLogId" jdbcType="DECIMAL" />
+    <result column="LOGIN_USER_CODE" property="loginUserCode" jdbcType="NVARCHAR" />
+    <result column="LOGIN_DATE" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="LOGIN_IP" property="loginIp" jdbcType="NVARCHAR" />
+    <result column="LOGIN_MAC" property="loginMac" jdbcType="NVARCHAR" />
+    <result column="LOGIN_MARK" property="loginMark" jdbcType="NVARCHAR" />
+    <result column="LOGIN_ADDRESS" property="loginAddress" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOGIN_USER_LOG_ID, LOGIN_USER_CODE, LOGIN_DATE, LOGIN_IP, LOGIN_MAC, LOGIN_MARK, 
+    LOGIN_ADDRESS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysuser.SysUserLoginLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_USER_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER_LOGIN_LOG
+    where LOGIN_USER_LOG_ID = #{loginUserLogId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USER_LOGIN_LOG
+    where LOGIN_USER_LOG_ID = #{loginUserLogId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysuser.SysUserLoginLogExample" >
+    delete from SYS_USER_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysuser.SysUserLoginLog" >
+    insert into SYS_USER_LOGIN_LOG (LOGIN_USER_CODE, LOGIN_DATE, 
+      LOGIN_IP, LOGIN_MAC, LOGIN_MARK, 
+      LOGIN_ADDRESS)
+    values (#{loginUserCode,jdbcType=NVARCHAR}, #{loginDate,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=NVARCHAR}, #{loginMac,jdbcType=NVARCHAR}, #{loginMark,jdbcType=NVARCHAR}, 
+      #{loginAddress,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysuser.SysUserLoginLog" >
+    insert into SYS_USER_LOGIN_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginUserLogId != null" >
+        LOGIN_USER_LOG_ID,
+      </if>
+      <if test="loginUserCode != null" >
+        LOGIN_USER_CODE,
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE,
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP,
+      </if>
+      <if test="loginMac != null" >
+        LOGIN_MAC,
+      </if>
+      <if test="loginMark != null" >
+        LOGIN_MARK,
+      </if>
+      <if test="loginAddress != null" >
+        LOGIN_ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginUserLogId != null" >
+        #{loginUserLogId,jdbcType=DECIMAL},
+      </if>
+      <if test="loginUserCode != null" >
+        #{loginUserCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginMac != null" >
+        #{loginMac,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginMark != null" >
+        #{loginMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginAddress != null" >
+        #{loginAddress,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysuser.SysUserLoginLogExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USER_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USER_LOGIN_LOG
+    <set >
+      <if test="record.loginUserLogId != null" >
+        LOGIN_USER_LOG_ID = #{record.loginUserLogId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loginUserCode != null" >
+        LOGIN_USER_CODE = #{record.loginUserCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginDate != null" >
+        LOGIN_DATE = #{record.loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginIp != null" >
+        LOGIN_IP = #{record.loginIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginMac != null" >
+        LOGIN_MAC = #{record.loginMac,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginMark != null" >
+        LOGIN_MARK = #{record.loginMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginAddress != null" >
+        LOGIN_ADDRESS = #{record.loginAddress,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USER_LOGIN_LOG
+    set LOGIN_USER_LOG_ID = #{record.loginUserLogId,jdbcType=DECIMAL},
+      LOGIN_USER_CODE = #{record.loginUserCode,jdbcType=NVARCHAR},
+      LOGIN_DATE = #{record.loginDate,jdbcType=TIMESTAMP},
+      LOGIN_IP = #{record.loginIp,jdbcType=NVARCHAR},
+      LOGIN_MAC = #{record.loginMac,jdbcType=NVARCHAR},
+      LOGIN_MARK = #{record.loginMark,jdbcType=NVARCHAR},
+      LOGIN_ADDRESS = #{record.loginAddress,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysuser.SysUserLoginLog" >
+    update SYS_USER_LOGIN_LOG
+    <set >
+      <if test="loginUserCode != null" >
+        LOGIN_USER_CODE = #{loginUserCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        LOGIN_IP = #{loginIp,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginMac != null" >
+        LOGIN_MAC = #{loginMac,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginMark != null" >
+        LOGIN_MARK = #{loginMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="loginAddress != null" >
+        LOGIN_ADDRESS = #{loginAddress,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where LOGIN_USER_LOG_ID = #{loginUserLogId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysuser.SysUserLoginLog" >
+    update SYS_USER_LOGIN_LOG
+    set LOGIN_USER_CODE = #{loginUserCode,jdbcType=NVARCHAR},
+      LOGIN_DATE = #{loginDate,jdbcType=TIMESTAMP},
+      LOGIN_IP = #{loginIp,jdbcType=NVARCHAR},
+      LOGIN_MAC = #{loginMac,jdbcType=NVARCHAR},
+      LOGIN_MARK = #{loginMark,jdbcType=NVARCHAR},
+      LOGIN_ADDRESS = #{loginAddress,jdbcType=NVARCHAR}
+    where LOGIN_USER_LOG_ID = #{loginUserLogId,jdbcType=DECIMAL}
+  </update>
+</mapper>

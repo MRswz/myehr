@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysActfreeModelMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysActfreeModel" >
+    <id column="MODELID" property="modelid" jdbcType="VARCHAR" />
+    <result column="MODELKEY" property="modelkey" jdbcType="VARCHAR" />
+    <result column="MODELNAME" property="modelname" jdbcType="NVARCHAR" />
+    <result column="FORMID" property="formid" jdbcType="VARCHAR" />
+    <result column="MODELTYPE" property="modeltype" jdbcType="NVARCHAR" />
+    <result column="CREATENAME" property="createname" jdbcType="NVARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MODELID, MODELKEY, MODELNAME, FORMID, MODELTYPE, CREATENAME, CREATETIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ACTFREE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ACTFREE_MODEL
+    where MODELID = #{modelid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ACTFREE_MODEL
+    where MODELID = #{modelid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModelExample" >
+    delete from SYS_ACTFREE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModel" >
+    insert into SYS_ACTFREE_MODEL (MODELID, MODELKEY, MODELNAME, 
+      FORMID, MODELTYPE, CREATENAME, 
+      CREATETIME)
+    values (#{modelid,jdbcType=VARCHAR}, #{modelkey,jdbcType=VARCHAR}, #{modelname,jdbcType=NVARCHAR}, 
+      #{formid,jdbcType=VARCHAR}, #{modeltype,jdbcType=NVARCHAR}, #{createname,jdbcType=NVARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModel" >
+    insert into SYS_ACTFREE_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        MODELID,
+      </if>
+      <if test="modelkey != null" >
+        MODELKEY,
+      </if>
+      <if test="modelname != null" >
+        MODELNAME,
+      </if>
+      <if test="formid != null" >
+        FORMID,
+      </if>
+      <if test="modeltype != null" >
+        MODELTYPE,
+      </if>
+      <if test="createname != null" >
+        CREATENAME,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelid != null" >
+        #{modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="modelkey != null" >
+        #{modelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="modelname != null" >
+        #{modelname,jdbcType=NVARCHAR},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        #{modeltype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createname != null" >
+        #{createname,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModelExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ACTFREE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ACTFREE_MODEL
+    <set >
+      <if test="record.modelid != null" >
+        MODELID = #{record.modelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelkey != null" >
+        MODELKEY = #{record.modelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelname != null" >
+        MODELNAME = #{record.modelname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formid != null" >
+        FORMID = #{record.formid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeltype != null" >
+        MODELTYPE = #{record.modeltype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createname != null" >
+        CREATENAME = #{record.createname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ACTFREE_MODEL
+    set MODELID = #{record.modelid,jdbcType=VARCHAR},
+      MODELKEY = #{record.modelkey,jdbcType=VARCHAR},
+      MODELNAME = #{record.modelname,jdbcType=NVARCHAR},
+      FORMID = #{record.formid,jdbcType=VARCHAR},
+      MODELTYPE = #{record.modeltype,jdbcType=NVARCHAR},
+      CREATENAME = #{record.createname,jdbcType=NVARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModel" >
+    update SYS_ACTFREE_MODEL
+    <set >
+      <if test="modelkey != null" >
+        MODELKEY = #{modelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="modelname != null" >
+        MODELNAME = #{modelname,jdbcType=NVARCHAR},
+      </if>
+      <if test="formid != null" >
+        FORMID = #{formid,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        MODELTYPE = #{modeltype,jdbcType=NVARCHAR},
+      </if>
+      <if test="createname != null" >
+        CREATENAME = #{createname,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MODELID = #{modelid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysActfreeModel" >
+    update SYS_ACTFREE_MODEL
+    set MODELKEY = #{modelkey,jdbcType=VARCHAR},
+      MODELNAME = #{modelname,jdbcType=NVARCHAR},
+      FORMID = #{formid,jdbcType=VARCHAR},
+      MODELTYPE = #{modeltype,jdbcType=NVARCHAR},
+      CREATENAME = #{createname,jdbcType=NVARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP}
+    where MODELID = #{modelid,jdbcType=VARCHAR}
+  </update>
+</mapper>

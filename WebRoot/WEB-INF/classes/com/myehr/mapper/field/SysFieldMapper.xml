@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.field.SysFieldMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.field.SysField" >
+    <id column="FIELD_ID" property="fieldId" jdbcType="DECIMAL" />
+    <result column="FIELD_CODE" property="fieldCode" jdbcType="NVARCHAR" />
+    <result column="FIELD_ENTITY_ID" property="fieldEntityId" jdbcType="DECIMAL" />
+    <result column="FIELD_TABLENAME" property="fieldTablename" jdbcType="NVARCHAR" />
+    <result column="FIELD_CHINA_NAME" property="fieldChinaName" jdbcType="NVARCHAR" />
+    <result column="FIELD_IS_NULL" property="fieldIsNull" jdbcType="NVARCHAR" />
+    <result column="FIELD_IS_KEY" property="fieldIsKey" jdbcType="NVARCHAR" />
+    <result column="FIELD_TYPE" property="fieldType" jdbcType="NVARCHAR" />
+    <result column="FIELD_LEN" property="fieldLen" jdbcType="NVARCHAR" />
+    <result column="FIELD_DICT" property="fieldDict" jdbcType="NVARCHAR" />
+    <result column="FIELD_SORT" property="fieldSort" jdbcType="DECIMAL" />
+    <result column="FIELD_STATE" property="fieldState" jdbcType="NVARCHAR" />
+    <result column="FIELD_IS_MARK" property="fieldIsMark" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="NVARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="NVARCHAR" />
+    <result column="FIELD_DATA_TYPE" property="fieldDataType" jdbcType="NVARCHAR" />
+    <result column="FIELD_IS_LOG" property="fieldIsLog" jdbcType="NVARCHAR" />
+    <result column="FIELD_IS_BUS_KEY" property="fieldIsBusKey" jdbcType="NVARCHAR" />
+    <result column="CONTROL_TYPE" property="controlType" jdbcType="NVARCHAR" />
+    <result column="DICT_CODE" property="dictCode" jdbcType="NVARCHAR" />
+    <result column="FIELD_RULE_ID" property="fieldRuleId" jdbcType="DECIMAL" />
+    <result column="FIELD_RULE_MAX" property="fieldRuleMax" jdbcType="NVARCHAR" />
+    <result column="FIELD_RULE_NAME" property="fieldRuleName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FIELD_ID, FIELD_CODE, FIELD_ENTITY_ID, FIELD_TABLENAME, FIELD_CHINA_NAME, FIELD_IS_NULL, 
+    FIELD_IS_KEY, FIELD_TYPE, FIELD_LEN, FIELD_DICT, FIELD_SORT, FIELD_STATE, FIELD_IS_MARK, 
+    OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK, 
+    FIELD_DATA_TYPE, FIELD_IS_LOG, FIELD_IS_BUS_KEY, CONTROL_TYPE, DICT_CODE, FIELD_RULE_ID, 
+    FIELD_RULE_MAX, FIELD_RULE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.field.SysFieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FIELD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FIELD
+    where FIELD_ID = #{fieldId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FIELD
+    where FIELD_ID = #{fieldId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.field.SysFieldExample" >
+    delete from SYS_FIELD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.field.SysField" useGeneratedKeys="true" keyProperty="fieldId" keyColumn="FIELD_ID">
+    insert into SYS_FIELD (FIELD_CODE, FIELD_ENTITY_ID, 
+      FIELD_TABLENAME, FIELD_CHINA_NAME, FIELD_IS_NULL, 
+      FIELD_IS_KEY, FIELD_TYPE, FIELD_LEN, 
+      FIELD_DICT, FIELD_SORT, FIELD_STATE, 
+      FIELD_IS_MARK, OPERATOR_NAME, OPERATOR_TIME, 
+      APPROVE_NAME, APPROVE_TIME, DELETE_MARK, 
+      DELETE_MARK_BACK, FIELD_DATA_TYPE, FIELD_IS_LOG, 
+      FIELD_IS_BUS_KEY, CONTROL_TYPE, DICT_CODE, 
+      FIELD_RULE_ID, FIELD_RULE_MAX, FIELD_RULE_NAME
+      )
+    values (#{fieldCode,jdbcType=NVARCHAR}, #{fieldEntityId,jdbcType=DECIMAL}, 
+      #{fieldTablename,jdbcType=NVARCHAR}, #{fieldChinaName,jdbcType=NVARCHAR}, #{fieldIsNull,jdbcType=NVARCHAR}, 
+      #{fieldIsKey,jdbcType=NVARCHAR}, #{fieldType,jdbcType=NVARCHAR}, #{fieldLen,jdbcType=NVARCHAR}, 
+      #{fieldDict,jdbcType=NVARCHAR}, #{fieldSort,jdbcType=DECIMAL}, #{fieldState,jdbcType=NVARCHAR}, 
+      #{fieldIsMark,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{approveName,jdbcType=NVARCHAR}, #{approveTime,jdbcType=TIMESTAMP}, #{deleteMark,jdbcType=NVARCHAR}, 
+      #{deleteMarkBack,jdbcType=NVARCHAR}, #{fieldDataType,jdbcType=NVARCHAR}, #{fieldIsLog,jdbcType=NVARCHAR}, 
+      #{fieldIsBusKey,jdbcType=NVARCHAR}, #{controlType,jdbcType=NVARCHAR}, #{dictCode,jdbcType=NVARCHAR}, 
+      #{fieldRuleId,jdbcType=DECIMAL}, #{fieldRuleMax,jdbcType=NVARCHAR}, #{fieldRuleName,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.field.SysField" >
+    insert into SYS_FIELD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldId != null" >
+        FIELD_ID,
+      </if>
+      <if test="fieldCode != null" >
+        FIELD_CODE,
+      </if>
+      <if test="fieldEntityId != null" >
+        FIELD_ENTITY_ID,
+      </if>
+      <if test="fieldTablename != null" >
+        FIELD_TABLENAME,
+      </if>
+      <if test="fieldChinaName != null" >
+        FIELD_CHINA_NAME,
+      </if>
+      <if test="fieldIsNull != null" >
+        FIELD_IS_NULL,
+      </if>
+      <if test="fieldIsKey != null" >
+        FIELD_IS_KEY,
+      </if>
+      <if test="fieldType != null" >
+        FIELD_TYPE,
+      </if>
+      <if test="fieldLen != null" >
+        FIELD_LEN,
+      </if>
+      <if test="fieldDict != null" >
+        FIELD_DICT,
+      </if>
+      <if test="fieldSort != null" >
+        FIELD_SORT,
+      </if>
+      <if test="fieldState != null" >
+        FIELD_STATE,
+      </if>
+      <if test="fieldIsMark != null" >
+        FIELD_IS_MARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK,
+      </if>
+      <if test="fieldDataType != null" >
+        FIELD_DATA_TYPE,
+      </if>
+      <if test="fieldIsLog != null" >
+        FIELD_IS_LOG,
+      </if>
+      <if test="fieldIsBusKey != null" >
+        FIELD_IS_BUS_KEY,
+      </if>
+      <if test="controlType != null" >
+        CONTROL_TYPE,
+      </if>
+      <if test="dictCode != null" >
+        DICT_CODE,
+      </if>
+      <if test="fieldRuleId != null" >
+        FIELD_RULE_ID,
+      </if>
+      <if test="fieldRuleMax != null" >
+        FIELD_RULE_MAX,
+      </if>
+      <if test="fieldRuleName != null" >
+        FIELD_RULE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldId != null" >
+        #{fieldId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldCode != null" >
+        #{fieldCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldEntityId != null" >
+        #{fieldEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldTablename != null" >
+        #{fieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldChinaName != null" >
+        #{fieldChinaName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsNull != null" >
+        #{fieldIsNull,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsKey != null" >
+        #{fieldIsKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        #{fieldType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldLen != null" >
+        #{fieldLen,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldDict != null" >
+        #{fieldDict,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldSort != null" >
+        #{fieldSort,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldState != null" >
+        #{fieldState,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsMark != null" >
+        #{fieldIsMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        #{deleteMarkBack,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldDataType != null" >
+        #{fieldDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsLog != null" >
+        #{fieldIsLog,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsBusKey != null" >
+        #{fieldIsBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="controlType != null" >
+        #{controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictCode != null" >
+        #{dictCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldRuleId != null" >
+        #{fieldRuleId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldRuleMax != null" >
+        #{fieldRuleMax,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldRuleName != null" >
+        #{fieldRuleName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.field.SysFieldExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FIELD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FIELD
+    <set >
+      <if test="record.fieldId != null" >
+        FIELD_ID = #{record.fieldId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fieldCode != null" >
+        FIELD_CODE = #{record.fieldCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldEntityId != null" >
+        FIELD_ENTITY_ID = #{record.fieldEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fieldTablename != null" >
+        FIELD_TABLENAME = #{record.fieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldChinaName != null" >
+        FIELD_CHINA_NAME = #{record.fieldChinaName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldIsNull != null" >
+        FIELD_IS_NULL = #{record.fieldIsNull,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldIsKey != null" >
+        FIELD_IS_KEY = #{record.fieldIsKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldType != null" >
+        FIELD_TYPE = #{record.fieldType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldLen != null" >
+        FIELD_LEN = #{record.fieldLen,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldDict != null" >
+        FIELD_DICT = #{record.fieldDict,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldSort != null" >
+        FIELD_SORT = #{record.fieldSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fieldState != null" >
+        FIELD_STATE = #{record.fieldState,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldIsMark != null" >
+        FIELD_IS_MARK = #{record.fieldIsMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldDataType != null" >
+        FIELD_DATA_TYPE = #{record.fieldDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldIsLog != null" >
+        FIELD_IS_LOG = #{record.fieldIsLog,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldIsBusKey != null" >
+        FIELD_IS_BUS_KEY = #{record.fieldIsBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.controlType != null" >
+        CONTROL_TYPE = #{record.controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dictCode != null" >
+        DICT_CODE = #{record.dictCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldRuleId != null" >
+        FIELD_RULE_ID = #{record.fieldRuleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fieldRuleMax != null" >
+        FIELD_RULE_MAX = #{record.fieldRuleMax,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fieldRuleName != null" >
+        FIELD_RULE_NAME = #{record.fieldRuleName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FIELD
+    set FIELD_ID = #{record.fieldId,jdbcType=DECIMAL},
+      FIELD_CODE = #{record.fieldCode,jdbcType=NVARCHAR},
+      FIELD_ENTITY_ID = #{record.fieldEntityId,jdbcType=DECIMAL},
+      FIELD_TABLENAME = #{record.fieldTablename,jdbcType=NVARCHAR},
+      FIELD_CHINA_NAME = #{record.fieldChinaName,jdbcType=NVARCHAR},
+      FIELD_IS_NULL = #{record.fieldIsNull,jdbcType=NVARCHAR},
+      FIELD_IS_KEY = #{record.fieldIsKey,jdbcType=NVARCHAR},
+      FIELD_TYPE = #{record.fieldType,jdbcType=NVARCHAR},
+      FIELD_LEN = #{record.fieldLen,jdbcType=NVARCHAR},
+      FIELD_DICT = #{record.fieldDict,jdbcType=NVARCHAR},
+      FIELD_SORT = #{record.fieldSort,jdbcType=DECIMAL},
+      FIELD_STATE = #{record.fieldState,jdbcType=NVARCHAR},
+      FIELD_IS_MARK = #{record.fieldIsMark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{record.deleteMark,jdbcType=NVARCHAR},
+      DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=NVARCHAR},
+      FIELD_DATA_TYPE = #{record.fieldDataType,jdbcType=NVARCHAR},
+      FIELD_IS_LOG = #{record.fieldIsLog,jdbcType=NVARCHAR},
+      FIELD_IS_BUS_KEY = #{record.fieldIsBusKey,jdbcType=NVARCHAR},
+      CONTROL_TYPE = #{record.controlType,jdbcType=NVARCHAR},
+      DICT_CODE = #{record.dictCode,jdbcType=NVARCHAR},
+      FIELD_RULE_ID = #{record.fieldRuleId,jdbcType=DECIMAL},
+      FIELD_RULE_MAX = #{record.fieldRuleMax,jdbcType=NVARCHAR},
+      FIELD_RULE_NAME = #{record.fieldRuleName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.field.SysField" >
+    update SYS_FIELD
+    <set >
+      <if test="fieldCode != null" >
+        FIELD_CODE = #{fieldCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldEntityId != null" >
+        FIELD_ENTITY_ID = #{fieldEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldTablename != null" >
+        FIELD_TABLENAME = #{fieldTablename,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldChinaName != null" >
+        FIELD_CHINA_NAME = #{fieldChinaName,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsNull != null" >
+        FIELD_IS_NULL = #{fieldIsNull,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsKey != null" >
+        FIELD_IS_KEY = #{fieldIsKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldType != null" >
+        FIELD_TYPE = #{fieldType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldLen != null" >
+        FIELD_LEN = #{fieldLen,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldDict != null" >
+        FIELD_DICT = #{fieldDict,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldSort != null" >
+        FIELD_SORT = #{fieldSort,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldState != null" >
+        FIELD_STATE = #{fieldState,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsMark != null" >
+        FIELD_IS_MARK = #{fieldIsMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldDataType != null" >
+        FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsLog != null" >
+        FIELD_IS_LOG = #{fieldIsLog,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldIsBusKey != null" >
+        FIELD_IS_BUS_KEY = #{fieldIsBusKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="controlType != null" >
+        CONTROL_TYPE = #{controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="dictCode != null" >
+        DICT_CODE = #{dictCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldRuleId != null" >
+        FIELD_RULE_ID = #{fieldRuleId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldRuleMax != null" >
+        FIELD_RULE_MAX = #{fieldRuleMax,jdbcType=NVARCHAR},
+      </if>
+      <if test="fieldRuleName != null" >
+        FIELD_RULE_NAME = #{fieldRuleName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where FIELD_ID = #{fieldId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.field.SysField" >
+    update SYS_FIELD
+    set FIELD_CODE = #{fieldCode,jdbcType=NVARCHAR},
+      FIELD_ENTITY_ID = #{fieldEntityId,jdbcType=DECIMAL},
+      FIELD_TABLENAME = #{fieldTablename,jdbcType=NVARCHAR},
+      FIELD_CHINA_NAME = #{fieldChinaName,jdbcType=NVARCHAR},
+      FIELD_IS_NULL = #{fieldIsNull,jdbcType=NVARCHAR},
+      FIELD_IS_KEY = #{fieldIsKey,jdbcType=NVARCHAR},
+      FIELD_TYPE = #{fieldType,jdbcType=NVARCHAR},
+      FIELD_LEN = #{fieldLen,jdbcType=NVARCHAR},
+      FIELD_DICT = #{fieldDict,jdbcType=NVARCHAR},
+      FIELD_SORT = #{fieldSort,jdbcType=DECIMAL},
+      FIELD_STATE = #{fieldState,jdbcType=NVARCHAR},
+      FIELD_IS_MARK = #{fieldIsMark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=NVARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{deleteMark,jdbcType=NVARCHAR},
+      DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=NVARCHAR},
+      FIELD_DATA_TYPE = #{fieldDataType,jdbcType=NVARCHAR},
+      FIELD_IS_LOG = #{fieldIsLog,jdbcType=NVARCHAR},
+      FIELD_IS_BUS_KEY = #{fieldIsBusKey,jdbcType=NVARCHAR},
+      CONTROL_TYPE = #{controlType,jdbcType=NVARCHAR},
+      DICT_CODE = #{dictCode,jdbcType=NVARCHAR},
+      FIELD_RULE_ID = #{fieldRuleId,jdbcType=DECIMAL},
+      FIELD_RULE_MAX = #{fieldRuleMax,jdbcType=NVARCHAR},
+      FIELD_RULE_NAME = #{fieldRuleName,jdbcType=NVARCHAR}
+    where FIELD_ID = #{fieldId,jdbcType=DECIMAL}
+  </update>
+</mapper>

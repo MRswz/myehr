@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysButtonRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysButtonRole" >
+    <id column="BUTTON_ROLE_ID" property="buttonRoleId" jdbcType="DECIMAL" />
+    <result column="BUTTON_ID" property="buttonId" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="FORM_ID" property="formId" jdbcType="DECIMAL" />
+    <result column="BUTTON_ROLE_REMARK" property="buttonRoleRemark" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_BUTTON_TYPE" property="formButtonType" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_ROLE_ID, BUTTON_ID, ROLE_ID, FORM_ID, BUTTON_ROLE_REMARK, OPERATOR_NAME, OPERATOR_TIME, 
+    FORM_BUTTON_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysButtonRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BUTTON_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BUTTON_ROLE
+    where BUTTON_ROLE_ID = #{buttonRoleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_BUTTON_ROLE
+    where BUTTON_ROLE_ID = #{buttonRoleId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysButtonRoleExample" >
+    delete from SYS_BUTTON_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysButtonRole" >
+    insert into SYS_BUTTON_ROLE (BUTTON_ID, ROLE_ID, 
+      FORM_ID, BUTTON_ROLE_REMARK, OPERATOR_NAME, 
+      OPERATOR_TIME, FORM_BUTTON_TYPE)
+    values (#{buttonId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, 
+      #{formId,jdbcType=DECIMAL}, #{buttonRoleRemark,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{formButtonType,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysButtonRole" >
+    insert into SYS_BUTTON_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonRoleId != null" >
+        BUTTON_ROLE_ID,
+      </if>
+      <if test="buttonId != null" >
+        BUTTON_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="buttonRoleRemark != null" >
+        BUTTON_ROLE_REMARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="formButtonType != null" >
+        FORM_BUTTON_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonRoleId != null" >
+        #{buttonRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonId != null" >
+        #{buttonId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonRoleRemark != null" >
+        #{buttonRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formButtonType != null" >
+        #{formButtonType,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysButtonRoleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_BUTTON_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_BUTTON_ROLE
+    <set >
+      <if test="record.buttonRoleId != null" >
+        BUTTON_ROLE_ID = #{record.buttonRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonId != null" >
+        BUTTON_ID = #{record.buttonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formId != null" >
+        FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonRoleRemark != null" >
+        BUTTON_ROLE_REMARK = #{record.buttonRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formButtonType != null" >
+        FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_BUTTON_ROLE
+    set BUTTON_ROLE_ID = #{record.buttonRoleId,jdbcType=DECIMAL},
+      BUTTON_ID = #{record.buttonId,jdbcType=DECIMAL},
+      ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      BUTTON_ROLE_REMARK = #{record.buttonRoleRemark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysButtonRole" >
+    update SYS_BUTTON_ROLE
+    <set >
+      <if test="buttonId != null" >
+        BUTTON_ID = #{buttonId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        FORM_ID = #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonRoleRemark != null" >
+        BUTTON_ROLE_REMARK = #{buttonRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formButtonType != null" >
+        FORM_BUTTON_TYPE = #{formButtonType,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BUTTON_ROLE_ID = #{buttonRoleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysButtonRole" >
+    update SYS_BUTTON_ROLE
+    set BUTTON_ID = #{buttonId,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      FORM_ID = #{formId,jdbcType=DECIMAL},
+      BUTTON_ROLE_REMARK = #{buttonRoleRemark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FORM_BUTTON_TYPE = #{formButtonType,jdbcType=DECIMAL}
+    where BUTTON_ROLE_ID = #{buttonRoleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

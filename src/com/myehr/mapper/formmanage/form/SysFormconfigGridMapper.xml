@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormconfigGridMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfigGrid" >
+    <id column="FORM_GRID_ID" property="formGridId" jdbcType="DECIMAL" />
+    <result column="FORM_GRID_FROM_ID" property="formGridFromId" jdbcType="DECIMAL" />
+    <result column="FORM_SHOW_PAGER" property="formShowPager" jdbcType="NVARCHAR" />
+    <result column="FORM_PAGE_SIZE" property="formPageSize" jdbcType="DECIMAL" />
+    <result column="FORM_PAGE_SIZE_LIST" property="formPageSizeList" jdbcType="NVARCHAR" />
+    <result column="FORM_IS_INDEX" property="formIsIndex" jdbcType="NVARCHAR" />
+    <result column="FORM_SHOW_COLUMNS" property="formShowColumns" jdbcType="NVARCHAR" />
+    <result column="FORM_EDIT_NEXT_ON_ENTER" property="formEditNextOnEnter" jdbcType="NVARCHAR" />
+    <result column="FORM_EDIT_NEXT_ROW_CELL" property="formEditNextRowCell" jdbcType="NVARCHAR" />
+    <result column="FORM_ALLOW_RESIZE" property="formAllowResize" jdbcType="NVARCHAR" />
+    <result column="FORM_ALLOW_CELL_EDIT" property="formAllowCellEdit" jdbcType="NVARCHAR" />
+    <result column="FORM_ALLOW_CELL_SELECT" property="formAllowCellSelect" jdbcType="NVARCHAR" />
+    <result column="FORM_MULTI_SELECT" property="formMultiSelect" jdbcType="NVARCHAR" />
+    <result column="FORM_ROW_CLICK_BUTTON_ID" property="formRowClickButtonId" jdbcType="NVARCHAR" />
+    <result column="FORM_ROW_DBCLICK_BUTTON_ID" property="formRowDbclickButtonId" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FORM_SHOW_TITLE" property="formShowTitle" jdbcType="NVARCHAR" />
+    <result column="FORM_INDEX_WIDTH" property="formIndexWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_MULTI_WIDTH" property="formMultiWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_FROZEN" property="formFrozen" jdbcType="DECIMAL" />
+    <result column="FORM_GRID_HEIGHT" property="formGridHeight" jdbcType="NVARCHAR" />
+    <result column="FORM_TABLE_IS_HANDSONTABLE" property="formTableIsHandsontable" jdbcType="NVARCHAR" />
+    <result column="FORM_HEADER_IS_SHOW" property="formHeaderIsShow" jdbcType="NVARCHAR" />
+    <result column="FORM_BORDER_SHOW_TYPE" property="formBorderShowType" jdbcType="NVARCHAR" />
+    <result column="FORM_IS_CHECKBOX" property="formIsCheckbox" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_GRID_ID, FORM_GRID_FROM_ID, FORM_SHOW_PAGER, FORM_PAGE_SIZE, FORM_PAGE_SIZE_LIST, 
+    FORM_IS_INDEX, FORM_SHOW_COLUMNS, FORM_EDIT_NEXT_ON_ENTER, FORM_EDIT_NEXT_ROW_CELL, 
+    FORM_ALLOW_RESIZE, FORM_ALLOW_CELL_EDIT, FORM_ALLOW_CELL_SELECT, FORM_MULTI_SELECT, 
+    FORM_ROW_CLICK_BUTTON_ID, FORM_ROW_DBCLICK_BUTTON_ID, OPERATOR_TIME, OPERATOR_NAME, 
+    FORM_SHOW_TITLE, FORM_INDEX_WIDTH, FORM_MULTI_WIDTH, FORM_FROZEN, FORM_GRID_HEIGHT, 
+    FORM_TABLE_IS_HANDSONTABLE, FORM_HEADER_IS_SHOW, FORM_BORDER_SHOW_TYPE, FORM_IS_CHECKBOX
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGridExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_GRID
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_GRID
+    where FORM_GRID_ID = #{formGridId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORMCONFIG_GRID
+    where FORM_GRID_ID = #{formGridId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGridExample" >
+    delete from SYS_FORMCONFIG_GRID
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGrid" useGeneratedKeys="true" keyProperty="formGridId" keyColumn="FORM_GRID_ID" >
+    insert into SYS_FORMCONFIG_GRID (FORM_GRID_FROM_ID, FORM_SHOW_PAGER, 
+      FORM_PAGE_SIZE, FORM_PAGE_SIZE_LIST, FORM_IS_INDEX, 
+      FORM_SHOW_COLUMNS, FORM_EDIT_NEXT_ON_ENTER, 
+      FORM_EDIT_NEXT_ROW_CELL, FORM_ALLOW_RESIZE, 
+      FORM_ALLOW_CELL_EDIT, FORM_ALLOW_CELL_SELECT, 
+      FORM_MULTI_SELECT, FORM_ROW_CLICK_BUTTON_ID, 
+      FORM_ROW_DBCLICK_BUTTON_ID, OPERATOR_TIME, 
+      OPERATOR_NAME, FORM_SHOW_TITLE, FORM_INDEX_WIDTH, 
+      FORM_MULTI_WIDTH, FORM_FROZEN, FORM_GRID_HEIGHT, 
+      FORM_TABLE_IS_HANDSONTABLE, FORM_HEADER_IS_SHOW, 
+      FORM_BORDER_SHOW_TYPE, FORM_IS_CHECKBOX)
+    values (#{formGridFromId,jdbcType=DECIMAL}, #{formShowPager,jdbcType=NVARCHAR}, 
+      #{formPageSize,jdbcType=DECIMAL}, #{formPageSizeList,jdbcType=NVARCHAR}, #{formIsIndex,jdbcType=NVARCHAR}, 
+      #{formShowColumns,jdbcType=NVARCHAR}, #{formEditNextOnEnter,jdbcType=NVARCHAR}, 
+      #{formEditNextRowCell,jdbcType=NVARCHAR}, #{formAllowResize,jdbcType=NVARCHAR}, 
+      #{formAllowCellEdit,jdbcType=NVARCHAR}, #{formAllowCellSelect,jdbcType=NVARCHAR}, 
+      #{formMultiSelect,jdbcType=NVARCHAR}, #{formRowClickButtonId,jdbcType=NVARCHAR}, 
+      #{formRowDbclickButtonId,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{formShowTitle,jdbcType=NVARCHAR}, #{formIndexWidth,jdbcType=NVARCHAR}, 
+      #{formMultiWidth,jdbcType=NVARCHAR}, #{formFrozen,jdbcType=DECIMAL}, #{formGridHeight,jdbcType=NVARCHAR}, 
+      #{formTableIsHandsontable,jdbcType=NVARCHAR}, #{formHeaderIsShow,jdbcType=NVARCHAR}, 
+      #{formBorderShowType,jdbcType=NVARCHAR}, #{formIsCheckbox,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGrid" >
+    insert into SYS_FORMCONFIG_GRID
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formGridId != null" >
+        FORM_GRID_ID,
+      </if>
+      <if test="formGridFromId != null" >
+        FORM_GRID_FROM_ID,
+      </if>
+      <if test="formShowPager != null" >
+        FORM_SHOW_PAGER,
+      </if>
+      <if test="formPageSize != null" >
+        FORM_PAGE_SIZE,
+      </if>
+      <if test="formPageSizeList != null" >
+        FORM_PAGE_SIZE_LIST,
+      </if>
+      <if test="formIsIndex != null" >
+        FORM_IS_INDEX,
+      </if>
+      <if test="formShowColumns != null" >
+        FORM_SHOW_COLUMNS,
+      </if>
+      <if test="formEditNextOnEnter != null" >
+        FORM_EDIT_NEXT_ON_ENTER,
+      </if>
+      <if test="formEditNextRowCell != null" >
+        FORM_EDIT_NEXT_ROW_CELL,
+      </if>
+      <if test="formAllowResize != null" >
+        FORM_ALLOW_RESIZE,
+      </if>
+      <if test="formAllowCellEdit != null" >
+        FORM_ALLOW_CELL_EDIT,
+      </if>
+      <if test="formAllowCellSelect != null" >
+        FORM_ALLOW_CELL_SELECT,
+      </if>
+      <if test="formMultiSelect != null" >
+        FORM_MULTI_SELECT,
+      </if>
+      <if test="formRowClickButtonId != null" >
+        FORM_ROW_CLICK_BUTTON_ID,
+      </if>
+      <if test="formRowDbclickButtonId != null" >
+        FORM_ROW_DBCLICK_BUTTON_ID,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="formShowTitle != null" >
+        FORM_SHOW_TITLE,
+      </if>
+      <if test="formIndexWidth != null" >
+        FORM_INDEX_WIDTH,
+      </if>
+      <if test="formMultiWidth != null" >
+        FORM_MULTI_WIDTH,
+      </if>
+      <if test="formFrozen != null" >
+        FORM_FROZEN,
+      </if>
+      <if test="formGridHeight != null" >
+        FORM_GRID_HEIGHT,
+      </if>
+      <if test="formTableIsHandsontable != null" >
+        FORM_TABLE_IS_HANDSONTABLE,
+      </if>
+      <if test="formHeaderIsShow != null" >
+        FORM_HEADER_IS_SHOW,
+      </if>
+      <if test="formBorderShowType != null" >
+        FORM_BORDER_SHOW_TYPE,
+      </if>
+      <if test="formIsCheckbox != null" >
+        FORM_IS_CHECKBOX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formGridId != null" >
+        #{formGridId,jdbcType=DECIMAL},
+      </if>
+      <if test="formGridFromId != null" >
+        #{formGridFromId,jdbcType=DECIMAL},
+      </if>
+      <if test="formShowPager != null" >
+        #{formShowPager,jdbcType=NVARCHAR},
+      </if>
+      <if test="formPageSize != null" >
+        #{formPageSize,jdbcType=DECIMAL},
+      </if>
+      <if test="formPageSizeList != null" >
+        #{formPageSizeList,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIsIndex != null" >
+        #{formIsIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="formShowColumns != null" >
+        #{formShowColumns,jdbcType=NVARCHAR},
+      </if>
+      <if test="formEditNextOnEnter != null" >
+        #{formEditNextOnEnter,jdbcType=NVARCHAR},
+      </if>
+      <if test="formEditNextRowCell != null" >
+        #{formEditNextRowCell,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowResize != null" >
+        #{formAllowResize,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowCellEdit != null" >
+        #{formAllowCellEdit,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowCellSelect != null" >
+        #{formAllowCellSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="formMultiSelect != null" >
+        #{formMultiSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRowClickButtonId != null" >
+        #{formRowClickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRowDbclickButtonId != null" >
+        #{formRowDbclickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formShowTitle != null" >
+        #{formShowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIndexWidth != null" >
+        #{formIndexWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formMultiWidth != null" >
+        #{formMultiWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formFrozen != null" >
+        #{formFrozen,jdbcType=DECIMAL},
+      </if>
+      <if test="formGridHeight != null" >
+        #{formGridHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formTableIsHandsontable != null" >
+        #{formTableIsHandsontable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formHeaderIsShow != null" >
+        #{formHeaderIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="formBorderShowType != null" >
+        #{formBorderShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIsCheckbox != null" >
+        #{formIsCheckbox,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGridExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORMCONFIG_GRID
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORMCONFIG_GRID
+    <set >
+      <if test="record.formGridId != null" >
+        FORM_GRID_ID = #{record.formGridId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formGridFromId != null" >
+        FORM_GRID_FROM_ID = #{record.formGridFromId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formShowPager != null" >
+        FORM_SHOW_PAGER = #{record.formShowPager,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formPageSize != null" >
+        FORM_PAGE_SIZE = #{record.formPageSize,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formPageSizeList != null" >
+        FORM_PAGE_SIZE_LIST = #{record.formPageSizeList,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formIsIndex != null" >
+        FORM_IS_INDEX = #{record.formIsIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formShowColumns != null" >
+        FORM_SHOW_COLUMNS = #{record.formShowColumns,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formEditNextOnEnter != null" >
+        FORM_EDIT_NEXT_ON_ENTER = #{record.formEditNextOnEnter,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formEditNextRowCell != null" >
+        FORM_EDIT_NEXT_ROW_CELL = #{record.formEditNextRowCell,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formAllowResize != null" >
+        FORM_ALLOW_RESIZE = #{record.formAllowResize,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formAllowCellEdit != null" >
+        FORM_ALLOW_CELL_EDIT = #{record.formAllowCellEdit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formAllowCellSelect != null" >
+        FORM_ALLOW_CELL_SELECT = #{record.formAllowCellSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formMultiSelect != null" >
+        FORM_MULTI_SELECT = #{record.formMultiSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formRowClickButtonId != null" >
+        FORM_ROW_CLICK_BUTTON_ID = #{record.formRowClickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formRowDbclickButtonId != null" >
+        FORM_ROW_DBCLICK_BUTTON_ID = #{record.formRowDbclickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formShowTitle != null" >
+        FORM_SHOW_TITLE = #{record.formShowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formIndexWidth != null" >
+        FORM_INDEX_WIDTH = #{record.formIndexWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formMultiWidth != null" >
+        FORM_MULTI_WIDTH = #{record.formMultiWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formFrozen != null" >
+        FORM_FROZEN = #{record.formFrozen,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formGridHeight != null" >
+        FORM_GRID_HEIGHT = #{record.formGridHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formTableIsHandsontable != null" >
+        FORM_TABLE_IS_HANDSONTABLE = #{record.formTableIsHandsontable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formHeaderIsShow != null" >
+        FORM_HEADER_IS_SHOW = #{record.formHeaderIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formBorderShowType != null" >
+        FORM_BORDER_SHOW_TYPE = #{record.formBorderShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formIsCheckbox != null" >
+        FORM_IS_CHECKBOX = #{record.formIsCheckbox,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORMCONFIG_GRID
+    set FORM_GRID_ID = #{record.formGridId,jdbcType=DECIMAL},
+      FORM_GRID_FROM_ID = #{record.formGridFromId,jdbcType=DECIMAL},
+      FORM_SHOW_PAGER = #{record.formShowPager,jdbcType=NVARCHAR},
+      FORM_PAGE_SIZE = #{record.formPageSize,jdbcType=DECIMAL},
+      FORM_PAGE_SIZE_LIST = #{record.formPageSizeList,jdbcType=NVARCHAR},
+      FORM_IS_INDEX = #{record.formIsIndex,jdbcType=NVARCHAR},
+      FORM_SHOW_COLUMNS = #{record.formShowColumns,jdbcType=NVARCHAR},
+      FORM_EDIT_NEXT_ON_ENTER = #{record.formEditNextOnEnter,jdbcType=NVARCHAR},
+      FORM_EDIT_NEXT_ROW_CELL = #{record.formEditNextRowCell,jdbcType=NVARCHAR},
+      FORM_ALLOW_RESIZE = #{record.formAllowResize,jdbcType=NVARCHAR},
+      FORM_ALLOW_CELL_EDIT = #{record.formAllowCellEdit,jdbcType=NVARCHAR},
+      FORM_ALLOW_CELL_SELECT = #{record.formAllowCellSelect,jdbcType=NVARCHAR},
+      FORM_MULTI_SELECT = #{record.formMultiSelect,jdbcType=NVARCHAR},
+      FORM_ROW_CLICK_BUTTON_ID = #{record.formRowClickButtonId,jdbcType=NVARCHAR},
+      FORM_ROW_DBCLICK_BUTTON_ID = #{record.formRowDbclickButtonId,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      FORM_SHOW_TITLE = #{record.formShowTitle,jdbcType=NVARCHAR},
+      FORM_INDEX_WIDTH = #{record.formIndexWidth,jdbcType=NVARCHAR},
+      FORM_MULTI_WIDTH = #{record.formMultiWidth,jdbcType=NVARCHAR},
+      FORM_FROZEN = #{record.formFrozen,jdbcType=DECIMAL},
+      FORM_GRID_HEIGHT = #{record.formGridHeight,jdbcType=NVARCHAR},
+      FORM_TABLE_IS_HANDSONTABLE = #{record.formTableIsHandsontable,jdbcType=NVARCHAR},
+      FORM_HEADER_IS_SHOW = #{record.formHeaderIsShow,jdbcType=NVARCHAR},
+      FORM_BORDER_SHOW_TYPE = #{record.formBorderShowType,jdbcType=NVARCHAR},
+      FORM_IS_CHECKBOX = #{record.formIsCheckbox,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGrid" >
+    update SYS_FORMCONFIG_GRID
+    <set >
+      <if test="formGridFromId != null" >
+        FORM_GRID_FROM_ID = #{formGridFromId,jdbcType=DECIMAL},
+      </if>
+      <if test="formShowPager != null" >
+        FORM_SHOW_PAGER = #{formShowPager,jdbcType=NVARCHAR},
+      </if>
+      <if test="formPageSize != null" >
+        FORM_PAGE_SIZE = #{formPageSize,jdbcType=DECIMAL},
+      </if>
+      <if test="formPageSizeList != null" >
+        FORM_PAGE_SIZE_LIST = #{formPageSizeList,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIsIndex != null" >
+        FORM_IS_INDEX = #{formIsIndex,jdbcType=NVARCHAR},
+      </if>
+      <if test="formShowColumns != null" >
+        FORM_SHOW_COLUMNS = #{formShowColumns,jdbcType=NVARCHAR},
+      </if>
+      <if test="formEditNextOnEnter != null" >
+        FORM_EDIT_NEXT_ON_ENTER = #{formEditNextOnEnter,jdbcType=NVARCHAR},
+      </if>
+      <if test="formEditNextRowCell != null" >
+        FORM_EDIT_NEXT_ROW_CELL = #{formEditNextRowCell,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowResize != null" >
+        FORM_ALLOW_RESIZE = #{formAllowResize,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowCellEdit != null" >
+        FORM_ALLOW_CELL_EDIT = #{formAllowCellEdit,jdbcType=NVARCHAR},
+      </if>
+      <if test="formAllowCellSelect != null" >
+        FORM_ALLOW_CELL_SELECT = #{formAllowCellSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="formMultiSelect != null" >
+        FORM_MULTI_SELECT = #{formMultiSelect,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRowClickButtonId != null" >
+        FORM_ROW_CLICK_BUTTON_ID = #{formRowClickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formRowDbclickButtonId != null" >
+        FORM_ROW_DBCLICK_BUTTON_ID = #{formRowDbclickButtonId,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formShowTitle != null" >
+        FORM_SHOW_TITLE = #{formShowTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIndexWidth != null" >
+        FORM_INDEX_WIDTH = #{formIndexWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formMultiWidth != null" >
+        FORM_MULTI_WIDTH = #{formMultiWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formFrozen != null" >
+        FORM_FROZEN = #{formFrozen,jdbcType=DECIMAL},
+      </if>
+      <if test="formGridHeight != null" >
+        FORM_GRID_HEIGHT = #{formGridHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formTableIsHandsontable != null" >
+        FORM_TABLE_IS_HANDSONTABLE = #{formTableIsHandsontable,jdbcType=NVARCHAR},
+      </if>
+      <if test="formHeaderIsShow != null" >
+        FORM_HEADER_IS_SHOW = #{formHeaderIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="formBorderShowType != null" >
+        FORM_BORDER_SHOW_TYPE = #{formBorderShowType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formIsCheckbox != null" >
+        FORM_IS_CHECKBOX = #{formIsCheckbox,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where FORM_GRID_ID = #{formGridId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigGrid" >
+    update SYS_FORMCONFIG_GRID
+    set FORM_GRID_FROM_ID = #{formGridFromId,jdbcType=DECIMAL},
+      FORM_SHOW_PAGER = #{formShowPager,jdbcType=NVARCHAR},
+      FORM_PAGE_SIZE = #{formPageSize,jdbcType=DECIMAL},
+      FORM_PAGE_SIZE_LIST = #{formPageSizeList,jdbcType=NVARCHAR},
+      FORM_IS_INDEX = #{formIsIndex,jdbcType=NVARCHAR},
+      FORM_SHOW_COLUMNS = #{formShowColumns,jdbcType=NVARCHAR},
+      FORM_EDIT_NEXT_ON_ENTER = #{formEditNextOnEnter,jdbcType=NVARCHAR},
+      FORM_EDIT_NEXT_ROW_CELL = #{formEditNextRowCell,jdbcType=NVARCHAR},
+      FORM_ALLOW_RESIZE = #{formAllowResize,jdbcType=NVARCHAR},
+      FORM_ALLOW_CELL_EDIT = #{formAllowCellEdit,jdbcType=NVARCHAR},
+      FORM_ALLOW_CELL_SELECT = #{formAllowCellSelect,jdbcType=NVARCHAR},
+      FORM_MULTI_SELECT = #{formMultiSelect,jdbcType=NVARCHAR},
+      FORM_ROW_CLICK_BUTTON_ID = #{formRowClickButtonId,jdbcType=NVARCHAR},
+      FORM_ROW_DBCLICK_BUTTON_ID = #{formRowDbclickButtonId,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      FORM_SHOW_TITLE = #{formShowTitle,jdbcType=NVARCHAR},
+      FORM_INDEX_WIDTH = #{formIndexWidth,jdbcType=NVARCHAR},
+      FORM_MULTI_WIDTH = #{formMultiWidth,jdbcType=NVARCHAR},
+      FORM_FROZEN = #{formFrozen,jdbcType=DECIMAL},
+      FORM_GRID_HEIGHT = #{formGridHeight,jdbcType=NVARCHAR},
+      FORM_TABLE_IS_HANDSONTABLE = #{formTableIsHandsontable,jdbcType=NVARCHAR},
+      FORM_HEADER_IS_SHOW = #{formHeaderIsShow,jdbcType=NVARCHAR},
+      FORM_BORDER_SHOW_TYPE = #{formBorderShowType,jdbcType=NVARCHAR},
+      FORM_IS_CHECKBOX = #{formIsCheckbox,jdbcType=NVARCHAR}
+    where FORM_GRID_ID = #{formGridId,jdbcType=DECIMAL}
+  </update>
+</mapper>

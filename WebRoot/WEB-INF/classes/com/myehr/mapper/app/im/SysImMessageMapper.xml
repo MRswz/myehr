@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.app.im.SysImMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.app.im.SysImMessage" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SENDTO" property="sendto" jdbcType="NVARCHAR" />
+    <result column="SENDFROM" property="sendfrom" jdbcType="NVARCHAR" />
+    <result column="MESSAGETEXT" property="messagetext" jdbcType="NVARCHAR" />
+    <result column="MESSAGETYPE" property="messagetype" jdbcType="NVARCHAR" />
+    <result column="SENDDATE" property="senddate" jdbcType="TIMESTAMP" />
+    <result column="ISREADED" property="isreaded" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.app.im.SysImMessage" extends="BaseResultMap" >
+    <result column="MESSAGECONTENT" property="messagecontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SENDTO, SENDFROM, MESSAGETEXT, MESSAGETYPE, SENDDATE, ISREADED
+  </sql>
+  <sql id="Blob_Column_List" >
+    MESSAGECONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.app.im.SysImMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_IM_MESSAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.app.im.SysImMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_IM_MESSAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_IM_MESSAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_IM_MESSAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.app.im.SysImMessageExample" >
+    delete from SYS_IM_MESSAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.app.im.SysImMessage" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_IM_MESSAGE ( SENDTO, SENDFROM, 
+      MESSAGETEXT, MESSAGETYPE, SENDDATE, 
+      ISREADED, MESSAGECONTENT)
+    values ( #{sendto,jdbcType=NVARCHAR}, #{sendfrom,jdbcType=NVARCHAR}, 
+      #{messagetext,jdbcType=NVARCHAR}, #{messagetype,jdbcType=NVARCHAR}, #{senddate,jdbcType=TIMESTAMP}, 
+      #{isreaded,jdbcType=NVARCHAR}, #{messagecontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.app.im.SysImMessage" >
+    insert into SYS_IM_MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sendto != null" >
+        SENDTO,
+      </if>
+      <if test="sendfrom != null" >
+        SENDFROM,
+      </if>
+      <if test="messagetext != null" >
+        MESSAGETEXT,
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE,
+      </if>
+      <if test="senddate != null" >
+        SENDDATE,
+      </if>
+      <if test="isreaded != null" >
+        ISREADED,
+      </if>
+      <if test="messagecontent != null" >
+        MESSAGECONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="sendto != null" >
+        #{sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendfrom != null" >
+        #{sendfrom,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagetext != null" >
+        #{messagetext,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isreaded != null" >
+        #{isreaded,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.app.im.SysImMessageExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_IM_MESSAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_IM_MESSAGE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendto != null" >
+        SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendfrom != null" >
+        SENDFROM = #{record.sendfrom,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.messagetext != null" >
+        MESSAGETEXT = #{record.messagetext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.messagetype != null" >
+        MESSAGETYPE = #{record.messagetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.senddate != null" >
+        SENDDATE = #{record.senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isreaded != null" >
+        ISREADED = #{record.isreaded,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.messagecontent != null" >
+        MESSAGECONTENT = #{record.messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_IM_MESSAGE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      SENDFROM = #{record.sendfrom,jdbcType=NVARCHAR},
+      MESSAGETEXT = #{record.messagetext,jdbcType=NVARCHAR},
+      MESSAGETYPE = #{record.messagetype,jdbcType=NVARCHAR},
+      SENDDATE = #{record.senddate,jdbcType=TIMESTAMP},
+      ISREADED = #{record.isreaded,jdbcType=NVARCHAR},
+      MESSAGECONTENT = #{record.messagecontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_IM_MESSAGE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      SENDTO = #{record.sendto,jdbcType=NVARCHAR},
+      SENDFROM = #{record.sendfrom,jdbcType=NVARCHAR},
+      MESSAGETEXT = #{record.messagetext,jdbcType=NVARCHAR},
+      MESSAGETYPE = #{record.messagetype,jdbcType=NVARCHAR},
+      SENDDATE = #{record.senddate,jdbcType=TIMESTAMP},
+      ISREADED = #{record.isreaded,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.app.im.SysImMessage" >
+    update SYS_IM_MESSAGE
+    <set >
+      <if test="sendto != null" >
+        SENDTO = #{sendto,jdbcType=NVARCHAR},
+      </if>
+      <if test="sendfrom != null" >
+        SENDFROM = #{sendfrom,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagetext != null" >
+        MESSAGETEXT = #{messagetext,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagetype != null" >
+        MESSAGETYPE = #{messagetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="senddate != null" >
+        SENDDATE = #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isreaded != null" >
+        ISREADED = #{isreaded,jdbcType=NVARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        MESSAGECONTENT = #{messagecontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.app.im.SysImMessage" >
+    update SYS_IM_MESSAGE
+    set SENDTO = #{sendto,jdbcType=NVARCHAR},
+      SENDFROM = #{sendfrom,jdbcType=NVARCHAR},
+      MESSAGETEXT = #{messagetext,jdbcType=NVARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=NVARCHAR},
+      SENDDATE = #{senddate,jdbcType=TIMESTAMP},
+      ISREADED = #{isreaded,jdbcType=NVARCHAR},
+      MESSAGECONTENT = #{messagecontent,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.app.im.SysImMessage" >
+    update SYS_IM_MESSAGE
+    set SENDTO = #{sendto,jdbcType=NVARCHAR},
+      SENDFROM = #{sendfrom,jdbcType=NVARCHAR},
+      MESSAGETEXT = #{messagetext,jdbcType=NVARCHAR},
+      MESSAGETYPE = #{messagetype,jdbcType=NVARCHAR},
+      SENDDATE = #{senddate,jdbcType=TIMESTAMP},
+      ISREADED = #{isreaded,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

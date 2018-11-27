@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.widget.SysFormRichtextMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.widget.SysFormRichtext" >
+    <id column="RICHTEXT_ID" property="richtextId" jdbcType="DECIMAL" />
+    <result column="RICHTEXT_FORM_COLUMN_ID" property="richtextFormColumnId" jdbcType="DECIMAL" />
+    <result column="RICHTEXT_CHECK_FUN" property="richtextCheckFun" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_INIT_FUN" property="richtextInitFun" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_DATA_FROM_TYPE" property="richtextDataFromType" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_DATA_FROM_VALUE" property="richtextDataFromValue" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_TYPE" property="richtextType" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_CHECK_TYPE" property="richtextCheckType" jdbcType="VARCHAR" />
+    <result column="RICHTEXT_READONLY" property="richtextReadonly" jdbcType="CHAR" />
+    <result column="RICHTEXT_CHECK_SELF" property="richtextCheckSelf" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RICHTEXT_ID, RICHTEXT_FORM_COLUMN_ID, RICHTEXT_CHECK_FUN, RICHTEXT_INIT_FUN, RICHTEXT_DATA_FROM_TYPE, 
+    RICHTEXT_DATA_FROM_VALUE, RICHTEXT_TYPE, OPERATOR_TIME, OPERATOR_NAME, RICHTEXT_CHECK_TYPE, 
+    RICHTEXT_READONLY, RICHTEXT_CHECK_SELF
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtextExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_RICHTEXT
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_RICHTEXT
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtextExample" >
+    delete from SYS_FORM_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtext" useGeneratedKeys="true" keyProperty="richtextId" keyColumn="RICHTEXT_ID">
+    insert into SYS_FORM_RICHTEXT (RICHTEXT_ID, RICHTEXT_FORM_COLUMN_ID, 
+      RICHTEXT_CHECK_FUN, RICHTEXT_INIT_FUN, RICHTEXT_DATA_FROM_TYPE, 
+      RICHTEXT_DATA_FROM_VALUE, RICHTEXT_TYPE, OPERATOR_TIME, 
+      OPERATOR_NAME, RICHTEXT_CHECK_TYPE, RICHTEXT_READONLY, 
+      RICHTEXT_CHECK_SELF)
+    values (#{richtextId,jdbcType=DECIMAL}, #{richtextFormColumnId,jdbcType=DECIMAL}, 
+      #{richtextCheckFun,jdbcType=VARCHAR}, #{richtextInitFun,jdbcType=VARCHAR}, #{richtextDataFromType,jdbcType=VARCHAR}, 
+      #{richtextDataFromValue,jdbcType=VARCHAR}, #{richtextType,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=VARCHAR}, #{richtextCheckType,jdbcType=VARCHAR}, #{richtextReadonly,jdbcType=CHAR}, 
+      #{richtextCheckSelf,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtext" >
+    insert into SYS_FORM_RICHTEXT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="richtextId != null" >
+        RICHTEXT_ID,
+      </if>
+      <if test="richtextFormColumnId != null" >
+        RICHTEXT_FORM_COLUMN_ID,
+      </if>
+      <if test="richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN,
+      </if>
+      <if test="richtextInitFun != null" >
+        RICHTEXT_INIT_FUN,
+      </if>
+      <if test="richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE,
+      </if>
+      <if test="richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE,
+      </if>
+      <if test="richtextType != null" >
+        RICHTEXT_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE,
+      </if>
+      <if test="richtextReadonly != null" >
+        RICHTEXT_READONLY,
+      </if>
+      <if test="richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="richtextId != null" >
+        #{richtextId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextFormColumnId != null" >
+        #{richtextFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextCheckFun != null" >
+        #{richtextCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextInitFun != null" >
+        #{richtextInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextDataFromType != null" >
+        #{richtextDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextDataFromValue != null" >
+        #{richtextDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextType != null" >
+        #{richtextType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextCheckType != null" >
+        #{richtextCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextReadonly != null" >
+        #{richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="richtextCheckSelf != null" >
+        #{richtextCheckSelf,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtextExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_RICHTEXT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_RICHTEXT
+    <set >
+      <if test="record.richtextId != null" >
+        RICHTEXT_ID = #{record.richtextId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.richtextFormColumnId != null" >
+        RICHTEXT_FORM_COLUMN_ID = #{record.richtextFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN = #{record.richtextCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextInitFun != null" >
+        RICHTEXT_INIT_FUN = #{record.richtextInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE = #{record.richtextDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE = #{record.richtextDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextType != null" >
+        RICHTEXT_TYPE = #{record.richtextType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE = #{record.richtextCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.richtextReadonly != null" >
+        RICHTEXT_READONLY = #{record.richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="record.richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF = #{record.richtextCheckSelf,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_RICHTEXT
+    set RICHTEXT_ID = #{record.richtextId,jdbcType=DECIMAL},
+      RICHTEXT_FORM_COLUMN_ID = #{record.richtextFormColumnId,jdbcType=DECIMAL},
+      RICHTEXT_CHECK_FUN = #{record.richtextCheckFun,jdbcType=VARCHAR},
+      RICHTEXT_INIT_FUN = #{record.richtextInitFun,jdbcType=VARCHAR},
+      RICHTEXT_DATA_FROM_TYPE = #{record.richtextDataFromType,jdbcType=VARCHAR},
+      RICHTEXT_DATA_FROM_VALUE = #{record.richtextDataFromValue,jdbcType=VARCHAR},
+      RICHTEXT_TYPE = #{record.richtextType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      RICHTEXT_CHECK_TYPE = #{record.richtextCheckType,jdbcType=VARCHAR},
+      RICHTEXT_READONLY = #{record.richtextReadonly,jdbcType=CHAR},
+      RICHTEXT_CHECK_SELF = #{record.richtextCheckSelf,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtext" >
+    update SYS_FORM_RICHTEXT
+    <set >
+      <if test="richtextFormColumnId != null" >
+        RICHTEXT_FORM_COLUMN_ID = #{richtextFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="richtextCheckFun != null" >
+        RICHTEXT_CHECK_FUN = #{richtextCheckFun,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextInitFun != null" >
+        RICHTEXT_INIT_FUN = #{richtextInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextDataFromType != null" >
+        RICHTEXT_DATA_FROM_TYPE = #{richtextDataFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextDataFromValue != null" >
+        RICHTEXT_DATA_FROM_VALUE = #{richtextDataFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextType != null" >
+        RICHTEXT_TYPE = #{richtextType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextCheckType != null" >
+        RICHTEXT_CHECK_TYPE = #{richtextCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="richtextReadonly != null" >
+        RICHTEXT_READONLY = #{richtextReadonly,jdbcType=CHAR},
+      </if>
+      <if test="richtextCheckSelf != null" >
+        RICHTEXT_CHECK_SELF = #{richtextCheckSelf,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.widget.SysFormRichtext" >
+    update SYS_FORM_RICHTEXT
+    set RICHTEXT_FORM_COLUMN_ID = #{richtextFormColumnId,jdbcType=DECIMAL},
+      RICHTEXT_CHECK_FUN = #{richtextCheckFun,jdbcType=VARCHAR},
+      RICHTEXT_INIT_FUN = #{richtextInitFun,jdbcType=VARCHAR},
+      RICHTEXT_DATA_FROM_TYPE = #{richtextDataFromType,jdbcType=VARCHAR},
+      RICHTEXT_DATA_FROM_VALUE = #{richtextDataFromValue,jdbcType=VARCHAR},
+      RICHTEXT_TYPE = #{richtextType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      RICHTEXT_CHECK_TYPE = #{richtextCheckType,jdbcType=VARCHAR},
+      RICHTEXT_READONLY = #{richtextReadonly,jdbcType=CHAR},
+      RICHTEXT_CHECK_SELF = #{richtextCheckSelf,jdbcType=VARCHAR}
+    where RICHTEXT_ID = #{richtextId,jdbcType=DECIMAL}
+  </update>
+</mapper>

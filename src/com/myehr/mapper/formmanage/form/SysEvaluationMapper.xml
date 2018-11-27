@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysEvaluationMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysEvaluation" >
+    <id column="EVALUATION_ID" property="evaluationId" jdbcType="DECIMAL" />
+    <result column="EVALUATION_FormId" property="evaluationFormid" jdbcType="DECIMAL" />
+    <result column="EVALUATION_KeyId" property="evaluationKeyid" jdbcType="DECIMAL" />
+    <result column="EVALUATION_name" property="evaluationName" jdbcType="NVARCHAR" />
+    <result column="EVALUATION_Content" property="evaluationContent" jdbcType="NVARCHAR" />
+    <result column="EVALUATION_Datetime" property="evaluationDatetime" jdbcType="TIMESTAMP" />
+    <result column="EVALUATION_ReplyIp" property="evaluationReplyip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EVALUATION_ID, EVALUATION_FormId, EVALUATION_KeyId, EVALUATION_name, EVALUATION_Content, 
+    EVALUATION_Datetime, EVALUATION_ReplyIp
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysEvaluationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EVALUATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EVALUATION
+    where EVALUATION_ID = #{evaluationId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_EVALUATION
+    where EVALUATION_ID = #{evaluationId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysEvaluationExample" >
+    delete from SYS_EVALUATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysEvaluation" >
+    insert into SYS_EVALUATION ( EVALUATION_FormId, EVALUATION_KeyId, 
+      EVALUATION_name, EVALUATION_Content, EVALUATION_Datetime, 
+      EVALUATION_ReplyIp)
+    values ( #{evaluationFormid,jdbcType=DECIMAL}, #{evaluationKeyid,jdbcType=DECIMAL}, 
+      #{evaluationName,jdbcType=NVARCHAR}, #{evaluationContent,jdbcType=NVARCHAR}, #{evaluationDatetime,jdbcType=TIMESTAMP}, 
+      #{evaluationReplyip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysEvaluation" >
+    insert into SYS_EVALUATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluationId != null" >
+        EVALUATION_ID,
+      </if>
+      <if test="evaluationFormid != null" >
+        EVALUATION_FormId,
+      </if>
+      <if test="evaluationKeyid != null" >
+        EVALUATION_KeyId,
+      </if>
+      <if test="evaluationName != null" >
+        EVALUATION_name,
+      </if>
+      <if test="evaluationContent != null" >
+        EVALUATION_Content,
+      </if>
+      <if test="evaluationDatetime != null" >
+        EVALUATION_Datetime,
+      </if>
+      <if test="evaluationReplyip != null" >
+        EVALUATION_ReplyIp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluationId != null" >
+        #{evaluationId,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluationFormid != null" >
+        #{evaluationFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluationKeyid != null" >
+        #{evaluationKeyid,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluationName != null" >
+        #{evaluationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="evaluationContent != null" >
+        #{evaluationContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="evaluationDatetime != null" >
+        #{evaluationDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluationReplyip != null" >
+        #{evaluationReplyip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysEvaluationExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_EVALUATION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_EVALUATION
+    <set >
+      <if test="record.evaluationId != null" >
+        EVALUATION_ID = #{record.evaluationId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.evaluationFormid != null" >
+        EVALUATION_FormId = #{record.evaluationFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.evaluationKeyid != null" >
+        EVALUATION_KeyId = #{record.evaluationKeyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.evaluationName != null" >
+        EVALUATION_name = #{record.evaluationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.evaluationContent != null" >
+        EVALUATION_Content = #{record.evaluationContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.evaluationDatetime != null" >
+        EVALUATION_Datetime = #{record.evaluationDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.evaluationReplyip != null" >
+        EVALUATION_ReplyIp = #{record.evaluationReplyip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_EVALUATION
+    set EVALUATION_ID = #{record.evaluationId,jdbcType=DECIMAL},
+      EVALUATION_FormId = #{record.evaluationFormid,jdbcType=DECIMAL},
+      EVALUATION_KeyId = #{record.evaluationKeyid,jdbcType=DECIMAL},
+      EVALUATION_name = #{record.evaluationName,jdbcType=NVARCHAR},
+      EVALUATION_Content = #{record.evaluationContent,jdbcType=NVARCHAR},
+      EVALUATION_Datetime = #{record.evaluationDatetime,jdbcType=TIMESTAMP},
+      EVALUATION_ReplyIp = #{record.evaluationReplyip,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysEvaluation" >
+    update SYS_EVALUATION
+    <set >
+      <if test="evaluationFormid != null" >
+        EVALUATION_FormId = #{evaluationFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluationKeyid != null" >
+        EVALUATION_KeyId = #{evaluationKeyid,jdbcType=DECIMAL},
+      </if>
+      <if test="evaluationName != null" >
+        EVALUATION_name = #{evaluationName,jdbcType=NVARCHAR},
+      </if>
+      <if test="evaluationContent != null" >
+        EVALUATION_Content = #{evaluationContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="evaluationDatetime != null" >
+        EVALUATION_Datetime = #{evaluationDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluationReplyip != null" >
+        EVALUATION_ReplyIp = #{evaluationReplyip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EVALUATION_ID = #{evaluationId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysEvaluation" >
+    update SYS_EVALUATION
+    set EVALUATION_FormId = #{evaluationFormid,jdbcType=DECIMAL},
+      EVALUATION_KeyId = #{evaluationKeyid,jdbcType=DECIMAL},
+      EVALUATION_name = #{evaluationName,jdbcType=NVARCHAR},
+      EVALUATION_Content = #{evaluationContent,jdbcType=NVARCHAR},
+      EVALUATION_Datetime = #{evaluationDatetime,jdbcType=TIMESTAMP},
+      EVALUATION_ReplyIp = #{evaluationReplyip,jdbcType=VARCHAR}
+    where EVALUATION_ID = #{evaluationId,jdbcType=DECIMAL}
+  </update>
+</mapper>

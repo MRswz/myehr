@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.calendar.KcalendarMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.calendar.Kcalendar" >
+    <id column="kguid" property="kguid" jdbcType="CHAR" />
+    <id column="Item_date" property="itemDate" jdbcType="TIMESTAMP" />
+    <result column="Item_Caption" property="itemCaption" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    kguid, Item_date, Item_Caption
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.KcalendarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from KCalendar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.KcalendarKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from KCalendar
+    where kguid = #{kguid,jdbcType=CHAR}
+      and Item_date = #{itemDate,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.myehr.pojo.calendar.KcalendarKey" >
+    delete from KCalendar
+    where kguid = #{kguid,jdbcType=CHAR}
+      and Item_date = #{itemDate,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.calendar.KcalendarExample" >
+    delete from KCalendar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.calendar.Kcalendar" >
+    insert into KCalendar (kguid, Item_date, Item_Caption
+      )
+    values (#{kguid,jdbcType=CHAR}, #{itemDate,jdbcType=TIMESTAMP}, #{itemCaption,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.calendar.Kcalendar" >
+    insert into KCalendar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kguid != null" >
+        kguid,
+      </if>
+      <if test="itemDate != null" >
+        Item_date,
+      </if>
+      <if test="itemCaption != null" >
+        Item_Caption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kguid != null" >
+        #{kguid,jdbcType=CHAR},
+      </if>
+      <if test="itemDate != null" >
+        #{itemDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="itemCaption != null" >
+        #{itemCaption,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.calendar.KcalendarExample" resultType="java.lang.Integer" >
+    select count(*) from KCalendar
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update KCalendar
+    <set >
+      <if test="record.kguid != null" >
+        kguid = #{record.kguid,jdbcType=CHAR},
+      </if>
+      <if test="record.itemDate != null" >
+        Item_date = #{record.itemDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.itemCaption != null" >
+        Item_Caption = #{record.itemCaption,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update KCalendar
+    set kguid = #{record.kguid,jdbcType=CHAR},
+      Item_date = #{record.itemDate,jdbcType=TIMESTAMP},
+      Item_Caption = #{record.itemCaption,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.calendar.Kcalendar" >
+    update KCalendar
+    <set >
+      <if test="itemCaption != null" >
+        Item_Caption = #{itemCaption,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where kguid = #{kguid,jdbcType=CHAR}
+      and Item_date = #{itemDate,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.calendar.Kcalendar" >
+    update KCalendar
+    set Item_Caption = #{itemCaption,jdbcType=VARCHAR}
+    where kguid = #{kguid,jdbcType=CHAR}
+      and Item_date = #{itemDate,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

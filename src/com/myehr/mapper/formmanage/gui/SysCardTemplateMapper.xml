@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.gui.SysCardTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.gui.SysCardTemplate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="template_title" property="templateTitle" jdbcType="NVARCHAR" />
+    <result column="template_address" property="templateAddress" jdbcType="NVARCHAR" />
+    <result column="template_photo" property="templatePhoto" jdbcType="NVARCHAR" />
+    <result column="template_name" property="templateName" jdbcType="NVARCHAR" />
+    <result column="template_content1" property="templateContent1" jdbcType="NVARCHAR" />
+    <result column="template_content2" property="templateContent2" jdbcType="NVARCHAR" />
+    <result column="template_content3" property="templateContent3" jdbcType="NVARCHAR" />
+    <result column="template_content4" property="templateContent4" jdbcType="NVARCHAR" />
+    <result column="template_content5" property="templateContent5" jdbcType="NVARCHAR" />
+    <result column="template_content6" property="templateContent6" jdbcType="NVARCHAR" />
+    <result column="template_content7" property="templateContent7" jdbcType="NVARCHAR" />
+    <result column="small_num" property="smallNum" jdbcType="DECIMAL" />
+    <result column="middle_num" property="middleNum" jdbcType="DECIMAL" />
+    <result column="large_num" property="largeNum" jdbcType="DECIMAL" />
+    <result column="operator_name" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, template_title, template_address, template_photo, template_name, template_content1, 
+    template_content2, template_content3, template_content4, template_content5, template_content6, 
+    template_content7, small_num, middle_num, large_num, operator_name, operator_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_CARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CARD_TEMPLATE
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_CARD_TEMPLATE
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplateExample" >
+    delete from SYS_CARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplate" >
+    insert into SYS_CARD_TEMPLATE (template_title, template_address, 
+      template_photo, template_name, template_content1, 
+      template_content2, template_content3, template_content4, 
+      template_content5, template_content6, template_content7, 
+      small_num, middle_num, large_num, 
+      operator_name, operator_time)
+    values ( #{templateTitle,jdbcType=NVARCHAR}, #{templateAddress,jdbcType=NVARCHAR}, 
+      #{templatePhoto,jdbcType=NVARCHAR}, #{templateName,jdbcType=NVARCHAR}, #{templateContent1,jdbcType=NVARCHAR}, 
+      #{templateContent2,jdbcType=NVARCHAR}, #{templateContent3,jdbcType=NVARCHAR}, #{templateContent4,jdbcType=NVARCHAR}, 
+      #{templateContent5,jdbcType=NVARCHAR}, #{templateContent6,jdbcType=NVARCHAR}, #{templateContent7,jdbcType=NVARCHAR}, 
+      #{smallNum,jdbcType=DECIMAL}, #{middleNum,jdbcType=DECIMAL}, #{largeNum,jdbcType=DECIMAL}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplate" >
+    insert into SYS_CARD_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="templateTitle != null" >
+        template_title,
+      </if>
+      <if test="templateAddress != null" >
+        template_address,
+      </if>
+      <if test="templatePhoto != null" >
+        template_photo,
+      </if>
+      <if test="templateName != null" >
+        template_name,
+      </if>
+      <if test="templateContent1 != null" >
+        template_content1,
+      </if>
+      <if test="templateContent2 != null" >
+        template_content2,
+      </if>
+      <if test="templateContent3 != null" >
+        template_content3,
+      </if>
+      <if test="templateContent4 != null" >
+        template_content4,
+      </if>
+      <if test="templateContent5 != null" >
+        template_content5,
+      </if>
+      <if test="templateContent6 != null" >
+        template_content6,
+      </if>
+      <if test="templateContent7 != null" >
+        template_content7,
+      </if>
+      <if test="smallNum != null" >
+        small_num,
+      </if>
+      <if test="middleNum != null" >
+        middle_num,
+      </if>
+      <if test="largeNum != null" >
+        large_num,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="operatorTime != null" >
+        operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="templateTitle != null" >
+        #{templateTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateAddress != null" >
+        #{templateAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="templatePhoto != null" >
+        #{templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent1 != null" >
+        #{templateContent1,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent2 != null" >
+        #{templateContent2,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent3 != null" >
+        #{templateContent3,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent4 != null" >
+        #{templateContent4,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent5 != null" >
+        #{templateContent5,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent6 != null" >
+        #{templateContent6,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent7 != null" >
+        #{templateContent7,jdbcType=NVARCHAR},
+      </if>
+      <if test="smallNum != null" >
+        #{smallNum,jdbcType=DECIMAL},
+      </if>
+      <if test="middleNum != null" >
+        #{middleNum,jdbcType=DECIMAL},
+      </if>
+      <if test="largeNum != null" >
+        #{largeNum,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_CARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_CARD_TEMPLATE
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateTitle != null" >
+        template_title = #{record.templateTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateAddress != null" >
+        template_address = #{record.templateAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templatePhoto != null" >
+        template_photo = #{record.templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateName != null" >
+        template_name = #{record.templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent1 != null" >
+        template_content1 = #{record.templateContent1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent2 != null" >
+        template_content2 = #{record.templateContent2,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent3 != null" >
+        template_content3 = #{record.templateContent3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent4 != null" >
+        template_content4 = #{record.templateContent4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent5 != null" >
+        template_content5 = #{record.templateContent5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent6 != null" >
+        template_content6 = #{record.templateContent6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateContent7 != null" >
+        template_content7 = #{record.templateContent7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.smallNum != null" >
+        small_num = #{record.smallNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.middleNum != null" >
+        middle_num = #{record.middleNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.largeNum != null" >
+        large_num = #{record.largeNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_CARD_TEMPLATE
+    set id = #{record.id,jdbcType=INTEGER},
+      template_title = #{record.templateTitle,jdbcType=NVARCHAR},
+      template_address = #{record.templateAddress,jdbcType=NVARCHAR},
+      template_photo = #{record.templatePhoto,jdbcType=NVARCHAR},
+      template_name = #{record.templateName,jdbcType=NVARCHAR},
+      template_content1 = #{record.templateContent1,jdbcType=NVARCHAR},
+      template_content2 = #{record.templateContent2,jdbcType=NVARCHAR},
+      template_content3 = #{record.templateContent3,jdbcType=NVARCHAR},
+      template_content4 = #{record.templateContent4,jdbcType=NVARCHAR},
+      template_content5 = #{record.templateContent5,jdbcType=NVARCHAR},
+      template_content6 = #{record.templateContent6,jdbcType=NVARCHAR},
+      template_content7 = #{record.templateContent7,jdbcType=NVARCHAR},
+      small_num = #{record.smallNum,jdbcType=DECIMAL},
+      middle_num = #{record.middleNum,jdbcType=DECIMAL},
+      large_num = #{record.largeNum,jdbcType=DECIMAL},
+      operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      operator_time = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplate" >
+    update SYS_CARD_TEMPLATE
+    <set >
+      <if test="templateTitle != null" >
+        template_title = #{templateTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateAddress != null" >
+        template_address = #{templateAddress,jdbcType=NVARCHAR},
+      </if>
+      <if test="templatePhoto != null" >
+        template_photo = #{templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateName != null" >
+        template_name = #{templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent1 != null" >
+        template_content1 = #{templateContent1,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent2 != null" >
+        template_content2 = #{templateContent2,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent3 != null" >
+        template_content3 = #{templateContent3,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent4 != null" >
+        template_content4 = #{templateContent4,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent5 != null" >
+        template_content5 = #{templateContent5,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent6 != null" >
+        template_content6 = #{templateContent6,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateContent7 != null" >
+        template_content7 = #{templateContent7,jdbcType=NVARCHAR},
+      </if>
+      <if test="smallNum != null" >
+        small_num = #{smallNum,jdbcType=DECIMAL},
+      </if>
+      <if test="middleNum != null" >
+        middle_num = #{middleNum,jdbcType=DECIMAL},
+      </if>
+      <if test="largeNum != null" >
+        large_num = #{largeNum,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.gui.SysCardTemplate" >
+    update SYS_CARD_TEMPLATE
+    set template_title = #{templateTitle,jdbcType=NVARCHAR},
+      template_address = #{templateAddress,jdbcType=NVARCHAR},
+      template_photo = #{templatePhoto,jdbcType=NVARCHAR},
+      template_name = #{templateName,jdbcType=NVARCHAR},
+      template_content1 = #{templateContent1,jdbcType=NVARCHAR},
+      template_content2 = #{templateContent2,jdbcType=NVARCHAR},
+      template_content3 = #{templateContent3,jdbcType=NVARCHAR},
+      template_content4 = #{templateContent4,jdbcType=NVARCHAR},
+      template_content5 = #{templateContent5,jdbcType=NVARCHAR},
+      template_content6 = #{templateContent6,jdbcType=NVARCHAR},
+      template_content7 = #{templateContent7,jdbcType=NVARCHAR},
+      small_num = #{smallNum,jdbcType=DECIMAL},
+      middle_num = #{middleNum,jdbcType=DECIMAL},
+      large_num = #{largeNum,jdbcType=DECIMAL},
+      operator_name = #{operatorName,jdbcType=NVARCHAR},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

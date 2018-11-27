@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.formexpand.SysFormColumnMapperExpand" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormColumn" >
+    <id column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_FORM_DEF_ID" property="formColumnFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_ENTITY_ID" property="formColumnEntityId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLUMN_ID" property="formColumnColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_ENTITY_TABLENAME" property="formEntityTablename" jdbcType="VARCHAR" />
+    <result column="FORM_FIELD_TABLENAME" property="formFieldTablename" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_US_NAME" property="formColumnUsName" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_LABLE" property="formColumnLable" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_LABLE_WIDTH" property="formColumnLableWidth" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_SQL" property="formColumnSql" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_GUI_TYPE" property="formColumnGuiType" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_WIDTH" property="formColumnWidth" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_ALIGN" property="formColumnAlign" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_HEIGHT" property="formColumnHeight" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_SORT" property="formColumnSort" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_SHOW_TYPE" property="formColumnShowType" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_ROW_SPAN" property="formColumnRowSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COL_SPAN" property="formColumnColSpan" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_REQUIRED" property="formColumnRequired" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_GROUP_ID" property="formColumnGroupId" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_CHANGE_FUN" property="formColumnChangeFun" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_INIT_FUN" property="formColumnInitFun" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_ISLOCKET" property="formColumnIslocket" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_RIGIST" property="formColumnRigist" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_TYPE" property="formColumnType" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_TOTAL" property="formColumnTotal" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_IS_DEV" property="formColumnIsDev" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_MAX_LENGTH" property="formColumnMaxLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_MIN_LENGTH" property="formColumnMinLength" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_COLOR" property="formColumnColor" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_COLOR_CONDITION" property="formColumnColorCondition" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_POSITION_ID" property="formColumnPositionId" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_TEMPLATE_COLUMN_ID" property="formColumnTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_POSITION_SORT" property="formColumnPositionSort" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_COLUMN_ID, FORM_COLUMN_FORM_DEF_ID, FORM_COLUMN_ENTITY_ID, FORM_COLUMN_COLUMN_ID, 
+    FORM_ENTITY_TABLENAME, FORM_FIELD_TABLENAME, FORM_COLUMN_US_NAME, FORM_COLUMN_LABLE, 
+    FORM_COLUMN_LABLE_WIDTH, FORM_COLUMN_SQL, FORM_COLUMN_GUI_TYPE, FORM_COLUMN_WIDTH, 
+    FORM_COLUMN_ALIGN, FORM_COLUMN_HEIGHT, FORM_COLUMN_SORT, FORM_COLUMN_SHOW_TYPE, FORM_COLUMN_ROW_SPAN, 
+    FORM_COLUMN_COL_SPAN, FORM_COLUMN_REQUIRED, FORM_COLUMN_GROUP_ID, FORM_COLUMN_CHANGE_FUN, 
+    FORM_COLUMN_INIT_FUN, FORM_COLUMN_ISLOCKET, FORM_COLUMN_RIGIST, FORM_COLUMN_TYPE, 
+    OPERATOR_TIME, OPERATOR_NAME, FORM_COLUMN_TOTAL, FORM_COLUMN_IS_DEV, FORM_COLUMN_MAX_LENGTH, 
+    FORM_COLUMN_MIN_LENGTH, FORM_COLUMN_COLOR, FORM_COLUMN_COLOR_CONDITION, FORM_COLUMN_POSITION_ID, 
+    FORM_COLUMN_TEMPLATE_COLUMN_ID, FORM_COLUMN_POSITION_SORT
+  </sql>
+<select id="batchUpdateFormcolumns" parameterType="java.util.Map">
+	update sys_form_column
+	   set form_column_align   	 = #{formColumnAlign},
+		   form_column_width     = #{formColumnWidth},
+		   form_column_required  = #{formColumnRequired},
+		   form_column_group_id  = #{formColumnGroupId},
+		   form_column_show_type = #{formColumnShowType}
+	 where form_column_id = #{formColumnId} 
+</select>
+  
+</mapper>

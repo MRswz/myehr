@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonEditorMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonEditor" >
+    <id column="button_editor_model_id" property="buttonEditorModelId" jdbcType="DECIMAL" />
+    <result column="button_editor_model_formId" property="buttonEditorModelFormid" jdbcType="DECIMAL" />
+    <result column="button_editor_model_buttonId" property="buttonEditorModelButtonid" jdbcType="DECIMAL" />
+    <result column="editor_model_type" property="editorModelType" jdbcType="NVARCHAR" />
+    <result column="editor_message_type" property="editorMessageType" jdbcType="NVARCHAR" />
+    <result column="editor_model_id" property="editorModelId" jdbcType="DECIMAL" />
+    <result column="editor_model_name" property="editorModelName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.button.SysFormButtonEditorWithBLOBs" extends="BaseResultMap" >
+    <result column="button_editor_model_value" property="buttonEditorModelValue" jdbcType="LONGVARCHAR" />
+    <result column="button_editor_model_html" property="buttonEditorModelHtml" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    button_editor_model_id, button_editor_model_formId, button_editor_model_buttonId, 
+    editor_model_type, editor_message_type, editor_model_id, editor_model_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    button_editor_model_value, button_editor_model_html
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_form_button_editor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_form_button_editor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_form_button_editor
+    where button_editor_model_id = #{buttonEditorModelId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_form_button_editor
+    where button_editor_model_id = #{buttonEditorModelId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorExample" >
+    delete from sys_form_button_editor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorWithBLOBs" >
+    insert into sys_form_button_editor (button_editor_model_formId, 
+      button_editor_model_buttonId, editor_model_type, 
+      editor_message_type, editor_model_id, editor_model_name, 
+      button_editor_model_value, button_editor_model_html
+      )
+    values (#{buttonEditorModelFormid,jdbcType=DECIMAL}, 
+      #{buttonEditorModelButtonid,jdbcType=DECIMAL}, #{editorModelType,jdbcType=NVARCHAR}, 
+      #{editorMessageType,jdbcType=NVARCHAR}, #{editorModelId,jdbcType=DECIMAL}, #{editorModelName,jdbcType=NVARCHAR}, 
+      #{buttonEditorModelValue,jdbcType=LONGVARCHAR}, #{buttonEditorModelHtml,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorWithBLOBs" >
+    insert into sys_form_button_editor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonEditorModelId != null" >
+        button_editor_model_id,
+      </if>
+      <if test="buttonEditorModelFormid != null" >
+        button_editor_model_formId,
+      </if>
+      <if test="buttonEditorModelButtonid != null" >
+        button_editor_model_buttonId,
+      </if>
+      <if test="editorModelType != null" >
+        editor_model_type,
+      </if>
+      <if test="editorMessageType != null" >
+        editor_message_type,
+      </if>
+      <if test="editorModelId != null" >
+        editor_model_id,
+      </if>
+      <if test="editorModelName != null" >
+        editor_model_name,
+      </if>
+      <if test="buttonEditorModelValue != null" >
+        button_editor_model_value,
+      </if>
+      <if test="buttonEditorModelHtml != null" >
+        button_editor_model_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonEditorModelId != null" >
+        #{buttonEditorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonEditorModelFormid != null" >
+        #{buttonEditorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonEditorModelButtonid != null" >
+        #{buttonEditorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelType != null" >
+        #{editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorMessageType != null" >
+        #{editorMessageType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelId != null" >
+        #{editorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelName != null" >
+        #{editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonEditorModelValue != null" >
+        #{buttonEditorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buttonEditorModelHtml != null" >
+        #{buttonEditorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorExample" resultType="java.lang.Integer" >
+    select count(*) from sys_form_button_editor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_form_button_editor
+    <set >
+      <if test="record.buttonEditorModelId != null" >
+        button_editor_model_id = #{record.buttonEditorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonEditorModelFormid != null" >
+        button_editor_model_formId = #{record.buttonEditorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonEditorModelButtonid != null" >
+        button_editor_model_buttonId = #{record.buttonEditorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.editorModelType != null" >
+        editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorMessageType != null" >
+        editor_message_type = #{record.editorMessageType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelId != null" >
+        editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.editorModelName != null" >
+        editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonEditorModelValue != null" >
+        button_editor_model_value = #{record.buttonEditorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.buttonEditorModelHtml != null" >
+        button_editor_model_html = #{record.buttonEditorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_form_button_editor
+    set button_editor_model_id = #{record.buttonEditorModelId,jdbcType=DECIMAL},
+      button_editor_model_formId = #{record.buttonEditorModelFormid,jdbcType=DECIMAL},
+      button_editor_model_buttonId = #{record.buttonEditorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      editor_message_type = #{record.editorMessageType,jdbcType=NVARCHAR},
+      editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR},
+      button_editor_model_value = #{record.buttonEditorModelValue,jdbcType=LONGVARCHAR},
+      button_editor_model_html = #{record.buttonEditorModelHtml,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_form_button_editor
+    set button_editor_model_id = #{record.buttonEditorModelId,jdbcType=DECIMAL},
+      button_editor_model_formId = #{record.buttonEditorModelFormid,jdbcType=DECIMAL},
+      button_editor_model_buttonId = #{record.buttonEditorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      editor_message_type = #{record.editorMessageType,jdbcType=NVARCHAR},
+      editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorWithBLOBs" >
+    update sys_form_button_editor
+    <set >
+      <if test="buttonEditorModelFormid != null" >
+        button_editor_model_formId = #{buttonEditorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonEditorModelButtonid != null" >
+        button_editor_model_buttonId = #{buttonEditorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelType != null" >
+        editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorMessageType != null" >
+        editor_message_type = #{editorMessageType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelId != null" >
+        editor_model_id = #{editorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelName != null" >
+        editor_model_name = #{editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonEditorModelValue != null" >
+        button_editor_model_value = #{buttonEditorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buttonEditorModelHtml != null" >
+        button_editor_model_html = #{buttonEditorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where button_editor_model_id = #{buttonEditorModelId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditorWithBLOBs" >
+    update sys_form_button_editor
+    set button_editor_model_formId = #{buttonEditorModelFormid,jdbcType=DECIMAL},
+      button_editor_model_buttonId = #{buttonEditorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      editor_message_type = #{editorMessageType,jdbcType=NVARCHAR},
+      editor_model_id = #{editorModelId,jdbcType=DECIMAL},
+      editor_model_name = #{editorModelName,jdbcType=NVARCHAR},
+      button_editor_model_value = #{buttonEditorModelValue,jdbcType=LONGVARCHAR},
+      button_editor_model_html = #{buttonEditorModelHtml,jdbcType=LONGVARCHAR}
+    where button_editor_model_id = #{buttonEditorModelId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonEditor" >
+    update sys_form_button_editor
+    set button_editor_model_formId = #{buttonEditorModelFormid,jdbcType=DECIMAL},
+      button_editor_model_buttonId = #{buttonEditorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      editor_message_type = #{editorMessageType,jdbcType=NVARCHAR},
+      editor_model_id = #{editorModelId,jdbcType=DECIMAL},
+      editor_model_name = #{editorModelName,jdbcType=NVARCHAR}
+    where button_editor_model_id = #{buttonEditorModelId,jdbcType=DECIMAL}
+  </update>
+</mapper>

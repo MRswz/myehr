@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.SysTemplateModelMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.SysTemplateModel" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_CODE" property="templateCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_TYPE" property="templateType" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_RANK" property="templateRank" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_TIMES" property="templateTimes" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_PHOTO" property="templatePhoto" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_REMARK" property="templateRemark" jdbcType="NVARCHAR" />
+    <result column="EDIT_NAME" property="editName" jdbcType="NVARCHAR" />
+    <result column="EDIT_TIME" property="editTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_NAME" property="createName" jdbcType="NVARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TEMPLATE_CODE, TEMPLATE_TYPE, TEMPLATE_RANK, TEMPLATE_TIMES, TEMPLATE_PHOTO, 
+    TEMPLATE_REMARK, EDIT_NAME, EDIT_TIME, CREATE_NAME, CREATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_MODEL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_MODEL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelExample" >
+    delete from SYS_TEMPLATE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModel" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_TEMPLATE_MODEL (TEMPLATE_CODE, TEMPLATE_TYPE, 
+      TEMPLATE_RANK, TEMPLATE_TIMES, TEMPLATE_PHOTO, 
+      TEMPLATE_REMARK, EDIT_NAME, EDIT_TIME, 
+      CREATE_NAME, CREATE_TIME)
+    values (#{templateCode,jdbcType=NVARCHAR}, #{templateType,jdbcType=NVARCHAR}, 
+      #{templateRank,jdbcType=NVARCHAR}, #{templateTimes,jdbcType=NVARCHAR}, #{templatePhoto,jdbcType=NVARCHAR}, 
+      #{templateRemark,jdbcType=NVARCHAR}, #{editName,jdbcType=NVARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{createName,jdbcType=NVARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModel" >
+    insert into SYS_TEMPLATE_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="templateCode != null" >
+        TEMPLATE_CODE,
+      </if>
+      <if test="templateType != null" >
+        TEMPLATE_TYPE,
+      </if>
+      <if test="templateRank != null" >
+        TEMPLATE_RANK,
+      </if>
+      <if test="templateTimes != null" >
+        TEMPLATE_TIMES,
+      </if>
+      <if test="templatePhoto != null" >
+        TEMPLATE_PHOTO,
+      </if>
+      <if test="templateRemark != null" >
+        TEMPLATE_REMARK,
+      </if>
+      <if test="editName != null" >
+        EDIT_NAME,
+      </if>
+      <if test="editTime != null" >
+        EDIT_TIME,
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateType != null" >
+        #{templateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateRank != null" >
+        #{templateRank,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateTimes != null" >
+        #{templateTimes,jdbcType=NVARCHAR},
+      </if>
+      <if test="templatePhoto != null" >
+        #{templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateRemark != null" >
+        #{templateRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="editName != null" >
+        #{editName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModelExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_MODEL
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateCode != null" >
+        TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateType != null" >
+        TEMPLATE_TYPE = #{record.templateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateRank != null" >
+        TEMPLATE_RANK = #{record.templateRank,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateTimes != null" >
+        TEMPLATE_TIMES = #{record.templateTimes,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templatePhoto != null" >
+        TEMPLATE_PHOTO = #{record.templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateRemark != null" >
+        TEMPLATE_REMARK = #{record.templateRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editName != null" >
+        EDIT_NAME = #{record.editName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editTime != null" >
+        EDIT_TIME = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createName != null" >
+        CREATE_NAME = #{record.createName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_MODEL
+    set ID = #{record.id,jdbcType=DECIMAL},
+      TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_TYPE = #{record.templateType,jdbcType=NVARCHAR},
+      TEMPLATE_RANK = #{record.templateRank,jdbcType=NVARCHAR},
+      TEMPLATE_TIMES = #{record.templateTimes,jdbcType=NVARCHAR},
+      TEMPLATE_PHOTO = #{record.templatePhoto,jdbcType=NVARCHAR},
+      TEMPLATE_REMARK = #{record.templateRemark,jdbcType=NVARCHAR},
+      EDIT_NAME = #{record.editName,jdbcType=NVARCHAR},
+      EDIT_TIME = #{record.editTime,jdbcType=TIMESTAMP},
+      CREATE_NAME = #{record.createName,jdbcType=NVARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModel" >
+    update SYS_TEMPLATE_MODEL
+    <set >
+      <if test="templateCode != null" >
+        TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateType != null" >
+        TEMPLATE_TYPE = #{templateType,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateRank != null" >
+        TEMPLATE_RANK = #{templateRank,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateTimes != null" >
+        TEMPLATE_TIMES = #{templateTimes,jdbcType=NVARCHAR},
+      </if>
+      <if test="templatePhoto != null" >
+        TEMPLATE_PHOTO = #{templatePhoto,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateRemark != null" >
+        TEMPLATE_REMARK = #{templateRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="editName != null" >
+        EDIT_NAME = #{editName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editTime != null" >
+        EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null" >
+        CREATE_NAME = #{createName,jdbcType=NVARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.SysTemplateModel" >
+    update SYS_TEMPLATE_MODEL
+    set TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_TYPE = #{templateType,jdbcType=NVARCHAR},
+      TEMPLATE_RANK = #{templateRank,jdbcType=NVARCHAR},
+      TEMPLATE_TIMES = #{templateTimes,jdbcType=NVARCHAR},
+      TEMPLATE_PHOTO = #{templatePhoto,jdbcType=NVARCHAR},
+      TEMPLATE_REMARK = #{templateRemark,jdbcType=NVARCHAR},
+      EDIT_NAME = #{editName,jdbcType=NVARCHAR},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      CREATE_NAME = #{createName,jdbcType=NVARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonIntrDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetail" >
+    <id column="INTR_DETAIL_ID" property="intrDetailId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+    <result column="TARGET_COLUMN_ID" property="targetColumnId" jdbcType="NVARCHAR" />
+    <result column="INTRODUCE_ID" property="introduceId" jdbcType="DECIMAL" />
+    <result column="TARGET_COLUMN_TYPE" property="targetColumnType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INTR_DETAIL_ID, FORM_COLUMN_ID, TARGET_COLUMN_ID, INTRODUCE_ID, TARGET_COLUMN_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTR_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_INTR_DETAIL
+    where INTR_DETAIL_ID = #{intrDetailId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_INTR_DETAIL
+    where INTR_DETAIL_ID = #{intrDetailId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetailExample" >
+    delete from SYS_FORM_BUTTON_INTR_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetail" >
+    insert into SYS_FORM_BUTTON_INTR_DETAIL (FORM_COLUMN_ID, TARGET_COLUMN_ID, 
+      INTRODUCE_ID, TARGET_COLUMN_TYPE)
+    values (#{formColumnId,jdbcType=DECIMAL}, #{targetColumnId,jdbcType=NVARCHAR}, 
+      #{introduceId,jdbcType=DECIMAL}, #{targetColumnType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetail" >
+    insert into SYS_FORM_BUTTON_INTR_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="intrDetailId != null" >
+        INTR_DETAIL_ID,
+      </if>
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID,
+      </if>
+      <if test="targetColumnId != null" >
+        TARGET_COLUMN_ID,
+      </if>
+      <if test="introduceId != null" >
+        INTRODUCE_ID,
+      </if>
+      <if test="targetColumnType != null" >
+        TARGET_COLUMN_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="intrDetailId != null" >
+        #{intrDetailId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnId != null" >
+        #{formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="targetColumnId != null" >
+        #{targetColumnId,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceId != null" >
+        #{introduceId,jdbcType=DECIMAL},
+      </if>
+      <if test="targetColumnType != null" >
+        #{targetColumnType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetailExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_INTR_DETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_INTR_DETAIL
+    <set >
+      <if test="record.intrDetailId != null" >
+        INTR_DETAIL_ID = #{record.intrDetailId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnId != null" >
+        FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.targetColumnId != null" >
+        TARGET_COLUMN_ID = #{record.targetColumnId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.introduceId != null" >
+        INTRODUCE_ID = #{record.introduceId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.targetColumnType != null" >
+        TARGET_COLUMN_TYPE = #{record.targetColumnType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_INTR_DETAIL
+    set INTR_DETAIL_ID = #{record.intrDetailId,jdbcType=DECIMAL},
+      FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      TARGET_COLUMN_ID = #{record.targetColumnId,jdbcType=NVARCHAR},
+      INTRODUCE_ID = #{record.introduceId,jdbcType=DECIMAL},
+      TARGET_COLUMN_TYPE = #{record.targetColumnType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetail" >
+    update SYS_FORM_BUTTON_INTR_DETAIL
+    <set >
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="targetColumnId != null" >
+        TARGET_COLUMN_ID = #{targetColumnId,jdbcType=NVARCHAR},
+      </if>
+      <if test="introduceId != null" >
+        INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL},
+      </if>
+      <if test="targetColumnType != null" >
+        TARGET_COLUMN_TYPE = #{targetColumnType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where INTR_DETAIL_ID = #{intrDetailId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonIntrDetail" >
+    update SYS_FORM_BUTTON_INTR_DETAIL
+    set FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL},
+      TARGET_COLUMN_ID = #{targetColumnId,jdbcType=NVARCHAR},
+      INTRODUCE_ID = #{introduceId,jdbcType=DECIMAL},
+      TARGET_COLUMN_TYPE = #{targetColumnType,jdbcType=NVARCHAR}
+    where INTR_DETAIL_ID = #{intrDetailId,jdbcType=DECIMAL}
+  </update>
+</mapper>

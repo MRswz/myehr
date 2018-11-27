@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.SysActTitleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.SysActTitle" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TITLE" property="title" jdbcType="NVARCHAR" />
+    <result column="BUSINESSID" property="businessid" jdbcType="DECIMAL" />
+    <result column="MODEL_KEY" property="modelKey" jdbcType="VARCHAR" />
+    <result column="EXPAND_COLUMN" property="expandColumn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TITLE, BUSINESSID, MODEL_KEY, EXPAND_COLUMN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.SysActTitleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ACT_TITLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ACT_TITLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_ACT_TITLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.SysActTitleExample" >
+    delete from SYS_ACT_TITLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.SysActTitle" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_ACT_TITLE ( TITLE, BUSINESSID, 
+      MODEL_KEY, EXPAND_COLUMN)
+    values ( #{title,jdbcType=NVARCHAR}, #{businessid,jdbcType=DECIMAL}, 
+      #{modelKey,jdbcType=VARCHAR}, #{expandColumn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.SysActTitle" >
+    insert into SYS_ACT_TITLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="businessid != null" >
+        BUSINESSID,
+      </if>
+      <if test="modelKey != null" >
+        MODEL_KEY,
+      </if>
+      <if test="expandColumn != null" >
+        EXPAND_COLUMN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="businessid != null" >
+        #{businessid,jdbcType=DECIMAL},
+      </if>
+      <if test="modelKey != null" >
+        #{modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="expandColumn != null" >
+        #{expandColumn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.SysActTitleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ACT_TITLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ACT_TITLE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.businessid != null" >
+        BUSINESSID = #{record.businessid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modelKey != null" >
+        MODEL_KEY = #{record.modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandColumn != null" >
+        EXPAND_COLUMN = #{record.expandColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ACT_TITLE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      BUSINESSID = #{record.businessid,jdbcType=DECIMAL},
+      MODEL_KEY = #{record.modelKey,jdbcType=VARCHAR},
+      EXPAND_COLUMN = #{record.expandColumn,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.SysActTitle" >
+    update SYS_ACT_TITLE
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="businessid != null" >
+        BUSINESSID = #{businessid,jdbcType=DECIMAL},
+      </if>
+      <if test="modelKey != null" >
+        MODEL_KEY = #{modelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="expandColumn != null" >
+        EXPAND_COLUMN = #{expandColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.SysActTitle" >
+    update SYS_ACT_TITLE
+    set TITLE = #{title,jdbcType=NVARCHAR},
+      BUSINESSID = #{businessid,jdbcType=DECIMAL},
+      MODEL_KEY = #{modelKey,jdbcType=VARCHAR},
+      EXPAND_COLUMN = #{expandColumn,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

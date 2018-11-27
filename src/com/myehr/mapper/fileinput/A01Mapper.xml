@@ -1,0 +1,1755 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.fileinput.A01Mapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.fileinput.A01" >
+    <id column="A0188" property="a0188" jdbcType="INTEGER" />
+    <result column="A0101" property="a0101" jdbcType="NVARCHAR" />
+    <result column="A0107" property="a0107" jdbcType="NVARCHAR" />
+    <result column="A01103" property="a01103" jdbcType="NVARCHAR" />
+    <result column="A0111" property="a0111" jdbcType="TIMESTAMP" />
+    <result column="A0114" property="a0114" jdbcType="NVARCHAR" />
+    <result column="A0121" property="a0121" jdbcType="NVARCHAR" />
+    <result column="A0127" property="a0127" jdbcType="NVARCHAR" />
+    <result column="A0141" property="a0141" jdbcType="TIMESTAMP" />
+    <result column="A0144" property="a0144" jdbcType="TIMESTAMP" />
+    <result column="A0146" property="a0146" jdbcType="NVARCHAR" />
+    <result column="A0147" property="a0147" jdbcType="NVARCHAR" />
+    <result column="A0190" property="a0190" jdbcType="NVARCHAR" />
+    <result column="A0191" property="a0191" jdbcType="NVARCHAR" />
+    <result column="A0193" property="a0193" jdbcType="DECIMAL" />
+    <result column="A0199" property="a0199" jdbcType="DECIMAL" />
+    <result column="A019A" property="a019a" jdbcType="NVARCHAR" />
+    <result column="A01A8" property="a01a8" jdbcType="DECIMAL" />
+    <result column="A01AD" property="a01ad" jdbcType="NVARCHAR" />
+    <result column="A01AF" property="a01af" jdbcType="NVARCHAR" />
+    <result column="A01AH" property="a01ah" jdbcType="NVARCHAR" />
+    <result column="A01AO" property="a01ao" jdbcType="TIMESTAMP" />
+    <result column="A01AR" property="a01ar" jdbcType="DECIMAL" />
+    <result column="A01AS" property="a01as" jdbcType="DECIMAL" />
+    <result column="A01AT" property="a01at" jdbcType="TIMESTAMP" />
+    <result column="A01AU" property="a01au" jdbcType="TIMESTAMP" />
+    <result column="A01AX" property="a01ax" jdbcType="NVARCHAR" />
+    <result column="A01AY" property="a01ay" jdbcType="NVARCHAR" />
+    <result column="A01B2" property="a01b2" jdbcType="TIMESTAMP" />
+    <result column="A01B6" property="a01b6" jdbcType="NVARCHAR" />
+    <result column="A01B8" property="a01b8" jdbcType="NVARCHAR" />
+    <result column="A01B9" property="a01b9" jdbcType="TIMESTAMP" />
+    <result column="A01BA" property="a01ba" jdbcType="TIMESTAMP" />
+    <result column="A01BB" property="a01bb" jdbcType="DECIMAL" />
+    <result column="A01BC" property="a01bc" jdbcType="NVARCHAR" />
+    <result column="A01BD" property="a01bd" jdbcType="NVARCHAR" />
+    <result column="A01BE" property="a01be" jdbcType="NVARCHAR" />
+    <result column="A01BF" property="a01bf" jdbcType="NVARCHAR" />
+    <result column="A01BG" property="a01bg" jdbcType="NVARCHAR" />
+    <result column="A01BH" property="a01bh" jdbcType="DECIMAL" />
+    <result column="A01BI" property="a01bi" jdbcType="NVARCHAR" />
+    <result column="A01BJ" property="a01bj" jdbcType="NVARCHAR" />
+    <result column="A01BK" property="a01bk" jdbcType="NVARCHAR" />
+    <result column="A01BM" property="a01bm" jdbcType="NVARCHAR" />
+    <result column="A01BO" property="a01bo" jdbcType="NVARCHAR" />
+    <result column="A01BQ" property="a01bq" jdbcType="TIMESTAMP" />
+    <result column="A01BR" property="a01br" jdbcType="NVARCHAR" />
+    <result column="A01BT" property="a01bt" jdbcType="NVARCHAR" />
+    <result column="A01BU" property="a01bu" jdbcType="NVARCHAR" />
+    <result column="A01BV" property="a01bv" jdbcType="DECIMAL" />
+    <result column="A01BX" property="a01bx" jdbcType="NVARCHAR" />
+    <result column="A01BZ" property="a01bz" jdbcType="NVARCHAR" />
+    <result column="A01C0" property="a01c0" jdbcType="NVARCHAR" />
+    <result column="A01C3" property="a01c3" jdbcType="NVARCHAR" />
+    <result column="A01C4" property="a01c4" jdbcType="DECIMAL" />
+    <result column="A01C5" property="a01c5" jdbcType="NVARCHAR" />
+    <result column="A01C7" property="a01c7" jdbcType="NVARCHAR" />
+    <result column="A01CD" property="a01cd" jdbcType="VARCHAR" />
+    <result column="A01CE" property="a01ce" jdbcType="TIMESTAMP" />
+    <result column="A01CF" property="a01cf" jdbcType="NVARCHAR" />
+    <result column="A01CG" property="a01cg" jdbcType="NVARCHAR" />
+    <result column="A01CH" property="a01ch" jdbcType="TIMESTAMP" />
+    <result column="A01CI" property="a01ci" jdbcType="DECIMAL" />
+    <result column="A01CK" property="a01ck" jdbcType="DECIMAL" />
+    <result column="A01CL" property="a01cl" jdbcType="DECIMAL" />
+    <result column="A01CM" property="a01cm" jdbcType="DECIMAL" />
+    <result column="A01CN" property="a01cn" jdbcType="NVARCHAR" />
+    <result column="A01CO" property="a01co" jdbcType="NVARCHAR" />
+    <result column="A01GL1" property="a01gl1" jdbcType="DECIMAL" />
+    <result column="A01GL2" property="a01gl2" jdbcType="DECIMAL" />
+    <result column="A01LT" property="a01lt" jdbcType="NVARCHAR" />
+    <result column="A01LU" property="a01lu" jdbcType="NVARCHAR" />
+    <result column="A01LV" property="a01lv" jdbcType="NVARCHAR" />
+    <result column="A01LW" property="a01lw" jdbcType="NVARCHAR" />
+    <result column="A01LX" property="a01lx" jdbcType="NVARCHAR" />
+    <result column="A01LY" property="a01ly" jdbcType="NVARCHAR" />
+    <result column="A01LZ" property="a01lz" jdbcType="TIMESTAMP" />
+    <result column="A01M0" property="a01m0" jdbcType="DECIMAL" />
+    <result column="A01M2" property="a01m2" jdbcType="DECIMAL" />
+    <result column="A01M3" property="a01m3" jdbcType="NVARCHAR" />
+    <result column="A01M4" property="a01m4" jdbcType="NVARCHAR" />
+    <result column="A01M5" property="a01m5" jdbcType="NVARCHAR" />
+    <result column="A01TZBU" property="a01tzbu" jdbcType="NVARCHAR" />
+    <result column="A01TZBV" property="a01tzbv" jdbcType="NVARCHAR" />
+    <result column="A01TZBW" property="a01tzbw" jdbcType="TIMESTAMP" />
+    <result column="A01TZBX" property="a01tzbx" jdbcType="TIMESTAMP" />
+    <result column="A01TZBY" property="a01tzby" jdbcType="DECIMAL" />
+    <result column="A01ZWDM" property="a01zwdm" jdbcType="NVARCHAR" />
+    <result column="C0105" property="c0105" jdbcType="NVARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="A01UPTM" property="a01uptm" jdbcType="TIMESTAMP" />
+    <result column="A01TZBS" property="a01tzbs" jdbcType="VARCHAR" />
+    <result column="PYDM" property="pydm" jdbcType="VARCHAR" />
+    <result column="A01TZBZ" property="a01tzbz" jdbcType="INTEGER" />
+    <result column="A01LS" property="a01ls" jdbcType="NUMERIC" />
+    <result column="A01CA" property="a01ca" jdbcType="NVARCHAR" />
+    <result column="A01CB" property="a01cb" jdbcType="NVARCHAR" />
+    <result column="A01CC" property="a01cc" jdbcType="NVARCHAR" />
+    <result column="A01BMBS" property="a01bmbs" jdbcType="NVARCHAR" />
+    <result column="A01WX" property="a01wx" jdbcType="NVARCHAR" />
+    <result column="A01D1" property="a01d1" jdbcType="NVARCHAR" />
+    <result column="A01D3" property="a01d3" jdbcType="NVARCHAR" />
+    <result column="A01D2" property="a01d2" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    A0188, A0101, A0107, A01103, A0111, A0114, A0121, A0127, A0141, A0144, A0146, A0147, 
+    A0190, A0191, A0193, A0199, A019A, A01A8, A01AD, A01AF, A01AH, A01AO, A01AR, A01AS, 
+    A01AT, A01AU, A01AX, A01AY, A01B2, A01B6, A01B8, A01B9, A01BA, A01BB, A01BC, A01BD, 
+    A01BE, A01BF, A01BG, A01BH, A01BI, A01BJ, A01BK, A01BM, A01BO, A01BQ, A01BR, A01BT, 
+    A01BU, A01BV, A01BX, A01BZ, A01C0, A01C3, A01C4, A01C5, A01C7, A01CD, A01CE, A01CF, 
+    A01CG, A01CH, A01CI, A01CK, A01CL, A01CM, A01CN, A01CO, A01GL1, A01GL2, A01LT, A01LU, 
+    A01LV, A01LW, A01LX, A01LY, A01LZ, A01M0, A01M2, A01M3, A01M4, A01M5, A01TZBU, A01TZBV, 
+    A01TZBW, A01TZBX, A01TZBY, A01ZWDM, C0105, DEPT_ID, A01UPTM, A01TZBS, PYDM, A01TZBZ, 
+    A01LS, A01CA, A01CB, A01CC, A01BMBS, A01WX, A01D1, A01D3, A01D2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.fileinput.A01Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from A01
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from A01
+    where A0188 = #{a0188,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from A01
+    where A0188 = #{a0188,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.fileinput.A01Example" >
+    delete from A01
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.fileinput.A01" >
+    insert into A01 (A0188, A0101, A0107, 
+      A01103, A0111, A0114, 
+      A0121, A0127, A0141, 
+      A0144, A0146, A0147, 
+      A0190, A0191, A0193, 
+      A0199, A019A, A01A8, 
+      A01AD, A01AF, A01AH, 
+      A01AO, A01AR, A01AS, 
+      A01AT, A01AU, A01AX, 
+      A01AY, A01B2, A01B6, 
+      A01B8, A01B9, A01BA, 
+      A01BB, A01BC, A01BD, 
+      A01BE, A01BF, A01BG, 
+      A01BH, A01BI, A01BJ, 
+      A01BK, A01BM, A01BO, 
+      A01BQ, A01BR, A01BT, 
+      A01BU, A01BV, A01BX, 
+      A01BZ, A01C0, A01C3, 
+      A01C4, A01C5, A01C7, 
+      A01CD, A01CE, A01CF, 
+      A01CG, A01CH, A01CI, 
+      A01CK, A01CL, A01CM, 
+      A01CN, A01CO, A01GL1, 
+      A01GL2, A01LT, A01LU, 
+      A01LV, A01LW, A01LX, 
+      A01LY, A01LZ, A01M0, 
+      A01M2, A01M3, A01M4, 
+      A01M5, A01TZBU, A01TZBV, 
+      A01TZBW, A01TZBX, A01TZBY, 
+      A01ZWDM, C0105, DEPT_ID, 
+      A01UPTM, A01TZBS, PYDM, 
+      A01TZBZ, A01LS, A01CA, 
+      A01CB, A01CC, A01BMBS, 
+      A01WX, A01D1, A01D3, 
+      A01D2)
+    values (#{a0188,jdbcType=INTEGER}, #{a0101,jdbcType=NVARCHAR}, #{a0107,jdbcType=NVARCHAR}, 
+      #{a01103,jdbcType=NVARCHAR}, #{a0111,jdbcType=TIMESTAMP}, #{a0114,jdbcType=NVARCHAR}, 
+      #{a0121,jdbcType=NVARCHAR}, #{a0127,jdbcType=NVARCHAR}, #{a0141,jdbcType=TIMESTAMP}, 
+      #{a0144,jdbcType=TIMESTAMP}, #{a0146,jdbcType=NVARCHAR}, #{a0147,jdbcType=NVARCHAR}, 
+      #{a0190,jdbcType=NVARCHAR}, #{a0191,jdbcType=NVARCHAR}, #{a0193,jdbcType=DECIMAL}, 
+      #{a0199,jdbcType=DECIMAL}, #{a019a,jdbcType=NVARCHAR}, #{a01a8,jdbcType=DECIMAL}, 
+      #{a01ad,jdbcType=NVARCHAR}, #{a01af,jdbcType=NVARCHAR}, #{a01ah,jdbcType=NVARCHAR}, 
+      #{a01ao,jdbcType=TIMESTAMP}, #{a01ar,jdbcType=DECIMAL}, #{a01as,jdbcType=DECIMAL}, 
+      #{a01at,jdbcType=TIMESTAMP}, #{a01au,jdbcType=TIMESTAMP}, #{a01ax,jdbcType=NVARCHAR}, 
+      #{a01ay,jdbcType=NVARCHAR}, #{a01b2,jdbcType=TIMESTAMP}, #{a01b6,jdbcType=NVARCHAR}, 
+      #{a01b8,jdbcType=NVARCHAR}, #{a01b9,jdbcType=TIMESTAMP}, #{a01ba,jdbcType=TIMESTAMP}, 
+      #{a01bb,jdbcType=DECIMAL}, #{a01bc,jdbcType=NVARCHAR}, #{a01bd,jdbcType=NVARCHAR}, 
+      #{a01be,jdbcType=NVARCHAR}, #{a01bf,jdbcType=NVARCHAR}, #{a01bg,jdbcType=NVARCHAR}, 
+      #{a01bh,jdbcType=DECIMAL}, #{a01bi,jdbcType=NVARCHAR}, #{a01bj,jdbcType=NVARCHAR}, 
+      #{a01bk,jdbcType=NVARCHAR}, #{a01bm,jdbcType=NVARCHAR}, #{a01bo,jdbcType=NVARCHAR}, 
+      #{a01bq,jdbcType=TIMESTAMP}, #{a01br,jdbcType=NVARCHAR}, #{a01bt,jdbcType=NVARCHAR}, 
+      #{a01bu,jdbcType=NVARCHAR}, #{a01bv,jdbcType=DECIMAL}, #{a01bx,jdbcType=NVARCHAR}, 
+      #{a01bz,jdbcType=NVARCHAR}, #{a01c0,jdbcType=NVARCHAR}, #{a01c3,jdbcType=NVARCHAR}, 
+      #{a01c4,jdbcType=DECIMAL}, #{a01c5,jdbcType=NVARCHAR}, #{a01c7,jdbcType=NVARCHAR}, 
+      #{a01cd,jdbcType=VARCHAR}, #{a01ce,jdbcType=TIMESTAMP}, #{a01cf,jdbcType=NVARCHAR}, 
+      #{a01cg,jdbcType=NVARCHAR}, #{a01ch,jdbcType=TIMESTAMP}, #{a01ci,jdbcType=DECIMAL}, 
+      #{a01ck,jdbcType=DECIMAL}, #{a01cl,jdbcType=DECIMAL}, #{a01cm,jdbcType=DECIMAL}, 
+      #{a01cn,jdbcType=NVARCHAR}, #{a01co,jdbcType=NVARCHAR}, #{a01gl1,jdbcType=DECIMAL}, 
+      #{a01gl2,jdbcType=DECIMAL}, #{a01lt,jdbcType=NVARCHAR}, #{a01lu,jdbcType=NVARCHAR}, 
+      #{a01lv,jdbcType=NVARCHAR}, #{a01lw,jdbcType=NVARCHAR}, #{a01lx,jdbcType=NVARCHAR}, 
+      #{a01ly,jdbcType=NVARCHAR}, #{a01lz,jdbcType=TIMESTAMP}, #{a01m0,jdbcType=DECIMAL}, 
+      #{a01m2,jdbcType=DECIMAL}, #{a01m3,jdbcType=NVARCHAR}, #{a01m4,jdbcType=NVARCHAR}, 
+      #{a01m5,jdbcType=NVARCHAR}, #{a01tzbu,jdbcType=NVARCHAR}, #{a01tzbv,jdbcType=NVARCHAR}, 
+      #{a01tzbw,jdbcType=TIMESTAMP}, #{a01tzbx,jdbcType=TIMESTAMP}, #{a01tzby,jdbcType=DECIMAL}, 
+      #{a01zwdm,jdbcType=NVARCHAR}, #{c0105,jdbcType=NVARCHAR}, #{deptId,jdbcType=DECIMAL}, 
+      #{a01uptm,jdbcType=TIMESTAMP}, #{a01tzbs,jdbcType=VARCHAR}, #{pydm,jdbcType=VARCHAR}, 
+      #{a01tzbz,jdbcType=INTEGER}, #{a01ls,jdbcType=NUMERIC}, #{a01ca,jdbcType=NVARCHAR}, 
+      #{a01cb,jdbcType=NVARCHAR}, #{a01cc,jdbcType=NVARCHAR}, #{a01bmbs,jdbcType=NVARCHAR}, 
+      #{a01wx,jdbcType=NVARCHAR}, #{a01d1,jdbcType=NVARCHAR}, #{a01d3,jdbcType=NVARCHAR}, 
+      #{a01d2,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.fileinput.A01" >
+    insert into A01
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="a0188 != null" >
+        A0188,
+      </if>
+      <if test="a0101 != null" >
+        A0101,
+      </if>
+      <if test="a0107 != null" >
+        A0107,
+      </if>
+      <if test="a01103 != null" >
+        A01103,
+      </if>
+      <if test="a0111 != null" >
+        A0111,
+      </if>
+      <if test="a0114 != null" >
+        A0114,
+      </if>
+      <if test="a0121 != null" >
+        A0121,
+      </if>
+      <if test="a0127 != null" >
+        A0127,
+      </if>
+      <if test="a0141 != null" >
+        A0141,
+      </if>
+      <if test="a0144 != null" >
+        A0144,
+      </if>
+      <if test="a0146 != null" >
+        A0146,
+      </if>
+      <if test="a0147 != null" >
+        A0147,
+      </if>
+      <if test="a0190 != null" >
+        A0190,
+      </if>
+      <if test="a0191 != null" >
+        A0191,
+      </if>
+      <if test="a0193 != null" >
+        A0193,
+      </if>
+      <if test="a0199 != null" >
+        A0199,
+      </if>
+      <if test="a019a != null" >
+        A019A,
+      </if>
+      <if test="a01a8 != null" >
+        A01A8,
+      </if>
+      <if test="a01ad != null" >
+        A01AD,
+      </if>
+      <if test="a01af != null" >
+        A01AF,
+      </if>
+      <if test="a01ah != null" >
+        A01AH,
+      </if>
+      <if test="a01ao != null" >
+        A01AO,
+      </if>
+      <if test="a01ar != null" >
+        A01AR,
+      </if>
+      <if test="a01as != null" >
+        A01AS,
+      </if>
+      <if test="a01at != null" >
+        A01AT,
+      </if>
+      <if test="a01au != null" >
+        A01AU,
+      </if>
+      <if test="a01ax != null" >
+        A01AX,
+      </if>
+      <if test="a01ay != null" >
+        A01AY,
+      </if>
+      <if test="a01b2 != null" >
+        A01B2,
+      </if>
+      <if test="a01b6 != null" >
+        A01B6,
+      </if>
+      <if test="a01b8 != null" >
+        A01B8,
+      </if>
+      <if test="a01b9 != null" >
+        A01B9,
+      </if>
+      <if test="a01ba != null" >
+        A01BA,
+      </if>
+      <if test="a01bb != null" >
+        A01BB,
+      </if>
+      <if test="a01bc != null" >
+        A01BC,
+      </if>
+      <if test="a01bd != null" >
+        A01BD,
+      </if>
+      <if test="a01be != null" >
+        A01BE,
+      </if>
+      <if test="a01bf != null" >
+        A01BF,
+      </if>
+      <if test="a01bg != null" >
+        A01BG,
+      </if>
+      <if test="a01bh != null" >
+        A01BH,
+      </if>
+      <if test="a01bi != null" >
+        A01BI,
+      </if>
+      <if test="a01bj != null" >
+        A01BJ,
+      </if>
+      <if test="a01bk != null" >
+        A01BK,
+      </if>
+      <if test="a01bm != null" >
+        A01BM,
+      </if>
+      <if test="a01bo != null" >
+        A01BO,
+      </if>
+      <if test="a01bq != null" >
+        A01BQ,
+      </if>
+      <if test="a01br != null" >
+        A01BR,
+      </if>
+      <if test="a01bt != null" >
+        A01BT,
+      </if>
+      <if test="a01bu != null" >
+        A01BU,
+      </if>
+      <if test="a01bv != null" >
+        A01BV,
+      </if>
+      <if test="a01bx != null" >
+        A01BX,
+      </if>
+      <if test="a01bz != null" >
+        A01BZ,
+      </if>
+      <if test="a01c0 != null" >
+        A01C0,
+      </if>
+      <if test="a01c3 != null" >
+        A01C3,
+      </if>
+      <if test="a01c4 != null" >
+        A01C4,
+      </if>
+      <if test="a01c5 != null" >
+        A01C5,
+      </if>
+      <if test="a01c7 != null" >
+        A01C7,
+      </if>
+      <if test="a01cd != null" >
+        A01CD,
+      </if>
+      <if test="a01ce != null" >
+        A01CE,
+      </if>
+      <if test="a01cf != null" >
+        A01CF,
+      </if>
+      <if test="a01cg != null" >
+        A01CG,
+      </if>
+      <if test="a01ch != null" >
+        A01CH,
+      </if>
+      <if test="a01ci != null" >
+        A01CI,
+      </if>
+      <if test="a01ck != null" >
+        A01CK,
+      </if>
+      <if test="a01cl != null" >
+        A01CL,
+      </if>
+      <if test="a01cm != null" >
+        A01CM,
+      </if>
+      <if test="a01cn != null" >
+        A01CN,
+      </if>
+      <if test="a01co != null" >
+        A01CO,
+      </if>
+      <if test="a01gl1 != null" >
+        A01GL1,
+      </if>
+      <if test="a01gl2 != null" >
+        A01GL2,
+      </if>
+      <if test="a01lt != null" >
+        A01LT,
+      </if>
+      <if test="a01lu != null" >
+        A01LU,
+      </if>
+      <if test="a01lv != null" >
+        A01LV,
+      </if>
+      <if test="a01lw != null" >
+        A01LW,
+      </if>
+      <if test="a01lx != null" >
+        A01LX,
+      </if>
+      <if test="a01ly != null" >
+        A01LY,
+      </if>
+      <if test="a01lz != null" >
+        A01LZ,
+      </if>
+      <if test="a01m0 != null" >
+        A01M0,
+      </if>
+      <if test="a01m2 != null" >
+        A01M2,
+      </if>
+      <if test="a01m3 != null" >
+        A01M3,
+      </if>
+      <if test="a01m4 != null" >
+        A01M4,
+      </if>
+      <if test="a01m5 != null" >
+        A01M5,
+      </if>
+      <if test="a01tzbu != null" >
+        A01TZBU,
+      </if>
+      <if test="a01tzbv != null" >
+        A01TZBV,
+      </if>
+      <if test="a01tzbw != null" >
+        A01TZBW,
+      </if>
+      <if test="a01tzbx != null" >
+        A01TZBX,
+      </if>
+      <if test="a01tzby != null" >
+        A01TZBY,
+      </if>
+      <if test="a01zwdm != null" >
+        A01ZWDM,
+      </if>
+      <if test="c0105 != null" >
+        C0105,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="a01uptm != null" >
+        A01UPTM,
+      </if>
+      <if test="a01tzbs != null" >
+        A01TZBS,
+      </if>
+      <if test="pydm != null" >
+        PYDM,
+      </if>
+      <if test="a01tzbz != null" >
+        A01TZBZ,
+      </if>
+      <if test="a01ls != null" >
+        A01LS,
+      </if>
+      <if test="a01ca != null" >
+        A01CA,
+      </if>
+      <if test="a01cb != null" >
+        A01CB,
+      </if>
+      <if test="a01cc != null" >
+        A01CC,
+      </if>
+      <if test="a01bmbs != null" >
+        A01BMBS,
+      </if>
+      <if test="a01wx != null" >
+        A01WX,
+      </if>
+      <if test="a01d1 != null" >
+        A01D1,
+      </if>
+      <if test="a01d3 != null" >
+        A01D3,
+      </if>
+      <if test="a01d2 != null" >
+        A01D2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="a0188 != null" >
+        #{a0188,jdbcType=INTEGER},
+      </if>
+      <if test="a0101 != null" >
+        #{a0101,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0107 != null" >
+        #{a0107,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01103 != null" >
+        #{a01103,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0111 != null" >
+        #{a0111,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0114 != null" >
+        #{a0114,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0121 != null" >
+        #{a0121,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0127 != null" >
+        #{a0127,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0141 != null" >
+        #{a0141,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0144 != null" >
+        #{a0144,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0146 != null" >
+        #{a0146,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0147 != null" >
+        #{a0147,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0190 != null" >
+        #{a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0191 != null" >
+        #{a0191,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0193 != null" >
+        #{a0193,jdbcType=DECIMAL},
+      </if>
+      <if test="a0199 != null" >
+        #{a0199,jdbcType=DECIMAL},
+      </if>
+      <if test="a019a != null" >
+        #{a019a,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01a8 != null" >
+        #{a01a8,jdbcType=DECIMAL},
+      </if>
+      <if test="a01ad != null" >
+        #{a01ad,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01af != null" >
+        #{a01af,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ah != null" >
+        #{a01ah,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ao != null" >
+        #{a01ao,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ar != null" >
+        #{a01ar,jdbcType=DECIMAL},
+      </if>
+      <if test="a01as != null" >
+        #{a01as,jdbcType=DECIMAL},
+      </if>
+      <if test="a01at != null" >
+        #{a01at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01au != null" >
+        #{a01au,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ax != null" >
+        #{a01ax,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ay != null" >
+        #{a01ay,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b2 != null" >
+        #{a01b2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01b6 != null" >
+        #{a01b6,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b8 != null" >
+        #{a01b8,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b9 != null" >
+        #{a01b9,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ba != null" >
+        #{a01ba,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01bb != null" >
+        #{a01bb,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bc != null" >
+        #{a01bc,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bd != null" >
+        #{a01bd,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01be != null" >
+        #{a01be,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bf != null" >
+        #{a01bf,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bg != null" >
+        #{a01bg,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bh != null" >
+        #{a01bh,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bi != null" >
+        #{a01bi,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bj != null" >
+        #{a01bj,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bk != null" >
+        #{a01bk,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bm != null" >
+        #{a01bm,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bo != null" >
+        #{a01bo,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bq != null" >
+        #{a01bq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01br != null" >
+        #{a01br,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bt != null" >
+        #{a01bt,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bu != null" >
+        #{a01bu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bv != null" >
+        #{a01bv,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bx != null" >
+        #{a01bx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bz != null" >
+        #{a01bz,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c0 != null" >
+        #{a01c0,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c3 != null" >
+        #{a01c3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c4 != null" >
+        #{a01c4,jdbcType=DECIMAL},
+      </if>
+      <if test="a01c5 != null" >
+        #{a01c5,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c7 != null" >
+        #{a01c7,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cd != null" >
+        #{a01cd,jdbcType=VARCHAR},
+      </if>
+      <if test="a01ce != null" >
+        #{a01ce,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01cf != null" >
+        #{a01cf,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cg != null" >
+        #{a01cg,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ch != null" >
+        #{a01ch,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ci != null" >
+        #{a01ci,jdbcType=DECIMAL},
+      </if>
+      <if test="a01ck != null" >
+        #{a01ck,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cl != null" >
+        #{a01cl,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cm != null" >
+        #{a01cm,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cn != null" >
+        #{a01cn,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01co != null" >
+        #{a01co,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01gl1 != null" >
+        #{a01gl1,jdbcType=DECIMAL},
+      </if>
+      <if test="a01gl2 != null" >
+        #{a01gl2,jdbcType=DECIMAL},
+      </if>
+      <if test="a01lt != null" >
+        #{a01lt,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lu != null" >
+        #{a01lu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lv != null" >
+        #{a01lv,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lw != null" >
+        #{a01lw,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lx != null" >
+        #{a01lx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ly != null" >
+        #{a01ly,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lz != null" >
+        #{a01lz,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01m0 != null" >
+        #{a01m0,jdbcType=DECIMAL},
+      </if>
+      <if test="a01m2 != null" >
+        #{a01m2,jdbcType=DECIMAL},
+      </if>
+      <if test="a01m3 != null" >
+        #{a01m3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01m4 != null" >
+        #{a01m4,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01m5 != null" >
+        #{a01m5,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbu != null" >
+        #{a01tzbu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbv != null" >
+        #{a01tzbv,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbw != null" >
+        #{a01tzbw,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzbx != null" >
+        #{a01tzbx,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzby != null" >
+        #{a01tzby,jdbcType=DECIMAL},
+      </if>
+      <if test="a01zwdm != null" >
+        #{a01zwdm,jdbcType=NVARCHAR},
+      </if>
+      <if test="c0105 != null" >
+        #{c0105,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="a01uptm != null" >
+        #{a01uptm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzbs != null" >
+        #{a01tzbs,jdbcType=VARCHAR},
+      </if>
+      <if test="pydm != null" >
+        #{pydm,jdbcType=VARCHAR},
+      </if>
+      <if test="a01tzbz != null" >
+        #{a01tzbz,jdbcType=INTEGER},
+      </if>
+      <if test="a01ls != null" >
+        #{a01ls,jdbcType=NUMERIC},
+      </if>
+      <if test="a01ca != null" >
+        #{a01ca,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cb != null" >
+        #{a01cb,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cc != null" >
+        #{a01cc,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bmbs != null" >
+        #{a01bmbs,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01wx != null" >
+        #{a01wx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d1 != null" >
+        #{a01d1,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d3 != null" >
+        #{a01d3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d2 != null" >
+        #{a01d2,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.fileinput.A01Example" resultType="java.lang.Integer" >
+    select count(*) from A01
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update A01
+    <set >
+      <if test="record.a0188 != null" >
+        A0188 = #{record.a0188,jdbcType=INTEGER},
+      </if>
+      <if test="record.a0101 != null" >
+        A0101 = #{record.a0101,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0107 != null" >
+        A0107 = #{record.a0107,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01103 != null" >
+        A01103 = #{record.a01103,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0111 != null" >
+        A0111 = #{record.a0111,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a0114 != null" >
+        A0114 = #{record.a0114,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0121 != null" >
+        A0121 = #{record.a0121,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0127 != null" >
+        A0127 = #{record.a0127,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0141 != null" >
+        A0141 = #{record.a0141,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a0144 != null" >
+        A0144 = #{record.a0144,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a0146 != null" >
+        A0146 = #{record.a0146,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0147 != null" >
+        A0147 = #{record.a0147,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0190 != null" >
+        A0190 = #{record.a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0191 != null" >
+        A0191 = #{record.a0191,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a0193 != null" >
+        A0193 = #{record.a0193,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a0199 != null" >
+        A0199 = #{record.a0199,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a019a != null" >
+        A019A = #{record.a019a,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01a8 != null" >
+        A01A8 = #{record.a01a8,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01ad != null" >
+        A01AD = #{record.a01ad,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01af != null" >
+        A01AF = #{record.a01af,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01ah != null" >
+        A01AH = #{record.a01ah,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01ao != null" >
+        A01AO = #{record.a01ao,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01ar != null" >
+        A01AR = #{record.a01ar,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01as != null" >
+        A01AS = #{record.a01as,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01at != null" >
+        A01AT = #{record.a01at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01au != null" >
+        A01AU = #{record.a01au,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01ax != null" >
+        A01AX = #{record.a01ax,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01ay != null" >
+        A01AY = #{record.a01ay,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01b2 != null" >
+        A01B2 = #{record.a01b2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01b6 != null" >
+        A01B6 = #{record.a01b6,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01b8 != null" >
+        A01B8 = #{record.a01b8,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01b9 != null" >
+        A01B9 = #{record.a01b9,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01ba != null" >
+        A01BA = #{record.a01ba,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01bb != null" >
+        A01BB = #{record.a01bb,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01bc != null" >
+        A01BC = #{record.a01bc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bd != null" >
+        A01BD = #{record.a01bd,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01be != null" >
+        A01BE = #{record.a01be,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bf != null" >
+        A01BF = #{record.a01bf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bg != null" >
+        A01BG = #{record.a01bg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bh != null" >
+        A01BH = #{record.a01bh,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01bi != null" >
+        A01BI = #{record.a01bi,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bj != null" >
+        A01BJ = #{record.a01bj,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bk != null" >
+        A01BK = #{record.a01bk,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bm != null" >
+        A01BM = #{record.a01bm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bo != null" >
+        A01BO = #{record.a01bo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bq != null" >
+        A01BQ = #{record.a01bq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01br != null" >
+        A01BR = #{record.a01br,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bt != null" >
+        A01BT = #{record.a01bt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bu != null" >
+        A01BU = #{record.a01bu,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bv != null" >
+        A01BV = #{record.a01bv,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01bx != null" >
+        A01BX = #{record.a01bx,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bz != null" >
+        A01BZ = #{record.a01bz,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01c0 != null" >
+        A01C0 = #{record.a01c0,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01c3 != null" >
+        A01C3 = #{record.a01c3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01c4 != null" >
+        A01C4 = #{record.a01c4,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01c5 != null" >
+        A01C5 = #{record.a01c5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01c7 != null" >
+        A01C7 = #{record.a01c7,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01cd != null" >
+        A01CD = #{record.a01cd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a01ce != null" >
+        A01CE = #{record.a01ce,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01cf != null" >
+        A01CF = #{record.a01cf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01cg != null" >
+        A01CG = #{record.a01cg,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01ch != null" >
+        A01CH = #{record.a01ch,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01ci != null" >
+        A01CI = #{record.a01ci,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01ck != null" >
+        A01CK = #{record.a01ck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01cl != null" >
+        A01CL = #{record.a01cl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01cm != null" >
+        A01CM = #{record.a01cm,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01cn != null" >
+        A01CN = #{record.a01cn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01co != null" >
+        A01CO = #{record.a01co,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01gl1 != null" >
+        A01GL1 = #{record.a01gl1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01gl2 != null" >
+        A01GL2 = #{record.a01gl2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01lt != null" >
+        A01LT = #{record.a01lt,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01lu != null" >
+        A01LU = #{record.a01lu,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01lv != null" >
+        A01LV = #{record.a01lv,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01lw != null" >
+        A01LW = #{record.a01lw,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01lx != null" >
+        A01LX = #{record.a01lx,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01ly != null" >
+        A01LY = #{record.a01ly,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01lz != null" >
+        A01LZ = #{record.a01lz,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01m0 != null" >
+        A01M0 = #{record.a01m0,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01m2 != null" >
+        A01M2 = #{record.a01m2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01m3 != null" >
+        A01M3 = #{record.a01m3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01m4 != null" >
+        A01M4 = #{record.a01m4,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01m5 != null" >
+        A01M5 = #{record.a01m5,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01tzbu != null" >
+        A01TZBU = #{record.a01tzbu,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01tzbv != null" >
+        A01TZBV = #{record.a01tzbv,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01tzbw != null" >
+        A01TZBW = #{record.a01tzbw,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01tzbx != null" >
+        A01TZBX = #{record.a01tzbx,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01tzby != null" >
+        A01TZBY = #{record.a01tzby,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01zwdm != null" >
+        A01ZWDM = #{record.a01zwdm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.c0105 != null" >
+        C0105 = #{record.c0105,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a01uptm != null" >
+        A01UPTM = #{record.a01uptm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.a01tzbs != null" >
+        A01TZBS = #{record.a01tzbs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pydm != null" >
+        PYDM = #{record.pydm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.a01tzbz != null" >
+        A01TZBZ = #{record.a01tzbz,jdbcType=INTEGER},
+      </if>
+      <if test="record.a01ls != null" >
+        A01LS = #{record.a01ls,jdbcType=NUMERIC},
+      </if>
+      <if test="record.a01ca != null" >
+        A01CA = #{record.a01ca,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01cb != null" >
+        A01CB = #{record.a01cb,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01cc != null" >
+        A01CC = #{record.a01cc,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01bmbs != null" >
+        A01BMBS = #{record.a01bmbs,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01wx != null" >
+        A01WX = #{record.a01wx,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01d1 != null" >
+        A01D1 = #{record.a01d1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01d3 != null" >
+        A01D3 = #{record.a01d3,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.a01d2 != null" >
+        A01D2 = #{record.a01d2,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update A01
+    set A0188 = #{record.a0188,jdbcType=INTEGER},
+      A0101 = #{record.a0101,jdbcType=NVARCHAR},
+      A0107 = #{record.a0107,jdbcType=NVARCHAR},
+      A01103 = #{record.a01103,jdbcType=NVARCHAR},
+      A0111 = #{record.a0111,jdbcType=TIMESTAMP},
+      A0114 = #{record.a0114,jdbcType=NVARCHAR},
+      A0121 = #{record.a0121,jdbcType=NVARCHAR},
+      A0127 = #{record.a0127,jdbcType=NVARCHAR},
+      A0141 = #{record.a0141,jdbcType=TIMESTAMP},
+      A0144 = #{record.a0144,jdbcType=TIMESTAMP},
+      A0146 = #{record.a0146,jdbcType=NVARCHAR},
+      A0147 = #{record.a0147,jdbcType=NVARCHAR},
+      A0190 = #{record.a0190,jdbcType=NVARCHAR},
+      A0191 = #{record.a0191,jdbcType=NVARCHAR},
+      A0193 = #{record.a0193,jdbcType=DECIMAL},
+      A0199 = #{record.a0199,jdbcType=DECIMAL},
+      A019A = #{record.a019a,jdbcType=NVARCHAR},
+      A01A8 = #{record.a01a8,jdbcType=DECIMAL},
+      A01AD = #{record.a01ad,jdbcType=NVARCHAR},
+      A01AF = #{record.a01af,jdbcType=NVARCHAR},
+      A01AH = #{record.a01ah,jdbcType=NVARCHAR},
+      A01AO = #{record.a01ao,jdbcType=TIMESTAMP},
+      A01AR = #{record.a01ar,jdbcType=DECIMAL},
+      A01AS = #{record.a01as,jdbcType=DECIMAL},
+      A01AT = #{record.a01at,jdbcType=TIMESTAMP},
+      A01AU = #{record.a01au,jdbcType=TIMESTAMP},
+      A01AX = #{record.a01ax,jdbcType=NVARCHAR},
+      A01AY = #{record.a01ay,jdbcType=NVARCHAR},
+      A01B2 = #{record.a01b2,jdbcType=TIMESTAMP},
+      A01B6 = #{record.a01b6,jdbcType=NVARCHAR},
+      A01B8 = #{record.a01b8,jdbcType=NVARCHAR},
+      A01B9 = #{record.a01b9,jdbcType=TIMESTAMP},
+      A01BA = #{record.a01ba,jdbcType=TIMESTAMP},
+      A01BB = #{record.a01bb,jdbcType=DECIMAL},
+      A01BC = #{record.a01bc,jdbcType=NVARCHAR},
+      A01BD = #{record.a01bd,jdbcType=NVARCHAR},
+      A01BE = #{record.a01be,jdbcType=NVARCHAR},
+      A01BF = #{record.a01bf,jdbcType=NVARCHAR},
+      A01BG = #{record.a01bg,jdbcType=NVARCHAR},
+      A01BH = #{record.a01bh,jdbcType=DECIMAL},
+      A01BI = #{record.a01bi,jdbcType=NVARCHAR},
+      A01BJ = #{record.a01bj,jdbcType=NVARCHAR},
+      A01BK = #{record.a01bk,jdbcType=NVARCHAR},
+      A01BM = #{record.a01bm,jdbcType=NVARCHAR},
+      A01BO = #{record.a01bo,jdbcType=NVARCHAR},
+      A01BQ = #{record.a01bq,jdbcType=TIMESTAMP},
+      A01BR = #{record.a01br,jdbcType=NVARCHAR},
+      A01BT = #{record.a01bt,jdbcType=NVARCHAR},
+      A01BU = #{record.a01bu,jdbcType=NVARCHAR},
+      A01BV = #{record.a01bv,jdbcType=DECIMAL},
+      A01BX = #{record.a01bx,jdbcType=NVARCHAR},
+      A01BZ = #{record.a01bz,jdbcType=NVARCHAR},
+      A01C0 = #{record.a01c0,jdbcType=NVARCHAR},
+      A01C3 = #{record.a01c3,jdbcType=NVARCHAR},
+      A01C4 = #{record.a01c4,jdbcType=DECIMAL},
+      A01C5 = #{record.a01c5,jdbcType=NVARCHAR},
+      A01C7 = #{record.a01c7,jdbcType=NVARCHAR},
+      A01CD = #{record.a01cd,jdbcType=VARCHAR},
+      A01CE = #{record.a01ce,jdbcType=TIMESTAMP},
+      A01CF = #{record.a01cf,jdbcType=NVARCHAR},
+      A01CG = #{record.a01cg,jdbcType=NVARCHAR},
+      A01CH = #{record.a01ch,jdbcType=TIMESTAMP},
+      A01CI = #{record.a01ci,jdbcType=DECIMAL},
+      A01CK = #{record.a01ck,jdbcType=DECIMAL},
+      A01CL = #{record.a01cl,jdbcType=DECIMAL},
+      A01CM = #{record.a01cm,jdbcType=DECIMAL},
+      A01CN = #{record.a01cn,jdbcType=NVARCHAR},
+      A01CO = #{record.a01co,jdbcType=NVARCHAR},
+      A01GL1 = #{record.a01gl1,jdbcType=DECIMAL},
+      A01GL2 = #{record.a01gl2,jdbcType=DECIMAL},
+      A01LT = #{record.a01lt,jdbcType=NVARCHAR},
+      A01LU = #{record.a01lu,jdbcType=NVARCHAR},
+      A01LV = #{record.a01lv,jdbcType=NVARCHAR},
+      A01LW = #{record.a01lw,jdbcType=NVARCHAR},
+      A01LX = #{record.a01lx,jdbcType=NVARCHAR},
+      A01LY = #{record.a01ly,jdbcType=NVARCHAR},
+      A01LZ = #{record.a01lz,jdbcType=TIMESTAMP},
+      A01M0 = #{record.a01m0,jdbcType=DECIMAL},
+      A01M2 = #{record.a01m2,jdbcType=DECIMAL},
+      A01M3 = #{record.a01m3,jdbcType=NVARCHAR},
+      A01M4 = #{record.a01m4,jdbcType=NVARCHAR},
+      A01M5 = #{record.a01m5,jdbcType=NVARCHAR},
+      A01TZBU = #{record.a01tzbu,jdbcType=NVARCHAR},
+      A01TZBV = #{record.a01tzbv,jdbcType=NVARCHAR},
+      A01TZBW = #{record.a01tzbw,jdbcType=TIMESTAMP},
+      A01TZBX = #{record.a01tzbx,jdbcType=TIMESTAMP},
+      A01TZBY = #{record.a01tzby,jdbcType=DECIMAL},
+      A01ZWDM = #{record.a01zwdm,jdbcType=NVARCHAR},
+      C0105 = #{record.c0105,jdbcType=NVARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=DECIMAL},
+      A01UPTM = #{record.a01uptm,jdbcType=TIMESTAMP},
+      A01TZBS = #{record.a01tzbs,jdbcType=VARCHAR},
+      PYDM = #{record.pydm,jdbcType=VARCHAR},
+      A01TZBZ = #{record.a01tzbz,jdbcType=INTEGER},
+      A01LS = #{record.a01ls,jdbcType=NUMERIC},
+      A01CA = #{record.a01ca,jdbcType=NVARCHAR},
+      A01CB = #{record.a01cb,jdbcType=NVARCHAR},
+      A01CC = #{record.a01cc,jdbcType=NVARCHAR},
+      A01BMBS = #{record.a01bmbs,jdbcType=NVARCHAR},
+      A01WX = #{record.a01wx,jdbcType=NVARCHAR},
+      A01D1 = #{record.a01d1,jdbcType=NVARCHAR},
+      A01D3 = #{record.a01d3,jdbcType=NVARCHAR},
+      A01D2 = #{record.a01d2,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.fileinput.A01" >
+    update A01
+    <set >
+      <if test="a0101 != null" >
+        A0101 = #{a0101,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0107 != null" >
+        A0107 = #{a0107,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01103 != null" >
+        A01103 = #{a01103,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0111 != null" >
+        A0111 = #{a0111,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0114 != null" >
+        A0114 = #{a0114,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0121 != null" >
+        A0121 = #{a0121,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0127 != null" >
+        A0127 = #{a0127,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0141 != null" >
+        A0141 = #{a0141,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0144 != null" >
+        A0144 = #{a0144,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a0146 != null" >
+        A0146 = #{a0146,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0147 != null" >
+        A0147 = #{a0147,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0190 != null" >
+        A0190 = #{a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0191 != null" >
+        A0191 = #{a0191,jdbcType=NVARCHAR},
+      </if>
+      <if test="a0193 != null" >
+        A0193 = #{a0193,jdbcType=DECIMAL},
+      </if>
+      <if test="a0199 != null" >
+        A0199 = #{a0199,jdbcType=DECIMAL},
+      </if>
+      <if test="a019a != null" >
+        A019A = #{a019a,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01a8 != null" >
+        A01A8 = #{a01a8,jdbcType=DECIMAL},
+      </if>
+      <if test="a01ad != null" >
+        A01AD = #{a01ad,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01af != null" >
+        A01AF = #{a01af,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ah != null" >
+        A01AH = #{a01ah,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ao != null" >
+        A01AO = #{a01ao,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ar != null" >
+        A01AR = #{a01ar,jdbcType=DECIMAL},
+      </if>
+      <if test="a01as != null" >
+        A01AS = #{a01as,jdbcType=DECIMAL},
+      </if>
+      <if test="a01at != null" >
+        A01AT = #{a01at,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01au != null" >
+        A01AU = #{a01au,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ax != null" >
+        A01AX = #{a01ax,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ay != null" >
+        A01AY = #{a01ay,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b2 != null" >
+        A01B2 = #{a01b2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01b6 != null" >
+        A01B6 = #{a01b6,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b8 != null" >
+        A01B8 = #{a01b8,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01b9 != null" >
+        A01B9 = #{a01b9,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ba != null" >
+        A01BA = #{a01ba,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01bb != null" >
+        A01BB = #{a01bb,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bc != null" >
+        A01BC = #{a01bc,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bd != null" >
+        A01BD = #{a01bd,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01be != null" >
+        A01BE = #{a01be,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bf != null" >
+        A01BF = #{a01bf,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bg != null" >
+        A01BG = #{a01bg,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bh != null" >
+        A01BH = #{a01bh,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bi != null" >
+        A01BI = #{a01bi,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bj != null" >
+        A01BJ = #{a01bj,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bk != null" >
+        A01BK = #{a01bk,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bm != null" >
+        A01BM = #{a01bm,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bo != null" >
+        A01BO = #{a01bo,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bq != null" >
+        A01BQ = #{a01bq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01br != null" >
+        A01BR = #{a01br,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bt != null" >
+        A01BT = #{a01bt,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bu != null" >
+        A01BU = #{a01bu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bv != null" >
+        A01BV = #{a01bv,jdbcType=DECIMAL},
+      </if>
+      <if test="a01bx != null" >
+        A01BX = #{a01bx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bz != null" >
+        A01BZ = #{a01bz,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c0 != null" >
+        A01C0 = #{a01c0,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c3 != null" >
+        A01C3 = #{a01c3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c4 != null" >
+        A01C4 = #{a01c4,jdbcType=DECIMAL},
+      </if>
+      <if test="a01c5 != null" >
+        A01C5 = #{a01c5,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01c7 != null" >
+        A01C7 = #{a01c7,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cd != null" >
+        A01CD = #{a01cd,jdbcType=VARCHAR},
+      </if>
+      <if test="a01ce != null" >
+        A01CE = #{a01ce,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01cf != null" >
+        A01CF = #{a01cf,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cg != null" >
+        A01CG = #{a01cg,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ch != null" >
+        A01CH = #{a01ch,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01ci != null" >
+        A01CI = #{a01ci,jdbcType=DECIMAL},
+      </if>
+      <if test="a01ck != null" >
+        A01CK = #{a01ck,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cl != null" >
+        A01CL = #{a01cl,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cm != null" >
+        A01CM = #{a01cm,jdbcType=DECIMAL},
+      </if>
+      <if test="a01cn != null" >
+        A01CN = #{a01cn,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01co != null" >
+        A01CO = #{a01co,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01gl1 != null" >
+        A01GL1 = #{a01gl1,jdbcType=DECIMAL},
+      </if>
+      <if test="a01gl2 != null" >
+        A01GL2 = #{a01gl2,jdbcType=DECIMAL},
+      </if>
+      <if test="a01lt != null" >
+        A01LT = #{a01lt,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lu != null" >
+        A01LU = #{a01lu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lv != null" >
+        A01LV = #{a01lv,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lw != null" >
+        A01LW = #{a01lw,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lx != null" >
+        A01LX = #{a01lx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01ly != null" >
+        A01LY = #{a01ly,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01lz != null" >
+        A01LZ = #{a01lz,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01m0 != null" >
+        A01M0 = #{a01m0,jdbcType=DECIMAL},
+      </if>
+      <if test="a01m2 != null" >
+        A01M2 = #{a01m2,jdbcType=DECIMAL},
+      </if>
+      <if test="a01m3 != null" >
+        A01M3 = #{a01m3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01m4 != null" >
+        A01M4 = #{a01m4,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01m5 != null" >
+        A01M5 = #{a01m5,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbu != null" >
+        A01TZBU = #{a01tzbu,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbv != null" >
+        A01TZBV = #{a01tzbv,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01tzbw != null" >
+        A01TZBW = #{a01tzbw,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzbx != null" >
+        A01TZBX = #{a01tzbx,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzby != null" >
+        A01TZBY = #{a01tzby,jdbcType=DECIMAL},
+      </if>
+      <if test="a01zwdm != null" >
+        A01ZWDM = #{a01zwdm,jdbcType=NVARCHAR},
+      </if>
+      <if test="c0105 != null" >
+        C0105 = #{c0105,jdbcType=NVARCHAR},
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="a01uptm != null" >
+        A01UPTM = #{a01uptm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="a01tzbs != null" >
+        A01TZBS = #{a01tzbs,jdbcType=VARCHAR},
+      </if>
+      <if test="pydm != null" >
+        PYDM = #{pydm,jdbcType=VARCHAR},
+      </if>
+      <if test="a01tzbz != null" >
+        A01TZBZ = #{a01tzbz,jdbcType=INTEGER},
+      </if>
+      <if test="a01ls != null" >
+        A01LS = #{a01ls,jdbcType=NUMERIC},
+      </if>
+      <if test="a01ca != null" >
+        A01CA = #{a01ca,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cb != null" >
+        A01CB = #{a01cb,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01cc != null" >
+        A01CC = #{a01cc,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01bmbs != null" >
+        A01BMBS = #{a01bmbs,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01wx != null" >
+        A01WX = #{a01wx,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d1 != null" >
+        A01D1 = #{a01d1,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d3 != null" >
+        A01D3 = #{a01d3,jdbcType=NVARCHAR},
+      </if>
+      <if test="a01d2 != null" >
+        A01D2 = #{a01d2,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where A0188 = #{a0188,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.fileinput.A01" >
+    update A01
+    set A0101 = #{a0101,jdbcType=NVARCHAR},
+      A0107 = #{a0107,jdbcType=NVARCHAR},
+      A01103 = #{a01103,jdbcType=NVARCHAR},
+      A0111 = #{a0111,jdbcType=TIMESTAMP},
+      A0114 = #{a0114,jdbcType=NVARCHAR},
+      A0121 = #{a0121,jdbcType=NVARCHAR},
+      A0127 = #{a0127,jdbcType=NVARCHAR},
+      A0141 = #{a0141,jdbcType=TIMESTAMP},
+      A0144 = #{a0144,jdbcType=TIMESTAMP},
+      A0146 = #{a0146,jdbcType=NVARCHAR},
+      A0147 = #{a0147,jdbcType=NVARCHAR},
+      A0190 = #{a0190,jdbcType=NVARCHAR},
+      A0191 = #{a0191,jdbcType=NVARCHAR},
+      A0193 = #{a0193,jdbcType=DECIMAL},
+      A0199 = #{a0199,jdbcType=DECIMAL},
+      A019A = #{a019a,jdbcType=NVARCHAR},
+      A01A8 = #{a01a8,jdbcType=DECIMAL},
+      A01AD = #{a01ad,jdbcType=NVARCHAR},
+      A01AF = #{a01af,jdbcType=NVARCHAR},
+      A01AH = #{a01ah,jdbcType=NVARCHAR},
+      A01AO = #{a01ao,jdbcType=TIMESTAMP},
+      A01AR = #{a01ar,jdbcType=DECIMAL},
+      A01AS = #{a01as,jdbcType=DECIMAL},
+      A01AT = #{a01at,jdbcType=TIMESTAMP},
+      A01AU = #{a01au,jdbcType=TIMESTAMP},
+      A01AX = #{a01ax,jdbcType=NVARCHAR},
+      A01AY = #{a01ay,jdbcType=NVARCHAR},
+      A01B2 = #{a01b2,jdbcType=TIMESTAMP},
+      A01B6 = #{a01b6,jdbcType=NVARCHAR},
+      A01B8 = #{a01b8,jdbcType=NVARCHAR},
+      A01B9 = #{a01b9,jdbcType=TIMESTAMP},
+      A01BA = #{a01ba,jdbcType=TIMESTAMP},
+      A01BB = #{a01bb,jdbcType=DECIMAL},
+      A01BC = #{a01bc,jdbcType=NVARCHAR},
+      A01BD = #{a01bd,jdbcType=NVARCHAR},
+      A01BE = #{a01be,jdbcType=NVARCHAR},
+      A01BF = #{a01bf,jdbcType=NVARCHAR},
+      A01BG = #{a01bg,jdbcType=NVARCHAR},
+      A01BH = #{a01bh,jdbcType=DECIMAL},
+      A01BI = #{a01bi,jdbcType=NVARCHAR},
+      A01BJ = #{a01bj,jdbcType=NVARCHAR},
+      A01BK = #{a01bk,jdbcType=NVARCHAR},
+      A01BM = #{a01bm,jdbcType=NVARCHAR},
+      A01BO = #{a01bo,jdbcType=NVARCHAR},
+      A01BQ = #{a01bq,jdbcType=TIMESTAMP},
+      A01BR = #{a01br,jdbcType=NVARCHAR},
+      A01BT = #{a01bt,jdbcType=NVARCHAR},
+      A01BU = #{a01bu,jdbcType=NVARCHAR},
+      A01BV = #{a01bv,jdbcType=DECIMAL},
+      A01BX = #{a01bx,jdbcType=NVARCHAR},
+      A01BZ = #{a01bz,jdbcType=NVARCHAR},
+      A01C0 = #{a01c0,jdbcType=NVARCHAR},
+      A01C3 = #{a01c3,jdbcType=NVARCHAR},
+      A01C4 = #{a01c4,jdbcType=DECIMAL},
+      A01C5 = #{a01c5,jdbcType=NVARCHAR},
+      A01C7 = #{a01c7,jdbcType=NVARCHAR},
+      A01CD = #{a01cd,jdbcType=VARCHAR},
+      A01CE = #{a01ce,jdbcType=TIMESTAMP},
+      A01CF = #{a01cf,jdbcType=NVARCHAR},
+      A01CG = #{a01cg,jdbcType=NVARCHAR},
+      A01CH = #{a01ch,jdbcType=TIMESTAMP},
+      A01CI = #{a01ci,jdbcType=DECIMAL},
+      A01CK = #{a01ck,jdbcType=DECIMAL},
+      A01CL = #{a01cl,jdbcType=DECIMAL},
+      A01CM = #{a01cm,jdbcType=DECIMAL},
+      A01CN = #{a01cn,jdbcType=NVARCHAR},
+      A01CO = #{a01co,jdbcType=NVARCHAR},
+      A01GL1 = #{a01gl1,jdbcType=DECIMAL},
+      A01GL2 = #{a01gl2,jdbcType=DECIMAL},
+      A01LT = #{a01lt,jdbcType=NVARCHAR},
+      A01LU = #{a01lu,jdbcType=NVARCHAR},
+      A01LV = #{a01lv,jdbcType=NVARCHAR},
+      A01LW = #{a01lw,jdbcType=NVARCHAR},
+      A01LX = #{a01lx,jdbcType=NVARCHAR},
+      A01LY = #{a01ly,jdbcType=NVARCHAR},
+      A01LZ = #{a01lz,jdbcType=TIMESTAMP},
+      A01M0 = #{a01m0,jdbcType=DECIMAL},
+      A01M2 = #{a01m2,jdbcType=DECIMAL},
+      A01M3 = #{a01m3,jdbcType=NVARCHAR},
+      A01M4 = #{a01m4,jdbcType=NVARCHAR},
+      A01M5 = #{a01m5,jdbcType=NVARCHAR},
+      A01TZBU = #{a01tzbu,jdbcType=NVARCHAR},
+      A01TZBV = #{a01tzbv,jdbcType=NVARCHAR},
+      A01TZBW = #{a01tzbw,jdbcType=TIMESTAMP},
+      A01TZBX = #{a01tzbx,jdbcType=TIMESTAMP},
+      A01TZBY = #{a01tzby,jdbcType=DECIMAL},
+      A01ZWDM = #{a01zwdm,jdbcType=NVARCHAR},
+      C0105 = #{c0105,jdbcType=NVARCHAR},
+      DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      A01UPTM = #{a01uptm,jdbcType=TIMESTAMP},
+      A01TZBS = #{a01tzbs,jdbcType=VARCHAR},
+      PYDM = #{pydm,jdbcType=VARCHAR},
+      A01TZBZ = #{a01tzbz,jdbcType=INTEGER},
+      A01LS = #{a01ls,jdbcType=NUMERIC},
+      A01CA = #{a01ca,jdbcType=NVARCHAR},
+      A01CB = #{a01cb,jdbcType=NVARCHAR},
+      A01CC = #{a01cc,jdbcType=NVARCHAR},
+      A01BMBS = #{a01bmbs,jdbcType=NVARCHAR},
+      A01WX = #{a01wx,jdbcType=NVARCHAR},
+      A01D1 = #{a01d1,jdbcType=NVARCHAR},
+      A01D3 = #{a01d3,jdbcType=NVARCHAR},
+      A01D2 = #{a01d2,jdbcType=NVARCHAR}
+    where A0188 = #{a0188,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,96 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+	<bean id="ListFormService" class="com.myehr.service.impl.formmanage.form.ListFormService" />
+	
+	<bean id="SysFormColumnServiceImpl" class="com.myehr.service.impl.formmanage.form.SysFormColumnServiceImpl" />
+	
+	<bean id="ITextBoxService" class="com.myehr.service.impl.formmanage.form.widget.TextBoxServiceImpl" />
+	
+	
+	<bean id="IDatePickerService" class="com.myehr.service.impl.formmanage.form.widget.DatePickerServiceImpl" />
+
+	<bean id="ISysFormGeneralParamService" class="com.myehr.service.impl.formmanage.form.generalparam.SysFormGeneralParamServiceImpl" />
+
+	<bean id="ISysformconfigService" class="com.myehr.service.impl.formmanage.form.SysformconfigService" />
+	
+	<bean id="IButtonService" class="com.myehr.service.impl.formmanage.form.ButtonServiceImpl" />
+	
+	<bean id="IFilterService" class="com.myehr.service.impl.formmanage.form.FilterServiceImpl" />
+	
+	<bean id="IButtonParamService" class="com.myehr.service.impl.formmanage.form.ButtonParamServiceImpl" />
+	
+	<bean id="ITreeService" class="com.myehr.service.impl.formmanage.form.TreeServiceImpl" />
+	
+	<bean id="WhereServiceImpl" class="com.myehr.service.impl.formmanage.form.WhereServiceImpl" />
+	
+	<bean id="IFormCacheBeanUtil" class="com.myehr.service.impl.formmanage.form.SysFormColumnService" />
+	
+	<bean id="ISysFormTreeService" class="com.myehr.service.impl.formmanage.form.SysFormTreeServiceImpl" />
+	
+	<bean id="ISchemeService" class="com.myehr.service.impl.scheme.SchemeServiceImpl" />
+	
+	<bean id="ISysSqlParamsService" class="com.myehr.service.impl.sqlparams.SysSqlParamsServiceImpl" />
+	
+	<bean id="IMstTabFormService" class="com.myehr.service.impl.formmanage.form.MstTabFormServiceImpl" />
+	
+	<bean id="IFileUploadService" class="com.myehr.service.impl.formmanage.form.FileUploadServiceImpl" />
+
+	<bean id="ILookUpService" class="com.myehr.service.impl.formmanage.form.widget.LookUpServiceImpl" />
+	
+	<bean id="IRichtextService" class="com.myehr.service.impl.formmanage.form.widget.RichtextServiceImpl" />
+	
+	<bean id="IRadioButtonListService" class="com.myehr.service.impl.formmanage.form.widget.RadioButtonListServiceImpl" />
+		
+	<bean id="ISysParamService" class="com.myehr.service.impl.sysParam.SysParamServiceImpl" />
+	
+	<bean id="idGen" class="com.myehr.service.flow.IdGen" /> 
+	
+	<bean id="actModelService" class="com.myehr.service.flow.ActModelService" />
+	
+	<bean id="actProcessService" class="com.myehr.service.flow.ActProcessService" /> 
+	
+	<bean id="actTaskService" class="com.myehr.service.flow.ActTaskService" /> 
+	
+	<bean id="AssigneeGetter" class="com.myehr.acttest.test.AssigneeGetterImpl" /> 
+	
+	<bean id="ActExtEditorService" class="com.myehr.service.flow.ext.ActExtEditorServiceImpl" /> 
+	<!-- <bean id="EhCacheTestService" class="com.myehr.common.ecache.impl.EhCacheTestServiceImpl" /> -->
+	
+	<bean id="ISysDictService" class="com.myehr.service.impl.sysdict.SysDictServiceImpl" />
+	
+	<bean id="ISysFieldLogService" class="com.myehr.service.impl.sysuser.SysFieldLogServiceImpl" />
+	
+	<bean id="ISysMenuService" class="com.myehr.service.impl.menu.SysMenuServiceImpl" />
+	
+	<bean id="ISysEvaluationService" class="com.myehr.service.impl.formmanage.form.EvaluationServiceImpl" />
+	
+	<bean id="SysUserService" class="com.myehr.service.impl.sysuser.SysUserServiceImpl" />
+	<bean id="SysRoleService" class="com.myehr.service.impl.sysRoleImpl.SysRoleServiceImpl" />
+	<bean id="ITemplateService" class="com.myehr.service.impl.formmanage.template.TemplateServiceImpl" />
+	<bean id="IRuntimeTreeFormService" class="com.myehr.service.impl.formmanage.runtime.RuntimeTreeFormServiceImpl" />
+	<bean id="IRuntimeGridFormService" class="com.myehr.service.impl.formmanage.runtime.RuntimeGridFormServiceImpl" />
+	<bean id="iFormConfigureService" class="com.myehr.service.impl.formmanage.form.iFormConfigureServiceImpl" />
+	<bean id="IRuntmeButtonService" class="com.myehr.service.impl.formmanage.runtime.RuntimeButtonServiceImpl" />
+	<bean id="EntityService" class="com.myehr.service.impl.entity.EntityServiceImpl" />
+	<bean id="PrimaryKeyService" class="com.myehr.service.impl.primaryKey.PrimaryKeyServiceImpl" />
+	<bean id="FieldService" class="com.myehr.service.impl.field.FieldServiceImpl" />
+	<bean id="SysDictTypeService" class="com.myehr.service.impl.sysdict.SysDictTypeServiceImpl" />
+	<bean id="TMapperExt" class="com.myehr.test.dao.TMapperExtImpl" />
+	<bean id="IFormService" class="com.myehr.service.impl.formmanage.form.FormServiceImpl" />
+	
+	<bean id="IComboBoxService" class="com.myehr.service.impl.formmanage.form.widget.ComboBoxServiceImpl" />
+	<bean id="TXIMService" class="com.myehr.service.impl.app.TXIMServiceImpy" />
+</beans>

@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.widget.SysTemplateLookupMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.widget.SysTemplateLookup" >
+    <id column="LOOKUP_ID" property="lookupId" jdbcType="DECIMAL" />
+    <result column="LOOKUP_TEMPLATE_COLUMN_ID" property="lookupTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="LOOKUP_CHECK_TYPE" property="lookupCheckType" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_CHECK_SELF" property="lookupCheckSelf" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_CHECK_FUN" property="lookupCheckFun" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_INIT_FUN" property="lookupInitFun" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_VALUECHANGE_FUN" property="lookupValuechangeFun" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_CLICK_FUN" property="lookupClickFun" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_DATA_FROM_TYPE" property="lookupDataFromType" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_DATA_FROM_VALUE" property="lookupDataFromValue" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_FORM_WIN_TYPE" property="lookupFormWinType" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_WIN_TITLE" property="lookupWinTitle" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_WIN_WIDTH" property="lookupWinWidth" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_WIN_HEIGHT" property="lookupWinHeight" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_SHOW_PROPERTY" property="lookupShowProperty" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_VALUE_PROPERTY" property="lookupValueProperty" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_FORM_ID" property="lookupFormId" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_FORM_URL" property="lookupFormUrl" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_DATABACK_VALUE" property="lookupDatabackValue" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_DATABACK_TYPE" property="lookupDatabackType" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_BUTTONCLICK_FUN" property="lookupButtonclickFun" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_EMPTYTEXT" property="lookupEmptytext" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_MULISELECT" property="lookupMuliselect" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_CUSTOM_DATABACK" property="lookupCustomDataback" jdbcType="NVARCHAR" />
+    <result column="LOOKUP_CUSTOM_DATABACK_FUN" property="lookupCustomDatabackFun" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOOKUP_ID, LOOKUP_TEMPLATE_COLUMN_ID, LOOKUP_CHECK_TYPE, LOOKUP_CHECK_SELF, LOOKUP_CHECK_FUN, 
+    LOOKUP_INIT_FUN, LOOKUP_VALUECHANGE_FUN, LOOKUP_CLICK_FUN, LOOKUP_DATA_FROM_TYPE, 
+    LOOKUP_DATA_FROM_VALUE, LOOKUP_FORM_WIN_TYPE, LOOKUP_WIN_TITLE, LOOKUP_WIN_WIDTH, 
+    LOOKUP_WIN_HEIGHT, LOOKUP_SHOW_PROPERTY, LOOKUP_VALUE_PROPERTY, LOOKUP_FORM_ID, LOOKUP_FORM_URL, 
+    LOOKUP_DATABACK_VALUE, LOOKUP_DATABACK_TYPE, LOOKUP_BUTTONCLICK_FUN, LOOKUP_EMPTYTEXT, 
+    OPERATOR_TIME, OPERATOR_NAME, LOOKUP_MULISELECT, LOOKUP_CUSTOM_DATABACK, LOOKUP_CUSTOM_DATABACK_FUN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_LOOKUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_LOOKUP
+    where LOOKUP_ID = #{lookupId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_LOOKUP
+    where LOOKUP_ID = #{lookupId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookupExample" >
+    delete from SYS_TEMPLATE_LOOKUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookup" useGeneratedKeys="true" keyProperty="lookupId" keyColumn="LOOKUP_ID">
+    insert into SYS_TEMPLATE_LOOKUP ( LOOKUP_TEMPLATE_COLUMN_ID, 
+      LOOKUP_CHECK_TYPE, LOOKUP_CHECK_SELF, LOOKUP_CHECK_FUN, 
+      LOOKUP_INIT_FUN, LOOKUP_VALUECHANGE_FUN, 
+      LOOKUP_CLICK_FUN, LOOKUP_DATA_FROM_TYPE, LOOKUP_DATA_FROM_VALUE, 
+      LOOKUP_FORM_WIN_TYPE, LOOKUP_WIN_TITLE, LOOKUP_WIN_WIDTH, 
+      LOOKUP_WIN_HEIGHT, LOOKUP_SHOW_PROPERTY, 
+      LOOKUP_VALUE_PROPERTY, LOOKUP_FORM_ID, LOOKUP_FORM_URL, 
+      LOOKUP_DATABACK_VALUE, LOOKUP_DATABACK_TYPE, 
+      LOOKUP_BUTTONCLICK_FUN, LOOKUP_EMPTYTEXT, 
+      OPERATOR_TIME, OPERATOR_NAME, LOOKUP_MULISELECT, 
+      LOOKUP_CUSTOM_DATABACK, LOOKUP_CUSTOM_DATABACK_FUN
+      )
+    values ( #{lookupTemplateColumnId,jdbcType=DECIMAL}, 
+      #{lookupCheckType,jdbcType=NVARCHAR}, #{lookupCheckSelf,jdbcType=NVARCHAR}, #{lookupCheckFun,jdbcType=NVARCHAR}, 
+      #{lookupInitFun,jdbcType=NVARCHAR}, #{lookupValuechangeFun,jdbcType=NVARCHAR}, 
+      #{lookupClickFun,jdbcType=NVARCHAR}, #{lookupDataFromType,jdbcType=NVARCHAR}, #{lookupDataFromValue,jdbcType=NVARCHAR}, 
+      #{lookupFormWinType,jdbcType=NVARCHAR}, #{lookupWinTitle,jdbcType=NVARCHAR}, #{lookupWinWidth,jdbcType=NVARCHAR}, 
+      #{lookupWinHeight,jdbcType=NVARCHAR}, #{lookupShowProperty,jdbcType=NVARCHAR}, 
+      #{lookupValueProperty,jdbcType=NVARCHAR}, #{lookupFormId,jdbcType=NVARCHAR}, #{lookupFormUrl,jdbcType=NVARCHAR}, 
+      #{lookupDatabackValue,jdbcType=NVARCHAR}, #{lookupDatabackType,jdbcType=NVARCHAR}, 
+      #{lookupButtonclickFun,jdbcType=NVARCHAR}, #{lookupEmptytext,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{lookupMuliselect,jdbcType=NVARCHAR}, 
+      #{lookupCustomDataback,jdbcType=NVARCHAR}, #{lookupCustomDatabackFun,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookup" >
+    insert into SYS_TEMPLATE_LOOKUP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lookupId != null" >
+        LOOKUP_ID,
+      </if>
+      <if test="lookupTemplateColumnId != null" >
+        LOOKUP_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="lookupCheckType != null" >
+        LOOKUP_CHECK_TYPE,
+      </if>
+      <if test="lookupCheckSelf != null" >
+        LOOKUP_CHECK_SELF,
+      </if>
+      <if test="lookupCheckFun != null" >
+        LOOKUP_CHECK_FUN,
+      </if>
+      <if test="lookupInitFun != null" >
+        LOOKUP_INIT_FUN,
+      </if>
+      <if test="lookupValuechangeFun != null" >
+        LOOKUP_VALUECHANGE_FUN,
+      </if>
+      <if test="lookupClickFun != null" >
+        LOOKUP_CLICK_FUN,
+      </if>
+      <if test="lookupDataFromType != null" >
+        LOOKUP_DATA_FROM_TYPE,
+      </if>
+      <if test="lookupDataFromValue != null" >
+        LOOKUP_DATA_FROM_VALUE,
+      </if>
+      <if test="lookupFormWinType != null" >
+        LOOKUP_FORM_WIN_TYPE,
+      </if>
+      <if test="lookupWinTitle != null" >
+        LOOKUP_WIN_TITLE,
+      </if>
+      <if test="lookupWinWidth != null" >
+        LOOKUP_WIN_WIDTH,
+      </if>
+      <if test="lookupWinHeight != null" >
+        LOOKUP_WIN_HEIGHT,
+      </if>
+      <if test="lookupShowProperty != null" >
+        LOOKUP_SHOW_PROPERTY,
+      </if>
+      <if test="lookupValueProperty != null" >
+        LOOKUP_VALUE_PROPERTY,
+      </if>
+      <if test="lookupFormId != null" >
+        LOOKUP_FORM_ID,
+      </if>
+      <if test="lookupFormUrl != null" >
+        LOOKUP_FORM_URL,
+      </if>
+      <if test="lookupDatabackValue != null" >
+        LOOKUP_DATABACK_VALUE,
+      </if>
+      <if test="lookupDatabackType != null" >
+        LOOKUP_DATABACK_TYPE,
+      </if>
+      <if test="lookupButtonclickFun != null" >
+        LOOKUP_BUTTONCLICK_FUN,
+      </if>
+      <if test="lookupEmptytext != null" >
+        LOOKUP_EMPTYTEXT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="lookupMuliselect != null" >
+        LOOKUP_MULISELECT,
+      </if>
+      <if test="lookupCustomDataback != null" >
+        LOOKUP_CUSTOM_DATABACK,
+      </if>
+      <if test="lookupCustomDatabackFun != null" >
+        LOOKUP_CUSTOM_DATABACK_FUN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lookupId != null" >
+        #{lookupId,jdbcType=DECIMAL},
+      </if>
+      <if test="lookupTemplateColumnId != null" >
+        #{lookupTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="lookupCheckType != null" >
+        #{lookupCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCheckSelf != null" >
+        #{lookupCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCheckFun != null" >
+        #{lookupCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupInitFun != null" >
+        #{lookupInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupValuechangeFun != null" >
+        #{lookupValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupClickFun != null" >
+        #{lookupClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDataFromType != null" >
+        #{lookupDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDataFromValue != null" >
+        #{lookupDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormWinType != null" >
+        #{lookupFormWinType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinTitle != null" >
+        #{lookupWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinWidth != null" >
+        #{lookupWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinHeight != null" >
+        #{lookupWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupShowProperty != null" >
+        #{lookupShowProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupValueProperty != null" >
+        #{lookupValueProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormId != null" >
+        #{lookupFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormUrl != null" >
+        #{lookupFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDatabackValue != null" >
+        #{lookupDatabackValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDatabackType != null" >
+        #{lookupDatabackType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupButtonclickFun != null" >
+        #{lookupButtonclickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupEmptytext != null" >
+        #{lookupEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupMuliselect != null" >
+        #{lookupMuliselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCustomDataback != null" >
+        #{lookupCustomDataback,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCustomDatabackFun != null" >
+        #{lookupCustomDatabackFun,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookupExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_LOOKUP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_LOOKUP
+    <set >
+      <if test="record.lookupId != null" >
+        LOOKUP_ID = #{record.lookupId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lookupTemplateColumnId != null" >
+        LOOKUP_TEMPLATE_COLUMN_ID = #{record.lookupTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lookupCheckType != null" >
+        LOOKUP_CHECK_TYPE = #{record.lookupCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupCheckSelf != null" >
+        LOOKUP_CHECK_SELF = #{record.lookupCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupCheckFun != null" >
+        LOOKUP_CHECK_FUN = #{record.lookupCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupInitFun != null" >
+        LOOKUP_INIT_FUN = #{record.lookupInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupValuechangeFun != null" >
+        LOOKUP_VALUECHANGE_FUN = #{record.lookupValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupClickFun != null" >
+        LOOKUP_CLICK_FUN = #{record.lookupClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupDataFromType != null" >
+        LOOKUP_DATA_FROM_TYPE = #{record.lookupDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupDataFromValue != null" >
+        LOOKUP_DATA_FROM_VALUE = #{record.lookupDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupFormWinType != null" >
+        LOOKUP_FORM_WIN_TYPE = #{record.lookupFormWinType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupWinTitle != null" >
+        LOOKUP_WIN_TITLE = #{record.lookupWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupWinWidth != null" >
+        LOOKUP_WIN_WIDTH = #{record.lookupWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupWinHeight != null" >
+        LOOKUP_WIN_HEIGHT = #{record.lookupWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupShowProperty != null" >
+        LOOKUP_SHOW_PROPERTY = #{record.lookupShowProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupValueProperty != null" >
+        LOOKUP_VALUE_PROPERTY = #{record.lookupValueProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupFormId != null" >
+        LOOKUP_FORM_ID = #{record.lookupFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupFormUrl != null" >
+        LOOKUP_FORM_URL = #{record.lookupFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupDatabackValue != null" >
+        LOOKUP_DATABACK_VALUE = #{record.lookupDatabackValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupDatabackType != null" >
+        LOOKUP_DATABACK_TYPE = #{record.lookupDatabackType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupButtonclickFun != null" >
+        LOOKUP_BUTTONCLICK_FUN = #{record.lookupButtonclickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupEmptytext != null" >
+        LOOKUP_EMPTYTEXT = #{record.lookupEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupMuliselect != null" >
+        LOOKUP_MULISELECT = #{record.lookupMuliselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupCustomDataback != null" >
+        LOOKUP_CUSTOM_DATABACK = #{record.lookupCustomDataback,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lookupCustomDatabackFun != null" >
+        LOOKUP_CUSTOM_DATABACK_FUN = #{record.lookupCustomDatabackFun,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_LOOKUP
+    set LOOKUP_ID = #{record.lookupId,jdbcType=DECIMAL},
+      LOOKUP_TEMPLATE_COLUMN_ID = #{record.lookupTemplateColumnId,jdbcType=DECIMAL},
+      LOOKUP_CHECK_TYPE = #{record.lookupCheckType,jdbcType=NVARCHAR},
+      LOOKUP_CHECK_SELF = #{record.lookupCheckSelf,jdbcType=NVARCHAR},
+      LOOKUP_CHECK_FUN = #{record.lookupCheckFun,jdbcType=NVARCHAR},
+      LOOKUP_INIT_FUN = #{record.lookupInitFun,jdbcType=NVARCHAR},
+      LOOKUP_VALUECHANGE_FUN = #{record.lookupValuechangeFun,jdbcType=NVARCHAR},
+      LOOKUP_CLICK_FUN = #{record.lookupClickFun,jdbcType=NVARCHAR},
+      LOOKUP_DATA_FROM_TYPE = #{record.lookupDataFromType,jdbcType=NVARCHAR},
+      LOOKUP_DATA_FROM_VALUE = #{record.lookupDataFromValue,jdbcType=NVARCHAR},
+      LOOKUP_FORM_WIN_TYPE = #{record.lookupFormWinType,jdbcType=NVARCHAR},
+      LOOKUP_WIN_TITLE = #{record.lookupWinTitle,jdbcType=NVARCHAR},
+      LOOKUP_WIN_WIDTH = #{record.lookupWinWidth,jdbcType=NVARCHAR},
+      LOOKUP_WIN_HEIGHT = #{record.lookupWinHeight,jdbcType=NVARCHAR},
+      LOOKUP_SHOW_PROPERTY = #{record.lookupShowProperty,jdbcType=NVARCHAR},
+      LOOKUP_VALUE_PROPERTY = #{record.lookupValueProperty,jdbcType=NVARCHAR},
+      LOOKUP_FORM_ID = #{record.lookupFormId,jdbcType=NVARCHAR},
+      LOOKUP_FORM_URL = #{record.lookupFormUrl,jdbcType=NVARCHAR},
+      LOOKUP_DATABACK_VALUE = #{record.lookupDatabackValue,jdbcType=NVARCHAR},
+      LOOKUP_DATABACK_TYPE = #{record.lookupDatabackType,jdbcType=NVARCHAR},
+      LOOKUP_BUTTONCLICK_FUN = #{record.lookupButtonclickFun,jdbcType=NVARCHAR},
+      LOOKUP_EMPTYTEXT = #{record.lookupEmptytext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      LOOKUP_MULISELECT = #{record.lookupMuliselect,jdbcType=NVARCHAR},
+      LOOKUP_CUSTOM_DATABACK = #{record.lookupCustomDataback,jdbcType=NVARCHAR},
+      LOOKUP_CUSTOM_DATABACK_FUN = #{record.lookupCustomDatabackFun,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookup" >
+    update SYS_TEMPLATE_LOOKUP
+    <set >
+      <if test="lookupTemplateColumnId != null" >
+        LOOKUP_TEMPLATE_COLUMN_ID = #{lookupTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="lookupCheckType != null" >
+        LOOKUP_CHECK_TYPE = #{lookupCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCheckSelf != null" >
+        LOOKUP_CHECK_SELF = #{lookupCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCheckFun != null" >
+        LOOKUP_CHECK_FUN = #{lookupCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupInitFun != null" >
+        LOOKUP_INIT_FUN = #{lookupInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupValuechangeFun != null" >
+        LOOKUP_VALUECHANGE_FUN = #{lookupValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupClickFun != null" >
+        LOOKUP_CLICK_FUN = #{lookupClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDataFromType != null" >
+        LOOKUP_DATA_FROM_TYPE = #{lookupDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDataFromValue != null" >
+        LOOKUP_DATA_FROM_VALUE = #{lookupDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormWinType != null" >
+        LOOKUP_FORM_WIN_TYPE = #{lookupFormWinType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinTitle != null" >
+        LOOKUP_WIN_TITLE = #{lookupWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinWidth != null" >
+        LOOKUP_WIN_WIDTH = #{lookupWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupWinHeight != null" >
+        LOOKUP_WIN_HEIGHT = #{lookupWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupShowProperty != null" >
+        LOOKUP_SHOW_PROPERTY = #{lookupShowProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupValueProperty != null" >
+        LOOKUP_VALUE_PROPERTY = #{lookupValueProperty,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormId != null" >
+        LOOKUP_FORM_ID = #{lookupFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupFormUrl != null" >
+        LOOKUP_FORM_URL = #{lookupFormUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDatabackValue != null" >
+        LOOKUP_DATABACK_VALUE = #{lookupDatabackValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupDatabackType != null" >
+        LOOKUP_DATABACK_TYPE = #{lookupDatabackType,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupButtonclickFun != null" >
+        LOOKUP_BUTTONCLICK_FUN = #{lookupButtonclickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupEmptytext != null" >
+        LOOKUP_EMPTYTEXT = #{lookupEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupMuliselect != null" >
+        LOOKUP_MULISELECT = #{lookupMuliselect,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCustomDataback != null" >
+        LOOKUP_CUSTOM_DATABACK = #{lookupCustomDataback,jdbcType=NVARCHAR},
+      </if>
+      <if test="lookupCustomDatabackFun != null" >
+        LOOKUP_CUSTOM_DATABACK_FUN = #{lookupCustomDatabackFun,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where LOOKUP_ID = #{lookupId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateLookup" >
+    update SYS_TEMPLATE_LOOKUP
+    set LOOKUP_TEMPLATE_COLUMN_ID = #{lookupTemplateColumnId,jdbcType=DECIMAL},
+      LOOKUP_CHECK_TYPE = #{lookupCheckType,jdbcType=NVARCHAR},
+      LOOKUP_CHECK_SELF = #{lookupCheckSelf,jdbcType=NVARCHAR},
+      LOOKUP_CHECK_FUN = #{lookupCheckFun,jdbcType=NVARCHAR},
+      LOOKUP_INIT_FUN = #{lookupInitFun,jdbcType=NVARCHAR},
+      LOOKUP_VALUECHANGE_FUN = #{lookupValuechangeFun,jdbcType=NVARCHAR},
+      LOOKUP_CLICK_FUN = #{lookupClickFun,jdbcType=NVARCHAR},
+      LOOKUP_DATA_FROM_TYPE = #{lookupDataFromType,jdbcType=NVARCHAR},
+      LOOKUP_DATA_FROM_VALUE = #{lookupDataFromValue,jdbcType=NVARCHAR},
+      LOOKUP_FORM_WIN_TYPE = #{lookupFormWinType,jdbcType=NVARCHAR},
+      LOOKUP_WIN_TITLE = #{lookupWinTitle,jdbcType=NVARCHAR},
+      LOOKUP_WIN_WIDTH = #{lookupWinWidth,jdbcType=NVARCHAR},
+      LOOKUP_WIN_HEIGHT = #{lookupWinHeight,jdbcType=NVARCHAR},
+      LOOKUP_SHOW_PROPERTY = #{lookupShowProperty,jdbcType=NVARCHAR},
+      LOOKUP_VALUE_PROPERTY = #{lookupValueProperty,jdbcType=NVARCHAR},
+      LOOKUP_FORM_ID = #{lookupFormId,jdbcType=NVARCHAR},
+      LOOKUP_FORM_URL = #{lookupFormUrl,jdbcType=NVARCHAR},
+      LOOKUP_DATABACK_VALUE = #{lookupDatabackValue,jdbcType=NVARCHAR},
+      LOOKUP_DATABACK_TYPE = #{lookupDatabackType,jdbcType=NVARCHAR},
+      LOOKUP_BUTTONCLICK_FUN = #{lookupButtonclickFun,jdbcType=NVARCHAR},
+      LOOKUP_EMPTYTEXT = #{lookupEmptytext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      LOOKUP_MULISELECT = #{lookupMuliselect,jdbcType=NVARCHAR},
+      LOOKUP_CUSTOM_DATABACK = #{lookupCustomDataback,jdbcType=NVARCHAR},
+      LOOKUP_CUSTOM_DATABACK_FUN = #{lookupCustomDatabackFun,jdbcType=NVARCHAR}
+    where LOOKUP_ID = #{lookupId,jdbcType=DECIMAL}
+  </update>
+</mapper>

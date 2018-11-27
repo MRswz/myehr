@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.calendar.K15Mapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.calendar.K15" >
+    <id column="K15_ID" property="k15Id" jdbcType="DECIMAL" />
+    <result column="A0188" property="a0188" jdbcType="DECIMAL" />
+    <result column="K0700" property="k0700" jdbcType="TIMESTAMP" />
+    <result column="D9999" property="d9999" jdbcType="TIMESTAMP" />
+    <result column="I9999" property="i9999" jdbcType="DECIMAL" />
+    <result column="K1500" property="k1500" jdbcType="NVARCHAR" />
+    <result column="K1501" property="k1501" jdbcType="DECIMAL" />
+    <result column="K1502" property="k1502" jdbcType="NVARCHAR" />
+    <result column="K1503" property="k1503" jdbcType="DECIMAL" />
+    <result column="K1504" property="k1504" jdbcType="DECIMAL" />
+    <result column="OPNAME" property="opname" jdbcType="NVARCHAR" />
+    <result column="K15A0190" property="k15a0190" jdbcType="NVARCHAR" />
+    <result column="APNAME" property="apname" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    K15_ID, A0188, K0700, D9999, I9999, K1500, K1501, K1502, K1503, K1504, OPNAME, K15A0190, 
+    APNAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.K15Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from K15
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from K15
+    where K15_ID = #{k15Id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from K15
+    where K15_ID = #{k15Id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.calendar.K15Example" >
+    delete from K15
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.calendar.K15" >
+    insert into K15 (A0188, K0700, 
+      D9999, I9999, K1500, 
+      K1501, K1502, K1503, 
+      K1504, OPNAME, K15A0190, 
+      APNAME)
+    values (#{a0188,jdbcType=DECIMAL}, #{k0700,jdbcType=TIMESTAMP}, 
+      #{d9999,jdbcType=TIMESTAMP}, #{i9999,jdbcType=DECIMAL}, #{k1500,jdbcType=NVARCHAR}, 
+      #{k1501,jdbcType=DECIMAL}, #{k1502,jdbcType=NVARCHAR}, #{k1503,jdbcType=DECIMAL}, 
+      #{k1504,jdbcType=DECIMAL}, #{opname,jdbcType=NVARCHAR}, #{k15a0190,jdbcType=NVARCHAR}, 
+      #{apname,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.calendar.K15" >
+    insert into K15
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="k15Id != null" >
+        K15_ID,
+      </if>
+      <if test="a0188 != null" >
+        A0188,
+      </if>
+      <if test="k0700 != null" >
+        K0700,
+      </if>
+      <if test="d9999 != null" >
+        D9999,
+      </if>
+      <if test="i9999 != null" >
+        I9999,
+      </if>
+      <if test="k1500 != null" >
+        K1500,
+      </if>
+      <if test="k1501 != null" >
+        K1501,
+      </if>
+      <if test="k1502 != null" >
+        K1502,
+      </if>
+      <if test="k1503 != null" >
+        K1503,
+      </if>
+      <if test="k1504 != null" >
+        K1504,
+      </if>
+      <if test="opname != null" >
+        OPNAME,
+      </if>
+      <if test="k15a0190 != null" >
+        K15A0190,
+      </if>
+      <if test="apname != null" >
+        APNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="k15Id != null" >
+        #{k15Id,jdbcType=DECIMAL},
+      </if>
+      <if test="a0188 != null" >
+        #{a0188,jdbcType=DECIMAL},
+      </if>
+      <if test="k0700 != null" >
+        #{k0700,jdbcType=TIMESTAMP},
+      </if>
+      <if test="d9999 != null" >
+        #{d9999,jdbcType=TIMESTAMP},
+      </if>
+      <if test="i9999 != null" >
+        #{i9999,jdbcType=DECIMAL},
+      </if>
+      <if test="k1500 != null" >
+        #{k1500,jdbcType=NVARCHAR},
+      </if>
+      <if test="k1501 != null" >
+        #{k1501,jdbcType=DECIMAL},
+      </if>
+      <if test="k1502 != null" >
+        #{k1502,jdbcType=NVARCHAR},
+      </if>
+      <if test="k1503 != null" >
+        #{k1503,jdbcType=DECIMAL},
+      </if>
+      <if test="k1504 != null" >
+        #{k1504,jdbcType=DECIMAL},
+      </if>
+      <if test="opname != null" >
+        #{opname,jdbcType=NVARCHAR},
+      </if>
+      <if test="k15a0190 != null" >
+        #{k15a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="apname != null" >
+        #{apname,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.calendar.K15Example" resultType="java.lang.Integer" >
+    select count(*) from K15
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update K15
+    <set >
+      <if test="record.k15Id != null" >
+        K15_ID = #{record.k15Id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.a0188 != null" >
+        A0188 = #{record.a0188,jdbcType=DECIMAL},
+      </if>
+      <if test="record.k0700 != null" >
+        K0700 = #{record.k0700,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.d9999 != null" >
+        D9999 = #{record.d9999,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.i9999 != null" >
+        I9999 = #{record.i9999,jdbcType=DECIMAL},
+      </if>
+      <if test="record.k1500 != null" >
+        K1500 = #{record.k1500,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.k1501 != null" >
+        K1501 = #{record.k1501,jdbcType=DECIMAL},
+      </if>
+      <if test="record.k1502 != null" >
+        K1502 = #{record.k1502,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.k1503 != null" >
+        K1503 = #{record.k1503,jdbcType=DECIMAL},
+      </if>
+      <if test="record.k1504 != null" >
+        K1504 = #{record.k1504,jdbcType=DECIMAL},
+      </if>
+      <if test="record.opname != null" >
+        OPNAME = #{record.opname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.k15a0190 != null" >
+        K15A0190 = #{record.k15a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.apname != null" >
+        APNAME = #{record.apname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update K15
+    set K15_ID = #{record.k15Id,jdbcType=DECIMAL},
+      A0188 = #{record.a0188,jdbcType=DECIMAL},
+      K0700 = #{record.k0700,jdbcType=TIMESTAMP},
+      D9999 = #{record.d9999,jdbcType=TIMESTAMP},
+      I9999 = #{record.i9999,jdbcType=DECIMAL},
+      K1500 = #{record.k1500,jdbcType=NVARCHAR},
+      K1501 = #{record.k1501,jdbcType=DECIMAL},
+      K1502 = #{record.k1502,jdbcType=NVARCHAR},
+      K1503 = #{record.k1503,jdbcType=DECIMAL},
+      K1504 = #{record.k1504,jdbcType=DECIMAL},
+      OPNAME = #{record.opname,jdbcType=NVARCHAR},
+      K15A0190 = #{record.k15a0190,jdbcType=NVARCHAR},
+      APNAME = #{record.apname,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.calendar.K15" >
+    update K15
+    <set >
+      <if test="a0188 != null" >
+        A0188 = #{a0188,jdbcType=DECIMAL},
+      </if>
+      <if test="k0700 != null" >
+        K0700 = #{k0700,jdbcType=TIMESTAMP},
+      </if>
+      <if test="d9999 != null" >
+        D9999 = #{d9999,jdbcType=TIMESTAMP},
+      </if>
+      <if test="i9999 != null" >
+        I9999 = #{i9999,jdbcType=DECIMAL},
+      </if>
+      <if test="k1500 != null" >
+        K1500 = #{k1500,jdbcType=NVARCHAR},
+      </if>
+      <if test="k1501 != null" >
+        K1501 = #{k1501,jdbcType=DECIMAL},
+      </if>
+      <if test="k1502 != null" >
+        K1502 = #{k1502,jdbcType=NVARCHAR},
+      </if>
+      <if test="k1503 != null" >
+        K1503 = #{k1503,jdbcType=DECIMAL},
+      </if>
+      <if test="k1504 != null" >
+        K1504 = #{k1504,jdbcType=DECIMAL},
+      </if>
+      <if test="opname != null" >
+        OPNAME = #{opname,jdbcType=NVARCHAR},
+      </if>
+      <if test="k15a0190 != null" >
+        K15A0190 = #{k15a0190,jdbcType=NVARCHAR},
+      </if>
+      <if test="apname != null" >
+        APNAME = #{apname,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where K15_ID = #{k15Id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.calendar.K15" >
+    update K15
+    set A0188 = #{a0188,jdbcType=DECIMAL},
+      K0700 = #{k0700,jdbcType=TIMESTAMP},
+      D9999 = #{d9999,jdbcType=TIMESTAMP},
+      I9999 = #{i9999,jdbcType=DECIMAL},
+      K1500 = #{k1500,jdbcType=NVARCHAR},
+      K1501 = #{k1501,jdbcType=DECIMAL},
+      K1502 = #{k1502,jdbcType=NVARCHAR},
+      K1503 = #{k1503,jdbcType=DECIMAL},
+      K1504 = #{k1504,jdbcType=DECIMAL},
+      OPNAME = #{opname,jdbcType=NVARCHAR},
+      K15A0190 = #{k15a0190,jdbcType=NVARCHAR},
+      APNAME = #{apname,jdbcType=NVARCHAR}
+    where K15_ID = #{k15Id,jdbcType=DECIMAL}
+  </update>
+</mapper>

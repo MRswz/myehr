@@ -1,0 +1,478 @@
+package com.myehr.controller.login;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.myehr.common.mybatis.MybatisUtil;
+import com.myehr.interceptor.LoginInterceptor;
+import com.myehr.mapper.sysParam.SysSystemParamMapper;
+import com.myehr.mapper.sysuser.SysUserExpandMapper;
+import com.myehr.mapper.sysuser.SysUserLoginLogMapper;
+import com.myehr.mapper.sysuser.SysUserMapper;import com.myehr.pojo.sysParam.SysSystemParam;
+import com.myehr.pojo.sysParam.SysSystemParamExample;
+import com.myehr.pojo.sysuser.SysUser;
+import com.myehr.pojo.sysuser.SysUserExample;import com.myehr.pojo.sysuser.SysUserLoginLog;
+import com.myehr.service.impl.formmanage.form.SysformconfigService;
+
+
+@Controller
+@RequestMapping("/user")
+public class Login {
+	
+	@Autowired
+	private SysUserExpandMapper sysUserExpandMapper;
+	
+	@Autowired
+	private SysUserLoginLogMapper sysUserLoginLogMapper;
+	
+	@Autowired
+	private SysSystemParamMapper sParamMapper;
+	
+	@Autowired
+	private SysUserMapper sUserMapper;
+	@Autowired
+	private SysformconfigService sysformconfigService;
+	private static Logger logger = LoggerFactory.getLogger(Login.class);
+
+	// 登录
+	@SuppressWarnings("unused")
+	@RequestMapping("/login")
+	public ModelAndView   insert2(HttpServletRequest request) throws Exception {
+		String userCode = request.getParameter("userCode");
+		String password = request.getParameter("userPassword");
+		String falg      = request.getParameter("falg");		
+		String language = request.getParameter("optionsRadios");
+		String loginType = request.getParameter("loginType");
+		String formType = request.getParameter("formType");
+		SysUser user = new SysUser();
+		user.setUserCode(userCode);
+		user.setUserPassword(password);
+		SysUser user2 =sysUserExpandMapper.selectByUsercode(user.getUserCode());
+				
+		SysUserLoginLog loginLog = new SysUserLoginLog();
+		String ipAddress = request.getParameter("ipAddress");
+		ModelAndView mv = null;
+		logger.info("debug开始登陆系统..............**********");
+		if (user2!=null) {
+			
+			//用户第一次登录密码验证
+			String usercode = user2.getUserCode();
+			if("x".equalsIgnoreCase(user2.getUserRemark())){
+				
+			}else{
+				loginLog.setLoginMark("1");
+				String date = (new Date())+"";
+				mv = new ModelAndView("redirect:/FirstupdatePassword.jsp?userCode="+user2.getUserCode()+"&userId="+user2.getUserId()+"&date="+date+"&type=firstLoad");
+				return mv;
+			}			
+			String sql = "select * from sys_online_user where user_id = '"+user2.getUserId()+"'";
+			List<Map> rs = new ArrayList<Map>();
+			try {
+				rs = MybatisUtil.queryList("runtime.selectSql", sql);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
+			} 
+			if (rs.size()<0) {
+				mv = new ModelAndView("../login");
+				mv.addObject("reCode","-2");
+			}else {
+				if(loginType!=null && loginType.equals("change")){
+					HttpSession session = request.getSession();
+					session.setAttribute("userid", new BigDecimal(user2.getUserId()));
+					session.setAttribute("userId", new BigDecimal(user2.getUserId()));
+					if (user2.getEmpId()!=null) {
+						SysSystemParam param = sysformconfigService.getSystemParam("EMP_ENTITY");
+						if(param!=null){
+							session.setAttribute("empid", new BigDecimal(user2.getEmpId()));
+							String sqlx = "select "+param.getSysParamRemark()+" from "+param.getSysParamValue1()+" where "+param.getSysParamValue2()+" = '"+user2.getEmpId()+"'";
+							Map map = MybatisUtil.queryOne("runtime.selectSql", sqlx);
+							String[] columns = param.getSysParamRemark().split(",");
+							int num = 0;
+							if(map!=null){
+								for (String column : columns) {
+									String columnName = column;
+									String columnValue = map.get(column)+"";
+									session.setAttribute(columnName,columnValue);
+									num++;
+								}
+							}
+						}
+					}
+					session.setAttribute("userCode", user2.getUserCode());
+					session.setAttribute("userName", user2.getUserName());
+					session.setAttribute("userPassword", user2.getUserPassword());
+					session.setAttribute("productName", "Oracle");
+					session.setAttribute("langType",language);
+					SysSystemParam param = sysformconfigService.getSystemParam("WORKSPACE");
+					if (param==null) {
+						mv = new ModelAndView("redirect:/menuWT.jsp");
+					} else {
+						String path = "redirect:/"+param.getSysParamValue1();
+						mv = new ModelAndView(path);
+					}	
+				}else if (user.getUserCode().equals(user2.getUserCode()) && (user.getUserPassword().toUpperCase()).equals(user2.getUserPassword().toUpperCase())) {
+					if(("true".equals(falg)||"".equals(falg))){
+						HttpSession session = request.getSession();
+						if (user2.getEmpId()!=null) {
+							SysSystemParam param = sysformconfigService.getSystemParam("EMP_ENTITY");
+							if(param!=null){
+								session.setAttribute("empid", new BigDecimal(user2.getEmpId()));
+								String sqlx = "select "+param.getSysParamRemark()+" from "+param.getSysParamValue1()+" where "+param.getSysParamValue2()+" = '"+user2.getEmpId()+"'";
+								Map map = MybatisUtil.queryOne("runtime.selectSql", sqlx);
+								String[] columns = param.getSysParamRemark().split(",");
+								int num = 0;
+								if(map!=null){
+									for (String column : columns) {
+										String columnName = column;
+										String columnValue = map.get(column)+"";
+										session.setAttribute(columnName,columnValue);
+										num++;
+									}
+								}
+							}
+						}
+						loginLog.setLoginUserCode(user.getUserCode());
+						loginLog.setLoginDate(new Date());
+						loginLog.setLoginIp(ipAddress);
+						loginLog.setLoginMark("0");
+						session.setAttribute("ipAddress", ipAddress);
+						if (user2.getEmpId()!=null) {
+							session.setAttribute("empid", new BigDecimal(user2.getEmpId()));
+						}
+						SysSystemParam param = sysformconfigService.getSystemParam("SOFT_INFO");
+						if(param!=null){
+							session.setAttribute("softwareTitle", param.getSysParamValue1());
+							session.setAttribute("softwareName", param.getSysParamValue2());
+							session.setAttribute("softwareImg", param.getSysParamEntry());
+						}else{
+							session.setAttribute("softwareTitle", "MyeHR");
+							session.setAttribute("softwareName", "高端人力资源管理软件方案");
+							session.setAttribute("softwareImg", "./images/logo-2.png");
+						}
+						String roleIds = sysformconfigService.getRoleIdsbyUserId(user2.getUserId()+"");
+						session.setAttribute("ipAddress", ipAddress);
+						session.setAttribute("userid", new BigDecimal(user2.getUserId()));
+						session.setAttribute("ROLEID", roleIds);
+						session.setAttribute("userId", new BigDecimal(user2.getUserId()));
+						session.setAttribute("userCode", user2.getUserCode());
+						session.setAttribute("userName", user2.getUserName());
+						session.setAttribute("userPassword", user2.getUserPassword());
+						session.setAttribute("orgUnit", "");
+						session.setAttribute("areaUnit", "");
+						session.setAttribute("personUnit", "");
+						session.setAttribute("payUnit", "");
+						session.setAttribute("attUnit", "");
+						session.setAttribute("performanceUnit","");
+						session.setAttribute("projectUnit", "");
+						session.setAttribute("businessLine", "");
+						session.setAttribute("productName", "Oracle");
+						session.setAttribute("langType",language);
+						sysformconfigService.setUserByUserid(user2.getUserId()+"");//刷新当前登录用户缓存
+						param = sysformconfigService.getSystemParam("WORKSPACE");
+						if (param==null) {
+							mv = new ModelAndView("redirect:/menuWT.jsp");
+						} else {
+							String path = "redirect:/"+param.getSysParamValue1();
+							mv = new ModelAndView(path);
+						}	
+						sysUserLoginLogMapper.insert(loginLog);
+					}else{
+						loginLog.setLoginMark("1");
+						mv = new ModelAndView("../login");
+						mv.addObject("reCode","-4");
+					}
+				}else {
+					loginLog.setLoginMark("1");
+					mv = new ModelAndView("../login");
+					mv.addObject("reCode","-1");
+				}
+			}
+		}else {
+			loginLog.setLoginMark("2");
+			mv = new ModelAndView("../login");
+			mv.addObject("reCode","2");
+		}
+		return mv;
+	}
+	
+	private boolean PasswordCheckTime(Date oldTime) {
+		SysSystemParamExample example = new SysSystemParamExample();
+		example.or().andSysParamCodeEqualTo("PASSWORD_WARNING");
+		SysSystemParam param = sParamMapper.selectByExample(example).get(0);
+		Date nowDate = new Date();
+		long oldTime1 = oldTime.getTime()/1000;
+		long nowDate1 = nowDate.getTime()/1000;
+		long time = nowDate1 - oldTime1;
+		long time2 = Integer.valueOf(param.getSysParamValue1())*24*3600;
+		return time2>time;
+	}
+
+	/**
+	 * 获取MAC地址
+	 */
+	 public static String callCmd(String[] cmd) { 
+	     String result = ""; 
+	     String line = ""; 
+	     try { 
+	    	 Process proc = Runtime.getRuntime().exec(cmd);
+	    	 InputStreamReader is = new InputStreamReader(proc.getInputStream());
+	    	 BufferedReader br = new BufferedReader (is);
+	    	 while ((line = br.readLine ()) != null) {
+	    		 result += line; 
+			 } 
+	     } 
+	     catch(Exception e) {
+	    	  
+	     } 
+	     return result; 
+	   }
+	 
+	 /**
+	  * @param cmd 第一个命令
+	  * @param another 第二个命令
+	  * @return  第二个命令的执行结果
+	  */
+	 public static String callCmd(String[] cmd,String[] another) { 
+	     String result = ""; 
+	     String line = ""; 
+	     try {
+	    	 Runtime rt = Runtime.getRuntime();
+	    	 Process proc = rt.exec(cmd);
+	    	 proc.waitFor(); //已经执行完第一个命令，准备执行第二个命令
+	    	 proc = rt.exec(another);
+	    	 InputStreamReader is = new InputStreamReader(proc.getInputStream());
+	    	 BufferedReader br = new BufferedReader (is);
+	    	 while ((line = br.readLine ()) != null) {
+	    		 result += line;
+	    	 }
+	     } 
+	     catch(Exception e) { 
+	    	  
+	     } 
+	     return result; 
+	 }
+	 
+	 /**
+	  * @param ip 目标ip,一般在局域网内 
+	  * @param sourceString 命令处理的结果字符串 
+	  * @param macSeparator mac分隔符号 
+	  * @return mac地址，用上面的分隔符号表示
+	  */
+	 public static String filterMacAddress(final String ip, final String sourceString,final String macSeparator) { 
+	     String result = ""; 
+	     String regExp = "((([0-9,A-F,a-f]{1,2}" + macSeparator + "){1,5})[0-9,A-F,a-f]{1,2})"; 
+	     Pattern pattern = Pattern.compile(regExp); 
+	     Matcher matcher = pattern.matcher(sourceString); 
+	     while(matcher.find()){ 
+	    	 result = matcher.group(1); 
+	    	 if(sourceString.indexOf(ip) <= sourceString.lastIndexOf(matcher.group(1))) { 
+	    		 break; //如果有多个IP,只匹配本IP对应的Mac. 
+	    	 } 
+	     }
+	     return result; 
+	 }
+	 
+	 /** 
+	  * 
+	  * @param ip 目标ip 
+	  * @return  Mac Address 
+	  * 
+	  */
+	 public static String getMacInWindows(final String ip){ 
+		 String result = ""; 
+		 String[] cmd = { 
+				 "cmd", 
+				 "/c", 
+				 "ping " + ip 
+		 }; 
+		 String[] another = { 
+				 "cmd", 
+				 "/c", 
+				 "arp -a"
+		 }; 
+		 String cmdResult = callCmd(cmd,another); 
+		 result = filterMacAddress(ip,cmdResult,"-");    
+	     return result; 
+	 } 
+	   
+	   
+	 
+	    
+	 /**
+	  * 获取MAC地址 
+	  * @return 返回MAC地址
+	  */
+	 public static String getMacAddress(String ip){
+		 String macAddress = "";
+		 macAddress = getMacInWindows(ip).trim();
+		 return macAddress;
+	 }
+	 
+	/** 
+	 *  
+	 * @param content 
+	 *            请求的参数 格式为：name=xxx&pwd=xxx 
+	 * @param encoding 
+	 *            服务器端请求编码。如GBK,UTF-8等 
+	 * @return 
+	 * @throws UnsupportedEncodingException 
+	 */  
+	public static String getAddresses(String content, String encodingString) throws UnsupportedEncodingException {  
+	    // 这里调用淘宝API  
+	    String urlStr = "http://ip.taobao.com/service/getIpInfo.php";  
+	    // 从http://whois.pconline.com.cn取得IP所在的省市区信息  
+	    String returnStr = getResult(urlStr, content, encodingString);  
+	    if (returnStr != null) {  
+	        // 处理返回的省市区信息  
+	        returnStr = decodeUnicode(returnStr);  
+	        String[] temp = returnStr.split(",");  
+	        if(temp.length<3){  
+	            return "0";//无效IP，局域网测试  
+	        }  
+	        return returnStr;  
+	    }  
+	    return null;  
+	}  
+	/** 
+	 * @param urlStr 
+	 *            请求的地址 
+	 * @param content 
+	 *            请求的参数 格式为：name=xxx&pwd=xxx 
+	 * @param encoding 
+	 *            服务器端请求编码。如GBK,UTF-8等 
+	 * @return 
+	 */  
+	private static String getResult(String urlStr, String content, String encoding) {  
+	    URL url = null;  
+	    HttpURLConnection connection = null;  
+	    try {  
+	        url = new URL(urlStr);  
+	        connection = (HttpURLConnection) url.openConnection();// 新建连接实例  
+	        connection.setConnectTimeout(2000);// 设置连接超时时间，单位毫秒  
+	        connection.setReadTimeout(2000);// 设置读取数据超时时间，单位毫秒  
+	        connection.setDoOutput(true);// 是否打开输出流 true|false  
+	        connection.setDoInput(true);// 是否打开输入流true|false  
+	        connection.setRequestMethod("POST");// 提交方法POST|GET  
+	        connection.setUseCaches(false);// 是否缓存true|false  
+	        connection.connect();// 打开连接端口  
+	        DataOutputStream out = new DataOutputStream(connection  
+	                .getOutputStream());// 打开输出流往对端服务器写数据  
+	        out.writeBytes(content);// 写数据,也就是提交你的表单 name=xxx&pwd=xxx  
+	        out.flush();// 刷新  
+	        out.close();// 关闭输出流  
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(  
+	                connection.getInputStream(), encoding));// 往对端写完数据对端服务器返回数据  
+	        // ,以BufferedReader流来读取  
+	        StringBuffer buffer = new StringBuffer();  
+	        String line = "";  
+	        while ((line = reader.readLine()) != null) {  
+	            buffer.append(line);  
+	        }  
+	        reader.close();  
+	        return buffer.toString();  
+	    } catch (IOException e) {  
+	          
+	    } finally {  
+	        if (connection != null) {  
+	            connection.disconnect();// 关闭连接  
+	        }  
+	    }  
+	    return null;  
+	}  
+	/** 
+	 * unicode 转换成 中文 
+	 *  
+	 * @author fanhui 2007-3-15 
+	 * @param theString 
+	 * @return 
+	 */  
+	public static String decodeUnicode(String theString) {  
+	    char aChar;  
+	    int len = theString.length();  
+	    StringBuffer outBuffer = new StringBuffer(len);  
+	    for (int x = 0; x < len;) {  
+	        aChar = theString.charAt(x++);  
+	        if (aChar == '\\') {  
+	            aChar = theString.charAt(x++);  
+	            if (aChar == 'u') {  
+	                int value = 0;  
+	                for (int i = 0; i < 4; i++) {  
+	                    aChar = theString.charAt(x++);  
+	                    switch (aChar) {  
+	                    case '0':  
+	                    case '1':  
+	                    case '2':  
+	                    case '3':  
+	                    case '4':  
+	                    case '5':  
+	                    case '6':  
+	                    case '7':  
+	                    case '8':  
+	                    case '9':  
+	                        value = (value << 4) + aChar - '0';  
+	                        break;  
+	                    case 'a':  
+	                    case 'b':  
+	                    case 'c':  
+	                    case 'd':  
+	                    case 'e':  
+	                    case 'f':  
+	                        value = (value << 4) + 10 + aChar - 'a';  
+	                        break;  
+	                    case 'A':  
+	                    case 'B':  
+	                    case 'C':  
+	                    case 'D':  
+	                    case 'E':  
+	                    case 'F':  
+	                        value = (value << 4) + 10 + aChar - 'A';  
+	                        break;  
+	                    default:  
+	                        throw new IllegalArgumentException(  
+	                                "Malformed      encoding.");  
+	                    }  
+	                }  
+	                outBuffer.append((char) value);  
+	            } else {  
+	                if (aChar == 't') {  
+	                    aChar = '\t';  
+	                } else if (aChar == 'r') {  
+	                    aChar = '\r';  
+	                } else if (aChar == 'n') {  
+	                    aChar = '\n';  
+	                } else if (aChar == 'f') {  
+	                    aChar = '\f';  
+	                }  
+	                outBuffer.append(aChar);  
+	            }  
+	        } else {  
+	            outBuffer.append(aChar);  
+	        }  
+	    }  
+	    return outBuffer.toString();  
+	}  
+    
+}

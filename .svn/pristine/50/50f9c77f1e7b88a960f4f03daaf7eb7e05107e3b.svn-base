@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormGeneralParamMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormGeneralParam" >
+    <id column="PARAM_ID" property="paramId" jdbcType="DECIMAL" />
+    <result column="PARAM_TYPE" property="paramType" jdbcType="VARCHAR" />
+    <result column="PARAM_TYPE_VALUE" property="paramTypeValue" jdbcType="DECIMAL" />
+    <result column="PARAM_NAME" property="paramName" jdbcType="VARCHAR" />
+    <result column="PARAM_FROM_TYPE" property="paramFromType" jdbcType="VARCHAR" />
+    <result column="PARAM_FROM_VALUE" property="paramFromValue" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PARAM_ID, PARAM_TYPE, PARAM_TYPE_VALUE, PARAM_NAME, PARAM_FROM_TYPE, PARAM_FROM_VALUE, 
+    OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_GENERAL_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_GENERAL_PARAM
+    where PARAM_ID = #{paramId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_GENERAL_PARAM
+    where PARAM_ID = #{paramId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParamExample" >
+    delete from SYS_FORM_GENERAL_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParam" useGeneratedKeys="true" keyProperty="paramId" keyColumn="PARAM_ID">
+    insert into SYS_FORM_GENERAL_PARAM (PARAM_TYPE, PARAM_TYPE_VALUE, 
+      PARAM_NAME, PARAM_FROM_TYPE, PARAM_FROM_VALUE, 
+      OPERATOR_TIME, OPERATOR_NAME)
+    values (#{paramType,jdbcType=VARCHAR}, #{paramTypeValue,jdbcType=DECIMAL}, 
+      #{paramName,jdbcType=VARCHAR}, #{paramFromType,jdbcType=VARCHAR}, #{paramFromValue,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParam" >
+    insert into SYS_FORM_GENERAL_PARAM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        PARAM_ID,
+      </if>
+      <if test="paramType != null" >
+        PARAM_TYPE,
+      </if>
+      <if test="paramTypeValue != null" >
+        PARAM_TYPE_VALUE,
+      </if>
+      <if test="paramName != null" >
+        PARAM_NAME,
+      </if>
+      <if test="paramFromType != null" >
+        PARAM_FROM_TYPE,
+      </if>
+      <if test="paramFromValue != null" >
+        PARAM_FROM_VALUE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramId != null" >
+        #{paramId,jdbcType=DECIMAL},
+      </if>
+      <if test="paramType != null" >
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeValue != null" >
+        #{paramTypeValue,jdbcType=DECIMAL},
+      </if>
+      <if test="paramName != null" >
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramFromType != null" >
+        #{paramFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramFromValue != null" >
+        #{paramFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParamExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_GENERAL_PARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_GENERAL_PARAM
+    <set >
+      <if test="record.paramId != null" >
+        PARAM_ID = #{record.paramId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paramType != null" >
+        PARAM_TYPE = #{record.paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramTypeValue != null" >
+        PARAM_TYPE_VALUE = #{record.paramTypeValue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paramName != null" >
+        PARAM_NAME = #{record.paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramFromType != null" >
+        PARAM_FROM_TYPE = #{record.paramFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramFromValue != null" >
+        PARAM_FROM_VALUE = #{record.paramFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_GENERAL_PARAM
+    set PARAM_ID = #{record.paramId,jdbcType=DECIMAL},
+      PARAM_TYPE = #{record.paramType,jdbcType=VARCHAR},
+      PARAM_TYPE_VALUE = #{record.paramTypeValue,jdbcType=DECIMAL},
+      PARAM_NAME = #{record.paramName,jdbcType=VARCHAR},
+      PARAM_FROM_TYPE = #{record.paramFromType,jdbcType=VARCHAR},
+      PARAM_FROM_VALUE = #{record.paramFromValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParam" >
+    update SYS_FORM_GENERAL_PARAM
+    <set >
+      <if test="paramType != null" >
+        PARAM_TYPE = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramTypeValue != null" >
+        PARAM_TYPE_VALUE = #{paramTypeValue,jdbcType=DECIMAL},
+      </if>
+      <if test="paramName != null" >
+        PARAM_NAME = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramFromType != null" >
+        PARAM_FROM_TYPE = #{paramFromType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramFromValue != null" >
+        PARAM_FROM_VALUE = #{paramFromValue,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAM_ID = #{paramId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormGeneralParam" >
+    update SYS_FORM_GENERAL_PARAM
+    set PARAM_TYPE = #{paramType,jdbcType=VARCHAR},
+      PARAM_TYPE_VALUE = #{paramTypeValue,jdbcType=DECIMAL},
+      PARAM_NAME = #{paramName,jdbcType=VARCHAR},
+      PARAM_FROM_TYPE = #{paramFromType,jdbcType=VARCHAR},
+      PARAM_FROM_VALUE = #{paramFromValue,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where PARAM_ID = #{paramId,jdbcType=DECIMAL}
+  </update>
+</mapper>

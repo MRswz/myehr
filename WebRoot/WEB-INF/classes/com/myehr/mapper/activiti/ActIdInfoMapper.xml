@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActIdInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActIdInfo" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="REV_" property="rev" jdbcType="DECIMAL" />
+    <result column="USER_ID_" property="userId" jdbcType="OTHER" />
+    <result column="TYPE_" property="type" jdbcType="OTHER" />
+    <result column="KEY_" property="key" jdbcType="OTHER" />
+    <result column="VALUE_" property="value" jdbcType="OTHER" />
+    <result column="PARENT_ID_" property="parentId" jdbcType="OTHER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.activiti.ActIdInfo" extends="BaseResultMap" >
+    <result column="PASSWORD_" property="password" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, REV_, USER_ID_, TYPE_, KEY_, VALUE_, PARENT_ID_
+  </sql>
+  <sql id="Blob_Column_List" >
+    PASSWORD_
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.activiti.ActIdInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ACT_ID_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActIdInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_ID_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ACT_ID_INFO
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_ID_INFO
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActIdInfoExample" >
+    delete from ACT_ID_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActIdInfo" >
+    insert into ACT_ID_INFO (ID_, REV_, USER_ID_, 
+      TYPE_, KEY_, VALUE_, PARENT_ID_, 
+      PASSWORD_)
+    values (#{id,jdbcType=OTHER}, #{rev,jdbcType=DECIMAL}, #{userId,jdbcType=OTHER}, 
+      #{type,jdbcType=OTHER}, #{key,jdbcType=OTHER}, #{value,jdbcType=OTHER}, #{parentId,jdbcType=OTHER}, 
+      #{password,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActIdInfo" >
+    insert into ACT_ID_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="rev != null" >
+        REV_,
+      </if>
+      <if test="userId != null" >
+        USER_ID_,
+      </if>
+      <if test="type != null" >
+        TYPE_,
+      </if>
+      <if test="key != null" >
+        KEY_,
+      </if>
+      <if test="value != null" >
+        VALUE_,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID_,
+      </if>
+      <if test="password != null" >
+        PASSWORD_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="rev != null" >
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=OTHER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=OTHER},
+      </if>
+      <if test="key != null" >
+        #{key,jdbcType=OTHER},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=OTHER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=OTHER},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActIdInfoExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_ID_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_ID_INFO
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.rev != null" >
+        REV_ = #{record.rev,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID_ = #{record.userId,jdbcType=OTHER},
+      </if>
+      <if test="record.type != null" >
+        TYPE_ = #{record.type,jdbcType=OTHER},
+      </if>
+      <if test="record.key != null" >
+        KEY_ = #{record.key,jdbcType=OTHER},
+      </if>
+      <if test="record.value != null" >
+        VALUE_ = #{record.value,jdbcType=OTHER},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID_ = #{record.parentId,jdbcType=OTHER},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD_ = #{record.password,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update ACT_ID_INFO
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      USER_ID_ = #{record.userId,jdbcType=OTHER},
+      TYPE_ = #{record.type,jdbcType=OTHER},
+      KEY_ = #{record.key,jdbcType=OTHER},
+      VALUE_ = #{record.value,jdbcType=OTHER},
+      PARENT_ID_ = #{record.parentId,jdbcType=OTHER},
+      PASSWORD_ = #{record.password,jdbcType=BLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_ID_INFO
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      USER_ID_ = #{record.userId,jdbcType=OTHER},
+      TYPE_ = #{record.type,jdbcType=OTHER},
+      KEY_ = #{record.key,jdbcType=OTHER},
+      VALUE_ = #{record.value,jdbcType=OTHER},
+      PARENT_ID_ = #{record.parentId,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActIdInfo" >
+    update ACT_ID_INFO
+    <set >
+      <if test="rev != null" >
+        REV_ = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        USER_ID_ = #{userId,jdbcType=OTHER},
+      </if>
+      <if test="type != null" >
+        TYPE_ = #{type,jdbcType=OTHER},
+      </if>
+      <if test="key != null" >
+        KEY_ = #{key,jdbcType=OTHER},
+      </if>
+      <if test="value != null" >
+        VALUE_ = #{value,jdbcType=OTHER},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID_ = #{parentId,jdbcType=OTHER},
+      </if>
+      <if test="password != null" >
+        PASSWORD_ = #{password,jdbcType=BLOB},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.activiti.ActIdInfo" >
+    update ACT_ID_INFO
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      USER_ID_ = #{userId,jdbcType=OTHER},
+      TYPE_ = #{type,jdbcType=OTHER},
+      KEY_ = #{key,jdbcType=OTHER},
+      VALUE_ = #{value,jdbcType=OTHER},
+      PARENT_ID_ = #{parentId,jdbcType=OTHER},
+      PASSWORD_ = #{password,jdbcType=BLOB}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActIdInfo" >
+    update ACT_ID_INFO
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      USER_ID_ = #{userId,jdbcType=OTHER},
+      TYPE_ = #{type,jdbcType=OTHER},
+      KEY_ = #{key,jdbcType=OTHER},
+      VALUE_ = #{value,jdbcType=OTHER},
+      PARENT_ID_ = #{parentId,jdbcType=OTHER}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

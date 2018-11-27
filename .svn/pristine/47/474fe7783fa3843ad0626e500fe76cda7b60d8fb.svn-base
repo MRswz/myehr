@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonImportMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonImport" >
+    <id column="BUTTON_IMPORT_ID" property="buttonImportId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_ID" property="formButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_IMPORT_EXC_TYPE" property="buttonImportExcType" jdbcType="NVARCHAR" />
+    <result column="BUTTON_IMPORT_FUN" property="buttonImportFun" jdbcType="NVARCHAR" />
+    <result column="BUTTON_IMPORT_URL" property="buttonImportUrl" jdbcType="NVARCHAR" />
+    <result column="BUTTON_IMPORT_SQL" property="buttonImportSql" jdbcType="NVARCHAR" />
+    <result column="BUTTON_IMPORT_INIT_FUN" property="buttonImportInitFun" jdbcType="NVARCHAR" />
+    <result column="BUTTON_IMPORT_TEMPLATE" property="buttonImportTemplate" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_IMPORT_ID, FORM_BUTTON_ID, BUTTON_IMPORT_EXC_TYPE, BUTTON_IMPORT_FUN, BUTTON_IMPORT_URL, 
+    BUTTON_IMPORT_SQL, BUTTON_IMPORT_INIT_FUN, BUTTON_IMPORT_TEMPLATE, OPERATOR_NAME, 
+    OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_IMPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_IMPORT
+    where BUTTON_IMPORT_ID = #{buttonImportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_IMPORT
+    where BUTTON_IMPORT_ID = #{buttonImportId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImportExample" >
+    delete from SYS_FORM_BUTTON_IMPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImport" >
+    insert into SYS_FORM_BUTTON_IMPORT (FORM_BUTTON_ID, BUTTON_IMPORT_EXC_TYPE, 
+      BUTTON_IMPORT_FUN, BUTTON_IMPORT_URL, BUTTON_IMPORT_SQL, 
+      BUTTON_IMPORT_INIT_FUN, BUTTON_IMPORT_TEMPLATE, 
+      OPERATOR_NAME, OPERATOR_TIME)
+    values (#{formButtonId,jdbcType=DECIMAL}, #{buttonImportExcType,jdbcType=NVARCHAR}, 
+      #{buttonImportFun,jdbcType=NVARCHAR}, #{buttonImportUrl,jdbcType=NVARCHAR}, #{buttonImportSql,jdbcType=NVARCHAR}, 
+      #{buttonImportInitFun,jdbcType=NVARCHAR}, #{buttonImportTemplate,jdbcType=NVARCHAR}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImport" >
+    insert into SYS_FORM_BUTTON_IMPORT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonImportId != null" >
+        BUTTON_IMPORT_ID,
+      </if>
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID,
+      </if>
+      <if test="buttonImportExcType != null" >
+        BUTTON_IMPORT_EXC_TYPE,
+      </if>
+      <if test="buttonImportFun != null" >
+        BUTTON_IMPORT_FUN,
+      </if>
+      <if test="buttonImportUrl != null" >
+        BUTTON_IMPORT_URL,
+      </if>
+      <if test="buttonImportSql != null" >
+        BUTTON_IMPORT_SQL,
+      </if>
+      <if test="buttonImportInitFun != null" >
+        BUTTON_IMPORT_INIT_FUN,
+      </if>
+      <if test="buttonImportTemplate != null" >
+        BUTTON_IMPORT_TEMPLATE,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonImportId != null" >
+        #{buttonImportId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonId != null" >
+        #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonImportExcType != null" >
+        #{buttonImportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportFun != null" >
+        #{buttonImportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportUrl != null" >
+        #{buttonImportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportSql != null" >
+        #{buttonImportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportInitFun != null" >
+        #{buttonImportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportTemplate != null" >
+        #{buttonImportTemplate,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImportExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_IMPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_IMPORT
+    <set >
+      <if test="record.buttonImportId != null" >
+        BUTTON_IMPORT_ID = #{record.buttonImportId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonId != null" >
+        FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonImportExcType != null" >
+        BUTTON_IMPORT_EXC_TYPE = #{record.buttonImportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonImportFun != null" >
+        BUTTON_IMPORT_FUN = #{record.buttonImportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonImportUrl != null" >
+        BUTTON_IMPORT_URL = #{record.buttonImportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonImportSql != null" >
+        BUTTON_IMPORT_SQL = #{record.buttonImportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonImportInitFun != null" >
+        BUTTON_IMPORT_INIT_FUN = #{record.buttonImportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.buttonImportTemplate != null" >
+        BUTTON_IMPORT_TEMPLATE = #{record.buttonImportTemplate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_IMPORT
+    set BUTTON_IMPORT_ID = #{record.buttonImportId,jdbcType=DECIMAL},
+      FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      BUTTON_IMPORT_EXC_TYPE = #{record.buttonImportExcType,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_FUN = #{record.buttonImportFun,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_URL = #{record.buttonImportUrl,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_SQL = #{record.buttonImportSql,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_INIT_FUN = #{record.buttonImportInitFun,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_TEMPLATE = #{record.buttonImportTemplate,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImport" >
+    update SYS_FORM_BUTTON_IMPORT
+    <set >
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonImportExcType != null" >
+        BUTTON_IMPORT_EXC_TYPE = #{buttonImportExcType,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportFun != null" >
+        BUTTON_IMPORT_FUN = #{buttonImportFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportUrl != null" >
+        BUTTON_IMPORT_URL = #{buttonImportUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportSql != null" >
+        BUTTON_IMPORT_SQL = #{buttonImportSql,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportInitFun != null" >
+        BUTTON_IMPORT_INIT_FUN = #{buttonImportInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="buttonImportTemplate != null" >
+        BUTTON_IMPORT_TEMPLATE = #{buttonImportTemplate,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BUTTON_IMPORT_ID = #{buttonImportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonImport" >
+    update SYS_FORM_BUTTON_IMPORT
+    set FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL},
+      BUTTON_IMPORT_EXC_TYPE = #{buttonImportExcType,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_FUN = #{buttonImportFun,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_URL = #{buttonImportUrl,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_SQL = #{buttonImportSql,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_INIT_FUN = #{buttonImportInitFun,jdbcType=NVARCHAR},
+      BUTTON_IMPORT_TEMPLATE = #{buttonImportTemplate,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where BUTTON_IMPORT_ID = #{buttonImportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

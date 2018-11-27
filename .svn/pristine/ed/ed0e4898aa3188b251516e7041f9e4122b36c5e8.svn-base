@@ -1,0 +1,152 @@
+package com.myehr.service.impl.app;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.JSON;
+import com.myehr.common.app.login.tls_sigcheck;
+import com.myehr.common.mybatis.MybatisUtil;
+import com.myehr.common.util.ChangeCode;
+import com.myehr.service.app.TXIMService;
+@Service("TXIMServiceImpy")
+public class TXIMServiceImpy implements TXIMService {
+	String identifier = "sysadmin";
+	String sdkappid = "1400113421";
+	String usersig = "eJxlj11PgzAYhe-5FYTbGW0pVWPiBe4jKbJMFNzcTYO0kHcIVNp9afzvRlxiE8-t8*ScnE-HdV0vjZ-O86Lotq3h5qik5964HvLO-qBSIHhuOOnFPygPCnrJ89LIfoCYUuojZDsgZGughJOhjzoXDbSWoUXNh5nfigAhjEngY1uBaoDzaTZmyWQxD6tClOn1jKpi3DwrnS3u6Mdolj6wjITr5KBf2bZYjiZ7Vk3jx-t1875BSdvEy7Dur3LJNheyDsruBb9l0cpEu2qVQMRurUkDjTx9IvgyIAG2X*1kr6FrB8FHmGKfoJ94zpfzDcTJXss_";
+	
+	@Override
+	public Map friendImport(String[] frendsCode,String userCode) {
+		/*{
+		    "From_Account":"id",
+		    "AddFriendItem":
+		    [
+		        {
+		            "To_Account":"id1",
+		            "AddSource":"AddSource_Type_XXXXXXXX"
+		        }
+		    ]
+		}*/
+		int lengths = 1000;
+		if (frendsCode.length<1000) {
+			lengths = frendsCode.length;
+		}
+		int num = lengths/200+1;
+		for (int j = 0; j < num; j++) {
+			String postStr = "{\"From_Account\":\""+userCode+"\",\"AddFriendItem\":[";
+			for (int i = 0; i < 200; i++) {
+				int num2 = j*200+i;
+				if (num2<lengths) {
+					if (!frendsCode[num2].equals(userCode)) {
+						if (i==0) {
+							postStr += "{\"To_Account\":\""+frendsCode[num2]+"\",\"AddSource\":\"AddSource_Type_Android\"}";
+						} else {
+							postStr += ",{\"To_Account\":\""+frendsCode[num2]+"\",\"AddSource\":\"AddSource_Type_Android\"}";
+						}
+					}
+				}
+			}
+			postStr += "]}";
+			String httpString = "https://console.tim.qq.com/v4/sns/friend_import?usersig="+usersig+"&identifier="+identifier+"&sdkappid="+sdkappid+"&random=99999999&contenttype=json";
+			Map map = (Map)JSON.parse(ChangeCode.httpsRequest(httpString,"POST",postStr));
+			System.out.println(map);
+		}
+		return null;
+	}
+
+	@Override
+	public Map createGroupFriendImport(String GroupName, String[] frendsCode,String userCode) {
+		/*{
+		    "From_Account":"id",
+		    "GroupName":["group1","group2","group3"],
+		    "To_Account":["id1","id2","id3","id4"]
+		}*/
+		String postStr = "{\"From_Account\":\""+userCode+"\",\"GroupName\":[\""+GroupName+"\"],\"To_Account\":[";
+		for (int i = 0; i < frendsCode.length; i++) {
+			if (i==0) {
+				postStr += "\""+frendsCode[i]+"\"";
+			} else {
+				postStr += ",\""+frendsCode[i]+"\"";
+			}
+		}
+		postStr += "]}";
+		String httpString = "https://console.tim.qq.com/v4/sns/group_add?usersig="+usersig+"&identifier="+identifier+"&sdkappid="+sdkappid+"&random=99999999&contenttype=json";
+		Map map = (Map)JSON.parse(ChangeCode.httpsRequest(httpString,"POST",postStr));
+		return map;
+	}
+
+	@Override
+	public Map batchUpdateFrendGroupInfo(String[] frendsCode,String GroupNameNew,String userCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map importDatas(String[] userCode) {
+		/*{
+			"Accounts":["test1","test2","test3","test4","test5"]
+		}*/
+		int num = userCode.length/80+1;
+		for (int j = 0; j < num; j++) {
+			String postStr = "{\"Accounts\":[";
+			for (int i = 0; i < 80; i++) {
+				int num2 = j*80+i;
+				if (num2<userCode.length) {
+					if (i==0) {
+						postStr += "\""+userCode[num2]+"\"";
+					} else {
+						postStr += ",\""+userCode[num2]+"\"";
+					}
+				}
+			}
+			postStr += "]}";
+			String httpString = "https://console.tim.qq.com/v4/im_open_login_svc/multiaccount_import?usersig="+usersig+"&identifier="+identifier+"&sdkappid="+sdkappid+"&random=99999999&contenttype=json";
+			Map map = (Map)JSON.parse(ChangeCode.httpsRequest(httpString,"POST",postStr));
+			//System.out.println(map);
+		}
+		return null;
+	}
+/**
+	{
+	    "From_Account":"id",
+	    "ProfileItem":
+	    [
+	        {
+	            "Tag":"Tag_Profile_IM_Nick",
+	            "Value":"系统管理员"
+	        },{
+	            "Tag":"Tag_Profile_IM_Image",
+	            "Value":"http://116.62.243.28:9875/W7.jpg"
+	        },
+	    ]
+	}
+	**/
+	/*@Override
+	public Map updateUserInfo(String[] userCode) {
+		{
+			"Accounts":["test1","test2","test3","test4","test5"]
+		}
+		int num = userCode.length/80+1;
+		for (int j = 0; j < num; j++) {
+			String postStr = "{\"Accounts\":[";
+			for (int i = 0; i < 80; i++) {
+				int num2 = j*80+i;
+				if (num2<userCode.length) {
+					if (i==0) {
+						postStr += "\""+userCode[num2]+"\"";
+					} else {
+						postStr += ",\""+userCode[num2]+"\"";
+					}
+				}
+			}
+			postStr += "]}";
+			String httpString = "https://console.tim.qq.com/v4/im_open_login_svc/multiaccount_import?usersig="+usersig+"&identifier="+identifier+"&sdkappid="+sdkappid+"&random=99999999&contenttype=json";
+			Map map = (Map)JSON.parse(ChangeCode.httpsRequest(httpString,"POST",postStr));
+			//System.out.println(map);
+		}
+		return null;
+	}*/
+}

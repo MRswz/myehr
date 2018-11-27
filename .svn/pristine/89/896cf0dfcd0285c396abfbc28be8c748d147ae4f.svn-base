@@ -1,0 +1,107 @@
+﻿@charset "UTF-8";
+html{font-size:62.5%;font-family:'helvetica neue',tahoma,arial,'hiragino sans gb','Simsun',sans-serif} 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,hr{margin:0;padding:0}
+body{line-height:1.333;font-size:12px}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-family:arial,'hiragino sans gb','microsoft yahei','Simsun',sans-serif}
+li{list-style:none}
+a:link,a:visited{text-decoration:none}
+
+.nav-logo{text-align: center; float: left; }
+.nav-logo img{height: 30px;padding: 15px;}
+.navbg{background: url(../../images/mainFrame/topbg.png) repeat; float: left;width: 100%; overflow: hidden;}
+.company-name{color: #fff;font-size: 20px;line-height: 65px; float: left;font-family: "microsoft yahei";letter-spacing: 2px;}
+.nav-tab{float: left;}
+.nav-tab a{padding: 22px 20px;font-size: 16px;color: #fff;line-height: 60px;}
+.nav-tab a.now,.nav-tab a:hover{background: #0196c1;}
+.navbg .user{float: right;margin-right:20px;}
+.user .home{padding:20px 15px 20px 30px;background: url(../../images/icons/navicon/icon_home.png) no-repeat 10px center;margin-right: 0px;}
+.user a{padding: 20px 15px;line-height: 60px; color: #fff;}
+.user a.user-name{padding:20px 15px 20px 15px;}
+.user span{display: inline-block;margin-bottom:-4px;width: 2px; height: 17px; background: url(../../images/mainFrame/line.png) no-repeat center center;}
+.user .search input{width: 100px;}
+.user .exit{padding: 20px 15px 20px 30px; background:url(../../images/icons/navicon/icon_exit.png) no-repeat 10px center; }
+
+.mini-tools .mini-tools-collapse{
+	background: url(../../images/icons/navicon/nav_arrow_left_collapse.png) no-repeat center center;
+}
+
+/*首页特殊的树样式*/
+.index-right-menu{
+	background: #FFFFFF;height: 100%;color: #fff;
+}
+.index-right-menu .mini-outlookbar-groupBody{
+	background: #1d2a33;
+}
+.index-right-menu .mini-grid-row{
+
+}
+.index-right-menu .mini-grid-row:hover{
+	border-left: solid 3px #53626d;background: #53626d;
+}
+.index-right-menu .mini-tree-nodetext{
+	font-size: 14px; text-indent: 20px;
+}
+.index-right-menu .mini-tree-nodetitle{
+	height: 40px;
+}
+.index-right-menu .mini-grid-row:hover .mini-tree-nodetitle{
+	
+}
+.index-right-menu .mini-tree-nodetext{
+	line-height: 40px;height: 40px;color: #bbbcbc;
+}   
+.index-right-menu .mini-tree-collapse{
+	background: url(../../images/mainFrame/arrowLeftGray.png) 170px center no-repeat;
+}
+.index-right-menu .mini-tree-expand{
+	background:#e3f0fc url(../../images/mainFrame/arrowDownGray.png) 170px center no-repeat;border-left:solid 3px #66aaff;
+}
+
+
+/*去掉一些不需要的标签或样式*/
+.index-right-menu .mini-tree-nodetitle a,.index-right-menu .mini-tree-icon,.index-right-menu .mini-tree-node-ecicon,.index-right-menu .mini-tree-nodeshow .mini-tree-folder{
+	display: none;
+}
+.index-right-menu .mini-tree-selectedNode .mini-tree-nodeshow{
+	background: none;border:none;
+}
+.index-right-menu .mini-tree-treeLine .mini-tree-indent{
+	background: none;
+}
+.index-right-menu .mini-tree-node-hover .mini-tree-nodeshow{
+	background: none;border:none;padding: 0;margin: 0;
+}
+/*首页竖导航方案*/
+.index-right-menu .mini-outlookbar .mini-outlookbar-icon{
+	margin-top: 11px;margin-right: 6px;
+}
+.index-right-menu .mini-outlookbar-groupHeader{
+	background: #334049;height: 36px;
+}
+
+.index-right-menu .mini-grid-rows-view{
+	height: auto;
+}
+.index-right-menu .mini-outlookbar-group{
+	border: none;
+}
+.index-right-menu .mini-outlookbar-border{
+	border: none;
+}
+.index-right-menu .mini-outlookbar-groupBody{
+	border: none;
+}
+
+.index-right-menu .mini-tools .mini-tools-collapse{
+	background: url(../../images/icons/navicon/nav_arrow_left_collapse.png) no-repeat center center;
+}
+.index-right-menu .mini-outlookbar-expand .mini-tools-collapse{
+	background: url(../../images/icons/navicon/nav_arrow_left_expand.png) no-repeat center center;
+}
+.index-right-menu .mini-tools{
+	margin-top: 8px;
+}
+.index-right-menu .mini-outlookbar-groupTitle{
+	font-size: 14px; font-weight: normal;line-height: 36px;
+}
+

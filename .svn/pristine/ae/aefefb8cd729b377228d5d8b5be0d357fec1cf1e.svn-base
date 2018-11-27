@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.question.SysQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.question.SysQuestion" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="NVARCHAR" />
+    <result column="ENAME" property="ename" jdbcType="NVARCHAR" />
+    <result column="GROUPID" property="groupid" jdbcType="INTEGER" />
+    <result column="XTYPE" property="xtype" jdbcType="INTEGER" />
+    <result column="DESCRIBE" property="describe" jdbcType="NVARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CODE, CNAME, ENAME, GROUPID, XTYPE, DESCRIBE, AMOUNT, REMARK, OPERATOR_NAME, 
+    OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.question.SysQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_QUESTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_QUESTION
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_QUESTION
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.question.SysQuestionExample" >
+    delete from SYS_QUESTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.question.SysQuestion" >
+    insert into SYS_QUESTION (ID, CODE, CNAME, 
+      ENAME, GROUPID, XTYPE, 
+      DESCRIBE, AMOUNT, REMARK, 
+      OPERATOR_NAME, OPERATOR_TIME)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{cname,jdbcType=NVARCHAR}, 
+      #{ename,jdbcType=NVARCHAR}, #{groupid,jdbcType=INTEGER}, #{xtype,jdbcType=INTEGER}, 
+      #{describe,jdbcType=NVARCHAR}, #{amount,jdbcType=DECIMAL}, #{remark,jdbcType=NVARCHAR}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.question.SysQuestion" >
+    insert into SYS_QUESTION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="ename != null" >
+        ENAME,
+      </if>
+      <if test="groupid != null" >
+        GROUPID,
+      </if>
+      <if test="xtype != null" >
+        XTYPE,
+      </if>
+      <if test="describe != null" >
+        DESCRIBE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=NVARCHAR},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="xtype != null" >
+        #{xtype,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=NVARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.question.SysQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_QUESTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_QUESTION
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        CNAME = #{record.cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.ename != null" >
+        ENAME = #{record.ename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.groupid != null" >
+        GROUPID = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.xtype != null" >
+        XTYPE = #{record.xtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.describe != null" >
+        DESCRIBE = #{record.describe,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_QUESTION
+    set ID = #{record.id,jdbcType=INTEGER},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      CNAME = #{record.cname,jdbcType=NVARCHAR},
+      ENAME = #{record.ename,jdbcType=NVARCHAR},
+      GROUPID = #{record.groupid,jdbcType=INTEGER},
+      XTYPE = #{record.xtype,jdbcType=INTEGER},
+      DESCRIBE = #{record.describe,jdbcType=NVARCHAR},
+      AMOUNT = #{record.amount,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.question.SysQuestion" >
+    update SYS_QUESTION
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        CNAME = #{cname,jdbcType=NVARCHAR},
+      </if>
+      <if test="ename != null" >
+        ENAME = #{ename,jdbcType=NVARCHAR},
+      </if>
+      <if test="groupid != null" >
+        GROUPID = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="xtype != null" >
+        XTYPE = #{xtype,jdbcType=INTEGER},
+      </if>
+      <if test="describe != null" >
+        DESCRIBE = #{describe,jdbcType=NVARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.question.SysQuestion" >
+    update SYS_QUESTION
+    set CODE = #{code,jdbcType=VARCHAR},
+      CNAME = #{cname,jdbcType=NVARCHAR},
+      ENAME = #{ename,jdbcType=NVARCHAR},
+      GROUPID = #{groupid,jdbcType=INTEGER},
+      XTYPE = #{xtype,jdbcType=INTEGER},
+      DESCRIBE = #{describe,jdbcType=NVARCHAR},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

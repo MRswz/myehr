@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysParam.SystemParmMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysParam.SystemParm" >
+    <id column="SYSTEM_PARM_ID" property="systemParmId" jdbcType="DECIMAL" />
+    <result column="PARM_NAME" property="parmName" jdbcType="NVARCHAR" />
+    <result column="PARM_PRICE" property="parmPrice" jdbcType="NVARCHAR" />
+    <result column="PARM_EXPLAIN" property="parmExplain" jdbcType="NVARCHAR" />
+    <result column="PARM_TYPE" property="parmType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SYSTEM_PARM_ID, PARM_NAME, PARM_PRICE, PARM_EXPLAIN, PARM_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysParam.SystemParmExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYSTEM_PARM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYSTEM_PARM
+    where SYSTEM_PARM_ID = #{systemParmId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYSTEM_PARM
+    where SYSTEM_PARM_ID = #{systemParmId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysParam.SystemParmExample" >
+    delete from SYSTEM_PARM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysParam.SystemParm" >
+    insert into SYSTEM_PARM (SYSTEM_PARM_ID, PARM_NAME, PARM_PRICE, 
+      PARM_EXPLAIN, PARM_TYPE)
+    values (#{systemParmId,jdbcType=DECIMAL}, #{parmName,jdbcType=NVARCHAR}, #{parmPrice,jdbcType=NVARCHAR}, 
+      #{parmExplain,jdbcType=NVARCHAR}, #{parmType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysParam.SystemParm" >
+    insert into SYSTEM_PARM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="systemParmId != null" >
+        SYSTEM_PARM_ID,
+      </if>
+      <if test="parmName != null" >
+        PARM_NAME,
+      </if>
+      <if test="parmPrice != null" >
+        PARM_PRICE,
+      </if>
+      <if test="parmExplain != null" >
+        PARM_EXPLAIN,
+      </if>
+      <if test="parmType != null" >
+        PARM_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="systemParmId != null" >
+        #{systemParmId,jdbcType=DECIMAL},
+      </if>
+      <if test="parmName != null" >
+        #{parmName,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmPrice != null" >
+        #{parmPrice,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmExplain != null" >
+        #{parmExplain,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmType != null" >
+        #{parmType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysParam.SystemParmExample" resultType="java.lang.Integer" >
+    select count(*) from SYSTEM_PARM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYSTEM_PARM
+    <set >
+      <if test="record.systemParmId != null" >
+        SYSTEM_PARM_ID = #{record.systemParmId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parmName != null" >
+        PARM_NAME = #{record.parmName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parmPrice != null" >
+        PARM_PRICE = #{record.parmPrice,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parmExplain != null" >
+        PARM_EXPLAIN = #{record.parmExplain,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parmType != null" >
+        PARM_TYPE = #{record.parmType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYSTEM_PARM
+    set SYSTEM_PARM_ID = #{record.systemParmId,jdbcType=DECIMAL},
+      PARM_NAME = #{record.parmName,jdbcType=NVARCHAR},
+      PARM_PRICE = #{record.parmPrice,jdbcType=NVARCHAR},
+      PARM_EXPLAIN = #{record.parmExplain,jdbcType=NVARCHAR},
+      PARM_TYPE = #{record.parmType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysParam.SystemParm" >
+    update SYSTEM_PARM
+    <set >
+      <if test="parmName != null" >
+        PARM_NAME = #{parmName,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmPrice != null" >
+        PARM_PRICE = #{parmPrice,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmExplain != null" >
+        PARM_EXPLAIN = #{parmExplain,jdbcType=NVARCHAR},
+      </if>
+      <if test="parmType != null" >
+        PARM_TYPE = #{parmType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where SYSTEM_PARM_ID = #{systemParmId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysParam.SystemParm" >
+    update SYSTEM_PARM
+    set PARM_NAME = #{parmName,jdbcType=NVARCHAR},
+      PARM_PRICE = #{parmPrice,jdbcType=NVARCHAR},
+      PARM_EXPLAIN = #{parmExplain,jdbcType=NVARCHAR},
+      PARM_TYPE = #{parmType,jdbcType=NVARCHAR}
+    where SYSTEM_PARM_ID = #{systemParmId,jdbcType=DECIMAL}
+  </update>
+</mapper>

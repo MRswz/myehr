@@ -1,0 +1,2101 @@
+{"data":[
+{
+ "menuCode":"orgPlan",
+ "menuName":"组织规划",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"org_manage",
+ "menuName":"机构管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"org_manage01",
+ "menuName":"公司管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1101"
+},
+{
+ "menuCode":"org_manage02",
+ "menuName":"部门管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1061"
+},
+{
+ "menuCode":"org_manage03",
+ "menuName":"部门审批关系",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1142"
+}]
+},
+{
+ "menuCode":"post_manage",
+ "menuName":"岗职位管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"post_manage01",
+ "menuName":"职位信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2639"
+},
+{
+ "menuCode":"post_manage02",
+ "menuName":"岗位信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1145"
+},
+{
+ "menuCode":"post_manage03",
+ "menuName":"职位任职资格",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2720"
+},
+{
+ "menuCode":"post_manage04",
+ "menuName":"职位KPI信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+},
+{
+ "menuCode":"post_manage05",
+ "menuName":"培训要求",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+}]
+},
+{
+ "menuCode":"Orgation_manage",
+ "menuName":"编制管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Orgation_manage01",
+ "menuName":"部门编制",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2813"
+},
+{
+ "menuCode":"Orgation_manage02",
+ "menuName":"岗位编制",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2820"
+},
+{
+ "menuCode":"Orgation_manage03",
+ "menuName":"分类编制",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2828"
+}]
+},
+{
+ "menuCode":"Virtual_org",
+ "menuName":"虚拟机构",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Virtual_org01",
+ "menuName":"虚拟部门",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2764"
+},
+{
+ "menuCode":"Virtual_org02",
+ "menuName":"虚拟岗位",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2767"
+}]
+},
+{
+ "menuCode":"statistical_anay",
+ "menuName":"统计分析",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"statistical_anay01",
+ "menuName":"组织机构图",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1901"
+},
+{
+ "menuCode":"statistical_anay02",
+ "menuName":"机构历史存档",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2795"
+},
+{
+ "menuCode":"statistical_anay03",
+ "menuName":"部门历史存档",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2796"
+},
+{
+ "menuCode":"statistical_anay04",
+ "menuName":"缺编岗位明细",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+},
+{
+ "menuCode":"statistical_anay05",
+ "menuName":"岗位花名册",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+},
+{
+ "menuCode":"statistical_anay06",
+ "menuName":"组织机构等级",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+},
+{
+ "menuCode":"statistical_anay07",
+ "menuName":"部门职责说明书",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+},
+{
+ "menuCode":"statistical_anay08",
+ "menuName":"岗位职责说明书",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1213"
+}]
+}]
+},
+{
+ "menuCode":"Personnelmanagement",
+ "menuName":"人员管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo01",
+ "menuName":"员工信息管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0100",
+ "menuName":"待入职员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2755"
+},
+{
+ "menuCode":"emp_empinfo0101",
+ "menuName":"在职员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1209"
+},
+{
+ "menuCode":"emp_empinfo0102",
+ "menuName":"试用期员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2690"
+},
+{
+ "menuCode":"emp_empinfo0103",
+ "menuName":"实习期员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2746"
+},
+{
+ "menuCode":"emp_empinfo0104",
+ "menuName":"离职员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2748"
+},
+{
+ "menuCode":"emp_empinfo0105",
+ "menuName":"退休员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2750"
+},
+{
+ "menuCode":"emp_empinfo0106",
+ "menuName":"内退员工",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0107",
+ "menuName":"历史数据查询",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1321"
+},
+{
+ "menuCode":"emp_empinfo0109",
+ "menuName":"证件管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1209"
+},
+{
+ "menuCode":"emp_empinfo0110",
+ "menuName":"员工档案管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+}]
+},
+{
+ "menuCode":"emp_empinfo02",
+ "menuName":"人员附表管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0201",
+ "menuName":"人员履历",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2648"
+},
+{
+ "menuCode":"emp_empinfo0202",
+ "menuName":"证照信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2654"
+},
+{
+ "menuCode":"emp_empinfo0203",
+ "menuName":"联系信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2735"
+},
+{
+ "menuCode":"emp_empinfo0204",
+ "menuName":"专业能力",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2741"
+},
+{
+ "menuCode":"emp_empinfo0205",
+ "menuName":"工伤管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2744"
+},
+{
+ "menuCode":"emp_empinfo0206",
+ "menuName":"绩效考核",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+}]
+},
+{
+ "menuCode":"emp_empinfo03",
+ "menuName":"人员调配管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0302",
+ "menuName":"入职手续办理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2772"
+},
+{
+ "menuCode":"emp_empinfo0303",
+ "menuName":"实习期变动",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2792"
+},
+{
+ "menuCode":"emp_empinfo0304",
+ "menuName":"实习转正",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2794"
+},
+{
+ "menuCode":"emp_empinfo0305",
+ "menuName":"试用期变动",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2801"
+},
+{
+ "menuCode":"emp_empinfo0306",
+ "menuName":"试用转正",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2812"
+},
+{
+ "menuCode":"emp_empinfo0307",
+ "menuName":"部门与岗位变动",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2825"
+},
+{
+ "menuCode":"emp_empinfo0308",
+ "menuName":"员工离职",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2858"
+},
+{
+ "menuCode":"emp_empinfo0309",
+ "menuName":"员工退休",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2868"
+},
+{
+ "menuCode":"emp_empinfo0310",
+ "menuName":"干部晋升",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2871"
+},
+{
+ "menuCode":"emp_empinfo0311",
+ "menuName":"离职手续办理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2880"
+},
+{
+ "menuCode":"emp_empinfo0312",
+ "menuName":"员工借调/挂职",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2883"
+},
+{
+ "menuCode":"emp_empinfo0313",
+ "menuName":"内退信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2886"
+},
+{
+ "menuCode":"emp_empinfo0314",
+ "menuName":"任职/兼职管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2892"
+},
+{
+ "menuCode":"emp_empinfo0315",
+ "menuName":"员工借调/外派",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2853"
+}]
+},
+{
+ "menuCode":"emp_empinfo04",
+ "menuName":"劳工合同",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0401",
+ "menuName":"合同新签",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2907"
+},
+{
+ "menuCode":"emp_empinfo0402",
+ "menuName":"续签流程",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2912"
+},
+{
+ "menuCode":"emp_empinfo0403",
+ "menuName":"合同变更登记",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2915"
+},
+{
+ "menuCode":"emp_empinfo0404",
+ "menuName":"合同终止登记",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2920"
+},
+{
+ "menuCode":"emp_empinfo0405",
+ "menuName":"合同解除登记",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2930"
+},
+{
+ "menuCode":"emp_empinfo0406",
+ "menuName":"合同管理历史",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0407",
+ "menuName":"合同最新信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0408",
+ "menuName":"培训协议",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+}]
+},
+{
+ "menuCode":"emp_empinfo05",
+ "menuName":"警戒提醒",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0501",
+ "menuName":"合同未签订",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0502",
+ "menuName":"合同将到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0503",
+ "menuName":"合同已到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0504",
+ "menuName":"需签无固定期限合同",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0505",
+ "menuName":"试用期将到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0506",
+ "menuName":"试用已到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0507",
+ "menuName":"实习将到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0508",
+ "menuName":"实习已到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0509",
+ "menuName":"晋升试用将到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0510",
+ "menuName":"晋升试用已到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0511",
+ "menuName":"证件到期",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0512",
+ "menuName":"本月生日",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0513",
+ "menuName":"本月将离职人员",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0514",
+ "menuName":"满周年提醒",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+}]
+},
+{
+ "menuCode":"emp_empinfo06",
+ "menuName":"报表管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_empinfo0601",
+ "menuName":"员工登记",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0602",
+ "menuName":"员工履历",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0603",
+ "menuName":"员工异动",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0604",
+ "menuName":"在职学习与年龄分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0605",
+ "menuName":"离职原因分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0606",
+ "menuName":"流动率分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+},
+{
+ "menuCode":"emp_empinfo0607",
+ "menuName":"员工状态分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"981"
+}]
+},
+{
+ "menuCode":"Personnelinformationmanagement",
+ "menuName":"人员信息管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1209"
+}]
+},
+{
+ "menuCode":"pay_wages_boon",
+ "menuName":"薪酬福利",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_standard",
+ "menuName":"薪酬标准",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_grade",
+ "menuName":"薪酬等级标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1383"
+},
+{
+ "menuCode":"pay_social_security",
+ "menuName":"社保地区标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1421"
+},
+{
+ "menuCode":"pay_item",
+ "menuName":"薪酬项目",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2844"
+},
+{
+ "menuCode":"pay_tax_standard",
+ "menuName":"个调税标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1424"
+},
+{
+ "menuCode":"pay_payroll_unit",
+ "menuName":"发薪单位管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1424"
+},
+{
+ "menuCode":"pay_cost_center",
+ "menuName":"成本中心管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1424"
+}]
+},
+{
+ "menuCode":"pay_wages_item",
+ "menuName":"薪酬福利标准",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_standard_list",
+ "menuName":"职等薪档表",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1383"
+},
+{
+ "menuCode":"pay_tax_list",
+ "menuName":"个税标准表",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1424"
+},
+{
+ "menuCode":"pay_housing_sub",
+ "menuName":"住房津贴标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1682"
+},
+{
+ "menuCode":"pay_traffic_sub",
+ "menuName":"交通补贴标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1681"
+},
+{
+ "menuCode":"pay_lunch_sub",
+ "menuName":"餐补标准表",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1684"
+},
+{
+ "menuCode":"pay_telephone_sub",
+ "menuName":"通讯费补贴标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1683"
+},
+{
+ "menuCode":"pay_reduction_standard",
+ "menuName":"个税减免标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2632"
+}]
+},
+{
+ "menuCode":"pay_guarantee",
+ "menuName":"社保福利",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_welfare",
+ "menuName":"法定福利标准",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1421"
+}]
+},
+{
+ "menuCode":"pay_wages_count",
+ "menuName":"薪酬核算",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_staff_wages",
+ "menuName":"员工薪酬标准信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1570"
+},
+{
+ "menuCode":"pay_monthly_assess",
+ "menuName":"月度考勤信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1563"
+},
+{
+ "menuCode":"pay_issue",
+ "menuName":"保险福利核算",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1582"
+},
+{
+ "menuCode":"pay_monthly_count",
+ "menuName":"薪资计算",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1567"
+},
+{
+ "menuCode":"PAY_COUNT_HIS",
+ "menuName":"薪酬核算历史查询",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2102"
+},
+{
+ "menuCode":"PAY_YEAR_PERFORMANCE",
+ "menuName":"年终绩效清算",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2082"
+}]
+},
+{
+ "menuCode":"pay_stand_v8",
+ "menuName":"薪资标准规划",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_gz005",
+ "menuName":"岗位薪资对照-直管",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2846"
+},
+{
+ "menuCode":"pay_gz006",
+ "menuName":"岗位薪资对照-非直",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2847"
+}]
+},
+{
+ "menuCode":"pay_usually",
+ "menuName":"薪资日常",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pay_gz01",
+ "menuName":"薪资基础",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2849"
+},
+{
+ "menuCode":"pay_gzpat1",
+ "menuName":"薪资计算",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2859"
+}]
+}]
+},
+{
+ "menuCode":"attendanceManager",
+ "menuName":"考勤管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"att_paibanguali",
+ "menuName":"排班管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"ATT_BANCIXINXI",
+ "menuName":"班次信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2864"
+},
+{
+ "menuCode":"ATT_PANCIXINXI",
+ "menuName":"排班信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2873"
+}]
+},
+{
+ "menuCode":"att_holiday_manager",
+ "menuName":"假期管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1561"
+},
+{
+ "menuCode":"workdaymanager2",
+ "menuName":"工作日历管理",
+ "menuUrl":"system/clendar/workday/workday.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"att_leave_dispose",
+ "menuName":"请假管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1461"
+},
+{
+ "menuCode":"att_overtime_dispose",
+ "menuName":"加班管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1464"
+},
+{
+ "menuCode":"att_month_statistics",
+ "menuName":"月考勤统计",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2624"
+}]
+},
+{
+ "menuCode":"performance_appraisal",
+ "menuName":"绩效考核",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"perManagement_department",
+ "menuName":"定性考评",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pr_examinerManagement",
+ "menuName":"考评官管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1704"
+},
+{
+ "menuCode":"per_relation",
+ "menuName":"部门考评关系管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1706"
+},
+{
+ "menuCode":"per_authorize",
+ "menuName":"部门考评授权",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2161"
+},
+{
+ "menuCode":"per_submit_dept",
+ "menuName":"部门考评提交进度",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2363"
+},
+{
+ "menuCode":"per_submit_emp",
+ "menuName":"领导互评提交进度",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2364"
+},
+{
+ "menuCode":"per_gradeManager",
+ "menuName":"部门考评成绩管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1707"
+},
+{
+ "menuCode":"per_grade_leadManager",
+ "menuName":"领导互评成绩管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2322"
+}]
+}]
+},
+{
+ "menuCode":"reportManager",
+ "menuName":"报表管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"employeeReport",
+ "menuName":"员工报表",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"HistoricalDataQuery",
+ "menuName":"历史数据查询",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1721"
+},
+{
+ "menuCode":"EmpEntryAnalyze",
+ "menuName":"人员入职分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2103"
+},
+{
+ "menuCode":"EmpAnalyze",
+ "menuName":"常规人员数据分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2263"
+},
+{
+ "menuCode":"EmpLeaveAnalyze",
+ "menuName":"人员离职分析",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2262"
+}]
+},
+{
+ "menuCode":"CompensationReport",
+ "menuName":"薪酬报表",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Detailed_list",
+ "menuName":"职等薪档人员明细表",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1741"
+},
+{
+ "menuCode":"prebyPerson",
+ "menuName":"预分配绩效表（按人）",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1742"
+},
+{
+ "menuCode":"perbyDepartment",
+ "menuName":"预分配绩效表（部门）",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1743"
+},
+{
+ "menuCode":"payWelfarestand",
+ "menuName":"五险一金统计表",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1745"
+},
+{
+ "menuCode":"AnIncomeStatistics",
+ "menuName":"年均收入统计表(按人)",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1744"
+},
+{
+ "menuCode":"AnIncomeOrg",
+ "menuName":"年均收入统计表(部门)",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2264"
+},
+{
+ "menuCode":"AnIncomeLevel",
+ "menuName":"年均收入统计表(层级)",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2265"
+}]
+},
+{
+ "menuCode":"ykTestReport",
+ "menuName":"易客报表测试",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"ykTestReport1",
+ "menuName":"报表测试1",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"Q",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2647"
+}]
+}]
+},
+{
+ "menuCode":"flowManager",
+ "menuName":"流程管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"flowmenumanager",
+ "menuName":"流程菜单管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2028"
+},
+{
+ "menuCode":"flowDefineManager",
+ "menuName":"业务流程管理",
+ "menuUrl":"flow/flowDefine/flowDefineManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"proInstManager",
+ "menuName":"流程实例管理",
+ "menuUrl":"workflow/wfmanager/instance/left.jsp",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"agentManager",
+ "menuName":"代理管理",
+ "menuUrl":"workflow/wfmanager/agent/index_agent.jsp",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"delegateManager",
+ "menuName":"代办管理",
+ "menuUrl":"workflow/wfmanager/delegate/delegateMgr.jsp",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"importExport",
+ "menuName":"导入导出",
+ "menuUrl":"workflow/wfmanager/definition/import_export.jsp",
+ "menuType":"L",
+ "menuDictCode":"F",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+}]
+},
+{
+ "menuCode":"powerManager",
+ "menuName":"权限管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"roleManager",
+ "menuName":"角色管理",
+ "menuUrl":"system/role/roleManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"userManager",
+ "menuName":"用户信息管理",
+ "menuUrl":"auth/user/queryUserList.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"roleUserManager",
+ "menuName":"角色用户管理",
+ "menuUrl":"auth/userRole/userRoleManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"roleMenuManager",
+ "menuName":"角色菜单管理",
+ "menuUrl":"auth/roleMenu/roleMenuManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"roleorg",
+ "menuName":"角色机构权限",
+ "menuUrl":"auth/roleOrg/roleOrgManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"roleFiledButtonManager",
+ "menuName":"角色字段按钮管理",
+ "menuUrl":"auth/roleFieldButton/roleFiledButtonManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"userDictManager",
+ "menuName":"用户字典管理",
+ "menuUrl":"auth/userDict/userDictManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"roleFlowManager",
+ "menuName":"角色流程管理",
+ "menuUrl":"ciitehr/roleFlowmenu/roleFlowMenuManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"2031"
+},
+{
+ "menuCode":"portalroler",
+ "menuName":"角色门户权限",
+ "menuUrl":"system/portal/portalRole.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+}]
+},
+{
+ "menuCode":"systemManager",
+ "menuName":"系统管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"portal",
+ "menuName":"门户管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"portalItemManager",
+ "menuName":"门户模块管理",
+ "menuUrl":"system/portal/introducePortalSchemeItem.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"notice_manager",
+ "menuName":"公告管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1942"
+},
+{
+ "menuCode":"filedown",
+ "menuName":"资料管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2204"
+},
+{
+ "menuCode":"portalSchemeManager",
+ "menuName":"门户方案管理",
+ "menuUrl":"system/portal/portalSchemeConfiguration.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+}]
+},
+{
+ "menuCode":"ConfigurationManager",
+ "menuName":"配置实施管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"dataStructureManager",
+ "menuName":"数据结构管理",
+ "menuUrl":"system/entity/entityAndFieldManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"dynamicFormManager",
+ "menuName":"动态表单管理",
+ "menuUrl":"form/form/formFrame/formHome.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"sqlParamManager",
+ "menuName":"参数管理",
+ "menuUrl":"system/sqlParam/sqlParamManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"fagl",
+ "menuName":"业务规则管理",
+ "menuUrl":"system/scheme/schemeManage.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"treesolution",
+ "menuName":"树方案管理",
+ "menuUrl":"form/form/treesolution/treesolutionHome.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+}]
+},
+{
+ "menuCode":"portalConfiguration",
+ "menuName":"门户资料公告",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"notice_manager",
+ "menuName":"公告管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"1942"
+},
+{
+ "menuCode":"filedown",
+ "menuName":"资料管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2204"
+}]
+},
+{
+ "menuCode":"logManager",
+ "menuName":"日志管理",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"auditLog",
+ "menuName":"审计日志",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2242"
+},
+{
+ "menuCode":"TIMING_LOG",
+ "menuName":"调度日志查询",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2421"
+},
+{
+ "menuCode":"LOGIN-LOG",
+ "menuName":"登录日志",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2634"
+}]
+},
+{
+ "menuCode":"menuManager",
+ "menuName":"菜单管理",
+ "menuUrl":"system/menu/menuManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+},
+{
+ "menuCode":"dictManager",
+ "menuName":"数据字典管理",
+ "menuUrl":"system/dict/dictManager.jsp",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null"
+}]
+},
+{
+ "menuCode":"hr_Gateway",
+ "menuName":"HR门户",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Def_gateway",
+ "menuName":"默认门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Def_gatewayy",
+ "menuName":"默认门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2941"
+}]
+},
+{
+ "menuCode":"CEO_gateway",
+ "menuName":"CEO门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"CEO_gatewayy",
+ "menuName":"CEO门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2940"
+}]
+},
+{
+ "menuCode":"dept_gateway",
+ "menuName":"部门经理门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"dept_gatewayy",
+ "menuName":"部门经理门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2942"
+}]
+},
+{
+ "menuCode":"emp_gateway",
+ "menuName":"员工自助门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"emp_gatewayy",
+ "menuName":"员工自助门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2943"
+}]
+},
+{
+ "menuCode":"org_gateway",
+ "menuName":"组织门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"org_gatewayy",
+ "menuName":"组织门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2944"
+}]
+},
+{
+ "menuCode":"Per_gateway",
+ "menuName":"人事门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Per_gatewayy",
+ "menuName":"人事门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2945"
+}]
+},
+{
+ "menuCode":"Pay_gateway",
+ "menuName":"薪酬门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Pay_gatewayy",
+ "menuName":"薪酬门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2946"
+}]
+},
+{
+ "menuCode":"Check_gateway",
+ "menuName":"考勤门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Check_gatewayy",
+ "menuName":"考勤门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2947"
+}]
+},
+{
+ "menuCode":"recruit_gateway",
+ "menuName":"招聘门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"recruit_gatewayy",
+ "menuName":"招聘门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2948"
+}]
+},
+{
+ "menuCode":"Ach_gateway",
+ "menuName":"绩效门户",
+ "menuUrl":"null",
+ "menuType":"F",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"Ach_gatewayy",
+ "menuName":"绩效门户",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2949"
+}]
+}]
+},
+{
+ "menuCode":"systemproject",
+ "menuName":"项目管理",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"pj_manager",
+ "menuName":"项目管理",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2973"
+},
+{
+ "menuCode":"pj_plan",
+ "menuName":"项目计划",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2982"
+},
+{
+ "menuCode":"pj_weekly",
+ "menuName":"项目周报",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2959"
+},
+{
+ "menuCode":"pj_daily",
+ "menuName":"项目日报",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2983"
+},
+{
+ "menuCode":"pj_Risk_plan",
+ "menuName":"风险计划汇总",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"2993"
+},
+{
+ "menuCode":"pj_Problemlist",
+ "menuName":"问题反馈清单",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"3000"
+},
+{
+ "menuCode":"pm_slove",
+ "menuName":"问题解决清单",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"3052"
+}]
+},
+{
+ "menuCode":"CRM_case",
+ "menuName":"客户信息",
+ "menuUrl":"null",
+ "menuType":"M",
+ "menuDictCode":"null",
+ "menuIsDynamicForm":"N",
+ "menuFormId":"null",
+ "childrens":[
+{
+ "menuCode":"CRM_case1",
+ "menuName":"基本信息",
+ "menuUrl":"null",
+ "menuType":"L",
+ "menuDictCode":"B",
+ "menuIsDynamicForm":"Y",
+ "menuFormId":"3053"
+}]
+}]}

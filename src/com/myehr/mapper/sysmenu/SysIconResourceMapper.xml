@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysmenu.SysIconResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysmenu.SysIconResource" >
+    <id column="ICON_CODE" property="iconCode" jdbcType="VARCHAR" />
+    <result column="ICON_NAME" property="iconName" jdbcType="VARCHAR" />
+    <result column="FOLDER_ID" property="folderId" jdbcType="DECIMAL" />
+    <result column="IMG_FILE_ID" property="imgFileId" jdbcType="VARCHAR" />
+    <result column="CHECKED_IMG_FILE_ID" property="checkedImgFileId" jdbcType="VARCHAR" />
+    <result column="ICON_TYPE" property="iconType" jdbcType="CHAR" />
+    <result column="ICON_URL" property="iconUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ICON_CODE, ICON_NAME, FOLDER_ID, IMG_FILE_ID, CHECKED_IMG_FILE_ID, ICON_TYPE, ICON_URL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysmenu.SysIconResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ICON_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ICON_RESOURCE
+    where ICON_CODE = #{iconCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ICON_RESOURCE
+    where ICON_CODE = #{iconCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysmenu.SysIconResourceExample" >
+    delete from SYS_ICON_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysmenu.SysIconResource" >
+    insert into SYS_ICON_RESOURCE (ICON_CODE, ICON_NAME, FOLDER_ID, 
+      IMG_FILE_ID, CHECKED_IMG_FILE_ID, ICON_TYPE, 
+      ICON_URL)
+    values (#{iconCode,jdbcType=VARCHAR}, #{iconName,jdbcType=VARCHAR}, #{folderId,jdbcType=DECIMAL}, 
+      #{imgFileId,jdbcType=VARCHAR}, #{checkedImgFileId,jdbcType=VARCHAR}, #{iconType,jdbcType=CHAR}, 
+      #{iconUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysmenu.SysIconResource" >
+    insert into SYS_ICON_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iconCode != null" >
+        ICON_CODE,
+      </if>
+      <if test="iconName != null" >
+        ICON_NAME,
+      </if>
+      <if test="folderId != null" >
+        FOLDER_ID,
+      </if>
+      <if test="imgFileId != null" >
+        IMG_FILE_ID,
+      </if>
+      <if test="checkedImgFileId != null" >
+        CHECKED_IMG_FILE_ID,
+      </if>
+      <if test="iconType != null" >
+        ICON_TYPE,
+      </if>
+      <if test="iconUrl != null" >
+        ICON_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iconCode != null" >
+        #{iconCode,jdbcType=VARCHAR},
+      </if>
+      <if test="iconName != null" >
+        #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderId != null" >
+        #{folderId,jdbcType=DECIMAL},
+      </if>
+      <if test="imgFileId != null" >
+        #{imgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedImgFileId != null" >
+        #{checkedImgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="iconType != null" >
+        #{iconType,jdbcType=CHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysmenu.SysIconResourceExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ICON_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ICON_RESOURCE
+    <set >
+      <if test="record.iconCode != null" >
+        ICON_CODE = #{record.iconCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconName != null" >
+        ICON_NAME = #{record.iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.folderId != null" >
+        FOLDER_ID = #{record.folderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.imgFileId != null" >
+        IMG_FILE_ID = #{record.imgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkedImgFileId != null" >
+        CHECKED_IMG_FILE_ID = #{record.checkedImgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iconType != null" >
+        ICON_TYPE = #{record.iconType,jdbcType=CHAR},
+      </if>
+      <if test="record.iconUrl != null" >
+        ICON_URL = #{record.iconUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ICON_RESOURCE
+    set ICON_CODE = #{record.iconCode,jdbcType=VARCHAR},
+      ICON_NAME = #{record.iconName,jdbcType=VARCHAR},
+      FOLDER_ID = #{record.folderId,jdbcType=DECIMAL},
+      IMG_FILE_ID = #{record.imgFileId,jdbcType=VARCHAR},
+      CHECKED_IMG_FILE_ID = #{record.checkedImgFileId,jdbcType=VARCHAR},
+      ICON_TYPE = #{record.iconType,jdbcType=CHAR},
+      ICON_URL = #{record.iconUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysmenu.SysIconResource" >
+    update SYS_ICON_RESOURCE
+    <set >
+      <if test="iconName != null" >
+        ICON_NAME = #{iconName,jdbcType=VARCHAR},
+      </if>
+      <if test="folderId != null" >
+        FOLDER_ID = #{folderId,jdbcType=DECIMAL},
+      </if>
+      <if test="imgFileId != null" >
+        IMG_FILE_ID = #{imgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedImgFileId != null" >
+        CHECKED_IMG_FILE_ID = #{checkedImgFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="iconType != null" >
+        ICON_TYPE = #{iconType,jdbcType=CHAR},
+      </if>
+      <if test="iconUrl != null" >
+        ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ICON_CODE = #{iconCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysmenu.SysIconResource" >
+    update SYS_ICON_RESOURCE
+    set ICON_NAME = #{iconName,jdbcType=VARCHAR},
+      FOLDER_ID = #{folderId,jdbcType=DECIMAL},
+      IMG_FILE_ID = #{imgFileId,jdbcType=VARCHAR},
+      CHECKED_IMG_FILE_ID = #{checkedImgFileId,jdbcType=VARCHAR},
+      ICON_TYPE = #{iconType,jdbcType=CHAR},
+      ICON_URL = #{iconUrl,jdbcType=VARCHAR}
+    where ICON_CODE = #{iconCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

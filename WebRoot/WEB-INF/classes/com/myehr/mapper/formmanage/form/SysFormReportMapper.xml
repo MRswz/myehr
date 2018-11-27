@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormReportMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormReport" >
+    <id column="REPORT_ID" property="reportId" jdbcType="DECIMAL" />
+    <result column="REPORT_FORM_ID" property="reportFormId" jdbcType="DECIMAL" />
+    <result column="REPORT_ROW_COUNT" property="reportRowCount" jdbcType="DECIMAL" />
+    <result column="REPORT_LABLE_WIDTH" property="reportLableWidth" jdbcType="VARCHAR" />
+    <result column="REPORT_REL_ID" property="reportRelId" jdbcType="VARCHAR" />
+    <result column="REPORT_BUTTON_NAME" property="reportButtonName" jdbcType="VARCHAR" />
+    <result column="REPORT_BUTTON_SELF_FUN" property="reportButtonSelfFun" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    REPORT_ID, REPORT_FORM_ID, REPORT_ROW_COUNT, REPORT_LABLE_WIDTH, REPORT_REL_ID, REPORT_BUTTON_NAME, 
+    REPORT_BUTTON_SELF_FUN, OPERATOR_NAME, OPERATOR_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_REPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_REPORT
+    where REPORT_ID = #{reportId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_REPORT
+    where REPORT_ID = #{reportId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormReportExample" >
+    delete from SYS_FORM_REPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormReport" >
+    insert into SYS_FORM_REPORT (REPORT_ID, REPORT_FORM_ID, REPORT_ROW_COUNT, 
+      REPORT_LABLE_WIDTH, REPORT_REL_ID, REPORT_BUTTON_NAME, 
+      REPORT_BUTTON_SELF_FUN, OPERATOR_NAME, OPERATOR_TIME
+      )
+    values (#{reportId,jdbcType=DECIMAL}, #{reportFormId,jdbcType=DECIMAL}, #{reportRowCount,jdbcType=DECIMAL}, 
+      #{reportLableWidth,jdbcType=VARCHAR}, #{reportRelId,jdbcType=VARCHAR}, #{reportButtonName,jdbcType=VARCHAR}, 
+      #{reportButtonSelfFun,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormReport" >
+    insert into SYS_FORM_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        REPORT_ID,
+      </if>
+      <if test="reportFormId != null" >
+        REPORT_FORM_ID,
+      </if>
+      <if test="reportRowCount != null" >
+        REPORT_ROW_COUNT,
+      </if>
+      <if test="reportLableWidth != null" >
+        REPORT_LABLE_WIDTH,
+      </if>
+      <if test="reportRelId != null" >
+        REPORT_REL_ID,
+      </if>
+      <if test="reportButtonName != null" >
+        REPORT_BUTTON_NAME,
+      </if>
+      <if test="reportButtonSelfFun != null" >
+        REPORT_BUTTON_SELF_FUN,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        #{reportId,jdbcType=DECIMAL},
+      </if>
+      <if test="reportFormId != null" >
+        #{reportFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="reportRowCount != null" >
+        #{reportRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="reportLableWidth != null" >
+        #{reportLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="reportRelId != null" >
+        #{reportRelId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportButtonName != null" >
+        #{reportButtonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportButtonSelfFun != null" >
+        #{reportButtonSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormReportExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_REPORT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_REPORT
+    <set >
+      <if test="record.reportId != null" >
+        REPORT_ID = #{record.reportId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportFormId != null" >
+        REPORT_FORM_ID = #{record.reportFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportRowCount != null" >
+        REPORT_ROW_COUNT = #{record.reportRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportLableWidth != null" >
+        REPORT_LABLE_WIDTH = #{record.reportLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportRelId != null" >
+        REPORT_REL_ID = #{record.reportRelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportButtonName != null" >
+        REPORT_BUTTON_NAME = #{record.reportButtonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportButtonSelfFun != null" >
+        REPORT_BUTTON_SELF_FUN = #{record.reportButtonSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_REPORT
+    set REPORT_ID = #{record.reportId,jdbcType=DECIMAL},
+      REPORT_FORM_ID = #{record.reportFormId,jdbcType=DECIMAL},
+      REPORT_ROW_COUNT = #{record.reportRowCount,jdbcType=DECIMAL},
+      REPORT_LABLE_WIDTH = #{record.reportLableWidth,jdbcType=VARCHAR},
+      REPORT_REL_ID = #{record.reportRelId,jdbcType=VARCHAR},
+      REPORT_BUTTON_NAME = #{record.reportButtonName,jdbcType=VARCHAR},
+      REPORT_BUTTON_SELF_FUN = #{record.reportButtonSelfFun,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormReport" >
+    update SYS_FORM_REPORT
+    <set >
+      <if test="reportFormId != null" >
+        REPORT_FORM_ID = #{reportFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="reportRowCount != null" >
+        REPORT_ROW_COUNT = #{reportRowCount,jdbcType=DECIMAL},
+      </if>
+      <if test="reportLableWidth != null" >
+        REPORT_LABLE_WIDTH = #{reportLableWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="reportRelId != null" >
+        REPORT_REL_ID = #{reportRelId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportButtonName != null" >
+        REPORT_BUTTON_NAME = #{reportButtonName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportButtonSelfFun != null" >
+        REPORT_BUTTON_SELF_FUN = #{reportButtonSelfFun,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where REPORT_ID = #{reportId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormReport" >
+    update SYS_FORM_REPORT
+    set REPORT_FORM_ID = #{reportFormId,jdbcType=DECIMAL},
+      REPORT_ROW_COUNT = #{reportRowCount,jdbcType=DECIMAL},
+      REPORT_LABLE_WIDTH = #{reportLableWidth,jdbcType=VARCHAR},
+      REPORT_REL_ID = #{reportRelId,jdbcType=VARCHAR},
+      REPORT_BUTTON_NAME = #{reportButtonName,jdbcType=VARCHAR},
+      REPORT_BUTTON_SELF_FUN = #{reportButtonSelfFun,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP}
+    where REPORT_ID = #{reportId,jdbcType=DECIMAL}
+  </update>
+</mapper>

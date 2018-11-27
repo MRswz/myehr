@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.SysUserExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.SysUser" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_CODE" property="userCode" jdbcType="NVARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="NVARCHAR" />
+    <result column="USER_TALEPHONE" property="userTalephone" jdbcType="NVARCHAR" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="NVARCHAR" />
+    <result column="USER_STATUS" property="userStatus" jdbcType="NVARCHAR" />
+    <result column="USER_TIME_START" property="userTimeStart" jdbcType="TIMESTAMP" />
+    <result column="USER_TIME_END" property="userTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="USER_STYLE" property="userStyle" jdbcType="NVARCHAR" />
+    <result column="USER_LASTLOGIN" property="userLastlogin" jdbcType="TIMESTAMP" />
+    <result column="USER_ERRCOUNT" property="userErrcount" jdbcType="INTEGER" />
+    <result column="USER_IPADDRESS" property="userIpaddress" jdbcType="NVARCHAR" />
+    <result column="USER_REMARK" property="userRemark" jdbcType="NVARCHAR" />
+    <result column="EMP_ID" property="empId" jdbcType="INTEGER" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="NVARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="ORG_UNIT" property="orgUnit" jdbcType="NVARCHAR" />
+    <result column="AREA_UNIT" property="areaUnit" jdbcType="NVARCHAR" />
+    <result column="PERSON_UNIT" property="personUnit" jdbcType="NVARCHAR" />
+    <result column="PAY_UNIT" property="payUnit" jdbcType="NVARCHAR" />
+    <result column="ATT_UNIT" property="attUnit" jdbcType="NVARCHAR" />
+    <result column="PERFORMANCE_UNIY" property="performanceUniy" jdbcType="NVARCHAR" />
+    <result column="PROJECT_UNIT" property="projectUnit" jdbcType="NVARCHAR" />
+    <result column="BUSINESS_LINE" property="businessLine" jdbcType="NVARCHAR" />
+    <result column="SCHEME_ID" property="schemeId" jdbcType="NVARCHAR" />
+    <result column="USER_ISAGENT" property="userIsagent" jdbcType="INTEGER" />
+    <result column="USER_IM_CODE" property="userImCode" jdbcType="NVARCHAR" />
+    <result column="USER_CATEGORY" property="userCategory" jdbcType="INTEGER" />
+    <result column="HEAD" property="head" jdbcType="VARCHAR" />
+    <result column="COMIP" property="comip" jdbcType="INTEGER" />
+    <result column="DEPID" property="depid" jdbcType="INTEGER" />
+    <result column="JOBID" property="jobid" jdbcType="INTEGER" />
+    <result column="EMP_UNIT" property="empUnit" jdbcType="INTEGER" />
+    <result column="ATTEND_UNIT" property="attendUnit" jdbcType="INTEGER" />
+    <result column="PER_UNIT" property="perUnit" jdbcType="INTEGER" />
+    <result column="Limit_IP" property="limitIp" jdbcType="VARCHAR" />
+    <result column="USER_IP" property="userIp" jdbcType="VARCHAR" />
+    <result column="DIGITAL" property="digital" jdbcType="VARCHAR" />
+    <result column="LOCKING_TIME" property="lockingTime" jdbcType="TIMESTAMP" />
+    <result column="UNLOCK_TIME" property="unlockTime" jdbcType="TIMESTAMP" />
+    <result column="NAIL_IM" property="nailIm" jdbcType="VARCHAR" />
+    <result column="WECHAT_IM" property="wechatIm" jdbcType="VARCHAR" />
+    <result column="TENCENT_IM" property="tencentIm" jdbcType="VARCHAR" />
+    <result column="USER_EQUIPMENT" property="userEquipment" jdbcType="VARCHAR" />
+    <result column="PASSWORD_WARNING_TIME" property="passwordWarningTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_CODE, USER_NAME, USER_PASSWORD, USER_TALEPHONE, USER_EMAIL, USER_STATUS, 
+    USER_TIME_START, USER_TIME_END, USER_STYLE, USER_LASTLOGIN, USER_ERRCOUNT, USER_IPADDRESS, 
+    USER_REMARK, EMP_ID, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, APPROVE_TIME, DELETE_MARK, 
+    ORG_UNIT, AREA_UNIT, PERSON_UNIT, PAY_UNIT, ATT_UNIT, PERFORMANCE_UNIY, PROJECT_UNIT, 
+    BUSINESS_LINE, SCHEME_ID, USER_ISAGENT, USER_IM_CODE, USER_CATEGORY, HEAD, COMIP, 
+    DEPID, JOBID, EMP_UNIT, ATTEND_UNIT, PER_UNIT, Limit_IP, USER_IP, DIGITAL, LOCKING_TIME, 
+    UNLOCK_TIME, NAIL_IM, WECHAT_IM, TENCENT_IM, USER_EQUIPMENT, PASSWORD_WARNING_TIME
+  </sql>
+
+  <select id="selectByUsercode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where USER_CODE = #{userCode,jdbcType=NVARCHAR}
+  </select>
+  
+ 
+   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM SYS_USER
+    WHERE
+	   USER_CODE LIKE #{condition,jdbcType=NVARCHAR}
+	OR USER_NAME LIKE #{condition,jdbcType=NVARCHAR}
+	OR USER_TALEPHONE LIKE #{condition,jdbcType=NVARCHAR}
+	OR USER_EMAIL LIKE #{condition,jdbcType=NVARCHAR}
+  </select>
+  
+  <update id="updatePassword" parameterType="java.lang.String">
+  	update SYS_USER set USER_PASSWORD=#{password,jdbcType=NVARCHAR}  where USER_ID=#{userId,jdbcType=NVARCHAR}
+  </update>
+  
+  
+</mapper>

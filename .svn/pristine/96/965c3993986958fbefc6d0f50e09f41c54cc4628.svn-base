@@ -1,0 +1,459 @@
+package com.myehr.controller.calendar;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.myehr.common.util.DateUtil;
+import com.myehr.mapper.calendar.AttendZoneMapper;
+import com.myehr.mapper.calendar.TestcalendarMapper;
+import com.myehr.mapper.sysdict.SysDictEntryMapper;
+import com.myehr.mapper.sysdict.SysDictTypeMapper;
+import com.myehr.mapper.calendar.KbasecodeMapper;
+import com.myehr.pojo.calendar.AttendCalendar;
+import com.myehr.pojo.calendar.AttendShifttype;
+import com.myehr.pojo.calendar.AttendZone;
+import com.myehr.pojo.calendar.AttendZoneExample;
+import com.myehr.pojo.calendar.K15;
+import com.myehr.pojo.calendar.Kbasecode;
+import com.myehr.pojo.calendar.Kcalclass;
+import com.myehr.pojo.calendar.Kcalendar;
+import com.myehr.pojo.calendar.Testcalendar;
+import com.myehr.pojo.calendar.TestcalendarExample;
+import com.myehr.pojo.dict.SysDictEntry;
+import com.myehr.pojo.dict.SysDictEntryExample;
+import com.myehr.pojo.dict.SysDictType;
+import com.myehr.pojo.dict.SysDictTypeExample;
+import com.myehr.service.calendar.CalendarService;
+import com.myehr.service.primaryKey.PrimaryKeyService;
+
+@Controller
+@RequestMapping("/calendar")
+public class CalendarController {
+	@Autowired
+	private TestcalendarMapper mapper;
+	
+	@Autowired
+	private CalendarService calendarService;
+	
+//	@Autowired
+//	@Qualifier("PrimaryKeyService") 
+	@Resource(name = "PrimaryKeyService")  
+	private PrimaryKeyService keyserviceImpl;
+	
+	@Autowired
+	private SysDictEntryMapper sysDictEntryMapper;
+	
+	@Autowired
+	private SysDictTypeMapper sysDictTypeMapper;
+	
+	@Autowired
+	private AttendZoneMapper attendZoneMapper;
+	
+	@Autowired
+	private KbasecodeMapper KbasecodeMapper;
+	
+	
+	//模糊查询
+	@RequestMapping("/search")
+	public @ResponseBody List<Testcalendar> search(HttpServletRequest request) throws Exception{
+		TestcalendarExample example = new TestcalendarExample();
+		List<Testcalendar> list = mapper.selectByExample(example);
+		return  list;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryWorkDay")
+	public @ResponseBody List<Kcalendar> queryWorkDay(HttpServletRequest request) throws Exception{
+		String kguid =request.getParameter("kguid");
+		String datemonth =request.getParameter("datemonth");
+		List<Kcalendar> list = calendarService.queryWorkDay(kguid,datemonth);
+		return  list;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryWorkDayNew")
+	public @ResponseBody List<AttendCalendar> queryWorkDayNew(HttpServletRequest request) throws Exception{
+		String zoneid =request.getParameter("zoneid");
+		String datemonth =request.getParameter("datemonth");
+		List<AttendCalendar> list = calendarService.queryWorkDayNew(Integer.parseInt(zoneid),datemonth);
+		return  list;
+	}
+	
+	
+	
+	//模糊查询
+	@RequestMapping("/queryEmpWorkDay")
+	public @ResponseBody List<K15> queryEmpWorkDay(HttpServletRequest request) throws Exception{
+		String K15A1090 =request.getParameter("K15A1090");
+		List<K15> list = calendarService.queryEmpWorkDay(K15A1090);
+		return  list;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryRestDayByMonth")
+	public @ResponseBody List<Kcalendar> queryRestDayByMonth(HttpServletRequest request) throws Exception{
+		String kguid =request.getParameter("kguid");
+		List<Kcalendar> list = calendarService.queryWorkDay(kguid,"");
+		return  list;
+	}
+	
+	//模糊查询
+	@RequestMapping("/addWorkDay")
+	public @ResponseBody String addWorkDay(HttpServletRequest request) throws Exception{
+		String kguid =request.getParameter("kguid");
+		request.setCharacterEncoding("utf-8");
+		//String itemCaption = new String(request.getParameter("itemCaption"));
+		//String itemCaption = request.getParameter("itemCaption"); 
+		String itemCaption = request.getParameter("itemCaption"); 
+		if (itemCaption.equals("1")) {
+			itemCaption = "休息日";
+		}else if (itemCaption.equals("2")) {
+			itemCaption = "法定假日";
+		}
+		String itemDate =request.getParameter("itemDate");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(itemDate);
+		calendarService.addWorkDay(kguid,itemCaption,date);
+		return  "1";
+	}
+	
+	//模糊查询
+	@RequestMapping("/addWorkDayNew")
+	public @ResponseBody String addWorkDayNew(HttpServletRequest request) throws Exception{
+		String zoneid =request.getParameter("zoneid");
+		request.setCharacterEncoding("utf-8");
+		//String itemCaption = new String(request.getParameter("itemCaption"));
+		//String itemCaption = request.getParameter("itemCaption"); 
+		String xtype = request.getParameter("xtype");
+		String itemDate =request.getParameter("itemDate");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(itemDate);
+		calendarService.addAttendCalendar(Integer.parseInt(zoneid),Integer.parseInt(xtype),date);
+		return  "1";
+	}
+	
+	//初始化月休息日历.....修改
+	@RequestMapping("/InitRestCalendar")
+	public @ResponseBody String InitRestCalendar(HttpServletRequest request) throws Exception{
+		String kguid =request.getParameter("kguid");
+		String itemDate =request.getParameter("itemDate");
+		calendarService.ClearRestCalendar(kguid,itemDate);
+		calendarService.InitRestCalendar(kguid,itemDate);
+		return  "";
+	}
+	
+	//初始化月休息日历
+	@RequestMapping("/InitRestCalendarNew")
+	public @ResponseBody String InitRestCalendarNew(HttpServletRequest request) throws Exception{
+		String zoneid =request.getParameter("zoneid");
+		String itemDate =request.getParameter("itemDate");
+		calendarService.InitRestCalendarNew(Integer.parseInt(zoneid),itemDate);
+		return  "";
+	}
+	
+	//清空月休息日历
+	@RequestMapping("/ClearRestCalendar")
+	public @ResponseBody String ClearRestCalendar(HttpServletRequest request) throws Exception{
+		String kguid =request.getParameter("kguid");
+		String itemDate =request.getParameter("itemDate");
+		calendarService.ClearRestCalendar(kguid,itemDate);
+		return  "";
+	}
+	
+	//清空月休息日历
+	@RequestMapping("/ClearRestCalendarNew")
+	public @ResponseBody String ClearRestCalendarNew(HttpServletRequest request) throws Exception{
+		String zoneid =request.getParameter("zoneid");
+		String itemDate =request.getParameter("itemDate");
+		calendarService.ClearRestCalendarNew(Integer.parseInt(zoneid),itemDate);
+		return  "";
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryItem")
+	public @ResponseBody List<Kbasecode> queryItem(HttpServletRequest request) throws Exception{
+		List<Kbasecode> kbasecodes = calendarService.queryItem();
+		return  kbasecodes;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryItemNew")
+	public @ResponseBody List<AttendShifttype> queryItemNew(HttpServletRequest request) throws Exception{
+		List<AttendShifttype> attendShifttypes = calendarService.queryAttendShifttypes();
+		return  attendShifttypes;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryItem1")
+	public @ResponseBody List<Kbasecode> queryItem1(HttpServletRequest request) throws Exception{
+		List<Kbasecode> kbasecodes = calendarService.queryItem();
+		return  kbasecodes;
+	}
+	
+	//模糊查询
+	@RequestMapping("/updateData")
+	public @ResponseBody List<Kbasecode> updateData(HttpServletRequest request,@RequestBody updateDataParam params) throws Exception{
+		List<Kbasecode> kbasecodes = params.getKbasecodes();
+		for (int i = 0; i < kbasecodes.size(); i++) {
+			if(kbasecodes.get(i).getKbcId()==null){
+				KbasecodeMapper.insert(kbasecodes.get(i));
+			}else{
+				KbasecodeMapper.updateByPrimaryKey(kbasecodes.get(i));
+			}
+		}
+		return  kbasecodes;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryCalClass")
+	public @ResponseBody List<Kcalclass> queryCalClass(HttpServletRequest request) throws Exception{
+		List<Kcalclass> kcalclasses = calendarService.queryCalClass();
+		return  kcalclasses;
+	}
+	
+	//模糊查询
+	@RequestMapping("/queryCalClassNew")
+	public @ResponseBody List<AttendZone> queryCalClassNew(HttpServletRequest request) throws Exception{
+		List<AttendZone> kcalclasses = calendarService.queryCalClassNew();
+		return  kcalclasses;
+	}
+	
+	//村田
+	@RequestMapping("/saveEmpWorkday")
+	public @ResponseBody String saveEmpWorkday(HttpServletRequest request,@RequestBody EmpWorkdayParam params) throws Exception{
+		calendarService.saveEmpWorkday(request,params.getEmpIds(),params.getEmpCodes(),params.getWorkdays(),params.getKguid());
+		return  "";
+	}
+	
+	//合肥科大国创
+	@RequestMapping("/saveEmpWorkdayNew")
+	public @ResponseBody String saveEmpWorkdayNew(HttpServletRequest request,@RequestBody EmpWorkdayParamNew params) throws Exception{
+		calendarService.saveEmpWorkdayNew(request,params.getEmpIds(),params.getEmpCodes(),params.getWorkdays(),params.getZoneid());
+		return  "";
+	}
+	
+	
+	//保存
+	@RequestMapping("/save")
+	public @ResponseBody String save(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+		String datetime = request.getParameter("datetime");
+		String title = request.getParameter("title"); 
+		//String title = new String(request.getParameter("title").getBytes("iso-8859-1"), "utf-8"); 
+		//String title = new String(request.getParameter("title").getBytes("iso-8859-1"),"utf-8"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	    Date date = sdf.parse(datetime);
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setDatetime(date);
+		mapper.insert(calendar);
+		return  "1";
+	}
+	
+	//保存
+	@RequestMapping("/saveNew")
+	public @ResponseBody String saveNew(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+		String datetime = request.getParameter("datetime");
+		String title = request.getParameter("title");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	    Date date = sdf.parse(datetime);
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setDatetime(date);
+		mapper.insert(calendar);
+		return  "1";
+	}
+	
+	//保存
+	@RequestMapping("/update")
+	public @ResponseBody String update(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+		String datetime = request.getParameter("datetime");
+		String title = request.getParameter("title"); 
+		//String title = new String(request.getParameter("title").getBytes("iso-8859-1"), "utf-8"); 
+		//String title = new String(request.getParameter("title").getBytes("iso-8859-1"),"utf-8"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	    Date date = sdf.parse(datetime);
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setDatetime(date);
+		mapper.insert(calendar);
+		return  "1";
+		
+	}
+	
+	/*//保存
+	@RequestMapping("/addCalendarTree")
+	public @ResponseBody String addCalendarTree(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+		String datetime = request.getParameter("datetime");
+		String title = request.getParameter("title"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	    Date date = sdf.parse(datetime);
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setDatetime(date);
+		mapper.insert(calendar);
+		return  "1";
+	}*/
+	
+	//保存
+	@RequestMapping("/addCalendarTree")
+	public @ResponseBody String addCalendarTree(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+		String datetime = request.getParameter("datetime");
+		String title = new String(request.getParameter("title").getBytes("iso-8859-1"),"utf-8"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+	    Date date = sdf.parse(datetime);
+		calendar.setId(id);
+		calendar.setTitle(title);
+		calendar.setDatetime(date);
+		mapper.insert(calendar);
+		return  "1";
+	}
+	
+	//保存
+	@RequestMapping("/init")
+	public @ResponseBody String init(HttpServletRequest request) throws Exception{
+		Testcalendar calendar = new Testcalendar();  
+		
+		String datetime = request.getParameter("datetime");
+		String month1 = datetime.substring(6,7);
+		for (int i = 1; i < 32; i++) {
+			String dateString="";
+			if (i<10) {
+				dateString =datetime+"-0"+i;
+			}else {
+				dateString=datetime+"-"+i;
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date = sdf.parse(dateString);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			String month = cal.get(Calendar.MONTH)+"";
+			if (month.equals(month1)) {
+				break;
+			}
+			String weekDay=DateUtil.getWeekOfDate(date);
+			String title="";
+			if (weekDay.equals("星期六") || weekDay.equals("星期日")) {
+				title="休息日";
+			}else{
+				title="工作日";
+			}
+			long id =keyserviceImpl.getPrimaryKey("TESTCALENDAR", "ID");
+			calendar.setId(id);
+			calendar.setTitle(title);
+			calendar.setDatetime(date);
+			mapper.insert(calendar);
+		}  
+		return  "1";
+	}
+	
+	
+	//保存
+	@RequestMapping("/buildTreeNodes")
+	public @ResponseBody List<Map> buildTreeNodes(HttpServletRequest request) throws Exception{
+		//List<SysDictEntry> dictEntrys = sysDictEntryMapper.queryCalClass();
+		
+		SysDictTypeExample example = new SysDictTypeExample();
+		com.myehr.pojo.dict.SysDictTypeExample.Criteria criteria = example.createCriteria();
+		criteria.andDictTypeCodeEqualTo("restCalendarTree");
+		List<SysDictType> SysDictTypes = sysDictTypeMapper.selectByExample(example);
+		
+		int dictTypeId = SysDictTypes.get(0).getDictTypeId();
+		SysDictEntryExample example1 = new SysDictEntryExample();
+		com.myehr.pojo.dict.SysDictEntryExample.Criteria criteria1 = example1.createCriteria();
+		criteria1.andDictTypeIdEqualTo(dictTypeId);
+		example1.setOrderByClause("DICT_ENTRY_SORT");
+		List<SysDictEntry> sysDictEntrys = sysDictEntryMapper.selectByExample(example1);
+		List<Map> datas = new ArrayList<Map>();
+		Map mapDefault=new HashMap();
+		mapDefault.put("expanded", false);
+		mapDefault.put("isLeaf", false);
+		mapDefault.put("isParent", false); 
+		mapDefault.put("open", false); 
+		mapDefault.put("CONTENT", SysDictTypes.get(0).getDictTypeName());
+		mapDefault.put("itemCode", "ROOT");
+		mapDefault.put("ORG_DEL", "N");
+		datas.add(mapDefault);
+		for (int i = 0; i < sysDictEntrys.size(); i++) {
+			Map map=new HashMap();
+			map.put("expanded", false);
+			map.put("isLeaf", false);
+			map.put("isParent", false); 
+			map.put("open", false); 
+			map.put("CONTENT", sysDictEntrys.get(i).getDictEntryName());
+			map.put("kguid", sysDictEntrys.get(i).getDictEntryCode());
+			map.put("typeCode", "SM");
+			map.put("itemCode", sysDictEntrys.get(i).getDictEntryRemark());
+			map.put("itemName", sysDictEntrys.get(i).getDictEntryName());
+			map.put("ORG_DEL", "N");
+			map.put("PARENT_CODE", "ROOT"); 
+			datas.add(map);
+		}
+		
+		return  datas;
+	}
+	
+	//保存
+	@RequestMapping("/buildTreeNodesNew")
+	public @ResponseBody List<Map> buildTreeNodesNew(HttpServletRequest request) throws Exception{
+		//List<SysDictEntry> dictEntrys = sysDictEntryMapper.queryCalClass();
+		
+		AttendZoneExample example = new AttendZoneExample();
+		//com.myehr.pojo.calendar.AttendZoneExample.Criteria criteria = example.createCriteria();
+		List<AttendZone> attendZones = attendZoneMapper.selectByExample(example);
+		
+		List<Map> datas = new ArrayList<Map>();
+		Map mapDefault=new HashMap();
+		mapDefault.put("expanded", false);
+		mapDefault.put("isLeaf", false);
+		mapDefault.put("isParent", false); 
+		mapDefault.put("open", false); 
+		mapDefault.put("CONTENT", "考勤账套");
+		mapDefault.put("azId", "ROOT");
+		mapDefault.put("ORG_DEL", "N");
+		datas.add(mapDefault);
+		for (int i = 0; i < attendZones.size(); i++) {
+			Map map=new HashMap();
+			map.put("expanded", false);
+			map.put("isLeaf", false);
+			map.put("isParent", false); 
+			map.put("open", false); 
+			map.put("CONTENT", attendZones.get(i).getAzCname());
+			map.put("azId", attendZones.get(i).getAzId());
+			map.put("typeCode", "SM");
+			map.put("azRemark", attendZones.get(i).getAzRemark());
+			map.put("azMonthflat", attendZones.get(i).getAzMonthflat());
+			map.put("azBegindate", attendZones.get(i).getAzBegindate());
+			map.put("ORG_DEL", "N");
+			map.put("pid", "ROOT"); 
+			datas.add(map);
+		}
+		
+		return  datas;
+	}
+	
+
+}

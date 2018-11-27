@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysmenu.SysMenuMapperExpand" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysmenu.SysMenuExpand" >
+    <id column="MENU_ID" property="menuId" jdbcType="INTEGER" />
+    <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_DESC" property="menuDesc" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="MENU_TYPE" property="menuType" jdbcType="VARCHAR" />
+    <result column="MENU_DIC_CODE" property="menuDicCode" jdbcType="VARCHAR" />
+    <result column="MENU_PARENT_CODE" property="menuParentCode" jdbcType="VARCHAR" />
+    <result column="MENU_SORT" property="menuSort" jdbcType="REAL" />
+    <result column="MENU_IS_DYNAMIC_FORM" property="menuIsDynamicForm" jdbcType="VARCHAR" />
+    <result column="MENU_FORM_ID" property="menuFormId" jdbcType="VARCHAR" />
+    <result column="MENU_SEQ" property="menuSeq" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+    <result column="ICON_URL" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="ICON_TYPE" property="iconType" jdbcType="VARCHAR" />
+    <result column="IMG_FILE_ID" property="imgFileId" jdbcType="VARCHAR" />
+    <result column="CHECKED_IMG_FILE_ID" property="checkedImgFileId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MENU_ID, MENU_CODE, MENU_NAME, MENU_DESC, MENU_URL, MENU_TYPE, MENU_DIC_CODE, MENU_PARENT_CODE, 
+    MENU_SORT, MENU_IS_DYNAMIC_FORM, MENU_FORM_ID, MENU_SEQ, OPERATOR_NAME, OPERATOR_TIME, 
+    APPROVE_NAME, APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK,ICON_URL,ICON_TYPE,IMG_FILE_ID,CHECKED_IMG_FILE_ID
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM SYS_MENU
+    WHERE
+	   MENU_CODE LIKE #{condition,jdbcType=VARCHAR}
+	OR MENU_NAME LIKE #{condition,jdbcType=VARCHAR}
+	OR MENU_TYPE LIKE #{condition,jdbcType=VARCHAR}
+	OR MENU_PARENT_CODE LIKE #{condition,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM SYS_MENU
+    WHERE
+	   MENU_PARENT_CODE = #{condition,jdbcType=VARCHAR}
+	   
+  </select>
+  
+  <select id="searchByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM SYS_MENU
+    WHERE
+	   MENU_CODE = #{condition,jdbcType=VARCHAR}
+	   
+  </select>
+
+  <select id="queryMenusByUserid" resultMap="BaseResultMap"  >
+    SELECT DISTINCT M.MENU_ID,
+                M.MENU_CODE,
+                M.MENU_NAME,
+                M.MENU_URL,
+                M.MENU_TYPE,
+                M.MENU_DESC,
+                M.MENU_PARENT_CODE,
+                M.MENU_SORT,
+                M.MENU_IS_DYNAMIC_FORM,
+                M.MENU_FORM_ID,
+                M.MENU_DIC_CODE,
+                M.MENU_SEQ
+  FROM SYS_MENU M, SYS_ROLE R, SYS_MENU_ROLE MR, SYS_USER_ROLE UR
+ WHERE M.MENU_ID = MR.MENU_ID
+   AND MR.ROLE_ID = R.ROLE_ID
+   AND R.ROLE_ID = UR.ROLE_ID
+   AND M.MENU_TYPE = 'L'
+   AND M.DELETE_MARK = 'N'
+   AND R.DELETE_MARK = 'N'
+	 AND UR.USER_ID = #{userId,jdbcType=VARCHAR}
+	 order by M.MENU_SORT
+	   
+  </select>
+  
+  <select id="queryMenusByUseridAndPcode" resultMap="BaseResultMap"  >
+     select t.*, sir.icon_type, sir.icon_url,sir.IMG_FILE_ID,sir.CHECKED_IMG_FILE_ID
+  from (SELECT DISTINCT M.MENU_ID,
+                        M.MENU_CODE,
+                        M.MENU_NAME,
+                        M.MENU_URL,
+                        M.MENU_TYPE,
+                        M.MENU_PARENT_CODE,
+                        M.MENU_SORT,
+                        M.MENU_IS_DYNAMIC_FORM,
+                        M.MENU_FORM_ID,
+                        M.MENU_SEQ
+        
+          FROM SYS_MENU               M,
+               sys_system_scheme_menu sM,
+               SYS_ROLE               R,
+               SYS_MENU_ROLE          MR,
+               SYS_USER_ROLE          UR
+        
+         WHERE M.MENU_ID = MR.MENU_ID
+           AND MR.ROLE_ID = R.ROLE_ID
+           AND M.MENU_CODE = SM.MENU_CODE
+           AND R.ROLE_ID = UR.ROLE_ID
+           AND M.MENU_TYPE = 'L'
+           AND M.DELETE_MARK = 'N'
+           AND R.DELETE_MARK = 'N'
+           AND sM.SYS_SYSTEM_SCHEME_ID = ${schemeId} 
+           AND UR.USER_ID = ${userId} 
+           AND charindex('.${parentCode}.',M.MENU_SEQ)>0) t
+  left join Sys_Icon_Resource sir on sir.icon_code = t.MENU_CODE
+ order by t.MENU_SORT
+	   
+  </select>
+  
+  <select id="queryMenusByRoleId" resultMap="BaseResultMap"  >
+    SELECT DISTINCT M.MENU_ID,
+                M.MENU_CODE,
+                M.MENU_NAME,
+                M.MENU_URL,
+                M.MENU_TYPE,
+                M.MENU_PARENT_CODE,
+                M.MENU_SORT,
+                M.MENU_IS_DYNAMIC_FORM,
+                M.MENU_FORM_ID,
+                M.MENU_DIC_CODE,
+                M.MENU_SEQ
+  FROM SYS_MENU M, SYS_ROLE R, SYS_MENU_ROLE MR, SYS_USER_ROLE UR
+ WHERE M.MENU_ID = MR.MENU_ID
+   AND MR.ROLE_ID = R.ROLE_ID
+   AND R.ROLE_ID = UR.ROLE_ID
+   AND M.MENU_TYPE = 'L'
+   AND M.DELETE_MARK = 'N'
+   AND R.DELETE_MARK = 'N'
+	 AND UR.ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	 order by M.MENU_SORT
+  </select>
+  
+  <select id="queryMenusByUseridAndSchemeId" resultMap="BaseResultMap" >
+ select t.*, sir.icon_type, sir.icon_url,sir.IMG_FILE_ID,sir.CHECKED_IMG_FILE_ID
+  from (SELECT DISTINCT M.MENU_ID,
+                        M.MENU_CODE,
+                        M.MENU_NAME,
+                        M.MENU_URL,
+                        M.MENU_TYPE,
+                        M.MENU_PARENT_CODE,
+                        M.MENU_SORT,
+                        M.MENU_IS_DYNAMIC_FORM,
+                        M.MENU_FORM_ID,
+                        M.MENU_SEQ
+        
+          FROM SYS_MENU               M,
+               sys_system_scheme_menu sM,
+               SYS_ROLE               R,
+               SYS_MENU_ROLE          MR,
+               SYS_USER_ROLE          UR
+        
+         WHERE M.MENU_ID = MR.MENU_ID
+           AND MR.ROLE_ID = R.ROLE_ID
+           AND M.MENU_CODE = SM.MENU_CODE
+           AND R.ROLE_ID = UR.ROLE_ID
+           AND M.MENU_TYPE = 'L'
+           AND M.DELETE_MARK = 'N'
+           AND R.DELETE_MARK = 'N'
+           AND sM.SYS_SYSTEM_SCHEME_ID = ${schemeId}
+           AND UR.USER_ID = ${userId}) t
+  left join Sys_Icon_Resource sir on sir.icon_code = t.MENU_CODE
+ order by t.MENU_SORT
+	   
+  </select>
+  
+  <select id="selectByExample" resultMap="BaseResultMap" >
+ SELECT DISTINCT M.*,
+        	sir.icon_type, 
+        	sir.icon_url,sir.IMG_FILE_ID,sir.CHECKED_IMG_FILE_ID
+          FROM SYS_MENU M left join  Sys_Icon_Resource    sir
+          on sir.icon_code = M.MENU_CODE
+          where M.delete_Mark = 'N'
+          and M.Menu_Type != 'L'      
+ order by M.MENU_SORT
+	   
+  </select>
+ 
+
+<select id="selectSchemeMenuByExample" resultMap="BaseResultMap" >
+SELECT DISTINCT M.*,
+          sir.icon_type, 
+          sir.icon_url,sir.IMG_FILE_ID,sir.CHECKED_IMG_FILE_ID
+          FROM sys_system_scheme_menu M left join  Sys_Icon_Resource    sir
+          on sir.icon_code = M.MENU_CODE
+          where M.delete_Mark is null
+          and M.Menu_Type != 'L'      
+ order by M.MENU_SORT
+	   
+  </select>
+ 
+<select id="queryMenusByUseridAndSchemeIdx" resultMap="BaseResultMap" >
+ select t.*, sir.icon_type, sir.icon_url,sir.IMG_FILE_ID,sir.CHECKED_IMG_FILE_ID
+  from (SELECT DISTINCT M.MENU_ID,
+                        M.MENU_CODE,
+                        M.MENU_NAME,
+                        M.MENU_URL,
+                        M.MENU_TYPE,
+                        M.MENU_PARENT_CODE,
+                        M.MENU_SORT,
+                        M.MENU_IS_DYNAMIC_FORM,
+                        M.MENU_FORM_ID,
+                        M.MENU_SEQ
+        
+          FROM SYS_MENU               M,
+               sys_system_scheme_menu sM,
+               SYS_ROLE               R,
+               SYS_MENU_ROLE          MR,
+               SYS_USER_ROLE          UR
+        
+         WHERE M.MENU_ID = MR.MENU_ID
+           AND MR.ROLE_ID = R.ROLE_ID
+           AND M.MENU_CODE = SM.MENU_CODE
+           AND R.ROLE_ID = UR.ROLE_ID
+           AND M.MENU_TYPE = '${menuType}'
+           AND M.DELETE_MARK = 'N'
+           AND R.DELETE_MARK = 'N'
+           AND sM.SYS_SYSTEM_SCHEME_ID = ${schemeId}
+           AND UR.USER_ID = ${userId}) t
+  left join Sys_Icon_Resource sir on sir.icon_code = t.MENU_CODE
+ order by t.MENU_SORT
+	   
+</select>
+  
+</mapper>

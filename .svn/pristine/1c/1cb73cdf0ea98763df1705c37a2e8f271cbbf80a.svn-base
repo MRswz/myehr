@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.formexpand.FormFilterColumnMapperExpand" >
+  <resultMap id="BaseResultMap" type="com.myehr.mapper.formmanage.formexpand.FormFilterColumnExpand" >
+    <id column="QUERY_COLUMN_ID" property="queryColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_ENTITY_TABLENAME" property="formEntityTablename" jdbcType="VARCHAR" />
+    <result column="FORM_FIELD_TABLENAME" property="formFieldTablename" jdbcType="VARCHAR" />
+    <result column="GRID_COLUMN_LABLE" property="gridColumnLable" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_GUI_TYPE" property="formColumnGuiType" jdbcType="VARCHAR" />
+    <result column="GRID_COLUMN_FILTER_RULE" property="gridColumnFilterRule" jdbcType="VARCHAR" />
+    <result column="GRID_COLUMN_WIDTH" property="gridColumnWidth" jdbcType="VARCHAR" />
+    <result column="GRID_COLUMN_COL_SPAN" property="gridColumnColSpan" jdbcType="VARCHAR" />
+    <result column="GRID_COLUMN_IS_INTERVAIS" property="gridColumnIsIntervais" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_SORT" property="formColumnSort" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_FORM_DEF_ID" property="formColumnFormDefId" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_ID" property="gridColumnId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_WIDTH" property="formColumnWidth" jdbcType="VARCHAR" />
+    <result column="FORM_COLUMN_HEIGHT" property="formColumnHeight" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    QUERY_COLUMN_ID, FORM_ENTITY_TABLENAME, FORM_FIELD_TABLENAME, GRID_COLUMN_LABLE, FORM_COLUMN_GUI_TYPE, 
+    GRID_COLUMN_FILTER_RULE, GRID_COLUMN_WIDTH, GRID_COLUMN_COL_SPAN, GRID_COLUMN_IS_INTERVAIS, FORM_COLUMN_SORT, 
+    FORM_COLUMN_FORM_DEF_ID, GRID_COLUMN_ID, FORM_COLUMN_WIDTH, FORM_COLUMN_HEIGHT
+  </sql>
+ 
+  <select id="getFormFilterColumnById" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select t.query_column_id,
+		       b.form_entity_tablename,
+		       b.form_field_tablename,
+		       t.grid_column_lable,
+		       b.form_column_gui_type,
+		       t.grid_column_filter_rule,
+		       t.grid_column_width,
+		       t.grid_column_col_span,
+		       t.grid_column_is_intervais,
+		       t.form_column_sort,
+		       b.form_column_form_def_id,
+		       t.grid_column_id,
+		       b.form_column_width,
+		       b.form_column_height
+			from sys_grid_filter_column t, sys_form_column b
+			 where t.grid_column_id = b.form_column_id
+			 and b.form_column_form_def_id = #{formId,jdbcType=DECIMAL}
+		order by  t.form_column_sort
+  </select>
+</mapper>

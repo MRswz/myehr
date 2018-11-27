@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysRole.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysRole.SysRole" >
+    <id column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_DESC" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR" />
+    <result column="ROLE_PARENT_CODE" property="roleParentCode" jdbcType="VARCHAR" />
+    <result column="ROLE_STATUS" property="roleStatus" jdbcType="VARCHAR" />
+    <result column="ROLE_TIME_START" property="roleTimeStart" jdbcType="DATE" />
+    <result column="ROLE_TIME_END" property="roleTimeEnd" jdbcType="DATE" />
+    <result column="ROLE_SEQ" property="roleSeq" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="DATE" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+    <result column="DELETE_MARK_BACK" property="deleteMarkBack" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_CODE, ROLE_NAME, ROLE_DESC, ROLE_TYPE, ROLE_PARENT_CODE, ROLE_STATUS, 
+    ROLE_TIME_START, ROLE_TIME_END, ROLE_SEQ, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+    APPROVE_TIME, DELETE_MARK, DELETE_MARK_BACK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysRole.SysRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysRole.SysRoleExample" >
+    delete from SYS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysRole.SysRole" >
+    insert into SYS_ROLE (ROLE_CODE, ROLE_NAME, 
+      ROLE_DESC, ROLE_TYPE, ROLE_PARENT_CODE, 
+      ROLE_STATUS, ROLE_TIME_START, ROLE_TIME_END, 
+      ROLE_SEQ, OPERATOR_NAME, OPERATOR_TIME, 
+      APPROVE_NAME, APPROVE_TIME, DELETE_MARK, 
+      DELETE_MARK_BACK)
+    values (#{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{roleDesc,jdbcType=VARCHAR}, #{roleType,jdbcType=VARCHAR}, #{roleParentCode,jdbcType=VARCHAR}, 
+      #{roleStatus,jdbcType=VARCHAR}, #{roleTimeStart,jdbcType=DATE}, #{roleTimeEnd,jdbcType=DATE}, 
+      #{roleSeq,jdbcType=VARCHAR}, #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=DATE}, 
+      #{approveName,jdbcType=VARCHAR}, #{approveTime,jdbcType=DATE}, #{deleteMark,jdbcType=VARCHAR}, 
+      #{deleteMarkBack,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysRole.SysRole" >
+    insert into SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleCode != null" >
+        ROLE_CODE,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC,
+      </if>
+      <if test="roleType != null" >
+        ROLE_TYPE,
+      </if>
+      <if test="roleParentCode != null" >
+        ROLE_PARENT_CODE,
+      </if>
+      <if test="roleStatus != null" >
+        ROLE_STATUS,
+      </if>
+      <if test="roleTimeStart != null" >
+        ROLE_TIME_START,
+      </if>
+      <if test="roleTimeEnd != null" >
+        ROLE_TIME_END,
+      </if>
+      <if test="roleSeq != null" >
+        ROLE_SEQ,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParentCode != null" >
+        #{roleParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleStatus != null" >
+        #{roleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="roleTimeStart != null" >
+        #{roleTimeStart,jdbcType=DATE},
+      </if>
+      <if test="roleTimeEnd != null" >
+        #{roleTimeEnd,jdbcType=DATE},
+      </if>
+      <if test="roleSeq != null" >
+        #{roleSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=DATE},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysRole.SysRoleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ROLE
+    <set >
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleCode != null" >
+        ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleName != null" >
+        ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleDesc != null" >
+        ROLE_DESC = #{record.roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleType != null" >
+        ROLE_TYPE = #{record.roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleParentCode != null" >
+        ROLE_PARENT_CODE = #{record.roleParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleStatus != null" >
+        ROLE_STATUS = #{record.roleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleTimeStart != null" >
+        ROLE_TIME_START = #{record.roleTimeStart,jdbcType=DATE},
+      </if>
+      <if test="record.roleTimeEnd != null" >
+        ROLE_TIME_END = #{record.roleTimeEnd,jdbcType=DATE},
+      </if>
+      <if test="record.roleSeq != null" >
+        ROLE_SEQ = #{record.roleSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=DATE},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ROLE
+    set ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
+      ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+      ROLE_DESC = #{record.roleDesc,jdbcType=VARCHAR},
+      ROLE_TYPE = #{record.roleType,jdbcType=VARCHAR},
+      ROLE_PARENT_CODE = #{record.roleParentCode,jdbcType=VARCHAR},
+      ROLE_STATUS = #{record.roleStatus,jdbcType=VARCHAR},
+      ROLE_TIME_START = #{record.roleTimeStart,jdbcType=DATE},
+      ROLE_TIME_END = #{record.roleTimeEnd,jdbcType=DATE},
+      ROLE_SEQ = #{record.roleSeq,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=DATE},
+      DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{record.deleteMarkBack,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysRole.SysRole" >
+    update SYS_ROLE
+    <set >
+      <if test="roleCode != null" >
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        ROLE_TYPE = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParentCode != null" >
+        ROLE_PARENT_CODE = #{roleParentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleStatus != null" >
+        ROLE_STATUS = #{roleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="roleTimeStart != null" >
+        ROLE_TIME_START = #{roleTimeStart,jdbcType=DATE},
+      </if>
+      <if test="roleTimeEnd != null" >
+        ROLE_TIME_END = #{roleTimeEnd,jdbcType=DATE},
+      </if>
+      <if test="roleSeq != null" >
+        ROLE_SEQ = #{roleSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=DATE},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteMarkBack != null" >
+        DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysRole.SysRole" >
+    update SYS_ROLE
+    set ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      ROLE_TYPE = #{roleType,jdbcType=VARCHAR},
+      ROLE_PARENT_CODE = #{roleParentCode,jdbcType=VARCHAR},
+      ROLE_STATUS = #{roleStatus,jdbcType=VARCHAR},
+      ROLE_TIME_START = #{roleTimeStart,jdbcType=DATE},
+      ROLE_TIME_END = #{roleTimeEnd,jdbcType=DATE},
+      ROLE_SEQ = #{roleSeq,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=DATE},
+      DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      DELETE_MARK_BACK = #{deleteMarkBack,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

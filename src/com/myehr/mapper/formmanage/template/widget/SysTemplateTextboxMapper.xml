@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.widget.SysTemplateTextboxMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.widget.SysTemplateTextbox" >
+    <id column="TEXTBOX_ID" property="textboxId" jdbcType="DECIMAL" />
+    <result column="TEXTBOX_TEMPLATE_COLUMN_ID" property="textboxTemplateColumnId" jdbcType="DECIMAL" />
+    <result column="TEXTBOX_CHECK_TYPE" property="textboxCheckType" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_CHECK_SELF" property="textboxCheckSelf" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_DATA_FROM_TYPE" property="textboxDataFromType" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_DATA_FROM_VALUE" property="textboxDataFromValue" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_CHECK_FUN" property="textboxCheckFun" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_INIT_FUN" property="textboxInitFun" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_SCHEME" property="textboxScheme" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_VALUECHANGE_FUN" property="textboxValuechangeFun" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_CLICK_FUN" property="textboxClickFun" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_EMPTYTEXT" property="textboxEmptytext" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_IS_LINK" property="textboxIsLink" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_IS_FORM" property="textboxLinkIsForm" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_FORM" property="textboxLinkForm" jdbcType="DECIMAL" />
+    <result column="TEXTBOX_LINK_URL" property="textboxLinkUrl" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_WIN_OPEN_TYPE" property="textboxLinkWinOpenType" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_WIN_TITLE" property="textboxLinkWinTitle" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_WIN_WIDTH" property="textboxLinkWinWidth" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_WIN_HEIGHT" property="textboxLinkWinHeight" jdbcType="NVARCHAR" />
+    <result column="TEXTBOX_LINK_SUCCESS_DEAL" property="textboxLinkSuccessDeal" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEXTBOX_ID, TEXTBOX_TEMPLATE_COLUMN_ID, TEXTBOX_CHECK_TYPE, TEXTBOX_CHECK_SELF, TEXTBOX_DATA_FROM_TYPE, 
+    TEXTBOX_DATA_FROM_VALUE, TEXTBOX_CHECK_FUN, TEXTBOX_INIT_FUN, TEXTBOX_SCHEME, TEXTBOX_VALUECHANGE_FUN, 
+    TEXTBOX_CLICK_FUN, TEXTBOX_EMPTYTEXT, OPERATOR_TIME, OPERATOR_NAME, TEXTBOX_IS_LINK, 
+    TEXTBOX_LINK_IS_FORM, TEXTBOX_LINK_FORM, TEXTBOX_LINK_URL, TEXTBOX_LINK_WIN_OPEN_TYPE, 
+    TEXTBOX_LINK_WIN_TITLE, TEXTBOX_LINK_WIN_WIDTH, TEXTBOX_LINK_WIN_HEIGHT, TEXTBOX_LINK_SUCCESS_DEAL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextboxExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_TEXTBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE_TEXTBOX
+    where TEXTBOX_ID = #{textboxId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE_TEXTBOX
+    where TEXTBOX_ID = #{textboxId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextboxExample" >
+    delete from SYS_TEMPLATE_TEXTBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextbox" useGeneratedKeys="true" keyProperty="textboxId" keyColumn="TEXTBOX_ID">
+    insert into SYS_TEMPLATE_TEXTBOX ( TEXTBOX_TEMPLATE_COLUMN_ID, 
+      TEXTBOX_CHECK_TYPE, TEXTBOX_CHECK_SELF, TEXTBOX_DATA_FROM_TYPE, 
+      TEXTBOX_DATA_FROM_VALUE, TEXTBOX_CHECK_FUN, 
+      TEXTBOX_INIT_FUN, TEXTBOX_SCHEME, TEXTBOX_VALUECHANGE_FUN, 
+      TEXTBOX_CLICK_FUN, TEXTBOX_EMPTYTEXT, OPERATOR_TIME, 
+      OPERATOR_NAME, TEXTBOX_IS_LINK, TEXTBOX_LINK_IS_FORM, 
+      TEXTBOX_LINK_FORM, TEXTBOX_LINK_URL, TEXTBOX_LINK_WIN_OPEN_TYPE, 
+      TEXTBOX_LINK_WIN_TITLE, TEXTBOX_LINK_WIN_WIDTH, 
+      TEXTBOX_LINK_WIN_HEIGHT, TEXTBOX_LINK_SUCCESS_DEAL
+      )
+    values ( #{textboxTemplateColumnId,jdbcType=DECIMAL}, 
+      #{textboxCheckType,jdbcType=NVARCHAR}, #{textboxCheckSelf,jdbcType=NVARCHAR}, #{textboxDataFromType,jdbcType=NVARCHAR}, 
+      #{textboxDataFromValue,jdbcType=NVARCHAR}, #{textboxCheckFun,jdbcType=NVARCHAR}, 
+      #{textboxInitFun,jdbcType=NVARCHAR}, #{textboxScheme,jdbcType=NVARCHAR}, #{textboxValuechangeFun,jdbcType=NVARCHAR}, 
+      #{textboxClickFun,jdbcType=NVARCHAR}, #{textboxEmptytext,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{textboxIsLink,jdbcType=NVARCHAR}, #{textboxLinkIsForm,jdbcType=NVARCHAR}, 
+      #{textboxLinkForm,jdbcType=DECIMAL}, #{textboxLinkUrl,jdbcType=NVARCHAR}, #{textboxLinkWinOpenType,jdbcType=NVARCHAR}, 
+      #{textboxLinkWinTitle,jdbcType=NVARCHAR}, #{textboxLinkWinWidth,jdbcType=NVARCHAR}, 
+      #{textboxLinkWinHeight,jdbcType=NVARCHAR}, #{textboxLinkSuccessDeal,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextbox" >
+    insert into SYS_TEMPLATE_TEXTBOX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="textboxId != null" >
+        TEXTBOX_ID,
+      </if>
+      <if test="textboxTemplateColumnId != null" >
+        TEXTBOX_TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="textboxCheckType != null" >
+        TEXTBOX_CHECK_TYPE,
+      </if>
+      <if test="textboxCheckSelf != null" >
+        TEXTBOX_CHECK_SELF,
+      </if>
+      <if test="textboxDataFromType != null" >
+        TEXTBOX_DATA_FROM_TYPE,
+      </if>
+      <if test="textboxDataFromValue != null" >
+        TEXTBOX_DATA_FROM_VALUE,
+      </if>
+      <if test="textboxCheckFun != null" >
+        TEXTBOX_CHECK_FUN,
+      </if>
+      <if test="textboxInitFun != null" >
+        TEXTBOX_INIT_FUN,
+      </if>
+      <if test="textboxScheme != null" >
+        TEXTBOX_SCHEME,
+      </if>
+      <if test="textboxValuechangeFun != null" >
+        TEXTBOX_VALUECHANGE_FUN,
+      </if>
+      <if test="textboxClickFun != null" >
+        TEXTBOX_CLICK_FUN,
+      </if>
+      <if test="textboxEmptytext != null" >
+        TEXTBOX_EMPTYTEXT,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="textboxIsLink != null" >
+        TEXTBOX_IS_LINK,
+      </if>
+      <if test="textboxLinkIsForm != null" >
+        TEXTBOX_LINK_IS_FORM,
+      </if>
+      <if test="textboxLinkForm != null" >
+        TEXTBOX_LINK_FORM,
+      </if>
+      <if test="textboxLinkUrl != null" >
+        TEXTBOX_LINK_URL,
+      </if>
+      <if test="textboxLinkWinOpenType != null" >
+        TEXTBOX_LINK_WIN_OPEN_TYPE,
+      </if>
+      <if test="textboxLinkWinTitle != null" >
+        TEXTBOX_LINK_WIN_TITLE,
+      </if>
+      <if test="textboxLinkWinWidth != null" >
+        TEXTBOX_LINK_WIN_WIDTH,
+      </if>
+      <if test="textboxLinkWinHeight != null" >
+        TEXTBOX_LINK_WIN_HEIGHT,
+      </if>
+      <if test="textboxLinkSuccessDeal != null" >
+        TEXTBOX_LINK_SUCCESS_DEAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="textboxId != null" >
+        #{textboxId,jdbcType=DECIMAL},
+      </if>
+      <if test="textboxTemplateColumnId != null" >
+        #{textboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="textboxCheckType != null" >
+        #{textboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxCheckSelf != null" >
+        #{textboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxDataFromType != null" >
+        #{textboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxDataFromValue != null" >
+        #{textboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxCheckFun != null" >
+        #{textboxCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxInitFun != null" >
+        #{textboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxScheme != null" >
+        #{textboxScheme,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxValuechangeFun != null" >
+        #{textboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxClickFun != null" >
+        #{textboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxEmptytext != null" >
+        #{textboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxIsLink != null" >
+        #{textboxIsLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkIsForm != null" >
+        #{textboxLinkIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkForm != null" >
+        #{textboxLinkForm,jdbcType=DECIMAL},
+      </if>
+      <if test="textboxLinkUrl != null" >
+        #{textboxLinkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinOpenType != null" >
+        #{textboxLinkWinOpenType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinTitle != null" >
+        #{textboxLinkWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinWidth != null" >
+        #{textboxLinkWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinHeight != null" >
+        #{textboxLinkWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkSuccessDeal != null" >
+        #{textboxLinkSuccessDeal,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextboxExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE_TEXTBOX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE_TEXTBOX
+    <set >
+      <if test="record.textboxId != null" >
+        TEXTBOX_ID = #{record.textboxId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.textboxTemplateColumnId != null" >
+        TEXTBOX_TEMPLATE_COLUMN_ID = #{record.textboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.textboxCheckType != null" >
+        TEXTBOX_CHECK_TYPE = #{record.textboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxCheckSelf != null" >
+        TEXTBOX_CHECK_SELF = #{record.textboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxDataFromType != null" >
+        TEXTBOX_DATA_FROM_TYPE = #{record.textboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxDataFromValue != null" >
+        TEXTBOX_DATA_FROM_VALUE = #{record.textboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxCheckFun != null" >
+        TEXTBOX_CHECK_FUN = #{record.textboxCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxInitFun != null" >
+        TEXTBOX_INIT_FUN = #{record.textboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxScheme != null" >
+        TEXTBOX_SCHEME = #{record.textboxScheme,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxValuechangeFun != null" >
+        TEXTBOX_VALUECHANGE_FUN = #{record.textboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxClickFun != null" >
+        TEXTBOX_CLICK_FUN = #{record.textboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxEmptytext != null" >
+        TEXTBOX_EMPTYTEXT = #{record.textboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxIsLink != null" >
+        TEXTBOX_IS_LINK = #{record.textboxIsLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkIsForm != null" >
+        TEXTBOX_LINK_IS_FORM = #{record.textboxLinkIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkForm != null" >
+        TEXTBOX_LINK_FORM = #{record.textboxLinkForm,jdbcType=DECIMAL},
+      </if>
+      <if test="record.textboxLinkUrl != null" >
+        TEXTBOX_LINK_URL = #{record.textboxLinkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkWinOpenType != null" >
+        TEXTBOX_LINK_WIN_OPEN_TYPE = #{record.textboxLinkWinOpenType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkWinTitle != null" >
+        TEXTBOX_LINK_WIN_TITLE = #{record.textboxLinkWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkWinWidth != null" >
+        TEXTBOX_LINK_WIN_WIDTH = #{record.textboxLinkWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkWinHeight != null" >
+        TEXTBOX_LINK_WIN_HEIGHT = #{record.textboxLinkWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textboxLinkSuccessDeal != null" >
+        TEXTBOX_LINK_SUCCESS_DEAL = #{record.textboxLinkSuccessDeal,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE_TEXTBOX
+    set TEXTBOX_ID = #{record.textboxId,jdbcType=DECIMAL},
+      TEXTBOX_TEMPLATE_COLUMN_ID = #{record.textboxTemplateColumnId,jdbcType=DECIMAL},
+      TEXTBOX_CHECK_TYPE = #{record.textboxCheckType,jdbcType=NVARCHAR},
+      TEXTBOX_CHECK_SELF = #{record.textboxCheckSelf,jdbcType=NVARCHAR},
+      TEXTBOX_DATA_FROM_TYPE = #{record.textboxDataFromType,jdbcType=NVARCHAR},
+      TEXTBOX_DATA_FROM_VALUE = #{record.textboxDataFromValue,jdbcType=NVARCHAR},
+      TEXTBOX_CHECK_FUN = #{record.textboxCheckFun,jdbcType=NVARCHAR},
+      TEXTBOX_INIT_FUN = #{record.textboxInitFun,jdbcType=NVARCHAR},
+      TEXTBOX_SCHEME = #{record.textboxScheme,jdbcType=NVARCHAR},
+      TEXTBOX_VALUECHANGE_FUN = #{record.textboxValuechangeFun,jdbcType=NVARCHAR},
+      TEXTBOX_CLICK_FUN = #{record.textboxClickFun,jdbcType=NVARCHAR},
+      TEXTBOX_EMPTYTEXT = #{record.textboxEmptytext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      TEXTBOX_IS_LINK = #{record.textboxIsLink,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_IS_FORM = #{record.textboxLinkIsForm,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_FORM = #{record.textboxLinkForm,jdbcType=DECIMAL},
+      TEXTBOX_LINK_URL = #{record.textboxLinkUrl,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_OPEN_TYPE = #{record.textboxLinkWinOpenType,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_TITLE = #{record.textboxLinkWinTitle,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_WIDTH = #{record.textboxLinkWinWidth,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_HEIGHT = #{record.textboxLinkWinHeight,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_SUCCESS_DEAL = #{record.textboxLinkSuccessDeal,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextbox" >
+    update SYS_TEMPLATE_TEXTBOX
+    <set >
+      <if test="textboxTemplateColumnId != null" >
+        TEXTBOX_TEMPLATE_COLUMN_ID = #{textboxTemplateColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="textboxCheckType != null" >
+        TEXTBOX_CHECK_TYPE = #{textboxCheckType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxCheckSelf != null" >
+        TEXTBOX_CHECK_SELF = #{textboxCheckSelf,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxDataFromType != null" >
+        TEXTBOX_DATA_FROM_TYPE = #{textboxDataFromType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxDataFromValue != null" >
+        TEXTBOX_DATA_FROM_VALUE = #{textboxDataFromValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxCheckFun != null" >
+        TEXTBOX_CHECK_FUN = #{textboxCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxInitFun != null" >
+        TEXTBOX_INIT_FUN = #{textboxInitFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxScheme != null" >
+        TEXTBOX_SCHEME = #{textboxScheme,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxValuechangeFun != null" >
+        TEXTBOX_VALUECHANGE_FUN = #{textboxValuechangeFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxClickFun != null" >
+        TEXTBOX_CLICK_FUN = #{textboxClickFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxEmptytext != null" >
+        TEXTBOX_EMPTYTEXT = #{textboxEmptytext,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxIsLink != null" >
+        TEXTBOX_IS_LINK = #{textboxIsLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkIsForm != null" >
+        TEXTBOX_LINK_IS_FORM = #{textboxLinkIsForm,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkForm != null" >
+        TEXTBOX_LINK_FORM = #{textboxLinkForm,jdbcType=DECIMAL},
+      </if>
+      <if test="textboxLinkUrl != null" >
+        TEXTBOX_LINK_URL = #{textboxLinkUrl,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinOpenType != null" >
+        TEXTBOX_LINK_WIN_OPEN_TYPE = #{textboxLinkWinOpenType,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinTitle != null" >
+        TEXTBOX_LINK_WIN_TITLE = #{textboxLinkWinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinWidth != null" >
+        TEXTBOX_LINK_WIN_WIDTH = #{textboxLinkWinWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkWinHeight != null" >
+        TEXTBOX_LINK_WIN_HEIGHT = #{textboxLinkWinHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="textboxLinkSuccessDeal != null" >
+        TEXTBOX_LINK_SUCCESS_DEAL = #{textboxLinkSuccessDeal,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where TEXTBOX_ID = #{textboxId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.widget.SysTemplateTextbox" >
+    update SYS_TEMPLATE_TEXTBOX
+    set TEXTBOX_TEMPLATE_COLUMN_ID = #{textboxTemplateColumnId,jdbcType=DECIMAL},
+      TEXTBOX_CHECK_TYPE = #{textboxCheckType,jdbcType=NVARCHAR},
+      TEXTBOX_CHECK_SELF = #{textboxCheckSelf,jdbcType=NVARCHAR},
+      TEXTBOX_DATA_FROM_TYPE = #{textboxDataFromType,jdbcType=NVARCHAR},
+      TEXTBOX_DATA_FROM_VALUE = #{textboxDataFromValue,jdbcType=NVARCHAR},
+      TEXTBOX_CHECK_FUN = #{textboxCheckFun,jdbcType=NVARCHAR},
+      TEXTBOX_INIT_FUN = #{textboxInitFun,jdbcType=NVARCHAR},
+      TEXTBOX_SCHEME = #{textboxScheme,jdbcType=NVARCHAR},
+      TEXTBOX_VALUECHANGE_FUN = #{textboxValuechangeFun,jdbcType=NVARCHAR},
+      TEXTBOX_CLICK_FUN = #{textboxClickFun,jdbcType=NVARCHAR},
+      TEXTBOX_EMPTYTEXT = #{textboxEmptytext,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      TEXTBOX_IS_LINK = #{textboxIsLink,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_IS_FORM = #{textboxLinkIsForm,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_FORM = #{textboxLinkForm,jdbcType=DECIMAL},
+      TEXTBOX_LINK_URL = #{textboxLinkUrl,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_OPEN_TYPE = #{textboxLinkWinOpenType,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_TITLE = #{textboxLinkWinTitle,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_WIDTH = #{textboxLinkWinWidth,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_WIN_HEIGHT = #{textboxLinkWinHeight,jdbcType=NVARCHAR},
+      TEXTBOX_LINK_SUCCESS_DEAL = #{textboxLinkSuccessDeal,jdbcType=NVARCHAR}
+    where TEXTBOX_ID = #{textboxId,jdbcType=DECIMAL}
+  </update>
+</mapper>

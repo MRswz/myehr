@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.fileinput.SysFileCheckedMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.fileinput.SysFileChecked" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CHECKED_NAME" property="checkedName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FORM_DEF_ID" property="formDefId" jdbcType="DECIMAL" />
+    <result column="RELATED_FILE_ID" property="relatedFileId" jdbcType="NVARCHAR" />
+    <result column="RELATED_FILE_NAME" property="relatedFileName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CHECKED_NAME, OPERATOR_TIME, OPERATOR_NAME, FORM_DEF_ID, RELATED_FILE_ID, RELATED_FILE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.fileinput.SysFileCheckedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FILE_CHECKED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FILE_CHECKED
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FILE_CHECKED
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.fileinput.SysFileCheckedExample" >
+    delete from SYS_FILE_CHECKED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.fileinput.SysFileChecked" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_FILE_CHECKED (CHECKED_NAME, OPERATOR_TIME, 
+      OPERATOR_NAME, FORM_DEF_ID, RELATED_FILE_ID, 
+      RELATED_FILE_NAME)
+    values (#{checkedName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{formDefId,jdbcType=DECIMAL}, #{relatedFileId,jdbcType=NVARCHAR}, 
+      #{relatedFileName,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.fileinput.SysFileChecked" >
+    insert into SYS_FILE_CHECKED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="checkedName != null" >
+        CHECKED_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="formDefId != null" >
+        FORM_DEF_ID,
+      </if>
+      <if test="relatedFileId != null" >
+        RELATED_FILE_ID,
+      </if>
+      <if test="relatedFileName != null" >
+        RELATED_FILE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedName != null" >
+        #{checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefId != null" >
+        #{formDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedFileId != null" >
+        #{relatedFileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="relatedFileName != null" >
+        #{relatedFileName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.fileinput.SysFileCheckedExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FILE_CHECKED
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FILE_CHECKED
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedName != null" >
+        CHECKED_NAME = #{record.checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formDefId != null" >
+        FORM_DEF_ID = #{record.formDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.relatedFileId != null" >
+        RELATED_FILE_ID = #{record.relatedFileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.relatedFileName != null" >
+        RELATED_FILE_NAME = #{record.relatedFileName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FILE_CHECKED
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CHECKED_NAME = #{record.checkedName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      FORM_DEF_ID = #{record.formDefId,jdbcType=DECIMAL},
+      RELATED_FILE_ID = #{record.relatedFileId,jdbcType=NVARCHAR},
+      RELATED_FILE_NAME = #{record.relatedFileName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.fileinput.SysFileChecked" >
+    update SYS_FILE_CHECKED
+    <set >
+      <if test="checkedName != null" >
+        CHECKED_NAME = #{checkedName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formDefId != null" >
+        FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedFileId != null" >
+        RELATED_FILE_ID = #{relatedFileId,jdbcType=NVARCHAR},
+      </if>
+      <if test="relatedFileName != null" >
+        RELATED_FILE_NAME = #{relatedFileName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.fileinput.SysFileChecked" >
+    update SYS_FILE_CHECKED
+    set CHECKED_NAME = #{checkedName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      FORM_DEF_ID = #{formDefId,jdbcType=DECIMAL},
+      RELATED_FILE_ID = #{relatedFileId,jdbcType=NVARCHAR},
+      RELATED_FILE_NAME = #{relatedFileName,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysSqlParamsMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysSqlParams" >
+    <id column="SQL_PARAMS_ID" property="sqlParamsId" jdbcType="DECIMAL" />
+    <result column="SQL_PARAMS_CODE" property="sqlParamsCode" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_NAME" property="sqlParamsName" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_TYPE" property="sqlParamsType" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_FOLDER_ID" property="sqlParamsFolderId" jdbcType="DECIMAL" />
+    <result column="SQL_PARAMS_DATA_TYPE" property="sqlParamsDataType" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_DESC" property="sqlParamsDesc" jdbcType="VARCHAR" />
+    <result column="SQL_PARAM_SCHEMA_ID" property="sqlParamSchemaId" jdbcType="DECIMAL" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="SQL_PARAMS_GUI_TYPE" property="sqlParamsGuiType" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_VALUE" property="sqlParamsValue" jdbcType="VARCHAR" />
+    <result column="SQL_PARAMS_IS_REQUIRED" property="sqlParamsIsRequired" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SQL_PARAMS_ID, SQL_PARAMS_CODE, SQL_PARAMS_NAME, SQL_PARAMS_TYPE, SQL_PARAMS_FOLDER_ID, 
+    SQL_PARAMS_DATA_TYPE, SQL_PARAMS_DESC, SQL_PARAM_SCHEMA_ID, OPERATOR_NAME, OPERATOR_TIME, 
+    SQL_PARAMS_GUI_TYPE, SQL_PARAMS_VALUE, SQL_PARAMS_IS_REQUIRED
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysSqlParamsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_SQL_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_SQL_PARAMS
+    where SQL_PARAMS_ID = #{sqlParamsId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_SQL_PARAMS
+    where SQL_PARAMS_ID = #{sqlParamsId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysSqlParamsExample" >
+    delete from SYS_SQL_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysSqlParams" >
+    insert into SYS_SQL_PARAMS (SQL_PARAMS_CODE, SQL_PARAMS_NAME, 
+      SQL_PARAMS_TYPE, SQL_PARAMS_FOLDER_ID, SQL_PARAMS_DATA_TYPE, 
+      SQL_PARAMS_DESC, SQL_PARAM_SCHEMA_ID, OPERATOR_NAME, 
+      OPERATOR_TIME, SQL_PARAMS_GUI_TYPE, SQL_PARAMS_VALUE, 
+      SQL_PARAMS_IS_REQUIRED)
+    values (#{sqlParamsCode,jdbcType=VARCHAR}, #{sqlParamsName,jdbcType=VARCHAR}, 
+      #{sqlParamsType,jdbcType=VARCHAR}, #{sqlParamsFolderId,jdbcType=DECIMAL}, #{sqlParamsDataType,jdbcType=VARCHAR}, 
+      #{sqlParamsDesc,jdbcType=VARCHAR}, #{sqlParamSchemaId,jdbcType=DECIMAL}, #{operatorName,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{sqlParamsGuiType,jdbcType=VARCHAR}, #{sqlParamsValue,jdbcType=VARCHAR}, 
+      #{sqlParamsIsRequired,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysSqlParams" >
+    insert into SYS_SQL_PARAMS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqlParamsId != null" >
+        SQL_PARAMS_ID,
+      </if>
+      <if test="sqlParamsCode != null" >
+        SQL_PARAMS_CODE,
+      </if>
+      <if test="sqlParamsName != null" >
+        SQL_PARAMS_NAME,
+      </if>
+      <if test="sqlParamsType != null" >
+        SQL_PARAMS_TYPE,
+      </if>
+      <if test="sqlParamsFolderId != null" >
+        SQL_PARAMS_FOLDER_ID,
+      </if>
+      <if test="sqlParamsDataType != null" >
+        SQL_PARAMS_DATA_TYPE,
+      </if>
+      <if test="sqlParamsDesc != null" >
+        SQL_PARAMS_DESC,
+      </if>
+      <if test="sqlParamSchemaId != null" >
+        SQL_PARAM_SCHEMA_ID,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="sqlParamsGuiType != null" >
+        SQL_PARAMS_GUI_TYPE,
+      </if>
+      <if test="sqlParamsValue != null" >
+        SQL_PARAMS_VALUE,
+      </if>
+      <if test="sqlParamsIsRequired != null" >
+        SQL_PARAMS_IS_REQUIRED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqlParamsId != null" >
+        #{sqlParamsId,jdbcType=DECIMAL},
+      </if>
+      <if test="sqlParamsCode != null" >
+        #{sqlParamsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsName != null" >
+        #{sqlParamsName,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsType != null" >
+        #{sqlParamsType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsFolderId != null" >
+        #{sqlParamsFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="sqlParamsDataType != null" >
+        #{sqlParamsDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsDesc != null" >
+        #{sqlParamsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamSchemaId != null" >
+        #{sqlParamSchemaId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqlParamsGuiType != null" >
+        #{sqlParamsGuiType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsValue != null" >
+        #{sqlParamsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsIsRequired != null" >
+        #{sqlParamsIsRequired,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysSqlParamsExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_SQL_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_SQL_PARAMS
+    <set >
+      <if test="record.sqlParamsId != null" >
+        SQL_PARAMS_ID = #{record.sqlParamsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sqlParamsCode != null" >
+        SQL_PARAMS_CODE = #{record.sqlParamsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsName != null" >
+        SQL_PARAMS_NAME = #{record.sqlParamsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsType != null" >
+        SQL_PARAMS_TYPE = #{record.sqlParamsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsFolderId != null" >
+        SQL_PARAMS_FOLDER_ID = #{record.sqlParamsFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sqlParamsDataType != null" >
+        SQL_PARAMS_DATA_TYPE = #{record.sqlParamsDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsDesc != null" >
+        SQL_PARAMS_DESC = #{record.sqlParamsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamSchemaId != null" >
+        SQL_PARAM_SCHEMA_ID = #{record.sqlParamSchemaId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqlParamsGuiType != null" >
+        SQL_PARAMS_GUI_TYPE = #{record.sqlParamsGuiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsValue != null" >
+        SQL_PARAMS_VALUE = #{record.sqlParamsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlParamsIsRequired != null" >
+        SQL_PARAMS_IS_REQUIRED = #{record.sqlParamsIsRequired,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_SQL_PARAMS
+    set SQL_PARAMS_ID = #{record.sqlParamsId,jdbcType=DECIMAL},
+      SQL_PARAMS_CODE = #{record.sqlParamsCode,jdbcType=VARCHAR},
+      SQL_PARAMS_NAME = #{record.sqlParamsName,jdbcType=VARCHAR},
+      SQL_PARAMS_TYPE = #{record.sqlParamsType,jdbcType=VARCHAR},
+      SQL_PARAMS_FOLDER_ID = #{record.sqlParamsFolderId,jdbcType=DECIMAL},
+      SQL_PARAMS_DATA_TYPE = #{record.sqlParamsDataType,jdbcType=VARCHAR},
+      SQL_PARAMS_DESC = #{record.sqlParamsDesc,jdbcType=VARCHAR},
+      SQL_PARAM_SCHEMA_ID = #{record.sqlParamSchemaId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      SQL_PARAMS_GUI_TYPE = #{record.sqlParamsGuiType,jdbcType=VARCHAR},
+      SQL_PARAMS_VALUE = #{record.sqlParamsValue,jdbcType=VARCHAR},
+      SQL_PARAMS_IS_REQUIRED = #{record.sqlParamsIsRequired,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysSqlParams" >
+    update SYS_SQL_PARAMS
+    <set >
+      <if test="sqlParamsCode != null" >
+        SQL_PARAMS_CODE = #{sqlParamsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsName != null" >
+        SQL_PARAMS_NAME = #{sqlParamsName,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsType != null" >
+        SQL_PARAMS_TYPE = #{sqlParamsType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsFolderId != null" >
+        SQL_PARAMS_FOLDER_ID = #{sqlParamsFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="sqlParamsDataType != null" >
+        SQL_PARAMS_DATA_TYPE = #{sqlParamsDataType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsDesc != null" >
+        SQL_PARAMS_DESC = #{sqlParamsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamSchemaId != null" >
+        SQL_PARAM_SCHEMA_ID = #{sqlParamSchemaId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqlParamsGuiType != null" >
+        SQL_PARAMS_GUI_TYPE = #{sqlParamsGuiType,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsValue != null" >
+        SQL_PARAMS_VALUE = #{sqlParamsValue,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlParamsIsRequired != null" >
+        SQL_PARAMS_IS_REQUIRED = #{sqlParamsIsRequired,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SQL_PARAMS_ID = #{sqlParamsId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysSqlParams" >
+    update SYS_SQL_PARAMS
+    set SQL_PARAMS_CODE = #{sqlParamsCode,jdbcType=VARCHAR},
+      SQL_PARAMS_NAME = #{sqlParamsName,jdbcType=VARCHAR},
+      SQL_PARAMS_TYPE = #{sqlParamsType,jdbcType=VARCHAR},
+      SQL_PARAMS_FOLDER_ID = #{sqlParamsFolderId,jdbcType=DECIMAL},
+      SQL_PARAMS_DATA_TYPE = #{sqlParamsDataType,jdbcType=VARCHAR},
+      SQL_PARAMS_DESC = #{sqlParamsDesc,jdbcType=VARCHAR},
+      SQL_PARAM_SCHEMA_ID = #{sqlParamSchemaId,jdbcType=DECIMAL},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      SQL_PARAMS_GUI_TYPE = #{sqlParamsGuiType,jdbcType=VARCHAR},
+      SQL_PARAMS_VALUE = #{sqlParamsValue,jdbcType=VARCHAR},
+      SQL_PARAMS_IS_REQUIRED = #{sqlParamsIsRequired,jdbcType=VARCHAR}
+    where SQL_PARAMS_ID = #{sqlParamsId,jdbcType=DECIMAL}
+  </update>
+</mapper>

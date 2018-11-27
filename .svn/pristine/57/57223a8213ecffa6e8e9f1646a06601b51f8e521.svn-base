@@ -1,0 +1,5 @@
+[
+	{ "id":11, "pId":"1v", "name":"打开百度", "iconSkin":"icon01","url":"http://www.baidu.com/", "target":"_blank"},
+	{ "id":12, "pId":"1v", "name":"叶子节点2", "iconSkin":"pIcon01","isParent":true},
+	{ "id":13, "pId":"1v", "name":"叶子节点3", "iconSkin":"pIcon02","isParent":true}
+]

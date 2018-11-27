@@ -1,0 +1,1072 @@
+package com.myehr.pojo.formmanage.form;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class SysFormWhereExample {
+    protected String orderByClause;
+
+    protected boolean distinct;
+
+    protected List<Criteria> oredCriteria;
+
+    public SysFormWhereExample() {
+        oredCriteria = new ArrayList<Criteria>();
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
+    }
+
+    public List<Criteria> getOredCriteria() {
+        return oredCriteria;
+    }
+
+    public void or(Criteria criteria) {
+        oredCriteria.add(criteria);
+    }
+
+    public Criteria or() {
+        Criteria criteria = createCriteriaInternal();
+        oredCriteria.add(criteria);
+        return criteria;
+    }
+
+    public Criteria createCriteria() {
+        Criteria criteria = createCriteriaInternal();
+        if (oredCriteria.size() == 0) {
+            oredCriteria.add(criteria);
+        }
+        return criteria;
+    }
+
+    protected Criteria createCriteriaInternal() {
+        Criteria criteria = new Criteria();
+        return criteria;
+    }
+
+    public void clear() {
+        oredCriteria.clear();
+        orderByClause = null;
+        distinct = false;
+    }
+
+    protected abstract static class GeneratedCriteria {
+        protected List<Criterion> criteria;
+
+        protected GeneratedCriteria() {
+            super();
+            criteria = new ArrayList<Criterion>();
+        }
+
+        public boolean isValid() {
+            return criteria.size() > 0;
+        }
+
+        public List<Criterion> getAllCriteria() {
+            return criteria;
+        }
+
+        public List<Criterion> getCriteria() {
+            return criteria;
+        }
+
+        protected void addCriterion(String condition) {
+            if (condition == null) {
+                throw new RuntimeException("Value for condition cannot be null");
+            }
+            criteria.add(new Criterion(condition));
+        }
+
+        protected void addCriterion(String condition, Object value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value));
+        }
+
+        protected void addCriterion(String condition, Object value1, Object value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andFormWhereIdIsNull() {
+            addCriterion("FORM_WHERE_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdIsNotNull() {
+            addCriterion("FORM_WHERE_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID =", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdNotEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID <>", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdGreaterThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID >", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID >=", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdLessThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID <", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_ID <=", value, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_ID in", values, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdNotIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_ID not in", values, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_ID between", value1, value2, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_ID not between", value1, value2, "formWhereId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdIsNull() {
+            addCriterion("FORM_WHERE_FORM_DEF_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdIsNotNull() {
+            addCriterion("FORM_WHERE_FORM_DEF_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID =", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdNotEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID <>", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdGreaterThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID >", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID >=", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdLessThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID <", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID <=", value, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID in", values, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdNotIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID not in", values, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID between", value1, value2, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereFormDefIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_FORM_DEF_ID not between", value1, value2, "formWhereFormDefId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdIsNull() {
+            addCriterion("FORM_WHERE_COLUMN_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdIsNotNull() {
+            addCriterion("FORM_WHERE_COLUMN_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdEqualTo(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID =", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID <>", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdGreaterThan(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID >", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID >=", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdLessThan(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID <", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID <=", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdLike(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID like", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdNotLike(String value) {
+            addCriterion("FORM_WHERE_COLUMN_ID not like", value, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdIn(List<String> values) {
+            addCriterion("FORM_WHERE_COLUMN_ID in", values, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_COLUMN_ID not in", values, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_COLUMN_ID between", value1, value2, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereColumnIdNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_COLUMN_ID not between", value1, value2, "formWhereColumnId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleIsNull() {
+            addCriterion("FORM_WHERE_CP_RULE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleIsNotNull() {
+            addCriterion("FORM_WHERE_CP_RULE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleEqualTo(String value) {
+            addCriterion("FORM_WHERE_CP_RULE =", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_CP_RULE <>", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleGreaterThan(String value) {
+            addCriterion("FORM_WHERE_CP_RULE >", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_CP_RULE >=", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleLessThan(String value) {
+            addCriterion("FORM_WHERE_CP_RULE <", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_CP_RULE <=", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleLike(String value) {
+            addCriterion("FORM_WHERE_CP_RULE like", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleNotLike(String value) {
+            addCriterion("FORM_WHERE_CP_RULE not like", value, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleIn(List<String> values) {
+            addCriterion("FORM_WHERE_CP_RULE in", values, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_CP_RULE not in", values, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_CP_RULE between", value1, value2, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereCpRuleNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_CP_RULE not between", value1, value2, "formWhereCpRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeIsNull() {
+            addCriterion("FORM_WHERE_VALUE_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeIsNotNull() {
+            addCriterion("FORM_WHERE_VALUE_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE =", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE <>", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeGreaterThan(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE >", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE >=", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeLessThan(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE <", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE <=", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeLike(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE like", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeNotLike(String value) {
+            addCriterion("FORM_WHERE_VALUE_TYPE not like", value, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeIn(List<String> values) {
+            addCriterion("FORM_WHERE_VALUE_TYPE in", values, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_VALUE_TYPE not in", values, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_VALUE_TYPE between", value1, value2, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueTypeNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_VALUE_TYPE not between", value1, value2, "formWhereValueType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueIsNull() {
+            addCriterion("FORM_WHERE_VALUE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueIsNotNull() {
+            addCriterion("FORM_WHERE_VALUE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE =", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE <>", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueGreaterThan(String value) {
+            addCriterion("FORM_WHERE_VALUE >", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE >=", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueLessThan(String value) {
+            addCriterion("FORM_WHERE_VALUE <", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_VALUE <=", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueLike(String value) {
+            addCriterion("FORM_WHERE_VALUE like", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueNotLike(String value) {
+            addCriterion("FORM_WHERE_VALUE not like", value, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueIn(List<String> values) {
+            addCriterion("FORM_WHERE_VALUE in", values, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_VALUE not in", values, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_VALUE between", value1, value2, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereValueNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_VALUE not between", value1, value2, "formWhereValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleIsNull() {
+            addCriterion("FORM_WHERE_JOIN_RULE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleIsNotNull() {
+            addCriterion("FORM_WHERE_JOIN_RULE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleEqualTo(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE =", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE <>", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleGreaterThan(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE >", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE >=", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleLessThan(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE <", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE <=", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleLike(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE like", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleNotLike(String value) {
+            addCriterion("FORM_WHERE_JOIN_RULE not like", value, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleIn(List<String> values) {
+            addCriterion("FORM_WHERE_JOIN_RULE in", values, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_JOIN_RULE not in", values, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_JOIN_RULE between", value1, value2, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereJoinRuleNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_JOIN_RULE not between", value1, value2, "formWhereJoinRule");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortIsNull() {
+            addCriterion("FORM_WHERE_SORT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortIsNotNull() {
+            addCriterion("FORM_WHERE_SORT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT =", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortNotEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT <>", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortGreaterThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT >", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT >=", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortLessThan(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT <", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("FORM_WHERE_SORT <=", value, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_SORT in", values, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortNotIn(List<BigDecimal> values) {
+            addCriterion("FORM_WHERE_SORT not in", values, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_SORT between", value1, value2, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereSortNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("FORM_WHERE_SORT not between", value1, value2, "formWhereSort");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsIsNull() {
+            addCriterion("FORM_WHERE_NULL_IS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsIsNotNull() {
+            addCriterion("FORM_WHERE_NULL_IS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsEqualTo(String value) {
+            addCriterion("FORM_WHERE_NULL_IS =", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_NULL_IS <>", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsGreaterThan(String value) {
+            addCriterion("FORM_WHERE_NULL_IS >", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_NULL_IS >=", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsLessThan(String value) {
+            addCriterion("FORM_WHERE_NULL_IS <", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_NULL_IS <=", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsLike(String value) {
+            addCriterion("FORM_WHERE_NULL_IS like", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsNotLike(String value) {
+            addCriterion("FORM_WHERE_NULL_IS not like", value, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsIn(List<String> values) {
+            addCriterion("FORM_WHERE_NULL_IS in", values, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_NULL_IS not in", values, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_NULL_IS between", value1, value2, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereNullIsNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_NULL_IS not between", value1, value2, "formWhereNullIs");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketIsNull() {
+            addCriterion("FORM_WHERE_LEFT_BRACKET is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketIsNotNull() {
+            addCriterion("FORM_WHERE_LEFT_BRACKET is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketEqualTo(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET =", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET <>", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketGreaterThan(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET >", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET >=", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketLessThan(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET <", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET <=", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketLike(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET like", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketNotLike(String value) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET not like", value, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketIn(List<String> values) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET in", values, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET not in", values, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET between", value1, value2, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereLeftBracketNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_LEFT_BRACKET not between", value1, value2, "formWhereLeftBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketIsNull() {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketIsNotNull() {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketEqualTo(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET =", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketNotEqualTo(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET <>", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketGreaterThan(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET >", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketGreaterThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET >=", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketLessThan(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET <", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketLessThanOrEqualTo(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET <=", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketLike(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET like", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketNotLike(String value) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET not like", value, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketIn(List<String> values) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET in", values, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketNotIn(List<String> values) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET not in", values, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET between", value1, value2, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andFormWhereRightBracketNotBetween(String value1, String value2) {
+            addCriterion("FORM_WHERE_RIGHT_BRACKET not between", value1, value2, "formWhereRightBracket");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeIsNull() {
+            addCriterion("OPERATOR_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeIsNotNull() {
+            addCriterion("OPERATOR_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeEqualTo(Date value) {
+            addCriterion("OPERATOR_TIME =", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeNotEqualTo(Date value) {
+            addCriterion("OPERATOR_TIME <>", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeGreaterThan(Date value) {
+            addCriterion("OPERATOR_TIME >", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("OPERATOR_TIME >=", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeLessThan(Date value) {
+            addCriterion("OPERATOR_TIME <", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeLessThanOrEqualTo(Date value) {
+            addCriterion("OPERATOR_TIME <=", value, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeIn(List<Date> values) {
+            addCriterion("OPERATOR_TIME in", values, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeNotIn(List<Date> values) {
+            addCriterion("OPERATOR_TIME not in", values, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeBetween(Date value1, Date value2) {
+            addCriterion("OPERATOR_TIME between", value1, value2, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorTimeNotBetween(Date value1, Date value2) {
+            addCriterion("OPERATOR_TIME not between", value1, value2, "operatorTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameIsNull() {
+            addCriterion("OPERATOR_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameIsNotNull() {
+            addCriterion("OPERATOR_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameEqualTo(String value) {
+            addCriterion("OPERATOR_NAME =", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameNotEqualTo(String value) {
+            addCriterion("OPERATOR_NAME <>", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameGreaterThan(String value) {
+            addCriterion("OPERATOR_NAME >", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameGreaterThanOrEqualTo(String value) {
+            addCriterion("OPERATOR_NAME >=", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameLessThan(String value) {
+            addCriterion("OPERATOR_NAME <", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameLessThanOrEqualTo(String value) {
+            addCriterion("OPERATOR_NAME <=", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameLike(String value) {
+            addCriterion("OPERATOR_NAME like", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameNotLike(String value) {
+            addCriterion("OPERATOR_NAME not like", value, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameIn(List<String> values) {
+            addCriterion("OPERATOR_NAME in", values, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameNotIn(List<String> values) {
+            addCriterion("OPERATOR_NAME not in", values, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameBetween(String value1, String value2) {
+            addCriterion("OPERATOR_NAME between", value1, value2, "operatorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNameNotBetween(String value1, String value2) {
+            addCriterion("OPERATOR_NAME not between", value1, value2, "operatorName");
+            return (Criteria) this;
+        }
+    }
+
+    public static class Criteria extends GeneratedCriteria {
+
+        protected Criteria() {
+            super();
+        }
+    }
+
+    public static class Criterion {
+        private String condition;
+
+        private Object value;
+
+        private Object secondValue;
+
+        private boolean noValue;
+
+        private boolean singleValue;
+
+        private boolean betweenValue;
+
+        private boolean listValue;
+
+        private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
+        protected Criterion(String condition) {
+            super();
+            this.condition = condition;
+            this.typeHandler = null;
+            this.noValue = true;
+        }
+
+        protected Criterion(String condition, Object value, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.typeHandler = typeHandler;
+            if (value instanceof List<?>) {
+                this.listValue = true;
+            } else {
+                this.singleValue = true;
+            }
+        }
+
+        protected Criterion(String condition, Object value) {
+            this(condition, value, null);
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue, String typeHandler) {
+            super();
+            this.condition = condition;
+            this.value = value;
+            this.secondValue = secondValue;
+            this.typeHandler = typeHandler;
+            this.betweenValue = true;
+        }
+
+        protected Criterion(String condition, Object value, Object secondValue) {
+            this(condition, value, secondValue, null);
+        }
+    }
+}

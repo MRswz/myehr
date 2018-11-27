@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.button.SysFormButtonRemoveMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.button.SysFormButtonRemove" >
+    <id column="BUTTON_REMOVE_ID" property="buttonRemoveId" jdbcType="DECIMAL" />
+    <result column="BUTTON_REMOVE_BUTTON_ID" property="buttonRemoveButtonId" jdbcType="DECIMAL" />
+    <result column="BUTTON_REMOVE_EXC_TYPE" property="buttonRemoveExcType" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_FUN" property="buttonRemoveFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_URL" property="buttonRemoveUrl" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_SQL" property="buttonRemoveSql" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_INIT_FUN" property="buttonRemoveInitFun" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_TYPE" property="buttonRemoveType" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMOVE_CASCADE_DELETE" property="buttonRemoveCascadeDelete" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BUTTON_REMOVE_ID, BUTTON_REMOVE_BUTTON_ID, BUTTON_REMOVE_EXC_TYPE, BUTTON_REMOVE_FUN, 
+    BUTTON_REMOVE_URL, BUTTON_REMOVE_SQL, BUTTON_REMOVE_INIT_FUN, BUTTON_REMOVE_TYPE, 
+    OPERATOR_TIME, OPERATOR_NAME, BUTTON_REMOVE_CASCADE_DELETE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemoveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_REMOVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON_REMOVE
+    where BUTTON_REMOVE_ID = #{buttonRemoveId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON_REMOVE
+    where BUTTON_REMOVE_ID = #{buttonRemoveId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemoveExample" >
+    delete from SYS_FORM_BUTTON_REMOVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemove" >
+    insert into SYS_FORM_BUTTON_REMOVE (BUTTON_REMOVE_BUTTON_ID, 
+      BUTTON_REMOVE_EXC_TYPE, BUTTON_REMOVE_FUN, BUTTON_REMOVE_URL, 
+      BUTTON_REMOVE_SQL, BUTTON_REMOVE_INIT_FUN, BUTTON_REMOVE_TYPE, 
+      OPERATOR_TIME, OPERATOR_NAME, BUTTON_REMOVE_CASCADE_DELETE
+      )
+    values (#{buttonRemoveButtonId,jdbcType=DECIMAL}, 
+      #{buttonRemoveExcType,jdbcType=VARCHAR}, #{buttonRemoveFun,jdbcType=VARCHAR}, #{buttonRemoveUrl,jdbcType=VARCHAR}, 
+      #{buttonRemoveSql,jdbcType=VARCHAR}, #{buttonRemoveInitFun,jdbcType=VARCHAR}, #{buttonRemoveType,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR}, #{buttonRemoveCascadeDelete,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemove" >
+    insert into SYS_FORM_BUTTON_REMOVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buttonRemoveId != null" >
+        BUTTON_REMOVE_ID,
+      </if>
+      <if test="buttonRemoveButtonId != null" >
+        BUTTON_REMOVE_BUTTON_ID,
+      </if>
+      <if test="buttonRemoveExcType != null" >
+        BUTTON_REMOVE_EXC_TYPE,
+      </if>
+      <if test="buttonRemoveFun != null" >
+        BUTTON_REMOVE_FUN,
+      </if>
+      <if test="buttonRemoveUrl != null" >
+        BUTTON_REMOVE_URL,
+      </if>
+      <if test="buttonRemoveSql != null" >
+        BUTTON_REMOVE_SQL,
+      </if>
+      <if test="buttonRemoveInitFun != null" >
+        BUTTON_REMOVE_INIT_FUN,
+      </if>
+      <if test="buttonRemoveType != null" >
+        BUTTON_REMOVE_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="buttonRemoveCascadeDelete != null" >
+        BUTTON_REMOVE_CASCADE_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buttonRemoveId != null" >
+        #{buttonRemoveId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonRemoveButtonId != null" >
+        #{buttonRemoveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonRemoveExcType != null" >
+        #{buttonRemoveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveFun != null" >
+        #{buttonRemoveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveUrl != null" >
+        #{buttonRemoveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveSql != null" >
+        #{buttonRemoveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveInitFun != null" >
+        #{buttonRemoveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveType != null" >
+        #{buttonRemoveType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveCascadeDelete != null" >
+        #{buttonRemoveCascadeDelete,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemoveExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON_REMOVE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON_REMOVE
+    <set >
+      <if test="record.buttonRemoveId != null" >
+        BUTTON_REMOVE_ID = #{record.buttonRemoveId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonRemoveButtonId != null" >
+        BUTTON_REMOVE_BUTTON_ID = #{record.buttonRemoveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buttonRemoveExcType != null" >
+        BUTTON_REMOVE_EXC_TYPE = #{record.buttonRemoveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveFun != null" >
+        BUTTON_REMOVE_FUN = #{record.buttonRemoveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveUrl != null" >
+        BUTTON_REMOVE_URL = #{record.buttonRemoveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveSql != null" >
+        BUTTON_REMOVE_SQL = #{record.buttonRemoveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveInitFun != null" >
+        BUTTON_REMOVE_INIT_FUN = #{record.buttonRemoveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveType != null" >
+        BUTTON_REMOVE_TYPE = #{record.buttonRemoveType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonRemoveCascadeDelete != null" >
+        BUTTON_REMOVE_CASCADE_DELETE = #{record.buttonRemoveCascadeDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON_REMOVE
+    set BUTTON_REMOVE_ID = #{record.buttonRemoveId,jdbcType=DECIMAL},
+      BUTTON_REMOVE_BUTTON_ID = #{record.buttonRemoveButtonId,jdbcType=DECIMAL},
+      BUTTON_REMOVE_EXC_TYPE = #{record.buttonRemoveExcType,jdbcType=VARCHAR},
+      BUTTON_REMOVE_FUN = #{record.buttonRemoveFun,jdbcType=VARCHAR},
+      BUTTON_REMOVE_URL = #{record.buttonRemoveUrl,jdbcType=VARCHAR},
+      BUTTON_REMOVE_SQL = #{record.buttonRemoveSql,jdbcType=VARCHAR},
+      BUTTON_REMOVE_INIT_FUN = #{record.buttonRemoveInitFun,jdbcType=VARCHAR},
+      BUTTON_REMOVE_TYPE = #{record.buttonRemoveType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      BUTTON_REMOVE_CASCADE_DELETE = #{record.buttonRemoveCascadeDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemove" >
+    update SYS_FORM_BUTTON_REMOVE
+    <set >
+      <if test="buttonRemoveButtonId != null" >
+        BUTTON_REMOVE_BUTTON_ID = #{buttonRemoveButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="buttonRemoveExcType != null" >
+        BUTTON_REMOVE_EXC_TYPE = #{buttonRemoveExcType,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveFun != null" >
+        BUTTON_REMOVE_FUN = #{buttonRemoveFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveUrl != null" >
+        BUTTON_REMOVE_URL = #{buttonRemoveUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveSql != null" >
+        BUTTON_REMOVE_SQL = #{buttonRemoveSql,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveInitFun != null" >
+        BUTTON_REMOVE_INIT_FUN = #{buttonRemoveInitFun,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveType != null" >
+        BUTTON_REMOVE_TYPE = #{buttonRemoveType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonRemoveCascadeDelete != null" >
+        BUTTON_REMOVE_CASCADE_DELETE = #{buttonRemoveCascadeDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BUTTON_REMOVE_ID = #{buttonRemoveId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.button.SysFormButtonRemove" >
+    update SYS_FORM_BUTTON_REMOVE
+    set BUTTON_REMOVE_BUTTON_ID = #{buttonRemoveButtonId,jdbcType=DECIMAL},
+      BUTTON_REMOVE_EXC_TYPE = #{buttonRemoveExcType,jdbcType=VARCHAR},
+      BUTTON_REMOVE_FUN = #{buttonRemoveFun,jdbcType=VARCHAR},
+      BUTTON_REMOVE_URL = #{buttonRemoveUrl,jdbcType=VARCHAR},
+      BUTTON_REMOVE_SQL = #{buttonRemoveSql,jdbcType=VARCHAR},
+      BUTTON_REMOVE_INIT_FUN = #{buttonRemoveInitFun,jdbcType=VARCHAR},
+      BUTTON_REMOVE_TYPE = #{buttonRemoveType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      BUTTON_REMOVE_CASCADE_DELETE = #{buttonRemoveCascadeDelete,jdbcType=VARCHAR}
+    where BUTTON_REMOVE_ID = #{buttonRemoveId,jdbcType=DECIMAL}
+  </update>
+</mapper>

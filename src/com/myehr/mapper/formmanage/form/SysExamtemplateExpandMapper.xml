@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysExamtemplateExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.question.SysExamtemplate" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="CNAME" property="cname" jdbcType="NVARCHAR" />
+    <result column="ENAME" property="ename" jdbcType="NVARCHAR" />
+    <result column="BEGINDESC" property="begindesc" jdbcType="NVARCHAR" />
+    <result column="ENDDESC" property="enddesc" jdbcType="NVARCHAR" />
+    <result column="TEMPLATEDESC" property="templatedesc" jdbcType="NVARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CODE, CNAME, ENAME, BEGINDESC, ENDDESC, TEMPLATEDESC, REMARK, OPERATOR_NAME, 
+    OPERATOR_TIME
+  </sql>
+ <select id="searchByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		SysExamtemplate
+	WHERE
+	   CODE LIKE #{condition,jdbcType=VARCHAR}
+	OR CNAME LIKE #{condition,jdbcType=VARCHAR}
+	OR ID LIKE #{condition,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="searchByDeleteMark" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		SysExamtemplate
+	WHERE
+	    REMARK = #{remark,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getSysExamtemplateByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		SysExamtemplate
+	WHERE
+	    CODE = #{Code,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getAllEmployee" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		${sql}
+  </select>
+  
+  <select id="getTotalEmployee" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		${sql2}
+  </select>
+</mapper>

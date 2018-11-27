@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysCardtocardConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysCardtocardConfig" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="FORM_ID" property="formId" jdbcType="DECIMAL" />
+    <result column="IS_DIV_LINK" property="isDivLink" jdbcType="NVARCHAR" />
+    <result column="MAIN_WIDTH" property="mainWidth" jdbcType="NVARCHAR" />
+    <result column="IS_PRINT" property="isPrint" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, FORM_ID, IS_DIV_LINK, MAIN_WIDTH, IS_PRINT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_CARDTOCARD_CONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CARDTOCARD_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_CARDTOCARD_CONFIG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfigExample" >
+    delete from SYS_CARDTOCARD_CONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfig" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_CARDTOCARD_CONFIG ( FORM_ID, IS_DIV_LINK, 
+      MAIN_WIDTH, IS_PRINT)
+    values ( #{formId,jdbcType=DECIMAL}, #{isDivLink,jdbcType=NVARCHAR}, 
+      #{mainWidth,jdbcType=NVARCHAR}, #{isPrint,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfig" >
+    insert into SYS_CARDTOCARD_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="isDivLink != null" >
+        IS_DIV_LINK,
+      </if>
+      <if test="mainWidth != null" >
+        MAIN_WIDTH,
+      </if>
+      <if test="isPrint != null" >
+        IS_PRINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="isDivLink != null" >
+        #{isDivLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="mainWidth != null" >
+        #{mainWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="isPrint != null" >
+        #{isPrint,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfigExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_CARDTOCARD_CONFIG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_CARDTOCARD_CONFIG
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formId != null" >
+        FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDivLink != null" >
+        IS_DIV_LINK = #{record.isDivLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.mainWidth != null" >
+        MAIN_WIDTH = #{record.mainWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isPrint != null" >
+        IS_PRINT = #{record.isPrint,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_CARDTOCARD_CONFIG
+    set ID = #{record.id,jdbcType=DECIMAL},
+      FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      IS_DIV_LINK = #{record.isDivLink,jdbcType=NVARCHAR},
+      MAIN_WIDTH = #{record.mainWidth,jdbcType=NVARCHAR},
+      IS_PRINT = #{record.isPrint,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfig" >
+    update SYS_CARDTOCARD_CONFIG
+    <set >
+      <if test="formId != null" >
+        FORM_ID = #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="isDivLink != null" >
+        IS_DIV_LINK = #{isDivLink,jdbcType=NVARCHAR},
+      </if>
+      <if test="mainWidth != null" >
+        MAIN_WIDTH = #{mainWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="isPrint != null" >
+        IS_PRINT = #{isPrint,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysCardtocardConfig" >
+    update SYS_CARDTOCARD_CONFIG
+    set FORM_ID = #{formId,jdbcType=DECIMAL},
+      IS_DIV_LINK = #{isDivLink,jdbcType=NVARCHAR},
+      MAIN_WIDTH = #{mainWidth,jdbcType=NVARCHAR},
+      IS_PRINT = #{isPrint,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

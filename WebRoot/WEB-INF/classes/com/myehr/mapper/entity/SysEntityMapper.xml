@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.entity.SysEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.entity.SysEntity" >
+    <id column="ENTITY_ID" property="entityId" jdbcType="INTEGER" />
+    <result column="ENTITY_CODE" property="entityCode" jdbcType="VARCHAR" />
+    <result column="ENTITY_TABLENAME" property="entityTablename" jdbcType="VARCHAR" />
+    <result column="ENTITY_TYPE" property="entityType" jdbcType="VARCHAR" />
+    <result column="ENTITY_CHINANAME" property="entityChinaname" jdbcType="VARCHAR" />
+    <result column="ENTITY_SORT" property="entitySort" jdbcType="INTEGER" />
+    <result column="ENTITY_DES" property="entityDes" jdbcType="VARCHAR" />
+    <result column="ENTITY_STATE" property="entityState" jdbcType="VARCHAR" />
+    <result column="ENTITY_MARK" property="entityMark" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="APPROVE_NAME" property="approveName" jdbcType="VARCHAR" />
+    <result column="APPROVE_TIME" property="approveTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_MARK" property="deleteMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ENTITY_ID, ENTITY_CODE, ENTITY_TABLENAME, ENTITY_TYPE, ENTITY_CHINANAME, ENTITY_SORT, 
+    ENTITY_DES, ENTITY_STATE, ENTITY_MARK, OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+    APPROVE_TIME, DELETE_MARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.entity.SysEntityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_entity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_entity
+    where ENTITY_ID = #{entityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_entity
+    where ENTITY_ID = #{entityId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.entity.SysEntityExample" >
+    delete from sys_entity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.entity.SysEntity" useGeneratedKeys="true" keyProperty="entityId" keyColumn="ENTITY_ID">
+    insert into sys_entity (ENTITY_CODE, ENTITY_TABLENAME, 
+      ENTITY_TYPE, ENTITY_CHINANAME, ENTITY_SORT, 
+      ENTITY_DES, ENTITY_STATE, ENTITY_MARK, 
+      OPERATOR_NAME, OPERATOR_TIME, APPROVE_NAME, 
+      APPROVE_TIME, DELETE_MARK)
+    values ( #{entityCode,jdbcType=VARCHAR}, #{entityTablename,jdbcType=VARCHAR}, 
+      #{entityType,jdbcType=VARCHAR}, #{entityChinaname,jdbcType=VARCHAR}, #{entitySort,jdbcType=INTEGER}, 
+      #{entityDes,jdbcType=VARCHAR}, #{entityState,jdbcType=VARCHAR}, #{entityMark,jdbcType=VARCHAR}, 
+      #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, #{approveName,jdbcType=VARCHAR}, 
+      #{approveTime,jdbcType=TIMESTAMP}, #{deleteMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.entity.SysEntity" >
+    insert into sys_entity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="entityId != null" >
+        ENTITY_ID,
+      </if>
+      <if test="entityCode != null" >
+        ENTITY_CODE,
+      </if>
+      <if test="entityTablename != null" >
+        ENTITY_TABLENAME,
+      </if>
+      <if test="entityType != null" >
+        ENTITY_TYPE,
+      </if>
+      <if test="entityChinaname != null" >
+        ENTITY_CHINANAME,
+      </if>
+      <if test="entitySort != null" >
+        ENTITY_SORT,
+      </if>
+      <if test="entityDes != null" >
+        ENTITY_DES,
+      </if>
+      <if test="entityState != null" >
+        ENTITY_STATE,
+      </if>
+      <if test="entityMark != null" >
+        ENTITY_MARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME,
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME,
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="entityId != null" >
+        #{entityId,jdbcType=INTEGER},
+      </if>
+      <if test="entityCode != null" >
+        #{entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityTablename != null" >
+        #{entityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null" >
+        #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityChinaname != null" >
+        #{entityChinaname,jdbcType=VARCHAR},
+      </if>
+      <if test="entitySort != null" >
+        #{entitySort,jdbcType=INTEGER},
+      </if>
+      <if test="entityDes != null" >
+        #{entityDes,jdbcType=VARCHAR},
+      </if>
+      <if test="entityState != null" >
+        #{entityState,jdbcType=VARCHAR},
+      </if>
+      <if test="entityMark != null" >
+        #{entityMark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.entity.SysEntityExample" resultType="java.lang.Integer" >
+    select count(*) from sys_entity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_entity
+    <set >
+      <if test="record.entityId != null" >
+        ENTITY_ID = #{record.entityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityCode != null" >
+        ENTITY_CODE = #{record.entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityTablename != null" >
+        ENTITY_TABLENAME = #{record.entityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityType != null" >
+        ENTITY_TYPE = #{record.entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityChinaname != null" >
+        ENTITY_CHINANAME = #{record.entityChinaname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entitySort != null" >
+        ENTITY_SORT = #{record.entitySort,jdbcType=INTEGER},
+      </if>
+      <if test="record.entityDes != null" >
+        ENTITY_DES = #{record.entityDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityState != null" >
+        ENTITY_STATE = #{record.entityState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityMark != null" >
+        ENTITY_MARK = #{record.entityMark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approveName != null" >
+        APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveTime != null" >
+        APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteMark != null" >
+        DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_entity
+    set ENTITY_ID = #{record.entityId,jdbcType=INTEGER},
+      ENTITY_CODE = #{record.entityCode,jdbcType=VARCHAR},
+      ENTITY_TABLENAME = #{record.entityTablename,jdbcType=VARCHAR},
+      ENTITY_TYPE = #{record.entityType,jdbcType=VARCHAR},
+      ENTITY_CHINANAME = #{record.entityChinaname,jdbcType=VARCHAR},
+      ENTITY_SORT = #{record.entitySort,jdbcType=INTEGER},
+      ENTITY_DES = #{record.entityDes,jdbcType=VARCHAR},
+      ENTITY_STATE = #{record.entityState,jdbcType=VARCHAR},
+      ENTITY_MARK = #{record.entityMark,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{record.approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{record.approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{record.deleteMark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.entity.SysEntity" >
+    update sys_entity
+    <set >
+      <if test="entityCode != null" >
+        ENTITY_CODE = #{entityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityTablename != null" >
+        ENTITY_TABLENAME = #{entityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="entityType != null" >
+        ENTITY_TYPE = #{entityType,jdbcType=VARCHAR},
+      </if>
+      <if test="entityChinaname != null" >
+        ENTITY_CHINANAME = #{entityChinaname,jdbcType=VARCHAR},
+      </if>
+      <if test="entitySort != null" >
+        ENTITY_SORT = #{entitySort,jdbcType=INTEGER},
+      </if>
+      <if test="entityDes != null" >
+        ENTITY_DES = #{entityDes,jdbcType=VARCHAR},
+      </if>
+      <if test="entityState != null" >
+        ENTITY_STATE = #{entityState,jdbcType=VARCHAR},
+      </if>
+      <if test="entityMark != null" >
+        ENTITY_MARK = #{entityMark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveName != null" >
+        APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null" >
+        APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        DELETE_MARK = #{deleteMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ENTITY_ID = #{entityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.entity.SysEntity" >
+    update sys_entity
+    set ENTITY_CODE = #{entityCode,jdbcType=VARCHAR},
+      ENTITY_TABLENAME = #{entityTablename,jdbcType=VARCHAR},
+      ENTITY_TYPE = #{entityType,jdbcType=VARCHAR},
+      ENTITY_CHINANAME = #{entityChinaname,jdbcType=VARCHAR},
+      ENTITY_SORT = #{entitySort,jdbcType=INTEGER},
+      ENTITY_DES = #{entityDes,jdbcType=VARCHAR},
+      ENTITY_STATE = #{entityState,jdbcType=VARCHAR},
+      ENTITY_MARK = #{entityMark,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      APPROVE_NAME = #{approveName,jdbcType=VARCHAR},
+      APPROVE_TIME = #{approveTime,jdbcType=TIMESTAMP},
+      DELETE_MARK = #{deleteMark,jdbcType=VARCHAR}
+    where ENTITY_ID = #{entityId,jdbcType=INTEGER}
+  </update>
+  
+  
+</mapper>

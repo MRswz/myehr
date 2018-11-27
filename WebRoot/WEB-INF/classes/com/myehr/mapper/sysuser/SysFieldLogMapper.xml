@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.sysuser.SysFieldLogMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.sysuser.SysFieldLog" >
+    <id column="LOG_ID" property="logId" jdbcType="DECIMAL" />
+    <result column="LOG_TABLE_NAME" property="logTableName" jdbcType="NVARCHAR" />
+    <result column="LOG_FIELD_NAME" property="logFieldName" jdbcType="NVARCHAR" />
+    <result column="LOG_FIELD_BEFORE" property="logFieldBefore" jdbcType="NVARCHAR" />
+    <result column="LOG_FIELD_AFTER" property="logFieldAfter" jdbcType="NVARCHAR" />
+    <result column="LOG_TYPE" property="logType" jdbcType="NVARCHAR" />
+    <result column="LOG_TIME" property="logTime" jdbcType="TIMESTAMP" />
+    <result column="LOG_OPERATOR" property="logOperator" jdbcType="NVARCHAR" />
+    <result column="LOG_IP" property="logIp" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOG_ID, LOG_TABLE_NAME, LOG_FIELD_NAME, LOG_FIELD_BEFORE, LOG_FIELD_AFTER, LOG_TYPE, 
+    LOG_TIME, LOG_OPERATOR, LOG_IP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.sysuser.SysFieldLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FIELD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FIELD_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FIELD_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.sysuser.SysFieldLogExample" >
+    delete from SYS_FIELD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.sysuser.SysFieldLog" >
+    insert into SYS_FIELD_LOG (LOG_TABLE_NAME, LOG_FIELD_NAME, 
+      LOG_FIELD_BEFORE, LOG_FIELD_AFTER, LOG_TYPE, 
+      LOG_TIME, LOG_OPERATOR, LOG_IP
+      )
+    values (#{logTableName,jdbcType=NVARCHAR}, #{logFieldName,jdbcType=NVARCHAR}, 
+      #{logFieldBefore,jdbcType=NVARCHAR}, #{logFieldAfter,jdbcType=NVARCHAR}, #{logType,jdbcType=NVARCHAR}, 
+      #{logTime,jdbcType=TIMESTAMP}, #{logOperator,jdbcType=NVARCHAR}, #{logIp,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.sysuser.SysFieldLog" >
+    insert into SYS_FIELD_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="logTableName != null" >
+        LOG_TABLE_NAME,
+      </if>
+      <if test="logFieldName != null" >
+        LOG_FIELD_NAME,
+      </if>
+      <if test="logFieldBefore != null" >
+        LOG_FIELD_BEFORE,
+      </if>
+      <if test="logFieldAfter != null" >
+        LOG_FIELD_AFTER,
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE,
+      </if>
+      <if test="logTime != null" >
+        LOG_TIME,
+      </if>
+      <if test="logOperator != null" >
+        LOG_OPERATOR,
+      </if>
+      <if test="logIp != null" >
+        LOG_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=DECIMAL},
+      </if>
+      <if test="logTableName != null" >
+        #{logTableName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldName != null" >
+        #{logFieldName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldBefore != null" >
+        #{logFieldBefore,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldAfter != null" >
+        #{logFieldAfter,jdbcType=NVARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=NVARCHAR},
+      </if>
+      <if test="logTime != null" >
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logOperator != null" >
+        #{logOperator,jdbcType=NVARCHAR},
+      </if>
+      <if test="logIp != null" >
+        #{logIp,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.sysuser.SysFieldLogExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FIELD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FIELD_LOG
+    <set >
+      <if test="record.logId != null" >
+        LOG_ID = #{record.logId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.logTableName != null" >
+        LOG_TABLE_NAME = #{record.logTableName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logFieldName != null" >
+        LOG_FIELD_NAME = #{record.logFieldName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logFieldBefore != null" >
+        LOG_FIELD_BEFORE = #{record.logFieldBefore,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logFieldAfter != null" >
+        LOG_FIELD_AFTER = #{record.logFieldAfter,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logType != null" >
+        LOG_TYPE = #{record.logType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logTime != null" >
+        LOG_TIME = #{record.logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logOperator != null" >
+        LOG_OPERATOR = #{record.logOperator,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.logIp != null" >
+        LOG_IP = #{record.logIp,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FIELD_LOG
+    set LOG_ID = #{record.logId,jdbcType=DECIMAL},
+      LOG_TABLE_NAME = #{record.logTableName,jdbcType=NVARCHAR},
+      LOG_FIELD_NAME = #{record.logFieldName,jdbcType=NVARCHAR},
+      LOG_FIELD_BEFORE = #{record.logFieldBefore,jdbcType=NVARCHAR},
+      LOG_FIELD_AFTER = #{record.logFieldAfter,jdbcType=NVARCHAR},
+      LOG_TYPE = #{record.logType,jdbcType=NVARCHAR},
+      LOG_TIME = #{record.logTime,jdbcType=TIMESTAMP},
+      LOG_OPERATOR = #{record.logOperator,jdbcType=NVARCHAR},
+      LOG_IP = #{record.logIp,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.sysuser.SysFieldLog" >
+    update SYS_FIELD_LOG
+    <set >
+      <if test="logTableName != null" >
+        LOG_TABLE_NAME = #{logTableName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldName != null" >
+        LOG_FIELD_NAME = #{logFieldName,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldBefore != null" >
+        LOG_FIELD_BEFORE = #{logFieldBefore,jdbcType=NVARCHAR},
+      </if>
+      <if test="logFieldAfter != null" >
+        LOG_FIELD_AFTER = #{logFieldAfter,jdbcType=NVARCHAR},
+      </if>
+      <if test="logType != null" >
+        LOG_TYPE = #{logType,jdbcType=NVARCHAR},
+      </if>
+      <if test="logTime != null" >
+        LOG_TIME = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logOperator != null" >
+        LOG_OPERATOR = #{logOperator,jdbcType=NVARCHAR},
+      </if>
+      <if test="logIp != null" >
+        LOG_IP = #{logIp,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.sysuser.SysFieldLog" >
+    update SYS_FIELD_LOG
+    set LOG_TABLE_NAME = #{logTableName,jdbcType=NVARCHAR},
+      LOG_FIELD_NAME = #{logFieldName,jdbcType=NVARCHAR},
+      LOG_FIELD_BEFORE = #{logFieldBefore,jdbcType=NVARCHAR},
+      LOG_FIELD_AFTER = #{logFieldAfter,jdbcType=NVARCHAR},
+      LOG_TYPE = #{logType,jdbcType=NVARCHAR},
+      LOG_TIME = #{logTime,jdbcType=TIMESTAMP},
+      LOG_OPERATOR = #{logOperator,jdbcType=NVARCHAR},
+      LOG_IP = #{logIp,jdbcType=NVARCHAR}
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+</mapper>

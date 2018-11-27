@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFieldRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFieldRole" >
+    <id column="FIELD_ROLE_ID" property="fieldRoleId" jdbcType="DECIMAL" />
+    <result column="FORM_COLUMN_ID" property="formColumnId" jdbcType="DECIMAL" />
+    <result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+    <result column="FORM_ID" property="formId" jdbcType="DECIMAL" />
+    <result column="FIELD_ROLE_REMARK" property="fieldRoleRemark" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="FORM_COLUMN_TYPE" property="formColumnType" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FIELD_ROLE_ID, FORM_COLUMN_ID, ROLE_ID, FORM_ID, FIELD_ROLE_REMARK, OPERATOR_NAME, 
+    OPERATOR_TIME, FORM_COLUMN_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFieldRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FIELD_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FIELD_ROLE
+    where FIELD_ROLE_ID = #{fieldRoleId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FIELD_ROLE
+    where FIELD_ROLE_ID = #{fieldRoleId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFieldRoleExample" >
+    delete from SYS_FIELD_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFieldRole" >
+    insert into SYS_FIELD_ROLE (FORM_COLUMN_ID, ROLE_ID, 
+      FORM_ID, FIELD_ROLE_REMARK, OPERATOR_NAME, 
+      OPERATOR_TIME, FORM_COLUMN_TYPE)
+    values (#{formColumnId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, 
+      #{formId,jdbcType=DECIMAL}, #{fieldRoleRemark,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{formColumnType,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFieldRole" >
+    insert into SYS_FIELD_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldRoleId != null" >
+        FIELD_ROLE_ID,
+      </if>
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="fieldRoleRemark != null" >
+        FIELD_ROLE_REMARK,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="formColumnType != null" >
+        FORM_COLUMN_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldRoleId != null" >
+        #{fieldRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="formColumnId != null" >
+        #{formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldRoleRemark != null" >
+        #{fieldRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formColumnType != null" >
+        #{formColumnType,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFieldRoleExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FIELD_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FIELD_ROLE
+    <set >
+      <if test="record.fieldRoleId != null" >
+        FIELD_ROLE_ID = #{record.fieldRoleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formColumnId != null" >
+        FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleId != null" >
+        ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formId != null" >
+        FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fieldRoleRemark != null" >
+        FIELD_ROLE_REMARK = #{record.fieldRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.formColumnType != null" >
+        FORM_COLUMN_TYPE = #{record.formColumnType,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FIELD_ROLE
+    set FIELD_ROLE_ID = #{record.fieldRoleId,jdbcType=DECIMAL},
+      FORM_COLUMN_ID = #{record.formColumnId,jdbcType=DECIMAL},
+      ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
+      FORM_ID = #{record.formId,jdbcType=DECIMAL},
+      FIELD_ROLE_REMARK = #{record.fieldRoleRemark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      FORM_COLUMN_TYPE = #{record.formColumnType,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFieldRole" >
+    update SYS_FIELD_ROLE
+    <set >
+      <if test="formColumnId != null" >
+        FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="formId != null" >
+        FORM_ID = #{formId,jdbcType=DECIMAL},
+      </if>
+      <if test="fieldRoleRemark != null" >
+        FIELD_ROLE_REMARK = #{fieldRoleRemark,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="formColumnType != null" >
+        FORM_COLUMN_TYPE = #{formColumnType,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where FIELD_ROLE_ID = #{fieldRoleId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFieldRole" >
+    update SYS_FIELD_ROLE
+    set FORM_COLUMN_ID = #{formColumnId,jdbcType=DECIMAL},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      FORM_ID = #{formId,jdbcType=DECIMAL},
+      FIELD_ROLE_REMARK = #{fieldRoleRemark,jdbcType=NVARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      FORM_COLUMN_TYPE = #{formColumnType,jdbcType=DECIMAL}
+    where FIELD_ROLE_ID = #{fieldRoleId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.lang.SysLangMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.lang.SysLang" >
+    <id column="LANG_CODE" property="langCode" jdbcType="VARCHAR" />
+    <result column="EN" property="en" jdbcType="VARCHAR" />
+    <result column="ZH" property="zh" jdbcType="VARCHAR" />
+    <result column="EUC" property="euc" jdbcType="VARCHAR" />
+    <result column="BIG5" property="big5" jdbcType="VARCHAR" />
+    <result column="LANG_TYPE" property="langType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LANG_CODE, EN, ZH, EUC, BIG5, LANG_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.lang.SysLangExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_LANG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LANG
+    where LANG_CODE = #{langCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_LANG
+    where LANG_CODE = #{langCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.lang.SysLangExample" >
+    delete from SYS_LANG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.lang.SysLang" >
+    insert into SYS_LANG (LANG_CODE, EN, ZH, 
+      EUC, BIG5, LANG_TYPE
+      )
+    values (#{langCode,jdbcType=VARCHAR}, #{en,jdbcType=VARCHAR}, #{zh,jdbcType=VARCHAR}, 
+      #{euc,jdbcType=VARCHAR}, #{big5,jdbcType=VARCHAR}, #{langType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.lang.SysLang" >
+    insert into SYS_LANG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="langCode != null" >
+        LANG_CODE,
+      </if>
+      <if test="en != null" >
+        EN,
+      </if>
+      <if test="zh != null" >
+        ZH,
+      </if>
+      <if test="euc != null" >
+        EUC,
+      </if>
+      <if test="big5 != null" >
+        BIG5,
+      </if>
+      <if test="langType != null" >
+        LANG_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="langCode != null" >
+        #{langCode,jdbcType=VARCHAR},
+      </if>
+      <if test="en != null" >
+        #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="zh != null" >
+        #{zh,jdbcType=VARCHAR},
+      </if>
+      <if test="euc != null" >
+        #{euc,jdbcType=VARCHAR},
+      </if>
+      <if test="big5 != null" >
+        #{big5,jdbcType=VARCHAR},
+      </if>
+      <if test="langType != null" >
+        #{langType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.lang.SysLangExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_LANG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_LANG
+    <set >
+      <if test="record.langCode != null" >
+        LANG_CODE = #{record.langCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.en != null" >
+        EN = #{record.en,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zh != null" >
+        ZH = #{record.zh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.euc != null" >
+        EUC = #{record.euc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.big5 != null" >
+        BIG5 = #{record.big5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langType != null" >
+        LANG_TYPE = #{record.langType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_LANG
+    set LANG_CODE = #{record.langCode,jdbcType=VARCHAR},
+      EN = #{record.en,jdbcType=VARCHAR},
+      ZH = #{record.zh,jdbcType=VARCHAR},
+      EUC = #{record.euc,jdbcType=VARCHAR},
+      BIG5 = #{record.big5,jdbcType=VARCHAR},
+      LANG_TYPE = #{record.langType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.lang.SysLang" >
+    update SYS_LANG
+    <set >
+      <if test="en != null" >
+        EN = #{en,jdbcType=VARCHAR},
+      </if>
+      <if test="zh != null" >
+        ZH = #{zh,jdbcType=VARCHAR},
+      </if>
+      <if test="euc != null" >
+        EUC = #{euc,jdbcType=VARCHAR},
+      </if>
+      <if test="big5 != null" >
+        BIG5 = #{big5,jdbcType=VARCHAR},
+      </if>
+      <if test="langType != null" >
+        LANG_TYPE = #{langType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LANG_CODE = #{langCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.lang.SysLang" >
+    update SYS_LANG
+    set EN = #{en,jdbcType=VARCHAR},
+      ZH = #{zh,jdbcType=VARCHAR},
+      EUC = #{euc,jdbcType=VARCHAR},
+      BIG5 = #{big5,jdbcType=VARCHAR},
+      LANG_TYPE = #{langType,jdbcType=VARCHAR}
+    where LANG_CODE = #{langCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

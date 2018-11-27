@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.act.checked.SysActCheckedPointMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.act.checked.SysActCheckedPoint" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="CHECKED_REQUIRE" property="checkedRequire" jdbcType="NVARCHAR" />
+    <result column="CHECKED_CONTENT" property="checkedContent" jdbcType="NVARCHAR" />
+    <result column="IS_FILE" property="isFile" jdbcType="NVARCHAR" />
+    <result column="CREATER_TIME" property="createrTime" jdbcType="TIMESTAMP" />
+    <result column="CREATER_NAME" property="createrName" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="DUTY_TYPE" property="dutyType" jdbcType="NVARCHAR" />
+    <result column="CONTROL_TYPE" property="controlType" jdbcType="NVARCHAR" />
+    <result column="IS_REQUIRE" property="isRequire" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CHECKED_REQUIRE, CHECKED_CONTENT, IS_FILE, CREATER_TIME, CREATER_NAME, OPERATOR_TIME, 
+    OPERATOR_NAME, DUTY_TYPE, CONTROL_TYPE, IS_REQUIRE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.act.checked.SysActCheckedPointExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_ACT_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ACT_CHECKED_POINT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ACT_CHECKED_POINT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.act.checked.SysActCheckedPointExample" >
+    delete from SYS_ACT_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.act.checked.SysActCheckedPoint" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_ACT_CHECKED_POINT (CHECKED_REQUIRE, CHECKED_CONTENT, 
+      IS_FILE, CREATER_TIME, CREATER_NAME, 
+      OPERATOR_TIME, OPERATOR_NAME, DUTY_TYPE, 
+      CONTROL_TYPE, IS_REQUIRE)
+    values (#{checkedRequire,jdbcType=NVARCHAR}, #{checkedContent,jdbcType=NVARCHAR}, 
+      #{isFile,jdbcType=NVARCHAR}, #{createrTime,jdbcType=TIMESTAMP}, #{createrName,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{dutyType,jdbcType=NVARCHAR}, 
+      #{controlType,jdbcType=NVARCHAR}, #{isRequire,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.act.checked.SysActCheckedPoint" >
+    insert into SYS_ACT_CHECKED_POINT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="checkedRequire != null" >
+        CHECKED_REQUIRE,
+      </if>
+      <if test="checkedContent != null" >
+        CHECKED_CONTENT,
+      </if>
+      <if test="isFile != null" >
+        IS_FILE,
+      </if>
+      <if test="createrTime != null" >
+        CREATER_TIME,
+      </if>
+      <if test="createrName != null" >
+        CREATER_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="dutyType != null" >
+        DUTY_TYPE,
+      </if>
+      <if test="controlType != null" >
+        CONTROL_TYPE,
+      </if>
+      <if test="isRequire != null" >
+        IS_REQUIRE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="checkedRequire != null" >
+        #{checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkedContent != null" >
+        #{checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="isFile != null" >
+        #{isFile,jdbcType=NVARCHAR},
+      </if>
+      <if test="createrTime != null" >
+        #{createrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrName != null" >
+        #{createrName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        #{dutyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="controlType != null" >
+        #{controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="isRequire != null" >
+        #{isRequire,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.act.checked.SysActCheckedPointExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_ACT_CHECKED_POINT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_ACT_CHECKED_POINT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkedRequire != null" >
+        CHECKED_REQUIRE = #{record.checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.checkedContent != null" >
+        CHECKED_CONTENT = #{record.checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE = #{record.isFile,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createrTime != null" >
+        CREATER_TIME = #{record.createrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createrName != null" >
+        CREATER_NAME = #{record.createrName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.dutyType != null" >
+        DUTY_TYPE = #{record.dutyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.controlType != null" >
+        CONTROL_TYPE = #{record.controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isRequire != null" >
+        IS_REQUIRE = #{record.isRequire,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_ACT_CHECKED_POINT
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CHECKED_REQUIRE = #{record.checkedRequire,jdbcType=NVARCHAR},
+      CHECKED_CONTENT = #{record.checkedContent,jdbcType=NVARCHAR},
+      IS_FILE = #{record.isFile,jdbcType=NVARCHAR},
+      CREATER_TIME = #{record.createrTime,jdbcType=TIMESTAMP},
+      CREATER_NAME = #{record.createrName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      DUTY_TYPE = #{record.dutyType,jdbcType=NVARCHAR},
+      CONTROL_TYPE = #{record.controlType,jdbcType=NVARCHAR},
+      IS_REQUIRE = #{record.isRequire,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.act.checked.SysActCheckedPoint" >
+    update SYS_ACT_CHECKED_POINT
+    <set >
+      <if test="checkedRequire != null" >
+        CHECKED_REQUIRE = #{checkedRequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="checkedContent != null" >
+        CHECKED_CONTENT = #{checkedContent,jdbcType=NVARCHAR},
+      </if>
+      <if test="isFile != null" >
+        IS_FILE = #{isFile,jdbcType=NVARCHAR},
+      </if>
+      <if test="createrTime != null" >
+        CREATER_TIME = #{createrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrName != null" >
+        CREATER_NAME = #{createrName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        DUTY_TYPE = #{dutyType,jdbcType=NVARCHAR},
+      </if>
+      <if test="controlType != null" >
+        CONTROL_TYPE = #{controlType,jdbcType=NVARCHAR},
+      </if>
+      <if test="isRequire != null" >
+        IS_REQUIRE = #{isRequire,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.act.checked.SysActCheckedPoint" >
+    update SYS_ACT_CHECKED_POINT
+    set CHECKED_REQUIRE = #{checkedRequire,jdbcType=NVARCHAR},
+      CHECKED_CONTENT = #{checkedContent,jdbcType=NVARCHAR},
+      IS_FILE = #{isFile,jdbcType=NVARCHAR},
+      CREATER_TIME = #{createrTime,jdbcType=TIMESTAMP},
+      CREATER_NAME = #{createrName,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      DUTY_TYPE = #{dutyType,jdbcType=NVARCHAR},
+      CONTROL_TYPE = #{controlType,jdbcType=NVARCHAR},
+      IS_REQUIRE = #{isRequire,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

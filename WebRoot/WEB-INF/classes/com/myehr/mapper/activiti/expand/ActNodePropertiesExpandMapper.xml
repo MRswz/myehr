@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.expand.ActNodePropertiesExpandMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.expand.ActNodePropertiesExpand" >
+    <result column="ACT_NODE_PROPERTY_EXPAND_ID" property="actNodePropertyExpandId" jdbcType="NVARCHAR" />
+    <result column="ACT_MODEL_ID" property="actModelId" jdbcType="NVARCHAR" />
+    <result column="ACT_NODE_KEY" property="actNodeKey" jdbcType="NVARCHAR" />
+    <result column="ACT_NODE_NAME" property="actNodeName" jdbcType="NVARCHAR" />
+    <result column="IS_SKIP_NOBODY_APPROVE" property="isSkipNobodyApprove" jdbcType="NVARCHAR" />
+    <result column="IS_APPOINT_NOBODY_APPROVE" property="isAppointNobodyApprove" jdbcType="NVARCHAR" />
+    <result column="IS_SKIP_REPEATED_APPROVE" property="isSkipRepeatedApprove" jdbcType="NVARCHAR" />
+    <result column="IS_ALLOW_RETURN" property="isAllowReturn" jdbcType="NVARCHAR" />
+    <result column="IS_ALLOW_BATCH_APPROVE" property="isAllowBatchApprove" jdbcType="NVARCHAR" />
+    <result column="IS_PROHIBIT_VIEWING_FLOW_CHART" property="isProhibitViewingFlowChart" jdbcType="NVARCHAR" />
+    <result column="SHOW_PASS_BUTTON" property="showPassButton" jdbcType="NVARCHAR" />
+    <result column="SHOW_REJECT_BUTTON" property="showRejectButton" jdbcType="NVARCHAR" />
+    <result column="SHOW_SUSPEND_BUTTON" property="showSuspendButton" jdbcType="NVARCHAR" />
+    <result column="SHOW_STOP_BUTTON" property="showStopButton" jdbcType="NVARCHAR" />
+    <result column="ACT_NODE_FORM_ID" property="actNodeFormId" jdbcType="DECIMAL" />
+    <result column="IS_AUTOMATICALLY_PASS" property="isAutomaticallyPass" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ACT_NODE_PROPERTY_EXPAND_ID, ACT_MODEL_ID, ACT_NODE_KEY, ACT_NODE_NAME, IS_SKIP_NOBODY_APPROVE, 
+    IS_APPOINT_NOBODY_APPROVE, IS_SKIP_REPEATED_APPROVE, IS_ALLOW_RETURN, IS_ALLOW_BATCH_APPROVE, 
+    IS_PROHIBIT_VIEWING_FLOW_CHART, SHOW_PASS_BUTTON, SHOW_REJECT_BUTTON, SHOW_SUSPEND_BUTTON, 
+    SHOW_STOP_BUTTON, ACT_NODE_FORM_ID, IS_AUTOMATICALLY_PASS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.expand.ActNodePropertiesExpandExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_NODE_PROPERTIES_EXPAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.expand.ActNodePropertiesExpandExample" >
+    delete from ACT_NODE_PROPERTIES_EXPAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.expand.ActNodePropertiesExpand" >
+    insert into ACT_NODE_PROPERTIES_EXPAND (ACT_NODE_PROPERTY_EXPAND_ID, ACT_MODEL_ID, 
+      ACT_NODE_KEY, ACT_NODE_NAME, IS_SKIP_NOBODY_APPROVE, 
+      IS_APPOINT_NOBODY_APPROVE, IS_SKIP_REPEATED_APPROVE, 
+      IS_ALLOW_RETURN, IS_ALLOW_BATCH_APPROVE, IS_PROHIBIT_VIEWING_FLOW_CHART, 
+      SHOW_PASS_BUTTON, SHOW_REJECT_BUTTON, SHOW_SUSPEND_BUTTON, 
+      SHOW_STOP_BUTTON, ACT_NODE_FORM_ID, IS_AUTOMATICALLY_PASS
+      )
+    values (#{actNodePropertyExpandId,jdbcType=NVARCHAR}, #{actModelId,jdbcType=NVARCHAR}, 
+      #{actNodeKey,jdbcType=NVARCHAR}, #{actNodeName,jdbcType=NVARCHAR}, #{isSkipNobodyApprove,jdbcType=NVARCHAR}, 
+      #{isAppointNobodyApprove,jdbcType=NVARCHAR}, #{isSkipRepeatedApprove,jdbcType=NVARCHAR}, 
+      #{isAllowReturn,jdbcType=NVARCHAR}, #{isAllowBatchApprove,jdbcType=NVARCHAR}, #{isProhibitViewingFlowChart,jdbcType=NVARCHAR}, 
+      #{showPassButton,jdbcType=NVARCHAR}, #{showRejectButton,jdbcType=NVARCHAR}, #{showSuspendButton,jdbcType=NVARCHAR}, 
+      #{showStopButton,jdbcType=NVARCHAR}, #{actNodeFormId,jdbcType=DECIMAL}, #{isAutomaticallyPass,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.expand.ActNodePropertiesExpand" >
+    insert into ACT_NODE_PROPERTIES_EXPAND
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actNodePropertyExpandId != null" >
+        ACT_NODE_PROPERTY_EXPAND_ID,
+      </if>
+      <if test="actModelId != null" >
+        ACT_MODEL_ID,
+      </if>
+      <if test="actNodeKey != null" >
+        ACT_NODE_KEY,
+      </if>
+      <if test="actNodeName != null" >
+        ACT_NODE_NAME,
+      </if>
+      <if test="isSkipNobodyApprove != null" >
+        IS_SKIP_NOBODY_APPROVE,
+      </if>
+      <if test="isAppointNobodyApprove != null" >
+        IS_APPOINT_NOBODY_APPROVE,
+      </if>
+      <if test="isSkipRepeatedApprove != null" >
+        IS_SKIP_REPEATED_APPROVE,
+      </if>
+      <if test="isAllowReturn != null" >
+        IS_ALLOW_RETURN,
+      </if>
+      <if test="isAllowBatchApprove != null" >
+        IS_ALLOW_BATCH_APPROVE,
+      </if>
+      <if test="isProhibitViewingFlowChart != null" >
+        IS_PROHIBIT_VIEWING_FLOW_CHART,
+      </if>
+      <if test="showPassButton != null" >
+        SHOW_PASS_BUTTON,
+      </if>
+      <if test="showRejectButton != null" >
+        SHOW_REJECT_BUTTON,
+      </if>
+      <if test="showSuspendButton != null" >
+        SHOW_SUSPEND_BUTTON,
+      </if>
+      <if test="showStopButton != null" >
+        SHOW_STOP_BUTTON,
+      </if>
+      <if test="actNodeFormId != null" >
+        ACT_NODE_FORM_ID,
+      </if>
+      <if test="isAutomaticallyPass != null" >
+        IS_AUTOMATICALLY_PASS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actNodePropertyExpandId != null" >
+        #{actNodePropertyExpandId,jdbcType=NVARCHAR},
+      </if>
+      <if test="actModelId != null" >
+        #{actModelId,jdbcType=NVARCHAR},
+      </if>
+      <if test="actNodeKey != null" >
+        #{actNodeKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="actNodeName != null" >
+        #{actNodeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="isSkipNobodyApprove != null" >
+        #{isSkipNobodyApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="isAppointNobodyApprove != null" >
+        #{isAppointNobodyApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="isSkipRepeatedApprove != null" >
+        #{isSkipRepeatedApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="isAllowReturn != null" >
+        #{isAllowReturn,jdbcType=NVARCHAR},
+      </if>
+      <if test="isAllowBatchApprove != null" >
+        #{isAllowBatchApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="isProhibitViewingFlowChart != null" >
+        #{isProhibitViewingFlowChart,jdbcType=NVARCHAR},
+      </if>
+      <if test="showPassButton != null" >
+        #{showPassButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="showRejectButton != null" >
+        #{showRejectButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="showSuspendButton != null" >
+        #{showSuspendButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="showStopButton != null" >
+        #{showStopButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="actNodeFormId != null" >
+        #{actNodeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="isAutomaticallyPass != null" >
+        #{isAutomaticallyPass,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.expand.ActNodePropertiesExpandExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_NODE_PROPERTIES_EXPAND
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_NODE_PROPERTIES_EXPAND
+    <set >
+      <if test="record.actNodePropertyExpandId != null" >
+        ACT_NODE_PROPERTY_EXPAND_ID = #{record.actNodePropertyExpandId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actModelId != null" >
+        ACT_MODEL_ID = #{record.actModelId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actNodeKey != null" >
+        ACT_NODE_KEY = #{record.actNodeKey,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actNodeName != null" >
+        ACT_NODE_NAME = #{record.actNodeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isSkipNobodyApprove != null" >
+        IS_SKIP_NOBODY_APPROVE = #{record.isSkipNobodyApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAppointNobodyApprove != null" >
+        IS_APPOINT_NOBODY_APPROVE = #{record.isAppointNobodyApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isSkipRepeatedApprove != null" >
+        IS_SKIP_REPEATED_APPROVE = #{record.isSkipRepeatedApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAllowReturn != null" >
+        IS_ALLOW_RETURN = #{record.isAllowReturn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAllowBatchApprove != null" >
+        IS_ALLOW_BATCH_APPROVE = #{record.isAllowBatchApprove,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isProhibitViewingFlowChart != null" >
+        IS_PROHIBIT_VIEWING_FLOW_CHART = #{record.isProhibitViewingFlowChart,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showPassButton != null" >
+        SHOW_PASS_BUTTON = #{record.showPassButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showRejectButton != null" >
+        SHOW_REJECT_BUTTON = #{record.showRejectButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showSuspendButton != null" >
+        SHOW_SUSPEND_BUTTON = #{record.showSuspendButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.showStopButton != null" >
+        SHOW_STOP_BUTTON = #{record.showStopButton,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actNodeFormId != null" >
+        ACT_NODE_FORM_ID = #{record.actNodeFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isAutomaticallyPass != null" >
+        IS_AUTOMATICALLY_PASS = #{record.isAutomaticallyPass,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_NODE_PROPERTIES_EXPAND
+    set ACT_NODE_PROPERTY_EXPAND_ID = #{record.actNodePropertyExpandId,jdbcType=NVARCHAR},
+      ACT_MODEL_ID = #{record.actModelId,jdbcType=NVARCHAR},
+      ACT_NODE_KEY = #{record.actNodeKey,jdbcType=NVARCHAR},
+      ACT_NODE_NAME = #{record.actNodeName,jdbcType=NVARCHAR},
+      IS_SKIP_NOBODY_APPROVE = #{record.isSkipNobodyApprove,jdbcType=NVARCHAR},
+      IS_APPOINT_NOBODY_APPROVE = #{record.isAppointNobodyApprove,jdbcType=NVARCHAR},
+      IS_SKIP_REPEATED_APPROVE = #{record.isSkipRepeatedApprove,jdbcType=NVARCHAR},
+      IS_ALLOW_RETURN = #{record.isAllowReturn,jdbcType=NVARCHAR},
+      IS_ALLOW_BATCH_APPROVE = #{record.isAllowBatchApprove,jdbcType=NVARCHAR},
+      IS_PROHIBIT_VIEWING_FLOW_CHART = #{record.isProhibitViewingFlowChart,jdbcType=NVARCHAR},
+      SHOW_PASS_BUTTON = #{record.showPassButton,jdbcType=NVARCHAR},
+      SHOW_REJECT_BUTTON = #{record.showRejectButton,jdbcType=NVARCHAR},
+      SHOW_SUSPEND_BUTTON = #{record.showSuspendButton,jdbcType=NVARCHAR},
+      SHOW_STOP_BUTTON = #{record.showStopButton,jdbcType=NVARCHAR},
+      ACT_NODE_FORM_ID = #{record.actNodeFormId,jdbcType=DECIMAL},
+      IS_AUTOMATICALLY_PASS = #{record.isAutomaticallyPass,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

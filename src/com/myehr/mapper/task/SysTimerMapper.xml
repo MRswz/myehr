@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.task.SysTimerMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.task.SysTimer" >
+    <id column="sys_timer_id" property="sysTimerId" jdbcType="DECIMAL" />
+    <result column="sys_timer_type" property="sysTimerType" jdbcType="NVARCHAR" />
+    <result column="sys_timer_frequency" property="sysTimerFrequency" jdbcType="NVARCHAR" />
+    <result column="sys_timer_repeat_value" property="sysTimerRepeatValue" jdbcType="INTEGER" />
+    <result column="sys_timer_status" property="sysTimerStatus" jdbcType="INTEGER" />
+    <result column="sys_timer_name" property="sysTimerName" jdbcType="NVARCHAR" />
+    <result column="sys_timer_exec_type" property="sysTimerExecType" jdbcType="NVARCHAR" />
+    <result column="sys_timer_is_repeat" property="sysTimerIsRepeat" jdbcType="NVARCHAR" />
+    <result column="sys_timer_repeat_type" property="sysTimerRepeatType" jdbcType="NVARCHAR" />
+    <result column="sys_timer_exec_sql_id" property="sysTimerExecSqlId" jdbcType="INTEGER" />
+    <result column="sys_timer_start_time" property="sysTimerStartTime" jdbcType="TIMESTAMP" />
+    <result column="sys_timer_end_time" property="sysTimerEndTime" jdbcType="TIMESTAMP" />
+    <result column="sys_timer_delayed_value" property="sysTimerDelayedValue" jdbcType="NVARCHAR" />
+    <result column="sys_timer_delayed_type" property="sysTimerDelayedType" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sys_timer_id, sys_timer_type, sys_timer_frequency, sys_timer_repeat_value, sys_timer_status, 
+    sys_timer_name, sys_timer_exec_type, sys_timer_is_repeat, sys_timer_repeat_type, 
+    sys_timer_exec_sql_id, sys_timer_start_time, sys_timer_end_time, sys_timer_delayed_value, 
+    sys_timer_delayed_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.task.SysTimerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_timer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_timer
+    where sys_timer_id = #{sysTimerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_timer
+    where sys_timer_id = #{sysTimerId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.task.SysTimerExample" >
+    delete from sys_timer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.task.SysTimer" >
+    insert into sys_timer (sys_timer_type, sys_timer_frequency, 
+      sys_timer_repeat_value, sys_timer_status, sys_timer_name, 
+      sys_timer_exec_type, sys_timer_is_repeat, sys_timer_repeat_type, 
+      sys_timer_exec_sql_id, sys_timer_start_time, 
+      sys_timer_end_time, sys_timer_delayed_value, 
+      sys_timer_delayed_type)
+    values (#{sysTimerType,jdbcType=NVARCHAR}, #{sysTimerFrequency,jdbcType=NVARCHAR}, 
+      #{sysTimerRepeatValue,jdbcType=INTEGER}, #{sysTimerStatus,jdbcType=INTEGER}, #{sysTimerName,jdbcType=NVARCHAR}, 
+      #{sysTimerExecType,jdbcType=NVARCHAR}, #{sysTimerIsRepeat,jdbcType=NVARCHAR}, #{sysTimerRepeatType,jdbcType=NVARCHAR}, 
+      #{sysTimerExecSqlId,jdbcType=INTEGER}, #{sysTimerStartTime,jdbcType=TIMESTAMP}, 
+      #{sysTimerEndTime,jdbcType=TIMESTAMP}, #{sysTimerDelayedValue,jdbcType=NVARCHAR}, 
+      #{sysTimerDelayedType,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.task.SysTimer" >
+    insert into sys_timer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysTimerId != null" >
+        sys_timer_id,
+      </if>
+      <if test="sysTimerType != null" >
+        sys_timer_type,
+      </if>
+      <if test="sysTimerFrequency != null" >
+        sys_timer_frequency,
+      </if>
+      <if test="sysTimerRepeatValue != null" >
+        sys_timer_repeat_value,
+      </if>
+      <if test="sysTimerStatus != null" >
+        sys_timer_status,
+      </if>
+      <if test="sysTimerName != null" >
+        sys_timer_name,
+      </if>
+      <if test="sysTimerExecType != null" >
+        sys_timer_exec_type,
+      </if>
+      <if test="sysTimerIsRepeat != null" >
+        sys_timer_is_repeat,
+      </if>
+      <if test="sysTimerRepeatType != null" >
+        sys_timer_repeat_type,
+      </if>
+      <if test="sysTimerExecSqlId != null" >
+        sys_timer_exec_sql_id,
+      </if>
+      <if test="sysTimerStartTime != null" >
+        sys_timer_start_time,
+      </if>
+      <if test="sysTimerEndTime != null" >
+        sys_timer_end_time,
+      </if>
+      <if test="sysTimerDelayedValue != null" >
+        sys_timer_delayed_value,
+      </if>
+      <if test="sysTimerDelayedType != null" >
+        sys_timer_delayed_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysTimerId != null" >
+        #{sysTimerId,jdbcType=DECIMAL},
+      </if>
+      <if test="sysTimerType != null" >
+        #{sysTimerType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerFrequency != null" >
+        #{sysTimerFrequency,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerRepeatValue != null" >
+        #{sysTimerRepeatValue,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerStatus != null" >
+        #{sysTimerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerName != null" >
+        #{sysTimerName,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerExecType != null" >
+        #{sysTimerExecType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerIsRepeat != null" >
+        #{sysTimerIsRepeat,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerRepeatType != null" >
+        #{sysTimerRepeatType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerExecSqlId != null" >
+        #{sysTimerExecSqlId,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerStartTime != null" >
+        #{sysTimerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTimerEndTime != null" >
+        #{sysTimerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTimerDelayedValue != null" >
+        #{sysTimerDelayedValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerDelayedType != null" >
+        #{sysTimerDelayedType,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.task.SysTimerExample" resultType="java.lang.Integer" >
+    select count(*) from sys_timer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_timer
+    <set >
+      <if test="record.sysTimerId != null" >
+        sys_timer_id = #{record.sysTimerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sysTimerType != null" >
+        sys_timer_type = #{record.sysTimerType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerFrequency != null" >
+        sys_timer_frequency = #{record.sysTimerFrequency,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerRepeatValue != null" >
+        sys_timer_repeat_value = #{record.sysTimerRepeatValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysTimerStatus != null" >
+        sys_timer_status = #{record.sysTimerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysTimerName != null" >
+        sys_timer_name = #{record.sysTimerName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerExecType != null" >
+        sys_timer_exec_type = #{record.sysTimerExecType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerIsRepeat != null" >
+        sys_timer_is_repeat = #{record.sysTimerIsRepeat,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerRepeatType != null" >
+        sys_timer_repeat_type = #{record.sysTimerRepeatType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerExecSqlId != null" >
+        sys_timer_exec_sql_id = #{record.sysTimerExecSqlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysTimerStartTime != null" >
+        sys_timer_start_time = #{record.sysTimerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTimerEndTime != null" >
+        sys_timer_end_time = #{record.sysTimerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sysTimerDelayedValue != null" >
+        sys_timer_delayed_value = #{record.sysTimerDelayedValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sysTimerDelayedType != null" >
+        sys_timer_delayed_type = #{record.sysTimerDelayedType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_timer
+    set sys_timer_id = #{record.sysTimerId,jdbcType=DECIMAL},
+      sys_timer_type = #{record.sysTimerType,jdbcType=NVARCHAR},
+      sys_timer_frequency = #{record.sysTimerFrequency,jdbcType=NVARCHAR},
+      sys_timer_repeat_value = #{record.sysTimerRepeatValue,jdbcType=INTEGER},
+      sys_timer_status = #{record.sysTimerStatus,jdbcType=INTEGER},
+      sys_timer_name = #{record.sysTimerName,jdbcType=NVARCHAR},
+      sys_timer_exec_type = #{record.sysTimerExecType,jdbcType=NVARCHAR},
+      sys_timer_is_repeat = #{record.sysTimerIsRepeat,jdbcType=NVARCHAR},
+      sys_timer_repeat_type = #{record.sysTimerRepeatType,jdbcType=NVARCHAR},
+      sys_timer_exec_sql_id = #{record.sysTimerExecSqlId,jdbcType=INTEGER},
+      sys_timer_start_time = #{record.sysTimerStartTime,jdbcType=TIMESTAMP},
+      sys_timer_end_time = #{record.sysTimerEndTime,jdbcType=TIMESTAMP},
+      sys_timer_delayed_value = #{record.sysTimerDelayedValue,jdbcType=NVARCHAR},
+      sys_timer_delayed_type = #{record.sysTimerDelayedType,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.task.SysTimer" >
+    update sys_timer
+    <set >
+      <if test="sysTimerType != null" >
+        sys_timer_type = #{sysTimerType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerFrequency != null" >
+        sys_timer_frequency = #{sysTimerFrequency,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerRepeatValue != null" >
+        sys_timer_repeat_value = #{sysTimerRepeatValue,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerStatus != null" >
+        sys_timer_status = #{sysTimerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerName != null" >
+        sys_timer_name = #{sysTimerName,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerExecType != null" >
+        sys_timer_exec_type = #{sysTimerExecType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerIsRepeat != null" >
+        sys_timer_is_repeat = #{sysTimerIsRepeat,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerRepeatType != null" >
+        sys_timer_repeat_type = #{sysTimerRepeatType,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerExecSqlId != null" >
+        sys_timer_exec_sql_id = #{sysTimerExecSqlId,jdbcType=INTEGER},
+      </if>
+      <if test="sysTimerStartTime != null" >
+        sys_timer_start_time = #{sysTimerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTimerEndTime != null" >
+        sys_timer_end_time = #{sysTimerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysTimerDelayedValue != null" >
+        sys_timer_delayed_value = #{sysTimerDelayedValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="sysTimerDelayedType != null" >
+        sys_timer_delayed_type = #{sysTimerDelayedType,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where sys_timer_id = #{sysTimerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.task.SysTimer" >
+    update sys_timer
+    set sys_timer_type = #{sysTimerType,jdbcType=NVARCHAR},
+      sys_timer_frequency = #{sysTimerFrequency,jdbcType=NVARCHAR},
+      sys_timer_repeat_value = #{sysTimerRepeatValue,jdbcType=INTEGER},
+      sys_timer_status = #{sysTimerStatus,jdbcType=INTEGER},
+      sys_timer_name = #{sysTimerName,jdbcType=NVARCHAR},
+      sys_timer_exec_type = #{sysTimerExecType,jdbcType=NVARCHAR},
+      sys_timer_is_repeat = #{sysTimerIsRepeat,jdbcType=NVARCHAR},
+      sys_timer_repeat_type = #{sysTimerRepeatType,jdbcType=NVARCHAR},
+      sys_timer_exec_sql_id = #{sysTimerExecSqlId,jdbcType=INTEGER},
+      sys_timer_start_time = #{sysTimerStartTime,jdbcType=TIMESTAMP},
+      sys_timer_end_time = #{sysTimerEndTime,jdbcType=TIMESTAMP},
+      sys_timer_delayed_value = #{sysTimerDelayedValue,jdbcType=NVARCHAR},
+      sys_timer_delayed_type = #{sysTimerDelayedType,jdbcType=NVARCHAR}
+    where sys_timer_id = #{sysTimerId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormActionMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormAction" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="OBJ_ID" property="objId" jdbcType="DECIMAL" />
+    <result column="OBJ_TYPE" property="objType" jdbcType="NVARCHAR" />
+    <result column="ACCESS_TIMES" property="accessTimes" jdbcType="DECIMAL" />
+    <result column="ACCESS_TIME" property="accessTime" jdbcType="TIMESTAMP" />
+    <result column="ACCESS_NAME" property="accessName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, OBJ_ID, OBJ_TYPE, ACCESS_TIMES, ACCESS_TIME, ACCESS_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormActionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_ACTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_ACTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_ACTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormActionExample" >
+    delete from SYS_FORM_ACTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormAction" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    insert into SYS_FORM_ACTION ( OBJ_ID, OBJ_TYPE, 
+      ACCESS_TIMES, ACCESS_TIME, ACCESS_NAME
+      )
+    values (#{objId,jdbcType=DECIMAL}, #{objType,jdbcType=NVARCHAR}, 
+      #{accessTimes,jdbcType=DECIMAL}, #{accessTime,jdbcType=TIMESTAMP}, #{accessName,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormAction" >
+    insert into SYS_FORM_ACTION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="objId != null" >
+        OBJ_ID,
+      </if>
+      <if test="objType != null" >
+        OBJ_TYPE,
+      </if>
+      <if test="accessTimes != null" >
+        ACCESS_TIMES,
+      </if>
+      <if test="accessTime != null" >
+        ACCESS_TIME,
+      </if>
+      <if test="accessName != null" >
+        ACCESS_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="objId != null" >
+        #{objId,jdbcType=DECIMAL},
+      </if>
+      <if test="objType != null" >
+        #{objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessTimes != null" >
+        #{accessTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="accessTime != null" >
+        #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessName != null" >
+        #{accessName,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormActionExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_ACTION
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_ACTION
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.objId != null" >
+        OBJ_ID = #{record.objId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.objType != null" >
+        OBJ_TYPE = #{record.objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.accessTimes != null" >
+        ACCESS_TIMES = #{record.accessTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accessTime != null" >
+        ACCESS_TIME = #{record.accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accessName != null" >
+        ACCESS_NAME = #{record.accessName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_ACTION
+    set ID = #{record.id,jdbcType=DECIMAL},
+      OBJ_ID = #{record.objId,jdbcType=DECIMAL},
+      OBJ_TYPE = #{record.objType,jdbcType=NVARCHAR},
+      ACCESS_TIMES = #{record.accessTimes,jdbcType=DECIMAL},
+      ACCESS_TIME = #{record.accessTime,jdbcType=TIMESTAMP},
+      ACCESS_NAME = #{record.accessName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormAction" >
+    update SYS_FORM_ACTION
+    <set >
+      <if test="objId != null" >
+        OBJ_ID = #{objId,jdbcType=DECIMAL},
+      </if>
+      <if test="objType != null" >
+        OBJ_TYPE = #{objType,jdbcType=NVARCHAR},
+      </if>
+      <if test="accessTimes != null" >
+        ACCESS_TIMES = #{accessTimes,jdbcType=DECIMAL},
+      </if>
+      <if test="accessTime != null" >
+        ACCESS_TIME = #{accessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessName != null" >
+        ACCESS_NAME = #{accessName,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormAction" >
+    update SYS_FORM_ACTION
+    set OBJ_ID = #{objId,jdbcType=DECIMAL},
+      OBJ_TYPE = #{objType,jdbcType=NVARCHAR},
+      ACCESS_TIMES = #{accessTimes,jdbcType=DECIMAL},
+      ACCESS_TIME = #{accessTime,jdbcType=TIMESTAMP},
+      ACCESS_NAME = #{accessName,jdbcType=NVARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

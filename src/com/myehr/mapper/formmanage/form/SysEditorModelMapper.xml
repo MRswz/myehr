@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysEditorModelMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysEditorModel" >
+    <id column="editor_model_id" property="editorModelId" jdbcType="DECIMAL" />
+    <result column="editor_model_formId" property="editorModelFormid" jdbcType="DECIMAL" />
+    <result column="editor_model_buttonId" property="editorModelButtonid" jdbcType="DECIMAL" />
+    <result column="editor_model_type" property="editorModelType" jdbcType="NVARCHAR" />
+    <result column="editor_model_code" property="editorModelCode" jdbcType="NVARCHAR" />
+    <result column="editor_model_name" property="editorModelName" jdbcType="NVARCHAR" />
+    <result column="editor_model_folder_id" property="editorModelFolderId" jdbcType="DECIMAL" />
+    <result column="operator_name" property="operatorName" jdbcType="DECIMAL" />
+    <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="delete_mark" property="deleteMark" jdbcType="NVARCHAR" />
+    <result column="editor_model_form_name" property="editorModelFormName" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myehr.pojo.formmanage.form.SysEditorModelWithBLOBs" extends="BaseResultMap" >
+    <result column="editor_model_value" property="editorModelValue" jdbcType="LONGVARCHAR" />
+    <result column="editor_model_html" property="editorModelHtml" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    editor_model_id, editor_model_formId, editor_model_buttonId, editor_model_type, editor_model_code, 
+    editor_model_name, editor_model_folder_id, operator_name, operator_time, delete_mark, 
+    editor_model_form_name
+  </sql>
+  <sql id="Blob_Column_List" >
+    editor_model_value, editor_model_html
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_EDITOR_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EDITOR_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_EDITOR_MODEL
+    where editor_model_id = #{editorModelId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_EDITOR_MODEL
+    where editor_model_id = #{editorModelId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelExample" >
+    delete from SYS_EDITOR_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelWithBLOBs" >
+    insert into SYS_EDITOR_MODEL (editor_model_formId, 
+      editor_model_buttonId, editor_model_type, 
+      editor_model_code, editor_model_name, editor_model_folder_id, 
+      operator_name, operator_time, delete_mark, 
+      editor_model_form_name, editor_model_value, 
+      editor_model_html)
+    values (#{editorModelFormid,jdbcType=DECIMAL}, 
+      #{editorModelButtonid,jdbcType=DECIMAL}, #{editorModelType,jdbcType=NVARCHAR}, 
+      #{editorModelCode,jdbcType=NVARCHAR}, #{editorModelName,jdbcType=NVARCHAR}, #{editorModelFolderId,jdbcType=DECIMAL}, 
+      #{operatorName,jdbcType=DECIMAL}, #{operatorTime,jdbcType=TIMESTAMP}, #{deleteMark,jdbcType=NVARCHAR}, 
+      #{editorModelFormName,jdbcType=NVARCHAR}, #{editorModelValue,jdbcType=LONGVARCHAR}, 
+      #{editorModelHtml,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelWithBLOBs" >
+    insert into SYS_EDITOR_MODEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="editorModelId != null" >
+        editor_model_id,
+      </if>
+      <if test="editorModelFormid != null" >
+        editor_model_formId,
+      </if>
+      <if test="editorModelButtonid != null" >
+        editor_model_buttonId,
+      </if>
+      <if test="editorModelType != null" >
+        editor_model_type,
+      </if>
+      <if test="editorModelCode != null" >
+        editor_model_code,
+      </if>
+      <if test="editorModelName != null" >
+        editor_model_name,
+      </if>
+      <if test="editorModelFolderId != null" >
+        editor_model_folder_id,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="operatorTime != null" >
+        operator_time,
+      </if>
+      <if test="deleteMark != null" >
+        delete_mark,
+      </if>
+      <if test="editorModelFormName != null" >
+        editor_model_form_name,
+      </if>
+      <if test="editorModelValue != null" >
+        editor_model_value,
+      </if>
+      <if test="editorModelHtml != null" >
+        editor_model_html,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="editorModelId != null" >
+        #{editorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelFormid != null" >
+        #{editorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelButtonid != null" >
+        #{editorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelType != null" >
+        #{editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelCode != null" >
+        #{editorModelCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelName != null" >
+        #{editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelFolderId != null" >
+        #{editorModelFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelFormName != null" >
+        #{editorModelFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelValue != null" >
+        #{editorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="editorModelHtml != null" >
+        #{editorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_EDITOR_MODEL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_EDITOR_MODEL
+    <set >
+      <if test="record.editorModelId != null" >
+        editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.editorModelFormid != null" >
+        editor_model_formId = #{record.editorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.editorModelButtonid != null" >
+        editor_model_buttonId = #{record.editorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.editorModelType != null" >
+        editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelCode != null" >
+        editor_model_code = #{record.editorModelCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelName != null" >
+        editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelFolderId != null" >
+        editor_model_folder_id = #{record.editorModelFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorName != null" >
+        operator_name = #{record.operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorTime != null" >
+        operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteMark != null" >
+        delete_mark = #{record.deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelFormName != null" >
+        editor_model_form_name = #{record.editorModelFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editorModelValue != null" >
+        editor_model_value = #{record.editorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.editorModelHtml != null" >
+        editor_model_html = #{record.editorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update SYS_EDITOR_MODEL
+    set editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      editor_model_formId = #{record.editorModelFormid,jdbcType=DECIMAL},
+      editor_model_buttonId = #{record.editorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      editor_model_code = #{record.editorModelCode,jdbcType=NVARCHAR},
+      editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR},
+      editor_model_folder_id = #{record.editorModelFolderId,jdbcType=DECIMAL},
+      operator_name = #{record.operatorName,jdbcType=DECIMAL},
+      operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      delete_mark = #{record.deleteMark,jdbcType=NVARCHAR},
+      editor_model_form_name = #{record.editorModelFormName,jdbcType=NVARCHAR},
+      editor_model_value = #{record.editorModelValue,jdbcType=LONGVARCHAR},
+      editor_model_html = #{record.editorModelHtml,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_EDITOR_MODEL
+    set editor_model_id = #{record.editorModelId,jdbcType=DECIMAL},
+      editor_model_formId = #{record.editorModelFormid,jdbcType=DECIMAL},
+      editor_model_buttonId = #{record.editorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{record.editorModelType,jdbcType=NVARCHAR},
+      editor_model_code = #{record.editorModelCode,jdbcType=NVARCHAR},
+      editor_model_name = #{record.editorModelName,jdbcType=NVARCHAR},
+      editor_model_folder_id = #{record.editorModelFolderId,jdbcType=DECIMAL},
+      operator_name = #{record.operatorName,jdbcType=DECIMAL},
+      operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      delete_mark = #{record.deleteMark,jdbcType=NVARCHAR},
+      editor_model_form_name = #{record.editorModelFormName,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelWithBLOBs" >
+    update SYS_EDITOR_MODEL
+    <set >
+      <if test="editorModelFormid != null" >
+        editor_model_formId = #{editorModelFormid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelButtonid != null" >
+        editor_model_buttonId = #{editorModelButtonid,jdbcType=DECIMAL},
+      </if>
+      <if test="editorModelType != null" >
+        editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelCode != null" >
+        editor_model_code = #{editorModelCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelName != null" >
+        editor_model_name = #{editorModelName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelFolderId != null" >
+        editor_model_folder_id = #{editorModelFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorTime != null" >
+        operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteMark != null" >
+        delete_mark = #{deleteMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelFormName != null" >
+        editor_model_form_name = #{editorModelFormName,jdbcType=NVARCHAR},
+      </if>
+      <if test="editorModelValue != null" >
+        editor_model_value = #{editorModelValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="editorModelHtml != null" >
+        editor_model_html = #{editorModelHtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where editor_model_id = #{editorModelId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myehr.pojo.formmanage.form.SysEditorModelWithBLOBs" >
+    update SYS_EDITOR_MODEL
+    set editor_model_formId = #{editorModelFormid,jdbcType=DECIMAL},
+      editor_model_buttonId = #{editorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      editor_model_code = #{editorModelCode,jdbcType=NVARCHAR},
+      editor_model_name = #{editorModelName,jdbcType=NVARCHAR},
+      editor_model_folder_id = #{editorModelFolderId,jdbcType=DECIMAL},
+      operator_name = #{operatorName,jdbcType=DECIMAL},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      delete_mark = #{deleteMark,jdbcType=NVARCHAR},
+      editor_model_form_name = #{editorModelFormName,jdbcType=NVARCHAR},
+      editor_model_value = #{editorModelValue,jdbcType=LONGVARCHAR},
+      editor_model_html = #{editorModelHtml,jdbcType=LONGVARCHAR}
+    where editor_model_id = #{editorModelId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysEditorModel" >
+    update SYS_EDITOR_MODEL
+    set editor_model_formId = #{editorModelFormid,jdbcType=DECIMAL},
+      editor_model_buttonId = #{editorModelButtonid,jdbcType=DECIMAL},
+      editor_model_type = #{editorModelType,jdbcType=NVARCHAR},
+      editor_model_code = #{editorModelCode,jdbcType=NVARCHAR},
+      editor_model_name = #{editorModelName,jdbcType=NVARCHAR},
+      editor_model_folder_id = #{editorModelFolderId,jdbcType=DECIMAL},
+      operator_name = #{operatorName,jdbcType=DECIMAL},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      delete_mark = #{deleteMark,jdbcType=NVARCHAR},
+      editor_model_form_name = #{editorModelFormName,jdbcType=NVARCHAR}
+    where editor_model_id = #{editorModelId,jdbcType=DECIMAL}
+  </update>
+</mapper>

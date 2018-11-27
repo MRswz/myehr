@@ -1,0 +1,128 @@
+package com.myehr.service.formmanage.form;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.myehr.common.exception.DcfException;
+import com.myehr.common.util.ResultMap;
+import com.myehr.pojo.activiti.expand.ActNodePropertiesExpand;
+import com.myehr.pojo.dict.SysDictEntry;
+import com.myehr.pojo.dict.SysDictType;
+import com.myehr.pojo.formmanage.cache.SysFormconfigCache;
+import com.myehr.pojo.formmanage.cache.SysRuleCache;
+import com.myehr.pojo.formmanage.form.FormChartsBarColumn;
+import com.myehr.pojo.formmanage.form.SysFormButton;
+import com.myehr.pojo.formmanage.form.SysFormCharts;
+import com.myehr.pojo.formmanage.form.SysFormColumn;
+import com.myehr.pojo.formmanage.form.SysFormGroup;
+import com.myehr.pojo.formmanage.form.SysFormWhere;
+import com.myehr.pojo.formmanage.form.SysFormconfig;
+import com.myehr.pojo.formmanage.form.SysFormconfigGrid;
+import com.myehr.pojo.formmanage.form.SysFormconfigTree;
+import com.myehr.pojo.formmanage.form.SysFormconfigWithBLOBs;
+import com.myehr.pojo.formmanage.template.timeaxis.SysTimeaxisTemplateColumn;
+import com.myehr.pojo.formmanage.widget.SysFileupload;
+import com.myehr.pojo.sysParam.SysRequestParam;
+
+public interface IFormService {
+	
+	List<SysFormColumn> findFormColumnsByFormId(int formId);
+	
+	List<SysFormGroup> findFormGroupsByFormId(int formId);
+	
+	List<SysFormColumn> findFreeFormColumnsByFormId(int formId);
+	
+	List<SysFormButton> findSysFormButtonsByFormId(int formId);
+	
+	List<SysFormWhere> findSysFormWheresByFormId(int formId);
+	
+	SysFormColumn findPkColumnByFormId(int formId);
+	
+	SysFormconfigTree findSysFormconfigTreeByFormId(int formId);
+	
+	SysFormconfigGrid findSysFormconfigGridByFormId(int formId);
+	
+	SysFormconfigWithBLOBs findSysFormconfigWithBLOBsByFormId(int formId);
+	
+	SysFormconfigCache getForm(String formId) throws DcfException, Exception;
+	
+	List<SysDictEntry> getDictEntrys(String dictTypeCode) throws DcfException, Exception;
+	
+	public List<SysDictType> getDictTypes() throws Exception;
+	
+	void removeForm(String formId) ;
+	
+	void removeDictEntrys(String dictTypeCode) ;
+	
+	String buildForm(SysFormconfigCache form,SysRequestParam request,String formType);
+	
+	String buildChartsForm(SysFormconfigCache form,SysFormconfigCache selectform,SysRequestParam request,String formType,SysFormCharts charts,List<FormChartsBarColumn> barColumns,List<FormChartsBarColumn> barColumns1,List<FormChartsBarColumn> barColumns2,Map map);
+
+	String buildCardForm(SysFormconfigCache form, SysRequestParam request,String formType,ActNodePropertiesExpand actNodePropertiesExpand,String userId);
+
+	String buildTreeForm(SysFormconfigCache form, SysRequestParam request);
+
+	String findSysFormFolderTreeById(int folderTreeId,String path);
+
+	String buildGridAndGridForm(SysFormconfigCache form, SysRequestParam request,String IsApp);
+	
+	String buildCardAndCardForm(SysFormconfigCache form, SysRequestParam request,String IsApp,ActNodePropertiesExpand actNodePropertiesExpand);
+	
+	String buildReportForm(SysFormconfigCache form, SysRequestParam request);
+	
+	String getReportUrl(SysFormconfigCache form, SysRequestParam request) throws SQLException;
+	
+	String buildFullTabForm(SysFormconfigCache form, SysRequestParam request,String IsApp);
+	
+	String buildCardAndGridForm(SysFormconfigCache form, SysRequestParam request,String IsApp,ActNodePropertiesExpand actNodePropertiesExpand);
+	
+	public String buildHandsontableForm(SysFormconfigCache form,SysRequestParam request,String isApp);
+	
+	public String replaceSqlParam(SysRuleCache rule,Map<String,String> params, Map<String, String> oparams) throws Throwable;
+	/*public ResultMap getDataByformDefSql (SysRequestParam request,String formDefSql) throws Exception;*/
+	
+	public SysFileupload uploadData (HttpServletRequest request) throws Exception;
+	
+	public ResultMap getAllFormMsSql(SysRequestParam request)throws Exception;
+	
+	public String buildTreeOrgChart(SysFormconfigCache form,SysRequestParam request,String isApp,SysFormconfigTree formTree);
+	
+	String buildTabsForm(SysFormconfigCache form, SysRequestParam request,String isApp);
+
+	ResultMap getAllDictMsSql(SysRequestParam request) throws Exception;
+
+	String buildFormByTemplate(SysFormconfigCache form,SysRequestParam request, String isApp);
+	
+	String buildTimeaxisForm(SysFormconfigCache form,SysRequestParam request, String isApp,List<SysTimeaxisTemplateColumn> templateColumns);
+
+	String buildDragForm(SysFormconfig form,SysRequestParam request);
+
+	ResultMap getExamtemplate(SysRequestParam request);
+
+	void buildQuestionForm(SysFormconfigCache form,SysRequestParam request);
+	
+	String setColumnSqlDict(String columnName);
+	
+	public ResultMap getDragconfig(SysRequestParam request);
+
+	String buildCardAndCardForm2(SysFormconfigCache form,
+			SysRequestParam request, String isApp,
+			ActNodePropertiesExpand actNodePropertiesExpand,String isApp2);
+
+	String buildCardAndCardForm2_ACT(SysFormconfigCache form,
+			SysRequestParam request, String isApp,
+			ActNodePropertiesExpand actNodePropertiesExpand, String nodeId,String taskId,String isApp2);
+
+	String buildCardAndGridForm_ACT(SysFormconfigCache form,
+			SysRequestParam request, String isApp,
+			ActNodePropertiesExpand actNodePropertiesExpand, String nodeId,
+			String taskId,String isApp2);
+
+	String buildCardAndNewGridForm2_ACT(SysFormconfigCache form,
+			SysRequestParam request, String isApp,
+			ActNodePropertiesExpand actNodePropertiesExpand, String nodeId,
+			String taskId,String isApp2);
+}

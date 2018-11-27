@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysTreeSolutionColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysTreeSolutionColumn" >
+    <id column="TREE_SLU_ID" property="treeSluId" jdbcType="DECIMAL" />
+    <result column="TREE_SOLUTION_ID" property="treeSolutionId" jdbcType="DECIMAL" />
+    <result column="TREE_ENTITY_ID" property="treeEntityId" jdbcType="DECIMAL" />
+    <result column="TREE_COLUMN_ID" property="treeColumnId" jdbcType="DECIMAL" />
+    <result column="TREE_ENTITY_TABLENAME" property="treeEntityTablename" jdbcType="VARCHAR" />
+    <result column="TREE_FIELD_TABLENAME" property="treeFieldTablename" jdbcType="VARCHAR" />
+    <result column="TREE_COLUMN_TYPE" property="treeColumnType" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TREE_SLU_ID, TREE_SOLUTION_ID, TREE_ENTITY_ID, TREE_COLUMN_ID, TREE_ENTITY_TABLENAME, 
+    TREE_FIELD_TABLENAME, TREE_COLUMN_TYPE, OPERATOR_TIME, OPERATOR_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TREE_SOLUTION_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TREE_SOLUTION_COLUMN
+    where TREE_SLU_ID = #{treeSluId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TREE_SOLUTION_COLUMN
+    where TREE_SLU_ID = #{treeSluId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumnExample" >
+    delete from SYS_TREE_SOLUTION_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumn" useGeneratedKeys="true" keyProperty="treeSluId" keyColumn="TREE_SLU_ID">
+    insert into SYS_TREE_SOLUTION_COLUMN (TREE_SOLUTION_ID, TREE_ENTITY_ID, 
+      TREE_COLUMN_ID, TREE_ENTITY_TABLENAME, TREE_FIELD_TABLENAME, 
+      TREE_COLUMN_TYPE, OPERATOR_TIME, OPERATOR_NAME
+      )
+    values (#{treeSolutionId,jdbcType=DECIMAL}, #{treeEntityId,jdbcType=DECIMAL}, 
+      #{treeColumnId,jdbcType=DECIMAL}, #{treeEntityTablename,jdbcType=VARCHAR}, #{treeFieldTablename,jdbcType=VARCHAR}, 
+      #{treeColumnType,jdbcType=VARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumn" >
+    insert into SYS_TREE_SOLUTION_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="treeSluId != null" >
+        TREE_SLU_ID,
+      </if>
+      <if test="treeSolutionId != null" >
+        TREE_SOLUTION_ID,
+      </if>
+      <if test="treeEntityId != null" >
+        TREE_ENTITY_ID,
+      </if>
+      <if test="treeColumnId != null" >
+        TREE_COLUMN_ID,
+      </if>
+      <if test="treeEntityTablename != null" >
+        TREE_ENTITY_TABLENAME,
+      </if>
+      <if test="treeFieldTablename != null" >
+        TREE_FIELD_TABLENAME,
+      </if>
+      <if test="treeColumnType != null" >
+        TREE_COLUMN_TYPE,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="treeSluId != null" >
+        #{treeSluId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeSolutionId != null" >
+        #{treeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeEntityId != null" >
+        #{treeEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeColumnId != null" >
+        #{treeColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeEntityTablename != null" >
+        #{treeEntityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="treeFieldTablename != null" >
+        #{treeFieldTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="treeColumnType != null" >
+        #{treeColumnType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TREE_SOLUTION_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TREE_SOLUTION_COLUMN
+    <set >
+      <if test="record.treeSluId != null" >
+        TREE_SLU_ID = #{record.treeSluId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeSolutionId != null" >
+        TREE_SOLUTION_ID = #{record.treeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeEntityId != null" >
+        TREE_ENTITY_ID = #{record.treeEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeColumnId != null" >
+        TREE_COLUMN_ID = #{record.treeColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treeEntityTablename != null" >
+        TREE_ENTITY_TABLENAME = #{record.treeEntityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeFieldTablename != null" >
+        TREE_FIELD_TABLENAME = #{record.treeFieldTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeColumnType != null" >
+        TREE_COLUMN_TYPE = #{record.treeColumnType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TREE_SOLUTION_COLUMN
+    set TREE_SLU_ID = #{record.treeSluId,jdbcType=DECIMAL},
+      TREE_SOLUTION_ID = #{record.treeSolutionId,jdbcType=DECIMAL},
+      TREE_ENTITY_ID = #{record.treeEntityId,jdbcType=DECIMAL},
+      TREE_COLUMN_ID = #{record.treeColumnId,jdbcType=DECIMAL},
+      TREE_ENTITY_TABLENAME = #{record.treeEntityTablename,jdbcType=VARCHAR},
+      TREE_FIELD_TABLENAME = #{record.treeFieldTablename,jdbcType=VARCHAR},
+      TREE_COLUMN_TYPE = #{record.treeColumnType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumn" >
+    update SYS_TREE_SOLUTION_COLUMN
+    <set >
+      <if test="treeSolutionId != null" >
+        TREE_SOLUTION_ID = #{treeSolutionId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeEntityId != null" >
+        TREE_ENTITY_ID = #{treeEntityId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeColumnId != null" >
+        TREE_COLUMN_ID = #{treeColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="treeEntityTablename != null" >
+        TREE_ENTITY_TABLENAME = #{treeEntityTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="treeFieldTablename != null" >
+        TREE_FIELD_TABLENAME = #{treeFieldTablename,jdbcType=VARCHAR},
+      </if>
+      <if test="treeColumnType != null" >
+        TREE_COLUMN_TYPE = #{treeColumnType,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TREE_SLU_ID = #{treeSluId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysTreeSolutionColumn" >
+    update SYS_TREE_SOLUTION_COLUMN
+    set TREE_SOLUTION_ID = #{treeSolutionId,jdbcType=DECIMAL},
+      TREE_ENTITY_ID = #{treeEntityId,jdbcType=DECIMAL},
+      TREE_COLUMN_ID = #{treeColumnId,jdbcType=DECIMAL},
+      TREE_ENTITY_TABLENAME = #{treeEntityTablename,jdbcType=VARCHAR},
+      TREE_FIELD_TABLENAME = #{treeFieldTablename,jdbcType=VARCHAR},
+      TREE_COLUMN_TYPE = #{treeColumnType,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR}
+    where TREE_SLU_ID = #{treeSluId,jdbcType=DECIMAL}
+  </update>
+</mapper>

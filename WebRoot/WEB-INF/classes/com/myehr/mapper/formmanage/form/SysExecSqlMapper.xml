@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysExecSqlMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysExecSql" >
+    <id column="EXEC_SQL_ID" property="execSqlId" jdbcType="DECIMAL" />
+    <result column="ENTITY_SQL" property="entitySql" jdbcType="VARCHAR" />
+    <result column="EXEC_SQL" property="execSql" jdbcType="VARCHAR" />
+    <result column="EXEC_SQL_TYPE" property="execSqlType" jdbcType="VARCHAR" />
+    <result column="EXEC_SQL_RELAID" property="execSqlRelaid" jdbcType="DECIMAL" />
+    <result column="AFTER_EXEC_TYPE" property="afterExecType" jdbcType="VARCHAR" />
+    <result column="AFTER_EXEC_FUN" property="afterExecFun" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EXEC_SQL_ID, ENTITY_SQL, EXEC_SQL, EXEC_SQL_TYPE, EXEC_SQL_RELAID, AFTER_EXEC_TYPE, 
+    AFTER_EXEC_FUN
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysExecSqlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EXEC_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EXEC_SQL
+    where EXEC_SQL_ID = #{execSqlId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_EXEC_SQL
+    where EXEC_SQL_ID = #{execSqlId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysExecSqlExample" >
+    delete from SYS_EXEC_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysExecSql" useGeneratedKeys="true" keyProperty="execSqlId" keyColumn="EXEC_SQL_ID">
+    insert into SYS_EXEC_SQL (ENTITY_SQL, EXEC_SQL, 
+      EXEC_SQL_TYPE, EXEC_SQL_RELAID, AFTER_EXEC_TYPE, 
+      AFTER_EXEC_FUN)
+    values (#{entitySql,jdbcType=VARCHAR}, #{execSql,jdbcType=VARCHAR}, 
+      #{execSqlType,jdbcType=VARCHAR}, #{execSqlRelaid,jdbcType=DECIMAL}, #{afterExecType,jdbcType=VARCHAR}, 
+      #{afterExecFun,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysExecSql" >
+    insert into SYS_EXEC_SQL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="execSqlId != null" >
+        EXEC_SQL_ID,
+      </if>
+      <if test="entitySql != null" >
+        ENTITY_SQL,
+      </if>
+      <if test="execSql != null" >
+        EXEC_SQL,
+      </if>
+      <if test="execSqlType != null" >
+        EXEC_SQL_TYPE,
+      </if>
+      <if test="execSqlRelaid != null" >
+        EXEC_SQL_RELAID,
+      </if>
+      <if test="afterExecType != null" >
+        AFTER_EXEC_TYPE,
+      </if>
+      <if test="afterExecFun != null" >
+        AFTER_EXEC_FUN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="execSqlId != null" >
+        #{execSqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="entitySql != null" >
+        #{entitySql,jdbcType=VARCHAR},
+      </if>
+      <if test="execSql != null" >
+        #{execSql,jdbcType=VARCHAR},
+      </if>
+      <if test="execSqlType != null" >
+        #{execSqlType,jdbcType=VARCHAR},
+      </if>
+      <if test="execSqlRelaid != null" >
+        #{execSqlRelaid,jdbcType=DECIMAL},
+      </if>
+      <if test="afterExecType != null" >
+        #{afterExecType,jdbcType=VARCHAR},
+      </if>
+      <if test="afterExecFun != null" >
+        #{afterExecFun,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysExecSqlExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_EXEC_SQL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_EXEC_SQL
+    <set >
+      <if test="record.execSqlId != null" >
+        EXEC_SQL_ID = #{record.execSqlId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.entitySql != null" >
+        ENTITY_SQL = #{record.entitySql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execSql != null" >
+        EXEC_SQL = #{record.execSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execSqlType != null" >
+        EXEC_SQL_TYPE = #{record.execSqlType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.execSqlRelaid != null" >
+        EXEC_SQL_RELAID = #{record.execSqlRelaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.afterExecType != null" >
+        AFTER_EXEC_TYPE = #{record.afterExecType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterExecFun != null" >
+        AFTER_EXEC_FUN = #{record.afterExecFun,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_EXEC_SQL
+    set EXEC_SQL_ID = #{record.execSqlId,jdbcType=DECIMAL},
+      ENTITY_SQL = #{record.entitySql,jdbcType=VARCHAR},
+      EXEC_SQL = #{record.execSql,jdbcType=VARCHAR},
+      EXEC_SQL_TYPE = #{record.execSqlType,jdbcType=VARCHAR},
+      EXEC_SQL_RELAID = #{record.execSqlRelaid,jdbcType=DECIMAL},
+      AFTER_EXEC_TYPE = #{record.afterExecType,jdbcType=VARCHAR},
+      AFTER_EXEC_FUN = #{record.afterExecFun,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysExecSql" >
+    update SYS_EXEC_SQL
+    <set >
+      <if test="entitySql != null" >
+        ENTITY_SQL = #{entitySql,jdbcType=VARCHAR},
+      </if>
+      <if test="execSql != null" >
+        EXEC_SQL = #{execSql,jdbcType=VARCHAR},
+      </if>
+      <if test="execSqlType != null" >
+        EXEC_SQL_TYPE = #{execSqlType,jdbcType=VARCHAR},
+      </if>
+      <if test="execSqlRelaid != null" >
+        EXEC_SQL_RELAID = #{execSqlRelaid,jdbcType=DECIMAL},
+      </if>
+      <if test="afterExecType != null" >
+        AFTER_EXEC_TYPE = #{afterExecType,jdbcType=VARCHAR},
+      </if>
+      <if test="afterExecFun != null" >
+        AFTER_EXEC_FUN = #{afterExecFun,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EXEC_SQL_ID = #{execSqlId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysExecSql" >
+    update SYS_EXEC_SQL
+    set ENTITY_SQL = #{entitySql,jdbcType=VARCHAR},
+      EXEC_SQL = #{execSql,jdbcType=VARCHAR},
+      EXEC_SQL_TYPE = #{execSqlType,jdbcType=VARCHAR},
+      EXEC_SQL_RELAID = #{execSqlRelaid,jdbcType=DECIMAL},
+      AFTER_EXEC_TYPE = #{afterExecType,jdbcType=VARCHAR},
+      AFTER_EXEC_FUN = #{afterExecFun,jdbcType=VARCHAR}
+    where EXEC_SQL_ID = #{execSqlId,jdbcType=DECIMAL}
+  </update>
+</mapper>

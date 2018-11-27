@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.gridbycard.SysGridbycardTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplate" >
+    <id column="TEMPLATE_ID" property="templateId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_CODE" property="templateCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_NAME" property="templateName" jdbcType="NVARCHAR" />
+    <result column="operator_name" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEMPLATE_ID, TEMPLATE_CODE, TEMPLATE_NAME, operator_name, operator_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_GRIDBYCARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GRIDBYCARD_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_GRIDBYCARD_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateExample" >
+    delete from SYS_GRIDBYCARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplate" >
+    insert into SYS_GRIDBYCARD_TEMPLATE (TEMPLATE_CODE, TEMPLATE_NAME, 
+      operator_name, operator_time)
+    values (#{templateCode,jdbcType=NVARCHAR}, #{templateName,jdbcType=NVARCHAR}, 
+      #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplate" >
+    insert into SYS_GRIDBYCARD_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="templateCode != null" >
+        TEMPLATE_CODE,
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="operatorTime != null" >
+        operator_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_GRIDBYCARD_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_GRIDBYCARD_TEMPLATE
+    <set >
+      <if test="record.templateId != null" >
+        TEMPLATE_ID = #{record.templateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateCode != null" >
+        TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateName != null" >
+        TEMPLATE_NAME = #{record.templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_GRIDBYCARD_TEMPLATE
+    set TEMPLATE_ID = #{record.templateId,jdbcType=INTEGER},
+      TEMPLATE_CODE = #{record.templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_NAME = #{record.templateName,jdbcType=NVARCHAR},
+      operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      operator_time = #{record.operatorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplate" >
+    update SYS_GRIDBYCARD_TEMPLATE
+    <set >
+      <if test="templateCode != null" >
+        TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME = #{templateName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TEMPLATE_ID = #{templateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplate" >
+    update SYS_GRIDBYCARD_TEMPLATE
+    set TEMPLATE_CODE = #{templateCode,jdbcType=NVARCHAR},
+      TEMPLATE_NAME = #{templateName,jdbcType=NVARCHAR},
+      operator_name = #{operatorName,jdbcType=NVARCHAR},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP}
+    where TEMPLATE_ID = #{templateId,jdbcType=INTEGER}
+  </update>
+</mapper>

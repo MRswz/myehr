@@ -1,0 +1,50 @@
+package com.myehr.service.calendar;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.myehr.pojo.calendar.AttendCalendar;
+import com.myehr.pojo.calendar.AttendShifttype;
+import com.myehr.pojo.calendar.AttendZone;
+import com.myehr.pojo.calendar.K15;
+import com.myehr.pojo.calendar.Kbasecode;
+import com.myehr.pojo.calendar.Kcalclass;
+import com.myehr.pojo.calendar.Kcalendar;
+import com.myehr.pojo.calendar.Testcalendar;
+
+public interface CalendarService {
+	public List<Testcalendar> getAllCalendar (Testcalendar test) throws Exception;
+	
+	List<Kcalendar> queryWorkDay(String kguid,String datemonth);
+	
+	List<AttendCalendar> queryWorkDayNew(Integer zoneid,String datemonth);
+	
+	List<K15> queryEmpWorkDay(String k15A1090);
+	
+	String addWorkDay(String kguid,String itemCaption,Date itemDate) throws Exception;
+	
+	String addAttendCalendar(Integer zoneid,Integer xtype,Date itemDate) throws Exception;
+	
+	public String InitRestCalendar(String kguid,String datetime) throws Exception ;
+	
+	public String InitRestCalendarNew(Integer zoneid,String datetime) throws Exception ;
+	
+	public String ClearRestCalendar(String kguid,String datetime) throws Exception ;
+	
+	public String ClearRestCalendarNew(Integer zoneid,String datetime) throws Exception ;
+	
+	public List<Kbasecode> queryItem();
+	
+	public List<AttendShifttype> queryAttendShifttypes();
+	
+	public List<Kcalclass> queryCalClass();
+	
+	public List<AttendZone> queryCalClassNew();
+	
+	public String saveEmpWorkday(HttpServletRequest request,String empIds,String empCodes,List<Kcalendar> workdays,String kguid) throws Exception;
+
+	public String saveEmpWorkdayNew(HttpServletRequest request,String empIds,String empCodes,List<Kcalendar> workdays,Integer zoneid) throws Exception;
+
+}

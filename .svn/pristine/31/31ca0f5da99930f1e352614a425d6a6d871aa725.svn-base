@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>menu demo</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
+</head>
+
+<body>
+    <div class="nav_outer"><div class="header_nav" id="js_nav"></div></div>
+</body>
+<script type="text/javascript" src="jquery-1.4.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+                url: "${pageContext.request.contextPath}/form/menuJson.action",
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    var arr=data.data;
+                    setTableDate(arr);
+                  }
+            });
+
+        function setTableDate(arr){
+            //arr是拿到目录数据
+             var ulObj = $("<ul></ul>");
+             for(var i=0;i<arr.length;i++){
+                var percentage = 100/arr.length;
+                //liObj是第一层目录
+                var liObj=$("<li class='lv1 lv1_"+ i +"' style='width:"+ percentage +"%'><a class='lv1_a' href='"+arr[i].menuUrl+"'>"+arr[i].menuName+"</a></li>");
+                //拿第二层目录
+                var secondArr=arr[i].childrens;
+                var divObj=$("<div class='lv1_submenu'><div class='lv1_submenu_container'></div></div>");
+                if(secondArr.length!=0){
+                   /* setNextDate(secondArr);*/
+                   for(var j=0;j<secondArr.length;j++){
+                    var secondulObj=$("<ul class='ul0"+ (j+1) +"'><li class='class_title'><a href='"+secondArr[j].menuUrl+"' class='cacheflag'>"+secondArr[j].menuName+"</a></li></ul>");
+                    var thirdArr=secondArr[j].childrens;
+                    if(thirdArr){
+                        for(var k=0;k<thirdArr.length;k++){
+                            var thirdliObj=$("<li><a href='"+thirdArr[k].menuUrl+"'><span>"+ thirdArr[k].menuName +"</span></a></li>");
+                            secondulObj.append(thirdliObj);
+                        }
+                    }
+                    divObj.find('.lv1_submenu_container').append(secondulObj);
+                   }
+                   liObj.append(divObj);
+                
+                }
+                liObj.hover(function(){
+                    var $this = $(this);
+                    $this.addClass('on');
+                    $this.find('.lv1_submenu').stop(true,true).slideDown(200);
+                },function(){
+                    var $this = $(this);
+                    $this.removeClass('on');
+                    $this.find('.lv1_submenu').stop(true,true).slideUp(200);
+                })
+                ulObj.append(liObj);
+             }
+            $("#js_nav").append(ulObj);
+        }
+    })
+</script>
+</html>

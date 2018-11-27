@@ -1,0 +1,54 @@
+
+<%@page errorPage="/error.jsp"%>
+<%
+	String contextPath = request.getContextPath();
+	
+	// 如果要设置客户端缓存页面，注释以下三行
+	response.setHeader("Pragma", "no-cache");// No-Cache
+	response.setHeader("Cache-Control", "No-Store"); 
+	response.setDateHeader("Expires", 0);
+%>
+<meta http-equiv="progma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<script type="text/javascript" src="${pageContext.request.contextPath }/common/js/md5.js"></script>
+<script type="text/javascript" src="../js/bootstrap-treeview.js"></script>
+<script type="text/javascript" src="../js/select2/js/select2.full.js"></script>
+<script type="text/javascript" src="../js/select2.js"></script>
+<script type="text/javascript" src="../js/date-format.js"></script>
+<script type="text/javascript" src="../js/assets/index.js"></script>
+<script type="text/javascript" src="../js/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="../js/ga.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap-table/src/bootstrap-editable.js"></script>
+<script type="text/javascript" src="../js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap-table/src/bootstrap-table-editable.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap-table/src/tableExport.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap-table/src/bootstrap-table-export.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap-table/bootstrap-table.js"></script>
+<script type="text/javascript" src="../js/assets/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/assets/jquery.min.js"></script>
+
+<link rel="stylesheet" href="../js/select2/css/select2.min.css" type="text/css"></link>
+<link rel="stylesheet" href="../css/zTreeStyle/metro.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/assets/examples.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/assets/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/assets/bootstrap-table/bootstrap-table.css" type="text/css"></link>
+<link rel="stylesheet" href="../js/assets/bootstrap/css/bootstrap.css" type="text/css"></link>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%-- <script>
+	nui.context='<%=contextPath %>';
+	nui.DataTree.prototype.dataField='data';//兼容改造		
+</script> --%>

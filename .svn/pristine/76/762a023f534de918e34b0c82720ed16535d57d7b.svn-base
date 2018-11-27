@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormconfigMstTabMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormconfigMstTab" >
+    <id column="MST_TAB_ID" property="mstTabId" jdbcType="DECIMAL" />
+    <result column="MST_TAB_FORM_ID" property="mstTabFormId" jdbcType="DECIMAL" />
+    <result column="MST_TAB_MAIN_FORM_ID" property="mstTabMainFormId" jdbcType="DECIMAL" />
+    <result column="MST_TAB_MAIN_FORM_HEIGHT" property="mstTabMainFormHeight" jdbcType="VARCHAR" />
+    <result column="MST_TAB_DETAIL_HEIGHT" property="mstTabDetailHeight" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+    <result column="FORM_SHOW_ALL" property="formShowAll" jdbcType="VARCHAR" />
+    <result column="VERTICALTYPE" property="verticaltype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MST_TAB_ID, MST_TAB_FORM_ID, MST_TAB_MAIN_FORM_ID, MST_TAB_MAIN_FORM_HEIGHT, MST_TAB_DETAIL_HEIGHT, 
+    OPERATOR_NAME, OPERATOR_TIME, FORM_SHOW_ALL, VERTICALTYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_MST_TAB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORMCONFIG_MST_TAB
+    where MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORMCONFIG_MST_TAB
+    where MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabExample" >
+    delete from SYS_FORMCONFIG_MST_TAB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTab" useGeneratedKeys="true" keyProperty="mstTabId" keyColumn="MST_TAB_ID">
+    insert into SYS_FORMCONFIG_MST_TAB ( MST_TAB_FORM_ID, MST_TAB_MAIN_FORM_ID, 
+      MST_TAB_MAIN_FORM_HEIGHT, MST_TAB_DETAIL_HEIGHT, 
+      OPERATOR_NAME, OPERATOR_TIME, FORM_SHOW_ALL, 
+      VERTICALTYPE)
+    values (#{mstTabFormId,jdbcType=DECIMAL}, #{mstTabMainFormId,jdbcType=DECIMAL}, 
+      #{mstTabMainFormHeight,jdbcType=VARCHAR}, #{mstTabDetailHeight,jdbcType=VARCHAR}, 
+      #{operatorName,jdbcType=VARCHAR}, #{operatorTime,jdbcType=DATE}, #{formShowAll,jdbcType=VARCHAR}, 
+      #{verticaltype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTab" >
+    insert into SYS_FORMCONFIG_MST_TAB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mstTabId != null" >
+        MST_TAB_ID,
+      </if>
+      <if test="mstTabFormId != null" >
+        MST_TAB_FORM_ID,
+      </if>
+      <if test="mstTabMainFormId != null" >
+        MST_TAB_MAIN_FORM_ID,
+      </if>
+      <if test="mstTabMainFormHeight != null" >
+        MST_TAB_MAIN_FORM_HEIGHT,
+      </if>
+      <if test="mstTabDetailHeight != null" >
+        MST_TAB_DETAIL_HEIGHT,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="formShowAll != null" >
+        FORM_SHOW_ALL,
+      </if>
+      <if test="verticaltype != null" >
+        VERTICALTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mstTabId != null" >
+        #{mstTabId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabFormId != null" >
+        #{mstTabFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabMainFormId != null" >
+        #{mstTabMainFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabMainFormHeight != null" >
+        #{mstTabMainFormHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="mstTabDetailHeight != null" >
+        #{mstTabDetailHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="formShowAll != null" >
+        #{formShowAll,jdbcType=VARCHAR},
+      </if>
+      <if test="verticaltype != null" >
+        #{verticaltype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTabExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORMCONFIG_MST_TAB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORMCONFIG_MST_TAB
+    <set >
+      <if test="record.mstTabId != null" >
+        MST_TAB_ID = #{record.mstTabId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mstTabFormId != null" >
+        MST_TAB_FORM_ID = #{record.mstTabFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mstTabMainFormId != null" >
+        MST_TAB_MAIN_FORM_ID = #{record.mstTabMainFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mstTabMainFormHeight != null" >
+        MST_TAB_MAIN_FORM_HEIGHT = #{record.mstTabMainFormHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mstTabDetailHeight != null" >
+        MST_TAB_DETAIL_HEIGHT = #{record.mstTabDetailHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+      <if test="record.formShowAll != null" >
+        FORM_SHOW_ALL = #{record.formShowAll,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verticaltype != null" >
+        VERTICALTYPE = #{record.verticaltype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORMCONFIG_MST_TAB
+    set MST_TAB_ID = #{record.mstTabId,jdbcType=DECIMAL},
+      MST_TAB_FORM_ID = #{record.mstTabFormId,jdbcType=DECIMAL},
+      MST_TAB_MAIN_FORM_ID = #{record.mstTabMainFormId,jdbcType=DECIMAL},
+      MST_TAB_MAIN_FORM_HEIGHT = #{record.mstTabMainFormHeight,jdbcType=VARCHAR},
+      MST_TAB_DETAIL_HEIGHT = #{record.mstTabDetailHeight,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      FORM_SHOW_ALL = #{record.formShowAll,jdbcType=VARCHAR},
+      VERTICALTYPE = #{record.verticaltype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTab" >
+    update SYS_FORMCONFIG_MST_TAB
+    <set >
+      <if test="mstTabFormId != null" >
+        MST_TAB_FORM_ID = #{mstTabFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabMainFormId != null" >
+        MST_TAB_MAIN_FORM_ID = #{mstTabMainFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="mstTabMainFormHeight != null" >
+        MST_TAB_MAIN_FORM_HEIGHT = #{mstTabMainFormHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="mstTabDetailHeight != null" >
+        MST_TAB_DETAIL_HEIGHT = #{mstTabDetailHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="formShowAll != null" >
+        FORM_SHOW_ALL = #{formShowAll,jdbcType=VARCHAR},
+      </if>
+      <if test="verticaltype != null" >
+        VERTICALTYPE = #{verticaltype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormconfigMstTab" >
+    update SYS_FORMCONFIG_MST_TAB
+    set MST_TAB_FORM_ID = #{mstTabFormId,jdbcType=DECIMAL},
+      MST_TAB_MAIN_FORM_ID = #{mstTabMainFormId,jdbcType=DECIMAL},
+      MST_TAB_MAIN_FORM_HEIGHT = #{mstTabMainFormHeight,jdbcType=VARCHAR},
+      MST_TAB_DETAIL_HEIGHT = #{mstTabDetailHeight,jdbcType=VARCHAR},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      FORM_SHOW_ALL = #{formShowAll,jdbcType=VARCHAR},
+      VERTICALTYPE = #{verticaltype,jdbcType=VARCHAR}
+    where MST_TAB_ID = #{mstTabId,jdbcType=DECIMAL}
+  </update>
+</mapper>

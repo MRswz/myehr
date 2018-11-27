@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.FormChartsBarColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.FormChartsBarColumn" >
+    <id column="charts_bar_column_id" property="chartsBarColumnId" jdbcType="DECIMAL" />
+    <result column="select_form_column_id" property="selectFormColumnId" jdbcType="DECIMAL" />
+    <result column="select_form_column_table" property="selectFormColumnTable" jdbcType="NVARCHAR" />
+    <result column="select_form_column_name" property="selectFormColumnName" jdbcType="NVARCHAR" />
+    <result column="select_form_column_lable" property="selectFormColumnLable" jdbcType="NVARCHAR" />
+    <result column="charts_bar_column_type" property="chartsBarColumnType" jdbcType="NVARCHAR" />
+    <result column="charts_bar_column_color" property="chartsBarColumnColor" jdbcType="NVARCHAR" />
+    <result column="charts_form_id" property="chartsFormId" jdbcType="DECIMAL" />
+    <result column="charts_pie_type" property="chartsPieType" jdbcType="NVARCHAR" />
+    <result column="charts_bar_type" property="chartsBarType" jdbcType="NVARCHAR" />
+    <result column="pie_outer_ring_diameter" property="pieOuterRingDiameter" jdbcType="NVARCHAR" />
+    <result column="pie_inner_ring_diameter" property="pieInnerRingDiameter" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    charts_bar_column_id, select_form_column_id, select_form_column_table, select_form_column_name, 
+    select_form_column_lable, charts_bar_column_type, charts_bar_column_color, charts_form_id, 
+    charts_pie_type, charts_bar_type, pie_outer_ring_diameter, pie_inner_ring_diameter
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from form_charts_bar_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from form_charts_bar_column
+    where charts_bar_column_id = #{chartsBarColumnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from form_charts_bar_column
+    where charts_bar_column_id = #{chartsBarColumnId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumnExample" >
+    delete from form_charts_bar_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumn" >
+    insert into form_charts_bar_column (select_form_column_id, 
+      select_form_column_table, select_form_column_name, 
+      select_form_column_lable, charts_bar_column_type, 
+      charts_bar_column_color, charts_form_id, charts_pie_type, 
+      charts_bar_type, pie_outer_ring_diameter, 
+      pie_inner_ring_diameter)
+    values (#{selectFormColumnId,jdbcType=DECIMAL}, 
+      #{selectFormColumnTable,jdbcType=NVARCHAR}, #{selectFormColumnName,jdbcType=NVARCHAR}, 
+      #{selectFormColumnLable,jdbcType=NVARCHAR}, #{chartsBarColumnType,jdbcType=NVARCHAR}, 
+      #{chartsBarColumnColor,jdbcType=NVARCHAR}, #{chartsFormId,jdbcType=DECIMAL}, #{chartsPieType,jdbcType=NVARCHAR}, 
+      #{chartsBarType,jdbcType=NVARCHAR}, #{pieOuterRingDiameter,jdbcType=NVARCHAR}, 
+      #{pieInnerRingDiameter,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumn" >
+    insert into form_charts_bar_column
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chartsBarColumnId != null" >
+        charts_bar_column_id,
+      </if>
+      <if test="selectFormColumnId != null" >
+        select_form_column_id,
+      </if>
+      <if test="selectFormColumnTable != null" >
+        select_form_column_table,
+      </if>
+      <if test="selectFormColumnName != null" >
+        select_form_column_name,
+      </if>
+      <if test="selectFormColumnLable != null" >
+        select_form_column_lable,
+      </if>
+      <if test="chartsBarColumnType != null" >
+        charts_bar_column_type,
+      </if>
+      <if test="chartsBarColumnColor != null" >
+        charts_bar_column_color,
+      </if>
+      <if test="chartsFormId != null" >
+        charts_form_id,
+      </if>
+      <if test="chartsPieType != null" >
+        charts_pie_type,
+      </if>
+      <if test="chartsBarType != null" >
+        charts_bar_type,
+      </if>
+      <if test="pieOuterRingDiameter != null" >
+        pie_outer_ring_diameter,
+      </if>
+      <if test="pieInnerRingDiameter != null" >
+        pie_inner_ring_diameter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chartsBarColumnId != null" >
+        #{chartsBarColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="selectFormColumnId != null" >
+        #{selectFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="selectFormColumnTable != null" >
+        #{selectFormColumnTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="selectFormColumnName != null" >
+        #{selectFormColumnName,jdbcType=NVARCHAR},
+      </if>
+      <if test="selectFormColumnLable != null" >
+        #{selectFormColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarColumnType != null" >
+        #{chartsBarColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarColumnColor != null" >
+        #{chartsBarColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsFormId != null" >
+        #{chartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="chartsPieType != null" >
+        #{chartsPieType,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarType != null" >
+        #{chartsBarType,jdbcType=NVARCHAR},
+      </if>
+      <if test="pieOuterRingDiameter != null" >
+        #{pieOuterRingDiameter,jdbcType=NVARCHAR},
+      </if>
+      <if test="pieInnerRingDiameter != null" >
+        #{pieInnerRingDiameter,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumnExample" resultType="java.lang.Integer" >
+    select count(*) from form_charts_bar_column
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update form_charts_bar_column
+    <set >
+      <if test="record.chartsBarColumnId != null" >
+        charts_bar_column_id = #{record.chartsBarColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.selectFormColumnId != null" >
+        select_form_column_id = #{record.selectFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.selectFormColumnTable != null" >
+        select_form_column_table = #{record.selectFormColumnTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.selectFormColumnName != null" >
+        select_form_column_name = #{record.selectFormColumnName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.selectFormColumnLable != null" >
+        select_form_column_lable = #{record.selectFormColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.chartsBarColumnType != null" >
+        charts_bar_column_type = #{record.chartsBarColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.chartsBarColumnColor != null" >
+        charts_bar_column_color = #{record.chartsBarColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.chartsFormId != null" >
+        charts_form_id = #{record.chartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chartsPieType != null" >
+        charts_pie_type = #{record.chartsPieType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.chartsBarType != null" >
+        charts_bar_type = #{record.chartsBarType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pieOuterRingDiameter != null" >
+        pie_outer_ring_diameter = #{record.pieOuterRingDiameter,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pieInnerRingDiameter != null" >
+        pie_inner_ring_diameter = #{record.pieInnerRingDiameter,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update form_charts_bar_column
+    set charts_bar_column_id = #{record.chartsBarColumnId,jdbcType=DECIMAL},
+      select_form_column_id = #{record.selectFormColumnId,jdbcType=DECIMAL},
+      select_form_column_table = #{record.selectFormColumnTable,jdbcType=NVARCHAR},
+      select_form_column_name = #{record.selectFormColumnName,jdbcType=NVARCHAR},
+      select_form_column_lable = #{record.selectFormColumnLable,jdbcType=NVARCHAR},
+      charts_bar_column_type = #{record.chartsBarColumnType,jdbcType=NVARCHAR},
+      charts_bar_column_color = #{record.chartsBarColumnColor,jdbcType=NVARCHAR},
+      charts_form_id = #{record.chartsFormId,jdbcType=DECIMAL},
+      charts_pie_type = #{record.chartsPieType,jdbcType=NVARCHAR},
+      charts_bar_type = #{record.chartsBarType,jdbcType=NVARCHAR},
+      pie_outer_ring_diameter = #{record.pieOuterRingDiameter,jdbcType=NVARCHAR},
+      pie_inner_ring_diameter = #{record.pieInnerRingDiameter,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumn" >
+    update form_charts_bar_column
+    <set >
+      <if test="selectFormColumnId != null" >
+        select_form_column_id = #{selectFormColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="selectFormColumnTable != null" >
+        select_form_column_table = #{selectFormColumnTable,jdbcType=NVARCHAR},
+      </if>
+      <if test="selectFormColumnName != null" >
+        select_form_column_name = #{selectFormColumnName,jdbcType=NVARCHAR},
+      </if>
+      <if test="selectFormColumnLable != null" >
+        select_form_column_lable = #{selectFormColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarColumnType != null" >
+        charts_bar_column_type = #{chartsBarColumnType,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarColumnColor != null" >
+        charts_bar_column_color = #{chartsBarColumnColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsFormId != null" >
+        charts_form_id = #{chartsFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="chartsPieType != null" >
+        charts_pie_type = #{chartsPieType,jdbcType=NVARCHAR},
+      </if>
+      <if test="chartsBarType != null" >
+        charts_bar_type = #{chartsBarType,jdbcType=NVARCHAR},
+      </if>
+      <if test="pieOuterRingDiameter != null" >
+        pie_outer_ring_diameter = #{pieOuterRingDiameter,jdbcType=NVARCHAR},
+      </if>
+      <if test="pieInnerRingDiameter != null" >
+        pie_inner_ring_diameter = #{pieInnerRingDiameter,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where charts_bar_column_id = #{chartsBarColumnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.FormChartsBarColumn" >
+    update form_charts_bar_column
+    set select_form_column_id = #{selectFormColumnId,jdbcType=DECIMAL},
+      select_form_column_table = #{selectFormColumnTable,jdbcType=NVARCHAR},
+      select_form_column_name = #{selectFormColumnName,jdbcType=NVARCHAR},
+      select_form_column_lable = #{selectFormColumnLable,jdbcType=NVARCHAR},
+      charts_bar_column_type = #{chartsBarColumnType,jdbcType=NVARCHAR},
+      charts_bar_column_color = #{chartsBarColumnColor,jdbcType=NVARCHAR},
+      charts_form_id = #{chartsFormId,jdbcType=DECIMAL},
+      charts_pie_type = #{chartsPieType,jdbcType=NVARCHAR},
+      charts_bar_type = #{chartsBarType,jdbcType=NVARCHAR},
+      pie_outer_ring_diameter = #{pieOuterRingDiameter,jdbcType=NVARCHAR},
+      pie_inner_ring_diameter = #{pieInnerRingDiameter,jdbcType=NVARCHAR}
+    where charts_bar_column_id = #{chartsBarColumnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

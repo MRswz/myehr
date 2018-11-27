@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.calendar.AttendShifttypeMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.calendar.AttendShifttype" >
+    <id column="as_id" property="asId" jdbcType="INTEGER" />
+    <result column="as_code" property="asCode" jdbcType="VARCHAR" />
+    <result column="as_cname" property="asCname" jdbcType="VARCHAR" />
+    <result column="as_ename" property="asEname" jdbcType="VARCHAR" />
+    <result column="as_worktimes" property="asWorktimes" jdbcType="DECIMAL" />
+    <result column="as_begintime1" property="asBegintime1" jdbcType="VARCHAR" />
+    <result column="as_endtime1" property="asEndtime1" jdbcType="VARCHAR" />
+    <result column="as_begintime2" property="asBegintime2" jdbcType="VARCHAR" />
+    <result column="as_endtime2" property="asEndtime2" jdbcType="VARCHAR" />
+    <result column="as_cardtimes" property="asCardtimes" jdbcType="INTEGER" />
+    <result column="as_scanbegintime" property="asScanbegintime" jdbcType="VARCHAR" />
+    <result column="as_scanendtime" property="asScanendtime" jdbcType="VARCHAR" />
+    <result column="as_latemiu" property="asLatemiu" jdbcType="INTEGER" />
+    <result column="as_lateabs" property="asLateabs" jdbcType="INTEGER" />
+    <result column="as_earlymiu" property="asEarlymiu" jdbcType="INTEGER" />
+    <result column="as_earlabs" property="asEarlabs" jdbcType="INTEGER" />
+    <result column="as_flextime" property="asFlextime" jdbcType="INTEGER" />
+    <result column="as_holidyot3" property="asHolidyot3" jdbcType="INTEGER" />
+    <result column="as_valid" property="asValid" jdbcType="INTEGER" />
+    <result column="as_remark" property="asRemark" jdbcType="VARCHAR" />
+    <result column="restdate" property="restdate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    as_id, as_code, as_cname, as_ename, as_worktimes, as_begintime1, as_endtime1, as_begintime2, 
+    as_endtime2, as_cardtimes, as_scanbegintime, as_scanendtime, as_latemiu, as_lateabs, 
+    as_earlymiu, as_earlabs, as_flextime, as_holidyot3, as_valid, as_remark, restdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.calendar.AttendShifttypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ATTEND_SHIFTTYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ATTEND_SHIFTTYPE
+    where as_id = #{asId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ATTEND_SHIFTTYPE
+    where as_id = #{asId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.calendar.AttendShifttypeExample" >
+    delete from ATTEND_SHIFTTYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.calendar.AttendShifttype" >
+    insert into ATTEND_SHIFTTYPE (as_code, as_cname, 
+      as_ename, as_worktimes, as_begintime1, 
+      as_endtime1, as_begintime2, as_endtime2, 
+      as_cardtimes, as_scanbegintime, as_scanendtime, 
+      as_latemiu, as_lateabs, as_earlymiu, 
+      as_earlabs, as_flextime, as_holidyot3, 
+      as_valid, as_remark, restdate
+      )
+    values (#{asCode,jdbcType=VARCHAR}, #{asCname,jdbcType=VARCHAR}, 
+      #{asEname,jdbcType=VARCHAR}, #{asWorktimes,jdbcType=DECIMAL}, #{asBegintime1,jdbcType=VARCHAR}, 
+      #{asEndtime1,jdbcType=VARCHAR}, #{asBegintime2,jdbcType=VARCHAR}, #{asEndtime2,jdbcType=VARCHAR}, 
+      #{asCardtimes,jdbcType=INTEGER}, #{asScanbegintime,jdbcType=VARCHAR}, #{asScanendtime,jdbcType=VARCHAR}, 
+      #{asLatemiu,jdbcType=INTEGER}, #{asLateabs,jdbcType=INTEGER}, #{asEarlymiu,jdbcType=INTEGER}, 
+      #{asEarlabs,jdbcType=INTEGER}, #{asFlextime,jdbcType=INTEGER}, #{asHolidyot3,jdbcType=INTEGER}, 
+      #{asValid,jdbcType=INTEGER}, #{asRemark,jdbcType=VARCHAR}, #{restdate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.calendar.AttendShifttype" >
+    insert into ATTEND_SHIFTTYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="asId != null" >
+        as_id,
+      </if>
+      <if test="asCode != null" >
+        as_code,
+      </if>
+      <if test="asCname != null" >
+        as_cname,
+      </if>
+      <if test="asEname != null" >
+        as_ename,
+      </if>
+      <if test="asWorktimes != null" >
+        as_worktimes,
+      </if>
+      <if test="asBegintime1 != null" >
+        as_begintime1,
+      </if>
+      <if test="asEndtime1 != null" >
+        as_endtime1,
+      </if>
+      <if test="asBegintime2 != null" >
+        as_begintime2,
+      </if>
+      <if test="asEndtime2 != null" >
+        as_endtime2,
+      </if>
+      <if test="asCardtimes != null" >
+        as_cardtimes,
+      </if>
+      <if test="asScanbegintime != null" >
+        as_scanbegintime,
+      </if>
+      <if test="asScanendtime != null" >
+        as_scanendtime,
+      </if>
+      <if test="asLatemiu != null" >
+        as_latemiu,
+      </if>
+      <if test="asLateabs != null" >
+        as_lateabs,
+      </if>
+      <if test="asEarlymiu != null" >
+        as_earlymiu,
+      </if>
+      <if test="asEarlabs != null" >
+        as_earlabs,
+      </if>
+      <if test="asFlextime != null" >
+        as_flextime,
+      </if>
+      <if test="asHolidyot3 != null" >
+        as_holidyot3,
+      </if>
+      <if test="asValid != null" >
+        as_valid,
+      </if>
+      <if test="asRemark != null" >
+        as_remark,
+      </if>
+      <if test="restdate != null" >
+        restdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="asId != null" >
+        #{asId,jdbcType=INTEGER},
+      </if>
+      <if test="asCode != null" >
+        #{asCode,jdbcType=VARCHAR},
+      </if>
+      <if test="asCname != null" >
+        #{asCname,jdbcType=VARCHAR},
+      </if>
+      <if test="asEname != null" >
+        #{asEname,jdbcType=VARCHAR},
+      </if>
+      <if test="asWorktimes != null" >
+        #{asWorktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="asBegintime1 != null" >
+        #{asBegintime1,jdbcType=VARCHAR},
+      </if>
+      <if test="asEndtime1 != null" >
+        #{asEndtime1,jdbcType=VARCHAR},
+      </if>
+      <if test="asBegintime2 != null" >
+        #{asBegintime2,jdbcType=VARCHAR},
+      </if>
+      <if test="asEndtime2 != null" >
+        #{asEndtime2,jdbcType=VARCHAR},
+      </if>
+      <if test="asCardtimes != null" >
+        #{asCardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="asScanbegintime != null" >
+        #{asScanbegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="asScanendtime != null" >
+        #{asScanendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="asLatemiu != null" >
+        #{asLatemiu,jdbcType=INTEGER},
+      </if>
+      <if test="asLateabs != null" >
+        #{asLateabs,jdbcType=INTEGER},
+      </if>
+      <if test="asEarlymiu != null" >
+        #{asEarlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="asEarlabs != null" >
+        #{asEarlabs,jdbcType=INTEGER},
+      </if>
+      <if test="asFlextime != null" >
+        #{asFlextime,jdbcType=INTEGER},
+      </if>
+      <if test="asHolidyot3 != null" >
+        #{asHolidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="asValid != null" >
+        #{asValid,jdbcType=INTEGER},
+      </if>
+      <if test="asRemark != null" >
+        #{asRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="restdate != null" >
+        #{restdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.calendar.AttendShifttypeExample" resultType="java.lang.Integer" >
+    select count(*) from ATTEND_SHIFTTYPE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ATTEND_SHIFTTYPE
+    <set >
+      <if test="record.asId != null" >
+        as_id = #{record.asId,jdbcType=INTEGER},
+      </if>
+      <if test="record.asCode != null" >
+        as_code = #{record.asCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asCname != null" >
+        as_cname = #{record.asCname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asEname != null" >
+        as_ename = #{record.asEname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asWorktimes != null" >
+        as_worktimes = #{record.asWorktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="record.asBegintime1 != null" >
+        as_begintime1 = #{record.asBegintime1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asEndtime1 != null" >
+        as_endtime1 = #{record.asEndtime1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asBegintime2 != null" >
+        as_begintime2 = #{record.asBegintime2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asEndtime2 != null" >
+        as_endtime2 = #{record.asEndtime2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asCardtimes != null" >
+        as_cardtimes = #{record.asCardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.asScanbegintime != null" >
+        as_scanbegintime = #{record.asScanbegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asScanendtime != null" >
+        as_scanendtime = #{record.asScanendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.asLatemiu != null" >
+        as_latemiu = #{record.asLatemiu,jdbcType=INTEGER},
+      </if>
+      <if test="record.asLateabs != null" >
+        as_lateabs = #{record.asLateabs,jdbcType=INTEGER},
+      </if>
+      <if test="record.asEarlymiu != null" >
+        as_earlymiu = #{record.asEarlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="record.asEarlabs != null" >
+        as_earlabs = #{record.asEarlabs,jdbcType=INTEGER},
+      </if>
+      <if test="record.asFlextime != null" >
+        as_flextime = #{record.asFlextime,jdbcType=INTEGER},
+      </if>
+      <if test="record.asHolidyot3 != null" >
+        as_holidyot3 = #{record.asHolidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="record.asValid != null" >
+        as_valid = #{record.asValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.asRemark != null" >
+        as_remark = #{record.asRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.restdate != null" >
+        restdate = #{record.restdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ATTEND_SHIFTTYPE
+    set as_id = #{record.asId,jdbcType=INTEGER},
+      as_code = #{record.asCode,jdbcType=VARCHAR},
+      as_cname = #{record.asCname,jdbcType=VARCHAR},
+      as_ename = #{record.asEname,jdbcType=VARCHAR},
+      as_worktimes = #{record.asWorktimes,jdbcType=DECIMAL},
+      as_begintime1 = #{record.asBegintime1,jdbcType=VARCHAR},
+      as_endtime1 = #{record.asEndtime1,jdbcType=VARCHAR},
+      as_begintime2 = #{record.asBegintime2,jdbcType=VARCHAR},
+      as_endtime2 = #{record.asEndtime2,jdbcType=VARCHAR},
+      as_cardtimes = #{record.asCardtimes,jdbcType=INTEGER},
+      as_scanbegintime = #{record.asScanbegintime,jdbcType=VARCHAR},
+      as_scanendtime = #{record.asScanendtime,jdbcType=VARCHAR},
+      as_latemiu = #{record.asLatemiu,jdbcType=INTEGER},
+      as_lateabs = #{record.asLateabs,jdbcType=INTEGER},
+      as_earlymiu = #{record.asEarlymiu,jdbcType=INTEGER},
+      as_earlabs = #{record.asEarlabs,jdbcType=INTEGER},
+      as_flextime = #{record.asFlextime,jdbcType=INTEGER},
+      as_holidyot3 = #{record.asHolidyot3,jdbcType=INTEGER},
+      as_valid = #{record.asValid,jdbcType=INTEGER},
+      as_remark = #{record.asRemark,jdbcType=VARCHAR},
+      restdate = #{record.restdate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.calendar.AttendShifttype" >
+    update ATTEND_SHIFTTYPE
+    <set >
+      <if test="asCode != null" >
+        as_code = #{asCode,jdbcType=VARCHAR},
+      </if>
+      <if test="asCname != null" >
+        as_cname = #{asCname,jdbcType=VARCHAR},
+      </if>
+      <if test="asEname != null" >
+        as_ename = #{asEname,jdbcType=VARCHAR},
+      </if>
+      <if test="asWorktimes != null" >
+        as_worktimes = #{asWorktimes,jdbcType=DECIMAL},
+      </if>
+      <if test="asBegintime1 != null" >
+        as_begintime1 = #{asBegintime1,jdbcType=VARCHAR},
+      </if>
+      <if test="asEndtime1 != null" >
+        as_endtime1 = #{asEndtime1,jdbcType=VARCHAR},
+      </if>
+      <if test="asBegintime2 != null" >
+        as_begintime2 = #{asBegintime2,jdbcType=VARCHAR},
+      </if>
+      <if test="asEndtime2 != null" >
+        as_endtime2 = #{asEndtime2,jdbcType=VARCHAR},
+      </if>
+      <if test="asCardtimes != null" >
+        as_cardtimes = #{asCardtimes,jdbcType=INTEGER},
+      </if>
+      <if test="asScanbegintime != null" >
+        as_scanbegintime = #{asScanbegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="asScanendtime != null" >
+        as_scanendtime = #{asScanendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="asLatemiu != null" >
+        as_latemiu = #{asLatemiu,jdbcType=INTEGER},
+      </if>
+      <if test="asLateabs != null" >
+        as_lateabs = #{asLateabs,jdbcType=INTEGER},
+      </if>
+      <if test="asEarlymiu != null" >
+        as_earlymiu = #{asEarlymiu,jdbcType=INTEGER},
+      </if>
+      <if test="asEarlabs != null" >
+        as_earlabs = #{asEarlabs,jdbcType=INTEGER},
+      </if>
+      <if test="asFlextime != null" >
+        as_flextime = #{asFlextime,jdbcType=INTEGER},
+      </if>
+      <if test="asHolidyot3 != null" >
+        as_holidyot3 = #{asHolidyot3,jdbcType=INTEGER},
+      </if>
+      <if test="asValid != null" >
+        as_valid = #{asValid,jdbcType=INTEGER},
+      </if>
+      <if test="asRemark != null" >
+        as_remark = #{asRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="restdate != null" >
+        restdate = #{restdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where as_id = #{asId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.calendar.AttendShifttype" >
+    update ATTEND_SHIFTTYPE
+    set as_code = #{asCode,jdbcType=VARCHAR},
+      as_cname = #{asCname,jdbcType=VARCHAR},
+      as_ename = #{asEname,jdbcType=VARCHAR},
+      as_worktimes = #{asWorktimes,jdbcType=DECIMAL},
+      as_begintime1 = #{asBegintime1,jdbcType=VARCHAR},
+      as_endtime1 = #{asEndtime1,jdbcType=VARCHAR},
+      as_begintime2 = #{asBegintime2,jdbcType=VARCHAR},
+      as_endtime2 = #{asEndtime2,jdbcType=VARCHAR},
+      as_cardtimes = #{asCardtimes,jdbcType=INTEGER},
+      as_scanbegintime = #{asScanbegintime,jdbcType=VARCHAR},
+      as_scanendtime = #{asScanendtime,jdbcType=VARCHAR},
+      as_latemiu = #{asLatemiu,jdbcType=INTEGER},
+      as_lateabs = #{asLateabs,jdbcType=INTEGER},
+      as_earlymiu = #{asEarlymiu,jdbcType=INTEGER},
+      as_earlabs = #{asEarlabs,jdbcType=INTEGER},
+      as_flextime = #{asFlextime,jdbcType=INTEGER},
+      as_holidyot3 = #{asHolidyot3,jdbcType=INTEGER},
+      as_valid = #{asValid,jdbcType=INTEGER},
+      as_remark = #{asRemark,jdbcType=VARCHAR},
+      restdate = #{restdate,jdbcType=VARCHAR}
+    where as_id = #{asId,jdbcType=INTEGER}
+  </update>
+</mapper>

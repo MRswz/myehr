@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.SysTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.SysTemplate" >
+    <id column="TEMPLATE_ID" property="templateId" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_CODE" property="templateCode" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_NAME" property="templateName" jdbcType="VARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="DATE" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_FOLDER_ID" property="templateFolderId" jdbcType="DECIMAL" />
+    <result column="TEMPLATE_SQL" property="templateSql" jdbcType="VARCHAR" />
+    <result column="PC_EDIT_CARD_SHOW" property="pcEditCardShow" jdbcType="VARCHAR" />
+    <result column="PC_GRID_SHOW" property="pcGridShow" jdbcType="VARCHAR" />
+    <result column="APP_GRID_SHOW" property="appGridShow" jdbcType="VARCHAR" />
+    <result column="PC_ADD_CARD_SHOW" property="pcAddCardShow" jdbcType="VARCHAR" />
+    <result column="APP_ADD_CARD_SHOW" property="appAddCardShow" jdbcType="VARCHAR" />
+    <result column="APP_EDIT_CARD_SHOW" property="appEditCardShow" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEMPLATE_ID, TEMPLATE_CODE, TEMPLATE_NAME, OPERATOR_TIME, OPERATOR_NAME, TEMPLATE_FOLDER_ID, 
+    TEMPLATE_SQL, PC_EDIT_CARD_SHOW, PC_GRID_SHOW, APP_GRID_SHOW, PC_ADD_CARD_SHOW, APP_ADD_CARD_SHOW, 
+    APP_EDIT_CARD_SHOW
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.SysTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateExample" >
+    delete from SYS_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.SysTemplate" >
+    insert into SYS_TEMPLATE ( TEMPLATE_CODE, TEMPLATE_NAME, 
+      OPERATOR_TIME, OPERATOR_NAME, TEMPLATE_FOLDER_ID, 
+      TEMPLATE_SQL, PC_EDIT_CARD_SHOW, PC_GRID_SHOW, 
+      APP_GRID_SHOW, PC_ADD_CARD_SHOW, APP_ADD_CARD_SHOW, 
+      APP_EDIT_CARD_SHOW)
+    values ( #{templateCode,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, 
+      #{operatorTime,jdbcType=DATE}, #{operatorName,jdbcType=VARCHAR}, #{templateFolderId,jdbcType=DECIMAL}, 
+      #{templateSql,jdbcType=VARCHAR}, #{pcEditCardShow,jdbcType=VARCHAR}, #{pcGridShow,jdbcType=VARCHAR}, 
+      #{appGridShow,jdbcType=VARCHAR}, #{pcAddCardShow,jdbcType=VARCHAR}, #{appAddCardShow,jdbcType=VARCHAR}, 
+      #{appEditCardShow,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplate" >
+    insert into SYS_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="templateCode != null" >
+        TEMPLATE_CODE,
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="templateFolderId != null" >
+        TEMPLATE_FOLDER_ID,
+      </if>
+      <if test="templateSql != null" >
+        TEMPLATE_SQL,
+      </if>
+      <if test="pcEditCardShow != null" >
+        PC_EDIT_CARD_SHOW,
+      </if>
+      <if test="pcGridShow != null" >
+        PC_GRID_SHOW,
+      </if>
+      <if test="appGridShow != null" >
+        APP_GRID_SHOW,
+      </if>
+      <if test="pcAddCardShow != null" >
+        PC_ADD_CARD_SHOW,
+      </if>
+      <if test="appAddCardShow != null" >
+        APP_ADD_CARD_SHOW,
+      </if>
+      <if test="appEditCardShow != null" >
+        APP_EDIT_CARD_SHOW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateCode != null" >
+        #{templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateFolderId != null" >
+        #{templateFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateSql != null" >
+        #{templateSql,jdbcType=VARCHAR},
+      </if>
+      <if test="pcEditCardShow != null" >
+        #{pcEditCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="pcGridShow != null" >
+        #{pcGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appGridShow != null" >
+        #{appGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="pcAddCardShow != null" >
+        #{pcAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appAddCardShow != null" >
+        #{appAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appEditCardShow != null" >
+        #{appEditCardShow,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.SysTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_TEMPLATE
+    <set >
+      <if test="record.templateId != null" >
+        TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateCode != null" >
+        TEMPLATE_CODE = #{record.templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateName != null" >
+        TEMPLATE_NAME = #{record.templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateFolderId != null" >
+        TEMPLATE_FOLDER_ID = #{record.templateFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.templateSql != null" >
+        TEMPLATE_SQL = #{record.templateSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcEditCardShow != null" >
+        PC_EDIT_CARD_SHOW = #{record.pcEditCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcGridShow != null" >
+        PC_GRID_SHOW = #{record.pcGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appGridShow != null" >
+        APP_GRID_SHOW = #{record.appGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcAddCardShow != null" >
+        PC_ADD_CARD_SHOW = #{record.pcAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appAddCardShow != null" >
+        APP_ADD_CARD_SHOW = #{record.appAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appEditCardShow != null" >
+        APP_EDIT_CARD_SHOW = #{record.appEditCardShow,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_TEMPLATE
+    set TEMPLATE_ID = #{record.templateId,jdbcType=DECIMAL},
+      TEMPLATE_CODE = #{record.templateCode,jdbcType=VARCHAR},
+      TEMPLATE_NAME = #{record.templateName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=DATE},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=VARCHAR},
+      TEMPLATE_FOLDER_ID = #{record.templateFolderId,jdbcType=DECIMAL},
+      TEMPLATE_SQL = #{record.templateSql,jdbcType=VARCHAR},
+      PC_EDIT_CARD_SHOW = #{record.pcEditCardShow,jdbcType=VARCHAR},
+      PC_GRID_SHOW = #{record.pcGridShow,jdbcType=VARCHAR},
+      APP_GRID_SHOW = #{record.appGridShow,jdbcType=VARCHAR},
+      PC_ADD_CARD_SHOW = #{record.pcAddCardShow,jdbcType=VARCHAR},
+      APP_ADD_CARD_SHOW = #{record.appAddCardShow,jdbcType=VARCHAR},
+      APP_EDIT_CARD_SHOW = #{record.appEditCardShow,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.SysTemplate" >
+    update SYS_TEMPLATE
+    <set >
+      <if test="templateCode != null" >
+        TEMPLATE_CODE = #{templateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateFolderId != null" >
+        TEMPLATE_FOLDER_ID = #{templateFolderId,jdbcType=DECIMAL},
+      </if>
+      <if test="templateSql != null" >
+        TEMPLATE_SQL = #{templateSql,jdbcType=VARCHAR},
+      </if>
+      <if test="pcEditCardShow != null" >
+        PC_EDIT_CARD_SHOW = #{pcEditCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="pcGridShow != null" >
+        PC_GRID_SHOW = #{pcGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appGridShow != null" >
+        APP_GRID_SHOW = #{appGridShow,jdbcType=VARCHAR},
+      </if>
+      <if test="pcAddCardShow != null" >
+        PC_ADD_CARD_SHOW = #{pcAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appAddCardShow != null" >
+        APP_ADD_CARD_SHOW = #{appAddCardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="appEditCardShow != null" >
+        APP_EDIT_CARD_SHOW = #{appEditCardShow,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TEMPLATE_ID = #{templateId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.SysTemplate" >
+    update SYS_TEMPLATE
+    set TEMPLATE_CODE = #{templateCode,jdbcType=VARCHAR},
+      TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=DATE},
+      OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+      TEMPLATE_FOLDER_ID = #{templateFolderId,jdbcType=DECIMAL},
+      TEMPLATE_SQL = #{templateSql,jdbcType=VARCHAR},
+      PC_EDIT_CARD_SHOW = #{pcEditCardShow,jdbcType=VARCHAR},
+      PC_GRID_SHOW = #{pcGridShow,jdbcType=VARCHAR},
+      APP_GRID_SHOW = #{appGridShow,jdbcType=VARCHAR},
+      PC_ADD_CARD_SHOW = #{pcAddCardShow,jdbcType=VARCHAR},
+      APP_ADD_CARD_SHOW = #{appAddCardShow,jdbcType=VARCHAR},
+      APP_EDIT_CARD_SHOW = #{appEditCardShow,jdbcType=VARCHAR}
+    where TEMPLATE_ID = #{templateId,jdbcType=DECIMAL}
+  </update>
+</mapper>

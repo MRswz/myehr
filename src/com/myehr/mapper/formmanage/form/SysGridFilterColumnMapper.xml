@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysGridFilterColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysGridFilterColumn" >
+    <id column="QUERY_COLUMN_ID" property="queryColumnId" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_FILTER_ID" property="gridColumnFilterId" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_LABLE" property="gridColumnLable" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_ID" property="gridColumnId" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_FILTER_RULE" property="gridColumnFilterRule" jdbcType="NVARCHAR" />
+    <result column="FORM_COLUMN_SORT" property="formColumnSort" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_IS_SHOW" property="gridColumnIsShow" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_ROW_SPAN" property="gridColumnRowSpan" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_COL_SPAN" property="gridColumnColSpan" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_HEIGHT" property="gridColumnHeight" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_WIDTH" property="gridColumnWidth" jdbcType="NVARCHAR" />
+    <result column="GRID_COLUMN_GROUP" property="gridColumnGroup" jdbcType="DECIMAL" />
+    <result column="GRID_COLUMN_IS_INTERVAIS" property="gridColumnIsIntervais" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="isShowWeb" property="isshowweb" jdbcType="VARCHAR" />
+    <result column="isShowMobile" property="isshowmobile" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    QUERY_COLUMN_ID, GRID_COLUMN_FILTER_ID, GRID_COLUMN_LABLE, GRID_COLUMN_ID, GRID_COLUMN_FILTER_RULE, 
+    FORM_COLUMN_SORT, GRID_COLUMN_IS_SHOW, GRID_COLUMN_ROW_SPAN, GRID_COLUMN_COL_SPAN, 
+    GRID_COLUMN_HEIGHT, GRID_COLUMN_WIDTH, GRID_COLUMN_GROUP, GRID_COLUMN_IS_INTERVAIS, 
+    OPERATOR_TIME, OPERATOR_NAME, isShowWeb, isShowMobile
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_GRID_FILTER_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GRID_FILTER_COLUMN
+    where QUERY_COLUMN_ID = #{queryColumnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_GRID_FILTER_COLUMN
+    where QUERY_COLUMN_ID = #{queryColumnId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumnExample" >
+    delete from SYS_GRID_FILTER_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumn" useGeneratedKeys="true" keyProperty="queryColumnId" keyColumn="QUERY_COLUMN_ID">
+    insert into SYS_GRID_FILTER_COLUMN (GRID_COLUMN_FILTER_ID, 
+      GRID_COLUMN_LABLE, GRID_COLUMN_ID, GRID_COLUMN_FILTER_RULE, 
+      FORM_COLUMN_SORT, GRID_COLUMN_IS_SHOW, GRID_COLUMN_ROW_SPAN, 
+      GRID_COLUMN_COL_SPAN, GRID_COLUMN_HEIGHT, 
+      GRID_COLUMN_WIDTH, GRID_COLUMN_GROUP, GRID_COLUMN_IS_INTERVAIS, 
+      OPERATOR_TIME, OPERATOR_NAME, isShowWeb, 
+      isShowMobile)
+    values (#{gridColumnFilterId,jdbcType=DECIMAL}, 
+      #{gridColumnLable,jdbcType=NVARCHAR}, #{gridColumnId,jdbcType=DECIMAL}, #{gridColumnFilterRule,jdbcType=NVARCHAR}, 
+      #{formColumnSort,jdbcType=DECIMAL}, #{gridColumnIsShow,jdbcType=NVARCHAR}, #{gridColumnRowSpan,jdbcType=NVARCHAR}, 
+      #{gridColumnColSpan,jdbcType=NVARCHAR}, #{gridColumnHeight,jdbcType=NVARCHAR}, 
+      #{gridColumnWidth,jdbcType=NVARCHAR}, #{gridColumnGroup,jdbcType=DECIMAL}, #{gridColumnIsIntervais,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{isshowweb,jdbcType=VARCHAR}, 
+      #{isshowmobile,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumn" >
+    insert into SYS_GRID_FILTER_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="queryColumnId != null" >
+        QUERY_COLUMN_ID,
+      </if>
+      <if test="gridColumnFilterId != null" >
+        GRID_COLUMN_FILTER_ID,
+      </if>
+      <if test="gridColumnLable != null" >
+        GRID_COLUMN_LABLE,
+      </if>
+      <if test="gridColumnId != null" >
+        GRID_COLUMN_ID,
+      </if>
+      <if test="gridColumnFilterRule != null" >
+        GRID_COLUMN_FILTER_RULE,
+      </if>
+      <if test="formColumnSort != null" >
+        FORM_COLUMN_SORT,
+      </if>
+      <if test="gridColumnIsShow != null" >
+        GRID_COLUMN_IS_SHOW,
+      </if>
+      <if test="gridColumnRowSpan != null" >
+        GRID_COLUMN_ROW_SPAN,
+      </if>
+      <if test="gridColumnColSpan != null" >
+        GRID_COLUMN_COL_SPAN,
+      </if>
+      <if test="gridColumnHeight != null" >
+        GRID_COLUMN_HEIGHT,
+      </if>
+      <if test="gridColumnWidth != null" >
+        GRID_COLUMN_WIDTH,
+      </if>
+      <if test="gridColumnGroup != null" >
+        GRID_COLUMN_GROUP,
+      </if>
+      <if test="gridColumnIsIntervais != null" >
+        GRID_COLUMN_IS_INTERVAIS,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb,
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="queryColumnId != null" >
+        #{queryColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnFilterId != null" >
+        #{gridColumnFilterId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnLable != null" >
+        #{gridColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnId != null" >
+        #{gridColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnFilterRule != null" >
+        #{gridColumnFilterRule,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSort != null" >
+        #{formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnIsShow != null" >
+        #{gridColumnIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnRowSpan != null" >
+        #{gridColumnRowSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnColSpan != null" >
+        #{gridColumnColSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnHeight != null" >
+        #{gridColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnWidth != null" >
+        #{gridColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnGroup != null" >
+        #{gridColumnGroup,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnIsIntervais != null" >
+        #{gridColumnIsIntervais,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowweb != null" >
+        #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_GRID_FILTER_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_GRID_FILTER_COLUMN
+    <set >
+      <if test="record.queryColumnId != null" >
+        QUERY_COLUMN_ID = #{record.queryColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridColumnFilterId != null" >
+        GRID_COLUMN_FILTER_ID = #{record.gridColumnFilterId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridColumnLable != null" >
+        GRID_COLUMN_LABLE = #{record.gridColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnId != null" >
+        GRID_COLUMN_ID = #{record.gridColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridColumnFilterRule != null" >
+        GRID_COLUMN_FILTER_RULE = #{record.gridColumnFilterRule,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formColumnSort != null" >
+        FORM_COLUMN_SORT = #{record.formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridColumnIsShow != null" >
+        GRID_COLUMN_IS_SHOW = #{record.gridColumnIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnRowSpan != null" >
+        GRID_COLUMN_ROW_SPAN = #{record.gridColumnRowSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnColSpan != null" >
+        GRID_COLUMN_COL_SPAN = #{record.gridColumnColSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnHeight != null" >
+        GRID_COLUMN_HEIGHT = #{record.gridColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnWidth != null" >
+        GRID_COLUMN_WIDTH = #{record.gridColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.gridColumnGroup != null" >
+        GRID_COLUMN_GROUP = #{record.gridColumnGroup,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gridColumnIsIntervais != null" >
+        GRID_COLUMN_IS_INTERVAIS = #{record.gridColumnIsIntervais,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isshowweb != null" >
+        isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshowmobile != null" >
+        isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_GRID_FILTER_COLUMN
+    set QUERY_COLUMN_ID = #{record.queryColumnId,jdbcType=DECIMAL},
+      GRID_COLUMN_FILTER_ID = #{record.gridColumnFilterId,jdbcType=DECIMAL},
+      GRID_COLUMN_LABLE = #{record.gridColumnLable,jdbcType=NVARCHAR},
+      GRID_COLUMN_ID = #{record.gridColumnId,jdbcType=DECIMAL},
+      GRID_COLUMN_FILTER_RULE = #{record.gridColumnFilterRule,jdbcType=NVARCHAR},
+      FORM_COLUMN_SORT = #{record.formColumnSort,jdbcType=DECIMAL},
+      GRID_COLUMN_IS_SHOW = #{record.gridColumnIsShow,jdbcType=NVARCHAR},
+      GRID_COLUMN_ROW_SPAN = #{record.gridColumnRowSpan,jdbcType=NVARCHAR},
+      GRID_COLUMN_COL_SPAN = #{record.gridColumnColSpan,jdbcType=NVARCHAR},
+      GRID_COLUMN_HEIGHT = #{record.gridColumnHeight,jdbcType=NVARCHAR},
+      GRID_COLUMN_WIDTH = #{record.gridColumnWidth,jdbcType=NVARCHAR},
+      GRID_COLUMN_GROUP = #{record.gridColumnGroup,jdbcType=DECIMAL},
+      GRID_COLUMN_IS_INTERVAIS = #{record.gridColumnIsIntervais,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumn" >
+    update SYS_GRID_FILTER_COLUMN
+    <set >
+      <if test="gridColumnFilterId != null" >
+        GRID_COLUMN_FILTER_ID = #{gridColumnFilterId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnLable != null" >
+        GRID_COLUMN_LABLE = #{gridColumnLable,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnId != null" >
+        GRID_COLUMN_ID = #{gridColumnId,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnFilterRule != null" >
+        GRID_COLUMN_FILTER_RULE = #{gridColumnFilterRule,jdbcType=NVARCHAR},
+      </if>
+      <if test="formColumnSort != null" >
+        FORM_COLUMN_SORT = #{formColumnSort,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnIsShow != null" >
+        GRID_COLUMN_IS_SHOW = #{gridColumnIsShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnRowSpan != null" >
+        GRID_COLUMN_ROW_SPAN = #{gridColumnRowSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnColSpan != null" >
+        GRID_COLUMN_COL_SPAN = #{gridColumnColSpan,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnHeight != null" >
+        GRID_COLUMN_HEIGHT = #{gridColumnHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnWidth != null" >
+        GRID_COLUMN_WIDTH = #{gridColumnWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="gridColumnGroup != null" >
+        GRID_COLUMN_GROUP = #{gridColumnGroup,jdbcType=DECIMAL},
+      </if>
+      <if test="gridColumnIsIntervais != null" >
+        GRID_COLUMN_IS_INTERVAIS = #{gridColumnIsIntervais,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile = #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where QUERY_COLUMN_ID = #{queryColumnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysGridFilterColumn" >
+    update SYS_GRID_FILTER_COLUMN
+    set GRID_COLUMN_FILTER_ID = #{gridColumnFilterId,jdbcType=DECIMAL},
+      GRID_COLUMN_LABLE = #{gridColumnLable,jdbcType=NVARCHAR},
+      GRID_COLUMN_ID = #{gridColumnId,jdbcType=DECIMAL},
+      GRID_COLUMN_FILTER_RULE = #{gridColumnFilterRule,jdbcType=NVARCHAR},
+      FORM_COLUMN_SORT = #{formColumnSort,jdbcType=DECIMAL},
+      GRID_COLUMN_IS_SHOW = #{gridColumnIsShow,jdbcType=NVARCHAR},
+      GRID_COLUMN_ROW_SPAN = #{gridColumnRowSpan,jdbcType=NVARCHAR},
+      GRID_COLUMN_COL_SPAN = #{gridColumnColSpan,jdbcType=NVARCHAR},
+      GRID_COLUMN_HEIGHT = #{gridColumnHeight,jdbcType=NVARCHAR},
+      GRID_COLUMN_WIDTH = #{gridColumnWidth,jdbcType=NVARCHAR},
+      GRID_COLUMN_GROUP = #{gridColumnGroup,jdbcType=DECIMAL},
+      GRID_COLUMN_IS_INTERVAIS = #{gridColumnIsIntervais,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{isshowmobile,jdbcType=VARCHAR}
+    where QUERY_COLUMN_ID = #{queryColumnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

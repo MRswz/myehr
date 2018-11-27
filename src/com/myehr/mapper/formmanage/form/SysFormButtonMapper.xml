@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.form.SysFormButtonMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.form.SysFormButton" >
+    <id column="FORM_BUTTON_ID" property="formButtonId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_DEF_ID" property="formButtonFormDefId" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_TYPE" property="formButtonType" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_CODE" property="formButtonCode" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_NAME" property="formButtonName" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_SORT" property="formButtonSort" jdbcType="DECIMAL" />
+    <result column="FORM_BUTTON_FORM_ID" property="formButtonFormId" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_WIDTH" property="formButtonWidth" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_HEIGHT" property="formButtonHeight" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_ICON" property="formButtonIcon" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_CSS" property="formButtonCss" jdbcType="NVARCHAR" />
+    <result column="OPERATOR_TIME" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_NAME" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_WARNING_INFO" property="formButtonWarningInfo" jdbcType="NVARCHAR" />
+    <result column="FORM_BUTTON_CHECK_FUN" property="formButtonCheckFun" jdbcType="NVARCHAR" />
+    <result column="isShowWeb" property="isshowweb" jdbcType="VARCHAR" />
+    <result column="isShowMobile" property="isshowmobile" jdbcType="VARCHAR" />
+    <result column="SHOW_AREA" property="showArea" jdbcType="VARCHAR" />
+    <result column="SHOW_TYPE" property="showType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FORM_BUTTON_ID, FORM_BUTTON_FORM_DEF_ID, FORM_BUTTON_TYPE, FORM_BUTTON_CODE, FORM_BUTTON_NAME, 
+    FORM_BUTTON_SORT, FORM_BUTTON_FORM_ID, FORM_BUTTON_WIDTH, FORM_BUTTON_HEIGHT, FORM_BUTTON_ICON, 
+    FORM_BUTTON_CSS, OPERATOR_TIME, OPERATOR_NAME, FORM_BUTTON_WARNING_INFO, FORM_BUTTON_CHECK_FUN, 
+    isShowWeb, isShowMobile, SHOW_AREA, SHOW_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.form.SysFormButtonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FORM_BUTTON
+    where FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_FORM_BUTTON
+    where FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormButtonExample" >
+    delete from SYS_FORM_BUTTON
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.form.SysFormButton" useGeneratedKeys="true" keyProperty="formButtonId" keyColumn="FORM_BUTTON_ID">
+    insert into SYS_FORM_BUTTON ( FORM_BUTTON_FORM_DEF_ID, 
+      FORM_BUTTON_TYPE, FORM_BUTTON_CODE, FORM_BUTTON_NAME, 
+      FORM_BUTTON_SORT, FORM_BUTTON_FORM_ID, FORM_BUTTON_WIDTH, 
+      FORM_BUTTON_HEIGHT, FORM_BUTTON_ICON, FORM_BUTTON_CSS, 
+      OPERATOR_TIME, OPERATOR_NAME, FORM_BUTTON_WARNING_INFO, 
+      FORM_BUTTON_CHECK_FUN, isShowWeb, isShowMobile, 
+      SHOW_AREA, SHOW_TYPE)
+    values (#{formButtonFormDefId,jdbcType=DECIMAL}, 
+      #{formButtonType,jdbcType=NVARCHAR}, #{formButtonCode,jdbcType=NVARCHAR}, #{formButtonName,jdbcType=NVARCHAR}, 
+      #{formButtonSort,jdbcType=DECIMAL}, #{formButtonFormId,jdbcType=NVARCHAR}, #{formButtonWidth,jdbcType=NVARCHAR}, 
+      #{formButtonHeight,jdbcType=NVARCHAR}, #{formButtonIcon,jdbcType=NVARCHAR}, #{formButtonCss,jdbcType=NVARCHAR}, 
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operatorName,jdbcType=NVARCHAR}, #{formButtonWarningInfo,jdbcType=NVARCHAR}, 
+      #{formButtonCheckFun,jdbcType=NVARCHAR}, #{isshowweb,jdbcType=VARCHAR}, #{isshowmobile,jdbcType=VARCHAR}, 
+      #{showArea,jdbcType=VARCHAR}, #{showType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.form.SysFormButton" >
+    insert into SYS_FORM_BUTTON
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formButtonId != null" >
+        FORM_BUTTON_ID,
+      </if>
+      <if test="formButtonFormDefId != null" >
+        FORM_BUTTON_FORM_DEF_ID,
+      </if>
+      <if test="formButtonType != null" >
+        FORM_BUTTON_TYPE,
+      </if>
+      <if test="formButtonCode != null" >
+        FORM_BUTTON_CODE,
+      </if>
+      <if test="formButtonName != null" >
+        FORM_BUTTON_NAME,
+      </if>
+      <if test="formButtonSort != null" >
+        FORM_BUTTON_SORT,
+      </if>
+      <if test="formButtonFormId != null" >
+        FORM_BUTTON_FORM_ID,
+      </if>
+      <if test="formButtonWidth != null" >
+        FORM_BUTTON_WIDTH,
+      </if>
+      <if test="formButtonHeight != null" >
+        FORM_BUTTON_HEIGHT,
+      </if>
+      <if test="formButtonIcon != null" >
+        FORM_BUTTON_ICON,
+      </if>
+      <if test="formButtonCss != null" >
+        FORM_BUTTON_CSS,
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME,
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME,
+      </if>
+      <if test="formButtonWarningInfo != null" >
+        FORM_BUTTON_WARNING_INFO,
+      </if>
+      <if test="formButtonCheckFun != null" >
+        FORM_BUTTON_CHECK_FUN,
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb,
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile,
+      </if>
+      <if test="showArea != null" >
+        SHOW_AREA,
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formButtonId != null" >
+        #{formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonFormDefId != null" >
+        #{formButtonFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonType != null" >
+        #{formButtonType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCode != null" >
+        #{formButtonCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonName != null" >
+        #{formButtonName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonSort != null" >
+        #{formButtonSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonFormId != null" >
+        #{formButtonFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonWidth != null" >
+        #{formButtonWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonHeight != null" >
+        #{formButtonHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonIcon != null" >
+        #{formButtonIcon,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCss != null" >
+        #{formButtonCss,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonWarningInfo != null" >
+        #{formButtonWarningInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCheckFun != null" >
+        #{formButtonCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowweb != null" >
+        #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="showArea != null" >
+        #{showArea,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null" >
+        #{showType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.form.SysFormButtonExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_FORM_BUTTON
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_FORM_BUTTON
+    <set >
+      <if test="record.formButtonId != null" >
+        FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonFormDefId != null" >
+        FORM_BUTTON_FORM_DEF_ID = #{record.formButtonFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonType != null" >
+        FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonCode != null" >
+        FORM_BUTTON_CODE = #{record.formButtonCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonName != null" >
+        FORM_BUTTON_NAME = #{record.formButtonName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonSort != null" >
+        FORM_BUTTON_SORT = #{record.formButtonSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formButtonFormId != null" >
+        FORM_BUTTON_FORM_ID = #{record.formButtonFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonWidth != null" >
+        FORM_BUTTON_WIDTH = #{record.formButtonWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonHeight != null" >
+        FORM_BUTTON_HEIGHT = #{record.formButtonHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonIcon != null" >
+        FORM_BUTTON_ICON = #{record.formButtonIcon,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonCss != null" >
+        FORM_BUTTON_CSS = #{record.formButtonCss,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorName != null" >
+        OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonWarningInfo != null" >
+        FORM_BUTTON_WARNING_INFO = #{record.formButtonWarningInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.formButtonCheckFun != null" >
+        FORM_BUTTON_CHECK_FUN = #{record.formButtonCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isshowweb != null" >
+        isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshowmobile != null" >
+        isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showArea != null" >
+        SHOW_AREA = #{record.showArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showType != null" >
+        SHOW_TYPE = #{record.showType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_FORM_BUTTON
+    set FORM_BUTTON_ID = #{record.formButtonId,jdbcType=DECIMAL},
+      FORM_BUTTON_FORM_DEF_ID = #{record.formButtonFormDefId,jdbcType=DECIMAL},
+      FORM_BUTTON_TYPE = #{record.formButtonType,jdbcType=NVARCHAR},
+      FORM_BUTTON_CODE = #{record.formButtonCode,jdbcType=NVARCHAR},
+      FORM_BUTTON_NAME = #{record.formButtonName,jdbcType=NVARCHAR},
+      FORM_BUTTON_SORT = #{record.formButtonSort,jdbcType=DECIMAL},
+      FORM_BUTTON_FORM_ID = #{record.formButtonFormId,jdbcType=NVARCHAR},
+      FORM_BUTTON_WIDTH = #{record.formButtonWidth,jdbcType=NVARCHAR},
+      FORM_BUTTON_HEIGHT = #{record.formButtonHeight,jdbcType=NVARCHAR},
+      FORM_BUTTON_ICON = #{record.formButtonIcon,jdbcType=NVARCHAR},
+      FORM_BUTTON_CSS = #{record.formButtonCss,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{record.operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{record.operatorName,jdbcType=NVARCHAR},
+      FORM_BUTTON_WARNING_INFO = #{record.formButtonWarningInfo,jdbcType=NVARCHAR},
+      FORM_BUTTON_CHECK_FUN = #{record.formButtonCheckFun,jdbcType=NVARCHAR},
+      isShowWeb = #{record.isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{record.isshowmobile,jdbcType=VARCHAR},
+      SHOW_AREA = #{record.showArea,jdbcType=VARCHAR},
+      SHOW_TYPE = #{record.showType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.form.SysFormButton" >
+    update SYS_FORM_BUTTON
+    <set >
+      <if test="formButtonFormDefId != null" >
+        FORM_BUTTON_FORM_DEF_ID = #{formButtonFormDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonType != null" >
+        FORM_BUTTON_TYPE = #{formButtonType,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCode != null" >
+        FORM_BUTTON_CODE = #{formButtonCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonName != null" >
+        FORM_BUTTON_NAME = #{formButtonName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonSort != null" >
+        FORM_BUTTON_SORT = #{formButtonSort,jdbcType=DECIMAL},
+      </if>
+      <if test="formButtonFormId != null" >
+        FORM_BUTTON_FORM_ID = #{formButtonFormId,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonWidth != null" >
+        FORM_BUTTON_WIDTH = #{formButtonWidth,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonHeight != null" >
+        FORM_BUTTON_HEIGHT = #{formButtonHeight,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonIcon != null" >
+        FORM_BUTTON_ICON = #{formButtonIcon,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCss != null" >
+        FORM_BUTTON_CSS = #{formButtonCss,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorName != null" >
+        OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonWarningInfo != null" >
+        FORM_BUTTON_WARNING_INFO = #{formButtonWarningInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="formButtonCheckFun != null" >
+        FORM_BUTTON_CHECK_FUN = #{formButtonCheckFun,jdbcType=NVARCHAR},
+      </if>
+      <if test="isshowweb != null" >
+        isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      </if>
+      <if test="isshowmobile != null" >
+        isShowMobile = #{isshowmobile,jdbcType=VARCHAR},
+      </if>
+      <if test="showArea != null" >
+        SHOW_AREA = #{showArea,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null" >
+        SHOW_TYPE = #{showType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.form.SysFormButton" >
+    update SYS_FORM_BUTTON
+    set FORM_BUTTON_FORM_DEF_ID = #{formButtonFormDefId,jdbcType=DECIMAL},
+      FORM_BUTTON_TYPE = #{formButtonType,jdbcType=NVARCHAR},
+      FORM_BUTTON_CODE = #{formButtonCode,jdbcType=NVARCHAR},
+      FORM_BUTTON_NAME = #{formButtonName,jdbcType=NVARCHAR},
+      FORM_BUTTON_SORT = #{formButtonSort,jdbcType=DECIMAL},
+      FORM_BUTTON_FORM_ID = #{formButtonFormId,jdbcType=NVARCHAR},
+      FORM_BUTTON_WIDTH = #{formButtonWidth,jdbcType=NVARCHAR},
+      FORM_BUTTON_HEIGHT = #{formButtonHeight,jdbcType=NVARCHAR},
+      FORM_BUTTON_ICON = #{formButtonIcon,jdbcType=NVARCHAR},
+      FORM_BUTTON_CSS = #{formButtonCss,jdbcType=NVARCHAR},
+      OPERATOR_TIME = #{operatorTime,jdbcType=TIMESTAMP},
+      OPERATOR_NAME = #{operatorName,jdbcType=NVARCHAR},
+      FORM_BUTTON_WARNING_INFO = #{formButtonWarningInfo,jdbcType=NVARCHAR},
+      FORM_BUTTON_CHECK_FUN = #{formButtonCheckFun,jdbcType=NVARCHAR},
+      isShowWeb = #{isshowweb,jdbcType=VARCHAR},
+      isShowMobile = #{isshowmobile,jdbcType=VARCHAR},
+      SHOW_AREA = #{showArea,jdbcType=VARCHAR},
+      SHOW_TYPE = #{showType,jdbcType=VARCHAR}
+    where FORM_BUTTON_ID = #{formButtonId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.activiti.ActRuJobMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.activiti.ActRuJob" >
+    <id column="ID_" property="id" jdbcType="OTHER" />
+    <result column="REV_" property="rev" jdbcType="DECIMAL" />
+    <result column="TYPE_" property="type" jdbcType="OTHER" />
+    <result column="LOCK_EXP_TIME_" property="lockExpTime" jdbcType="TIMESTAMP" />
+    <result column="LOCK_OWNER_" property="lockOwner" jdbcType="OTHER" />
+    <result column="EXCLUSIVE_" property="exclusive" jdbcType="DECIMAL" />
+    <result column="EXECUTION_ID_" property="executionId" jdbcType="OTHER" />
+    <result column="PROCESS_INSTANCE_ID_" property="processInstanceId" jdbcType="OTHER" />
+    <result column="PROC_DEF_ID_" property="procDefId" jdbcType="OTHER" />
+    <result column="RETRIES_" property="retries" jdbcType="DECIMAL" />
+    <result column="EXCEPTION_STACK_ID_" property="exceptionStackId" jdbcType="OTHER" />
+    <result column="EXCEPTION_MSG_" property="exceptionMsg" jdbcType="OTHER" />
+    <result column="DUEDATE_" property="duedate" jdbcType="TIMESTAMP" />
+    <result column="REPEAT_" property="repeat" jdbcType="OTHER" />
+    <result column="HANDLER_TYPE_" property="handlerType" jdbcType="OTHER" />
+    <result column="HANDLER_CFG_" property="handlerCfg" jdbcType="OTHER" />
+    <result column="TENANT_ID_" property="tenantId" jdbcType="OTHER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_, REV_, TYPE_, LOCK_EXP_TIME_, LOCK_OWNER_, EXCLUSIVE_, EXECUTION_ID_, PROCESS_INSTANCE_ID_, 
+    PROC_DEF_ID_, RETRIES_, EXCEPTION_STACK_ID_, EXCEPTION_MSG_, DUEDATE_, REPEAT_, HANDLER_TYPE_, 
+    HANDLER_CFG_, TENANT_ID_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.activiti.ActRuJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ACT_RU_JOB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_RU_JOB
+    where ID_ = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from ACT_RU_JOB
+    where ID_ = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.activiti.ActRuJobExample" >
+    delete from ACT_RU_JOB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.activiti.ActRuJob" >
+    insert into ACT_RU_JOB (ID_, REV_, TYPE_, LOCK_EXP_TIME_, 
+      LOCK_OWNER_, EXCLUSIVE_, EXECUTION_ID_, 
+      PROCESS_INSTANCE_ID_, PROC_DEF_ID_, RETRIES_, 
+      EXCEPTION_STACK_ID_, EXCEPTION_MSG_, DUEDATE_, 
+      REPEAT_, HANDLER_TYPE_, HANDLER_CFG_, 
+      TENANT_ID_)
+    values (#{id,jdbcType=OTHER}, #{rev,jdbcType=DECIMAL}, #{type,jdbcType=OTHER}, #{lockExpTime,jdbcType=TIMESTAMP}, 
+      #{lockOwner,jdbcType=OTHER}, #{exclusive,jdbcType=DECIMAL}, #{executionId,jdbcType=OTHER}, 
+      #{processInstanceId,jdbcType=OTHER}, #{procDefId,jdbcType=OTHER}, #{retries,jdbcType=DECIMAL}, 
+      #{exceptionStackId,jdbcType=OTHER}, #{exceptionMsg,jdbcType=OTHER}, #{duedate,jdbcType=TIMESTAMP}, 
+      #{repeat,jdbcType=OTHER}, #{handlerType,jdbcType=OTHER}, #{handlerCfg,jdbcType=OTHER}, 
+      #{tenantId,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.activiti.ActRuJob" >
+    insert into ACT_RU_JOB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID_,
+      </if>
+      <if test="rev != null" >
+        REV_,
+      </if>
+      <if test="type != null" >
+        TYPE_,
+      </if>
+      <if test="lockExpTime != null" >
+        LOCK_EXP_TIME_,
+      </if>
+      <if test="lockOwner != null" >
+        LOCK_OWNER_,
+      </if>
+      <if test="exclusive != null" >
+        EXCLUSIVE_,
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_,
+      </if>
+      <if test="processInstanceId != null" >
+        PROCESS_INSTANCE_ID_,
+      </if>
+      <if test="procDefId != null" >
+        PROC_DEF_ID_,
+      </if>
+      <if test="retries != null" >
+        RETRIES_,
+      </if>
+      <if test="exceptionStackId != null" >
+        EXCEPTION_STACK_ID_,
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG_,
+      </if>
+      <if test="duedate != null" >
+        DUEDATE_,
+      </if>
+      <if test="repeat != null" >
+        REPEAT_,
+      </if>
+      <if test="handlerType != null" >
+        HANDLER_TYPE_,
+      </if>
+      <if test="handlerCfg != null" >
+        HANDLER_CFG_,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="rev != null" >
+        #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=OTHER},
+      </if>
+      <if test="lockExpTime != null" >
+        #{lockExpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockOwner != null" >
+        #{lockOwner,jdbcType=OTHER},
+      </if>
+      <if test="exclusive != null" >
+        #{exclusive,jdbcType=DECIMAL},
+      </if>
+      <if test="executionId != null" >
+        #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="processInstanceId != null" >
+        #{processInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="procDefId != null" >
+        #{procDefId,jdbcType=OTHER},
+      </if>
+      <if test="retries != null" >
+        #{retries,jdbcType=DECIMAL},
+      </if>
+      <if test="exceptionStackId != null" >
+        #{exceptionStackId,jdbcType=OTHER},
+      </if>
+      <if test="exceptionMsg != null" >
+        #{exceptionMsg,jdbcType=OTHER},
+      </if>
+      <if test="duedate != null" >
+        #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repeat != null" >
+        #{repeat,jdbcType=OTHER},
+      </if>
+      <if test="handlerType != null" >
+        #{handlerType,jdbcType=OTHER},
+      </if>
+      <if test="handlerCfg != null" >
+        #{handlerCfg,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.activiti.ActRuJobExample" resultType="java.lang.Integer" >
+    select count(*) from ACT_RU_JOB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ACT_RU_JOB
+    <set >
+      <if test="record.id != null" >
+        ID_ = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.rev != null" >
+        REV_ = #{record.rev,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null" >
+        TYPE_ = #{record.type,jdbcType=OTHER},
+      </if>
+      <if test="record.lockExpTime != null" >
+        LOCK_EXP_TIME_ = #{record.lockExpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lockOwner != null" >
+        LOCK_OWNER_ = #{record.lockOwner,jdbcType=OTHER},
+      </if>
+      <if test="record.exclusive != null" >
+        EXCLUSIVE_ = #{record.exclusive,jdbcType=DECIMAL},
+      </if>
+      <if test="record.executionId != null" >
+        EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      </if>
+      <if test="record.processInstanceId != null" >
+        PROCESS_INSTANCE_ID_ = #{record.processInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="record.procDefId != null" >
+        PROC_DEF_ID_ = #{record.procDefId,jdbcType=OTHER},
+      </if>
+      <if test="record.retries != null" >
+        RETRIES_ = #{record.retries,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exceptionStackId != null" >
+        EXCEPTION_STACK_ID_ = #{record.exceptionStackId,jdbcType=OTHER},
+      </if>
+      <if test="record.exceptionMsg != null" >
+        EXCEPTION_MSG_ = #{record.exceptionMsg,jdbcType=OTHER},
+      </if>
+      <if test="record.duedate != null" >
+        DUEDATE_ = #{record.duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repeat != null" >
+        REPEAT_ = #{record.repeat,jdbcType=OTHER},
+      </if>
+      <if test="record.handlerType != null" >
+        HANDLER_TYPE_ = #{record.handlerType,jdbcType=OTHER},
+      </if>
+      <if test="record.handlerCfg != null" >
+        HANDLER_CFG_ = #{record.handlerCfg,jdbcType=OTHER},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID_ = #{record.tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ACT_RU_JOB
+    set ID_ = #{record.id,jdbcType=OTHER},
+      REV_ = #{record.rev,jdbcType=DECIMAL},
+      TYPE_ = #{record.type,jdbcType=OTHER},
+      LOCK_EXP_TIME_ = #{record.lockExpTime,jdbcType=TIMESTAMP},
+      LOCK_OWNER_ = #{record.lockOwner,jdbcType=OTHER},
+      EXCLUSIVE_ = #{record.exclusive,jdbcType=DECIMAL},
+      EXECUTION_ID_ = #{record.executionId,jdbcType=OTHER},
+      PROCESS_INSTANCE_ID_ = #{record.processInstanceId,jdbcType=OTHER},
+      PROC_DEF_ID_ = #{record.procDefId,jdbcType=OTHER},
+      RETRIES_ = #{record.retries,jdbcType=DECIMAL},
+      EXCEPTION_STACK_ID_ = #{record.exceptionStackId,jdbcType=OTHER},
+      EXCEPTION_MSG_ = #{record.exceptionMsg,jdbcType=OTHER},
+      DUEDATE_ = #{record.duedate,jdbcType=TIMESTAMP},
+      REPEAT_ = #{record.repeat,jdbcType=OTHER},
+      HANDLER_TYPE_ = #{record.handlerType,jdbcType=OTHER},
+      HANDLER_CFG_ = #{record.handlerCfg,jdbcType=OTHER},
+      TENANT_ID_ = #{record.tenantId,jdbcType=OTHER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.activiti.ActRuJob" >
+    update ACT_RU_JOB
+    <set >
+      <if test="rev != null" >
+        REV_ = #{rev,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE_ = #{type,jdbcType=OTHER},
+      </if>
+      <if test="lockExpTime != null" >
+        LOCK_EXP_TIME_ = #{lockExpTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockOwner != null" >
+        LOCK_OWNER_ = #{lockOwner,jdbcType=OTHER},
+      </if>
+      <if test="exclusive != null" >
+        EXCLUSIVE_ = #{exclusive,jdbcType=DECIMAL},
+      </if>
+      <if test="executionId != null" >
+        EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      </if>
+      <if test="processInstanceId != null" >
+        PROCESS_INSTANCE_ID_ = #{processInstanceId,jdbcType=OTHER},
+      </if>
+      <if test="procDefId != null" >
+        PROC_DEF_ID_ = #{procDefId,jdbcType=OTHER},
+      </if>
+      <if test="retries != null" >
+        RETRIES_ = #{retries,jdbcType=DECIMAL},
+      </if>
+      <if test="exceptionStackId != null" >
+        EXCEPTION_STACK_ID_ = #{exceptionStackId,jdbcType=OTHER},
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG_ = #{exceptionMsg,jdbcType=OTHER},
+      </if>
+      <if test="duedate != null" >
+        DUEDATE_ = #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repeat != null" >
+        REPEAT_ = #{repeat,jdbcType=OTHER},
+      </if>
+      <if test="handlerType != null" >
+        HANDLER_TYPE_ = #{handlerType,jdbcType=OTHER},
+      </if>
+      <if test="handlerCfg != null" >
+        HANDLER_CFG_ = #{handlerCfg,jdbcType=OTHER},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID_ = #{tenantId,jdbcType=OTHER},
+      </if>
+    </set>
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.activiti.ActRuJob" >
+    update ACT_RU_JOB
+    set REV_ = #{rev,jdbcType=DECIMAL},
+      TYPE_ = #{type,jdbcType=OTHER},
+      LOCK_EXP_TIME_ = #{lockExpTime,jdbcType=TIMESTAMP},
+      LOCK_OWNER_ = #{lockOwner,jdbcType=OTHER},
+      EXCLUSIVE_ = #{exclusive,jdbcType=DECIMAL},
+      EXECUTION_ID_ = #{executionId,jdbcType=OTHER},
+      PROCESS_INSTANCE_ID_ = #{processInstanceId,jdbcType=OTHER},
+      PROC_DEF_ID_ = #{procDefId,jdbcType=OTHER},
+      RETRIES_ = #{retries,jdbcType=DECIMAL},
+      EXCEPTION_STACK_ID_ = #{exceptionStackId,jdbcType=OTHER},
+      EXCEPTION_MSG_ = #{exceptionMsg,jdbcType=OTHER},
+      DUEDATE_ = #{duedate,jdbcType=TIMESTAMP},
+      REPEAT_ = #{repeat,jdbcType=OTHER},
+      HANDLER_TYPE_ = #{handlerType,jdbcType=OTHER},
+      HANDLER_CFG_ = #{handlerCfg,jdbcType=OTHER},
+      TENANT_ID_ = #{tenantId,jdbcType=OTHER}
+    where ID_ = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

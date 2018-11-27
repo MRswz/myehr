@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+.about4{
+	width:648px;margin:0 auto 0 auto;
+	}
+.about4_ch{
+	font-size:26px;color:#333;padding-bottom:10px;padding-top:10px;
+	}
+.about4_main{
+	position:relative;padding-left:20px;overflow:hidden;
+	}
+.line{
+	width:1px;height:100%;background-color:#999;position:absolute;left:26px;z-index:-1;
+	}
+.about4_main ul li{
+	padding-left:25px;font-size:14px;color:#333333;line-height:30px;background:url(/myehr/commonNews/images/about4_icon.png) left center no-repeat;
+	}
+.about4_main ul li:last-child{
+	margin-bottom:0px;
+	}

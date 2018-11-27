@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myehr.mapper.formmanage.template.gridbycard.SysGridbycardTemplateColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumn" >
+    <id column="TEMPLATE_COLUMN_ID" property="templateColumnId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_TEMPLATE_ID" property="templateColumnTemplateId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_FORM_DEF_ID" property="templateColumnFormDefId" jdbcType="INTEGER" />
+    <result column="TEMPLATE_COLUMN_CODE" property="templateColumnCode" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_LINK_MARK" property="templateColumnLinkMark" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_VALUE" property="templateColumnValue" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_FONT_SIZE" property="templateColumnFontSize" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_COLUMN_FONT_COLOR" property="templateColumnFontColor" jdbcType="NVARCHAR" />
+    <result column="TEMPLATE_IS_TAG" property="templateIsTag" jdbcType="NVARCHAR" />
+    <result column="operator_name" property="operatorName" jdbcType="NVARCHAR" />
+    <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="TEMPLATE_COLUMN_FONT_WEIGHT" property="templateColumnFontWeight" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEMPLATE_COLUMN_ID, TEMPLATE_COLUMN_TEMPLATE_ID, TEMPLATE_COLUMN_FORM_DEF_ID, TEMPLATE_COLUMN_CODE, 
+    TEMPLATE_COLUMN_LINK_MARK, TEMPLATE_COLUMN_VALUE, TEMPLATE_COLUMN_FONT_SIZE, TEMPLATE_COLUMN_FONT_COLOR, 
+    TEMPLATE_IS_TAG, operator_name, operator_time, TEMPLATE_COLUMN_FONT_WEIGHT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumnExample" >
+    delete from SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumn" >
+    insert into SYS_GRIDBYCARD_TEMPLATE_COLUMN (TEMPLATE_COLUMN_TEMPLATE_ID, 
+      TEMPLATE_COLUMN_FORM_DEF_ID, TEMPLATE_COLUMN_CODE, 
+      TEMPLATE_COLUMN_LINK_MARK, TEMPLATE_COLUMN_VALUE, 
+      TEMPLATE_COLUMN_FONT_SIZE, TEMPLATE_COLUMN_FONT_COLOR, 
+      TEMPLATE_IS_TAG, operator_name, operator_time, 
+      TEMPLATE_COLUMN_FONT_WEIGHT)
+    values (#{templateColumnTemplateId,jdbcType=INTEGER}, 
+      #{templateColumnFormDefId,jdbcType=INTEGER}, #{templateColumnCode,jdbcType=NVARCHAR}, 
+      #{templateColumnLinkMark,jdbcType=NVARCHAR}, #{templateColumnValue,jdbcType=NVARCHAR}, 
+      #{templateColumnFontSize,jdbcType=NVARCHAR}, #{templateColumnFontColor,jdbcType=NVARCHAR}, 
+      #{templateIsTag,jdbcType=NVARCHAR}, #{operatorName,jdbcType=NVARCHAR}, #{operatorTime,jdbcType=TIMESTAMP}, 
+      #{templateColumnFontWeight,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumn" >
+    insert into SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateColumnId != null" >
+        TEMPLATE_COLUMN_ID,
+      </if>
+      <if test="templateColumnTemplateId != null" >
+        TEMPLATE_COLUMN_TEMPLATE_ID,
+      </if>
+      <if test="templateColumnFormDefId != null" >
+        TEMPLATE_COLUMN_FORM_DEF_ID,
+      </if>
+      <if test="templateColumnCode != null" >
+        TEMPLATE_COLUMN_CODE,
+      </if>
+      <if test="templateColumnLinkMark != null" >
+        TEMPLATE_COLUMN_LINK_MARK,
+      </if>
+      <if test="templateColumnValue != null" >
+        TEMPLATE_COLUMN_VALUE,
+      </if>
+      <if test="templateColumnFontSize != null" >
+        TEMPLATE_COLUMN_FONT_SIZE,
+      </if>
+      <if test="templateColumnFontColor != null" >
+        TEMPLATE_COLUMN_FONT_COLOR,
+      </if>
+      <if test="templateIsTag != null" >
+        TEMPLATE_IS_TAG,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="operatorTime != null" >
+        operator_time,
+      </if>
+      <if test="templateColumnFontWeight != null" >
+        TEMPLATE_COLUMN_FONT_WEIGHT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateColumnId != null" >
+        #{templateColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnTemplateId != null" >
+        #{templateColumnTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnFormDefId != null" >
+        #{templateColumnFormDefId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnCode != null" >
+        #{templateColumnCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLinkMark != null" >
+        #{templateColumnLinkMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnValue != null" >
+        #{templateColumnValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnFontSize != null" >
+        #{templateColumnFontSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnFontColor != null" >
+        #{templateColumnFontColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateIsTag != null" >
+        #{templateIsTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateColumnFontWeight != null" >
+        #{templateColumnFontWeight,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumnExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <set >
+      <if test="record.templateColumnId != null" >
+        TEMPLATE_COLUMN_ID = #{record.templateColumnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnTemplateId != null" >
+        TEMPLATE_COLUMN_TEMPLATE_ID = #{record.templateColumnTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnFormDefId != null" >
+        TEMPLATE_COLUMN_FORM_DEF_ID = #{record.templateColumnFormDefId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateColumnCode != null" >
+        TEMPLATE_COLUMN_CODE = #{record.templateColumnCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnLinkMark != null" >
+        TEMPLATE_COLUMN_LINK_MARK = #{record.templateColumnLinkMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnValue != null" >
+        TEMPLATE_COLUMN_VALUE = #{record.templateColumnValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnFontSize != null" >
+        TEMPLATE_COLUMN_FONT_SIZE = #{record.templateColumnFontSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateColumnFontColor != null" >
+        TEMPLATE_COLUMN_FONT_COLOR = #{record.templateColumnFontColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.templateIsTag != null" >
+        TEMPLATE_IS_TAG = #{record.templateIsTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorName != null" >
+        operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.operatorTime != null" >
+        operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.templateColumnFontWeight != null" >
+        TEMPLATE_COLUMN_FONT_WEIGHT = #{record.templateColumnFontWeight,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    set TEMPLATE_COLUMN_ID = #{record.templateColumnId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_TEMPLATE_ID = #{record.templateColumnTemplateId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_FORM_DEF_ID = #{record.templateColumnFormDefId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_CODE = #{record.templateColumnCode,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LINK_MARK = #{record.templateColumnLinkMark,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_VALUE = #{record.templateColumnValue,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_FONT_SIZE = #{record.templateColumnFontSize,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_FONT_COLOR = #{record.templateColumnFontColor,jdbcType=NVARCHAR},
+      TEMPLATE_IS_TAG = #{record.templateIsTag,jdbcType=NVARCHAR},
+      operator_name = #{record.operatorName,jdbcType=NVARCHAR},
+      operator_time = #{record.operatorTime,jdbcType=TIMESTAMP},
+      TEMPLATE_COLUMN_FONT_WEIGHT = #{record.templateColumnFontWeight,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumn" >
+    update SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    <set >
+      <if test="templateColumnTemplateId != null" >
+        TEMPLATE_COLUMN_TEMPLATE_ID = #{templateColumnTemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnFormDefId != null" >
+        TEMPLATE_COLUMN_FORM_DEF_ID = #{templateColumnFormDefId,jdbcType=INTEGER},
+      </if>
+      <if test="templateColumnCode != null" >
+        TEMPLATE_COLUMN_CODE = #{templateColumnCode,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnLinkMark != null" >
+        TEMPLATE_COLUMN_LINK_MARK = #{templateColumnLinkMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnValue != null" >
+        TEMPLATE_COLUMN_VALUE = #{templateColumnValue,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnFontSize != null" >
+        TEMPLATE_COLUMN_FONT_SIZE = #{templateColumnFontSize,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateColumnFontColor != null" >
+        TEMPLATE_COLUMN_FONT_COLOR = #{templateColumnFontColor,jdbcType=NVARCHAR},
+      </if>
+      <if test="templateIsTag != null" >
+        TEMPLATE_IS_TAG = #{templateIsTag,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=NVARCHAR},
+      </if>
+      <if test="operatorTime != null" >
+        operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateColumnFontWeight != null" >
+        TEMPLATE_COLUMN_FONT_WEIGHT = #{templateColumnFontWeight,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myehr.pojo.formmanage.template.gridbycard.SysGridbycardTemplateColumn" >
+    update SYS_GRIDBYCARD_TEMPLATE_COLUMN
+    set TEMPLATE_COLUMN_TEMPLATE_ID = #{templateColumnTemplateId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_FORM_DEF_ID = #{templateColumnFormDefId,jdbcType=INTEGER},
+      TEMPLATE_COLUMN_CODE = #{templateColumnCode,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_LINK_MARK = #{templateColumnLinkMark,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_VALUE = #{templateColumnValue,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_FONT_SIZE = #{templateColumnFontSize,jdbcType=NVARCHAR},
+      TEMPLATE_COLUMN_FONT_COLOR = #{templateColumnFontColor,jdbcType=NVARCHAR},
+      TEMPLATE_IS_TAG = #{templateIsTag,jdbcType=NVARCHAR},
+      operator_name = #{operatorName,jdbcType=NVARCHAR},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      TEMPLATE_COLUMN_FONT_WEIGHT = #{templateColumnFontWeight,jdbcType=NVARCHAR}
+    where TEMPLATE_COLUMN_ID = #{templateColumnId,jdbcType=INTEGER}
+  </update>
+</mapper>

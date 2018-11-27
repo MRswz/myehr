@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="profiler.settings.instrument.empty.methods">true</entry>
+<entry key="ProfilerCPUSettings_profile_runnables">true</entry>
+<entry key="ProfilerCPUSettings_filter_type">2</entry>
+<entry key="ProfilerMemorySettings_track_every">10</entry>
+<entry key="ProfilerMemorySettings_mode">4</entry>
+<entry key="ProfilerCPUSettings_root_classes">Test.**
+com.myehr.common.converter.**
+com.myehr.common.ecache.**
+com.myehr.common.exception.**
+com.myehr.common.mybatis.**
+com.myehr.common.util.**
+com.myehr.controller.calendar.**
+com.myehr.controller.datasource.**
+com.myehr.controller.dict.**
+com.myehr.controller.entity.**
+com.myehr.controller.field.**
+com.myehr.controller.form.**
+com.myehr.controller.handsontable.**
+com.myehr.controller.login.**
+com.myehr.controller.orgPicture.**
+com.myehr.controller.sysCvr.**
+com.myehr.controller.sysFlowMenu.**
+com.myehr.controller.sysMenuRole.**
+com.myehr.controller.sysParam.**
+com.myehr.controller.sysRole.**
+com.myehr.controller.sysUserRole.**
+com.myehr.controller.sysmenu.**
+com.myehr.controller.sysuser.**
+com.myehr.controller.test.**
+com.myehr.exception.**
+com.myehr.interceptor.**
+com.myehr.mapper.calendar.**
+com.myehr.mapper.entity.**
+com.myehr.mapper.field.**
+com.myehr.mapper.formmanage.button.**
+com.myehr.mapper.formmanage.form.**
+com.myehr.mapper.formmanage.template.**
+com.myehr.mapper.formmanage.widget.**
+com.myehr.mapper.lang.**
+com.myehr.mapper.primaryKeys.**
+com.myehr.mapper.sysCvr.**
+com.myehr.mapper.sysFlowMenu.**
+com.myehr.mapper.sysMenuRole.**
+com.myehr.mapper.sysParam.**
+com.myehr.mapper.sysRole.**
+com.myehr.mapper.sysUserExpand.**
+com.myehr.mapper.sysUserRole.**
+com.myehr.mapper.sysdict.**
+com.myehr.mapper.sysmenu.**
+com.myehr.mapper.sysuser.**
+com.myehr.pojo.**
+com.myehr.service.**
+com.myehr.test.dao.**
+</entry>
+<entry key="ProfilerCPUSettings_filter_value">Test.*,
+com.myehr.common.converter.*,
+com.myehr.common.ecache.*,
+com.myehr.common.exception.*,
+com.myehr.common.mybatis.*,
+com.myehr.common.util.*,
+com.myehr.controller.calendar.*,
+com.myehr.controller.datasource.*,
+com.myehr.controller.dict.*,
+com.myehr.controller.entity.*,
+com.myehr.controller.field.*,
+com.myehr.controller.form.*,
+com.myehr.controller.handsontable.*,
+com.myehr.controller.login.*,
+com.myehr.controller.orgPicture.*,
+com.myehr.controller.sysCvr.*,
+com.myehr.controller.sysFlowMenu.*,
+com.myehr.controller.sysMenuRole.*,
+com.myehr.controller.sysParam.*,
+com.myehr.controller.sysRole.*,
+com.myehr.controller.sysUserRole.*,
+com.myehr.controller.sysmenu.*,
+com.myehr.controller.sysuser.*,
+com.myehr.controller.test.*,
+com.myehr.exception.*,
+com.myehr.interceptor.*,
+com.myehr.mapper.calendar.*,
+com.myehr.mapper.entity.*,
+com.myehr.mapper.field.*,
+com.myehr.mapper.formmanage.button.*,
+com.myehr.mapper.formmanage.form.*,
+com.myehr.mapper.formmanage.template.*,
+com.myehr.mapper.formmanage.widget.*,
+com.myehr.mapper.lang.*,
+com.myehr.mapper.primaryKeys.*,
+com.myehr.mapper.sysCvr.*,
+com.myehr.mapper.sysFlowMenu.*,
+com.myehr.mapper.sysMenuRole.*,
+com.myehr.mapper.sysParam.*,
+com.myehr.mapper.sysRole.*,
+com.myehr.mapper.sysUserExpand.*,
+com.myehr.mapper.sysUserRole.*,
+com.myehr.mapper.sysdict.*,
+com.myehr.mapper.sysmenu.*,
+com.myehr.mapper.sysuser.*,
+com.myehr.pojo.*,
+com.myehr.service.*,
+com.myehr.test.dao.*</entry>
+<entry key="profiler.settings.istrument.getter.setter.methods">true</entry>
+<entry key="myeclipse.profiling.mode">0</entry>
+<entry key="ProfilerMemorySettings_stacktraces">-1</entry>
+</properties>
